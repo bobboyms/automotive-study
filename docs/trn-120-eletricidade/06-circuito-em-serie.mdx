@@ -1,0 +1,754 @@
+---
+title: Circuito em série
+---
+
+import Associacao from '@site/src/components/Associacao';
+
+# Circuito em série
+
+> **Pergunta central:** quando duas cargas estão no mesmo caminho, uma depois da
+> outra, como a corrente e a tensão se dividem entre elas — e o que acontece
+> com todas quando uma delas abre?
+
+## A queixa: o ventilador que só funciona no máximo
+
+Um cliente reclama:
+
+> “O ventilador do ar só funciona na velocidade máxima. Nas outras, não sai
+> vento nenhum.”
+
+Você confere. O botão do ventilador tem quatro posições: 1, 2, 3 e máxima. Nas
+posições 1, 2 e 3, o motor do ventilador fica parado. Na máxima, ele gira
+normalmente, com força.
+
+O motor está bom, porque gira na máxima. O fusível está bom, pelo mesmo motivo.
+Então o que pode parar três velocidades de uma vez e deixar a quarta
+funcionando? Ao final desta lição você vai saber responder, e vai saber que
+medição confirma a resposta antes de trocar qualquer peça.
+
+## Mapa das ideias
+
+| Português | Inglês | O que é |
+|---|---|---|
+| circuito em série | *series circuit* | circuito de um caminho só, com as cargas uma depois da outra |
+| resistência total | *total resistance* | a resistência do circuito inteiro, a que a fonte “enxerga” |
+| queda de tensão | *voltage drop* | a parte da tensão que fica numa carga ou num trecho do caminho |
+| tensão da fonte | *source voltage* | a tensão que a bateria ou o alternador entrega ao circuito |
+| lei das tensões de Kirchhoff | *Kirchhoff's voltage law* | num laço, as quedas de tensão somadas dão a tensão da fonte |
+| bloco de resistores do ventilador | *blower motor resistor* | resistores que ficam em série com o motor do ventilador nas velocidades baixas |
+| limitador térmico | *thermal limiter* | proteção que abre o caminho quando a peça esquenta demais |
+
+## Onde isso aparece
+
+Toda vez que a corrente passa por mais de uma resistência no mesmo caminho, o
+circuito é em série. No carro, isso acontece:
+
+- **de propósito**, quando um resistor é colocado no caminho para diminuir a
+  corrente de uma carga — o bloco de resistores do ventilador é o exemplo
+  clássico;
+- **sempre**, com o fusível e o interruptor: eles ficam em série com a carga
+  que protegem e comandam, porque só assim conseguem cortar a corrente dela;
+- **por defeito**, quando um terminal oxidado ou uma massa ruim acrescenta
+  resistência no caminho de uma carga. Foi o caso do motor de partida na lição
+  [Lei de Ohm](./lei-de-ohm).
+
+Na Wake Tech, circuitos em série fazem parte de *circuit construction* na
+**TRN-120**. Na prova ASE, área **A6**, aparecem em contas diretas e, mais
+ainda, no raciocínio de queda de tensão, que é a base do diagnóstico de
+resistência alta.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição usa três ideias já estudadas. Responda antes de seguir:
+
+1. Na lição [O circuito elétrico](./o-circuito-eletrico), a corrente da
+   bicicleta serviu de comparação para o circuito. A lâmpada gasta elétrons? O
+   número de elétrons que entra nela é igual ao que sai?
+2. Na lição [Lei de Ohm](./lei-de-ohm), um terminal oxidado de 0.01 Ω estava no
+   caminho do motor de partida, com 150 A passando. Quantos volts ficavam no
+   terminal, e quantos sobravam para o motor, de uma bateria de 12.6 V?
+3. Na lição [Potência elétrica](./potencia-eletrica), o motor do ventilador da
+   cabine tinha 180 W na velocidade máxima. Que corrente ele puxava em 12 V?
+
+<details>
+<summary>Respostas</summary>
+
+1. Não gasta. O número de elétrons que entra na lâmpada é o mesmo que sai. O que
+   a lâmpada usa é a energia que a bateria deu a eles. Esta ideia é a base da
+   primeira regra desta lição.
+2. Ficavam $V = I \times R = 150 \times 0.01 = 1.5\,\text{V}$ no terminal, e
+   sobravam $12.6 - 1.5 = 11.1\,\text{V}$ para o motor. Repare que
+   $1.5 + 11.1 = 12.6$: as duas partes somadas dão a tensão da bateria. Isso
+   não é coincidência, e esta lição explica por quê.
+3. $I = P \div V = 180 \div 12 = 15\,\text{A}$. Esse motor volta na queixa.
+
+</details>
+
+## Intuição: um caminho só
+
+Volte à corrente da bicicleta da lição 2. Ela é um laço único: cada elo passa
+pela coroa, pela catraca e volta, sempre pelo mesmo caminho. Se você contar
+quantos elos passam por segundo num ponto qualquer da corrente, o número é o
+mesmo em qualquer outro ponto. Nenhum elo some no meio do caminho, e nenhum
+elo pode pegar um atalho, porque atalho não existe.
+
+Um circuito em série é assim. A corrente tem **um caminho só**, e todas as
+cargas estão nele, uma depois da outra. Daí saem três consequências, que esta
+lição transforma em regras.
+
+1. **A corrente é a mesma em todo o circuito.** É o que a bicicleta mostra.
+2. **Cada carga a mais dificulta a passagem.** Aperte uma mangueira de jardim
+   num ponto e sai menos água. Aperte a mesma mangueira em dois pontos, um
+   depois do outro, e sai menos ainda: a água tem que vencer os dois apertos.
+3. **A tensão se divide entre as cargas.** Para ver essa, pense em altura.
+   Imagine que a bateria é um elevador que leva você do térreo até o 12º andar.
+   Cada carga é um lance de escada que desce alguns andares. No fim do laço,
+   você está de volta ao térreo — a massa. Então a soma de tudo o que você
+   desceu tem que ser igual aos 12 andares que o elevador subiu.
+
+Na escada, os andares são os volts. A subida do elevador é a tensão da bateria.
+Cada lance de escada é a queda de tensão numa carga. A comparação para de valer
+num ponto: a tensão não é uma altura de verdade, e nada fica “empilhado” dentro
+do fio. Ela serve só para a contabilidade — o que a bateria dá, as cargas usam,
+e a conta fecha.
+
+## Modelo visual: o ventilador na velocidade 1
+
+O motor do ventilador gira mais devagar quando recebe menos tensão. Para fazer
+as velocidades baixas, o carro coloca um **bloco de resistores** (*blower motor
+resistor*) no caminho, entre o interruptor e o motor. Na velocidade 1, a
+corrente passa primeiro pelo resistor e depois pelo motor.
+
+Para as contas, vamos usar números ilustrativos. Na lição de potência, o motor
+puxava 15 A em 12 V. Pela lei de Ohm, isso corresponde a
+$R = V \div I = 12 \div 15 = 0.8\,\Omega$. Vamos tratar o motor como uma
+resistência fixa de 0.8 Ω. É uma simplificação: um motor girando não se
+comporta exatamente como um resistor, e a corrente dele muda com a velocidade.
+Mas as três regras desta lição valem do mesmo jeito, e os números servem para
+vê-las funcionando. Na velocidade 1, o resistor do bloco tem também 0.8 Ω.
+
+<Associacao
+  fusivel
+  interruptor
+  corrente
+  rotuloCorrente="I = 7.5\,\text{A}"
+  cargas={[
+    {tipo: 'resistor', rotulo: 'R_1 = 0.8\\,\\Omega', queda: '6\\,\\text{V}'},
+    {tipo: 'motor', rotulo: 'R_2 = 0.8\\,\\Omega', queda: '6\\,\\text{V}'},
+  ]}
+  caption="Velocidade 1: o resistor do bloco (R1) e o motor (R2) no mesmo caminho, um depois do outro. A mesma corrente de 7.5 A passa pelos dois. Os 12 V da bateria se dividem: 6 V ficam no resistor e 6 V chegam ao motor. Valores ilustrativos."
+/>
+
+Leia o desenho de três jeitos.
+
+| O que olhar | O que o desenho mostra |
+|---|---|
+| a corrente | 7.5 A, a mesma no resistor, no motor e no fio inteiro |
+| as resistências | 0.8 Ω mais 0.8 Ω: o circuito tem 1.6 Ω no total |
+| as tensões | 6 V no resistor mais 6 V no motor: 12 V, a tensão da bateria |
+
+Compare com a velocidade máxima, em que o motor fica sozinho no caminho: 12 V
+sobre 0.8 Ω dão 15 A, e o motor recebe a tensão inteira. Na velocidade 1, o
+resistor ficou com metade da tensão. O motor recebe só 6 V, e por isso gira
+devagar. **A velocidade baixa existe porque o resistor fica com uma parte da
+tensão.**
+
+## Ponte para a formalização
+
+Os três números da tabela não são independentes. Todos saem da lei de Ohm,
+aplicada duas vezes.
+
+- Primeiro, ao circuito **inteiro**: a bateria empurra 12 V através de 1.6 Ω,
+  então $I = 12 \div 1.6 = 7.5\,\text{A}$.
+- Depois, a **cada peça**, usando essa mesma corrente: no resistor,
+  $V = 7.5 \times 0.8 = 6\,\text{V}$; no motor, também
+  $7.5 \times 0.8 = 6\,\text{V}$.
+
+A lei de Ohm vale para o circuito todo e vale para cada pedaço dele. O cuidado
+é usar, em cada conta, os números **do mesmo pedaço**: a tensão daquele
+pedaço, a resistência daquele pedaço e a corrente que passa por ele.
+
+## Formalização: as três regras do circuito em série
+
+> **Circuito em série** (*series circuit*) é o circuito em que a corrente tem um
+> caminho só. Todas as cargas ficam nesse caminho, uma depois da outra.
+
+- **Exemplo:** o resistor do bloco e o motor do ventilador, na velocidade 1. Se
+  você seguir o fio a partir do positivo da bateria, passa obrigatoriamente pelo
+  fusível, pelo interruptor, pelo resistor e pelo motor, nessa ordem, até
+  chegar à massa. Não existe outro caminho.
+- **Contraexemplo:** as duas luzes de freio. Cada lâmpada tem o próprio fio, que
+  sai de um ponto comum e vai até ela. A corrente de uma lâmpada não passa pela
+  outra. Por isso, quando uma queima, a outra continua acesa — foi a queixa da
+  lição [O circuito elétrico](./o-circuito-eletrico). Esse circuito é em
+  paralelo, o assunto da [próxima lição](./circuito-em-paralelo).
+
+Nos slides e no livro da aula, as regras do circuito em série costumam aparecer
+assim, em inglês:
+
+> *Current is the same throughout the circuit. Resistance is additive.
+> Individual voltage drops add up to source voltage.*
+
+Uma regra por frase. A seguir, cada uma em português, com o motivo físico.
+
+### Regra 1: a corrente é a mesma em todo o circuito
+
+$$
+I = I_1 = I_2 = I_3 = \ldots
+$$
+
+O número pequeno embaixo da letra identifica a peça: $I_1$ é a corrente na
+carga 1, $I_2$ na carga 2. A regra diz que todas valem o mesmo.
+
+**Por quê:** a carga não gasta elétrons. Os elétrons que entram no resistor
+saem dele e entram no motor. Como não existe outro caminho, todos os que passam
+por um ponto do circuito passam também por todos os outros.
+
+> **Erro comum:** achar que a corrente “é gasta” na primeira carga e chega
+> menor na segunda. É tentador, porque o motor gira devagar e “parece” receber
+> menos. Mas o que o motor recebe a menos é **tensão**, não corrente. Ligue um
+> amperímetro antes do resistor e ele mostra 7.5 A. Ligue entre o resistor e o
+> motor: 7.5 A. Depois do motor, já no caminho da massa: 7.5 A.
+
+Repare em como o amperímetro entra nessa medição. Na lição
+[Tensão, corrente e resistência](./tensao-corrente-e-resistencia), vimos que a
+corrente se mede com o caminho passando **através** do instrumento. Agora dá
+para dizer isso com o nome certo: **o amperímetro é ligado em série** com o
+circuito. Ele vira mais uma peça no caminho único, e por isso mede a corrente
+que passa por todas as outras.
+
+### Regra 2: as resistências se somam
+
+$$
+R_T = R_1 + R_2 + R_3 + \ldots
+$$
+
+$R_T$ é a resistência total (o T vem de *total*). Na velocidade 1,
+$R_T = 0.8 + 0.8 = 1.6\,\Omega$.
+
+**Por quê:** a corrente tem que atravessar todas as resistências, uma depois da
+outra. Cada uma acrescenta a sua dificuldade, como os dois apertos na
+mangueira. Uma consequência direta: **cada carga a mais em série diminui a
+corrente do circuito inteiro.** A tensão da bateria continua a mesma, e o
+número de baixo de $I = V \div R_T$ fica maior.
+
+### Regra 3: as quedas de tensão somam a tensão da fonte
+
+$$
+V_{\text{fonte}} = V_1 + V_2 + V_3 + \ldots
+$$
+
+Na velocidade 1, $6 + 6 = 12\,\text{V}$. Essa regra tem nome nos livros:
+**lei das tensões de Kirchhoff** (*Kirchhoff's voltage law*). Na oficina,
+quase ninguém fala o nome; todo mundo usa a regra.
+
+**Por quê:** é a escada da intuição. A bateria dá a cada porção de carga uma
+certa energia, e essa energia é usada ao longo do laço, carga por carga. Quando
+a carga elétrica volta à massa, ela já entregou tudo o que recebeu. Então a
+soma do que ficou em cada carga é igual ao que a bateria deu.
+
+A queda em cada carga sai da lei de Ohm, com a corrente do circuito:
+$V_1 = I \times R_1$, $V_2 = I \times R_2$. Como a corrente é a mesma para
+todas, **a carga de maior resistência fica com a maior parte da tensão.** Se o
+resistor do bloco tivesse 2.4 Ω e o motor 0.8 Ω, o resistor teria três vezes a
+resistência do motor e ficaria com três vezes a tensão do motor: 9 V para o
+resistor e 3 V para o motor.
+
+> **Erro comum:** achar que, em série, cada carga recebe os 12 V da bateria. Se
+> fosse assim, o motor na velocidade 1 giraria tão rápido quanto na máxima, e o
+> resistor não serviria para nada. A soma das quedas é 12 V; cada uma é uma
+> parte.
+
+### A ordem das contas
+
+Quase todo problema de circuito em série se resolve nesta ordem:
+
+1. some as resistências e ache $R_T$;
+2. ache a corrente com $I = V_{\text{fonte}} \div R_T$;
+3. ache a queda em cada carga com $V = I \times R$ daquela carga;
+4. confira: as quedas somadas têm que dar a tensão da fonte.
+
+O passo 4 não é enfeite. Se a soma não fechar, alguma conta está errada.
+
+**O que muda** de uma velocidade do ventilador para outra é a resistência do
+bloco no caminho, e com ela a corrente e a divisão da tensão. **O que
+permanece igual** são as três regras e a tensão da bateria.
+
+## Como falha e como diagnosticar
+
+Num circuito em série, todas as cargas dependem do mesmo caminho. Por isso, um
+defeito em qualquer ponto afeta todas elas.
+
+| Falha | Corrente | O que as cargas fazem | Onde fica a tensão |
+|---|---|---|---|
+| circuito aberto em qualquer ponto | zero | todas param | a tensão inteira da fonte aparece sobre o ponto aberto |
+| resistência alta em algum ponto | menor que o normal | todas funcionam fracas | o ponto ruim fica com uma parte da tensão que devia chegar às cargas |
+| uma carga em curto, pulada por um caminho sem resistência | maior que o normal | a carga pulada para; as outras recebem mais tensão | a carga pulada fica com zero |
+
+### O ponto aberto fica com a tensão inteira
+
+Esta é a ideia que mais confunde nesta lição, e a mais útil no diagnóstico. Se
+ela não fechar na primeira leitura, isso é esperado; releia depois do exemplo 4.
+
+Imagine o circuito da velocidade 1 com o resistor do bloco rompido. O laço está
+aberto, e a corrente é zero.
+
+<Associacao
+  fusivel
+  interruptor
+  cargas={[
+    {tipo: 'resistor', rotulo: '\\text{aberto}', aberta: true, queda: '12\\,\\text{V}'},
+    {tipo: 'motor', rotulo: '\\text{motor}', queda: '0\\,\\text{V}'},
+  ]}
+  caption="O mesmo circuito com o resistor rompido. Não passa corrente, e o motor para. O voltímetro mostra 12 V entre as duas pontas do resistor aberto e 0 V entre as duas pontas do motor."
+/>
+
+Agora meça a tensão entre as duas pontas de cada peça, com o interruptor na
+velocidade 1.
+
+- **Sobre o motor:** 0 V. A corrente é zero, e $V = I \times R = 0 \times 0.8 = 0$.
+  Uma carga só tem queda de tensão quando passa corrente por ela.
+- **Sobre o resistor aberto:** 12 V, a tensão inteira da bateria.
+
+Por que os 12 V aparecem justamente no ponto aberto? Pela regra 3, as quedas
+do laço continuam somando 12 V. Todas as peças inteiras têm queda zero, porque
+não passa corrente. Então os 12 V só podem estar num lugar: sobre a peça
+aberta.
+
+Dá para ver o mesmo de outro jeito. A ponta de entrada do resistor aberto está
+ligada ao positivo da bateria pelo fusível e pelo interruptor, e nenhum deles
+tem queda, porque a corrente é zero. Então essa ponta está “no nível” do
+positivo. A ponta de saída está ligada à massa pelo motor, que também não tem
+queda. Então ela está “no nível” da massa. Entre as duas pontas, o voltímetro
+mede a diferença entre o positivo e a massa: 12 V.
+
+**A regra prática:** num circuito em série aberto, o voltímetro mostra zero
+sobre as peças boas e a tensão inteira da fonte sobre o ponto aberto. Esse teste
+aponta o ponto aberto sem desmontar nada.
+
+### A queixa resolvida
+
+Voltemos ao ventilador que só funciona no máximo. Primeiro, o que o sistema
+**deveria** fazer: nas velocidades 1, 2 e 3, a corrente passa pelo bloco de
+resistores e depois pelo motor, em série. Na máxima, o interruptor manda a
+corrente direto ao motor, por um caminho que não passa pelo bloco — em muitos
+carros, esse caminho passa por um relé.
+
+Agora, o que foi observado:
+
+- **Na máxima, o motor gira.** Então o motor, o fusível e a massa do motor estão
+  bons: a corrente da máxima passa por todos eles.
+- **Nas velocidades 1, 2 e 3, nada.** Corrente zero nas três. As três têm uma
+  peça em comum que a máxima não usa: o bloco de resistores.
+
+Em muitos blocos, os resistores das velocidades baixas ficam ligados um depois
+do outro, e todos os caminhos das velocidades baixas passam por uma mesma
+proteção, o **limitador térmico** (*thermal limiter*). Ele abre o caminho se o
+bloco esquentar demais. Um limitador aberto, ou um resistor rompido no trecho
+comum, abre o circuito em série das três velocidades de uma vez. Essa é a causa
+provável.
+
+**Para confirmar antes de trocar**, use a regra do ponto aberto. Com o
+interruptor na velocidade 1, meça a tensão entre a entrada e a saída do bloco,
+nos terminais do conector. Se o bloco estiver aberto, o voltímetro mostra a
+tensão da bateria, perto de 12 V, e a tensão sobre o motor é zero. Se a leitura
+sobre o bloco der zero com o motor parado, o bloco está inteiro, e o ponto
+aberto está em outro lugar: no interruptor ou nos fios. O procedimento exato e
+a localização do bloco estão no manual do veículo. Em muitos carros mais novos,
+o bloco de resistores foi substituído por um módulo eletrônico; nesse caso, o
+teste é o do manual, mas a ideia de seguir a tensão até o ponto aberto continua
+valendo.
+
+Antes de dar o serviço por terminado, ainda falta uma pergunta: **por que** o
+limitador abriu? Uma causa comum é o próprio motor do ventilador, gasto, puxar
+mais corrente que o normal e esquentar o bloco. Medir a corrente do motor com o
+amperímetro em série, e comparar com a especificação do manual, evita que o
+bloco novo queime de novo.
+
+## Na oficina: medir no circuito do ventilador
+
+:::warning Antes de medir ou trocar
+
+- **O bloco de resistores esquenta muito.** Ele fica dentro do duto de ar para
+  ser resfriado pelo próprio vento do ventilador. Depois de usar o ventilador,
+  espere o bloco esfriar antes de tocar nele. E não ligue as velocidades baixas
+  com o bloco fora do duto: sem o ar passando, ele superaquece.
+- **A ventoinha do motor gira com força.** Com o motor exposto, mantenha os
+  dedos, as pontas do multímetro e os fios longe dela.
+- **Para tirar o bloco ou o motor, desligue a bateria**, negativo primeiro,
+  como na lição [O circuito elétrico](./o-circuito-eletrico). Em muitos carros,
+  essas peças ficam embaixo do painel, perto de fios e módulos do airbag. Siga o
+  procedimento do manual, que pode mandar esperar alguns minutos depois de
+  desligar a bateria.
+- **Encoste as pontas do multímetro só nos terminais que você quer medir.** Uma
+  ponta que escorrega e encosta ao mesmo tempo num terminal positivo e na
+  lataria fecha um curto.
+
+:::
+
+## Exemplos resolvidos
+
+### Exemplo 1: dois resistores
+
+Um resistor de 2 Ω e outro de 4 Ω estão em série, ligados a 12 V. Ache a
+resistência total, a corrente e a queda de tensão em cada resistor.
+
+Seguindo a ordem das contas:
+
+$$
+\begin{array}{ll}
+R_T = 2 + 4 = 6\,\Omega & \text{resistências somadas} \\[4pt]
+I = 12 \div 6 = 2\,\text{A} & \text{a mesma nos dois resistores} \\[4pt]
+V_1 = 2 \times 2 = 4\,\text{V} & \text{no resistor de } 2\,\Omega \\[4pt]
+V_2 = 2 \times 4 = 8\,\text{V} & \text{no resistor de } 4\,\Omega
+\end{array}
+$$
+
+Conferindo: $4 + 8 = 12\,\text{V}$, a tensão da fonte. E o resistor de 4 Ω,
+que tem o dobro da resistência, ficou com o dobro da tensão.
+
+### Exemplo 2: a velocidade 2 do ventilador
+
+**Pause e tente:** na velocidade 2, o bloco põe 0.4 Ω em série com o motor de
+0.8 Ω (valores ilustrativos), em 12 V. Ache a corrente, a tensão no motor e a
+tensão no resistor. Depois use a lição de potência para saber quantos watts
+viram calor no resistor.
+
+<details>
+<summary>Solução</summary>
+
+$$
+\begin{array}{ll}
+R_T = 0.4 + 0.8 = 1.2\,\Omega & \\[4pt]
+I = 12 \div 1.2 = 10\,\text{A} & \\[4pt]
+V_{\text{motor}} = 10 \times 0.8 = 8\,\text{V} & \\[4pt]
+V_{\text{resistor}} = 10 \times 0.4 = 4\,\text{V} &
+\end{array}
+$$
+
+Conferindo: $8 + 4 = 12\,\text{V}$. Com menos resistência no bloco do que na
+velocidade 1, a corrente subiu de 7.5 A para 10 A, e o motor passou de 6 V para
+8 V. Ele gira mais rápido.
+
+A potência no resistor é $P = V \times I = 4 \times 10 = 40\,\text{W}$. São
+40 W virando calor dentro do bloco, sem fazer vento nenhum. É por isso que o
+bloco fica no duto de ar: o vento leva esse calor embora.
+
+</details>
+
+### Exemplo 3: o farol com massa ruim
+
+**Pause e tente:** um farol tem 2.4 Ω aceso (valor ilustrativo). A ligação de
+massa dele está oxidada e acrescenta 0.6 Ω ao caminho, em série com a lâmpada.
+Com 12 V, quanto chega à lâmpada? Compare a potência dela com a de um circuito
+sem a massa ruim.
+
+<details>
+<summary>Solução</summary>
+
+A lâmpada e a massa oxidada estão no mesmo caminho: é um circuito em série.
+
+$$
+\begin{array}{ll}
+R_T = 2.4 + 0.6 = 3\,\Omega & \\[4pt]
+I = 12 \div 3 = 4\,\text{A} & \\[4pt]
+V_{\text{lâmpada}} = 4 \times 2.4 = 9.6\,\text{V} & \\[4pt]
+V_{\text{massa}} = 4 \times 0.6 = 2.4\,\text{V} &
+\end{array}
+$$
+
+Conferindo: $9.6 + 2.4 = 12\,\text{V}$. A lâmpada recebe 9.6 V em vez de 12 V.
+
+Potência na lâmpada, agora: $P = V \times I = 9.6 \times 4 = 38.4\,\text{W}$.
+Sem a massa ruim, ela teria $12 \times 12 \div 2.4 = 60\,\text{W}$. O farol
+perdeu mais de um terço da potência, e o cliente vê um farol fraco.
+
+Um detalhe, para ser honesto com a conta: com menos tensão, o filamento esfria
+um pouco, e a resistência dele cai. O número real fica um pouco diferente de
+38.4 W. A conclusão não muda: a massa oxidada rouba tensão da lâmpada.
+
+</details>
+
+### Exemplo 4: três lâmpadas, e uma queima
+
+**Pause e tente:** três lâmpadas iguais, de 2 Ω cada, estão em série em 12 V.
+Ache a corrente e a tensão em cada uma. Depois, imagine que o filamento da
+lâmpada do meio rompe. O que acontece com as outras duas? O que o voltímetro
+mostra sobre cada lâmpada?
+
+<details>
+<summary>Solução</summary>
+
+Com as três boas: $R_T = 2 + 2 + 2 = 6\,\Omega$, $I = 12 \div 6 = 2\,\text{A}$,
+e cada lâmpada fica com $2 \times 2 = 4\,\text{V}$. As três, iguais, dividem
+a tensão em partes iguais: $4 + 4 + 4 = 12\,\text{V}$.
+
+Com a lâmpada do meio aberta, o caminho único foi interrompido. A corrente cai
+para zero, e **as três apagam**, inclusive as duas que estão boas. O voltímetro
+mostra 0 V sobre a primeira e a terceira, porque não passa corrente nelas, e
+12 V sobre a lâmpada do meio, a aberta.
+
+Os antigos pisca-piscas de Natal funcionavam assim: uma lâmpada queimava e o
+fio inteiro apagava. Achar a culpada exigia testar uma por uma. O voltímetro
+resolve isso direto: a lâmpada aberta é a que mostra a tensão inteira. É também
+por isso que as lâmpadas do carro **não** são ligadas em série — a próxima
+lição mostra como elas são ligadas.
+
+</details>
+
+### Exemplo 5: descobrir a resistência que falta
+
+**Pause e tente:** um circuito em série de 12 V tem um resistor conhecido de
+4 Ω e uma segunda resistência desconhecida. O amperímetro, ligado em série,
+mostra 2 A. Quanto vale a resistência desconhecida? Quanto de tensão fica em
+cada uma?
+
+<details>
+<summary>Dica</summary>
+
+Comece pelo circuito inteiro: com a tensão da fonte e a corrente, a lei de Ohm
+dá a resistência total.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+Para o circuito inteiro: $R_T = V \div I = 12 \div 2 = 6\,\Omega$.
+
+As resistências se somam, então a desconhecida é o que falta para chegar a
+6 Ω: $6 - 4 = 2\,\Omega$.
+
+Quedas de tensão: no resistor de 4 Ω, $2 \times 4 = 8\,\text{V}$; no de 2 Ω,
+$2 \times 2 = 4\,\text{V}$. Conferindo: $8 + 4 = 12\,\text{V}$.
+
+Se você encontrou 3 Ω, provavelmente dividiu 12 V por 4 Ω e tratou o resultado
+como resistência. A conta $12 \div 4 = 3$ dá uma corrente, e seria a corrente
+do resistor de 4 Ω **sozinho** no circuito — que não é o caso aqui.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que a corrente é a mesma em todos os pontos de um circuito em série?
+2. Por que a soma das quedas de tensão tem que dar exatamente a tensão da fonte?
+3. Em série, qual carga fica com a maior parte da tensão? Por quê?
+4. Com o laço aberto, por que o voltímetro mostra 0 V sobre o motor, que está
+   bom, e 12 V sobre o resistor rompido?
+5. Por que acrescentar mais uma carga em série diminui a corrente do circuito
+   inteiro?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque só existe um caminho, e a carga não gasta elétrons. Todos os elétrons
+   que passam por um ponto têm que passar por todos os outros, como os elos da
+   corrente da bicicleta.
+2. Porque a bateria dá uma certa energia a cada porção de carga, e essa energia
+   é usada ao longo do laço, carga por carga. Quando a carga elétrica volta à
+   massa, já entregou tudo. Então o que ficou em cada carga, somado, é o que a
+   bateria deu.
+3. A de maior resistência. A queda em cada carga é $V = I \times R$, e a
+   corrente é a mesma para todas. Então a queda acompanha a resistência: o
+   dobro de resistência, o dobro de tensão.
+4. Porque, com o laço aberto, a corrente é zero, e uma carga sem corrente tem
+   queda $0 \times R = 0$. As quedas do laço continuam somando 12 V. Como todas
+   as peças inteiras têm zero, os 12 V só podem estar sobre a peça aberta.
+5. Porque as resistências em série se somam. A resistência total fica maior, a
+   tensão da fonte continua a mesma, e $I = V \div R_T$ fica menor.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Quais destes circuitos são em série? Responda sim ou não para cada um.
+
+a) o resistor do bloco e o motor do ventilador, na velocidade 1;
+
+b) as duas luzes de freio, uma de cada lado do carro;
+
+c) o cabo da bateria, um terminal oxidado e o motor de partida;
+
+d) o fusível e a lâmpada que ele protege.
+
+### 2. Explicação
+
+Explique por que o fusível e o interruptor de um circuito precisam ficar em
+série com a carga. O que aconteceria se o fusível estivesse num caminho
+separado do caminho da carga?
+
+### 3. Aplicação direta
+
+a) Dois resistores de 3 Ω em série, em 12 V. Ache $R_T$, a corrente e a queda
+em cada um.
+
+b) Três resistores de 1 Ω, 2 Ω e 3 Ω em série, em 12 V. Ache $R_T$, a corrente
+e a queda em cada um.
+
+c) Duas cargas em série estão ligadas a 12 V. O voltímetro mostra 7.5 V sobre
+a primeira. Quanto ele mostra sobre a segunda?
+
+### 4. Variação
+
+Na velocidade 3, o bloco põe 0.2 Ω em série com o motor de 0.8 Ω (valores
+ilustrativos), em 12 V. Ache a corrente e a tensão no motor. Depois monte uma
+tabela com as quatro velocidades — 1, 2, 3 e máxima —, usando os resultados
+desta lição, e explique o que acontece com a corrente e com a tensão no motor
+de uma velocidade para a seguinte.
+
+### 5. Caso de diagnóstico
+
+Uma lanterna traseira tem 12 Ω acesa (valor ilustrativo) e deveria puxar 1 A em
+12 V. Ela está fraca. Com ela acesa, você mede 9 V sobre a lâmpada e 0.75 A no
+circuito.
+
+a) Qual é a resistência total do circuito agora? Quanto de resistência apareceu
+a mais?
+
+b) Quanto de tensão fica nessa resistência a mais? Confira se a soma das quedas
+fecha.
+
+c) Que medição você faria em seguida para descobrir em que trecho do caminho
+essa resistência está?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+No item a, use a tensão da fonte e a corrente medida: isso dá a resistência do
+circuito inteiro. A lâmpada continua com os 12 Ω dela; o resto é a resistência
+a mais.
+
+</details>
+
+### 6. Justificativa
+
+Na queixa, o limitador térmico aberto parou as velocidades 1, 2 e 3, mas não a
+máxima. Explique por que, usando a ideia de caminho único.
+
+### 7. Formato ASE
+
+**Question 1.** Three resistors of 2 ohms, 4 ohms and 6 ohms are connected in
+series to a 12-volt source. What is the current in the circuit?
+
+- A. 1 A
+- B. 2 A
+- C. 6 A
+- D. 24 A
+
+**Question 2.** Technician A says that in a series circuit the current is the
+same through every resistor. Technician B says that in a series circuit the
+voltage drops add up to the source voltage. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** Two bulbs are connected in series. The filament of one bulb
+breaks. What happens to the other bulb?
+
+- A. It becomes brighter.
+- B. It stays the same.
+- C. It goes out.
+- D. It blows the fuse.
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Sim: um caminho só passa pelo resistor e pelo motor.
+   b) Não: cada luz tem o próprio caminho; quando uma queima, a outra continua
+   acesa. É um circuito em paralelo.
+   c) Sim: a corrente do motor de partida passa pelo cabo, pelo terminal e pelo
+   motor, um depois do outro. Por isso o terminal oxidado rouba tensão do
+   motor.
+   d) Sim: toda a corrente da lâmpada passa pelo fusível.
+
+2. Para cortar a corrente de uma carga, a peça precisa estar no caminho dessa
+   corrente. Em série, existe um caminho só, e toda a corrente passa pelo
+   fusível e pelo interruptor. Quando o fusível derrete ou o interruptor abre,
+   o caminho único se interrompe e a corrente cai a zero. Num caminho separado,
+   a corrente da carga não passaria pelo fusível: ele não sentiria uma corrente
+   alta na carga e não conseguiria cortá-la.
+
+3. a) $R_T = 3 + 3 = 6\,\Omega$; $I = 12 \div 6 = 2\,\text{A}$; cada resistor
+   fica com $2 \times 3 = 6\,\text{V}$. Conferindo: $6 + 6 = 12$.
+
+   b) $R_T = 1 + 2 + 3 = 6\,\Omega$; $I = 12 \div 6 = 2\,\text{A}$; quedas de
+   $2 \times 1 = 2\,\text{V}$, $2 \times 2 = 4\,\text{V}$ e
+   $2 \times 3 = 6\,\text{V}$. Conferindo: $2 + 4 + 6 = 12$.
+
+   c) $12 - 7.5 = 4.5\,\text{V}$, porque as duas quedas somadas dão 12 V.
+
+   Se no item a você encontrou 4 A, dividiu 12 V por 3 Ω, a resistência de um
+   resistor só. Em série, a corrente sai da resistência **total**.
+
+4. $R_T = 0.2 + 0.8 = 1\,\Omega$; $I = 12 \div 1 = 12\,\text{A}$; o motor fica
+   com $12 \times 0.8 = 9.6\,\text{V}$ e o resistor com
+   $12 \times 0.2 = 2.4\,\text{V}$.
+
+   | Velocidade | Resistor no caminho | $R_T$ | Corrente | Tensão no motor |
+   |---|---|---|---|---|
+   | 1 | 0.8 Ω | 1.6 Ω | 7.5 A | 6 V |
+   | 2 | 0.4 Ω | 1.2 Ω | 10 A | 8 V |
+   | 3 | 0.2 Ω | 1 Ω | 12 A | 9.6 V |
+   | máxima | nenhum | 0.8 Ω | 15 A | 12 V |
+
+   A cada velocidade, o bloco põe menos resistência no caminho. A resistência
+   total cai, a corrente sobe e o resistor fica com uma parte menor da tensão.
+   Sobra mais tensão para o motor, que gira mais rápido. Na máxima, o resistor
+   sai do caminho, e o motor recebe a tensão inteira.
+
+5. a) $R_T = 12 \div 0.75 = 16\,\Omega$. A lâmpada tem 12 Ω, então apareceram
+   $16 - 12 = 4\,\Omega$ a mais.
+
+   b) $V = 0.75 \times 4 = 3\,\text{V}$. Conferindo: 9 V na lâmpada mais 3 V na
+   resistência a mais dão 12 V.
+
+   c) Medir a tensão sobre cada trecho do caminho com a lâmpada acesa: do
+   positivo da bateria até o terminal positivo do soquete, e do terminal de
+   massa do soquete até o negativo da bateria. O trecho que mostrar os 3 V é o
+   que tem a resistência a mais. É a medição de queda de tensão, que terá uma
+   lição própria.
+
+6. Nas velocidades 1, 2 e 3, o caminho único da corrente passa pelo limitador.
+   Com ele aberto, esse caminho está interrompido, e a corrente é zero nas três.
+   Na máxima, o interruptor manda a corrente por outro caminho, que não passa
+   pelo bloco. Esse caminho está inteiro, e o motor gira.
+
+7. **Question 1: A.** $R_T = 2 + 4 + 6 = 12\,\Omega$ e
+   $I = 12 \div 12 = 1\,\text{A}$. A alternativa B vem de usar só o resistor de
+   6 Ω, $12 \div 6$. A C vem de usar só o de 2 Ω, $12 \div 2$. A D vem de
+   somar 12 V com 12 Ω, o que mistura grandezas diferentes.
+
+   **Question 2: C.** Os dois estão certos. O técnico A descreve a regra 1: um
+   caminho só, a mesma corrente em todo o circuito. O técnico B descreve a
+   regra 3, a lei das tensões de Kirchhoff.
+
+   **Question 3: C.** Em série, o filamento rompido interrompe o caminho único,
+   e a corrente cai a zero nas duas lâmpadas. A alternativa A seria verdade se
+   a lâmpada rompida fosse **pulada** por um curto, e não aberta. A B descreve
+   um circuito em paralelo. A D exige corrente alta, e um circuito aberto deixa
+   a corrente em zero.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** num circuito em série, a corrente tem um caminho só. A
+  corrente é a mesma em todo o circuito, as resistências se somam, e as quedas
+  de tensão somadas dão a tensão da fonte.
+- **Quando usar:** para calcular a tensão que chega a uma carga quando há outra
+  resistência no caminho — de propósito, como o bloco do ventilador, ou por
+  defeito, como uma massa oxidada. E para achar um ponto aberto: ele é o que
+  fica com a tensão inteira da fonte.
+- **Com o que se conecta:** a regra das quedas de tensão é a base da lição de
+  queda de tensão, a principal ferramenta para achar resistência alta. E as
+  luzes do carro, ao contrário do pisca-pisca de Natal, não apagam juntas
+  quando uma queima. A próxima lição mostra por quê:
+  [Circuito em paralelo](./circuito-em-paralelo).
+
+**Termos em inglês desta lição:** *series circuit*, *total resistance*,
+*voltage drop*, *source voltage*, *Kirchhoff's voltage law*, *blower motor
+resistor*, *thermal limiter*.

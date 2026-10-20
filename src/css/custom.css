@@ -1,0 +1,54 @@
+:root {
+  --ifm-color-primary: #1f6feb;
+  --ifm-color-primary-dark: #1b63d4;
+  --ifm-color-primary-darker: #185dc8;
+  --ifm-color-primary-darkest: #144da5;
+  --ifm-color-primary-light: #367df0;
+  --ifm-color-primary-lighter: #4386f1;
+  --ifm-color-primary-lightest: #6ba0f4;
+  --ifm-code-font-size: 95%;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #58a6ff;
+  --ifm-color-primary-dark: #3695ff;
+  --ifm-color-primary-darker: #258cff;
+  --ifm-color-primary-darkest: #0071e6;
+  --ifm-color-primary-light: #7ab7ff;
+  --ifm-color-primary-lighter: #8bc0ff;
+  --ifm-color-primary-lightest: #bfdcff;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+/*
+ * Paleta dos diagramas (src/components/README.md).
+ * Três tons categóricos, validados para daltonismo e contraste nos dois temas.
+ * Não acrescente um quarto tom: com quatro cores em cena o par amarelo/laranja
+ * deixa de ser distinguível. Quando um diagrama parecer precisar de mais de
+ * três, quase sempre duas regiões representam a mesma quantidade e devem
+ * dividir a mesma cor.
+ */
+:root {
+  --mv-tone-0: var(--ifm-color-emphasis-500);
+  --mv-tone-1: #2a78d6;
+  --mv-tone-2: #eb6834;
+  --mv-tone-3: #1baf7a;
+  --mv-fill-opacity: 0.22;
+  /* Cor do papel, para um desenho apagar o que passa por baixo dele — é o que
+     deixa oco o miolo da bola vazia da NumberLine. Precisa ser uma variável
+     nossa: `--ifm-background-color` é `#0000` no tema claro, transparente, e
+     `--ifm-background-surface-color` é mais claro que o fundo no tema escuro. */
+  --mv-paper: #fff;
+}
+
+[data-theme='dark'] {
+  --mv-tone-1: #3987e5;
+  --mv-tone-2: #d95926;
+  --mv-tone-3: #199e70;
+  --mv-paper: #1b1b1d;
+}

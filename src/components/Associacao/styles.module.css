@@ -1,0 +1,131 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.svg {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+.wire,
+.wire line {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.wireThin {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.plate {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.4;
+}
+
+.plateShort {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 5;
+}
+
+.part {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.contact {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.load {
+  fill: none;
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.lamp {
+  fill: var(--mv-tone-2);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+}
+
+.body {
+  fill: var(--mv-tone-0);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--mv-tone-0);
+  stroke-width: 1.5;
+}
+
+.arrow {
+  fill: none;
+  stroke: var(--mv-tone-1);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fault {
+  fill: none;
+  stroke: var(--mv-tone-3);
+  stroke-width: 2.4;
+  stroke-dasharray: 6 4;
+  stroke-linejoin: round;
+}
+
+.faultDot {
+  fill: var(--mv-tone-3);
+}
+
+.faultEnd {
+  fill: var(--mv-paper);
+  stroke: var(--mv-tone-3);
+  stroke-width: 2;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+/* carga aberta: o defeito sai no tom 3, como no `Circuito` */
+.loadOpen {
+  fill: none;
+  stroke: var(--mv-tone-3);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.lampOpen {
+  fill: var(--mv-tone-3);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--mv-tone-3);
+  stroke-width: 2.4;
+}
+
+.node {
+  fill: var(--ifm-font-color-base);
+}

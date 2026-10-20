@@ -1,0 +1,550 @@
+---
+title: Potência elétrica
+---
+
+# Potência elétrica
+
+> **Pergunta central:** o que o número de watts de uma lâmpada diz sobre a
+> corrente que ela puxa — e por que um terminal ruim esquenta?
+
+## A queixa: os faróis auxiliares
+
+Um cliente comprou dois faróis auxiliares de 100 W cada e pede:
+
+> “Liga esses dois faróis no lugar do farol de milha original. O fio já está
+> lá, é só aproveitar.”
+
+É o mesmo carro da lição [Lei de Ohm](./lei-de-ohm): o circuito do farol de
+milha tem um fusível de 10 A (valor ilustrativo), e o farol original tem 3 Ω
+aceso, puxando 4 A.
+
+A embalagem dos faróis novos não fala em ampères nem em ohms. Fala em **watts**.
+Para decidir se o pedido do cliente é seguro, você precisa transformar watts em
+ampères. Ao final desta lição você vai saber fazer essa conta e dar a resposta.
+
+## Mapa das ideias
+
+| Português | Inglês | O que é |
+|---|---|---|
+| potência | *power* | a rapidez com que a energia elétrica vira outra coisa: luz, calor, movimento |
+| watt (W) | *watt* | unidade de potência |
+| lei de Watt | *Watt's law* | a relação $P = V \times I$ |
+| quilowatt (kW) | *kilowatt* | 1000 watts |
+| cavalo-vapor | *horsepower* (hp) | unidade antiga de potência; 1 hp equivale a cerca de 746 W |
+| energia | *energy* | o total de trabalho feito; depende da potência e do tempo |
+
+## Onde isso aparece
+
+- **Lâmpadas** são vendidas pela potência: 5 W na luz da placa, 21 W na luz de
+  freio, 55 W num farol halógeno comum (valores típicos).
+- **Acessórios** — faróis auxiliares, som, guincho — precisam de fio e fusível
+  dimensionados pela potência deles.
+- **Terminais e conectores ruins** esquentam, às vezes até derreter. A potência
+  explica por quê.
+- **Motores elétricos** — do motor de partida ao motor de um carro elétrico —
+  são descritos em quilowatts.
+
+Na Wake Tech, a potência completa a teoria elétrica básica da **TRN-120**. Na
+prova ASE, aparece na área **A6**, quase sempre junto com a lei de Ohm.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O circuito elétrico](./o-circuito-eletrico), o que a lâmpada usa,
+   se ela não gasta elétrons?
+2. Na [lei de Ohm](./lei-de-ohm), qual forma da lei dá a corrente, sabendo
+   tensão e resistência?
+3. No exemplo do terminal oxidado do motor de partida, quantos volts ficavam no
+   terminal, e com que corrente?
+
+<details>
+<summary>Respostas</summary>
+
+1. A energia que a bateria deu aos elétrons. O número de elétrons que entra na
+   lâmpada é o mesmo que sai; o que fica na lâmpada é energia, que vira luz e
+   calor. Esta lição mede **com que rapidez** essa energia é usada.
+2. $I = V \div R$.
+3. Ficavam 1.5 V no terminal, com 150 A passando — porque
+   $V = I \times R = 150 \times 0.01 = 1.5\,\text{V}$. Esses números voltam
+   nesta lição.
+
+</details>
+
+## Intuição: empurrão e fluxo, juntos
+
+Imagine uma pequena roda d'água movida pela mangueira de jardim.
+
+- Uma mangueira com muita pressão, mas soltando um fio de água, não gira a
+  roda: o jato é forte, mas é pouca água.
+- Uma mangueira com muita água, mas sem pressão nenhuma, também não gira: a água
+  só escorre.
+- A roda gira com força quando há **pressão e vazão ao mesmo tempo**.
+
+O trabalho feito por segundo depende das duas coisas multiplicadas. No circuito
+é igual: a potência depende da tensão (o empurrão) **e** da corrente (o fluxo).
+Uma lâmpada de 12 V com pouca corrente brilha pouco; com mais corrente, na
+mesma tensão, brilha mais.
+
+## Modelo visual: lâmpadas do carro
+
+Todas as lâmpadas abaixo trabalham com 12 V. Repare na coluna de corrente.
+
+| Lâmpada (valores típicos) | Potência | Tensão | Corrente |
+|---|---|---|---|
+| luz da placa | 5 W | 12 V | cerca de 0.42 A |
+| luz de freio | 21 W | 12 V | 1.75 A |
+| farol halógeno | 55 W | 12 V | cerca de 4.58 A |
+
+Com a tensão igual, **mais watts quer dizer mais ampères**, na mesma proporção.
+A luz de freio tem um pouco mais que quatro vezes a potência da luz da placa, e
+puxa um pouco mais que quatro vezes a corrente. E em toda linha vale o mesmo:
+tensão vezes corrente dá a potência. Para a luz de freio, $12 \times 1.75 = 21$.
+
+## Ponte para a formalização
+
+Por que multiplicar tensão por corrente? Porque cada uma diz uma parte da
+história.
+
+- A **tensão** diz quanta energia cada porção de carga elétrica recebe da
+  bateria. É o “tamanho do empurrão” que cada elétron leva.
+- A **corrente** diz quantas porções de carga passam por segundo.
+
+Se cada porção leva uma certa energia, e passam tantas porções por segundo, a
+energia entregue por segundo é a energia de cada uma vezes quantas passam. É a
+mesma conta de um caixa de supermercado: o valor de cada compra vezes quantas
+compras por hora dá o faturamento por hora.
+
+Energia entregue por segundo é exatamente o que chamamos de potência.
+
+## Formalização
+
+> **Potência** (*power*) é a quantidade de energia elétrica transformada a cada
+> segundo — em luz, calor ou movimento. A unidade é o **watt** (W).
+>
+> $$
+> P = V \times I
+> $$
+>
+> com $P$ em watts, $V$ em volts e $I$ em ampères. Nos livros americanos de
+> mecânica, essa relação aparece com o nome de *Watt's law*, lei de Watt.
+
+Pela fórmula, 1 watt é a potência de 1 volt empurrando 1 ampère.
+
+- **Exemplo:** a luz de freio de 21 W, em 12 V, puxa
+  $I = P \div V = 21 \div 12 = 1.75\,\text{A}$. A conta usa a fórmula com o
+  $I$ isolado. Ele foi isolado como na lição anterior: dividindo os dois lados
+  de $P = V \times I$ por $V$.
+- **Contraexemplo: potência não é energia.** Uma lâmpada de 5 W acesa por um
+  minuto e a mesma lâmpada acesa a noite inteira têm a **mesma potência**: 5 W.
+  Mas a energia gasta é muito diferente. Potência é o ritmo; energia é o total,
+  que depende do ritmo **e** do tempo. É por isso que uma luz pequena esquecida
+  acesa pode descarregar a bateria: pouca potência, por muitas horas. A lição de
+  baterias mede essa energia.
+
+### Quilowatts e cavalos
+
+Motores grandes têm potências de milhares de watts, por isso se usa o
+**quilowatt** (kW): 1 kW = 1000 W. Nos Estados Unidos, a potência de motores
+também aparece em **cavalo-vapor** (*horsepower*, hp): 1 hp equivale a cerca de
+746 W.
+
+### Duas formas a mais
+
+Às vezes você não conhece a tensão e a corrente, mas conhece a resistência. A
+lei de Ohm permite trocar uma grandeza pela outra.
+
+Comece com $P = V \times I$. Pela lei de Ohm, $V$ é igual a $I \times R$.
+Coisas iguais podem ocupar o lugar uma da outra sem mudar o valor da conta.
+Então, no lugar do $V$, escreva $I \times R$:
+
+$$
+P = V \times I = (I \times R) \times I = I^2 \times R
+$$
+
+O $I^2$ é $I \times I$: a corrente aparece duas vezes.
+
+Do mesmo jeito, a lei de Ohm diz que $I = V \div R$. Colocando isso no lugar do
+$I$:
+
+$$
+P = V \times I = V \times \frac{V}{R} = \frac{V^2}{R}
+$$
+
+| Você conhece | Use |
+|---|---|
+| tensão e corrente | $P = V \times I$ |
+| corrente e resistência | $P = I^2 \times R$ |
+| tensão e resistência | $P = \dfrac{V^2}{R}$ |
+
+**O que muda** são as letras que aparecem. **O que permanece igual** é o valor
+da potência: as três formas dão o mesmo número no mesmo circuito. Confira com o
+farol de milha da lição anterior, com 12 V, 4 A e 3 Ω:
+
+$$
+12 \times 4 = 48\,\text{W} \qquad 4^2 \times 3 = 16 \times 3 = 48\,\text{W} \qquad \frac{12^2}{3} = \frac{144}{3} = 48\,\text{W}
+$$
+
+As três dão 48 W.
+
+### Para onde vai a potência
+
+A fórmula não pergunta se a potência é útil. Ela diz quanta energia vira outra
+coisa a cada segundo, **em qualquer resistência por onde a corrente passa**.
+
+- Na **carga**, essa energia faz o trabalho que queremos: o filamento brilha, o
+  motor gira.
+- Num **terminal oxidado** ou num fio fino demais, a energia vira só calor. Não
+  ilumina nem gira nada; esquenta a peça e rouba energia da carga.
+
+Por isso, **um conector quente depois de usado é sinal de resistência alta.**
+Num conector bom, a resistência é quase zero, e a potência perdida nele também.
+
+## Como falha e como diagnosticar
+
+A potência explica três tipos de defeito que a lei de Ohm sozinha não deixa
+claros.
+
+| Sintoma | O que a potência explica | O que fazer |
+|---|---|---|
+| conector derretido ou escurecido | resistência alta no conector transforma potência em calor | trocar terminais e procurar a causa: oxidação, terminal frouxo |
+| fusível queima depois de instalar um acessório | a potência do acessório exige mais corrente do que o circuito comporta | calcular a corrente pela potência e fazer um circuito próprio |
+| carga fraca | menos corrente chega à carga, e a potência dela cai | procurar a resistência a mais no caminho |
+
+Um detalhe torna o primeiro sintoma traiçoeiro. Pela forma $P = I^2 \times R$,
+o calor num conector cresce com o **quadrado** da corrente. Se a corrente
+dobra, o calor no mesmo conector fica quatro vezes maior. Um conector que
+aguenta bem uma lâmpada pode derreter com outra de potência maior.
+
+### A queixa resolvida
+
+Os dois faróis novos têm 100 W cada, juntos 200 W. A corrente, em 12 V:
+
+$$
+I = \frac{P}{V} = \frac{200}{12} \approx 16.7\,\text{A}
+$$
+
+São cerca de 16.7 A num circuito protegido por 10 A. Com o motor funcionando,
+perto de 14 V, a corrente cai um pouco: $200 \div 14 \approx 14.3\,\text{A}$.
+Ainda passa bastante dos 10 A.
+
+Compare com o farol original: com 3 Ω em 12 V, ele tinha 48 W e puxava 4 A. Os
+faróis novos pedem mais que quatro vezes essa potência. O fusível de 10 A vai
+queimar, e o fio, dimensionado para o farol original, não foi feito para essa
+corrente.
+
+**A resposta ao cliente:** os faróis não podem ser ligados no circuito original.
+Eles precisam de um circuito próprio, com relé, fio e fusível adequados à
+corrente deles, seguindo as instruções do fabricante dos faróis. E aumentar o
+fusível do circuito original não é solução — a lição anterior mostrou por quê.
+
+## Na oficina: calor
+
+:::warning Peças que esquentam
+
+- **Lâmpadas halógenas ficam muito quentes.** Espere esfriar antes de tirar uma
+  lâmpada que acabou de ficar acesa.
+- **Não toque no vidro de uma lâmpada halógena nova com os dedos.** A gordura da
+  pele cria pontos quentes no vidro e encurta a vida da lâmpada. Segure pela
+  base, ou com luva ou pano limpo.
+- **Conector que esquentou pode queimar a mão.** Para conferir se um conector
+  esquenta, toque com cuidado depois de desligar o circuito, ou use um
+  termômetro infravermelho.
+- **Acessórios:** a instalação segue as instruções do fabricante do acessório e
+  o manual do veículo. Não aproveite um circuito existente sem conferir a
+  corrente pela potência.
+
+:::
+
+## Exemplos resolvidos
+
+### Exemplo 1: as luzes de freio
+
+As duas luzes de freio de um carro têm 21 W cada e trabalham com 12 V. Quanta
+corrente cada uma puxa, e quanta as duas juntas?
+
+Cada uma: $I = P \div V = 21 \div 12 = 1.75\,\text{A}$.
+
+As duas juntas somam $21 + 21 = 42\,\text{W}$, então
+$I = 42 \div 12 = 3.5\,\text{A}$. É o mesmo que somar as duas correntes:
+$1.75 + 1.75 = 3.5\,\text{A}$.
+
+### Exemplo 2: o calor no terminal oxidado
+
+**Pause e tente:** volte ao terminal oxidado do motor de partida da lição
+anterior. Passavam 150 A, e ficavam 1.5 V no terminal. Quanta potência vira
+calor ali, enquanto o motor de partida gira? Compare com um farol de 55 W.
+
+<details>
+<summary>Solução</summary>
+
+$$
+P = V \times I = 1.5 \times 150 = 225\,\text{W}
+$$
+
+São 225 W virando calor dentro de um terminal pequeno. Um farol halógeno de 55 W
+esquenta bastante; 225 W é cerca de quatro vezes isso
+($225 \div 55 \approx 4.1$). O motor de partida só gira por alguns segundos de
+cada vez, por isso o terminal não derrete na primeira partida. Mas, partida após
+partida, ele esquenta, oxida ainda mais e a resistência sobe — o defeito piora
+sozinho.
+
+</details>
+
+### Exemplo 3: a mesma potência por outro caminho
+
+**Pause e tente:** calcule a potência do exemplo 2 com $P = I^2 \times R$,
+sabendo que o terminal tem 0.01 Ω. Depois com $P = V^2 \div R$. Os resultados
+batem?
+
+<details>
+<summary>Solução</summary>
+
+$$
+P = I^2 \times R = 150^2 \times 0.01 = 22\,500 \times 0.01 = 225\,\text{W}
+$$
+
+$$
+P = \frac{V^2}{R} = \frac{1.5^2}{0.01} = \frac{2.25}{0.01} = 225\,\text{W}
+$$
+
+Os três caminhos dão 225 W. Isso tem que acontecer, porque as três formas vêm da
+mesma fórmula, com a lei de Ohm trocando uma grandeza pela outra.
+
+Atenção a um detalhe: na forma $V^2 \div R$, o $V$ é a tensão **sobre o
+terminal**, 1.5 V, e não a tensão da bateria. Se você usou 12.6 V, calculou a
+potência de outra coisa — e encontrou um valor sem sentido, de quase 16 mil
+watts.
+
+</details>
+
+### Exemplo 4: a potência do motor de partida
+
+**Pause e tente:** o motor de partida do exemplo recebe 11.1 V e puxa 150 A.
+Qual é a potência elétrica dele, em watts e em quilowatts? Quanto isso dá em
+cavalos?
+
+<details>
+<summary>Solução</summary>
+
+$$
+P = V \times I = 11.1 \times 150 = 1665\,\text{W}
+$$
+
+Em quilowatts, divida por 1000: $1665 \div 1000 \approx 1.67\,\text{kW}$.
+
+Em cavalos, divida por 746: $1665 \div 746 \approx 2.2\,\text{hp}$.
+
+É a potência elétrica que chega ao motor de partida; uma parte dela vira calor
+no próprio motor, e o resto vira o giro que dá a partida. Para comparar: os
+1665 W equivalem a cerca de trinta faróis de 55 W acesos ao mesmo tempo. É por
+isso que o cabo do motor de partida é tão grosso.
+
+</details>
+
+### Exemplo 5: o ventilador da cabine
+
+**Pause e tente:** o motor do ventilador da cabine — o que sopra o ar do painel,
+em inglês *blower motor* — tem, na velocidade máxima, cerca de 180 W (valor
+ilustrativo). Que corrente ele puxa em 12 V? Por que o fusível dele costuma ser
+maior que o de uma lâmpada?
+
+<details>
+<summary>Solução</summary>
+
+$$
+I = \frac{P}{V} = \frac{180}{12} = 15\,\text{A}
+$$
+
+São 15 A, contra menos de 5 A de um farol. O fusível é dimensionado para a
+corrente do circuito, e a corrente vem da potência da carga. Carga de potência
+maior, corrente maior, fusível e fio maiores.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que a potência é tensão **vezes** corrente, e não tensão mais corrente?
+2. Uma lâmpada de 5 W ficou acesa a noite toda e a bateria descarregou. Como uma
+   potência tão pequena faz isso?
+3. Por que um conector bom não esquenta, se a mesma corrente passa por ele e
+   pelo conector oxidado?
+4. Se a corrente num conector dobra, por que o calor nele fica quatro vezes
+   maior, e não duas?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque a tensão é a energia que cada porção de carga leva, e a corrente é
+   quantas porções passam por segundo. Energia por segundo é a energia de cada
+   porção vezes o número de porções — como o valor de cada compra vezes o número
+   de compras. Somar volts com ampères nem faz sentido: são grandezas de tipos
+   diferentes.
+2. Porque potência é o ritmo, e a bateria perde energia, que é o ritmo vezes o
+   tempo. Com pouca potência por muitas horas, a energia total fica grande o
+   bastante para descarregar a bateria.
+3. Porque a potência perdida num trecho é $I^2 \times R$, e a resistência do
+   conector bom é quase zero. Corrente ao quadrado vezes quase zero dá quase
+   zero. No conector oxidado, a resistência é maior, e a mesma corrente produz
+   calor de verdade.
+4. Porque, na forma $P = I^2 \times R$, a corrente entra ao quadrado. Com o
+   dobro da corrente, $I^2$ fica $2 \times 2 = 4$ vezes maior. A resistência do
+   conector é a mesma, então o calor fica quatro vezes maior.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Qual é a unidade de potência?
+
+b) Você conhece a corrente e a resistência de uma carga. Qual forma da fórmula
+de potência usa diretamente esses dois números?
+
+### 2. Explicação
+
+Explique, com suas palavras, por que um terminal oxidado esquenta e um terminal
+limpo não, mesmo com a mesma corrente passando pelos dois.
+
+### 3. Aplicação direta
+
+a) Uma carga em 12 V puxa 2 A. Qual é a potência?
+
+b) Um acessório de 60 W é ligado em 12 V. Qual é a corrente?
+
+c) Passam 3 A por uma resistência de 2 Ω. Quanta potência vira calor nela?
+
+d) Uma carga de 6 Ω está ligada a 12 V. Qual é a potência?
+
+### 4. Variação
+
+A lâmpada da luz de freio tem 21 W e a da placa tem 5 W, as duas em 12 V. Qual
+das duas tem **mais** resistência acesa? Calcule as duas com $R = V^2 \div P$ e
+explique o resultado.
+
+<details>
+<summary>Dica para o exercício 4</summary>
+
+A forma $R = V^2 \div P$ sai de $P = V^2 \div R$ trocando $P$ e $R$ de lugar:
+multiplique os dois lados por $R$ e depois divida os dois lados por $P$.
+
+</details>
+
+### 5. Caso de diagnóstico
+
+Um cliente trocou a lâmpada do farol, de 55 W, por uma de 100 W, “para iluminar
+mais”. Semanas depois, o conector atrás do farol apareceu derretido.
+
+a) Qual é a corrente da lâmpada original e da nova, em 12 V?
+
+b) Por quanto fica multiplicado o calor no conector, considerando que a
+resistência dele é a mesma?
+
+c) Explique o que aconteceu.
+
+### 6. Justificativa
+
+Mostre como a forma $P = I^2 \times R$ sai de $P = V \times I$ e da lei de Ohm.
+Diga o que permite fazer a troca.
+
+### 7. Formato ASE
+
+**Question 1.** A 12-volt lamp draws 2 amperes. How much power does it use?
+
+- A. 6 W
+- B. 10 W
+- C. 14 W
+- D. 24 W
+
+**Question 2.** Technician A says that a high-resistance connection can become
+hot because power is converted to heat at the connection. Technician B says
+that a high-resistance connection increases the current in the circuit. Who is
+right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A 60-watt accessory is connected to a 12-volt system. How much
+current does it draw?
+
+- A. 0.2 A
+- B. 5 A
+- C. 48 A
+- D. 720 A
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) O watt (W).
+   b) $P = I^2 \times R$.
+
+2. A potência que vira calor num trecho é $I^2 \times R$. A corrente é a mesma
+   nos dois terminais, mas a resistência não: no terminal limpo ela é quase
+   zero, então quase nada vira calor; no terminal oxidado ela é maior, e a mesma
+   corrente produz calor de verdade. Esse calor não faz trabalho útil nenhum:
+   é energia que deveria ter chegado à carga.
+
+3. a) $P = 12 \times 2 = 24\,\text{W}$.
+   b) $I = 60 \div 12 = 5\,\text{A}$.
+   c) $P = 3^2 \times 2 = 9 \times 2 = 18\,\text{W}$.
+   d) $P = 12^2 \div 6 = 144 \div 6 = 24\,\text{W}$.
+
+   Se você encontrou 12 W no item c, fez $3 \times 2 \times 2$: a corrente entra
+   ao quadrado, $3 \times 3$, e não multiplicada por 2.
+
+4. Luz de freio: $R = 144 \div 21 \approx 6.86\,\Omega$. Luz da placa:
+   $R = 144 \div 5 = 28.8\,\Omega$. A lâmpada de **menor** potência tem
+   **maior** resistência. Com a mesma tensão, resistência maior deixa passar
+   menos corrente ($I = V \div R$), e menos corrente na mesma tensão dá menos
+   potência ($P = V \times I$). Se você esperava o contrário, é um engano comum:
+   “mais forte” parece querer dizer “mais resistência”, mas aqui é o inverso.
+
+5. a) Original: $55 \div 12 \approx 4.58\,\text{A}$. Nova:
+   $100 \div 12 \approx 8.33\,\text{A}$.
+
+   b) A corrente ficou $8.33 \div 4.58 \approx 1.82$ vezes maior. Como o calor
+   no conector é $I^2 \times R$, ele fica $1.82 \times 1.82 \approx 3.3$ vezes
+   maior.
+
+   c) O conector e o fio foram feitos para a lâmpada de 55 W. Com a de 100 W, a
+   corrente quase dobrou, e o calor no conector ficou mais de três vezes maior.
+   O conector, que tem sempre alguma resistência de contato, esquentou até
+   derreter o plástico. A solução é voltar à lâmpada especificada no manual.
+
+6. Comece de $P = V \times I$. A lei de Ohm diz que $V = I \times R$: os dois
+   lados dessa igualdade valem o mesmo número. Por isso, trocar $V$ por
+   $I \times R$ dentro da fórmula da potência não muda o valor da conta. Fica
+   $P = (I \times R) \times I$. Juntando as duas correntes, $I \times I = I^2$,
+   e chegamos a $P = I^2 \times R$.
+
+7. **Question 1: D.** $P = V \times I = 12 \times 2 = 24\,\text{W}$. A
+   alternativa A vem de dividir, $12 \div 2$. A B vem de subtrair, $12 - 2$. A C
+   vem de somar, $12 + 2$.
+
+   **Question 2: A.** O técnico A está certo: a potência perdida na resistência
+   da conexão vira calor. O técnico B está errado: resistência a mais no
+   caminho **diminui** a corrente, pela lei de Ohm.
+
+   **Question 3: B.** $I = P \div V = 60 \div 12 = 5\,\text{A}$. A alternativa A
+   vem de dividir ao contrário, $12 \div 60$. A C vem de subtrair, $60 - 12$. A
+   D vem de multiplicar, $60 \times 12$.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** potência é a energia transformada por segundo, em watts.
+  $P = V \times I$; com a lei de Ohm, também $P = I^2 \times R$ e
+  $P = V^2 \div R$.
+- **Quando usar:** para transformar a potência de uma lâmpada ou acessório em
+  corrente, dimensionar fio e fusível, e entender por que uma resistência no
+  lugar errado esquenta.
+- **Com o que se conecta:** esta lição fecha o primeiro tópico da TRN-120. Até
+  aqui, todo circuito teve uma carga só. O próximo tópico mostra o que acontece
+  quando há várias cargas, uma depois da outra ou lado a lado: circuitos em
+  série, em paralelo e mistos. Comece por
+  [Circuito em série](./circuito-em-serie).
+
+**Termos em inglês desta lição:** *power*, *watt*, *Watt's law*, *kilowatt*,
+*horsepower*, *energy*, *blower motor*.

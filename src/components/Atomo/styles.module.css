@@ -1,0 +1,48 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shell {
+  fill: none;
+  stroke: var(--ifm-color-emphasis-500);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.nucleus {
+  fill: var(--mv-tone-2);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--mv-tone-2);
+  stroke-width: 2;
+}
+
+.electron {
+  fill: var(--ifm-font-color-base);
+}
+
+.free {
+  fill: var(--mv-tone-1);
+}
+
+.leader {
+  stroke: var(--mv-tone-1);
+  stroke-width: 1.4;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}

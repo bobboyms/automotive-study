@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Quadro — caderno de estudo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+  body {
+    font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f4f5; color: #27272a;
+    display: flex; flex-direction: column;
+    -webkit-user-select: none; user-select: none;
+  }
+  #aviso-arquivo {
+    display: none; background: #fef3c7; color: #78350f;
+    padding: 8px 12px; text-align: center; border-bottom: 1px solid #fcd34d;
+  }
+  header {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 8px 12px; background: #fff; border-bottom: 1px solid #e4e4e7;
+  }
+  .grupo { display: flex; align-items: center; gap: 6px; padding-right: 10px; border-right: 1px solid #e4e4e7; }
+  .grupo.sem-borda { border-right: none; }
+  button {
+    font: inherit; color: #27272a; background: #fff;
+    border: 1px solid #d4d4d8; border-radius: 8px; padding: 6px 10px; cursor: pointer;
+  }
+  button:hover { background: #f4f4f5; }
+  button:disabled { opacity: .4; cursor: default; }
+  button.ativo { background: #eef2ff; border-color: #6366f1; color: #3730a3; }
+  .cor { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(0,0,0,.12); padding: 0; }
+  .cor.ativo { border-color: #18181b; box-shadow: inset 0 0 0 2px #fff; }
+  .tracos button { width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; }
+  .tracos i { display: block; border-radius: 50%; background: currentColor; }
+  #titulo {
+    font: inherit; color: inherit; border: 1px solid #d4d4d8; border-radius: 8px;
+    padding: 6px 10px; width: 220px; max-width: 45vw;
+    -webkit-user-select: text; user-select: text;
+  }
+  #salvar { background: #4f46e5; border-color: #4f46e5; color: #fff; font-weight: 600; }
+  #salvar:hover { background: #4338ca; }
+  main { flex: 1; position: relative; }
+  #folha {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    touch-action: none; cursor: crosshair;
+    background-color: #fff;
+    background-image:
+      linear-gradient(to right, #eef1f6 1px, transparent 1px),
+      linear-gradient(to bottom, #eef1f6 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  #toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    background: #18181b; color: #fafafa; padding: 10px 16px; border-radius: 10px;
+    opacity: 0; transition: opacity .25s; pointer-events: none;
+    max-width: 90vw; text-align: center;
+  }
+  #toast.visivel { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="aviso-arquivo">
+  Para salvar, o quadro precisa rodar pelo servidor: execute <code>npm run quadro</code>
+  e abra <strong>http://localhost:4123</strong>.
+</div>
+<header>
+  <div class="grupo" id="cores">
+    <button class="cor ativo" data-cor="#1d1d1f" style="background:#1d1d1f" title="Preto"></button>
+    <button class="cor" data-cor="#2563eb" style="background:#2563eb" title="Azul"></button>
+    <button class="cor" data-cor="#dc2626" style="background:#dc2626" title="Vermelho"></button>
+    <button class="cor" data-cor="#16a34a" style="background:#16a34a" title="Verde"></button>
+  </div>
+  <div class="grupo tracos" id="tracos">
+    <button data-tam="2" title="Traço fino"><i style="width:4px;height:4px"></i></button>
+    <button data-tam="3.5" class="ativo" title="Traço médio"><i style="width:7px;height:7px"></i></button>
+    <button data-tam="6" title="Traço grosso"><i style="width:11px;height:11px"></i></button>
+  </div>
+  <div class="grupo">
+    <button id="borracha">Borracha</button>
+  </div>
+  <div class="grupo">
+    <button id="desfazer" disabled>Desfazer</button>
+    <button id="refazer" disabled>Refazer</button>
+    <button id="limpar">Limpar</button>
+  </div>
+  <div class="grupo sem-borda" style="flex:1; justify-content:flex-end;">
+    <input id="titulo" placeholder="nome do exercício (opcional)" autocomplete="off">
+    <button id="salvar">Salvar para correção</button>
+  </div>
+</header>
+<main><canvas id="folha"></canvas></main>
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+const folha = document.getElementById('folha');
+const ctx = folha.getContext('2d');
+const campoTitulo = document.getElementById('titulo');
+const botaoBorracha = document.getElementById('borracha');
+const botaoDesfazer = document.getElementById('desfazer');
+const botaoRefazer = document.getElementById('refazer');
+const elToast = document.getElementById('toast');
+
+// Cada traço: {cor, tam, borracha, caneta, pontos: [{x, y, p}]}
+const tracos = [];
+const pilhaRefazer = [];
+let tracoAtual = null;
+
+let cor = '#1d1d1f';
+let tam = 3.5;
+let usandoBorracha = false;
+let canetaVista = false;  // depois do primeiro toque de caneta, ignora dedo (palma)
+let dpr = 1;
+let temporizadorToast = null;
+
+function toast(mensagem, duracao) {
+  elToast.textContent = mensagem;
+  elToast.classList.add('visivel');
+  clearTimeout(temporizadorToast);
+  temporizadorToast = setTimeout(() => elToast.classList.remove('visivel'), duracao || 3500);
+}
+
+function larguraDoPonto(traco, pressao) {
+  if (!traco.caneta) return traco.tam;
+  return traco.tam * (0.4 + 1.2 * Math.max(pressao, 0.05));
+}
+
+function desenharSegmento(c, traco, a, b) {
+  c.globalCompositeOperation = traco.borracha ? 'destination-out' : 'source-over';
+  c.strokeStyle = traco.cor;
+  c.lineCap = 'round';
+  c.lineJoin = 'round';
+  c.lineWidth = traco.borracha
+    ? traco.tam * 6
+    : (larguraDoPonto(traco, a.p) + larguraDoPonto(traco, b.p)) / 2;
+  c.beginPath();
+  c.moveTo(a.x, a.y);
+  c.lineTo(b.x, b.y);
+  c.stroke();
+}
+
+function desenharTraco(c, traco) {
+  const pontos = traco.pontos;
+  if (pontos.length === 1) {
+    const p = pontos[0];
+    c.globalCompositeOperation = traco.borracha ? 'destination-out' : 'source-over';
+    c.fillStyle = traco.cor;
+    c.beginPath();
+    c.arc(p.x, p.y, (traco.borracha ? traco.tam * 6 : larguraDoPonto(traco, p.p)) / 2, 0, Math.PI * 2);
+    c.fill();
+    return;
+  }
+  for (let i = 1; i < pontos.length; i++) desenharSegmento(c, traco, pontos[i - 1], pontos[i]);
+}
+
+function redesenhar() {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, folha.width, folha.height);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  for (const traco of tracos) desenharTraco(ctx, traco);
+  ctx.globalCompositeOperation = 'source-over';
+  atualizarBotoes();
+}
+
+function redimensionar() {
+  dpr = window.devicePixelRatio || 1;
+  const r = folha.getBoundingClientRect();
+  folha.width = Math.round(r.width * dpr);
+  folha.height = Math.round(r.height * dpr);
+  redesenhar();
+}
+
+function atualizarBotoes() {
+  botaoDesfazer.disabled = tracos.length === 0;
+  botaoRefazer.disabled = pilhaRefazer.length === 0;
+}
+
+function posicao(evento) {
+  const r = folha.getBoundingClientRect();
+  return { x: evento.clientX - r.left, y: evento.clientY - r.top, p: evento.pressure || 0 };
+}
+
+folha.addEventListener('pointerdown', (e) => {
+  if (e.pointerType === 'pen') canetaVista = true;
+  if (canetaVista && e.pointerType === 'touch') return;
+  if (e.pointerType === 'touch' && !e.isPrimary) return;
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  e.preventDefault();
+  folha.setPointerCapture(e.pointerId);
+  tracoAtual = {
+    cor, tam,
+    borracha: usandoBorracha,
+    caneta: e.pointerType === 'pen',
+    pontos: [posicao(e)],
+    pointerId: e.pointerId,
+  };
+});
+
+folha.addEventListener('pointermove', (e) => {
+  if (!tracoAtual || e.pointerId !== tracoAtual.pointerId) return;
+  const eventos = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+  for (const ev of eventos) {
+    const ponto = posicao(ev);
+    const ultimo = tracoAtual.pontos[tracoAtual.pontos.length - 1];
+    if (Math.hypot(ponto.x - ultimo.x, ponto.y - ultimo.y) < 0.7) continue;
+    tracoAtual.pontos.push(ponto);
+    desenharSegmento(ctx, tracoAtual, ultimo, ponto);
+  }
+});
+
+function terminarTraco(e) {
+  if (!tracoAtual || e.pointerId !== tracoAtual.pointerId) return;
+  if (tracoAtual.pontos.length === 1) desenharTraco(ctx, tracoAtual);
+  delete tracoAtual.pointerId;
+  tracos.push(tracoAtual);
+  pilhaRefazer.length = 0;
+  tracoAtual = null;
+  ctx.globalCompositeOperation = 'source-over';
+  atualizarBotoes();
+}
+
+folha.addEventListener('pointerup', terminarTraco);
+folha.addEventListener('pointercancel', terminarTraco);
+folha.addEventListener('contextmenu', (e) => e.preventDefault());
+
+document.getElementById('cores').addEventListener('click', (e) => {
+  const botao = e.target.closest('.cor');
+  if (!botao) return;
+  cor = botao.dataset.cor;
+  usandoBorracha = false;
+  botaoBorracha.classList.remove('ativo');
+  for (const b of document.querySelectorAll('.cor')) b.classList.toggle('ativo', b === botao);
+});
+
+document.getElementById('tracos').addEventListener('click', (e) => {
+  const botao = e.target.closest('button');
+  if (!botao) return;
+  tam = Number(botao.dataset.tam);
+  for (const b of document.querySelectorAll('.tracos button')) b.classList.toggle('ativo', b === botao);
+});
+
+botaoBorracha.addEventListener('click', () => {
+  usandoBorracha = !usandoBorracha;
+  botaoBorracha.classList.toggle('ativo', usandoBorracha);
+});
+
+function desfazer() {
+  if (!tracos.length) return;
+  pilhaRefazer.push(tracos.pop());
+  redesenhar();
+}
+
+function refazer() {
+  if (!pilhaRefazer.length) return;
+  tracos.push(pilhaRefazer.pop());
+  redesenhar();
+}
+
+botaoDesfazer.addEventListener('click', desfazer);
+botaoRefazer.addEventListener('click', refazer);
+
+document.getElementById('limpar').addEventListener('click', () => {
+  if (!tracos.length) return;
+  if (!confirm('Apagar o quadro inteiro? (Salve antes, se quiser guardar.)')) return;
+  tracos.length = 0;
+  pilhaRefazer.length = 0;
+  redesenhar();
+});
+
+async function salvar() {
+  if (!tracos.length) { toast('O quadro está vazio.'); return; }
+  const copia = document.createElement('canvas');
+  copia.width = folha.width;
+  copia.height = folha.height;
+  const c = copia.getContext('2d');
+  c.fillStyle = '#ffffff';
+  c.fillRect(0, 0, copia.width, copia.height);
+  c.drawImage(folha, 0, 0);
+  const blob = await new Promise((res) => copia.toBlob(res, 'image/png'));
+  const titulo = campoTitulo.value.trim();
+  try {
+    const resposta = await fetch('/salvar?titulo=' + encodeURIComponent(titulo), {
+      method: 'POST',
+      headers: { 'Content-Type': 'image/png' },
+      body: blob,
+    });
+    if (!resposta.ok) throw new Error(await resposta.text());
+    const dados = await resposta.json();
+    toast('Salvo em ' + dados.arquivo + ' — agora é só pedir a correção ao Claude.', 5000);
+  } catch (erro) {
+    toast('Não consegui salvar. O servidor está rodando? (npm run quadro)', 5000);
+  }
+}
+
+document.getElementById('salvar').addEventListener('click', salvar);
+
+window.addEventListener('keydown', (e) => {
+  if (!(e.metaKey || e.ctrlKey)) return;
+  const tecla = e.key.toLowerCase();
+  if (tecla === 's') { e.preventDefault(); salvar(); return; }
+  if (document.activeElement === campoTitulo) return;
+  if (tecla === 'z' && !e.shiftKey) { e.preventDefault(); desfazer(); }
+  else if ((tecla === 'z' && e.shiftKey) || tecla === 'y') { e.preventDefault(); refazer(); }
+});
+
+window.addEventListener('resize', redimensionar);
+if (location.protocol === 'file:') document.getElementById('aviso-arquivo').style.display = 'block';
+redimensionar();
+</script>
+</body>
+</html>

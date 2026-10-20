@@ -1,0 +1,740 @@
+---
+title: Circuito em paralelo
+---
+
+import Associacao from '@site/src/components/Associacao';
+
+# Circuito em paralelo
+
+> **Pergunta central:** quando cada carga tem o próprio caminho até a bateria,
+> o que cada uma recebe, quanto a fonte entrega no total — e por que um defeito
+> num caminho pode apagar todos os outros?
+
+## A queixa: o fusível que queima com o reboque
+
+Um cliente reclama:
+
+> “Sempre que eu ligo o reboque e acendo as luzes, o fusível das lanternas
+> queima. Sem o reboque, nunca queimou. Acho que o reboque tem lâmpada demais
+> para o carro.”
+
+Neste carro, as luzes do **reboque** (*trailer*) são ligadas ao circuito das
+lanternas pelo **conector do reboque** (*trailer connector*), uma tomada perto
+do engate. O circuito das lanternas do carro tem três lâmpadas — as duas
+lanternas traseiras e a luz da placa — e um fusível de 10 A. O reboque
+acrescenta mais três lâmpadas iguais. São valores ilustrativos, escolhidos para
+as contas ficarem claras; os do carro real estão no manual.
+
+O cliente tem uma hipótese: lâmpadas demais. Ela pode estar certa ou errada, e
+a conta desta lição vai decidir. Antes de trocar o fusível por um maior — o que
+a lição [Lei de Ohm](./lei-de-ohm) já mostrou ser perigoso —, você precisa
+saber quanta corrente seis lâmpadas deveriam puxar.
+
+## Mapa das ideias
+
+| Português | Inglês | O que é |
+|---|---|---|
+| circuito em paralelo | *parallel circuit* | circuito em que cada carga tem o próprio caminho entre os mesmos dois pontos |
+| ramo | *branch* | cada um dos caminhos de um circuito em paralelo |
+| nó | *junction* | ponto onde a corrente se divide entre os ramos ou volta a se juntar |
+| corrente total | *total current* | a corrente que sai da fonte, antes de se dividir |
+| resistência total | *total resistance* | a resistência do circuito inteiro, a que a fonte “enxerga” |
+| lei das correntes de Kirchhoff | *Kirchhoff's current law* | a corrente que chega a um nó é igual à soma das que saem dele |
+| reboque | *trailer* | veículo sem motor puxado pelo carro, com luzes ligadas ao circuito do carro |
+
+## Onde isso aparece
+
+Quase todas as cargas do carro são ligadas em paralelo: lâmpadas, motores dos
+vidros, rádio, ventilador, módulos. Há uma razão prática para isso. Cada carga
+recebe a tensão inteira da bateria, e cada uma liga e desliga sem afetar as
+outras. Quando uma lâmpada queima, as outras continuam acesas.
+
+Na Wake Tech, o circuito em paralelo faz parte de *circuit construction* na
+**TRN-120**, junto com o [circuito em série](./circuito-em-serie). Na prova ASE,
+área **A6**, aparece em contas de corrente total e resistência total, e no
+raciocínio de diagnóstico: o que uma carga apagada diz sobre o resto do
+circuito.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Tensão, corrente e resistência](./tensao-corrente-e-resistencia),
+   a tensão foi definida “entre dois pontos”. O que isso quer dizer na hora de
+   medir?
+2. Na lição [O circuito elétrico](./o-circuito-eletrico), a queixa era a luz de
+   freio esquerda apagada, com a direita e a terceira luz acesas. Que pergunta
+   organizou o diagnóstico?
+3. Na lição [Circuito em série](./circuito-em-serie), o que acontece com a
+   corrente quando se acrescenta mais uma carga em série?
+
+<details>
+<summary>Respostas</summary>
+
+1. Que a tensão é sempre uma comparação entre dois pontos. O voltímetro usa as
+   duas pontas, uma em cada ponto, e um ponto sozinho não tem tensão. Esta lição
+   usa isso para explicar a primeira regra do paralelo.
+2. “O que é compartilhado, e o que é exclusivo?” As três luzes dividem o fusível
+   e o interruptor do pedal. Como duas acendiam, as partes compartilhadas
+   estavam boas, e o defeito estava na parte exclusiva da luz esquerda. As três
+   luzes de freio formam um circuito em paralelo; esta lição dá nome ao que
+   aquele raciocínio já usava.
+3. A corrente diminui, porque as resistências em série se somam. Guarde essa
+   resposta: no paralelo acontece o contrário.
+
+</details>
+
+## Intuição: várias mangueiras na mesma torneira
+
+Imagine uma torneira de jardim com um distribuidor de várias saídas, cada uma
+com a sua mangueira.
+
+- **Cada mangueira recebe a pressão inteira da torneira.** A pressão não se
+  divide entre elas, porque todas estão ligadas ao mesmo ponto de saída.
+- **Cada mangueira aberta tira a sua água da torneira.** Com uma mangueira
+  aberta, sai a água de uma. Com três, sai a água das três somada.
+- **Para a torneira, ficou mais fácil soltar água.** Com mais saídas abertas,
+  mais água passa por ela com a mesma pressão. Cada saída nova é um caminho a
+  mais.
+
+No circuito: a pressão é a tensão, a água que passa por segundo é a corrente, e
+cada mangueira é um **ramo** do circuito. A comparação para de valer num ponto.
+Numa casa, abrir muitas torneiras ao mesmo tempo faz a pressão cair. No carro,
+a bateria mantém a tensão quase constante enquanto a corrente não é exagerada —
+a lição de bateria mostra o que acontece quando ela é.
+
+Compare com a escada da lição anterior. Em série, a corrente descia os 12
+andares por **uma** escada, dividida em lances. Em paralelo, cada ramo é uma
+escada **separada**, do 12º andar até o térreo. Cada uma desce os 12 andares
+inteiros.
+
+## Modelo visual: as lanternas do carro
+
+O circuito das lanternas, antes do reboque. A corrente sai da bateria, passa
+pelo fusível e pelo interruptor das luzes, e se divide em três ramos, um para
+cada lâmpada. Cada lâmpada tem 24 Ω acesa (valor ilustrativo).
+
+<Associacao
+  tipo="paralelo"
+  fusivel
+  interruptor
+  corrente
+  rotuloCorrente="I_T = 1.5\,\text{A}"
+  cargas={[
+    {tipo: 'lampada', rotulo: '24\\,\\Omega', corrente: '0.5\\,\\text{A}'},
+    {tipo: 'lampada', rotulo: '24\\,\\Omega', corrente: '0.5\\,\\text{A}'},
+    {tipo: 'lampada', rotulo: '24\\,\\Omega', corrente: '0.5\\,\\text{A}'},
+  ]}
+  caption="As duas lanternas traseiras e a luz da placa, cada uma no seu ramo. Os pontos pretos são os nós: em cima, a corrente total de 1.5 A se divide em três ramos de 0.5 A; embaixo, as três voltam a se juntar. Valores ilustrativos."
+/>
+
+Leia o desenho de três jeitos.
+
+| O que olhar | O que o desenho mostra |
+|---|---|
+| a tensão | cada lâmpada está ligada entre o fio de cima e o de baixo: as três recebem 12 V |
+| a corrente | cada ramo leva 0.5 A; o fio antes da divisão leva a soma, 1.5 A |
+| a resistência | a fonte entrega 1.5 A com 12 V: para ela, o circuito inteiro vale 8 Ω |
+
+Repare no último número. Cada lâmpada tem 24 Ω, mas o circuito inteiro vale só
+8 Ω. Com três lâmpadas, a resistência total ficou **menor** que a de qualquer
+uma delas. É o contrário do circuito em série, e é a parte que mais surpreende
+nesta lição.
+
+## Ponte para a formalização
+
+Os três números saem da lei de Ohm, mas numa ordem diferente da do circuito em
+série.
+
+- Em série, a conta começava pelo circuito inteiro: somar as resistências,
+  achar a corrente, depois dividir a tensão.
+- Em paralelo, a conta começa **por cada ramo**. Cada ramo recebe os 12 V
+  inteiros, então cada um tem a sua lei de Ohm, independente dos outros:
+  $I = 12 \div 24 = 0.5\,\text{A}$ em cada lâmpada.
+- Depois, junta-se tudo: as correntes dos ramos somadas dão a corrente total, e
+  a resistência total sai da lei de Ohm aplicada ao circuito inteiro:
+  $R_T = 12 \div 1.5 = 8\,\Omega$.
+
+A lei de Ohm é a mesma. O que muda é o que é comum a todas as peças: em série,
+todas têm a mesma **corrente**; em paralelo, todas têm a mesma **tensão**.
+
+## Formalização: as três regras do circuito em paralelo
+
+> **Circuito em paralelo** (*parallel circuit*) é o circuito em que cada carga
+> fica num caminho próprio, chamado **ramo** (*branch*). Todos os ramos ficam
+> ligados entre os mesmos dois pontos: o positivo e a massa.
+
+- **Exemplo:** as lanternas e a luz da placa. Cada lâmpada tem o próprio fio a
+  partir do ponto onde a corrente se divide. A corrente de uma lâmpada não
+  passa pelas outras.
+- **Contraexemplo:** o resistor do bloco e o motor do ventilador, na velocidade
+  1, da [lição anterior](./circuito-em-serie). Toda a corrente do motor passa
+  antes pelo resistor. Não existe um caminho próprio para cada um; existe um
+  caminho só. Esse circuito é em série.
+
+Nos slides e no livro da aula, as regras do circuito em paralelo costumam
+aparecer assim, em inglês:
+
+> *Each branch gets the same voltage as the source voltage. Current is
+> additive. Total resistance is smaller than the smallest resistor.*
+
+A seguir, cada uma em português, com o motivo físico.
+
+### Regra 1: cada ramo recebe a tensão da fonte
+
+$$
+V_{\text{fonte}} = V_1 = V_2 = V_3 = \ldots
+$$
+
+**Por quê:** a tensão é medida entre dois pontos. O fio de cima é um condutor
+só, ligado ao positivo; o fio de baixo é outro, ligado à massa. Todos os ramos
+começam no fio de cima e terminam no de baixo. Então todos estão entre **os
+mesmos dois pontos**, e a tensão entre esses dois pontos é a da fonte.
+
+> **Erro comum:** dividir a tensão entre os ramos, como no circuito em série, e
+> achar que cada uma das três lanternas recebe 4 V. Se fosse assim, cada carga
+> nova ligada no carro deixaria as outras mais fracas, e acender o farol
+> apagaria o painel. Em paralelo, cada ramo é uma escada separada, e cada uma
+> desce os 12 andares inteiros.
+
+Essa regra explica como o **voltímetro** é ligado. Para medir a tensão sobre
+uma lâmpada, você encosta uma ponta em cada terminal dela. O voltímetro vira
+um ramo a mais, em paralelo com a lâmpada, e por isso recebe a mesma tensão que
+ela. **O voltímetro é ligado em paralelo; o amperímetro, em série.** Trocar os
+dois é um erro comum. O amperímetro ligado em paralelo com uma carga é um ramo
+quase sem resistência, ou seja, um curto: o fusível do instrumento queima,
+como avisou a lição
+[Tensão, corrente e resistência](./tensao-corrente-e-resistencia).
+
+### Regra 2: as correntes dos ramos se somam
+
+$$
+I_T = I_1 + I_2 + I_3 + \ldots
+$$
+
+$I_T$ é a corrente total, a que sai da fonte antes de se dividir. Nas
+lanternas, $I_T = 0.5 + 0.5 + 0.5 = 1.5\,\text{A}$. Cada corrente de ramo sai
+da lei de Ohm daquele ramo: $I_1 = V_{\text{fonte}} \div R_1$.
+
+**Por quê:** o ponto onde a corrente se divide se chama **nó** (*junction*).
+Num nó, nenhum elétron é criado nem desaparece — é a mesma ideia de que a carga
+não gasta elétrons, da lição 2. Então tudo o que chega ao nó sai dele, repartido
+entre os ramos. Nos livros, essa regra tem nome: **lei das correntes de
+Kirchhoff** (*Kirchhoff's current law*).
+
+Duas consequências práticas:
+
+- **Cada ramo a mais aumenta a corrente total.** Os ramos que já estavam ligados
+  continuam puxando o mesmo que antes, porque continuam com a mesma tensão. O
+  ramo novo soma a corrente dele.
+- **O fusível do fio comum sente a soma.** Ele fica antes da divisão, e por ele
+  passa a corrente de todos os ramos juntos. Por isso o fusível é escolhido pela
+  corrente total do circuito, e não pela de uma carga só.
+
+### Regra 3: a resistência total é menor que a menor resistência
+
+A resistência total sai da lei de Ohm aplicada ao circuito inteiro:
+
+$$
+R_T = \frac{V_{\text{fonte}}}{I_T}
+$$
+
+Nas lanternas: $R_T = 12 \div 1.5 = 8\,\Omega$, menor que os 24 Ω de cada
+lâmpada.
+
+**Por quê:** pense no ramo de menor resistência sozinho. Ele já puxa uma certa
+corrente. Cada ramo a mais soma corrente, sem tirar nada desse primeiro. Então
+a corrente total é sempre **maior** que a do ramo de menor resistência sozinho.
+Com a mesma tensão e mais corrente, a conta $V \div I$ dá um número **menor**.
+É a torneira da intuição: cada mangueira a mais é um caminho a mais, e com mais
+caminhos a água passa com mais facilidade.
+
+> **Erro comum:** achar que, como em série, acrescentar uma carga aumenta a
+> resistência total. Confira com números. Uma lanterna de 24 Ω sozinha em 12 V
+> puxa 0.5 A. Ligue uma segunda em paralelo: a corrente total vai para 1 A, e
+> $R_T = 12 \div 1 = 12\,\Omega$. A resistência total **caiu** de 24 Ω para
+> 12 Ω com uma carga a mais.
+
+### Calcular a resistência total sem a tensão
+
+Às vezes você conhece as resistências, mas não a tensão. Há três jeitos de
+calcular, e todos dão o mesmo resultado que $R_T = V_{\text{fonte}} \div I_T$.
+
+**Ramos iguais:** divida a resistência de um ramo pelo número de ramos. Três
+lâmpadas de 24 Ω: $R_T = 24 \div 3 = 8\,\Omega$.
+
+**Dois ramos quaisquer:** multiplique as duas resistências e divida pela soma
+delas, o “produto sobre a soma” (*product over sum*):
+
+$$
+R_T = \frac{R_1 \times R_2}{R_1 + R_2}
+$$
+
+Com 3 Ω e 6 Ω: $R_T = (3 \times 6) \div (3 + 6) = 18 \div 9 = 2\,\Omega$.
+
+**Qualquer número de ramos:** some os inversos de cada resistência e inverta o
+resultado. O inverso de um número é 1 dividido por ele.
+
+$$
+\frac{1}{R_T} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots
+$$
+
+Para as três lâmpadas de 24 Ω:
+$\dfrac{1}{24} + \dfrac{1}{24} + \dfrac{1}{24} = \dfrac{3}{24} = 0.125$. Esse
+0.125 é $1 \div R_T$, e não $R_T$. Falta inverter: $R_T = 1 \div 0.125 = 8\,\Omega$.
+
+> **Erro comum:** parar a conta no 0.125 e responder “0.125 Ω”. O último passo,
+> inverter, é o que costuma ser esquecido. Uma conferência rápida pega o erro: a
+> resposta tem que ser menor que a menor resistência, mas não absurdamente
+> menor. Com três ramos de 24 Ω, 0.125 Ω seria quase um curto.
+
+**O que muda** quando um ramo é ligado ou desligado: a corrente total e a
+resistência total. **O que permanece igual:** a tensão e a corrente de cada um
+dos outros ramos.
+
+## Como falha e como diagnosticar
+
+O circuito das lanternas tem duas partes. A **parte comum** é o fusível, o
+interruptor e o fio até o nó: ela está em série com o conjunto dos ramos, e
+toda a corrente passa por ela. Os **ramos** são as partes exclusivas de cada
+lâmpada. É a pergunta da lição 2, “o que é compartilhado, e o que é
+exclusivo?”, agora com o nome certo de cada parte.
+
+| Falha | Corrente total | O que as cargas fazem |
+|---|---|---|
+| aberto num ramo | cai, perdendo a corrente daquele ramo | só a carga daquele ramo para; as outras funcionam normais |
+| aberto na parte comum | zero | todas param |
+| resistência alta num ramo | cai um pouco | só a carga daquele ramo fica fraca |
+| curto num ramo | enorme | o fusível da parte comum queima, e **todas** param |
+
+A última linha é a que engana. O defeito está num ramo só, mas o sintoma
+aparece em todos. Com um curto num ramo, a corrente total explode, e o fusível
+comum derrete. Depois disso, a parte comum está aberta, e nenhum ramo recebe
+tensão. **Num circuito em paralelo, todas as cargas apagadas juntas apontam
+para a parte comum — mas a causa de o fusível ter queimado pode estar em
+qualquer ramo.**
+
+Uma diferença com o circuito em série ajuda no teste. Em paralelo, uma lâmpada
+queimada continua com 12 V entre os terminais do soquete: os dois terminais
+continuam ligados ao fio de cima e ao de baixo. Em série, a lâmpada aberta
+também mostrava a tensão inteira, mas as outras mostravam zero. Em paralelo,
+**todas** as lâmpadas, queimadas ou não, mostram 12 V. Por isso, num ramo
+apagado, a pergunta do teste é outra: a tensão **chega** ao soquete? Se chega e
+a lâmpada não acende, o defeito está na lâmpada. Se não chega, está no fio ou
+na massa daquele ramo.
+
+### A queixa resolvida
+
+Primeiro, a hipótese do cliente: lâmpadas demais. Quanto o circuito
+**deveria** puxar com o reboque ligado? São seis lâmpadas de 24 Ω em paralelo,
+três do carro e três do reboque. Cada uma recebe 12 V e puxa
+$12 \div 24 = 0.5\,\text{A}$. A corrente total é a soma:
+
+$$
+I_T = 6 \times 0.5 = 3\,\text{A}
+$$
+
+São 3 A num fusível de 10 A. Seis lâmpadas não chegam perto do limite: seria
+preciso ligar mais de 20 lâmpadas de 0.5 A para passar de 10 A. **A hipótese do
+cliente está errada.** Lâmpadas a mais aumentam a corrente, mas não tanto.
+
+Então o que faz o fusível queimar? Para passar de 10 A com 12 V, a resistência
+total precisa cair abaixo de $12 \div 10 = 1.2\,\Omega$. Seis lâmpadas dão
+$24 \div 6 = 4\,\Omega$. Algum ramo novo, com resistência muito menor, apareceu
+quando o reboque foi ligado: um curto. Ao inspecionar, o técnico acha o fio das
+lanternas do reboque com a capa gasta, encostando no chassi do reboque.
+
+<Associacao
+  tipo="paralelo"
+  fusivel
+  interruptor
+  corrente
+  curto
+  rotuloCorrente="I_T \approx 241\,\text{A}"
+  rotuloCurto="240\,\text{A}"
+  cargas={[
+    {tipo: 'lampada', rotulo: '\\text{carro}', corrente: '1.5\\,\\text{A}'},
+    {tipo: 'lampada', rotulo: '\\text{reboque}', corrente: '1.5\\,\\text{A}'},
+  ]}
+  caption="O curto no fio do reboque é um ramo a mais, quase sem resistência. Cada lâmpada desenhada representa as três lâmpadas de um lado. A corrente do curto se soma à das lâmpadas, e o fusível comum queima, apagando todos os ramos. Valores ilustrativos."
+/>
+
+O curto é um ramo em paralelo com as lâmpadas. Imagine que ele tenha 0.05 Ω,
+valor ilustrativo. Sozinho, esse ramo puxa $12 \div 0.05 = 240\,\text{A}$. Pela
+regra 2, essa corrente se **soma** aos 3 A das lâmpadas, e passam mais de
+240 A pelo fusível de 10 A. Ele derrete na hora, e todas as lanternas do carro
+apagam, embora o defeito esteja só no reboque.
+
+**Para confirmar antes de reparar**, use o fato de que os ramos são
+independentes. Com o reboque desligado do conector, o fusível novo não queima.
+Com o reboque ligado, queima. Então o defeito está do lado do reboque, e não
+no carro. A inspeção do fio do reboque acha o ponto gasto. O reparo é consertar
+o fio e protegê-lo do atrito. Trocar o fusível por um maior não resolve, e
+deixaria o fio do carro sem proteção contra os 240 A.
+
+## Na oficina: reboque e fusíveis
+
+:::warning Antes de testar ou reparar
+
+- **Para engatar ou desengatar o reboque**, siga o procedimento do instrutor:
+  calce as rodas do reboque e mantenha as mãos fora do espaço entre o engate e
+  a bola.
+- **Nunca troque o fusível por um de amperagem maior**, nem coloque um fio no
+  lugar dele. O motivo está na lição [Lei de Ohm](./lei-de-ohm): o fusível
+  protege o fio.
+- **Antes de reparar um fio em curto, tire a alimentação:** desligue o conector
+  do reboque e, se o reparo for no carro, desligue a bateria, negativo
+  primeiro.
+- **Em muitos carros e picapes mais novos, as luzes do reboque têm módulo e
+  fusíveis próprios.** O raciocínio de ramos e parte comum continua valendo,
+  mas o circuito a seguir é o do diagrama do manual do veículo.
+
+:::
+
+## Exemplos resolvidos
+
+### Exemplo 1: duas lâmpadas iguais
+
+Duas lâmpadas de 6 Ω estão em paralelo, em 12 V. Ache a corrente de cada uma,
+a corrente total e a resistência total.
+
+$$
+\begin{array}{ll}
+I_1 = I_2 = 12 \div 6 = 2\,\text{A} & \text{cada ramo recebe os 12 V} \\[4pt]
+I_T = 2 + 2 = 4\,\text{A} & \text{as correntes se somam} \\[4pt]
+R_T = 12 \div 4 = 3\,\Omega & \text{lei de Ohm no circuito inteiro}
+\end{array}
+$$
+
+Conferindo pelos ramos iguais: $6 \div 2 = 3\,\Omega$. E 3 Ω é menor que os
+6 Ω de cada lâmpada, como a regra 3 pede.
+
+### Exemplo 2: as lanternas pela fórmula dos inversos
+
+**Pause e tente:** calcule a resistência total das três lanternas de 24 Ω pela
+fórmula dos inversos, sem usar a tensão. Confira com os 8 Ω do modelo visual.
+
+<details>
+<summary>Solução</summary>
+
+$$
+\frac{1}{R_T} = \frac{1}{24} + \frac{1}{24} + \frac{1}{24} = \frac{3}{24} = 0.125
+$$
+
+Invertendo: $R_T = 1 \div 0.125 = 8\,\Omega$. É o mesmo resultado de
+$12 \div 1.5$ e de $24 \div 3$. Os três caminhos têm que concordar, porque
+descrevem o mesmo circuito.
+
+</details>
+
+### Exemplo 3: dois ramos diferentes
+
+**Pause e tente:** um ramo de 3 Ω e outro de 6 Ω estão em paralelo, em 12 V.
+Ache a corrente de cada ramo, a corrente total e a resistência total. Qual ramo
+puxa mais corrente?
+
+<details>
+<summary>Solução</summary>
+
+$$
+\begin{array}{ll}
+I_1 = 12 \div 3 = 4\,\text{A} & \\[4pt]
+I_2 = 12 \div 6 = 2\,\text{A} & \\[4pt]
+I_T = 4 + 2 = 6\,\text{A} & \\[4pt]
+R_T = 12 \div 6 = 2\,\Omega &
+\end{array}
+$$
+
+Pelo produto sobre a soma: $(3 \times 6) \div (3 + 6) = 18 \div 9 = 2\,\Omega$.
+Bate.
+
+O ramo de **menor** resistência puxa **mais** corrente: os mesmos 12 V
+empurram mais corrente onde a passagem é mais fácil. É o oposto do circuito em
+série, em que a peça de maior resistência ficava com a maior parte da
+**tensão**. E a resistência total, 2 Ω, ficou menor que a do menor ramo, 3 Ω.
+
+</details>
+
+### Exemplo 4: os faróis auxiliares, de novo
+
+**Pause e tente:** na lição [Potência elétrica](./potencia-eletrica), o cliente
+queria ligar dois faróis auxiliares de 100 W no circuito do farol de milha.
+Os dois faróis ficam em paralelo. Calcule a corrente de cada um, a corrente
+total e a resistência total. Compare com a resposta daquela lição.
+
+<details>
+<summary>Solução</summary>
+
+Cada farol, em 12 V: $I = P \div V = 100 \div 12 \approx 8.33\,\text{A}$. Os
+dois juntos: $I_T \approx 8.33 + 8.33 \approx 16.7\,\text{A}$.
+
+Naquela lição, a conta foi $200 \div 12 \approx 16.7\,\text{A}$, com as
+potências somadas. As duas contas dão o mesmo número porque, em paralelo, cada
+farol recebe os mesmos 12 V. Então somar as correntes e somar as potências são
+o mesmo raciocínio.
+
+A resistência de cada farol aceso é $R = V^2 \div P = 144 \div 100 = 1.44\,\Omega$.
+Com dois ramos iguais, $R_T = 1.44 \div 2 = 0.72\,\Omega$. Conferindo:
+$12 \div 0.72 \approx 16.7\,\text{A}$.
+
+</details>
+
+### Exemplo 5: uma lanterna queima
+
+**Pause e tente:** no circuito das três lanternas de 24 Ω, a lanterna esquerda
+queima. O que acontece com as outras duas? Qual é a nova corrente total e a
+nova resistência total? Que tensão o voltímetro mostra entre os terminais do
+soquete da lanterna queimada?
+
+<details>
+<summary>Solução</summary>
+
+As outras duas continuam acesas, com o mesmo brilho: cada uma continua ligada
+entre os mesmos dois pontos, com 12 V, e continua puxando 0.5 A.
+
+<Associacao
+  tipo="paralelo"
+  corrente
+  rotuloCorrente="I_T = 1\,\text{A}"
+  cargas={[
+    {tipo: 'lampada', rotulo: '\\text{queimada}', aberta: true},
+    {tipo: 'lampada', rotulo: '24\\,\\Omega', corrente: '0.5\\,\\text{A}'},
+    {tipo: 'lampada', rotulo: '24\\,\\Omega', corrente: '0.5\\,\\text{A}'},
+  ]}
+  caption="A lanterna esquerda queimada. O ramo dela não leva corrente, mas os outros dois continuam iguais. A corrente total cai de 1.5 A para 1 A."
+/>
+
+Corrente total: $0.5 + 0.5 = 1\,\text{A}$. Resistência total:
+$12 \div 1 = 12\,\Omega$, ou $24 \div 2 = 12\,\Omega$. A resistência total
+**subiu** de 8 Ω para 12 Ω, porque o circuito perdeu um caminho.
+
+O voltímetro mostra 12 V no soquete da lanterna queimada. Os terminais dele
+continuam ligados ao fio de cima e ao de baixo, mesmo com o filamento rompido.
+Então a tensão chega; o defeito está na lâmpada. Se o voltímetro mostrasse
+zero, a lâmpada podia estar boa, e o defeito estaria no fio ou na massa
+daquele ramo.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que cada ramo de um circuito em paralelo recebe a tensão inteira da
+   fonte?
+2. Por que a corrente total é a soma das correntes dos ramos?
+3. Ligar mais uma lâmpada em paralelo muda a corrente das lâmpadas que já
+   estavam acesas? E a corrente total?
+4. Por que a resistência total fica menor que a menor resistência dos ramos?
+5. Um curto num ramo só apaga todas as cargas do circuito. Por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque todos os ramos estão ligados entre os mesmos dois pontos: o fio de
+   cima, ligado ao positivo, e o de baixo, ligado à massa. A tensão é medida
+   entre dois pontos; mesmos pontos, mesma tensão.
+2. Porque no nó nenhum elétron é criado nem desaparece. Tudo o que chega ao nó
+   pelo fio comum sai dele, repartido entre os ramos. Então a corrente do fio
+   comum é a soma das correntes dos ramos.
+3. A corrente das que já estavam acesas não muda: elas continuam com 12 V e com
+   a mesma resistência. A corrente total aumenta, porque a lâmpada nova soma a
+   corrente dela.
+4. Porque cada ramo a mais soma corrente sem tirar nada dos outros. A corrente
+   total fica maior que a do menor ramo sozinho. Com a mesma tensão e mais
+   corrente, $R_T = V \div I_T$ dá um número menor.
+5. Porque o curto é um ramo quase sem resistência, e a corrente dele é enorme.
+   Essa corrente se soma às outras e passa pelo fusível da parte comum, que
+   queima. Com a parte comum aberta, nenhum ramo recebe tensão.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Para cada caso, diga se as peças estão em série ou em paralelo.
+
+a) os dois faróis baixos, o esquerdo e o direito;
+
+b) o voltímetro e a lâmpada cuja tensão ele está medindo;
+
+c) o amperímetro e a lâmpada cuja corrente ele está medindo;
+
+d) o fusível das lanternas e o conjunto das três lanternas.
+
+### 2. Explicação
+
+Explique por que as lâmpadas do carro são ligadas em paralelo, e não em série.
+Use pelo menos duas das três regras desta lição.
+
+### 3. Aplicação direta
+
+a) Dois resistores de 4 Ω em paralelo, em 12 V. Ache a corrente de cada um, a
+corrente total e a resistência total.
+
+b) Três ramos de 12 Ω, 6 Ω e 4 Ω em paralelo, em 12 V. Ache a corrente de cada
+ramo, a corrente total e a resistência total.
+
+c) Um circuito em paralelo tem dois ramos. A corrente total é 5 A, e a de um
+dos ramos é 3 A. Qual é a corrente do outro ramo?
+
+### 4. Variação
+
+Volte à queixa. O cliente quer acrescentar ao reboque mais lâmpadas de 0.5 A.
+Quantas lâmpadas, somando as do carro e as do reboque, o circuito pode ter até
+a corrente total chegar a 10 A? O que acontece com a resistência total a cada
+lâmpada acrescentada?
+
+### 5. Caso de diagnóstico
+
+Os dois faróis baixos de um carro ficam no mesmo fusível e no mesmo relé (neste
+carro, ilustrativo). O farol baixo direito não acende; o esquerdo funciona. Com
+os faróis ligados e a lâmpada direita no lugar, você mede:
+
+- entre o terminal positivo do soquete direito e o negativo da bateria: 12 V;
+- entre o terminal de massa do soquete direito e o negativo da bateria: 12 V.
+
+a) Que partes do circuito você já pode considerar boas, sem medir nada? Por
+quê?
+
+b) O que as duas medições dizem sobre o ramo direito?
+
+c) Onde está o defeito, e qual seria o próximo passo?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Pense no terminal de massa do soquete. Num ramo funcionando, ele está ligado à
+massa por um fio quase sem resistência. Que tensão você esperaria entre ele e o
+negativo da bateria nesse caso? E se a ligação dele com a massa estivesse
+aberta?
+
+</details>
+
+### 6. Justificativa
+
+Na queixa do reboque, desligar o conector do reboque fez o fusível novo parar de
+queimar. Explique por que esse teste separa o carro do reboque, usando a ideia
+de ramos independentes.
+
+### 7. Formato ASE
+
+**Question 1.** Two 4-ohm resistors are connected in parallel to a 12-volt
+source. What is the total current?
+
+- A. 1.5 A
+- B. 3 A
+- C. 6 A
+- D. 12 A
+
+**Question 2.** Technician A says that in a parallel circuit the total
+resistance is less than the smallest branch resistance. Technician B says that
+each branch of a parallel circuit has the same voltage as the source. Who is
+right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** Both low-beam headlamps are fed by the same fuse and relay. The
+right headlamp is out and the left headlamp works normally. Which of these is
+the most likely cause?
+
+- A. a blown fuse
+- B. a faulty relay
+- C. an open in the right headlamp circuit
+- D. a discharged battery
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Paralelo: cada farol tem o próprio caminho, e um continua aceso quando o
+   outro queima.
+   b) Paralelo: o voltímetro encosta uma ponta em cada terminal da lâmpada e
+   fica entre os mesmos dois pontos que ela.
+   c) Série: toda a corrente da lâmpada passa pelo amperímetro.
+   d) Série: toda a corrente das três lanternas passa pelo fusível antes de se
+   dividir. É por isso que ele protege as três.
+
+2. Pela regra 1, em paralelo cada lâmpada recebe a tensão inteira da bateria e
+   funciona com o brilho certo. Em série, a tensão se dividiria entre elas, e
+   todas ficariam fracas. Pelos ramos independentes, uma lâmpada queimada não
+   apaga as outras. Em série, uma lâmpada queimada abriria o caminho único e
+   apagaria todas — perigoso num farol ou numa luz de freio. E, pela regra 2,
+   cada carga liga e desliga sem mudar a corrente das outras.
+
+3. a) Cada um: $12 \div 4 = 3\,\text{A}$. Total: $3 + 3 = 6\,\text{A}$.
+   Resistência total: $12 \div 6 = 2\,\Omega$, ou $4 \div 2 = 2\,\Omega$.
+
+   b) Ramos: $12 \div 12 = 1\,\text{A}$, $12 \div 6 = 2\,\text{A}$ e
+   $12 \div 4 = 3\,\text{A}$. Total: $1 + 2 + 3 = 6\,\text{A}$. Resistência
+   total: $12 \div 6 = 2\,\Omega$, menor que o menor ramo, de 4 Ω.
+
+   c) $5 - 3 = 2\,\text{A}$, porque as correntes dos ramos somadas dão a total.
+
+   Se no item a você encontrou 8 Ω, somou as resistências, como em série. Em
+   paralelo, a resistência total é **menor** que a de cada ramo.
+
+4. Com 0.5 A por lâmpada, $10 \div 0.5 = 20$ lâmpadas fazem a corrente total
+   chegar a exatamente 10 A, o limite do fusível. Ou seja, até 20 lâmpadas a
+   corrente fica dentro do limite, e a partir da 21ª passa dele. Na prática,
+   não se trabalha encostado no limite do fusível: o circuito e o reboque devem
+   seguir o que o fabricante especifica. A cada lâmpada acrescentada, a
+   resistência total **cai**, porque o circuito ganha um caminho: com 6
+   lâmpadas, $24 \div 6 = 4\,\Omega$; com 20, $24 \div 20 = 1.2\,\Omega$.
+
+5. a) O fusível, o relé e o fio comum até a divisão estão bons. O farol
+   esquerdo depende deles e funciona. Se um deles estivesse aberto, os dois
+   faróis estariam apagados.
+
+   b) A tensão chega ao terminal positivo do soquete: a alimentação do ramo
+   direito está boa. Mas o terminal de massa também mostra 12 V em relação ao
+   negativo da bateria. Num ramo funcionando, esse terminal estaria ligado à
+   massa quase sem resistência, e mostraria perto de 0 V. Mostrar 12 V quer
+   dizer que ele está “no nível” do positivo, através da lâmpada, e não está
+   ligado à massa.
+
+   c) O ramo direito está aberto do lado da massa: no fio de massa do farol, no
+   terminal ou no ponto onde ele se prende à carroceria. Como não passa
+   corrente, a lâmpada não tem queda, e o terminal de massa fica com a tensão do
+   positivo — a mesma lógica do ponto aberto da lição de circuito em série. O
+   próximo passo é seguir o fio de massa no diagrama do manual até o ponto de
+   massa, e inspecionar e medir esse trecho.
+
+6. O conector separa os ramos do reboque dos ramos do carro. Com ele desligado,
+   o fusível só alimenta os ramos do carro. Se o fusível não queima assim, os
+   ramos do carro e a parte comum não têm curto. Quando o reboque é ligado, os
+   ramos dele se somam ao circuito, e o fusível queima. Então o ramo com
+   resistência baixa demais está no reboque.
+
+7. **Question 1: C.** Cada resistor puxa $12 \div 4 = 3\,\text{A}$, e a total é
+   $3 + 3 = 6\,\text{A}$. A alternativa A vem de somar as resistências como em
+   série, $12 \div 8$. A B é a corrente de um ramo só. A D supõe uma resistência
+   total de 1 Ω, metade da que a conta dá.
+
+   **Question 2: C.** Os dois estão certos. O técnico A descreve a regra 3. O
+   técnico B descreve a regra 1.
+
+   **Question 3: C.** O fusível (A) e o relé (B) são da parte comum: se um deles
+   tivesse falhado, os dois faróis estariam apagados. Uma bateria descarregada
+   (D) também afetaria os dois. Só um aberto no ramo direito — lâmpada, soquete,
+   fio ou massa — apaga um farol e deixa o outro funcionando.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** num circuito em paralelo, cada carga tem o próprio ramo
+  entre os mesmos dois pontos. Cada ramo recebe a tensão da fonte, as correntes
+  dos ramos se somam, e a resistência total é menor que a do menor ramo.
+- **Quando usar:** para calcular a corrente total que um fusível vai sentir,
+  prever o efeito de ligar uma carga a mais, e separar no diagnóstico a parte
+  comum dos ramos: uma carga apagada aponta para o ramo dela; todas apagadas
+  apontam para a parte comum — e, se o fusível queimou, para um curto em
+  qualquer ramo.
+- **Com o que se conecta:** no carro, o fusível e o interruptor ficam em série
+  com um conjunto de ramos em paralelo. Circuitos assim, que misturam as duas
+  ligações, são os **circuitos mistos**, assunto da próxima lição do roteiro,
+  ainda em preparação. Veja o [roteiro da disciplina](./).
+
+**Termos em inglês desta lição:** *parallel circuit*, *branch*, *junction*,
+*total current*, *total resistance*, *Kirchhoff's current law*, *product over
+sum*, *trailer*, *trailer connector*.

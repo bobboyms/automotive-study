@@ -1,0 +1,554 @@
+---
+title: Tensão, corrente e resistência
+---
+
+import Circuito from '@site/src/components/Circuito';
+
+# Tensão, corrente e resistência
+
+> **Pergunta central:** se a mesma bateria de 12 V alimenta tudo no carro, por
+> que alguns fios são grossos como um dedo e outros são finos como um barbante?
+
+## A queixa: o cabo grosso e o fio fino
+
+Esta lição não começa com um defeito. Ela começa com uma pergunta que todo aluno
+faz na primeira vez que abre o capô.
+
+Do polo positivo da bateria sai um cabo grosso, quase da largura de um dedo,
+que vai até o **motor de partida** (*starter*). O motor de partida é o motor
+elétrico que gira o motor do carro para ele pegar. Do mesmo polo, passando pela
+caixa de fusíveis, sai um fio fino, que vai até a lâmpada da placa traseira.
+
+Os dois fios estão ligados à mesma bateria, com os mesmos 12 volts. Por que um
+precisa ser tão mais grosso que o outro? E o que aconteceria se o fabricante
+usasse o fio fino para o motor de partida?
+
+Ao final desta lição você vai saber responder às duas perguntas. Para isso,
+precisamos separar três coisas que, no dia a dia, a gente chama tudo de
+“eletricidade”: **o empurrão**, **o fluxo** e **a dificuldade de passar**.
+
+## Mapa das ideias
+
+| Português | Inglês | O que é |
+|---|---|---|
+| tensão | *voltage* | o empurrão que faz a corrente circular; também chamada diferença de potencial |
+| volt (V) | *volt* | unidade de tensão |
+| corrente | *current* | a quantidade de elétrons que passa por um ponto a cada segundo |
+| ampère (A) | *ampere*, *amp* | unidade de corrente |
+| resistência | *resistance* | a dificuldade que um material oferece à passagem da corrente |
+| ohm (Ω) | *ohm* | unidade de resistência |
+| corrente contínua | *direct current* (DC) | corrente que circula sempre no mesmo sentido |
+| corrente alternada | *alternating current* (AC) | corrente que troca de sentido muitas vezes por segundo |
+| bitola | *wire gauge* | a espessura do fio |
+
+## Onde isso aparece
+
+Toda medição elétrica do carro é uma dessas três grandezas. O multímetro, a
+principal ferramenta do diagnóstico elétrico, tem uma posição para cada uma. As
+*job sheets* do laboratório pedem que você anote volts, ampères e ohms.
+
+Na Wake Tech, isso faz parte da teoria elétrica básica da **TRN-120**. Na prova
+ASE, as três grandezas aparecem em praticamente toda questão da área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição se apoia em [O circuito elétrico](./o-circuito-eletrico). Responda
+antes de continuar:
+
+1. O que a bateria faz com os elétrons do fio?
+2. A lâmpada gasta elétrons?
+3. Num circuito aberto, quanta corrente passa?
+
+<details>
+<summary>Respostas</summary>
+
+1. Ela empurra os elétrons que já estão no fio. A bateria não fabrica elétrons:
+   um polo empurra, o outro puxa, e os elétrons do laço inteiro se movem juntos.
+2. Não. A quantidade de elétrons que entra na lâmpada é a mesma que sai. A
+   lâmpada usa a energia que a bateria deu a esses elétrons.
+3. Zero, em todo o laço. Uma interrupção em qualquer ponto para a corrente no
+   circuito inteiro.
+
+</details>
+
+Se alguma resposta não veio, releia a parte correspondente da lição anterior
+antes de seguir. Esta lição dá nome e número exatamente a essas ideias: o
+empurrão da resposta 1 é a **tensão**, e o movimento que para na resposta 3 é a
+**corrente**.
+
+## Intuição: o empurrão, o fluxo e o aperto
+
+Pense numa **mangueira de jardim** ligada a uma torneira.
+
+- **A pressão da água** na torneira é o que empurra a água pela mangueira. Sem
+  pressão, a água fica parada, mesmo com a mangueira cheia.
+- **A vazão** é quanta água sai por segundo. É o que enche o balde.
+- **Um aperto na mangueira** dificulta a passagem. Se você aperta a mangueira com
+  a mão, a vazão diminui, mesmo com a mesma pressão na torneira.
+
+A eletricidade tem as mesmas três coisas:
+
+| Mangueira | Circuito | Nome | Unidade |
+|---|---|---|---|
+| pressão da água | o empurrão da bateria | tensão | volt (V) |
+| vazão: litros por segundo | elétrons por segundo | corrente | ampère (A) |
+| aperto na mangueira | dificuldade de passar pelo material | resistência | ohm (Ω) |
+
+A comparação ajuda, mas tem limites, e vale saber quais são.
+
+- A mangueira joga a água fora pela ponta. O circuito precisa de caminho de
+  volta, como vimos na lição anterior. Num circuito aberto, nada vaza: a
+  corrente para.
+- A água sai pela ponta mesmo com a mangueira solta no chão. A eletricidade não
+  “escapa” de um fio solto no ar, porque o ar é isolante.
+
+Então use a mangueira para lembrar o papel de cada grandeza, e use o laço da
+lição anterior para lembrar o caminho.
+
+## Modelo visual
+
+Num esquema, as três grandezas ocupam lugares diferentes do mesmo circuito.
+
+<Circuito
+  corrente
+  fonte="V = 12\,\text{V}"
+  rotuloCarga="R"
+  rotuloCorrente="I"
+  caption="A tensão (V) é o empurrão que a bateria dá. A corrente (I) é o fluxo que percorre o laço inteiro. A resistência (R) é a dificuldade que a carga oferece à passagem."
+/>
+
+Repare na letra de cada uma. Tensão é **V**, de *voltage*. Resistência é **R**.
+A corrente é **I**, e não C. A letra vem do francês *intensité*, intensidade, e
+ficou em todos os livros, inclusive os americanos. Alguns livros usam **E** para
+a tensão, de *electromotive force*, força eletromotriz. Se encontrar um E na
+aula, é a mesma tensão que aqui chamamos de V.
+
+## Ponte para a formalização
+
+Na mangueira, você enxerga a pressão, a vazão e o aperto. No fio, não se vê
+nada: um fio com corrente parece igual a um fio sem corrente. Por isso cada
+grandeza elétrica precisa de uma **unidade** e de uma **forma de medir**. Sem
+elas, não há como anotar o que o multímetro mostrou, comparar com a
+especificação do manual ou dizer se uma leitura está alta ou baixa.
+
+## Formalização
+
+### Tensão
+
+> **Tensão** (*voltage*) é a diferença de energia elétrica entre dois pontos de
+> um circuito. É ela que empurra a corrente de um ponto para o outro. A unidade
+> é o **volt** (V).
+
+O detalhe que mais importa na prática está em “**entre dois pontos**”. A tensão é
+sempre uma comparação. Por isso o multímetro, para medir tensão, usa as duas
+pontas: uma em cada ponto.
+
+- Exemplo: entre o polo positivo e o polo negativo de uma bateria carregada,
+  em repouso, o multímetro mostra cerca de 12.6 V (valor típico). Cada bateria
+  de carro tem seis **células** (*cells*) por dentro, cada uma com cerca de
+  2.1 V. Seis vezes 2.1 dá os 12.6 V.
+- Contraexemplo: “a tensão do fio vermelho”, sozinha, não quer dizer nada. Um
+  ponto só não tem tensão. Quando o técnico diz isso, ele está subentendendo
+  “entre o fio vermelho e a massa”. Neste material, sempre que o segundo ponto
+  for a massa, o texto vai dizer.
+
+E uma diferença que separa tensão de corrente: **tensão pode existir sem
+corrente.** Uma bateria na prateleira tem 12.6 V entre os polos, mas não há
+corrente nenhuma, porque não há caminho ligando um polo ao outro. É como uma
+torneira fechada: a pressão está lá, a água não passa.
+
+**Neste capítulo, 12 V é o número redondo.** Com o motor desligado, a bateria
+carregada fica perto de 12.6 V. Com o motor funcionando, o alternador mantém o
+sistema mais alto, perto de 14 V. A lição do sistema de carga explica por quê.
+Nas contas, vamos usar 12 V para deixar o raciocínio limpo.
+
+### Corrente
+
+> **Corrente** (*current*) é a quantidade de carga elétrica que passa por um
+> ponto do circuito a cada segundo. A unidade é o **ampère** (A); na oficina,
+> todo mundo fala *amp*.
+
+A corrente passa **através** do circuito. Por isso, para medi-la, o caminho
+precisa passar por dentro do instrumento. A lição de instrumentos mostra como
+isso é feito.
+
+- Exemplo: com o motor de partida girando, passa pelo cabo grosso uma corrente
+  da ordem de 150 A (valor típico, só para comparar; depende do motor).
+- Contraexemplo: na bateria da prateleira há 12.6 V e **zero** ampère. Tensão
+  sem caminho não produz corrente.
+
+Num laço único, como os da lição anterior, a corrente é a mesma em todos os
+pontos. O número de elétrons que passa pelo fusível a cada segundo é o mesmo que
+passa pela lâmpada e pelo fio de massa. Isso é o que dissemos antes com outras
+palavras: a lâmpada não gasta elétrons.
+
+### Resistência
+
+> **Resistência** (*resistance*) é a dificuldade que um material ou uma peça
+> oferece à passagem da corrente. A unidade é o **ohm**, com o símbolo **Ω**
+> (a letra grega ômega).
+
+A resistência de um fio depende de quatro coisas:
+
+| O que muda | Efeito na resistência | Comparação na mangueira |
+|---|---|---|
+| o material | cobre tem menos resistência que aço | um cano liso contra um cano áspero |
+| o comprimento | fio mais longo, mais resistência | mangueira mais longa, mais difícil empurrar a água |
+| a espessura | fio mais grosso, menos resistência | mangueira mais larga, a água passa com mais facilidade |
+| a temperatura | nos metais, quente tem mais resistência que frio | não há comparação direta |
+
+- Exemplo: o filamento da lâmpada tem resistência de propósito. É ao forçar a
+  corrente por ele que a energia vira luz e calor. **Toda carga tem
+  resistência**, e é ela que faz a carga trabalhar.
+- Contraexemplo: um fio de cobre em bom estado tem resistência tão pequena que,
+  para quase todo efeito prático, é considerada zero. Ele não deve “trabalhar”;
+  deve só levar a corrente até a carga.
+
+Resistência, então, não é um defeito em si. O defeito é **resistência no lugar
+errado**: num terminal oxidado, num fio meio partido, num parafuso de massa
+enferrujado. Lá ela atrapalha a corrente sem fazer nenhum trabalho útil.
+
+### Bitola: a espessura do fio
+
+Nos carros americanos, a espessura do fio é dada pela escala **AWG**
+(*American Wire Gauge*). Nela, **quanto menor o número, mais grosso o fio** —
+o contrário do que se espera. Um fio 18 AWG é fino, do tipo usado em lâmpadas
+pequenas. Um cabo de bateria é muito mais grosso, com número bem menor, às vezes
+até zero ou abaixo (escrito 1/0, 2/0). A bitola exata de cada circuito vem do
+manual do veículo.
+
+### Corrente contínua e alternada
+
+A corrente da bateria circula sempre no mesmo sentido. Ela é **corrente
+contínua** (*direct current*, DC). Quase tudo no carro funciona com corrente
+contínua.
+
+A tomada de casa fornece **corrente alternada** (*alternating current*, AC), que
+troca de sentido muitas vezes por segundo. O alternador do carro também gera
+corrente alternada por dentro, mas converte essa corrente em contínua antes de
+mandá-la para o carro. A lição do sistema de carga mostra como.
+
+No multímetro, as duas aparecem como posições diferentes. Medir a bateria na
+posição de tensão alternada dá uma leitura sem sentido. Para o carro, use a
+posição de tensão contínua: V com uma linha reta em cima, ou “VDC”.
+
+### Prefixos: mili, quilo e mega
+
+Na oficina, os valores vão de milésimos a milhões. Por isso o multímetro usa
+prefixos:
+
+| Prefixo | Símbolo | Quer dizer | Exemplo |
+|---|---|---|---|
+| mili | m | dividido por 1000 | 35 mA = 0.035 A |
+| quilo | k | vezes 1000 | 4.7 kΩ = 4700 Ω |
+| mega | M | vezes 1 000 000 | 1 MΩ = 1 000 000 Ω |
+
+Para converter, a pergunta é sempre a mesma: **a unidade nova é maior ou menor
+que a antiga?**
+
+- De ampères para miliampères, a unidade fica 1000 vezes menor. Então cabem 1000
+  vezes mais miliampères no mesmo valor: multiplique por 1000. Por exemplo,
+  0.035 A vira 35 mA.
+- De ohms para quiloohms, a unidade fica 1000 vezes maior. Então o número fica
+  1000 vezes menor: divida por 1000. Por exemplo, 4700 Ω vira 4.7 kΩ.
+
+A quantidade não muda; só muda o tamanho da unidade usada para contá-la. É como
+dizer 1.5 metro ou 150 centímetros.
+
+## Como falha e como diagnosticar
+
+Os três tipos de falha da lição anterior podem agora ser descritos com as três
+grandezas.
+
+| Falha | Resistência no caminho | Corrente | O que a carga faz |
+|---|---|---|---|
+| circuito aberto | enorme, sem limite | zero | não funciona |
+| resistência alta | maior que o normal | menor que o normal | funciona fraca: lâmpada fosca, motor lento |
+| curto-circuito | quase zero, por um caminho que pula a carga | muito alta | o fusível queima |
+
+Cada linha dessa tabela vai ganhar uma lição própria. Por enquanto, guarde a
+lógica: **a resistência no caminho decide a corrente, e a corrente decide o que
+a carga faz.** A próxima lição transforma essa frase numa conta.
+
+E guarde também o lugar de cada medição:
+
+- **tensão** se mede **entre dois pontos**, com o circuito funcionando;
+- **corrente** se mede **através** do circuito, com o caminho passando pelo
+  instrumento;
+- **resistência** se mede com o circuito **desligado**, porque o multímetro usa a
+  própria pilha para medir.
+
+### A queixa resolvida
+
+Volte ao cabo grosso e ao fio fino. A tensão é a mesma nos dois: a mesma bateria
+empurra os dois com cerca de 12 V. O que é diferente é a **corrente** de que cada
+carga precisa.
+
+O motor de partida precisa girar o motor do carro inteiro, e para isso puxa uma
+corrente enorme, da ordem de 150 A (valor típico). A lâmpada da placa puxa menos
+de meio ampère. São centenas de vezes mais corrente no cabo do motor de partida.
+
+O cabo grosso existe para que essa corrente enorme passe sem dificuldade. Grosso
+e curto, ele tem resistência baixíssima. Se o fabricante usasse o fio fino, a
+resistência do fio seria muito maior. Duas coisas aconteceriam:
+
+1. o fio fino esquentaria, a ponto de derreter a capa de plástico;
+2. parte do empurrão da bateria ficaria gasta no próprio fio, e o motor de
+   partida receberia menos tensão — giraria fraco ou nem giraria.
+
+A próxima lição mostra como calcular exatamente quanto empurrão se perde. Por
+agora, a resposta qualitativa está completa: **a espessura do fio acompanha a
+corrente, e não a tensão.**
+
+## Na oficina: medir sem estragar o instrumento
+
+:::warning Cuidados com o multímetro
+
+- **Nunca meça resistência num circuito ligado.** O multímetro mede resistência
+  mandando uma corrente pequena da própria pilha. A tensão do carro, somada a
+  essa, dá uma leitura errada e pode danificar o instrumento.
+- **Na posição de corrente, o multímetro vira um pedaço de fio.** Se você
+  encostar as pontas direto nos polos da bateria nessa posição, fecha um
+  circuito sem carga. O fusível interno do multímetro queima — ou, sem fusível,
+  o instrumento estraga. Corrente se mede com o instrumento no meio do caminho,
+  como mostra a lição de instrumentos.
+- **Confira onde estão as pontas** antes de medir: o multímetro tem uma entrada
+  separada para corrente. Esquecer a ponta vermelha nela e medir tensão é o
+  mesmo erro do item anterior.
+- As regras de segurança da bateria da [lição anterior](./o-circuito-eletrico#na-oficina-segurança-com-12-volts)
+  continuam valendo.
+
+:::
+
+## Exemplos resolvidos
+
+### Exemplo 1: ler uma job sheet
+
+Uma *job sheet* do laboratório tem três leituras anotadas: 12.4 V, 150 mA e
+4.7 kΩ. O que cada uma mede, e quanto vale em unidades sem prefixo?
+
+- **12.4 V** é uma tensão: o empurrão entre dois pontos. Já está sem prefixo.
+- **150 mA** é uma corrente. Mili quer dizer dividido por 1000. Então
+  150 mA = 150 ÷ 1000 A = 0.15 A.
+- **4.7 kΩ** é uma resistência. Quilo quer dizer vezes 1000. Então
+  4.7 kΩ = 4.7 × 1000 Ω = 4700 Ω.
+
+### Exemplo 2: a bateria na prateleira
+
+**Pause e tente:** uma bateria nova está na prateleira da loja, sem nada ligado
+aos polos. Existe tensão? Existe corrente?
+
+<details>
+<summary>Solução</summary>
+
+Existe tensão: o multímetro, com uma ponta em cada polo, mostra cerca de 12.6 V.
+A diferença de energia entre os polos existe mesmo parada.
+
+Não existe corrente. Para haver corrente, é preciso um caminho completo de um
+polo ao outro. Na prateleira, entre os polos só há ar, que é isolante.
+
+É o mesmo que a torneira fechada da mangueira: a pressão está lá, mas a água não
+passa.
+
+</details>
+
+### Exemplo 3: dois fios do mesmo comprimento
+
+**Pause e tente:** dois fios de cobre têm o mesmo comprimento. Um é 18 AWG, o
+outro é 12 AWG. Qual tem menos resistência? Qual você usaria para uma carga que
+puxa muita corrente?
+
+<details>
+<summary>Solução</summary>
+
+Na escala AWG, número menor quer dizer fio mais grosso. Então o 12 AWG é o mais
+grosso. Mesmo material e mesmo comprimento, o fio mais grosso tem menos
+resistência — é a mangueira mais larga. Para a carga de corrente alta, use o
+12 AWG.
+
+Se você escolheu o 18 AWG por ter o número maior, caiu na armadilha da escala:
+na AWG, o número cresce quando o fio afina.
+
+</details>
+
+### Exemplo 4: m pequeno e M grande
+
+**Pause e tente:** o multímetro mostra “1.2 MΩ” numa medição e “1.2 mΩ” em
+outra. São valores parecidos?
+
+<details>
+<summary>Solução</summary>
+
+Não são. O M maiúsculo é mega: 1.2 MΩ = 1 200 000 Ω. O m minúsculo é mili:
+1.2 mΩ = 0.0012 Ω. A diferença entre os dois é um fator de um bilhão. A primeira
+é uma resistência altíssima; a segunda, praticamente um fio. Na tela do
+multímetro, olhe sempre se a letra é maiúscula ou minúscula.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que a tensão é sempre medida entre dois pontos, e a corrente não?
+2. Uma lâmpada fica mais fraca porque um terminal oxidou. A tensão da bateria
+   mudou? O que mudou?
+3. Se toda carga tem resistência, por que resistência às vezes é chamada de
+   defeito?
+4. Qual das três grandezas decide a espessura do fio? Por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque a tensão é uma diferença: ela compara a energia de um ponto com a de
+   outro. Um ponto sozinho não tem tensão. A corrente é um fluxo que passa por
+   dentro do caminho; para medi-la, o caminho precisa passar pelo instrumento.
+2. A tensão da bateria não mudou: ela continua empurrando com os mesmos 12 V. O
+   que mudou foi a resistência no caminho, que ficou maior por causa da
+   oxidação. Com mais resistência, passa menos corrente, e a lâmpada brilha
+   menos.
+3. Porque o problema é o lugar. Na carga, a resistência faz o trabalho: é ela que
+   transforma a energia em luz, calor ou movimento. Num terminal oxidado, ela
+   atrapalha a corrente sem fazer nada de útil.
+4. A corrente. A tensão é praticamente a mesma em todo o carro. O que muda de um
+   circuito para outro é quanta corrente a carga puxa. Corrente alta precisa de
+   fio grosso, de resistência baixa, para não esquentar o fio nem desperdiçar o
+   empurrão da bateria no caminho.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Associe cada unidade à grandeza que ela mede: volt, ampère, ohm.
+
+### 2. Explicação
+
+Usando a mangueira de jardim, explique a diferença entre tensão e corrente. Diga
+também um ponto em que a comparação com a mangueira deixa de valer.
+
+### 3. Aplicação direta
+
+Converta:
+
+a) 250 mA para ampères;
+
+b) 2.2 kΩ para ohms;
+
+c) 0.5 A para miliampères;
+
+d) 3300 Ω para quiloohms;
+
+e) 0.5 MΩ para quiloohms.
+
+### 4. Variação
+
+Um técnico mede a resistência de um fio de 1 metro e encontra um valor muito
+pequeno. Depois mede um fio igual, de mesma bitola, mas com 3 metros. A
+resistência do segundo fio é maior, menor ou igual? E se o segundo fio tivesse
+1 metro, mas fosse bem mais grosso?
+
+### 5. Caso de diagnóstico
+
+Os faróis de um carro estão mais fracos que o normal. A bateria mede 12.6 V,
+entre os polos, com o carro desligado. O técnico conclui: “a bateria está boa,
+então não é problema elétrico”. Usando a tabela de falhas desta lição, explique
+o que o raciocínio dele deixou de fora.
+
+### 6. Justificativa
+
+Por que medir resistência num circuito ligado dá uma leitura errada?
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says that resistance in a copper wire increases as
+the wire gets longer. Technician B says that a wire with a larger AWG gauge
+number is thicker than a wire with a smaller gauge number. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** Which of these describes an open circuit?
+
+- A. zero resistance and very high current
+- B. no current flow
+- C. normal current with low voltage at the battery
+- D. current flowing through a path that bypasses the load
+
+**Question 3.** A digital multimeter displays 4.7 kΩ. This value is equal to:
+
+- A. 0.0047 Ω
+- B. 47 Ω
+- C. 470 Ω
+- D. 4700 Ω
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. Volt: tensão. Ampère: corrente. Ohm: resistência.
+
+2. A tensão é a pressão que empurra a água; a corrente é a vazão, quanta água
+   passa por segundo. Pode haver pressão sem vazão, com a torneira fechada, do
+   mesmo jeito que a bateria na prateleira tem tensão sem corrente. A
+   comparação deixa de valer em pelo menos dois pontos: a mangueira joga a água
+   fora pela ponta, enquanto o circuito precisa de um caminho de volta; e um
+   fio solto no ar não “vaza” eletricidade, porque o ar é isolante.
+
+3. a) 250 mA = 250 ÷ 1000 = 0.25 A.
+   b) 2.2 kΩ = 2.2 × 1000 = 2200 Ω.
+   c) 0.5 A = 0.5 × 1000 = 500 mA.
+   d) 3300 Ω = 3300 ÷ 1000 = 3.3 kΩ.
+   e) 0.5 MΩ = 0.5 × 1000 = 500 kΩ, porque 1 MΩ são 1000 kΩ.
+
+   Se você encontrou 250 000 A no item a, multiplicou em vez de dividir. O
+   ampère é uma unidade maior que o miliampère, então o número em ampères tem
+   que ficar menor.
+
+4. Maior: o fio mais longo tem mais caminho para a corrente atravessar, como a
+   mangueira mais longa. No segundo caso, menor: o fio mais grosso tem mais
+   espaço para a corrente passar.
+
+5. A medição com o carro desligado mostra a tensão da bateria sem corrente
+   nenhuma. Ela não diz nada sobre o caminho até os faróis. Farol fraco é o
+   sintoma típico de **resistência alta** no caminho: mais resistência, menos
+   corrente, luz mais fraca. A bateria pode estar perfeita e haver um terminal
+   oxidado, um fio danificado ou uma massa ruim no circuito dos faróis. É um
+   problema elétrico, só que no caminho, e não na fonte.
+
+6. Para medir resistência, o multímetro manda pelo componente uma corrente
+   pequena, da própria pilha, e mede como ela passa. Se o circuito estiver
+   ligado, a tensão do carro empurra outra corrente pelo mesmo caminho. O
+   multímetro não tem como separar as duas, e a leitura sai errada. Além disso,
+   a tensão do carro pode danificar o instrumento.
+
+7. **Question 1: A.** O técnico A está certo: fio mais longo, mais resistência.
+   O técnico B está errado: na escala AWG é o contrário, número maior quer
+   dizer fio mais fino.
+
+   **Question 2: B.** No circuito aberto, o caminho está interrompido e a
+   corrente é zero. A alternativa A descreve um curto: resistência quase zero e
+   corrente muito alta. A alternativa C fala da bateria, não do caminho. A
+   alternativa D descreve um curto que pula a carga.
+
+   **Question 3: D.** O k quer dizer vezes 1000: 4.7 × 1000 = 4700 Ω. As outras
+   alternativas vêm de dividir em vez de multiplicar, ou de mover o ponto
+   decimal o número errado de casas.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** tensão é o empurrão, medido entre dois pontos, em volts.
+  Corrente é o fluxo que atravessa o caminho, em ampères. Resistência é a
+  dificuldade de passar, em ohms.
+- **Quando usar:** em toda medição elétrica. Antes de medir, pergunte qual das
+  três grandezas responde à sua dúvida.
+- **Com o que se conecta:** a tabela de falhas desta lição disse que “a
+  resistência decide a corrente”. A próxima lição transforma essa frase numa
+  conta: [Lei de Ohm](./lei-de-ohm).
+
+**Termos em inglês desta lição:** *voltage*, *volt*, *potential difference*,
+*current*, *ampere*, *amp*, *resistance*, *ohm*, *direct current* (DC),
+*alternating current* (AC), *wire gauge*, *AWG*, *starter*, *cells*,
+*electromotive force*.
