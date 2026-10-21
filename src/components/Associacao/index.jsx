@@ -11,8 +11,15 @@ import styles from "./styles.module.css";
 
 const L = 90; // fio da bateria
 const T = 60; // fio de cima
-const PASSO = 140; // distância entre uma carga e a seguinte
+const PASSO_SERIE = 115; // distância entre uma carga e a seguinte
+const PASSO_PARALELO = 140; // cabe “queimada” e “reboque” sem encostar no ramo seguinte
 const MEIA = 22; // meia largura de uma carga, de terminal a terminal
+
+// Tamanho dos rótulos a partir da largura do desenho. No celular a figura é
+// reduzida a cerca de 358 px; com 0.029 × W, o rótulo sai com uns 10.5 px ou
+// mais. O desenho é compacto de propósito: largura mínima com rolagem de lado
+// escondia metade do circuito no celular.
+const tamanhoFonte = (W) => Math.max(15, Math.ceil(W * 0.029));
 
 const ROT = { right: 0, down: 90, left: 180, up: 270 };
 function Seta({ x, y, dir }) {
@@ -75,7 +82,6 @@ function Carga({ x, y, tipo, aberta, deitada }) {
           math="\text{M}"
           fontSize={15}
           tone={aberta ? 3 : 2}
-          space={30}
         />
       )}
     </g>
@@ -113,7 +119,7 @@ function Interruptor({ x }) {
   );
 }
 
-function Bateria({ y, fonte, B }) {
+function Bateria({ y, fonte, B, fs }) {
   return (
     <g>
       <line className={styles.wire} x1={L} y1={T} x2={L} y2={y - 7} />
@@ -132,9 +138,9 @@ function Bateria({ y, fonte, B }) {
         x2={L + 11}
         y2={y + 7}
       />
-      <SvgMath x={L + 28} y={y - 16} math="+" anchor="start" space={30} />
-      <SvgMath x={L + 28} y={y + 16} math="-" anchor="start" space={30} />
-      <SvgMath x={L - 30} y={y} math={fonte} anchor="end" space={L - 34} />
+      <SvgMath x={L + 28} y={y - 16} math="+" anchor="start" fontSize={fs} />
+      <SvgMath x={L + 28} y={y + 16} math="-" anchor="start" fontSize={fs} />
+      <SvgMath x={L - 28} y={y} math={fonte} anchor="end" fontSize={fs} />
     </g>
   );
 }
@@ -174,36 +180,49 @@ export default function Associacao({
   const B = serie ? 200 : 240;
   const BAT_Y = (T + B) / 2;
 
-  // Fusível e interruptor, nessa ordem, logo depois da bateria.
-  let x = L + 50;
+  // Fusível e interruptor, nessa ordem, logo depois da bateria. Os centros
+  // ficam a 100 de distância, para cada nome ficar centrado sobre a própria
+  // peça. Os nomes vão em lados opostos do fio —
+  // “fusível” embaixo, “interruptor” em cima —, porque na mesma linha, com a
+  // fonte grande que o celular pede, eles se encostavam e liam como uma
+  // palavra só. Medida que vale para os cálculos de espaço: no KaTeX, cada
+  // letra de \text ocupa cerca de 0.65 do tamanho da fonte.
   const cortes = [];
   let fuseX;
   let swX;
+  let fim = L + 40; // onde acaba o último elemento do fio de cima
   if (fusivel) {
-    fuseX = x + 20;
+    fuseX = L + 50;
     cortes.push([fuseX - 18, fuseX + 18]);
-    x += 80;
+    fim = fuseX + 18;
   }
   if (interruptor) {
-    swX = x + 20;
+    swX = fusivel ? fuseX + 100 : L + 50;
     cortes.push([swX - 18, swX + 18]);
-    x += 80;
+    fim = swX + 18;
   }
 
-  // Em paralelo, o primeiro ramo fica mais afastado, para caber o rótulo da
-  // corrente total no fio comum.
-  const xs = cargas.map((_, i) => x + (serie ? 50 : 90) + i * PASSO);
+  // Em série, a primeira carga começa longe o bastante para o rótulo dela, em
+  // cima, e a queda, embaixo, não encostarem no interruptor.
+  const PASSO = serie ? PASSO_SERIE : PASSO_PARALELO;
+  // O primeiro ramo do paralelo começa depois do fim do nome “interruptor”.
+  const inicio = serie
+    ? Math.max(fim + 100, L + 110)
+    : Math.max(interruptor ? fim + 57 : fim + 40, L + 110);
+  const xs = cargas.map((_, i) => inicio + i * PASSO);
   const algumaAberta = cargas.some((c) => c.aberta);
   // Em série, uma carga aberta abre o laço inteiro.
   const circula = !(serie && algumaAberta);
   const mostra = corrente && circula;
 
   let W;
+  let fs;
   let conteudo;
 
   if (serie) {
-    const R = xs[xs.length - 1] + 90;
+    const R = xs[xs.length - 1] + 75;
     W = R + 30;
+    fs = tamanhoFonte(W);
     xs.forEach((c) => cortes.push([c - MEIA, c + MEIA]));
     conteudo = (
       <g>
@@ -224,8 +243,8 @@ export default function Associacao({
                 x={xs[i]}
                 y={T - 30}
                 math={c.rotulo}
+                fontSize={fs}
                 tone={c.aberta ? 3 : 2}
-                space={PASSO - 10}
               />
             )}
             {c.queda && (
@@ -233,9 +252,8 @@ export default function Associacao({
                 x={xs[i]}
                 y={T + 32}
                 math={c.queda}
-                fontSize={14}
+                fontSize={fs - 1}
                 tone={c.aberta ? 3 : 2}
-                space={PASSO - 10}
               />
             )}
           </g>
@@ -251,7 +269,7 @@ export default function Associacao({
                 x={(L + R) / 2}
                 y={B - 20}
                 math={rotuloCorrente}
-                fontSize={14}
+                fontSize={fs}
                 tone={1}
               />
             )}
@@ -261,11 +279,12 @@ export default function Associacao({
     );
   } else {
     const LOAD_Y = BAT_Y;
-    const curtoX = curto ? xs[xs.length - 1] + PASSO - 20 : null;
+    const curtoX = curto ? xs[xs.length - 1] + PASSO : null;
     const ultimo = curto ? curtoX : xs[xs.length - 1];
-    W = ultimo + (curto ? 80 : 110);
+    W = ultimo + (curto ? 85 : 95);
+    fs = tamanhoFonte(W);
     const setaY = (LOAD_Y + MEIA + B) / 2;
-    const totalX = (x + xs[0]) / 2;
+    const totalX = (fim + xs[0]) / 2;
     const ramos = curto ? [...xs, curtoX] : xs;
     conteudo = (
       <g>
@@ -306,8 +325,8 @@ export default function Associacao({
                 y={LOAD_Y}
                 math={c.rotulo}
                 anchor="start"
+                fontSize={fs}
                 tone={c.aberta ? 3 : 2}
-                space={PASSO - 34}
               />
             )}
             {mostra && !c.aberta && (
@@ -319,9 +338,8 @@ export default function Associacao({
                     y={setaY}
                     math={c.corrente}
                     anchor="start"
-                    fontSize={14}
+                    fontSize={fs - 1}
                     tone={1}
-                    space={PASSO - 20}
                   />
                 )}
               </g>
@@ -335,26 +353,24 @@ export default function Associacao({
               d={`M ${curtoX} ${T} L ${curtoX} ${LOAD_Y - 10} L ${curtoX - 7} ${LOAD_Y - 4} L ${curtoX + 7} ${LOAD_Y + 4} L ${curtoX} ${LOAD_Y + 10} L ${curtoX} ${B}`}
             />
             <SvgMath
-              x={curtoX + 14}
+              x={curtoX + 16}
               y={LOAD_Y}
               math="\text{curto}"
               anchor="start"
-              fontSize={13}
+              fontSize={fs - 1}
               tone={3}
-              space={64}
             />
             {mostra && (
               <g>
                 <Seta x={curtoX} y={setaY} dir="down" />
                 {rotuloCurto && (
                   <SvgMath
-                    x={curtoX + 14}
+                    x={curtoX + 16}
                     y={setaY}
                     math={rotuloCurto}
                     anchor="start"
-                    fontSize={14}
+                    fontSize={fs - 1}
                     tone={1}
-                    space={64}
                   />
                 )}
               </g>
@@ -367,13 +383,15 @@ export default function Associacao({
             <Seta x={totalX} y={B} dir="left" />
             <Seta x={L} y={(BAT_Y + B) / 2 + 8} dir="up" />
             {rotuloCorrente && (
+              // junto da seta do fio da bateria: é por ali que passa a
+              // corrente total, e o fio de cima fica livre para os nomes
               <SvgMath
-                x={totalX}
-                y={T - 22}
+                x={L + 16}
+                y={(BAT_Y + B) / 2 + 8}
                 math={rotuloCorrente}
-                fontSize={14}
+                anchor="start"
+                fontSize={fs}
                 tone={1}
-                space={xs[0] - x}
               />
             )}
           </g>
@@ -384,28 +402,24 @@ export default function Associacao({
 
   return (
     <figure className={styles.figure}>
-      {/* Com várias cargas o desenho fica largo. No celular, encolher até caber
-          deixaria os rótulos ilegíveis; em vez disso, a figura ganha uma
-          largura mínima e rola de lado dentro da própria caixa. */}
-      <div className={styles.scroll}>
+      <div style={{ width: "100%" }}>
         <svg
           className={styles.svg}
           viewBox={`0 0 ${W} ${B + 30}`}
-          style={{ maxWidth: `${W}px`, minWidth: `${Math.min(W, 560)}px` }}
+          style={{ maxWidth: `${W}px` }}
           role="img"
           aria-label={caption || `Circuito em ${serie ? "série" : "paralelo"}.`}
         >
-          <Bateria y={BAT_Y} fonte={fonte} B={B} />
+          <Bateria y={BAT_Y} fonte={fonte} B={B} fs={fs} />
           {conteudo}
           {fusivel && <Fusivel x={fuseX} />}
           {interruptor && <Interruptor x={swX} />}
           {nomes && fusivel && (
             <SvgMath
               x={fuseX}
-              y={T - 24}
+              y={T + 24}
               math="\text{fusível}"
-              fontSize={13}
-              space={78}
+              fontSize={fs - 1}
             />
           )}
           {nomes && interruptor && (
@@ -413,8 +427,7 @@ export default function Associacao({
               x={swX}
               y={T - 24}
               math="\text{interruptor}"
-              fontSize={13}
-              space={78}
+              fontSize={fs - 1}
             />
           )}
         </svg>

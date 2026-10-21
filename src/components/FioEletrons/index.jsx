@@ -112,13 +112,13 @@ export default function FioEletrons({corrente = false, caption}) {
               x={X0 + 10}
               y={Y1 + 22}
               math="\text{polo }-"
-              fontSize={14}
+              fontSize={16}
             />
             <SvgMath
               x={X1 - 10}
               y={Y1 + 22}
               math="\text{polo }+"
-              fontSize={14}
+              fontSize={16}
             />
           </g>
         )}
@@ -131,7 +131,7 @@ export default function FioEletrons({corrente = false, caption}) {
               ? '\\text{com bateria: todos andam para o polo }+'
               : '\\text{sem bateria: cada um para um lado}'
           }
-          fontSize={15}
+          fontSize={16}
           tone={1}
         />
       </svg>

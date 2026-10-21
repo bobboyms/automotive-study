@@ -7,7 +7,8 @@
     "build": "node --max-old-space-size=8192 ./node_modules/@docusaurus/core/bin/docusaurus.mjs build",
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
-    "quadro": "node caderno/servidor.js"
+    "quadro": "node caderno/servidor.js",
+    "figuras": "node scripts/conferir-figuras.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
@@ -25,6 +26,7 @@
     "@docusaurus/module-type-aliases": "^3.10.1",
     "@docusaurus/tsconfig": "^3.10.1",
     "@docusaurus/types": "^3.10.1",
+    "puppeteer-core": "^23.11.1",
     "typescript": "~5.8.3"
   },
   "browserslist": {

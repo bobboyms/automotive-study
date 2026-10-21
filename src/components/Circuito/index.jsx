@@ -120,14 +120,13 @@ export default function Circuito({
           x2={L + 11}
           y2={BAT_Y + 7}
         />
-        <SvgMath x={L + 28} y={BAT_Y - 16} math="+" anchor="start" space={30} />
-        <SvgMath x={L + 28} y={BAT_Y + 16} math="-" anchor="start" space={30} />
+        <SvgMath x={L + 28} y={BAT_Y - 16} math="+" anchor="start" />
+        <SvgMath x={L + 28} y={BAT_Y + 16} math="-" anchor="start" />
         <SvgMath
           x={L - 30}
           y={BAT_Y}
           math={fonte}
           anchor="end"
-          space={L - 34}
         />
 
         {/* fusível */}
@@ -145,12 +144,14 @@ export default function Circuito({
               className={styles.wireThin}
               d={`M ${FUSE_X - 18} ${T} C ${FUSE_X - 6} ${T - 9}, ${FUSE_X + 6} ${T + 9}, ${FUSE_X + 18} ${T}`}
             />
+            {/* embaixo do fio: em cima, ao lado de “interruptor”, os dois
+                nomes se encostavam no celular */}
             {nomes && (
               <SvgMath
                 x={FUSE_X}
-                y={T - 24}
+                y={T + 24}
                 math="\text{fusível}"
-                fontSize={13}
+                fontSize={15}
               />
             )}
           </g>
@@ -180,12 +181,14 @@ export default function Circuito({
                 y2={T}
               />
             )}
+            {/* alto o bastante para a alavanca do interruptor aberto, que sobe
+                até T - 17, não riscar o nome */}
             {nomes && (
               <SvgMath
                 x={SWITCH_X}
-                y={T - 24}
+                y={T - 33}
                 math="\text{interruptor}"
-                fontSize={13}
+                fontSize={15}
               />
             )}
           </g>
@@ -196,14 +199,14 @@ export default function Circuito({
           <g>
             <circle className={styles.faultEnd} cx={FAULT_X - 9} cy={T} r={2.5} />
             <circle className={styles.faultEnd} cx={FAULT_X + 9} cy={T} r={2.5} />
-            {/* ancorado à direita, para não cruzar o fio vertical da carga */}
+            {/* termina antes do fio da carga, para não cruzá-lo, e começa
+                depois do nome “fusível”, que fica na mesma altura */}
             <SvgMath
-              x={FAULT_X + 12}
-              y={T + 22}
+              x={R - 6}
+              y={T + 24}
               math="\text{fio rompido}"
               anchor="end"
-              space={140}
-              fontSize={13}
+              fontSize={15}
               tone={3}
             />
           </g>
@@ -227,8 +230,7 @@ export default function Circuito({
               y={LOAD_Y}
               math="\text{curto}"
               anchor="end"
-              space={70}
-              fontSize={13}
+              fontSize={15}
               tone={3}
             />
           </g>
@@ -259,7 +261,6 @@ export default function Circuito({
             (carga === 'resistor' ? '\\text{resistor}' : '\\text{lâmpada}')
           }
           anchor="start"
-          space={W - R - 34}
           tone={2}
         />
 
@@ -280,7 +281,7 @@ export default function Circuito({
               x={(L + R) / 2}
               y={B + 50}
               math="\text{carroceria e chassi (massa)}"
-              fontSize={13}
+              fontSize={15}
             />
           </g>
         ) : (
@@ -307,7 +308,7 @@ export default function Circuito({
                 x={(L + R) / 2}
                 y={B - 18}
                 math={rotuloCorrente}
-                fontSize={14}
+                fontSize={16}
                 tone={1}
               />
             )}

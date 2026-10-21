@@ -25,3 +25,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .DS_Store
+
+# Capturas da conferência de figuras (npm run figuras)
+.figuras/

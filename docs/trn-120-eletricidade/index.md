@@ -55,22 +55,29 @@ conhecimento anterior.
    cada ramo recebe a tensão da fonte, as correntes se somam e a resistência
    total fica menor que a do menor ramo. Por que um curto num ramo apaga todos.
 
+### Tópico 3 — Instrumentos de teste
+
+8. [Medições com o multímetro](./medicoes-com-multimetro) — as cinco medições:
+   tensão da fonte, tensão disponível, queda de tensão, corrente e resistência.
+   Onde vão as pontas, em que estado fica o circuito e por que uma tensão
+   medida sem corrente pode enganar.
+
 ### Próximos tópicos (em preparação)
 
-8. **Circuito misto** — série e paralelo no mesmo circuito, como o fusível em
+9. **Circuito misto** — série e paralelo no mesmo circuito, como o fusível em
    série com um conjunto de lâmpadas em paralelo.
-9. **Componentes de controle e proteção** — fusíveis, disjuntores, interruptores
-   e relés.
-10. **Esquemas elétricos** — símbolos, códigos de cor dos fios, conectores e
+10. **Componentes de controle e proteção** — fusíveis, disjuntores, interruptores
+    e relés.
+11. **Esquemas elétricos** — símbolos, códigos de cor dos fios, conectores e
     como seguir um circuito no esquema do fabricante.
-11. **Instrumentos de teste** — multímetro, lâmpada de teste, pinça
-    amperimétrica e *jumper* com fusível.
-12. **Diagnóstico de circuitos** — circuito aberto, curto-circuito à massa e ao
+12. **Outros instrumentos de teste** — lâmpada de teste, pinça amperimétrica e
+    *jumper* com fusível.
+13. **Diagnóstico de circuitos** — circuito aberto, curto-circuito à massa e ao
     positivo, resistência alta e queda de tensão.
-13. **Bateria** — construção, estado de carga, testes, carga, partida com
+14. **Bateria** — construção, estado de carga, testes, carga, partida com
     bateria auxiliar e consumo parasita.
-14. **Sistema de partida** — motor de partida, solenoide e testes.
-15. **Sistema de carga** — alternador, retificador, regulador e testes.
+15. **Sistema de partida** — motor de partida, solenoide e testes.
+16. **Sistema de carga** — alternador, retificador, regulador e testes.
 
 ## Como estudar cada lição
 

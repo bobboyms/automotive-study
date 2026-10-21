@@ -1,0 +1,154 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wire {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.wireThin {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.plate {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.4;
+}
+
+.plateShort {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 5;
+}
+
+.part,
+.contact {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.lamp {
+  fill: var(--mv-tone-0);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.2;
+}
+
+.battery {
+  fill: var(--mv-tone-0);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+}
+
+.post {
+  fill: var(--ifm-font-color-base);
+}
+
+.meter {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+}
+
+.display {
+  fill: var(--mv-tone-0);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.2;
+}
+
+.jack {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.5;
+}
+
+.jackRed {
+  fill: var(--mv-tone-2);
+  stroke: var(--mv-tone-2);
+  stroke-width: 1.5;
+}
+
+.jackBlack {
+  fill: var(--ifm-font-color-base);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.5;
+}
+
+.leadRed {
+  fill: none;
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+}
+
+.leadBlack {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+}
+
+.tipRed {
+  fill: var(--mv-tone-2);
+}
+
+.tipBlack {
+  fill: var(--ifm-font-color-base);
+}
+
+.arrow {
+  fill: none;
+  stroke: var(--mv-tone-1);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fault {
+  fill: none;
+  stroke: var(--mv-tone-3);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+.openEnd {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+/* borda embaixo da ponta vermelha: quando ela cruza a preta, abre um vão na
+   preta e mostra qual passa por cima. A cor é a do fundo onde a figura está:
+   dentro de um bloco recolhido (<details>, que o Docusaurus desenha como
+   .alert), é o fundo do bloco; fora dele, a cor do papel. */
+.casing {
+  fill: none;
+  stroke: var(--ifm-alert-background-color, var(--mv-paper));
+  stroke-width: 8;
+  stroke-linecap: round;
+}

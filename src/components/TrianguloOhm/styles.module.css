@@ -32,3 +32,34 @@
   color: var(--ifm-color-emphasis-800);
   text-align: center;
 }
+
+/* selo de um sinal: círculo pousado sobre a linha que ele explica */
+.badge {
+  fill: var(--mv-paper);
+  stroke: var(--mv-tone-1);
+  stroke-width: 1.6;
+}
+
+/* três triângulos que quebram linha no celular, em vez de encolher */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  width: 100%;
+}
+
+.item {
+  display: block;
+  /* sem crescer: o triângulo que desce sozinho para a linha de baixo fica do
+     mesmo tamanho dos outros */
+  flex: 0 0 170px;
+  height: auto;
+}
+
+/* no celular, dois por linha */
+@media (max-width: 500px) {
+  .item {
+    flex-basis: 150px;
+  }
+}

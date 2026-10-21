@@ -83,7 +83,6 @@ export default function Atomo({
               y={cy + (rMax + 9) * Math.sin(outerStart)}
               math={rotuloExterno}
               anchor="start"
-              space={LABEL_SPACE - 30}
               fontSize={14}
               tone={1}
             />
