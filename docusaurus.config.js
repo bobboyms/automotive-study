@@ -2,6 +2,13 @@
 
 const remarkMath = require('remark-math').default;
 const rehypeKatex = require('rehype-katex').default;
+const remarkTermos = require('./src/plugins/remark-termos');
+const remarkFigurasLivro = require('./src/plugins/remark-figuras-livro');
+
+// Figuras do livro salvas pelo aluno em material/livro/ (fora do git). Só o
+// servidor local (`npm run start`) as serve, em /livro/1-13.png; o build — o
+// site publicado — nunca as inclui, porque o livro tem direitos autorais.
+const DEV = process.env.NODE_ENV !== 'production';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -16,6 +23,10 @@ const config = {
   projectName: 'automotive-study',
 
   onBrokenLinks: 'throw',
+
+  staticDirectories: DEV ? ['static', 'material'] : ['static'],
+
+  customFields: {figurasLocais: DEV},
 
   markdown: {
     hooks: {
@@ -36,7 +47,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [remarkMath, remarkFigurasLivro, remarkTermos],
           rehypePlugins: [rehypeKatex],
         },
         blog: false,

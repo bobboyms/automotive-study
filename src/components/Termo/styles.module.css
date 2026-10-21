@@ -1,0 +1,22 @@
+/* O termo continua parecendo texto — mesma fonte, mesma cor —, com um
+   sublinhado pontilhado que diz “dá para clicar”. */
+.termo {
+  all: unset;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 1.5px dotted var(--ifm-color-primary);
+  /* o botão quebra linha como texto comum */
+  display: inline;
+  white-space: normal;
+}
+
+.termo:hover {
+  color: var(--ifm-color-primary);
+}
+
+.termo:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

@@ -1,0 +1,83 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cabecote {
+  fill: var(--ifm-color-emphasis-300);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.guia {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.2;
+}
+
+.metal {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.mola {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.balancim {
+  stroke: var(--ifm-color-emphasis-600);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.pivo {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+}
+
+.vareta {
+  stroke: var(--ifm-color-emphasis-600);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.came {
+  fill: var(--ifm-color-emphasis-400);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.eixo {
+  fill: var(--ifm-font-color-base);
+}
+
+.seta {
+  fill: none;
+  stroke: var(--mv-tone-2);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}

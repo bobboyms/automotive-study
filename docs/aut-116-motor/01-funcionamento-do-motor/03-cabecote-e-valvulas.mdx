@@ -1,0 +1,727 @@
+---
+title: Cylinder head e valves
+---
+
+import Motor from '@site/src/components/Motor';
+import ComandoValvula from '@site/src/components/ComandoValvula';
+import Sincronismo from '@site/src/components/Sincronismo';
+
+# Cylinder head e valves
+
+> **Pergunta central:** o cylinder precisa ficar fechado para a pressão da
+> combustão empurrar o piston, mas também precisa abrir para a mistura entrar e
+> o gás queimado sair. Como uma peça fecha e abre o cylinder no momento certo,
+> milhares de vezes por minuto?
+
+## A queixa: o motor gira, mas não pega
+
+Um cliente chega de guincho e conta:
+
+> “Eu estava na estrada e o carro apagou do nada. Agora, quando dou a partida,
+> o motor gira, mas não pega. E está girando diferente, mais solto que o
+> normal.”
+
+A battery está boa, porque o starter motor gira com força. O motor também
+não está travado, porque o crankshaft gira. Então o que falta para ele
+funcionar sozinho?
+
+Guarde duas pistas: o motor apagou de repente, e agora gira “mais solto”. No
+fim desta lição, essas duas pistas vão apontar para uma peça só.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| cylinder head | cabeçote | peça parafusada em cima do bloco que fecha os cilindros e segura as válvulas |
+| combustion chamber | câmara de combustão | o espaço entre o topo do pistão e o cabeçote, onde a mistura queima |
+| intake port, exhaust port | duto de admissão, duto de escape | passagens do cabeçote por onde a mistura entra e o gás queimado sai |
+| intake valve, exhaust valve | válvula de admissão, válvula de escape | as peças que abrem e fecham cada duto |
+| valve head, valve face, valve stem | cabeça, face e haste da válvula | as partes da válvula: o disco, a borda que veda e a haste comprida |
+| valve seat | sede da válvula | o anel usinado onde a face da válvula encosta para vedar |
+| valve guide | guia de válvula | o furo em que a haste da válvula desliza |
+| valve spring | mola da válvula | a mola que fecha a válvula |
+| camshaft, cam lobe | eixo de comando, came | o eixo com ressaltos que abre cada válvula na hora certa |
+| lifter, pushrod, rocker arm | tucho, vareta, balancim | as peças que levam o empurrão do came até a válvula |
+| valve train | trem de válvulas | o conjunto de todas essas peças |
+| camshaft timing | sincronismo do comando | a posição certa do comando em relação ao virabrequim |
+| timing belt, timing chain | correia dentada, corrente de sincronismo | o que liga o virabrequim ao comando |
+
+## Onde isso aparece
+
+O cylinder head e o valve train aparecem em todo motor de quatro tempos, a
+gasolina ou a diesel. Na Wake Tech, são assunto da **AUT-116**: você vai
+desmontar um cylinder head, medir as valve springs e conferir as valve seats
+no laboratório. Voltam na AUT-181 e na AUT-183, porque uma valve que não veda
+derruba o desempenho do motor. Na prova ASE, estão na área **A1** (*Engine
+Repair*), na parte de *cylinder head and valve train*.
+
+No livro, esta lição corresponde ao capítulo 1, seção 1.1 (Cylinder Head e
+Engine Valves) e à parte de Valve Train da seção 1.3.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição usa duas lições anteriores. De
+[O motor de combustão interna](./motor-de-combustao-interna) vem a ideia de
+que a queima esquenta o gás, o gás quente faz pressão e a pressão empurra o
+piston. De
+[Block, piston, connecting rod e crankshaft](./bloco-pistao-biela-e-virabrequim)
+vêm o deck, o TDC, o BDC e o stroke. Responda antes de seguir:
+
+1. Por que a pressão da combustão só empurra o piston se o cylinder estiver
+   bem fechado?
+2. O que é o deck do cylinder block?
+3. Numa volta completa do crankshaft, quantos strokes o piston faz?
+
+<details>
+<summary>Respostas</summary>
+
+1. A pressão empurra todas as paredes do espaço onde o gás está preso. Se
+   houver uma fresta, o gás sai por ela, a pressão cai e sobra menos força
+   para empurrar o piston.
+2. É a superfície plana, usinada, em cima do block. O cylinder head é
+   parafusado nela.
+3. Dois. O piston vai do TDC ao BDC, que é um stroke, e volta do BDC ao TDC,
+   que é outro.
+
+</details>
+
+Se alguma resposta não veio, releia a lição correspondente antes de
+continuar. Esta lição fecha o cylinder por cima, e o cylinder foi o assunto
+das duas anteriores.
+
+## Intuição: a tampa com portas
+
+Pense numa seringa de injeção sem agulha. Tape o bico com o dedo e empurre o
+êmbolo: o ar fica preso e faz força contra o seu dedo. É assim que o cylinder
+precisa estar na hora da combustão. O dedo é a tampa, e ele não pode deixar
+nada escapar.
+
+Agora tire o dedo e puxe o êmbolo. O ar entra pelo bico. Ponha o dedo de
+novo, empurre um pouco, solte o dedo e empurre até o fim. O ar sai pelo bico.
+O cylinder do motor também precisa disso: ar e combustível entrando, gás
+queimado saindo.
+
+O cylinder head é a tampa do cylinder, com duas “portas”: uma de entrada e
+outra de saída. Cada porta tem uma valve, que faz o papel do dedo. A valve
+fecha a porta com força quando o cylinder precisa estar vedado e abre quando
+o gás precisa passar.
+
+**Onde a analogia para de valer:** o seu dedo decide sozinho quando tapar o
+bico. No motor, ninguém decide. Quem abre cada valve é uma peça ligada ao
+crankshaft, e por isso a valve abre sempre no mesmo ponto do movimento do
+piston. Essa ligação é o valve train, a segunda metade da lição.
+
+## O cylinder head: a tampa do cylinder
+
+O **cylinder head** é parafusado no deck, em cima do cylinder block. Ele fecha
+o alto de todos os cylinders. O espaço que sobra entre o topo do piston, no
+TDC, e a parte de baixo do cylinder head é a **combustion chamber**: é ali que
+a mistura queima.
+
+Entre o block e o cylinder head vai uma junta, a **head gasket**. Ela veda três
+coisas ao mesmo tempo: a pressão de cada cylinder, o coolant
+e o óleo que passam de uma peça para a outra.
+
+Como o block, o cylinder head tem por dentro:
+
+- **water jackets**, por onde o coolant passa para levar
+  embora o calor da combustão. O cylinder head fica encostado na combustion
+  chamber, então recebe muito calor;
+- **oil galleries**, pequenos canais que levam óleo às peças que se movem em
+  cima do motor;
+- **ports**: o **intake port**, por onde a mistura de ar e combustível entra
+  na combustion chamber, e o **exhaust port**, por onde o gás queimado sai;
+- **valve guides**, furos em que as valves deslizam para cima e para baixo;
+- **valve seats**, anéis usinados na boca de cada port, onde a valve encosta
+  para fechar.
+
+<Motor
+  rotulos="cima"
+  fase={0}
+  caption="A parte de cima do motor de estudo. O cylinder head fecha o cylinder e forma a combustion chamber. Há um port de cada lado, cada um fechado por uma valve, e um camshaft em cima de cada valve. No livro, compare com a Figura 1-9. Toque nos nomes para ver em português."
+/>
+
+## As valves: como uma peça abre e fecha o port
+
+Cada cylinder tem pelo menos duas valves:
+
+- a **intake valve** abre o intake port e deixa a mistura entrar;
+- a **exhaust valve** abre o exhaust port e deixa o gás queimado sair.
+
+A valve tem forma de cogumelo comprido. As partes dela:
+
+- **valve head**: o disco largo da ponta, que fica do lado da combustion
+  chamber;
+- **valve face**: a borda inclinada do valve head. É ela que encosta na valve
+  seat;
+- **valve stem**: a haste comprida e fina, que desliza dentro da valve guide.
+
+Em cima de cada valve fica uma **valve spring**. A mola puxa a valve para
+cima, contra a valve seat. Por isso a posição natural da valve é **fechada**:
+se nada empurrar, a valve fica fechada.
+
+### Abrir é descer, fechar é subir
+
+Este é o ponto que mais confunde no começo, então vale olhar devagar.
+
+- **Para abrir**, a valve é empurrada **para baixo**, para dentro da combustion
+  chamber. O valve head se afasta da valve seat, e abre-se uma fresta em
+  volta dele. O gás passa por essa fresta.
+- **Para fechar**, a valve **sobe**, puxada pela valve spring. O valve head vem
+  até a valve seat, e a valve face encosta nela em toda a volta. A fresta
+  some, e o port fica vedado.
+
+<Motor
+  tempo="admissao"
+  rotulos="nenhum"
+  caption="Tempo de admissão no motor de estudo: a intake valve, à esquerda, desceu e saiu da valve seat. A mistura (azul) passa pela fresta e enche o cylinder. A exhaust valve, à direita, continua fechada. No livro, compare com as Figuras 1-11 e 1-12."
+/>
+
+Por que vedar é empurrar para cima? A valve face é cônica e a valve seat
+também, com o mesmo ângulo. Quando as duas se encostam, elas formam um anel de
+contato fino em toda a volta. A valve spring aperta esse anel. Na combustão,
+a pressão dentro da combustion chamber empurra o valve head **contra** a valve
+seat, no mesmo sentido da mola. Então, quanto maior a pressão, mais forte a
+valve fica apertada na seat. A vedação melhora justamente quando ela mais
+importa.
+
+### Por que a intake valve é maior
+
+No motor de estudo, a intake valve é maior que a exhaust valve. Na maioria dos
+motores é assim, e o motivo é a diferença de pressão.
+
+- A mistura **entra** empurrada só pela pressão do ar em volta do carro, a
+  atmospheric pressure, porque o piston, descendo, deixa o cylinder com
+  pressão mais baixa. Essa diferença de pressão é pequena. Por isso a
+  passagem precisa ser larga.
+- O gás queimado **sai** empurrado pelo piston subindo, e ainda com pressão
+  sobrando da combustão. Essa diferença é bem maior. Uma passagem menor dá
+  conta.
+
+## O valve train: quem abre as valves na hora certa
+
+A valve spring mantém a valve fechada. Para abrir, alguma peça precisa
+empurrar a valve para baixo, contra a força da mola, e soltar depois. O
+conjunto de peças que faz isso é o **valve train**.
+
+### O camshaft e os cam lobes
+
+O coração do valve train é o **camshaft**: um eixo com um ressalto em forma de
+ovo para cada valve. Cada ressalto é um **cam lobe**.
+
+Enquanto o camshaft gira, a parte redonda do cam lobe passa embaixo da peça
+que encosta nele, e nada acontece. Quando a “ponta do ovo” chega, ela empurra
+essa peça, e a valve abre. Quando a ponta passa, a valve spring fecha a valve
+de novo. **O formato do cam lobe decide quando a valve abre, quanto ela abre e
+por quanto tempo.**
+
+### O caminho do empurrão num motor com pushrods
+
+Num tipo de motor muito usado em picapes e V8 americanos, o camshaft fica
+dentro do block, longe das valves (em inglês, *overhead valve*, OHV). O
+empurrão do cam lobe precisa subir até o cylinder head. É o arranjo da Figura
+1-24 do livro:
+
+1. o cam lobe empurra o **lifter** para cima. O lifter é um copo que fica
+   apoiado no cam lobe;
+2. o lifter empurra a **pushrod**, uma vareta comprida que sobe até o cylinder
+   head;
+3. a pushrod empurra para cima uma ponta do **rocker arm**. O rocker arm é uma
+   alavanca que gira num eixo no meio: quando um lado sobe, o outro desce;
+4. o outro lado do rocker arm desce e empurra a ponta do valve stem para
+   baixo. A valve abre.
+
+Quando a ponta do cam lobe passa, a valve spring empurra tudo de volta: a
+valve sobe e fecha, o rocker arm gira de volta, e a pushrod e o lifter descem.
+
+<ComandoValvula caption="Valve fechada. A ponta do cam lobe está virada para baixo, longe do lifter. A valve spring segura a valve apertada na valve seat. No livro, compare com a Figura 1-24, parte B." />
+
+<ComandoValvula
+  aberta
+  caption="Valve aberta. A ponta do cam lobe empurrou o lifter e a pushrod para cima (seta da direita). O rocker arm girou no eixo, e o outro lado desceu a valve, que saiu da valve seat (seta da esquerda). No livro, compare com a Figura 1-24, parte A."
+/>
+
+### O overhead cam: o camshaft em cima das valves
+
+Na maioria dos carros de passeio atuais, o camshaft fica no próprio cylinder
+head, em cima das valves. É o **overhead cam** (OHC). O cam lobe empurra a
+valve quase direto, sem pushrod e muitas vezes sem rocker arm. Quando há um
+camshaft só para as intake valves e outro só para as exhaust valves, o motor é
+**DOHC** (*dual overhead cam*). É o caso do motor de estudo das figuras acima:
+um camshaft em cima de cada valve.
+
+O que muda entre os dois arranjos é o caminho do empurrão. O que não muda é a
+regra: o cam lobe abre a valve, e a valve spring fecha.
+
+## Camshaft timing: o camshaft amarrado ao crankshaft
+
+Cada valve precisa abrir num ponto exato do movimento do piston. A intake
+valve, por exemplo, abre quando o piston começa a descer para puxar a
+mistura. Se ela abrir na hora errada, a mistura não entra, ou o gás da
+combustão escapa pelo port.
+
+Por isso o camshaft não gira por conta própria: ele é girado **pelo
+crankshaft**. Uma **timing belt** (correia com dentes), uma **timing chain**
+ou um conjunto de **timing gears** liga as duas peças. Com essa ligação, cada
+posição do crankshaft corresponde a uma única posição do camshaft. Essa
+amarração é o **camshaft timing**.
+
+### Por que o camshaft gira à metade da velocidade
+
+Esta é a conta mais importante da lição. Faça com calma.
+
+Cada valve abre **uma vez por ciclo** do motor. E um ciclo completo do motor
+de quatro tempos leva **quatro strokes** do piston. Na lição anterior, você
+viu que cada volta do crankshaft dá dois strokes. Então:
+
+$$
+\text{voltas do crankshaft por ciclo} = \frac{4\ \text{strokes}}{2\ \text{strokes por volta}} = 2
+$$
+
+O crankshaft dá **duas voltas** por ciclo. Mas o camshaft precisa abrir cada
+valve uma vez por ciclo, e cada cam lobe empurra uma vez por volta do
+camshaft. Logo, o camshaft dá **uma volta** por ciclo. Ele gira à metade da
+velocidade do crankshaft.
+
+Como a timing belt faz isso? Pelo número de dentes. No desenho abaixo, a
+**crankshaft sprocket** tem 18 dentes, e a **camshaft sprocket** tem 36. Os
+números são só para o exemplo; o que vale em todo motor de quatro tempos é a
+proporção de 1 para 2.
+
+Quando o crankshaft dá uma volta, a timing belt anda 18 dentes. Esses mesmos 18
+dentes passam pela camshaft sprocket, que tem 36. Então o camshaft gira
+
+$$
+\frac{18}{36} = 0.5\ \text{volta}
+$$
+
+<Sincronismo voltas={0} caption="Posição inicial: as duas marcas apontam para cima. Repare que a camshaft sprocket tem o dobro de dentes da crankshaft sprocket. No livro, compare com a Figura 1-25." />
+
+<Sincronismo voltas={1} caption="O crankshaft deu uma volta completa: a marca dele voltou para cima. A do camshaft deu só meia volta e aponta para baixo." />
+
+<Sincronismo voltas={2} caption="O crankshaft deu duas voltas, e o camshaft, uma. As duas marcas voltaram para cima ao mesmo tempo: um ciclo completo do motor terminou." />
+
+**O que muda:** a velocidade de cada eixo. **O que permanece igual:** a timing
+belt não escorrega, porque é dentada. Por isso as duas marcas voltam a se
+alinhar sempre no mesmo ponto, ciclo após ciclo. É por esse alinhamento que o
+mecânico confere o camshaft timing: o manual mostra onde ficam as marcas de
+cada motor.
+
+## Formalização: as definições para guardar
+
+> **Cylinder head:** a peça parafusada no deck que fecha os cylinders por
+> cima, forma a combustion chamber e segura as valves.
+>
+> **Exemplo:** num motor de quatro cylinders em linha, um cylinder head só
+> fecha os quatro cylinders.
+>
+> **Contraexemplo:** a valve cover, a tampa em cima do cylinder head, não é
+> parte do cylinder head. Ela só cobre o valve train para o óleo não espirrar,
+> e não recebe a pressão da combustão.
+
+> **Valve:** a peça que abre e fecha um port. Abre descendo, para dentro da
+> combustion chamber; fecha subindo, quando a valve face encosta na valve
+> seat.
+>
+> **Exemplo:** no intake stroke, a intake valve está aberta e a exhaust valve,
+> fechada.
+>
+> **Contraexemplo:** a throttle valve do intake manifold também se chama
+> *valve*, mas não é uma valve do motor nesse sentido. Ela não fica no
+> cylinder head, não veda a combustion chamber e é comandada pelo pedal do
+> acelerador, não pelo camshaft.
+
+> **Valve train:** o conjunto que abre e fecha as valves — camshaft, cam lobes,
+> lifters, pushrods, rocker arms e valve springs, conforme o motor.
+>
+> **Exemplo:** num motor com pushrods, o valve train vai do camshaft, no block,
+> até as valves, no cylinder head.
+>
+> **Contraexemplo:** a timing belt não abre nenhuma valve. Ela só gira o
+> camshaft. Mas, sem ela, nenhuma valve abre.
+
+> **Camshaft timing:** a posição certa do camshaft em relação ao crankshaft.
+> O camshaft dá uma volta a cada duas voltas do crankshaft.
+>
+> **Exemplo:** a camshaft sprocket com 36 dentes, girada por uma crankshaft
+> sprocket de 18, gira à metade da velocidade.
+>
+> **Contraexemplo:** um camshaft montado um dente fora do lugar continua
+> girando à metade da velocidade, mas as valves passam a abrir na hora
+> errada. A velocidade está certa; o timing, não.
+
+## Erros comuns
+
+> **Erro comum:** achar que a valve abre subindo, como uma tampa de panela que
+> se levanta. É tentador porque “abrir” lembra levantar. Mas a valve abre
+> **descendo**, para dentro da combustion chamber. Teste mental: se a valve
+> abrisse subindo, a pressão da combustão empurraria o valve head para longe
+> da valve seat, e a valve se abriria sozinha na hora em que mais precisa
+> estar fechada. Como ela abre para dentro, a pressão faz o contrário: aperta
+> a valve na seat.
+
+> **Erro comum:** achar que o camshaft gira na mesma velocidade do crankshaft
+> porque os dois estão “ligados”. Estar ligado pela timing belt não quer dizer
+> ter a mesma velocidade. Com 18 dentes embaixo e 36 em cima, cada volta do
+> crankshaft dá só meia volta no camshaft. Se o camshaft girasse junto, cada
+> valve abriria uma vez por volta do crankshaft — duas vezes por ciclo. A intake
+> valve abriria também durante o power stroke, e a exhaust valve, durante o
+> compression stroke.
+
+## Como falha e como diagnosticar
+
+O cylinder head e o valve train deveriam fazer duas coisas: **vedar** a
+combustion chamber na compressão e na combustão, e **abrir** os ports na hora
+certa. Cada defeito quebra uma das duas.
+
+### A valve que não veda
+
+Se a valve face ou a valve seat estiverem queimadas, empenadas ou com carvão
+grudado, a valve não encosta em toda a volta. Sobra uma fresta. Na compressão,
+a mistura escapa pela fresta; na combustão, parte da pressão também escapa.
+Esse cylinder empurra o piston com menos força que os outros. O motor treme em
+marcha lenta e pode ter **misfire**, a falha de combustão naquele cylinder.
+
+O teste que mostra isso é o **compression test**: tira-se a spark plug de cada
+cylinder, rosqueia-se no lugar um **compression gauge** e dá-se a partida. O
+relógio mostra a pressão mais alta que o cylinder consegue fazer. A lição
+[O four-stroke cycle](./ciclo-de-quatro-tempos) volta a esse teste.
+
+| O que se observa | O que pode ser | O que fazer em seguida |
+|---|---|---|
+| um cylinder com compressão bem mais baixa que os outros | valve que não veda, piston rings gastos ou head gasket queimada | repetir o teste com um pouco de óleo no cylinder (próximo exemplo) |
+| dois cylinders vizinhos com compressão baixa | head gasket queimada entre os dois | teste de vazamento: ar injetado num cylinder sai pelo vizinho? |
+| a maioria dos cylinders com compressão baixa ou nula e o motor girando “solto” | valves não estão abrindo e fechando no tempo certo: camshaft timing perdido | conferir se o camshaft gira na partida |
+
+### A timing belt rompida
+
+Se a timing belt arrebenta, o crankshaft continua girando, mas o camshaft
+para. As valves ficam paradas onde estavam: umas abertas, outras fechadas.
+
+O que acontece então:
+
+- o motor apaga na hora, porque as valves deixam de abrir e fechar no ritmo do
+  piston;
+- na partida, o starter motor gira o crankshaft normalmente, mas o motor
+  não pega. Nos cylinders com valve aberta parada, o piston sobe e o ar sai
+  pelo port, sem compressão. Nos cylinders com as duas valves fechadas, nada
+  de mistura nova entra;
+- a maioria dos cylinders fica sem compressão, e nos outros o ar preso só é
+  comprimido e devolvido, como uma mola. Por isso o crankshaft gira com menos
+  esforço, e o motor gira **mais solto e mais rápido** que o normal na
+  partida.
+
+**Atenção antes de insistir na partida.** Em muitos motores, a valve aberta
+desce até o caminho do piston. Se o camshaft parou com uma valve aberta, o
+piston pode bater nela, e a valve entorta. Esses motores são chamados, em
+inglês, de *interference engines*. O manual de serviço diz se o motor é desse
+tipo. Na dúvida, não fique dando partida num motor com suspeita de timing belt
+rompida.
+
+## Na oficina: conferir se o camshaft gira
+
+:::danger Segurança antes de começar
+
+- **Motor desligado e frio** antes de abrir qualquer tampa. O cylinder head
+  e o coolant queimam por muito tempo depois que o motor
+  para.
+- **Óculos de segurança** (safety glasses) o tempo todo.
+- Quem dá a partida não pode acionar o starter motor enquanto alguém tem a
+  mão perto da drive belt ou das polias. **Combinem um sinal** antes, e mantenha
+  as mãos, as ferramentas e a roupa longe de tudo que gira.
+- Siga o manual para impedir que o motor pegue durante o teste: muitos
+  fabricantes mandam desligar a fuel pump ou o ignition system por um fusível
+  ou relay específico.
+- Em motor com suspeita de timing belt rompida, dê a partida só o necessário
+  para ver se o camshaft gira, pelo risco de a valve bater no piston.
+
+:::
+
+O procedimento geral, sem os detalhes de um motor específico:
+
+1. Consulte o service manual: ele mostra onde fica o camshaft e se há uma
+   tampa de inspeção para ver a timing belt ou a timing chain.
+2. Tire a tampa do bocal de óleo, ou a tampa de inspeção, de onde se veja o
+   camshaft ou a camshaft sprocket.
+3. Com as mãos longe, peça para alguém dar uma partida curta.
+4. Observe: o camshaft gira? Se o crankshaft gira e o camshaft fica parado, a
+   ligação entre os dois está rompida.
+
+Este teste não diz se houve dano às valves. Ele só confirma a falta de
+ligação. O dano se confirma depois, com compression test ou desmontando.
+
+## Voltando à queixa
+
+O cliente disse que o carro **apagou de repente** e que agora o motor **gira
+mais solto** na partida e não pega.
+
+- O que o sistema deveria fazer: o crankshaft, girando, deveria girar o
+  camshaft pela timing belt, e as valves deveriam abrir e fechar no ritmo dos
+  pistons.
+- O que foi observado: o crankshaft gira, mas o motor não pega e gira com
+  menos esforço que o normal.
+- O que liga as duas coisas: sem compressão, o piston sobe sem resistência.
+  Sem o camshaft girando, as valves ficam paradas, e a compressão some na
+  maioria dos cylinders.
+- O que muda: as valves pararam. O que permanece igual: o starter motor e o
+  crankshaft funcionam.
+
+A suspeita é a **timing belt rompida**. Para confirmar, faça o teste da seção
+anterior: com uma partida curta, o camshaft não gira. E, antes de trocar a
+timing belt, consulte o manual para saber se o motor é *interference*. Se for,
+será preciso conferir as valves.
+
+## Exemplos resolvidos
+
+**Exemplo 1 — velocidade do camshaft.** O motor está a 3000 rpm. Quantas
+rotações por minuto faz o camshaft?
+
+O camshaft gira à metade da velocidade do crankshaft:
+
+$$
+\frac{3000\ \text{rpm}}{2} = 1500\ \text{rpm}
+$$
+
+**Exemplo 2 — quantas vezes por segundo a valve abre.** *Pause e tente antes de
+ler a solução.* No mesmo motor a 3000 rpm, quantas vezes **por segundo** uma
+intake valve abre?
+
+<details>
+<summary>Solução</summary>
+
+Cada valve abre uma vez a cada volta do camshaft. O camshaft faz 1500 voltas
+por minuto (exemplo 1), então a valve abre 1500 vezes por minuto. Um minuto tem
+60 segundos:
+
+$$
+\frac{1500}{60} = 25\ \text{vezes por segundo}
+$$
+
+É por isso que a valve spring precisa ser forte: uma volta do camshaft dura
+1/25 de segundo, e a valve fica aberta só uma parte dessa volta. A spring tem
+esse tempo curto para fechar a valve de novo.
+
+</details>
+
+**Exemplo 3 — o rocker arm como alavanca.** *Pause e tente.* No rocker arm da
+figura, os dois braços têm o mesmo comprimento. Mas em muitos motores o lado da
+valve é mais comprido que o lado da pushrod: o lado da valve se move uma vez e
+meia o que o lado da pushrod se move. Se o cam lobe levanta a pushrod 0.300 in,
+quanto a valve abre? (Valores ilustrativos, só para a conta; os de um motor real
+estão no manual.)
+
+<details>
+<summary>Solução</summary>
+
+O lado da valve se move 1.5 vez o que o lado da pushrod se move:
+
+$$
+0.300\ \text{in} \times 1.5 = 0.450\ \text{in}
+$$
+
+A valve abre 0.450 in. O rocker arm é uma alavanca: ele troca força por
+movimento. A pushrod precisa empurrar com mais força, mas a valve abre mais do
+que o cam lobe levanta.
+
+</details>
+
+**Exemplo 4 — caso de diagnóstico.** *Pause e tente.* Um motor de quatro
+cylinders treme em marcha lenta. O compression test mostra 150, 148, 95 e
+151 psi nos cylinders 1, 2, 3 e 4. Em kPa, 150 psi são cerca de 1034 kPa.
+Os valores são ilustrativos; os aceitos estão no service manual. Repetindo o
+teste no cylinder 3 com uma colher de óleo dentro, a
+leitura vai para 98 psi. O que é mais provável: piston rings gastos ou uma
+valve que não veda?
+
+<details>
+<summary>Solução</summary>
+
+O óleo colocado no cylinder forma uma película na folga dos piston rings e
+veda essa folga por um momento. Se o vazamento fosse pelos rings, a compressão
+subiria bastante com o óleo. Ela quase não mudou: 95 psi (655 kPa) para
+98 psi. Então o vazamento não está nos rings. Ele está em cima, onde o óleo não
+chega: numa valve que não veda ou na head gasket. Como só o cylinder 3 está
+baixo, e os vizinhos 2 e 4 estão normais, a head gasket entre cylinders é
+menos provável. A suspeita principal é uma valve do cylinder 3. O próximo passo
+é o teste de vazamento: ar comprimido injetado no cylinder, ouvindo por onde
+ele sai. Se sair pelo intake manifold, é a intake valve; pelo escapamento,
+a exhaust valve.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que a pressão da combustão ajuda a valve a vedar, em vez de atrapalhar?
+2. Que ideia da lição anterior garante que o crankshaft dá duas voltas por
+   ciclo?
+3. O que o compression test com óleo descarta, quando a leitura não sobe?
+4. Por que a intake valve costuma ser maior que a exhaust valve?
+5. Se a valve spring quebrar, a valve fica aberta ou fechada? Por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. A valve abre para dentro da combustion chamber. A pressão empurra o valve
+   head para fora da câmara, ou seja, contra a valve seat, no mesmo sentido da
+   valve spring.
+2. Cada volta do crankshaft dá dois strokes (do TDC ao BDC e de volta). Um
+   ciclo tem quatro strokes, então leva duas voltas.
+3. Descarta os piston rings como causa principal do vazamento. O óleo veda a
+   folga dos rings; se a compressão não sobe, o gás está escapando por outro
+   lugar — valve ou head gasket.
+4. A mistura entra empurrada só pela atmospheric pressure, uma diferença de
+   pressão pequena, e precisa de uma passagem larga. O gás queimado sai
+   empurrado pelo piston, com uma diferença de pressão maior.
+5. Tende a ficar aberta ou a fechar mal. É a valve spring que puxa a valve
+   contra a valve seat; sem ela, depois que o cam lobe empurra a valve para
+   baixo, nada a traz de volta com força.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+1. Na figura do motor de estudo com rótulos, toque em cada nome e diga o
+   português de: camshaft, valve spring, intake port, combustion chamber,
+   exhaust valve.
+2. Coloque na ordem em que o empurrão passa, num motor com pushrods: rocker
+   arm, cam lobe, valve, pushrod, lifter.
+3. Qual destas peças fica no cylinder head: crankshaft, valve guide, connecting
+   rod?
+
+### 2. Explicação
+
+4. Explique com suas palavras o que a valve face e a valve seat fazem juntas.
+5. Explique por que o camshaft precisa estar ligado ao crankshaft, e não girar
+   com um motor próprio.
+
+### 3. Aplicação direta
+
+6. O motor está em marcha lenta, a 800 rpm. A quantas rpm gira o camshaft?
+7. Uma crankshaft sprocket tem 21 dentes. Quantos dentes precisa ter a camshaft
+   sprocket de um motor de quatro tempos? (Número ilustrativo.)
+
+### 4. Variação
+
+8. No exercício 6, se o motor passar para 2400 rpm, quantas vezes por segundo
+   abre cada exhaust valve?
+9. Um rocker arm tem o lado da valve 1.6 vez mais comprido que o lado da
+   pushrod (valor ilustrativo). Se a pushrod sobe 0.250 in, quanto a valve
+   abre?
+
+### 5. Caso de diagnóstico
+
+10. Depois de uma troca de timing belt, o motor pega, mas funciona fraco e
+    estoura no intake manifold. A compressão está um pouco baixa em todos os
+    cylinders, por igual. Qual a suspeita principal e qual o próximo teste?
+
+### 6. Justificativa
+
+11. Por que conferir as marcas da camshaft sprocket e da crankshaft sprocket
+    garante que todas as valves vão abrir na hora certa?
+
+### 7. Formato ASE
+
+12. Technician A says that the valve spring opens the valve. Technician B says
+    that the valve spring closes the valve. Who is correct?
+    - A. A only
+    - B. B only
+    - C. Both A and B
+    - D. Neither A nor B
+
+13. An engine cranks faster than normal but does not start. Which of the
+    following is the most likely cause?
+    - A. A weak valve spring in one cylinder
+    - B. A broken timing belt
+    - C. A worn intake valve guide
+    - D. A burned exhaust valve in one cylinder
+
+14. Technician A says that the camshaft turns at one-half crankshaft speed.
+    Technician B says that the camshaft sprocket has half as many teeth as the
+    crankshaft sprocket. Who is correct?
+    - A. A only
+    - B. B only
+    - C. Both A and B
+    - D. Neither A nor B
+
+<details>
+<summary>Dica para o exercício 10</summary>
+
+O que mudou no motor no último serviço? Pense no que acontece se uma peça
+dentada for montada com um dente de diferença.
+
+</details>
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. camshaft: eixo de comando de válvulas; valve spring: mola da válvula; intake
+   port: duto de admissão; combustion chamber: câmara de combustão; exhaust
+   valve: válvula de escape.
+2. cam lobe → lifter → pushrod → rocker arm → valve.
+3. A valve guide. O crankshaft e a connecting rod ficam no block, embaixo.
+4. A valve face é a borda inclinada do valve head; a valve seat é o anel
+   usinado na boca do port. Quando a valve fecha, as duas se encostam em toda a
+   volta e não deixam o gás passar.
+5. Cada valve precisa abrir num ponto exato do movimento do piston. Ligado ao
+   crankshaft pela timing belt, o camshaft acompanha o piston sempre na mesma
+   proporção, em qualquer rotação. Um motor próprio poderia se adiantar ou se
+   atrasar.
+6. $800 \div 2 = 400$ rpm.
+7. O dobro: $21 \times 2 = 42$ dentes. Se você encontrou 10.5, dividiu em vez de
+   multiplicar. Lembre: a camshaft sprocket é a **maior**, porque o camshaft
+   gira mais devagar.
+8. O camshaft gira a $2400 \div 2 = 1200$ rpm. Cada exhaust valve abre uma vez
+   por volta do camshaft: $1200 \div 60 = 20$ vezes por segundo.
+9. $0.250 \times 1.6 = 0.400$ in.
+10. Camshaft timing errado: a timing belt foi montada um ou mais dentes fora das
+    marcas. As valves abrem fora de hora — por exemplo, a intake valve abrindo enquanto
+    ainda há gás queimando no cylinder, e a chama volta pelo intake manifold:
+    é o estouro —, e a compressão cai por igual
+    em todos os cylinders. O próximo teste é conferir o alinhamento das marcas
+    de timing pelo manual.
+11. A timing belt não escorrega, porque é dentada, e a camshaft sprocket gira
+    exatamente meia volta por volta do crankshaft. Se as marcas estão alinhadas
+    numa posição, a relação entre os dois eixos está certa em todas as outras.
+    Como todos os cam lobes estão presos no mesmo camshaft, todas as valves ficam
+    no tempo certo de uma vez.
+12. **B.** A está errado: quem abre a valve é o cam lobe, pelo valve train; a
+    valve spring trabalha contra a abertura. B está certo: é a valve spring que
+    puxa a valve de volta contra a valve seat.
+13. **B.** Girar mais rápido que o normal indica que a maioria dos cylinders
+    perdeu a compressão, e isso acontece quando as valves param, com a timing
+    belt rompida. A, C e D afetariam um cylinder só: o motor ainda pegaria,
+    tremendo, e giraria normal na partida.
+14. **A.** A está certo: o camshaft dá uma volta a cada duas do crankshaft. B
+    está errado: é o contrário. A camshaft sprocket tem o **dobro** de dentes,
+    e é isso que a faz girar à metade da velocidade.
+
+</details>
+
+## Revisão
+
+- O **cylinder head** fecha os cylinders por cima e forma a **combustion
+  chamber**. Ele tem water jackets, oil galleries, os **ports**, as **valve
+  guides** e as **valve seats**.
+- A **valve** abre **descendo** e fecha **subindo**. A **valve spring** a
+  mantém fechada; a pressão da combustão ajuda a vedar.
+- O **camshaft** abre as valves com os **cam lobes**. Num motor com pushrods,
+  o empurrão passa por **lifter**, **pushrod** e **rocker arm**. No
+  **overhead cam**, o camshaft fica em cima das valves.
+- O **camshaft timing** amarra o camshaft ao crankshaft por **timing belt**,
+  **timing chain** ou **timing gears**. O camshaft gira à metade da velocidade
+  do crankshaft, porque cada valve abre uma vez por ciclo e um ciclo leva duas
+  voltas do crankshaft.
+- Diagnóstico: valve que não veda → compressão baixa num cylinder, que não sobe
+  com óleo. Timing belt rompida → o motor gira solto e não pega.
+
+**Termos para revisar:** cylinder head, head gasket, combustion chamber, port,
+intake port, exhaust port, valve, intake valve, exhaust valve, valve head,
+valve face, valve stem, valve seat, valve guide, valve spring, camshaft, cam
+lobe, lifter, pushrod, rocker arm, valve train, overhead cam, camshaft timing,
+timing belt, timing chain, timing gears, camshaft sprocket, crankshaft
+sprocket, compression test, compression gauge.
+
+A próxima lição junta tudo isto num ciclo só:
+[O four-stroke cycle](./ciclo-de-quatro-tempos).

@@ -11,8 +11,10 @@ disciplinas técnicas do programa e explica cada assunto do começo, sem supor
 experiência de oficina.
 
 As aulas, os manuais de serviço e a prova ASE são em inglês. Por isso, todo
-termo técnico aparece aqui também em inglês, na primeira vez que é usado:
-**pastilha de freio** (*brake pad*). Os termos de todas as lições estão no
+termo técnico aparece aqui também em inglês. Na TRN-120, ele vem ao lado do
+português na primeira vez que é usado: **pastilha de freio** (*brake pad*). Na
+AUT-116, o termo fica em inglês no próprio texto — “o piston desce” — e um
+toque nele mostra o nome em português. Os termos de todas as lições estão no
 [glossário](./glossario).
 
 ## Disciplinas
@@ -20,7 +22,7 @@ termo técnico aparece aqui também em inglês, na primeira vez que é usado:
 | Disciplina | Assunto | Área ASE | Situação |
 |---|---|---|---|
 | [TRN-120](./trn-120-eletricidade/) | Eletricidade básica | A6 | em andamento |
-| AUT-116 | Reparo de motor | A1 | em preparação |
+| [AUT-116](./aut-116-motor/) | Reparo de motor (*Engine Repair*) | A1 | em andamento: capítulo 1 pronto |
 
 As outras disciplinas técnicas entram no material à medida que o programa
 avança.

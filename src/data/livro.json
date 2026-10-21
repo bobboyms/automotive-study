@@ -1,0 +1,12 @@
+{
+  "_leia": "Livro da AUT-116 no VitalSource. `pagina` + número abre o leitor do aluno na página (é preciso estar logado: o acesso vem do Blackboard da Wake Tech). `figuras` diz em que página do livro está cada figura; o plugin src/plugins/remark-figuras-livro.js e o componente LegendaLivro transformam toda menção “Figura 1-13” num link para ela. As figuras não são copiadas: o repositório é público e elas têm direitos autorais.",
+  "titulo": "Auto Engine Repair (Duffy e Palmiter)",
+  "pagina": "https://bookshelf-ref.vitalsource.com/reader/books/9798894483764/page/",
+  "figuras": {
+    "1-1": 2, "1-2": 3, "1-3": 3, "1-4": 3, "1-5": 4, "1-6": 4, "1-7": 4,
+    "1-8": 5, "1-9": 5, "1-10": 5, "1-11": 6, "1-12": 6, "1-13": 7,
+    "1-14": 8, "1-15": 9, "1-16": 9, "1-17": 10, "1-18": 10, "1-19": 11,
+    "1-20": 12, "1-21": 12, "1-22": 13, "1-23": 13, "1-24": 15, "1-25": 15,
+    "1-26": 16
+  }
+}

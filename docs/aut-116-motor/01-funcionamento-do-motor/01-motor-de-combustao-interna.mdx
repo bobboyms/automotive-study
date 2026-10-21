@@ -1,0 +1,524 @@
+---
+title: O motor de combustão interna
+---
+
+import Motor from '@site/src/components/Motor';
+
+# O motor de combustão interna
+
+> **Pergunta central:** como a queima de um pouco de gasolina faz um carro de
+> uma tonelada e meia andar?
+
+:::tip Como ler esta lição
+
+Os nomes das peças estão em inglês, como você vai ouvir na aula e ler no
+livro. **Toque ou clique num termo sublinhado com pontinhos** — por exemplo,
+engine — para ver o nome em português e uma definição curta.
+
+:::
+
+## A queixa: o barulho de “tchuf-tchuf” depois da troca de velas
+
+Uma cliente volta à oficina dois dias depois de uma revisão:
+
+> “Desde que vocês trocaram as velas, o carro está fraco na subida. E com o
+> capô aberto dá para ouvir um ‘tchuf-tchuf-tchuf’ vindo de cima do motor.”
+
+Na revisão, alguém trocou as spark plugs. A spark plug é a peça rosqueada no
+alto do engine que solta a faísca. A suspeita imediata é que uma delas ficou
+mal apertada.
+
+Mas por que uma vela frouxa deixaria o carro **fraco**? A faísca continua
+saindo. O combustível continua chegando. Para responder, precisamos entender
+de onde vem a força do engine. Esta lição faz isso partindo do zero, e volta
+à cliente no fim.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| engine | motor | máquina que transforma a queima do combustível em movimento |
+| internal combustion engine | motor de combustão interna | motor em que o combustível queima dentro dele mesmo |
+| power plant | motor (outro nome) | outro nome do engine no livro e no manual |
+| combustion | combustão | a queima do combustível com o ar |
+| fuel | combustível | o que o engine queima: gasolina ou diesel |
+| air-fuel mixture | mistura ar-combustível | ar e combustível misturados, prontos para queimar |
+| cylinder | cilindro | furo redondo onde o piston se move |
+| piston | pistão | a “parede móvel” que a pressão empurra |
+| combustion chamber | câmara de combustão | o espaço fechado onde a mistura queima |
+| spark plug | vela de ignição | solta a faísca que acende a mistura |
+| — | pressão (*pressure*) | força espalhada sobre uma área, medida em psi |
+| — | força (*force*) | o empurrão total sobre uma peça, medido em libras (lb) |
+| — | calor (*heat*) | energia que passa de um corpo quente para um frio |
+
+## Onde isso aparece
+
+Esta é a primeira ideia da **AUT-116** e do capítulo 1 do livro
+(*Review of Engine Operation*, seção 1.1). Tudo o que vem depois — medir um
+cylinder, testar a compressão, achar um vazamento — depende dela.
+
+Na prova ASE, ela fica por trás de toda a área **A1** (*Engine Repair*). A
+prova não pergunta “o que é pressão”, mas pergunta, por exemplo, por que um
+cylinder com vazamento perde força. Quem entende esta lição responde sem
+decorar.
+
+## Ideias anteriores que voltam aqui
+
+Esta é a primeira lição da disciplina, então ela não depende de nenhuma
+anterior. Duas ideias do dia a dia vão ser usadas, e vale conferir se estão
+firmes:
+
+1. O que acontece com uma bola de futebol esquecida no sol, dentro do carro
+   fechado?
+2. Numa seringa sem agulha, se você tampa a ponta com o dedo e empurra o
+   êmbolo, o que sente no dedo?
+
+<details>
+<summary>Respostas</summary>
+
+1. Ela fica mais dura. O ar dentro dela esquentou e passou a empurrar a parede
+   da bola com mais força. A bola não ganhou ar nenhum: o mesmo ar, mais
+   quente, empurra mais.
+2. O dedo sente o ar empurrando. O ar ficou preso num espaço menor e empurra
+   tudo em volta — o dedo e o êmbolo — com mais força.
+
+As duas respostas são a lição inteira em miniatura: **gás preso e aquecido
+empurra as paredes**. Se uma das paredes puder andar, ela anda.
+
+</details>
+
+## Intuição: o gás quente empurra a parede que pode se mexer
+
+Volte à seringa tampada. Agora imagine que, em vez de empurrar o êmbolo com a
+mão, você esquenta o ar lá dentro. O ar quente empurra todas as paredes da
+seringa. As paredes de plástico não se movem. O êmbolo se move. Então o
+êmbolo é empurrado para fora.
+
+O engine do carro faz exatamente isso, muitas vezes por segundo:
+
+| Na seringa | No engine |
+|---|---|
+| o corpo da seringa | o cylinder, um furo redondo num bloco de metal |
+| o êmbolo | o piston, que desliza dentro do cylinder |
+| a ponta tampada pelo dedo | o alto do cylinder, fechado pelo cylinder head |
+| o ar aquecido | o gás da queima da air-fuel mixture |
+
+O calor não vem de fora. Ele vem da **combustion**: a queima da gasolina
+misturada com ar dentro do próprio cylinder. A queima é muito rápida e
+esquenta muito o gás. O gás quente faz pressão em todas as paredes. A única
+parede que pode andar é o piston, e ele desce.
+
+**Onde a analogia para de valer:** na seringa, o êmbolo sai e pronto. No
+engine, o piston está preso a uma haste, a connecting rod, que gira um eixo, o
+crankshaft. O giro do crankshaft traz o piston de volta para cima, e o ciclo
+recomeça. Essa parte — como o “empurra para baixo” vira giro — é o assunto da
+próxima lição.
+
+## Modelo visual: o motor de estudo
+
+O livro monta um engine de **um cylinder só** para ensinar. Os engines de
+carro têm 3, 4, 6 ou 8 cylinders, mas cada um funciona igual a este. Um
+engine de vários cylinders é um multicylinder engine: o mesmo conjunto
+repetido, todos girando o mesmo crankshaft.
+
+<Motor
+  tempo="combustao"
+  rotulos="nenhum"
+  caption="A queima acabou de acontecer: o gás quente (laranja) está preso entre o piston e o alto do cylinder, com as duas valves fechadas. Ele empurra todas as paredes, mas só o piston pode andar — e desce (seta preta). Compare com a Figura 1-13C do livro."
+/>
+
+Agora o mesmo engine com os nomes. Primeiro a parte de baixo:
+
+<Motor
+  rotulos="baixo"
+  caption="A parte de baixo do engine. O cylinder block segura tudo; o piston sobe e desce no cylinder; a connecting rod liga o piston ao crankshaft. As áreas verdes são as water jackets, por onde passa o líquido que esfria o engine. Toque nos nomes para ver em português. Compare com as Figuras 1-1 e 1-2 do livro."
+/>
+
+E a parte de cima:
+
+<Motor
+  rotulos="cima"
+  fase={0}
+  caption="A parte de cima. O cylinder head fecha o alto do cylinder e forma a combustion chamber. As valves abrem e fecham as passagens de entrada (intake port) e de saída (exhaust port). Cada camshaft empurra uma valve; a valve spring a fecha de novo. A spark plug fica no meio. Compare com as Figuras 1-9 e 1-10 do livro."
+/>
+
+O livro resume o papel de cada peça numa lista. Aqui está a mesma lista, com
+as nossas palavras. Ainda não é para decorar: cada linha vira uma lição.
+
+| Peça | O que faz | Lição |
+|---|---|---|
+| cylinder block | é a estrutura que segura as outras peças | 2 |
+| piston | sobe e desce no cylinder e recebe a pressão da queima | 2 |
+| piston ring | veda a folga entre o piston e a parede do cylinder | 2 |
+| connecting rod | liga o piston ao crankshaft | 2 |
+| crankshaft | transforma o sobe e desce do piston em giro | 2 |
+| cylinder head | fecha o alto do cylinder e segura as valves | 3 |
+| valve | abre e fecha a entrada da mistura e a saída do gás queimado | 3 |
+| combustion chamber | o espaço, acima do piston e abaixo do cylinder head, onde a mistura queima | 3 |
+| camshaft | abre cada valve na hora certa | 3 |
+| valve spring | fecha a valve de novo | 3 |
+| timing belt ou timing chain | gira o camshaft junto com o crankshaft, à metade da velocidade | 3 |
+
+## Ponte para a formalização
+
+A intuição diz que “o gás quente empurra o piston”. Para diagnosticar, isso
+não basta: precisamos saber **quanto** ele empurra, e o que faz esse empurrão
+ficar maior ou menor. Dois números resolvem: quanto o gás aperta cada pedaço
+da parede, e o tamanho da parede. O primeiro número se chama pressão. A conta
+que junta os dois dá a força no piston.
+
+## Formalização
+
+### Combustion e internal combustion engine
+
+> **Combustion** é a queima do combustível com o oxigênio do ar. Ela solta
+> calor. No engine, esse calor esquenta o gás dentro do cylinder.
+
+> Um **internal combustion engine** é um engine em que o combustível queima
+> **dentro** dele mesmo, no cylinder, e o próprio gás da queima empurra a peça
+> que se move.
+
+- **Exemplo:** o engine a gasolina do carro. A mistura queima na combustion
+  chamber, e o gás da queima empurra o piston.
+- **Contraexemplo:** a máquina a vapor de uma locomotiva antiga. Ela queima
+  lenha ou carvão **fora**, numa fornalha. O calor ferve água numa caldeira, e
+  quem empurra o pistão é o vapor, não o gás da queima. Por isso ela é uma
+  máquina de combustão **externa**.
+
+O livro também chama o engine de **power plant**: a “usina de força” do
+veículo. É o mesmo engine, com outro nome.
+
+### Pressão e força
+
+> **Pressão** é quanto um gás (ou um líquido) empurra **cada polegada
+> quadrada** de uma parede. Nos manuais americanos, a unidade é o **psi**
+> (*pounds per square inch*, libras por polegada quadrada).
+
+> A **força** total sobre o piston é a pressão vezes a área do topo do piston:
+>
+> $$
+> \text{força} = \text{pressão} \times \text{área}
+> $$
+
+Leia a unidade como uma receita: psi é “libras **por** polegada quadrada”.
+Multiplicar pelas polegadas quadradas da área dá libras. Por exemplo,
+$100\,\text{psi} \times 10\,\text{in}^2 = 1000\,\text{lb}$. Cada uma das 10
+polegadas quadradas recebe 100 libras de empurrão, e o total é 1000 libras.
+
+- **Exemplo:** o ar em volta de nós já faz uma pressão de cerca de 14.7 psi
+  (101 kPa) ao nível do mar. É a **pressão atmosférica**. Nós não sentimos
+  porque ela empurra igual de todos os lados.
+- **Contraexemplo:** uma caixa de 1000 lb apoiada no chão faz força sobre o
+  chão, mas isso não é uma pressão de gás. A força dela aponta só para baixo.
+  A pressão de um gás preso empurra **todas** as paredes ao mesmo tempo — e é
+  por isso que a combustion chamber precisa estar fechada por todos os lados.
+
+O número que importa no diagnóstico vem dessa última frase. A força no piston
+depende da pressão. E a pressão só se mantém alta se o gás não tiver por onde
+escapar.
+
+### Gasolina e diesel: quem acende a mistura
+
+O livro compara dois tipos de internal combustion engine:
+
+| | gasoline engine | diesel engine |
+|---|---|---|
+| o que acende a mistura | a faísca da spark plug | o calor do ar muito comprimido |
+| tem spark plug? | sim | não |
+
+O diesel engine aperta tanto o ar dentro do cylinder que o ar fica muito
+quente. Quando o diesel é borrifado nesse ar, ele pega fogo sozinho. A lição 7
+volta a esse assunto.
+
+## Como falha e como diagnosticar
+
+O engine deveria fazer isto: a mistura queima num espaço **fechado**, a
+pressão sobe e empurra o piston com uma força grande.
+
+A conta da força mostra as duas coisas que podem diminuir esse empurrão:
+
+| O que muda | O que acontece com a força | Exemplo de causa |
+|---|---|---|
+| a pressão cai | cai junto, na mesma proporção | gás escapando: spark plug frouxa, valve que não fecha, piston ring gasto |
+| a mistura não queima | quase não há pressão | sem faísca, sem combustível |
+| a área do piston | não muda | é medida de fábrica; não é defeito |
+
+Repare na última linha. A área do piston não muda com o uso. Então, quando um
+cylinder perde força, quase sempre a **pressão** caiu. E pressão cai por dois
+caminhos: o gás vaza, ou a queima não acontece direito.
+
+No caso da cliente, a faísca e o combustível estão chegando, porque o carro
+funciona. Sobra o vazamento. O “tchuf-tchuf” é o próprio gás saindo pela rosca
+da spark plug a cada queima. O teste que separa as causas aparece na lição 4:
+o **compression test**, que mede quanta pressão cada cylinder consegue fazer.
+
+## Na oficina: o primeiro contato com um engine funcionando
+
+:::danger Antes de abrir o capô com o engine ligado
+
+- **Óculos de segurança sempre** (safety glasses). Respingo de líquido quente
+  ou de combustível no olho é acidente comum.
+- **Nada solto perto das correias e do ventilador:** cabelo preso, sem
+  colares, sem mangas largas, sem pano no bolso. A correia e o ventilador
+  puxam e prendem. O ventilador elétrico pode ligar sozinho, mesmo com o
+  engine desligado.
+- **Peças quentes:** o coletor de escape e o cylinder head queimam a pele em
+  segundos, e continuam quentes muito tempo depois de o engine desligar.
+- **Gás de escape:** nunca deixe um engine funcionando em lugar fechado. O gás
+  de escape tem monóxido de carbono, que não tem cheiro e mata. Na oficina,
+  use o exaustor ligado ao escapamento.
+- **Alta tensão da ignição:** não toque nos cabos e bobinas com o engine
+  funcionando.
+
+:::
+
+Escutar um vazamento como o da cliente é o primeiro passo: com o engine em
+marcha lenta, o ruído aparece perto de uma spark plug. **Não tente apertar uma
+vela com o engine quente nem ligado.** O aperto correto da spark plug é uma
+especificação de torque do manual de serviço (service manual) do veículo, e o
+procedimento — inclusive se a rosca no cylinder head foi danificada — também.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — a força no piston
+
+Um piston tem 3.5 in de diâmetro. No auge da queima, a pressão na combustion
+chamber chega a 600 psi. São valores típicos, só para a conta; o de cada
+engine não está no manual, e não é isso que se mede na oficina. Qual é a força
+no piston?
+
+**Solução.** Primeiro a área do topo do piston, que é um círculo. O raio é
+metade do diâmetro: $3.5 \div 2 = 1.75\,\text{in}$.
+
+$$
+\text{área} = \pi \times r^2 = 3.1416 \times 1.75^2 \approx 9.62\,\text{in}^2
+$$
+
+Depois a força:
+
+$$
+\text{força} = 600\,\text{psi} \times 9.62\,\text{in}^2 \approx 5773\,\text{lb}
+$$
+
+São quase 5800 libras, cerca de **2.9 toneladas** (a tonelada americana, *ton*,
+tem 2000 lb). É disso que o livro fala quando diz que o piston é empurrado
+“com várias toneladas”. E isso acontece numa fração de segundo, muitas vezes
+por segundo.
+
+### Exemplo 2 — a vela frouxa (pause e tente)
+
+No mesmo piston do exemplo 1, o gás escapa pela rosca de uma spark plug mal
+apertada, e a pressão máxima fica em 450 psi em vez de 600 psi. Quanto de
+força o piston perdeu?
+
+**Pause e tente** antes de abrir.
+
+<details>
+<summary>Solução</summary>
+
+A área não mudou: continua 9.62 in². A força agora é
+
+$$
+450 \times 9.62 \approx 4329\,\text{lb}
+$$
+
+Antes eram cerca de 5773 lb. A perda é $5773 - 4329 = 1444\,\text{lb}$, um
+quarto da força. A pressão caiu um quarto (de 600 para 450) e a força caiu na
+mesma proporção, porque a área é a mesma.
+
+Esse cylinder empurra um quarto a menos que os outros. É a cliente sentindo o
+carro “fraco na subida”.
+
+</details>
+
+### Exemplo 3 — a pressão do ar que já está lá (pause e tente)
+
+Antes da queima, com o engine parado, o gás dentro do cylinder está à pressão
+atmosférica, 14.7 psi. Qual é a força desse ar sobre o mesmo piston de
+9.62 in²? Por que ela não empurra o piston para baixo?
+
+<details>
+<summary>Solução</summary>
+
+$$
+14.7 \times 9.62 \approx 141\,\text{lb}
+$$
+
+São 141 lb de empurrão para baixo. O piston não se move porque, embaixo dele,
+também há ar à pressão atmosférica, empurrando para cima com a mesma força. As
+duas se cancelam. O piston só é empurrado quando a pressão em cima fica
+**maior** que embaixo — e é a combustion que faz isso.
+
+</details>
+
+## A queixa resolvida
+
+Voltemos à cliente. A pergunta era: se a faísca e o combustível continuam
+chegando, por que uma spark plug frouxa deixa o carro fraco?
+
+1. **O que o sistema deveria fazer:** queimar a mistura num espaço fechado,
+   para a pressão subir e empurrar o piston.
+2. **O que foi observado:** carro fraco na subida e um “tchuf-tchuf” no alto do
+   engine, ritmado como as queimas.
+3. **A ideia que liga as duas coisas:** força = pressão × área. A área do
+   piston não muda, então menos força quer dizer menos pressão.
+4. **Por que se aplica aqui:** a spark plug fecha um furo da combustion
+   chamber. Se ela não está apertada, o gás escapa pela rosca a cada queima. É
+   o “tchuf”.
+5. **O que muda:** a pressão máxima naquele cylinder, e com ela a força.
+6. **O que permanece igual:** a faísca, o combustível e os outros cylinders.
+   Por isso o carro ainda anda, só que mais fraco.
+7. **Como confirmar:** com o engine **frio** e desligado, conferir o aperto de
+   cada spark plug com um torquímetro, no valor do manual. Um teste de
+   compressão (lição 4) mostraria esse cylinder abaixo dos outros.
+
+## Perguntas de verificação
+
+1. Por que o gás da queima empurra o piston e não o cylinder head?
+2. A área do topo do piston pode mudar com o desgaste do engine? O que isso
+   diz sobre a causa de um cylinder fraco?
+3. Por que uma locomotiva a vapor não é um internal combustion engine?
+4. Se a pressão máxima num cylinder dobra, o que acontece com a força no
+   piston? Por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. O gás empurra todas as paredes, inclusive o cylinder head. Mas o cylinder
+   head está aparafusado no bloco e não se move. O piston é a única parede que
+   pode deslizar, então é ele que anda.
+2. Não. O diâmetro do piston vem da fábrica e quase não muda. Então, quando um
+   cylinder perde força, a causa está na pressão: vazamento ou queima ruim.
+3. Porque ela queima o combustível fora do cylinder, numa fornalha. Quem
+   empurra o pistão é o vapor de água, não o gás da queima.
+4. Dobra também. A força é pressão vezes área, e a área é a mesma.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+1. Qual peça desliza dentro do cylinder e recebe a pressão da queima?
+2. Como se chama, em inglês, o espaço onde a mistura queima?
+3. Qual peça solta a faísca num gasoline engine?
+4. Que outro nome o livro dá ao engine?
+
+### 2. Explicação
+
+5. Explique com suas palavras, sem fórmula, por que uma queima dentro do
+   cylinder faz o piston descer.
+6. Explique por que um diesel engine não precisa de spark plug.
+
+### 3. Aplicação direta
+
+7. Um piston tem 4 in de diâmetro. A pressão máxima da queima é 600 psi
+   (valor ilustrativo). Qual é a força no piston, em libras e em toneladas
+   americanas?
+
+### 4. Variação
+
+8. Dois engines têm a mesma pressão máxima, 600 psi. Um tem pistons de 3.5 in
+   e o outro de 4 in de diâmetro. Qual empurra mais forte cada piston? Use os
+   resultados do exemplo 1 e do exercício 7.
+
+### 5. Caso de diagnóstico
+
+9. Um carro de 4 cylinders está fraco. O técnico descobre que um dos
+   cylinders faz bem menos pressão que os outros três. Cite duas causas
+   possíveis e diga por que a área do piston não está na lista.
+
+### 6. Justificativa
+
+10. Por que a combustion chamber precisa ser fechada por todos os lados
+    durante a queima?
+
+### 7. Formato ASE
+
+11. An internal combustion engine is called "internal" because:
+
+    - A. the engine is located inside the vehicle.
+    - B. the fuel burns inside the engine cylinder.
+    - C. the crankshaft is inside the cylinder block.
+    - D. the spark plug is inside the cylinder head.
+
+12. Technician A says that combustion pressure pushes on all surfaces of the
+    combustion chamber. Technician B says that the piston moves because it is
+    the only surface of the chamber that is free to move. Who is right?
+
+    - A. A only
+    - B. B only
+    - C. Both A and B
+    - D. Neither A nor B
+
+13. A cylinder produces less power than the others. Which of the following is
+    the LEAST likely cause?
+
+    - A. A loose spark plug
+    - B. A valve that does not close completely
+    - C. Worn piston rings
+    - D. A piston with a larger area than the others
+
+<details>
+<summary>Dica para o exercício 7</summary>
+
+Comece pela área de um círculo, $\pi \times r^2$. O raio é metade do
+diâmetro.
+
+</details>
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. O piston.
+2. Combustion chamber.
+3. A spark plug.
+4. Power plant.
+5. A mistura queima e esquenta o gás preso no cylinder. Gás quente empurra
+   todas as paredes. O cylinder head e as paredes do cylinder não se movem;
+   o piston pode deslizar, então ele é empurrado para baixo.
+6. O diesel engine aperta tanto o ar que o ar fica muito quente. O diesel
+   borrifado nesse ar pega fogo sozinho, sem faísca.
+7. Raio de 2 in. Área: $\pi \times 2^2 \approx 12.57\,\text{in}^2$. Força:
+   $600 \times 12.57 \approx 7540\,\text{lb}$, cerca de 3.8 toneladas
+   americanas ($7540 \div 2000 \approx 3.77$). Se você achou cerca de
+   30 000 lb, provavelmente usou o diâmetro (4) no lugar do raio (2): a área
+   ficou quatro vezes maior.
+8. O de 4 in: cerca de 7540 lb por piston, contra cerca de 5773 lb do de
+   3.5 in. Com a mesma pressão, a área maior recebe mais força.
+9. Spark plug frouxa, valve que não fecha, piston rings gastos — qualquer
+   caminho por onde o gás escape — ou queima ruim naquele cylinder. A área do
+   piston não entra porque não muda com o uso.
+10. Porque a pressão só se mantém alta se o gás não tiver por onde escapar.
+    Qualquer saída deixa a pressão cair, e com ela a força no piston.
+11. **B.** “Internal” se refere a onde o combustível queima: dentro do
+    cylinder. A está errada: o lugar do engine no carro não tem relação com o
+    nome. C descreve uma peça, não o tipo de engine (e o crankshaft fica
+    embaixo do cylinder, não dentro). D é verdade num gasoline engine, mas não
+    é o que define o nome — um diesel engine também é internal combustion e
+    não tem spark plug.
+12. **C.** Os dois estão certos. A pressão de um gás preso empurra todas as
+    superfícies (A). O cylinder head e as paredes estão presos; o piston é a
+    única que pode deslizar, por isso ele é empurrado (B).
+13. **D.** A, B e C são vazamentos de pressão, e qualquer um tira força do
+    cylinder. D não é uma causa real: todos os pistons de um engine têm o
+    mesmo diâmetro de fábrica, e a área não muda com o uso. (E, se fosse
+    maior, ele empurraria **mais**, não menos.)
+
+</details>
+
+## Revisão
+
+- **Ideia central:** a combustion esquenta o gás preso na combustion chamber;
+  o gás quente faz pressão em todas as paredes; o piston é a única que pode
+  andar, e desce.
+- **A conta:** força = pressão × área. A área do piston não muda; então menos
+  força quer dizer menos pressão — vazamento ou queima ruim.
+- **Onde usar:** sempre que um cylinder estiver fraco, pergunte por onde a
+  pressão está escapando.
+- **Próxima lição:** como o empurrão do piston vira o giro do crankshaft.
+
+Termos desta lição para revisar: engine, internal combustion engine, power
+plant, combustion, fuel, air-fuel mixture, gasoline engine, diesel engine,
+cylinder, piston, combustion chamber, cylinder head, spark plug,
+multicylinder engine, service manual.

@@ -1,0 +1,142 @@
+/* Estilos comuns dos desenhos de peças da AUT-116 (Biela, Coletores,
+   Arrefecimento, Lubrificacao, PartidaCarga). Três tons no máximo por figura:
+   cada componente diz no comentário o que cada tom significa. */
+
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bloco {
+  fill: var(--ifm-color-emphasis-300);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.metal {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.escuro {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.vazio {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.linha {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fina {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1;
+}
+
+.tracejada {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+}
+
+.cabo {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.preenche1 {
+  fill: var(--mv-tone-1);
+  fill-opacity: 0.4;
+  stroke: var(--mv-tone-1);
+  stroke-width: 1.4;
+}
+
+.preenche2 {
+  fill: var(--mv-tone-2);
+  fill-opacity: 0.4;
+  stroke: var(--mv-tone-2);
+  stroke-width: 1.4;
+}
+
+.preenche3 {
+  fill: var(--mv-tone-3);
+  fill-opacity: 0.45;
+  stroke: var(--mv-tone-3);
+  stroke-width: 1.4;
+}
+
+.traco1,
+.traco2,
+.traco3 {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.traco1 {
+  stroke: var(--mv-tone-1);
+}
+
+.traco2 {
+  stroke: var(--mv-tone-2);
+}
+
+.traco3 {
+  stroke: var(--mv-tone-3);
+}
+
+.seta {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pontos {
+  fill: var(--ifm-font-color-base);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+/* jato de combustível: pontilhado na cor do texto, fora dos três tons */
+.jato {
+  fill: var(--ifm-font-color-base);
+  fill-opacity: 0.3;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}

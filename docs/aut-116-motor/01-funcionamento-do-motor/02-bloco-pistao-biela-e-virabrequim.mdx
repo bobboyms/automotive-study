@@ -1,0 +1,838 @@
+---
+title: Block, piston, connecting rod e crankshaft
+---
+
+import Motor from '@site/src/components/Motor';
+import Pistao from '@site/src/components/Pistao';
+import Fluxo from '@site/src/components/Fluxo';
+import Biela from '@site/src/components/Biela';
+
+# Block, piston, connecting rod e crankshaft
+
+> **Pergunta central:** a combustão empurra o piston para baixo, em linha reta.
+> As rodas precisam girar. Que peças transformam esse empurrão em giro — e que
+> peças seguram, vedam e guiam esse movimento sem deixar a pressão escapar?
+
+## A queixa: fumaça azul e óleo sumindo
+
+Um cliente chega à oficina:
+
+> “Quando eu acelero, sai uma fumaça azulada pelo escapamento. E entre uma
+> troca de óleo e outra eu tenho que completar o óleo umas três vezes.”
+
+O óleo do motor não deveria sumir. Ele fica embaixo, no fundo do motor, e
+circula para lubrificar as peças. A fumaça azul é o sinal de que esse óleo está
+chegando a um lugar onde não devia: o espaço em cima do piston, onde a mistura
+queima. Lá ele queima junto, e a fumaça sai pelo escapamento.
+
+**Por onde o óleo está passando?** Para responder, você precisa conhecer as
+peças da parte de baixo do motor — em especial as que vedam o espaço entre o
+piston e o cylinder. Esta lição monta essa parte do motor peça por peça, e
+volta a esta queixa no fim.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| cylinder block (engine block) | bloco do motor | a peça maior do motor, que contém os cilindros e segura as outras peças |
+| cylinder | cilindro | o furo redondo no block, onde o piston sobe e desce |
+| clearance | folga | o pequeno espaço entre duas peças que se movem uma junto da outra |
+| deck | face do bloco | a superfície plana em cima do block, onde o cylinder head é parafusado |
+| water jacket | galeria de água | espaço oco em volta dos cilindros por onde passa o líquido de arrefecimento |
+| crankcase | parte de baixo do bloco | a região de baixo do block, onde o crankshaft gira |
+| main bore, main cap, main bearing | alojamento, capa e bronzina de mancal | onde o crankshaft se apoia e gira, embaixo do block |
+| piston | pistão | peça que desliza no cylinder e recebe a pressão da combustão |
+| piston ring | anel do pistão | anel fino que veda a folga entre o piston e a parede do cylinder |
+| compression ring | anel de compressão | os anéis de cima: seguram a pressão na câmara |
+| oil ring | anel de óleo | o anel de baixo: raspa o óleo da parede |
+| piston pin (wrist pin) | pino do pistão | pino que liga o piston à connecting rod |
+| connecting rod | biela | haste que liga o piston ao crankshaft |
+| small end, big end | olhal menor, olhal maior | as duas pontas da connecting rod |
+| rod cap, rod bearing | capa da biela, bronzina de biela | a metade removível do big end e a casca lisa dentro dele |
+| crankshaft | virabrequim | eixo com manivelas que transforma o sobe e desce em giro |
+| crankshaft journal | munhão | parte lisa e redonda do crankshaft que gira dentro de uma bronzina |
+| flywheel | volante do motor | disco pesado que mantém o crankshaft girando entre os empurrões |
+| reciprocating motion | movimento alternado | ir e voltar em linha reta |
+| rotary motion | movimento de rotação | girar em volta de um eixo |
+| TDC, BDC | PMS, PMI | o ponto mais alto e o ponto mais baixo do piston |
+| stroke | curso | o movimento do piston de uma ponta à outra; também a distância entre elas |
+| blow-by | vazamento de gases para o cárter | gás da combustão que escapa pelos anéis para baixo |
+| blue smoke | fumaça azul | fumaça de óleo queimando |
+| friction | atrito | a resistência que aparece quando uma superfície escorrega sobre outra |
+| thermal expansion | dilatação térmica | o aumento de tamanho de uma peça quando ela esquenta |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Estas peças formam a **parte de baixo do motor**. Na oficina e nos manuais,
+você vai ouvir que um motor tem uma parte de cima — o cylinder head e as
+valves, da [lição 3](./cabecote-e-valvulas) — e uma parte de baixo — o block,
+os pistons, as connecting rods e o crankshaft, desta lição.
+
+- **Na Wake Tech:** é o assunto central da **AUT-116**. No livro, é a primeira
+  metade da seção 1.1 do capítulo 1, e volta com detalhes nos capítulos 4
+  (*Engine Hardware*), 13 (*Engine Mechanical Problems*) e 17 (*Short Block
+  Construction, Rebuilding, and Machining*), quando você vai medir e
+  recondicionar estas peças.
+- **Na prova ASE:** área **A1** (*Engine Repair*). As questões perguntam para
+  que serve cada peça, como ela se desgasta e qual sintoma cada desgaste
+  produz.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição usa o que você estudou em
+[O motor de combustão interna](./motor-de-combustao-interna). Responda antes
+de seguir:
+
+1. O que empurra o piston para baixo?
+2. Por que o gás, quando esquenta dentro do cylinder fechado, empurra as
+   paredes com mais força?
+3. A força que empurra o piston depende da pressão do gás e de mais uma
+   coisa. Qual?
+
+<details>
+<summary>Respostas</summary>
+
+1. A pressão do gás quente que sai da combustão, a queima da mistura de ar e
+   combustível.
+2. Porque as partículas do gás passam a se mover mais rápido e batem com mais
+   força nas paredes. Num espaço fechado, elas não têm para onde ir, e a
+   pressão sobe.
+3. Da área do topo do piston. A força é a pressão vezes a área: o mesmo gás
+   empurra com mais força um piston maior.
+
+</details>
+
+Se alguma resposta não veio, releia a lição 1 antes de continuar. Toda esta
+lição depende de uma ideia de lá: **a combustão produz pressão, e a pressão
+empurra o piston.**
+
+## Intuição: o motor é uma bicicleta ao contrário
+
+Pense em alguém pedalando uma bicicleta. A perna sobe e desce. O pé está preso
+ao pedal, e o pedal está na ponta de um braço, o pedivela, que gira em volta
+do eixo do movimento central. A perna só empurra para baixo, mas o pedal anda
+em círculo — e o eixo gira.
+
+No motor acontece a mesma coisa:
+
+| Na bicicleta | No motor |
+|---|---|
+| o joelho sobe e desce | o piston sobe e desce no cylinder |
+| a canela, que liga o joelho ao pedal | a connecting rod, que liga o piston à manivela |
+| o pedal e o pedivela, fora do centro | o crank throw, a manivela do crankshaft |
+| o eixo do movimento central, que gira | o crankshaft, que gira |
+| o embalo da bicicleta, que leva o pedal pelo ponto morto | o flywheel, que leva o crankshaft entre um empurrão e outro |
+
+**Onde a comparação deixa de valer.** A perna dobra no joelho e no tornozelo;
+a connecting rod é uma peça rígida, que só balança nas duas pontas. E a força
+da perna vem do músculo; a do piston vem da pressão do gás. Por isso o piston
+precisa de algo que a perna não precisa: rings que vedem a pressão, para ela
+não escapar pela folga entre o piston e o cylinder.
+
+## Modelo visual: a parte de baixo do motor
+
+O desenho abaixo é o motor de um cylinder que o livro usa no capítulo 1,
+redesenhado em corte. Compare com a Figura 1-2 do livro, que mostra um motor
+de verdade cortado ao meio.
+
+<Motor
+  rotulos="baixo"
+  caption="A parte de baixo do motor em corte. O cylinder block segura tudo; o piston sobe e desce no cylinder; a connecting rod liga o piston ao crankshaft. As galerias verdes são as water jackets, por onde passa o líquido de arrefecimento."
+/>
+
+Siga o caminho da força, de cima para baixo:
+
+<Fluxo
+  etapas={[
+    {texto: 'pressão da combustão', nota: 'o gás quente empurra', tone: 2},
+    {k: 'piston', nota: 'recebe o empurrão'},
+    {k: 'piston pin', nota: 'passa a força para a connecting rod'},
+    {k: 'connecting rod', nota: 'empurra a manivela'},
+    {k: 'crankshaft', nota: 'gira', tone: 2},
+  ]}
+  caption="O caminho da força na parte de baixo do motor. Cada peça passa o empurrão para a seguinte; no fim, o empurrão em linha reta virou giro."
+/>
+
+Cada peça do caminho precisa de um apoio que não se mexa: é o cylinder block.
+E cada ligação entre duas peças que se movem precisa de folga e de óleo. As
+próximas seções explicam cada peça, na ordem do desenho.
+
+## Ponte para a formalização
+
+Você já tem a ideia: empurrão em linha reta, transformado em giro. Para
+trabalhar numa oficina, falta o vocabulário exato de cada peça, porque é por
+ele que o manual de serviço, a ordem de serviço e o instrutor vão se referir a
+elas. Falta também um número: **quanto o piston anda** de uma ponta à outra.
+Esse número sai direto da geometria do crankshaft, e você vai calculá-lo na
+seção sobre TDC e BDC.
+
+Antes das peças, duas ideias físicas que elas usam o tempo todo. Nenhuma das
+duas é “senso comum”; vale ler com calma.
+
+**Atrito** (*friction*). Quando uma superfície escorrega sobre outra, aparece
+uma força contrária ao movimento. Esfregue as mãos uma na outra com força:
+elas esquentam. Esse calor vem do atrito. Entre duas peças de metal, o atrito
+gera calor e arranca pedacinhos do metal, que é o desgaste. Por isso as peças
+que giram ou deslizam no motor nunca encostam metal com metal: entre elas fica
+uma camada fina de óleo, e o metal escorrega sobre o óleo.
+
+**Dilatação térmica** (*thermal expansion*). Quando uma peça esquenta, ela
+aumenta um pouco de tamanho. É por isso que uma tampa de metal presa num pote
+de vidro solta depois de passar debaixo da água quente: o metal cresce mais
+que o vidro. O piston esquenta muito com a combustão e cresce. Se ele entrasse
+justo no cylinder com o motor frio, travaria com o motor quente.
+
+## Formalização: peça por peça
+
+### Cylinder block: a estrutura
+
+> **Cylinder block** (ou **engine block**, ou só **block**): a peça maior e
+> mais pesada do motor. Ela contém os cylinders e serve de apoio para todas as
+> outras peças. É feita de ferro fundido ou de alumínio.
+
+No block você encontra:
+
+- **Cylinder** — um furo grande e redondo, usinado de cima a baixo do block. O
+  piston desliza dentro dele. A parede de dentro do cylinder, onde os rings
+  escorregam, é a **cylinder wall**. O furo também se chama **cylinder bore**,
+  e “bore” é ainda a medida do diâmetro desse furo.
+- **Deck** — a face plana e usinada em cima do block. O cylinder head é
+  parafusado nela. As passagens de óleo e de líquido de arrefecimento do deck
+  coincidem com as do cylinder head.
+- **Water jackets** — espaços ocos em volta dos cylinders, dentro do block (e
+  também dentro do cylinder head). O líquido de arrefecimento passa por eles e
+  leva embora o calor da combustão. O sistema todo é assunto da
+  [lição 6](./arrefecimento-e-lubrificacao).
+- **Crankcase** — a parte de baixo do block. É ali que o crankshaft gira e
+  para onde o óleo volta depois de lubrificar as peças.
+- **Main bore** — uma fila de furos meio-redondos, embaixo do block, da frente
+  até a traseira. O crankshaft fica deitado nessa fila.
+- **Main caps** — capas parafusadas embaixo do block. Cada main cap fecha a
+  metade de baixo de um furo do main bore e prende o crankshaft no lugar.
+- **Main bearings** — cascas finas e lisas, montadas no main bore e nas main
+  caps. O crankshaft gira apoiado nelas, sobre uma película de óleo.
+
+**Exemplo:** num motor de quatro cylinders em linha, os quatro cylinders são
+furos do mesmo block. **Contraexemplo:** o cylinder head **não** faz parte do
+block. É outra peça, parafusada no deck — por isso dá para tirar o cylinder
+head sem tirar o motor do carro.
+
+### Cylinder e clearance: a folga que precisa existir
+
+O piston é um pouco menor que o cylinder. A diferença entre os dois é a
+**clearance**, a folga.
+
+> **Clearance:** o espaço pequeno entre duas peças que se movem uma junto da
+> outra. Ela existe por dois motivos: o piston cresce quando esquenta
+> (dilatação térmica), e precisa caber uma película de óleo entre as peças.
+
+**Exemplo:** a folga entre o piston e a cylinder wall. **Contraexemplo:** a
+folga entre o deck e o cylinder head não existe — ali as duas peças são
+apertadas uma contra a outra, com uma junta no meio, porque não se movem.
+
+Folga demais também é defeito. Se o cylinder se desgasta e fica maior, o
+piston balança dentro dele e a vedação piora. O valor certo da folga é uma
+especificação do manual de serviço, medida com instrumento; você vai fazer
+essa medição mais adiante na AUT-116.
+
+### Piston: a parede que anda
+
+> **Piston:** a peça que desliza dentro do cylinder. Ela é a única parede da
+> câmara que pode se mover, então é ela que a pressão da combustão empurra.
+> O piston passa esse empurrão para o piston pin, a connecting rod e o
+> crankshaft. Ele também segura os rings e o piston pin.
+
+O piston trabalha num regime muito violento. Em cada stroke, ele sai parado de
+uma ponta do cylinder, acelera e para de novo na outra ponta. O livro dá uma
+ideia do tamanho disso: com o carro a cerca de 55 mph (89 km/h), o piston
+chega a cerca de 60 mph (97 km/h) no meio do caminho e volta a zero, num só
+movimento de cima a baixo. Ele faz isso dezenas de vezes por segundo. Essa
+aceleração força o piston e todas as peças ligadas a ele.
+
+**Exemplo:** num motor de seis cylinders há seis pistons, um em cada cylinder.
+**Contraexemplo:** o piston não gira. Quem gira é o crankshaft; o piston só
+vai e volta.
+
+### Piston rings: a vedação
+
+Lembre a clearance: há uma folga entre o piston e a cylinder wall. Se nada
+fechasse essa folga, a pressão da combustão escaparia por ela para baixo, e o
+óleo de baixo subiria por ela para a câmara. Quem fecha a folga são os rings.
+
+> **Piston rings:** anéis finos e abertos num ponto, encaixados em sulcos
+> usinados na lateral do piston, as **ring grooves**. O anel é um pouco maior
+> que o cylinder e, ao ser montado, fica apertado como uma mola contra a
+> cylinder wall. Assim ele fecha a folga.
+
+Um piston típico tem três rings, com funções diferentes:
+
+<Pistao caption="O piston no cylinder, em corte. Os dois rings de cima são compression rings; o de baixo é o oil ring. A folga entre o piston e a parede está exagerada no desenho para aparecer. Compare com a Figura 1-3 do livro." />
+
+- **Compression rings** — os dois rings de cima, mais perto do topo do
+  piston. Eles seguram a pressão na câmara. Sem eles, a pressão passaria por
+  fora do piston e iria para o crankcase.
+- **Oil ring** — o ring de baixo. Ele raspa o excesso de óleo da cylinder
+  wall, para esse óleo não subir até a câmara e queimar.
+
+Os compression rings têm um truque: **eles usam a própria pressão da
+combustão para vedar melhor.** A pressão desce pela folga, entra no sulco atrás
+do ring e empurra o ring para fora, contra a parede, e para baixo, contra a
+face de baixo do sulco. Quanto maior a pressão, mais forte o ring aperta.
+
+<Pistao
+  modo="compressao"
+  caption="A pressão da combustão (laranja) desce pela folga, entra atrás do compression ring e o aperta contra a cylinder wall e contra a face de baixo do ring groove. Compare com a Figura 1-4 do livro."
+/>
+
+O oil ring tem dois lábios que raspam a parede. Quando o piston desce, os
+lábios empurram o óleo para baixo; o óleo raspado entra no vão do ring e volta
+para o crankcase por furos no piston.
+
+<Pistao
+  modo="oleo"
+  caption="O oil ring raspando a cylinder wall. Acima dele fica só uma película fina de óleo; o excesso (azul) volta para baixo. Compare com a Figura 1-5 do livro."
+/>
+
+**Exemplo:** o primeiro ring de cima é um compression ring. **Contraexemplo:**
+o oil ring não segura a pressão da combustão; a função dele é controlar o óleo.
+
+:::note Por que não fazer o ring tão justo que nada passe?
+
+Porque o ring precisa escorregar. Se ele não deixasse nem uma película de óleo
+na parede, o metal do ring rasparia o metal do cylinder, e o atrito destruiria
+os dois. O oil ring deixa uma película fina de propósito.
+
+:::
+
+### Piston pin e connecting rod: a ligação
+
+> **Piston pin** (também chamado **wrist pin**): um pino de aço que atravessa
+> o piston de um lado ao outro e passa pela ponta de cima da connecting rod.
+> Ele deixa a connecting rod balançar para um lado e para o outro dentro do
+> piston.
+
+> **Connecting rod:** a haste que liga o piston ao crankshaft. Ela passa o
+> empurrão do piston para o crankshaft. E faz também o contrário: nos
+> movimentos em que não há combustão, é o crankshaft que puxa e empurra o
+> piston por meio dela.
+
+A connecting rod tem duas pontas:
+
+- **Small end** — a ponta de cima, menor, com um furo para o piston pin.
+  Dentro desse furo costuma ficar uma **bushing**, um tubo curto e liso que
+  serve de mancal para o pino.
+- **Big end** — a ponta de baixo, maior, que abraça um **journal** do
+  crankshaft. A metade de baixo do big end é removível: é a **rod cap**, presa
+  por **rod bolts** e porcas especiais. Dentro do big end ficam as **rod
+  bearings**, duas cascas lisas onde o journal gira sobre óleo.
+
+A rod cap é o que permite montar a connecting rod em volta do crankshaft: sem
+ela, seria preciso passar o crankshaft inteiro por dentro de um furo fechado.
+
+<Biela caption="A connecting rod desmontada. A rod cap e as duas rod bearings se encaixam em volta do crankshaft journal e são presas pelos rod bolts; as linhas tracejadas mostram onde cada peça entra. Em laranja, as superfícies em que algo gira: a bushing do small end e as rod bearings. Compare com a Figura 1-6 do livro." />
+
+**Exemplo:** num motor de quatro cylinders há quatro connecting rods.
+**Contraexemplo:** a connecting rod não gira inteira como o crankshaft. A
+ponta de cima só sobe e desce com o piston; a de baixo anda em círculo com a
+manivela; o corpo dela balança entre as duas.
+
+### Crankshaft e flywheel: o giro
+
+> **Crankshaft:** o eixo que transforma o movimento de ir e voltar do piston
+> (**reciprocating motion**) em giro (**rotary motion**). Ele fica deitado no
+> main bore, no fundo do block, apoiado nas main bearings e preso pelas main
+> caps.
+
+O crankshaft não é um eixo reto. Ele tem partes no centro, alinhadas com o
+main bore, e partes deslocadas para fora do centro:
+
+- **Main journals** — os journals do centro. Eles giram nas main bearings.
+- **Rod journals** — os journals deslocados, na ponta de cada **crank
+  throw** (a manivela). O big end de cada connecting rod fica em volta de um
+  rod journal.
+
+Quando o piston é empurrado para baixo, a connecting rod empurra o rod
+journal, que está fora do centro. Uma força fora do centro faz o eixo girar —
+é o mesmo que acontece quando você empurra o pedal da bicicleta.
+
+O giro do crankshaft depois aciona engrenagens, correntes, correias e o trem
+de força que leva a força às rodas ([lição 8](./trem-de-forca)).
+
+> **Flywheel:** um disco pesado, preso na traseira do crankshaft. O piston só
+> empurra o crankshaft numa parte do tempo; no resto, o crankshaft continuaria
+> girando só pelo embalo. O peso do flywheel guarda esse embalo e deixa o
+> giro mais uniforme entre um empurrão e outro. O flywheel também tem, em
+> volta, a engrenagem grande em que o motor de partida engata
+> ([lição 5](./ignicao-partida-e-carga)).
+
+**Exemplo:** o flywheel de um motor com manual transmission é um disco de ferro
+pesado. **Contraexemplo:** o flywheel não produz força. Ele só guarda o embalo
+que a combustão deu ao crankshaft e o devolve nos momentos sem empurrão.
+
+### TDC, BDC e stroke
+
+O piston não sobe nem desce indefinidamente: ele vai e volta entre duas
+pontas, sempre as mesmas.
+
+> **TDC** (*top dead center*, ponto morto superior): o ponto mais alto que o
+> piston alcança no cylinder.
+>
+> **BDC** (*bottom dead center*, ponto morto inferior): o ponto mais baixo que
+> o piston alcança.
+
+“Morto” porque, em cada uma dessas pontas, o piston para por um instante: ele
+estava subindo e vai começar a descer, ou o contrário.
+
+<Motor
+  fase={0}
+  rotulos="nenhum"
+  marcas
+  caption="Piston em TDC: o rod journal está bem em cima do centro do crankshaft. As linhas tracejadas marcam TDC e BDC; a distância entre elas é o stroke. Compare com a Figura 1-8 do livro."
+/>
+
+<Motor
+  fase={180}
+  rotulos="nenhum"
+  marcas
+  caption="Meia volta depois, o piston está em BDC: o rod journal está bem embaixo do centro do crankshaft. O piston percorreu um stroke."
+/>
+
+> **Stroke:** um movimento completo do piston, de TDC até BDC ou de BDC até
+> TDC. A mesma palavra também é a **distância** entre TDC e BDC.
+
+Compare as duas figuras. Em TDC, o rod journal está em cima do centro do
+crankshaft. Em BDC, depois de meia volta, está embaixo. O rod journal andou
+de um lado ao outro do círculo, e o piston acompanhou essa diferença de
+altura. A diferença entre a posição mais alta e a mais baixa do rod journal é
+o diâmetro do círculo que ele descreve — duas vezes o raio da manivela. Por
+isso:
+
+$$
+\text{stroke} = 2 \times r
+$$
+
+em que $r$ é o raio do crank throw: a distância do centro do main journal até
+o centro do rod journal.
+
+**Exemplo:** meia volta do crankshaft leva o piston de TDC a BDC — um stroke.
+Uma volta inteira leva de TDC a BDC e de volta a TDC — dois strokes.
+**Contraexemplo:** o stroke **não** é a altura do cylinder nem o comprimento
+do piston. Um cylinder alto com um crank throw curto tem stroke curto: quem
+decide o stroke é o crankshaft.
+
+:::warning Erro comum: as duas “strokes”
+
+Em inglês, **stroke** tem dois sentidos, e os dois aparecem na mesma aula. Um
+é o **movimento**: “the power stroke” é o movimento do piston em que a
+combustão o empurra (você vai ver os quatro na
+[lição 4](./ciclo-de-quatro-tempos)). O outro é a **medida**: “a 3.5-inch
+stroke” é a distância entre TDC e BDC. A confusão é tentadora porque é a mesma
+palavra. Para saber qual é qual, olhe se vem um número junto: com número, é
+distância; com nome de tempo (intake, compression, power, exhaust), é
+movimento.
+
+:::
+
+## Como falha e como diagnosticar
+
+Antes do defeito, o que o sistema **deveria** fazer:
+
+- os compression rings mantêm a pressão em cima do piston;
+- o oil ring mantém o óleo embaixo, deixando só uma película na parede;
+- as bearings mantêm uma película de óleo entre os journals e as peças em
+  volta, sem metal encostar em metal.
+
+Cada defeito é uma dessas três coisas falhando:
+
+| Sintoma | O que está falhando | Causa possível | O que fazer antes de concluir |
+|---|---|---|---|
+| blue smoke e óleo baixando entre as trocas | óleo chegando à câmara e queimando | oil ring ou compression rings gastos; ou um caminho pelas valves (lição 3) | confirmar que é óleo (e não líquido de arrefecimento) e testar a vedação do cylinder |
+| vapor saindo com força pelo bocal de óleo com o motor ligado | pressão da combustão escapando para baixo (blow-by) | compression rings gastos ou quebrados | testar a vedação de cada cylinder (compression test, lição 4) |
+| batida metálica no fundo do motor que acompanha a rotação | metal encostando em metal numa bearing | rod bearing ou main bearing gasta, falta de óleo | verificar o nível e a pressão do óleo; desligar o motor e não continuar rodando |
+| um cylinder fraco, motor tremendo | pressão escapando daquele cylinder | ring quebrado, piston danificado, ou a vedação de cima (valves, junta) | comparar a vedação de todos os cylinders |
+
+Repare que nenhuma linha diz “troque os rings”. Fumaça azul diz **que** óleo
+está queimando, mas não diz **por onde** ele entrou. Há pelo menos dois
+caminhos: pela folga do piston (rings) e pelas valves, no cylinder head.
+Trocar rings num motor cujo óleo entra pelas valves custa a desmontagem
+inteira e não resolve nada. O teste que separa os dois caminhos é ensinado nas
+lições seguintes e no capítulo 13 do livro.
+
+:::danger Batida metálica: pare o motor
+
+Uma batida metálica que acompanha a rotação, principalmente com a luz de
+pressão do óleo acesa, quer dizer metal encostando em metal. Cada volta a mais
+arranca metal da bearing e do journal. Continuar rodando pode quebrar uma
+connecting rod, que atravessa o block. Desligue o motor e investigue antes de
+ligar de novo.
+
+:::
+
+## Na oficina
+
+No laboratório da AUT-116, você vai mexer nestas peças com o motor fora do
+carro, preso num cavalete de motor (*engine stand*). Antes de qualquer
+procedimento:
+
+:::danger Segurança primeiro
+
+- **Óculos de segurança** (safety glasses) o tempo todo: solvente, óleo e
+  pedaços de metal espirram.
+- **Luvas** (gloves) resistentes a óleo e solvente. Óleo de motor usado
+  irrita a pele.
+- **Peso:** o crankshaft e o flywheel são pesados e escorregadios de óleo.
+  Levante com as pernas, com ajuda, e nunca com os dedos embaixo da peça.
+- **Bordas cortantes:** as pontas dos piston rings e as bordas usinadas do
+  block cortam. Não passe a mão por dentro do cylinder sem luva.
+- **Dedos fora:** nunca deixe a mão entre o crankshaft e o block quando alguém
+  for girar o motor, nem com o motor no cavalete.
+- **Chão:** óleo derramado no chão escorrega. Limpe na hora.
+
+:::
+
+Três cuidados de procedimento que este capítulo já justifica:
+
+- **Cada rod cap volta para a sua connecting rod, na mesma posição.** A rod
+  cap foi usinada junto com a connecting rod dela. Trocada de connecting rod
+  ou virada ao contrário, o furo do big end fica torto, e a rod bearing não
+  assenta. Por isso, antes de desmontar, as caps são marcadas. O mesmo vale
+  para as main caps e o block.
+- **O aperto dos rod bolts e das main caps é especificação.** O valor e o
+  método de aperto estão no manual de serviço do motor. Em muitos motores,
+  esses parafusos são de uso único; o manual diz quando trocar.
+- **Folgas são medidas, não adivinhadas.** A clearance entre o piston e o
+  cylinder, e a das bearings, têm valores no manual de serviço. Medir é
+  assunto dos próximos capítulos do livro.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — o stroke a partir do crank throw
+
+Num crankshaft, a distância do centro do main journal até o centro do rod
+journal é 1.75 in. (Valor ilustrativo, só para a conta; o de cada motor está
+no manual.) Qual é o stroke?
+
+**Solução.** O raio da manivela é $r = 1.75\,\text{in}$. O rod journal
+descreve um círculo desse raio; a diferença entre o ponto mais alto e o mais
+baixo do círculo é o diâmetro:
+
+$$
+\text{stroke} = 2 \times r = 2 \times 1.75\,\text{in} = 3.5\,\text{in}
+$$
+
+Em milímetros: $3.5 \times 25.4 = 88.9\,\text{mm}$.
+
+**Confira se faz sentido:** o stroke tem que ser maior que o raio — é o dobro.
+Se você achou 0.875 in, dividiu em vez de multiplicar.
+
+### Exemplo 2 — quantos strokes por segundo
+
+**Pause e tente** antes de ler a solução. Um motor gira a 3000 rpm (valor
+ilustrativo). Quantos strokes cada piston faz por segundo? Quanto tempo dura
+cada um?
+
+<details>
+<summary>Solução</summary>
+
+Cada volta do crankshaft tem dois strokes: um de descida, de TDC a BDC, e um
+de subida, de BDC a TDC. Em um minuto:
+
+$$
+3000\,\tfrac{\text{voltas}}{\text{min}} \times 2\,\tfrac{\text{strokes}}{\text{volta}} = 6000\,\tfrac{\text{strokes}}{\text{min}}
+$$
+
+Um minuto tem 60 segundos: $6000 \div 60 = 100$ strokes por segundo. Cada
+stroke dura $1 \div 100 = 0.01$ segundo — um centésimo de segundo.
+
+Em cada um desses centésimos, o piston sai parado, acelera e para de novo.
+É por isso que o piston, o piston pin e a connecting rod sofrem tanto esforço.
+
+</details>
+
+### Exemplo 3 — a velocidade média do piston
+
+**Pause e tente.** O motor do exemplo 1 (stroke de 3.5 in) gira a 3000 rpm,
+como no exemplo 2. Que distância o piston percorre em um minuto? Quanto isso
+dá em milhas por hora?
+
+<details>
+<summary>Solução</summary>
+
+Em cada volta, o piston desce um stroke e sobe um stroke: anda
+$2 \times 3.5 = 7\,\text{in}$. Em 3000 voltas:
+
+$$
+3000 \times 7\,\text{in} = 21000\,\text{in por minuto}
+$$
+
+Em pés: $21000 \div 12 = 1750\,\text{ft/min}$. Em milhas por hora:
+$1750 \times 60 = 105000\,\text{ft por hora}$, e
+$105000 \div 5280 \approx 19.9\,\text{mph}$ (cerca de 32 km/h).
+
+Essa é a velocidade **média**. Mas o piston para duas vezes em cada volta, em
+TDC e em BDC. Para ter essa média parando nas pontas, ele precisa passar bem
+mais rápido no meio do stroke: a 3000 rpm, cerca de 33 mph no pico (com uma
+connecting rod de tamanho típico, só para a conta). Em rotação mais alta, perto
+de 5500 rpm, esse pico chega aos cerca de 60 mph que o livro cita: o piston vai
+de zero a 60 mph e volta a zero em um só movimento.
+
+</details>
+
+### Exemplo 4 — onde está o óleo?
+
+**Pause e tente.** O motor do cliente da abertura solta blue smoke e consome
+óleo. O técnico tira o oil ring de um dos pistons e vê que os dois lábios
+raspadores estão gastos e arredondados, sem a borda viva. Explique, peça por
+peça, como esse desgaste leva à fumaça.
+
+<details>
+<summary>Solução</summary>
+
+1. O que o oil ring deveria fazer: raspar a cylinder wall na descida e deixar
+   só uma película fina de óleo.
+2. Com os lábios arredondados, ele passa por cima do óleo em vez de raspá-lo.
+   Sobra uma camada grossa de óleo na parede.
+3. No movimento seguinte, essa parede fica exposta à câmara, onde a mistura
+   queima. O óleo da camada grossa queima junto.
+4. Óleo queimado sai como blue smoke pelo escapamento, e o nível do óleo
+   baixa.
+
+O que não muda: a pressão da combustão continua vedada pelos compression
+rings, se eles estiverem bons — por isso o motor pode ter força normal e,
+mesmo assim, queimar óleo.
+
+</details>
+
+## A queixa resolvida
+
+O cliente via fumaça azulada e completava o óleo várias vezes entre as trocas.
+Agora dá para ligar cada pedaço da queixa a uma peça:
+
+- **O que o sistema deveria fazer:** o oil ring deixa só uma película de óleo
+  na cylinder wall, e os compression rings seguram a pressão em cima.
+- **O que foi observado:** óleo sumindo e blue smoke — óleo chegando à câmara
+  e queimando.
+- **Que princípio liga as duas coisas:** o óleo só chega à câmara se
+  atravessar a vedação. Pela parte de baixo do motor, o único caminho é a
+  folga entre o piston e o cylinder, que os rings deveriam fechar.
+- **O que muda com os rings gastos:** sobra óleo na parede, e ele queima a
+  cada combustão.
+- **O que não muda:** o óleo ainda poderia estar entrando pelo outro caminho,
+  o das valves.
+- **Como confirmar:** antes de abrir o motor, testar a vedação de cada
+  cylinder e examinar o caminho pelas valves. Esses testes vêm nas próximas
+  lições. Só depois de confirmada a causa a desmontagem se justifica.
+
+## Perguntas de verificação
+
+1. Por que o piston precisa ser um pouco menor que o cylinder, se a folga é
+   justamente por onde a pressão tenta escapar?
+2. Por que um compression ring veda **melhor** quando a pressão da combustão
+   sobe?
+3. O que aconteceria com o giro do motor se você tirasse o flywheel?
+4. Por que a rod cap precisa voltar para a mesma connecting rod?
+5. Num motor, o crank throw tem raio $r$. Por que o stroke é $2 \times r$, e
+   não $r$?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o piston cresce quando esquenta (dilatação térmica) e precisa de
+   espaço para uma película de óleo. Sem folga, ele travaria no cylinder
+   quente. A pressão que tentaria passar pela folga é segurada pelos rings.
+2. Porque a pressão desce pela folga, entra atrás do ring e o empurra contra a
+   cylinder wall e contra a face de baixo do sulco. Mais pressão, aperto maior.
+3. O crankshaft perderia velocidade entre um empurrão e outro e aceleraria a
+   cada empurrão. O giro ficaria irregular, aos trancos — principalmente em
+   baixa rotação.
+4. Porque a cap foi usinada junto com aquela connecting rod. Com outra cap, ou
+   virada, o furo do big end não fica redondo, e a rod bearing não assenta.
+5. Porque o rod journal anda num círculo de raio $r$. De TDC a BDC ele vai do
+   ponto mais alto ao mais baixo do círculo: uma distância igual ao diâmetro,
+   que é $2 \times r$.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Escreva o nome em inglês da peça:
+
+a) O furo redondo no block onde o piston desliza.
+b) A face plana em cima do block, onde o cylinder head é parafusado.
+c) O ring de baixo do piston, que raspa o óleo da parede.
+d) O pino que liga o piston à connecting rod (dois nomes).
+e) A metade removível do big end da connecting rod.
+f) O disco pesado na traseira do crankshaft.
+
+### 2. Explicação
+
+a) Com suas palavras: como o crankshaft transforma o sobe e desce do piston
+em giro?
+b) Para que servem as water jackets do block?
+
+### 3. Aplicação direta
+
+a) O crank throw de um motor tem raio de 1.5 in (valor ilustrativo). Qual é o
+stroke, em polegadas e em milímetros?
+b) Um manual informa stroke de 86 mm (valor ilustrativo). Qual é o raio do
+crank throw?
+
+### 4. Variação
+
+O motor do item 3a recebe um crankshaft com raio de crank throw de 1.6 in, e
+nada mais muda. Qual é o novo stroke? Quanto o piston passa a andar a mais em
+cada stroke? O que isso exige do resto do motor? (Pense em onde o piston
+chega em TDC.)
+
+<details>
+<summary>Dica</summary>
+
+O stroke depende só do raio. Para a última pergunta: se o piston desce mais,
+ele também sobe mais. O que fica logo acima do piston em TDC?
+
+</details>
+
+### 5. Caso de diagnóstico
+
+Um motor tem duas queixas: sai bastante vapor pelo bocal de óleo quando ele
+está ligado, e o motor parece sem força. O óleo não está baixando.
+
+a) Que nome tem o gás que chega ao crankcase passando pelos rings?
+b) Que rings você suspeita, e por quê?
+c) Por que o fato de o óleo **não** estar baixando ajuda no raciocínio?
+d) Qual é o próximo passo antes de qualquer desmontagem?
+
+### 6. Justificativa
+
+Por que o oil ring deixa de propósito uma película de óleo na cylinder wall,
+em vez de raspá-la até ficar seca?
+
+### 7. Formato ASE
+
+**1.** Technician A says the compression rings are the top rings on the
+piston. Technician B says the oil ring keeps combustion pressure out of the
+crankcase. Who is right?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+**2.** Which part converts the reciprocating motion of the pistons into rotary
+motion?
+
+- A. Camshaft
+- B. Connecting rod
+- C. Crankshaft
+- D. Flywheel
+
+**3.** Blue smoke from the tailpipe most likely means the engine is burning:
+
+- A. coolant.
+- B. engine oil.
+- C. too much fuel.
+- D. normal water vapor.
+
+**4.** Technician A says the stroke is the distance the piston travels from
+TDC to BDC. Technician B says the stroke is equal to the radius of the crank
+throw. Who is right?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) cylinder (o furo também se chama cylinder bore). b) deck. c) oil ring.
+d) piston pin ou wrist pin. e) rod cap. f) flywheel.
+
+**2. Explicação**
+
+a) O piston empurra a connecting rod, que empurra o rod journal. O rod
+journal está fora do centro do crankshaft, então o empurrão faz o crankshaft
+girar, como o pé no pedal da bicicleta faz o eixo girar.
+b) Elas deixam o líquido de arrefecimento passar em volta dos cylinders e
+levar embora o calor da combustão. Sem isso, as peças esquentariam até se
+deformar ou travar.
+
+**3. Aplicação direta**
+
+a) $\text{stroke} = 2 \times 1.5 = 3.0\,\text{in}$; em milímetros,
+$3.0 \times 25.4 = 76.2\,\text{mm}$.
+b) $r = 86 \div 2 = 43\,\text{mm}$. Se você achou 172 mm, multiplicou em vez
+de dividir: o raio é sempre a metade do stroke.
+
+**4. Variação**
+
+Novo stroke: $2 \times 1.6 = 3.2\,\text{in}$. A diferença é
+$3.2 - 3.0 = 0.2\,\text{in}$: o dobro do aumento do raio (0.1 in), porque o
+aumento vale nas duas pontas. O piston sobe 0.1 in a mais em TDC e desce
+0.1 in a mais em BDC. Em TDC ele chegaria mais perto do cylinder head — e
+poderia bater nele ou nas valves. Por isso não se troca um crankshaft por
+outro de stroke diferente sem mudar outras peças, como a connecting rod ou o
+piston.
+
+**5. Caso de diagnóstico**
+
+a) Blow-by.
+b) Os compression rings, porque a função deles é justamente segurar a pressão
+da combustão em cima do piston. Pressão chegando ao crankcase e perda de força
+apontam para eles.
+c) Porque mostra que o controle de óleo, função do oil ring, ainda funciona: o
+problema é de pressão escapando, não de óleo subindo.
+d) Medir a vedação de cada cylinder (compression test, na lição 4), para saber
+quais cylinders estão fracos — sem desmontar nada.
+
+**6. Justificativa**
+
+Porque o ring precisa escorregar sobre óleo. Sem película, o metal do ring
+rasparia o metal do cylinder; o atrito geraria calor e desgaste e arranharia
+os dois. A película fina lubrifica sem deixar óleo demais para queimar.
+
+**7. Formato ASE**
+
+1. **A.** Technician A está certo: os compression rings são os de cima.
+   Technician B está errado: quem segura a pressão são os compression rings;
+   o oil ring controla o óleo da parede. B, C e D estão erradas por causa do
+   erro de B.
+2. **C.** O crankshaft transforma o reciprocating motion em rotary motion. A
+   (camshaft) abre as valves, assunto da lição 3. B (connecting rod) liga o
+   piston ao crankshaft, mas quem gira é o crankshaft. D (flywheel) guarda o
+   embalo, não transforma movimento.
+3. **B.** Blue smoke é óleo queimando. A (coolant) costuma dar fumaça branca e
+   com cheiro adocicado. C (combustível demais) costuma dar fumaça preta. D
+   (vapor d'água normal) é fumaça branca e fina que some quando o motor
+   esquenta.
+4. **A.** O stroke é a distância de TDC a BDC. Technician B errou: o stroke é
+   o **dobro** do raio do crank throw, não igual a ele.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a pressão da combustão empurra o piston em linha reta;
+  o piston pin e a connecting rod passam o empurrão para o rod journal, que
+  está fora do centro; e o crankshaft gira. O flywheel guarda o embalo entre
+  um empurrão e outro.
+- **Vedação:** os compression rings seguram a pressão em cima (e usam a
+  própria pressão para vedar); o oil ring mantém o óleo embaixo. Quando
+  falham, aparecem blow-by e blue smoke.
+- **Medida:** o stroke é a distância de TDC a BDC, e vale $2 \times r$.
+- **Com o que se conecta:** com a lição 1 (a pressão que empurra o piston) e
+  com a [lição 3](./cabecote-e-valvulas), que fecha o cylinder por cima.
+
+**Termos desta lição para revisar:** cylinder block, engine block, cylinder,
+cylinder bore, cylinder wall, clearance, deck, water jacket, crankcase, main
+bore, main cap, main bearing, piston, piston ring, compression ring, oil ring,
+ring groove, piston pin, wrist pin, connecting rod, small end, big end,
+bushing, rod cap, rod bolt, rod bearing, crankshaft, crankshaft journal,
+crank throw, flywheel, reciprocating motion, rotary motion, TDC, BDC, stroke,
+blow-by, blue smoke.

@@ -253,5 +253,6 @@ E mais:
 - Quando houver mais de um teste possível, compare e diga quando cada um é
   melhor.
 - Negrito para termos técnicos na primeira aparição, com o inglês em itálico ao
-  lado; citação em bloco (`>`) para a pergunta central e para as definições que
+  lado (na AUT-116 em diante, o termo fica em inglês no texto e vira botão com
+  o português — veja `CLAUDE.md`, “Idioma e escrita”); citação em bloco (`>`) para a pergunta central e para as definições que
   o aluno deve guardar.

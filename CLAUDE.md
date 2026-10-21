@@ -19,7 +19,8 @@ programa e o funcionamento técnico do repositório.
 O site foi montado a partir do projeto anterior de curso de matemática
 (`../math_study`), do qual vieram a configuração do Docusaurus, a paleta de
 cores dos diagramas, o `SvgMath` e o quadro branco. Conteúdo pronto: os tópicos
-1 e 2 da TRN-120 (sete lições).
+1 a 3 da TRN-120 (oito lições) e o capítulo 1 do livro da AUT-116, *Review of
+Engine Operation* (oito lições).
 
 Repositório público: `https://github.com/bobboyms/automotive-study`. Todo push
 na `main` publica o site no GitHub Pages pelo workflow
@@ -121,11 +122,25 @@ Norte, não para uma área ASE.
 ## Idioma e escrita
 
 - Todo o texto visível é em **português com acentuação e cedilha completas**.
-- **Termos em inglês.** Na primeira aparição do termo na página, escreva o
-  português em negrito e o inglês em itálico entre parênteses: **pastilha de
-  freio** (*brake pad*). Daí em diante, use o português. O aluno precisa
-  reconhecer o termo em inglês na aula, no manual e na prova, então esse par
-  não é opcional.
+- **Termos em inglês.** O aluno precisa reconhecer o termo em inglês na aula,
+  no manual e na prova, então o inglês nunca é opcional. Há duas convenções,
+  por disciplina:
+  - **TRN-120:** na primeira aparição do termo na página, o português em
+    negrito e o inglês em itálico entre parênteses: **pastilha de freio**
+    (*brake pad*). Daí em diante, o português.
+  - **AUT-116 em diante** (pedido do aluno, que estuda nos EUA): **peças e
+    termos técnicos ficam em inglês no texto**, sem tradução ao lado — “o
+    piston desce e a connecting rod gira o crankshaft”. O plugin
+    `src/plugins/remark-termos.js` transforma cada termo do dicionário
+    `src/data/termos.json` num botão; o toque mostra o português e uma
+    definição. Todo termo usado precisa estar no dicionário (termo novo entra
+    lá). O artigo segue o gênero da palavra em português: **o** piston (o
+    pistão), **a** connecting rod (a biela). Fenômenos físicos (pressão,
+    calor, força, atrito) ficam em português. A tabela “Mapa das ideias” tem
+    as colunas Inglês · Português · O que é. Detalhes em
+    `src/components/README.md`, seção “AUT-116”.
+  - **Figuras:** na AUT-116, os rótulos das figuras também são em inglês e
+    clicáveis (`RotuloTermo`).
 - **Termos que a oficina usa em inglês** — *scan tool*, DTC, OBD-II, *freeze
   frame* — ficam em inglês, explicados na primeira aparição.
 - **Siglas:** expanda em inglês e traduza: **PCM** (*Powertrain Control
@@ -143,8 +158,16 @@ Norte, não para uma área ASE.
   `docs/aut-151-freios/`. Cada pasta tem um `index.md` com o roteiro das lições,
   a descrição oficial da disciplina (citação curta, em inglês) e a área ASE
   correspondente.
-- `docs/glossario.md` reúne os termos de todas as lições (português, inglês,
-  uma linha de definição).
+- `docs/glossario.mdx` reúne os termos de todas as lições (português, inglês,
+  uma linha de definição). A tabela da AUT-116 é gerada de
+  `src/data/termos.json` pelo componente `TabelaTermos`: não se escreve à mão.
+- **Livro da AUT-116:** *Auto Engine Repair* (Duffy e Palmiter), lido pelo
+  aluno no VitalSource. As lições seguem a ordem dos capítulos e citam a figura
+  correspondente do livro (“compare com a Figura 1-13”), mas o texto é
+  próprio e os desenhos são redesenhados em SVG: nada de texto ou figura do
+  livro é copiado, porque o repositório é público. Toda menção “Figura 1-13”
+  vira link para a página da figura no VitalSource do aluno
+  (`src/data/livro.json`; detalhes em `src/components/README.md`).
 - `docs/intro.md` é a raiz do site (`slug: /`).
 - `.md` para páginas de texto. `.mdx` apenas quando a página importa um
   componente React.
@@ -233,6 +256,7 @@ npm run start   # servidor local em http://localhost:3000
 npm run build   # validação de verdade: links, MDX, sidebar
 npm run clear   # limpa cache quando o start fica com conteúdo velho
 npm run quadro  # quadro branco do aluno em http://localhost:4123
+npm run figuras # captura cada figura (claro, escuro, celular) em .figuras/
 ```
 
 Se o build estourar com `Ineffective mark-compacts near heap limit`, rode
@@ -301,6 +325,29 @@ símbolos diferentes significam a mesma coisa:
   cm³ (ci quando o manual usar).
 - **Texto dentro de fórmula:** `\text{potência} = \text{tensão} \times \text{corrente}`.
 
+## Figuras: conferir sempre, corrigir até ficar perfeita
+
+Uma figura com defeito ensina errado do mesmo jeito que um gabarito errado: o
+aluno não sabe se a linha que falta é um detalhe ou parte do conceito. **Toda
+figura criada ou alterada — e toda figura de um componente que você mexeu — é
+conferida renderizada antes da entrega.** Olhar o código não basta: rótulo
+cortado, linha apagada, texto ilegível no celular e fio cruzando fio não
+aparecem no diff.
+
+O ciclo é obrigatório e só termina quando não sobra nenhum defeito:
+
+1. `npm run build && npm run figuras` (ou `npm run figuras -- <lição>`);
+2. abra **cada** folha em `.figuras/` com a ferramenta Read e olhe figura por
+   figura, nas cinco colunas: claro, escuro, celular, Safari e Safari no
+   celular. O Safari tem defeitos que o Chrome não mostra;
+3. achou um defeito, corrija e volte ao passo 1. Não entregue com “quase bom”,
+   nem deixe um defeito para depois.
+
+A lista do que procurar — texto pequeno no celular, rótulo encostando, linha
+apagada por um sinal, fio cruzando fio, desenho cortado — e as regras de
+desenho que evitam cada defeito estão em `src/components/README.md`, seção
+“Conferência obrigatória”.
+
 ## Corretude técnica
 
 Uma especificação inventada, uma conta errada ou um aviso de segurança faltando
@@ -336,12 +383,16 @@ Toda entrega passa por esta lista:
 - [ ] página nova está em `sidebars.js`, com o id **sem** prefixo numérico;
 - [ ] links relativos resolvem, e a numeração das lições está coerente;
 - [ ] fórmulas renderizam (confira no `npm run start`, não só no código-fonte);
+- [ ] `npm run figuras` rodado e **cada** folha olhada: nenhuma figura com
+      defeito no claro, no escuro, no celular ou no Safari (seção “Figuras”
+      acima);
 - [ ] valores em dólar escritos como `\$`;
 - [ ] todas as contas, conversões e o gabarito conferidos por cálculo;
 - [ ] nenhuma especificação de memória; valores ilustrativos marcados;
 - [ ] avisos de segurança antes de todo passo com risco;
 - [ ] termos técnicos com o par em inglês na primeira aparição, e incluídos em
-      `docs/glossario.md`;
+      `docs/glossario.mdx` (na AUT-116: termo em inglês no texto, presente em
+      `src/data/termos.json`; `node scripts/conferir-termos.mjs` passa);
 - [ ] acentuação completa no texto que você escreveu;
 - [ ] o checklist didático da skill `tutor-automotivo` foi aplicado.
 

@@ -1,0 +1,141 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.fila {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.coluna,
+.coluna .bloco {
+  flex-direction: column;
+}
+
+.coluna {
+  align-items: center;
+  max-width: 26rem;
+}
+
+.bloco {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border: 1.6px solid var(--ifm-font-color-base);
+  border-radius: 8px;
+  background: var(--mv-paper);
+  text-align: center;
+}
+
+.coluna .bloco {
+  width: 100%;
+  flex: none;
+}
+
+.tom1 {
+  border-color: var(--mv-tone-1);
+  box-shadow: inset 0 0 0 100vmax color-mix(in srgb, var(--mv-tone-1) 12%, transparent);
+}
+
+.tom2 {
+  border-color: var(--mv-tone-2);
+  box-shadow: inset 0 0 0 100vmax color-mix(in srgb, var(--mv-tone-2) 14%, transparent);
+}
+
+.tom3 {
+  border-color: var(--mv-tone-3);
+  box-shadow: inset 0 0 0 100vmax color-mix(in srgb, var(--mv-tone-3) 14%, transparent);
+}
+
+.nome {
+  all: unset;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline dotted var(--ifm-color-primary);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.nome:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.nomeSimples {
+  font-weight: 700;
+}
+
+.nota {
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.seta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.baixo {
+  display: none;
+}
+
+.coluna .direita {
+  display: none;
+}
+
+.coluna .baixo {
+  display: inline;
+}
+
+.volta {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .fila,
+  .bloco {
+    flex-direction: column;
+  }
+
+  .fila {
+    align-items: center;
+  }
+
+  .bloco {
+    width: 100%;
+    flex: none;
+  }
+
+  .direita {
+    display: none;
+  }
+
+  .baixo {
+    display: inline;
+  }
+}

@@ -1,0 +1,906 @@
+---
+title: Cooling e lubrication
+---
+
+import Motor from '@site/src/components/Motor';
+import Fluxo from '@site/src/components/Fluxo';
+import Arrefecimento from '@site/src/components/Arrefecimento';
+import Lubrificacao from '@site/src/components/Lubrificacao';
+
+# Cooling e lubrication
+
+> **Pergunta central:** o motor produz calor o tempo todo e tem peças de metal
+> esfregando umas nas outras milhares de vezes por minuto. O que impede que
+> ele se destrua em poucos minutos?
+
+:::tip Como ler esta lição
+
+Os nomes das peças estão em inglês. **Toque ou clique num termo sublinhado com
+pontinhos** — por exemplo, water pump — para ver o nome em português e uma
+definição curta.
+
+:::
+
+## A queixa: o ponteiro que sobe no trânsito
+
+Um cliente chega à oficina com esta reclamação:
+
+> “Quando eu fico parado no trânsito, o ponteiro da temperatura sobe quase até
+> o vermelho. Na estrada, ele volta para o meio e fica normal.”
+
+O ponteiro da temperatura é o **temperature gauge**: o indicador do painel que
+mostra quão quente está o líquido que circula dentro do motor. No meio da
+escala, o motor está na temperatura certa. Perto do vermelho, ele está
+esquentando demais.
+
+Repare no detalhe mais importante da queixa: o motor esquenta **parado** e se
+recupera **andando**. O motor é o mesmo, o líquido é o mesmo. Então alguma
+coisa muda entre ficar parado e andar a 60 mph. O que é? Guarde a pergunta. Ao
+final da lição você vai saber qual peça testar primeiro — e por quê.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| — | calor (*heat*) | energia que passa de um corpo mais quente para um mais frio |
+| — | atrito (*friction*) | a resistência que aparece quando uma superfície esfrega em outra; gera calor e desgaste |
+| cooling system | sistema de arrefecimento | tira do motor o calor da combustão e do atrito |
+| coolant | líquido de arrefecimento | mistura de antifreeze e água que leva o calor para fora do motor |
+| antifreeze | anticongelante (aditivo) | o produto misturado à água para ela não congelar nem ferver fácil |
+| water pump | bomba d'água | faz o coolant circular |
+| water jacket | galeria de água (camisa d'água) | espaço oco no block e no cylinder head por onde o coolant passa |
+| thermostat | válvula termostática | fechada com o motor frio, abre quando ele esquenta |
+| radiator | radiador | passa o calor do coolant para o ar |
+| radiator hose | mangueira do radiador | liga o motor ao radiator |
+| radiator cap | tampa do radiador | mantém o sistema sob pressão |
+| cooling fan | ventilador do radiador | puxa ou empurra ar pelo radiator |
+| heater core | radiador do aquecedor | radiador pequeno que aquece o ar da cabine |
+| overheating | superaquecimento | o motor passa da temperatura normal de trabalho |
+| operating temperature | temperatura de trabalho | a temperatura em que o motor foi projetado para funcionar |
+| temperature gauge | indicador de temperatura | o ponteiro do painel que mostra a temperatura do coolant |
+| lubrication system | sistema de lubrificação | leva óleo aos pontos de atrito do motor |
+| engine oil | óleo do motor | o lubrificante que separa as peças que se movem |
+| oil film | película de óleo | camada fina de óleo que impede o metal de raspar no metal |
+| oil pan | cárter de óleo | a bandeja embaixo do motor onde o óleo fica guardado |
+| oil pickup | pescador de óleo | tubo com tela que puxa o óleo do fundo do oil pan |
+| oil pump | bomba de óleo | empurra o óleo pelas oil galleries |
+| oil filter | filtro de óleo | tira a sujeira do óleo |
+| oil galleries | galerias de óleo | canais dentro do motor que levam o óleo aos bearings e ao valve train |
+| dipstick | vareta de óleo | mostra o nível do óleo no oil pan |
+| oil pressure | pressão do óleo | a pressão com que a oil pump empurra o óleo pelas galerias |
+| scoring | riscos no metal | marcas riscadas numa superfície que trabalhou sem óleo suficiente |
+
+## Onde isso aparece
+
+Os dois sistemas trabalham em todo motor de combustão interna: no carro, na
+picape, no caminhão a diesel, no cortador de grama. Eles são o assunto do
+final da seção 1.3 do capítulo 1 do livro, e voltam com muito mais detalhe nos
+capítulos 11 (*Cooling System Operation and Service*) e 12 (*Lubrication
+System Operation and Service*).
+
+Na Wake Tech, você trabalha com eles na **AUT-116**, ao desmontar e medir um
+motor, e de novo em toda revisão de manutenção (troca de óleo, troca de
+coolant). Na prova ASE, aparecem na área **A1** (*Engine Repair*), que tem
+uma parte só de diagnóstico e reparo de lubrication system e cooling system,
+e na **G1** (*Maintenance and Light Repair*).
+
+## Ideias anteriores que voltam aqui
+
+Esta lição usa três ideias de lições anteriores:
+
+- da lição [O motor de combustão interna](./motor-de-combustao-interna): a
+  combustion esquenta muito o gás dentro do cylinder;
+- da lição [Block, piston, connecting rod e crankshaft](./bloco-pistao-biela-e-virabrequim):
+  as water jackets, os bearings e a clearance entre as peças;
+- da lição [Ignition, starting e charging](./ignicao-partida-e-carga): a
+  drive belt, que leva o giro da crankshaft pulley para outras peças.
+
+Responda antes de seguir:
+
+1. De onde vem o calor que esquenta o motor?
+2. Onde ficam as water jackets, e o que passa por dentro delas?
+3. Em que peça o crankshaft gira dentro do block? E por que existe uma
+   clearance (folga) entre o piston e a cylinder wall?
+4. O que faz girar a water pump e o alternator na maioria dos carros?
+
+<details>
+<summary>Respostas</summary>
+
+1. Da combustion: a queima da air-fuel mixture dentro do cylinder. Ela
+   esquenta muito o gás, e o gás quente esquenta as paredes de metal em volta.
+2. São espaços ocos no cylinder block e no cylinder head, em volta dos
+   cylinders. Por dentro delas passa o coolant, o líquido de arrefecimento.
+3. Nos main bearings, cascas lisas presas no block. A clearance existe para o
+   piston deslizar sem prender — se não houvesse folga nenhuma, ele travaria.
+4. A drive belt, movida pela crankshaft pulley, na frente do crankshaft.
+
+Se alguma resposta não veio, releia a lição correspondente antes de seguir: as
+quatro ideias são usadas logo adiante.
+
+</details>
+
+## O fenômeno: calor e atrito
+
+Antes dos dois sistemas, os dois problemas que eles resolvem. Nenhum dos dois
+é “senso comum” no detalhe, então vamos com calma.
+
+### Calor: de onde vem e para onde vai
+
+**Temperatura** é o quanto uma coisa está quente. **Calor** é a energia que
+passa de uma coisa mais quente para uma mais fria quando as duas se encostam.
+Uma panela no fogão mostra as duas coisas: a chama está muito quente, a panela
+está fria; o calor passa da chama para a panela, e a temperatura da panela
+sobe.
+
+O calor só anda num sentido: **do mais quente para o mais frio**. Ele nunca
+passa sozinho do frio para o quente. Isso vai ser importante daqui a pouco.
+
+No motor, a fonte de calor é a combustion. Na lição 1 você viu que a queima
+esquenta o gás para empurrar o piston. Só que nem todo o calor vira
+empurrão. Uma parte grande dele passa para o metal: para o topo do piston,
+para as valves, para a cylinder wall e para o cylinder head. Uma aproximação
+comum nos livros, só para dar uma ideia do tamanho, é que algo como um terço
+da energia do combustível sai do motor como calor levado pelo cooling system.
+
+E metal quente demais causa três problemas:
+
+1. **O metal dilata.** Quase todo material fica um pouco maior quando
+   esquenta. O piston e o cylinder têm uma clearance pequena entre eles. Se o
+   piston esquenta demais, ele cresce, a folga some e ele raspa — ou trava —
+   na cylinder wall.
+2. **O metal perde resistência.** Muito quente, ele fica mais mole e pode
+   deformar. O cylinder head de alumínio pode empenar, e o block e o head
+   podem trincar.
+3. **O óleo se estraga.** Quente demais, ele perde a capacidade de separar
+   as peças, como você vai ver na parte do atrito.
+
+O livro resume o tamanho do problema: sem cooling system, o piston, as valves
+e o cylinder podem ser destruídos em poucos minutos.
+
+### Atrito: o calor que nasce do esfregar
+
+Esfregue as palmas das mãos uma na outra, com força, por alguns segundos. Elas
+esquentam. Isso é **atrito**: duas superfícies esfregando resistem ao
+movimento, e essa resistência vira calor.
+
+Vista no microscópio, uma superfície de metal que parece lisa tem pequenos
+picos e vales. Quando duas superfícies assim se esfregam a seco, os picos de
+uma batem nos picos da outra. Três coisas acontecem ao mesmo tempo: aparece
+resistência ao movimento, aparece calor, e pedacinhos de metal se soltam. Os
+pedacinhos soltos riscam as superfícies. Esses riscos se chamam **scoring**.
+
+No motor há muitas superfícies esfregando: o crankshaft girando nos bearings,
+o piston e os piston rings subindo e descendo na cylinder wall, o camshaft
+girando, as valves deslizando nas guias. Todas ao mesmo tempo, milhares de
+vezes por minuto.
+
+### A oil film: deslizar sobre o óleo, não sobre o metal
+
+Agora faça o teste das mãos de novo, mas com as palmas cheias de sabão. Elas
+deslizam fácil e quase não esquentam. O sabão formou uma camada entre as duas
+palmas, e uma pele passou a deslizar sobre o sabão, não sobre a outra pele.
+
+O óleo faz isso no motor. Ele forma uma **oil film**, uma camada muito fina de
+óleo entre as duas peças. Com a oil film inteira, o metal de uma peça desliza
+sobre o óleo, e não encosta no metal da outra. Os picos não batem, o calor do
+atrito cai muito e quase nada se desgasta.
+
+**Onde a comparação com o sabão para de valer:** nas mãos, um pouco de sabão
+dura vários segundos. No motor, a oil film é espremida para fora o tempo todo
+pela carga e pelo movimento das peças. Por isso o óleo precisa chegar sem
+parar, empurrado com pressão. Se o óleo para de chegar, a oil film acaba em
+pouco tempo, o metal encosta no metal, e começam o calor, o scoring e o
+desgaste. É exatamente o que o lubrication system existe para impedir.
+
+## Intuição: dois sistemas que transportam
+
+Os dois sistemas desta lição fazem a mesma coisa em essência: **mantêm um
+líquido circulando por dentro do motor**. O que muda é o que cada líquido
+leva.
+
+- O **coolant** leva **calor**. Ele passa pelas water jackets, em volta dos
+  cylinders, recebe o calor do metal e vai até o radiator, na frente do carro.
+  Lá ele entrega o calor ao ar e volta para buscar mais.
+- O **óleo** mantém a **oil film** entre as peças que se esfregam. De
+  quebra, ele também leva um pouco de calor e leva a sujeira até o oil filter.
+
+Uma comparação para o cooling system: pense numa esteira de aeroporto que
+anda em círculo. Ela pega as malas num lugar e solta em outro, e a esteira
+vazia volta para buscar mais. O coolant é a esteira; o calor é a mala. Ele
+pega o calor nas water jackets e solta no radiator.
+
+**Onde a comparação para de valer:** a esteira carrega as malas por causa de
+um motor. O calor sai do coolant para o ar por outro motivo: o coolant que
+chega ao radiator está **mais quente** que o ar, e calor sempre passa do mais
+quente para o mais frio. Se o ar estivesse tão quente quanto o coolant, o
+radiator não conseguiria tirar calor nenhum. E repare: o coolant não “leva
+frio” para o motor. Frio não é uma coisa que viaja. O que acontece é que o
+coolant volta do radiator com menos calor, e por isso consegue receber mais.
+
+## Modelo visual
+
+### O caminho do coolant
+
+Primeiro, onde ficam as water jackets: elas aparecem em verde no motor de
+estudo, dos dois lados do cylinder, e também no cylinder head.
+
+<Motor
+  rotulos="baixo"
+  caption="O motor de estudo, com as water jackets em verde: espaços ocos no block e no cylinder head, em volta do cylinder. O coolant passa por dentro delas e recebe o calor do metal."
+/>
+
+Agora o caminho completo do coolant, com o motor já quente e o thermostat
+aberto. O azul marca o coolant que acabou de perder calor no radiator. O
+laranja marca o coolant que acabou de receber calor no motor.
+
+<Fluxo
+  etapas={[
+    {k: 'water pump', nota: 'empurra o coolant para dentro do motor', tone: 1},
+    {k: 'water jacket', texto: 'water jackets', nota: 'o coolant passa em volta dos cylinders e esquenta', tone: 2},
+    {k: 'thermostat', nota: 'aberto: deixa o coolant quente sair do motor', tone: 2},
+    {k: 'radiator hose', texto: 'radiator hose (de cima)', nota: 'leva o coolant quente até o radiator', tone: 2},
+    {k: 'radiator', nota: 'o ar que atravessa o radiator leva o calor embora'},
+    {k: 'radiator hose', texto: 'radiator hose (de baixo)', nota: 'devolve o coolant, agora mais frio, à water pump', tone: 1},
+  ]}
+  volta="da radiator hose de baixo, o coolant volta à water pump e o ciclo recomeça"
+  caption="Caminho do coolant com o motor quente. Azul: coolant que acabou de perder calor. Laranja: coolant que acabou de receber calor. No livro, compare com a Figura 1-17."
+/>
+
+Duas peças ficam fora dessa fila, mas fazem parte do sistema:
+
+- o **cooling fan** não está no caminho do coolant. Ele está no caminho do
+  **ar**: puxa ou empurra ar através do radiator;
+- o **heater core** recebe um desvio do coolant quente e aquece o ar da
+  cabine. É por isso que o aquecedor do carro só esquenta depois que o motor
+  esquenta.
+
+Agora o sistema inteiro desenhado com as peças, cada uma no seu lugar:
+
+<Arrefecimento caption="O cooling system com o motor quente e o thermostat aberto. O coolant quente (laranja) sai das water jackets pelo thermostat e vai pela radiator hose de cima ao radiator; o ar que atravessa o radiator leva o calor, e o coolant frio (azul) volta pela hose de baixo à water pump. O cooling fan puxa o ar; o heater core recebe um desvio para aquecer a cabine. Compare com a Figura 1-17 do livro." />
+
+### O caminho do óleo
+
+<Fluxo
+  etapas={[
+    {k: 'oil pan', nota: 'guarda o óleo, embaixo do motor'},
+    {k: 'oil pickup', nota: 'puxa o óleo do fundo, através de uma tela'},
+    {k: 'oil pump', nota: 'empurra o óleo com pressão', tone: 1},
+    {k: 'oil filter', nota: 'retém a sujeira', tone: 1},
+    {k: 'oil galleries', nota: 'canais que levam o óleo pelo motor', tone: 1},
+    {k: 'bearing', texto: 'bearings e valve train', nota: 'o óleo forma a oil film e depois escorre', tone: 1},
+  ]}
+  volta="o óleo escorre por gravidade e volta para o oil pan"
+  caption="Caminho do óleo. Azul: o trecho em que o óleo está sob pressão, da oil pump até os pontos de atrito. No livro, compare com a Figura 1-18."
+/>
+
+E desenhado com as peças:
+
+<Lubrificacao caption="O lubrication system. O oil pickup puxa o óleo do oil pan; a oil pump o empurra pelo oil filter até as oil galleries, que levam o óleo à main bearing do crankshaft e, subindo, ao camshaft. Pontilhado: o óleo escorrendo de volta para o oil pan. A dipstick mergulha no óleo para mostrar o nível. Compare com a Figura 1-18 do livro." />
+
+## Ponte para a formalização
+
+Ponha os dois diagramas lado a lado e veja o que eles têm em comum:
+
+| | Cooling system | Lubrication system |
+|---|---|---|
+| o líquido | coolant | óleo |
+| quem faz circular | water pump | oil pump |
+| por onde passa | water jackets | oil galleries |
+| onde tira o que não presta | radiator (tira calor) | oil filter (tira sujeira) |
+| quem volta para o começo | radiator hose de baixo | gravidade, até o oil pan |
+
+A semelhança é útil no diagnóstico. Nos dois sistemas, quase todo defeito cai
+em uma de três perguntas: **falta líquido?** **O líquido parou de circular?**
+**O lugar que tira calor ou sujeira parou de funcionar?** Com essas perguntas
+em mente, vamos às definições de cada peça.
+
+## Formalização
+
+### Cooling system
+
+> **Cooling system** é o sistema que tira do motor o calor da combustion e do
+> atrito e o entrega ao ar, mantendo o motor na operating temperature.
+
+A **operating temperature** é a temperatura em que o motor foi projetado para
+funcionar. É importante entender que ela é **quente**, de propósito. Um motor
+frio gasta mais combustível, queima pior a mistura, polui mais e se desgasta
+mais, porque o óleo frio é grosso e as folgas ainda não estão nas medidas de
+projeto. O cooling system não existe para deixar o motor frio. Ele existe para
+segurar o motor numa temperatura quente, sem passar dela.
+
+- **Exemplo:** um motor que trabalha com o coolant perto de 195 °F (91 °C) —
+  valor típico, só para o exemplo; o que vale é o manual do veículo — está na
+  operating temperature.
+- **Contraexemplo:** um motor que, depois de 30 minutos de estrada, continua
+  com o coolant morno **não** está bem refrigerado: ele está abaixo da
+  operating temperature, e isso também é defeito.
+
+Para converter temperaturas entre as duas escalas, use:
+
+$$
+T_{^\circ\text{C}} = (T_{^\circ\text{F}} - 32) \times \frac{5}{9}
+\qquad\qquad
+T_{^\circ\text{F}} = T_{^\circ\text{C}} \times \frac{9}{5} + 32
+$$
+
+Conferindo o exemplo: $(195 - 32) \times \frac{5}{9} = 163 \times \frac{5}{9} \approx 90.6$,
+que arredonda para 91 °C.
+
+Agora as peças, uma por uma.
+
+**Water pump.** A water pump faz o coolant circular. Na maioria dos motores
+ela é girada pela drive belt, que vem da crankshaft pulley. Em alguns motores
+modernos ela é movida por um motor elétrico. Se ela para, o coolant para, e o
+calor fica preso nas water jackets.
+
+**Coolant e antifreeze.** O coolant é uma mistura de **antifreeze** com água.
+Por que não água pura? Por três motivos:
+
+1. água pura congela no inverno, e água congelada aumenta de volume — com
+   força suficiente para trincar o block;
+2. a mistura ferve numa temperatura mais alta que a da água pura;
+3. o antifreeze traz aditivos que protegem o metal contra a corrosão.
+
+A proporção da mistura e o tipo de coolant vêm do manual do veículo. Misturar
+tipos diferentes pode estragar os aditivos.
+
+- **Exemplo:** coolant do tipo pedido pelo manual, misturado na proporção do
+  manual, é o líquido certo para o cooling system.
+- **Contraexemplo:** água da torneira sozinha até faz o coolant circular, mas
+  **não** é coolant: congela, ferve mais cedo e deixa o metal enferrujar por
+  dentro.
+
+**Water jackets.** São os espaços ocos no cylinder block e no cylinder head,
+em volta dos cylinders e da combustion chamber. É ali que o coolant recebe o
+calor.
+
+**Thermostat.** O **thermostat** é a válvula termostática: uma válvula que
+abre e fecha sozinha, conforme a temperatura do coolant em volta dela.
+
+- Com o motor **frio**, o thermostat fica **fechado**. O coolant não vai para
+  o radiator: ele circula só dentro do motor (e pelo heater core). Assim o
+  motor chega rápido à operating temperature.
+- Com o motor **quente**, o thermostat **abre** e deixa o coolant passar para
+  o radiator.
+
+Alguns motores modernos têm thermostats de vários estágios, com um aquecimento
+elétrico comandado pelo control module. Com isso, o computador decide a hora
+de abrir, em vez de esperar só pela temperatura do coolant.
+
+- **Exemplo:** de manhã, no frio, a radiator hose de cima fica fria nos
+  primeiros minutos e de repente esquenta. Esse é o momento em que o
+  thermostat abriu.
+- **Contraexemplo:** o thermostat **não** regula a temperatura ligando e
+  desligando um cooling fan. Quem cuida do ar é o cooling fan. O thermostat só
+  controla por onde o coolant passa.
+
+**Radiator.** O radiator fica na frente do carro. Ele é feito de muitos tubos
+finos com aletas de metal em volta. O coolant quente passa pelos tubos, o ar
+passa pelas aletas, e o calor vai do coolant para o ar.
+
+**Radiator hoses.** São as mangueiras grossas que ligam o motor ao radiator:
+uma em cima, que leva o coolant quente, e uma embaixo, que traz o coolant de
+volta.
+
+**Radiator cap.** A radiator cap fecha o sistema e mantém o coolant sob
+pressão. A pressão sobe o ponto de fervura: é o mesmo efeito da panela de
+pressão. Para ter uma ideia, a água pura ferve a 212 °F (100 °C) na pressão
+do ar ao nível do mar; com cerca de 15 psi (103 kPa) acima dessa pressão, ela
+só ferve perto de 248 °F (120 °C). São números de física, aproximados. A
+pressão que a tampa de cada carro segura está no manual.
+
+**Cooling fan.** O cooling fan puxa ou empurra ar através do radiator. Na
+maioria dos carros ele é elétrico: o control module liga o cooling fan quando
+o coolant passa de certa temperatura. Em carros mais antigos, e em muitas
+picapes, ele é girado por uma drive belt, a fan belt.
+
+O cooling fan é mais importante com o carro **parado**. Andando, o próprio
+movimento do carro força o ar através do radiator. Parado, não há vento
+nenhum: todo o ar que passa pelo radiator é o que o cooling fan puxa.
+
+**Heater core.** É um radiator pequeno, atrás do painel. O coolant quente
+passa por ele, e o ventilador da cabine sopra o ar através dele para dentro
+do carro.
+
+### Lubrication system
+
+> **Lubrication system** é o sistema que leva óleo, sob pressão, a todos os
+> pontos de atrito do motor, para manter uma oil film entre as peças que se
+> movem.
+
+**Oil pan.** O oil pan é a bandeja presa embaixo do block. Ele guarda o óleo
+quando o motor está desligado, e recebe de volta o óleo que escorre de dentro
+do motor.
+
+**Oil pickup.** É um tubo que mergulha no fundo do oil pan, com uma tela na
+ponta. A oil pump puxa o óleo por ele, e a tela segura os pedaços grandes de
+sujeira.
+
+**Oil pump.** A oil pump empurra o óleo pelas oil galleries. O livro chama a
+oil pump de “coração” do lubrication system. A comparação funciona assim: o
+coração empurra o sangue pelas veias até todos os órgãos; a oil pump empurra
+o óleo pelas oil galleries até todos os pontos de atrito. Se o coração para,
+o sangue para; se a oil pump para, o óleo para, e a oil film acaba. **Onde a
+comparação para de valer:** o sangue volta ao coração por veias; o óleo volta
+ao oil pan escorrendo, pela gravidade, sem tubo de volta.
+
+**Oil filter.** O oil filter retém as partículas de metal, de carvão da
+queima e de poeira que o óleo recolhe dentro do motor. Sem ele, essa sujeira
+circularia e riscaria os bearings.
+
+**Oil galleries.** São canais pequenos, furados dentro do block, do
+crankshaft e do cylinder head. Eles levam o óleo aos **main bearings** e aos
+**rod bearings** do crankshaft, aos bearings do camshaft e às peças do valve
+train. São os pontos de mais atrito do motor.
+
+**Dipstick.** A dipstick é a vareta que mostra o nível do óleo dentro do oil
+pan. Ela tem duas marcas: o nível certo fica entre elas.
+
+**Oil pressure.** A oil pump empurra o óleo, e o óleo encontra resistência
+para passar pelas galerias e pelas folgas estreitas dos bearings. Essa
+resistência faz a pressão subir. É a mesma ideia de apertar a ponta de uma
+mangueira de jardim: quanto mais estreita a saída, mais pressão dentro da
+mangueira. A oil pressure mostra que o óleo está sendo empurrado até os
+bearings.
+
+- **Exemplo:** motor quente, em marcha lenta, com a oil pressure dentro do
+  valor do manual: o óleo está chegando aos bearings.
+- **Contraexemplo:** óleo no nível certo na dipstick **não** prova que a
+  lubrificação está boa. A dipstick mostra quanto óleo há no oil pan, não se
+  ele está sendo empurrado. Uma oil pump gasta deixa o oil pan cheio e os
+  bearings sem óleo.
+
+### Erros comuns
+
+> **Erro comum: “o motor está superaquecendo, então é só tirar o
+> thermostat”.** É tentador, porque sem thermostat o coolant passa direto para
+> o radiator. Mas o thermostat é o que leva o motor à operating temperature.
+> Sem ele, o motor passa a trabalhar frio: gasta mais, polui mais, desgasta
+> mais, o aquecedor da cabine fica fraco, e o computador pode até acender a
+> check engine light. E, se a causa do superaquecimento era outra — o cooling
+> fan, por exemplo —, ela continua lá.
+
+> **Erro comum: “o óleo está no nível, então a lubrificação está boa”.** O
+> nível mede a quantidade guardada no oil pan; a pressão mede se o óleo está
+> sendo entregue. São duas medidas diferentes, e as duas importam.
+
+> **Erro comum: completar o cooling system só com água.** Resolve o nível na
+> hora e cria três problemas: o coolant congela mais fácil, ferve mais cedo e
+> protege menos contra a corrosão.
+
+> **Erro comum: achar que a luz vermelha de óleo do painel é a luz do nível.**
+> Em muitos carros, ela é a **oil pressure warning light**: acende quando a
+> pressão cai, não quando o nível baixa. Confira no manual de cada carro.
+
+## Como falha e como diagnosticar
+
+O que os sistemas **deveriam** fazer: o cooling system deve levar o motor à
+operating temperature em poucos minutos e segurá-lo lá, parado ou andando. O
+lubrication system deve manter a oil pressure dentro do valor do manual em
+todas as rotações.
+
+| Sintoma | Causas possíveis | Teste que separa |
+|---|---|---|
+| superaquece só parado; andando fica normal | cooling fan não liga | com o motor quente, ver se o cooling fan liga |
+| superaquece parado e andando | nível baixo de coolant; thermostat preso fechado; water pump; radiator entupido | nível (motor frio); temperatura das radiator hoses com o motor quente |
+| demora muito a esquentar; aquecedor fraco | thermostat preso aberto | a radiator hose de cima esquenta junto com o motor, desde o começo |
+| o nível de coolant baixa sozinho | vazamento externo (hose, radiator, water pump) ou interno | procurar marcas e poças; teste de pressão do sistema |
+| luz de óleo acende | nível baixo; oil pressure baixa | dipstick primeiro; depois medir a oil pressure com um manômetro |
+
+Três casos, com o raciocínio completo.
+
+**Caso 1 — thermostat preso fechado.** O motor superaquece em 15 minutos,
+parado ou andando. Com o motor quente, a radiator hose de cima está fria.
+
+- **O que deveria acontecer:** motor quente, thermostat aberto, coolant quente
+  saindo do motor pela radiator hose de cima. A hose de cima deveria estar
+  quente.
+- **O que foi observado:** hose de cima fria, motor superaquecendo.
+- **O princípio que liga as duas coisas:** a hose só esquenta se coolant
+  quente passar por ela. Hose fria quer dizer que o coolant quente não está
+  saindo do motor.
+- **Conclusão:** a passagem para o radiator está fechada. A primeira suspeita
+  é o thermostat preso fechado.
+- **O que isso descarta:** um cooling fan parado deixaria a hose de cima
+  quente — o coolant passaria, só não perderia calor no radiator. Por isso a
+  temperatura da hose separa as duas hipóteses.
+
+**Caso 2 — thermostat preso aberto.** No inverno, o ponteiro mal sai do frio,
+e o aquecedor da cabine sopra ar morno. A radiator hose de cima esquenta aos
+pouquinhos, junto com o motor, desde a partida.
+
+- **O que deveria acontecer:** nos primeiros minutos, thermostat fechado,
+  coolant só dentro do motor, hose de cima fria até o thermostat abrir.
+- **O que foi observado:** a hose esquenta desde o começo, devagar.
+- **Conclusão:** o coolant está indo para o radiator desde a partida. O
+  radiator tira o calor antes de o motor chegar à operating temperature. A
+  suspeita é o thermostat preso aberto.
+
+**Caso 3 — luz de óleo acesa.** A oil pressure warning light acende em marcha
+lenta, com o motor quente.
+
+- **Primeiro, o mais simples:** desligar o motor e olhar a dipstick. Se falta
+  óleo, a oil pump puxa ar junto com o óleo, e a pressão cai.
+- **Nível certo?** Então medir a oil pressure com um manômetro mecânico (o
+  **oil pressure gauge**), rosqueado no lugar do sensor de pressão, e comparar
+  com o manual. O teste é feito com o motor quente e funcionando: leia antes
+  os avisos da seção “Na oficina”.
+- **Pressão baixa confirmada, com nível certo:** as causas ficam dentro do
+  motor — oil pickup entupido, oil pump gasta ou bearings gastos. Por que
+  bearings gastos baixam a pressão? Volte à mangueira com a ponta apertada:
+  se você solta a ponta, a água sai mais fácil e a pressão dentro da mangueira
+  cai. Um bearing gasto tem uma clearance maior; o óleo escapa mais fácil por
+  ela, e a pressão cai no sistema todo.
+
+## Na oficina
+
+:::danger Segurança antes de qualquer verificação
+
+- **Nunca abra a radiator cap — nem a tampa de um reservatório pressurizado —
+  com o motor quente.** O coolant está sob pressão e acima de 212 °F (100 °C).
+  Quando a tampa abre, a pressão cai de uma vez, o coolant ferve na hora e
+  jorra para fora, fervendo. Isso causa queimaduras graves no rosto e nos
+  braços. Espere o motor esfriar. Mesmo frio, abra devagar, com um pano por
+  cima da tampa.
+- **O cooling fan elétrico pode ligar sozinho**, com o motor desligado e às
+  vezes até sem a chave. Mantenha mãos, roupas largas, cabelo e ferramentas
+  longe das pás. Antes de trabalhar perto dele, siga o manual para desligar o
+  circuito.
+- **Com o motor ligado**, a drive belt e as polias giram. Nada de mãos,
+  mangas, colares ou cabelo solto perto delas.
+- **Óleo e coolant quentes queimam.** Para drenar, siga a temperatura que o
+  manual indica, com **safety glasses** e **gloves**.
+- **O coolant é tóxico e tem gosto doce**, o que atrai crianças e animais.
+  Limpe na hora qualquer coisa que derramar. Coolant, óleo usado e o oil filter
+  usado nunca vão para o ralo, para o chão ou para o lixo comum: vão para a
+  reciclagem da oficina.
+- **Óleo usado** tem resíduos da queima que fazem mal à pele. Use gloves e
+  lave as mãos.
+- Se o carro precisar ser levantado (para trocar o óleo, por exemplo), use os
+  pontos de apoio do manual e cavaletes, nunca só o macaco.
+
+:::
+
+**Verificar o nível do coolant.** Com o motor **frio**, olhe o reservatório
+plástico ao lado do radiator, o **coolant reservoir**. O nível deve ficar
+entre as marcas “MIN” e “MAX” (ou “COLD” e “HOT”) moldadas no plástico.
+Complete só com o coolant do tipo e na mistura que o manual pede.
+
+**Verificar o nível do óleo.** Carro em piso plano, motor desligado. Espere
+alguns minutos para o óleo de cima escorrer para o oil pan — o tempo certo
+está no manual. Puxe a dipstick, limpe com um pano, enfie de novo até o fim,
+puxe outra vez e leia: o óleo deve molhar a vareta até um ponto entre as duas
+marcas. Repare também na cor e no cheiro. Óleo leitoso, com aspecto de café
+com leite, indica coolant misturado no óleo, e isso é sinal de vazamento
+interno.
+
+**Onde buscar as especificações:** no **service manual** do veículo. Ele traz
+o tipo e a quantidade de coolant, a proporção da mistura, o tipo e a
+viscosidade do óleo, a capacidade do oil pan com o oil filter, a temperatura
+de abertura do thermostat, a pressão da radiator cap e a oil pressure mínima
+em cada rotação. Nenhum desses números deve vir de memória.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — converter a temperatura do thermostat
+
+Um manual diz que o thermostat de um motor começa a abrir a 195 °F (valor
+ilustrativo). Quanto é isso em °C?
+
+$$
+T_{^\circ\text{C}} = (195 - 32) \times \frac{5}{9} = 163 \times \frac{5}{9} \approx 90.6
+$$
+
+Cerca de 91 °C. Repare na ordem: primeiro tira 32, depois multiplica por
+$\frac{5}{9}$.
+
+### Exemplo 2 — a hose fria (pause e tente)
+
+Um motor está ligado há 20 minutos. O temperature gauge está quase no
+vermelho. Você mede as duas radiator hoses com um termômetro infravermelho
+(o **infrared thermometer**, que mede a temperatura de longe, sem encostar):
+a de baixo está fria e a de cima também está fria. O nível de coolant,
+conferido antes com o motor frio, estava certo.
+
+Qual é a primeira suspeita? Pense antes de abrir.
+
+<details>
+<summary>Solução</summary>
+
+O motor está quente, mas o coolant quente não está chegando ao radiator: se
+estivesse, a hose de cima estaria quente. Com o nível certo, a peça que fecha
+a passagem entre o motor e o radiator é o thermostat. A suspeita é o
+thermostat preso fechado.
+
+O que não se encaixa: um cooling fan parado deixaria a hose de cima quente,
+porque o coolant continuaria passando; ele só não perderia calor. Uma water
+pump com defeito também é possível, mas o thermostat é mais simples de testar
+e mais comum. O próximo passo é conferir o thermostat, seguindo o manual.
+
+</details>
+
+### Exemplo 3 — a mistura do coolant (pause e tente)
+
+Imagine um cooling system com capacidade de 8 qt (7.6 L) — valor
+ilustrativo, só para a conta. O manual pede uma mistura de 50 % antifreeze e
+50 % água. Quanto de cada um, em quarts e em litros?
+
+<details>
+<summary>Solução</summary>
+
+Metade de 8 qt é 4 qt de antifreeze e 4 qt de água.
+
+Em litros: 1 qt são cerca de 0.946 L, então
+$4 \times 0.946 \approx 3.8\,\text{L}$ de cada.
+
+Na prática, muitas lojas vendem o coolant já misturado na proporção certa. A
+proporção do exemplo é ilustrativa: a que vale é a do manual e do fabricante
+do coolant.
+
+</details>
+
+### Exemplo 4 — por que bearing gasto baixa a pressão (pause e tente)
+
+Um motor com muitos quilômetros tem a oil pressure baixa em marcha lenta, com
+o nível de óleo certo e uma oil pump nova. Explique, com as ideias da lição,
+como bearings gastos podem causar isso.
+
+<details>
+<summary>Solução</summary>
+
+A pressão aparece porque o óleo encontra resistência para passar. Boa parte
+dessa resistência está nas folgas estreitas dos bearings. Um bearing gasto
+tem uma clearance maior, então o óleo escapa por ele com mais facilidade.
+Com menos resistência na saída, a pressão no sistema cai — como a mangueira
+de jardim com a ponta solta. A oil pump nova continua empurrando o mesmo
+óleo, mas ele vaza por onde está mais fácil.
+
+</details>
+
+## De volta à queixa
+
+O cliente disse que o ponteiro sobe parado no trânsito e volta ao normal na
+estrada. Agora dá para raciocinar:
+
+- **O que o sistema deveria fazer:** segurar a operating temperature parado ou
+  andando.
+- **O que muda entre parado e andando:** andando, o vento força o ar através do
+  radiator. Parado, o único ar que passa é o que o cooling fan puxa.
+- **O que a queixa indica:** quando há vento, o radiator dá conta do calor.
+  Então o coolant está circulando, o thermostat está abrindo e o radiator está
+  trocando calor. O que falha é só a parte que funciona quando não há vento:
+  o cooling fan.
+- **O teste:** com o motor ligado e já quente, parado (e longe das pás), veja
+  se o cooling fan liga quando o temperature gauge passa do meio. Se ele não
+  liga, o próximo passo é testar o circuito dele: fuse, relay, conector e o
+  próprio motor do cooling fan. Esse teste usa as ideias da TRN-120, como em
+  [O circuito elétrico](../../trn-120-eletricidade/o-circuito-eletrico).
+- **O que o teste descarta:** se o cooling fan liga normalmente, a causa é
+  outra — por exemplo, um radiator com as aletas entupidas de sujeira, que
+  deixa passar pouco ar mesmo com o cooling fan funcionando.
+
+## Perguntas de verificação
+
+1. Por que o cooling system não tenta deixar o motor o mais frio possível?
+2. Por que o radiator funciona pior num dia muito quente?
+3. Por que o aquecedor da cabine sopra ar frio nos primeiros minutos de um
+   dia de inverno?
+4. A dipstick mostra o óleo no nível certo. Isso garante que os bearings
+   estão sendo lubrificados? Por quê?
+5. O que acontece com a oil film se a oil pump parar com o motor girando?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o motor foi projetado para trabalhar quente, na operating
+   temperature. Frio, ele gasta mais combustível, queima pior a mistura, polui
+   mais e se desgasta mais.
+2. Porque o calor passa do mais quente para o mais frio, e passa mais rápido
+   quando a diferença de temperatura é grande. Com o ar mais quente, a
+   diferença entre o coolant e o ar fica menor, e o radiator tira menos calor
+   a cada segundo.
+3. Porque o heater core aquece o ar com o calor do coolant, e o coolant ainda
+   está frio. O aquecedor só esquenta depois que o motor esquenta.
+4. Não. A dipstick mostra a quantidade guardada no oil pan. Se a oil pump não
+   empurra o óleo, ou se ele escapa por folgas grandes, os bearings ficam sem
+   óleo mesmo com o oil pan cheio. Quem mostra se o óleo está chegando é a oil
+   pressure.
+5. A oil film é espremida para fora pelas peças em movimento e não é reposta.
+   Em pouco tempo o metal encosta no metal, o atrito esquenta as peças e
+   começam o scoring e o desgaste.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+1. Qual peça faz o coolant circular?
+2. Qual peça fica fechada com o motor frio e abre quando ele esquenta?
+3. Qual peça puxa o óleo do fundo do oil pan, através de uma tela?
+4. Qual peça mostra o nível do óleo?
+5. Em que peça o coolant entrega o calor ao ar?
+
+### 2. Explicação
+
+1. Explique, com as suas palavras, o que é a oil film e por que ela reduz o
+   desgaste.
+2. Explique por que a radiator cap ajuda o coolant a não ferver.
+
+### 3. Aplicação direta
+
+1. Converta 200 °F para °C.
+2. Converta 104 °C para °F.
+
+### 4. Variação
+
+Um carro tem o thermostat preso aberto. O que o motorista nota no inverno? E
+no verão, num dia de 95 °F, ele notaria a mesma coisa? Explique.
+
+<details>
+<summary>Dica</summary>
+
+Pense no que o radiator faz com o coolant quando o ar está muito frio e
+quando o ar já está quente.
+
+</details>
+
+### 5. Caso de diagnóstico
+
+Uma cliente diz que a luz vermelha de óleo pisca em marcha lenta, com o motor
+quente, e apaga quando ela acelera. Você confere a dipstick: o óleo está no
+nível certo. Qual é o próximo teste, e o que cada resultado indica?
+
+### 6. Justificativa
+
+1. Por que se olha a dipstick **antes** de medir a oil pressure com um
+   manômetro?
+2. Por que medir a temperatura das duas radiator hoses ajuda a separar um
+   thermostat preso fechado de um cooling fan que não liga?
+
+### 7. Formato ASE
+
+1. Technician A says that a thermostat stuck open can keep the engine from
+   reaching operating temperature. Technician B says that a thermostat stuck
+   closed can cause the engine to overheat. Who is correct?
+   - A. A only
+   - B. B only
+   - C. Both A and B
+   - D. Neither A nor B
+2. An engine overheats when the vehicle is stopped in traffic, but the
+   temperature stays normal at highway speed. Which of the following is the
+   most likely cause?
+   - A. A thermostat stuck closed
+   - B. An inoperative cooling fan
+   - C. A low engine oil level
+   - D. A thermostat stuck open
+3. Which component draws oil from the bottom of the oil pan and sends it to
+   the oil pump?
+   - A. Oil filter
+   - B. Dipstick
+   - C. Oil pickup
+   - D. Oil galleries
+4. Technician A says that the radiator cap can be removed safely as soon as
+   the engine is turned off. Technician B says that hot coolant also flows
+   through the heater core. Who is correct?
+   - A. A only
+   - B. B only
+   - C. Both A and B
+   - D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+1. A water pump.
+2. O thermostat.
+3. O oil pickup.
+4. A dipstick.
+5. No radiator.
+
+**2. Explicação**
+
+1. A oil film é uma camada muito fina de óleo entre duas peças que se movem.
+   Com ela inteira, uma peça desliza sobre o óleo, e o metal não encosta no
+   metal. Sem o contato direto, os picos microscópicos das superfícies não se
+   batem: o atrito cai, o calor cai e quase nada se desgasta.
+2. A radiator cap mantém o sistema sob pressão. Sob pressão, um líquido só
+   ferve numa temperatura mais alta — o mesmo efeito da panela de pressão.
+   Assim o coolant pode passar de 212 °F (100 °C) sem virar vapor.
+
+**3. Aplicação direta**
+
+1. $(200 - 32) \times \frac{5}{9} = 168 \times \frac{5}{9} \approx 93.3$ °C.
+   Se você achou 302.4, multiplicou por $\frac{9}{5}$ em vez de $\frac{5}{9}$:
+   essa é a conversão no sentido contrário. Se achou 111.1, esqueceu de tirar
+   o 32 antes de multiplicar.
+2. $104 \times \frac{9}{5} + 32 = 187.2 + 32 = 219.2$ °F.
+
+**4. Variação**
+
+No inverno, o radiator tira muito calor, porque o ar está muito mais frio que
+o coolant. Com o thermostat preso aberto, o coolant passa pelo radiator desde
+a partida, e o motor demora muito a esquentar ou nunca chega à operating
+temperature: o ponteiro fica baixo e o aquecedor sopra morno. Num dia de
+95 °F (35 °C), o ar está bem mais quente, a diferença entre o coolant e o ar
+é menor, e o radiator tira menos calor. O motor acaba esquentando mais perto
+do normal, e o defeito fica muito menos visível. Por isso essa queixa costuma
+aparecer no inverno.
+
+**5. Caso de diagnóstico**
+
+O nível está certo, então a próxima pergunta é se a pressão está mesmo
+baixa: a luz também acende se o sensor de pressão ou o circuito dela
+tiverem defeito. O teste é medir a oil pressure com um manômetro mecânico,
+rosqueado no lugar do sensor, com o motor quente, em marcha lenta e em
+rotação mais alta, e comparar com o manual.
+
+- Pressão dentro do manual: o óleo está chegando; o defeito está no sensor
+  de pressão ou no circuito da luz.
+- Pressão baixa em marcha lenta, que sobe com a rotação: o óleo está
+  escapando com facilidade ou a oil pump entrega pouco. Causas típicas:
+  bearings gastos (folga maior), oil pump gasta, oil pickup parcialmente
+  entupido.
+
+A luz apaga ao acelerar porque a oil pump, girando mais rápido, empurra mais
+óleo, e a pressão sobe acima do ponto em que a luz acende.
+
+**6. Justificativa**
+
+1. Porque é o teste mais simples e barato, e porque nível baixo sozinho já
+   derruba a pressão: a oil pump passa a puxar ar junto com o óleo. Medir a
+   pressão de um motor com pouco óleo daria uma leitura baixa que não aponta
+   para o defeito interno.
+2. Porque os dois defeitos superaquecem o motor, mas de jeitos diferentes.
+   Com o thermostat preso fechado, o coolant quente não sai do motor, e a hose
+   de cima fica fria. Com o cooling fan parado, o coolant circula, mas não
+   perde calor no radiator parado, e a hose de cima fica quente. A
+   temperatura da hose de cima separa as duas hipóteses.
+
+**7. Formato ASE**
+
+1. **C.** O técnico A está certo: preso aberto, o thermostat manda o coolant
+   para o radiator desde a partida, e o motor pode não chegar à operating
+   temperature. O técnico B também: preso fechado, o coolant quente não chega
+   ao radiator, e o motor superaquece. As alternativas A, B e D deixam de
+   fora pelo menos uma afirmação certa.
+2. **B.** Andando, o vento força o ar pelo radiator; parado, só o cooling fan
+   faz isso. Se o motor só esquenta parado, a peça que falha é a que trabalha
+   quando não há vento. A (thermostat preso fechado) superaqueceria também na
+   estrada, porque o coolant não chegaria ao radiator. C (óleo baixo) afeta a
+   lubrificação e não produz esse padrão de parado/andando. D (preso aberto)
+   faz o motor trabalhar frio, não quente.
+3. **C.** O oil pickup é o tubo com tela que mergulha no oil pan e leva o
+   óleo até a oil pump. A (oil filter) fica depois da oil pump. B (dipstick) só
+   mostra o nível. D (oil galleries) são os canais que levam o óleo depois
+   que ele já passou pela oil pump e pelo oil filter.
+4. **B.** Só o técnico B está certo: o heater core recebe coolant quente para
+   aquecer a cabine. O técnico A está errado, e o erro é perigoso: logo depois
+   de desligar, o sistema continua quente e sob pressão; abrir a radiator cap
+   faz o coolant ferver de uma vez e jorrar. O certo é esperar o motor esfriar.
+
+</details>
+
+## Revisão curta
+
+**A ideia central:** o motor produz calor (da combustion e do atrito) e tem
+peças que se esfregam o tempo todo. O cooling system mantém o coolant
+circulando para levar o calor ao radiator e segurar o motor na operating
+temperature. O lubrication system mantém o óleo circulando, sob pressão, para
+manter uma oil film entre as peças.
+
+**Quando usar:** toda queixa de motor esquentando, demorando a esquentar,
+perdendo coolant ou acendendo a luz de óleo começa por estas perguntas: falta
+líquido? O líquido parou de circular? O lugar que tira calor ou sujeira parou
+de funcionar?
+
+**Com o que se conecta:** com a lição 1 (o calor da combustion), com a lição 2
+(water jackets, bearings e clearance), com a lição 5 (a drive belt que gira a
+water pump) e com a TRN-120 (o circuito elétrico do cooling fan).
+
+**Termos para revisar:** cooling system, coolant, antifreeze, water pump,
+water jacket, thermostat, radiator, radiator hose, radiator cap, cooling fan,
+heater core, overheating, operating temperature, temperature gauge,
+lubrication system, engine oil, oil film, oil pan, oil pickup, oil pump, oil
+filter, oil galleries, dipstick, oil pressure, scoring.

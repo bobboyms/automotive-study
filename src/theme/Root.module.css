@@ -1,0 +1,29 @@
+.balao {
+  position: fixed;
+  z-index: 1000;
+  max-width: min(20rem, calc(100vw - 16px));
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--mv-paper);
+  color: var(--ifm-font-color-base);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.en {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.pt {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.def {
+  margin-top: 0.2rem;
+  color: var(--ifm-color-emphasis-800);
+}

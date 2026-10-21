@@ -1,0 +1,112 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
+}
+
+.painel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.desenho {
+  flex: 1 1 18rem;
+  max-width: 24rem;
+}
+
+.leitura {
+  flex: 1 1 14rem;
+  max-width: 18rem;
+}
+
+.tempo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.termo {
+  all: unset;
+  cursor: pointer;
+  border-bottom: 2px dotted var(--ifm-color-primary);
+}
+
+.dados {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.dados dt {
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 400;
+}
+
+.dados dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.controle {
+  display: grid;
+  gap: 0.3rem;
+  width: 100%;
+  max-width: 30rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.controle input {
+  width: 100%;
+  accent-color: var(--ifm-color-primary);
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.botao,
+.ativo {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ifm-color-emphasis-500);
+  background: var(--mv-paper);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+}
+
+.ativo {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary);
+  color: var(--mv-paper);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+/* No celular, o desenho menor deixa o motor, a leitura e o controle na mesma
+   tela: dá para arrastar o controle e ver o pistão ao mesmo tempo. */
+@media (max-width: 600px) {
+  .desenho {
+    max-width: 13rem;
+  }
+}

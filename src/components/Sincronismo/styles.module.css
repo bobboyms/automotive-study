@@ -1,0 +1,50 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.engrenagem {
+  fill: var(--ifm-color-emphasis-300);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.eixo {
+  fill: var(--ifm-font-color-base);
+}
+
+.correia {
+  fill: none;
+  stroke: var(--ifm-color-emphasis-700);
+  stroke-width: 7;
+  stroke-linejoin: round;
+}
+
+.marca {
+  fill: var(--mv-tone-2);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.2;
+}
+
+.marcaLinha {
+  stroke: var(--mv-tone-2);
+  stroke-width: 3;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}

@@ -9,6 +9,56 @@ Componente interativo (com controle deslizante) só quando **mexer no parâmetro
 é a ideia** sendo ensinada — veja o critério em
 `.claude/skills/tutor-automotivo/escrever-licao.md`. Ainda não há nenhum.
 
+## Conferência obrigatória
+
+Nenhuma figura está pronta antes de ser vista renderizada, nos três modos:
+
+```bash
+npm run build && npm run figuras             # todas as lições
+npm run figuras -- lei-de-ohm                # só uma
+```
+
+O script (`scripts/conferir-figuras.mjs`) captura cada `<figure>` — inclusive as
+que ficam dentro de `<details>` — no Chrome (tema claro, tema escuro e celular de
+390 px) e no Safari (computador e celular, pelo WebKit do macOS, com
+`scripts/capturar-safari.swift`), e monta folhas de até três figuras em
+`.figuras/`. Abra **cada folha** e procure os defeitos da lista abaixo. Achou um:
+corrija, rode de novo e olhe de novo, até a figura estar 100% legível nos cinco
+modos.
+
+O Safari não é opcional: há defeito que só ele mostra. A primeira versão do
+`SvgMath` punha o KaTeX dentro de um `<foreignObject>`; no Chrome ficava perfeito
+e no Safari as letras saíam gigantes e fora de lugar. Por isso os rótulos agora
+são `<text>` de SVG com as fontes do KaTeX — **não volte a pôr HTML dentro de um
+SVG**.
+
+### O que procurar (e as regras que evitam cada defeito)
+
+- **Texto pequeno demais no celular.** No celular a figura é reduzida a cerca de
+  358 px. Um rótulo de tamanho `f` num desenho de largura `W` sai com
+  `f × 358 ÷ W` px; o mínimo é 10 px, o ideal 11 px. Em desenho largo, calcule a
+  fonte a partir de `W` (veja `Associacao`) em vez de fixar um número.
+- **Desenho cortado ou com rolagem de lado.** Nunca use largura mínima com
+  rolagem: no celular, quem lê vê metade do circuito e nem percebe que dá para
+  rolar. Compacte o desenho ou quebre em partes que descem uma embaixo da outra
+  (veja `TrianguloOhm cobrir`).
+- **Rótulo encostando em rótulo, peça ou fio.** Calcule o espaço: no KaTeX, cada
+  letra de `\text{}` ocupa cerca de **0,65 do tamanho da fonte** (“interruptor”
+  com 16 tem uns 115 de largura). Dois nomes vizinhos que não cabem lado a lado
+  vão para lados opostos do fio.
+- **Linha apagada por um sinal.** Não use `halo` em cima de uma linha: o fundo do
+  halo apaga o pedaço da linha que fica por baixo. Um sinal que explica uma
+  linha vai num selo (círculo com borda) pousado sobre ela.
+- **Fio que cruza fio sem ligação.** Para quem está começando, um cruzamento
+  parece uma conexão. Ponta de prova e ligação nunca cruzam um fio do circuito;
+  se duas pontas precisam se cruzar, a de cima ganha uma borda da cor do fundo
+  (veja `Medicao`).
+- **Traço riscando texto.** Rótulo de entrada, de peça ou de fio fica do lado
+  oposto ao que o traço segue.
+- **Cor de fundo errada dentro de `<details>`.** O bloco recolhido tem fundo
+  próprio. Borda que imita o fundo usa
+  `var(--ifm-alert-background-color, var(--mv-paper))`.
+
 ## Como usar numa lição
 
 1. A página precisa ser `.mdx`. Se ainda for `.md`, renomeie com `git mv` — o id
@@ -36,7 +86,20 @@ import Circuito from '@site/src/components/Circuito';
 | circuito de uma carga: partes, laço completo, retorno pela massa, circuito aberto, curto, sentido da corrente | `Circuito` |
 | várias cargas em série ou em paralelo: quedas de tensão, correntes dos ramos, carga aberta, curto num ramo | `Associacao` |
 | triângulo da lei de Ohm, com letras ou unidades, e as três leituras tapando uma grandeza | `TrianguloOhm` |
+| multímetro ligado ao circuito: tensão da fonte, tensão disponível, queda de tensão, corrente, resistência | `Medicao` |
 | átomo em camadas, elétrons da camada de fora, elétron livre | `Atomo` |
+| motor de um cilindro em corte: peças, posição do pistão, válvulas, gás, PMS/PMI | `Motor` |
+| o ciclo de quatro tempos para girar com a mão (interativo) | `CicloQuatroTempos` |
+| pistão, anéis e pino de perto; vedação pela pressão; anel de óleo | `Pistao` |
+| trem de válvulas com vareta e balancim, aberto ou fechado | `ComandoValvula` |
+| correia dentada e a relação 2:1 entre virabrequim e comando | `Sincronismo` |
+| trem de força visto de cima, tração traseira ou dianteira | `TremDeForca` |
+| caminho de um sistema em blocos: óleo, líquido, corrente, sinal | `Fluxo` |
+| connecting rod desmontada: small end, bushing, rod cap, rod bearings, rod bolts | `Biela` |
+| intake manifold e exhaust manifold em corte, com throttle body e fuel injector | `Coletores` |
+| cooling system com as peças: water pump, thermostat, hoses, radiator, fan, heater core | `Arrefecimento` |
+| lubrication system com as peças: oil pan, pickup, pump, filter, galleries | `Lubrificacao` |
+| starting system (por trás) e charging system (pela frente, com a drive belt) | `PartidaCarga` |
 | elétrons livres dentro do fio, sem e com corrente | `FioEletrons` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
@@ -225,13 +288,20 @@ Cada carga:
 Os tons seguem os papéis do `Circuito`: azul é corrente, laranja é carga, verde
 é defeito.
 
+O tamanho dos rótulos é calculado a partir da largura do desenho, para continuar
+legível no celular — por isso uma figura com mais ramos sai com letras maiores.
+“fusível” vai embaixo do fio e “interruptor” em cima: na mesma linha, os dois
+se encostavam. Em paralelo, a corrente total aparece junto da seta do fio da
+bateria, que é por onde ela passa.
+
 ---
 
 ## TrianguloOhm
 
 O triângulo da lei de Ohm: V em cima, I e R embaixo. A linha deitada é
-“dividido por”, a linha em pé é “vezes”, e os sinais ÷ e × aparecem em azul
-sobre as linhas, como o instrutor costuma desenhar.
+“dividido por”, a linha em pé é “vezes”, e os sinais ÷ e × aparecem em azul,
+cada um num selo (círculo com borda) pousado sobre a linha que ele explica. Um
+sinal solto com fundo em cima da linha apagava pedaços dela.
 
 ```mdx
 <TrianguloOhm caption="..." />
@@ -246,6 +316,230 @@ sobre as linhas, como o instrutor costuma desenhar.
 | Prop | O que faz |
 |---|---|
 | `unidades` | troca $V$, $I$, $R$ por V, A, Ω |
-| `cobrir` | desenha as três leituras lado a lado, com a parte tapada em laranja |
+| `cobrir` | desenha as três leituras, com a parte tapada em laranja. São três SVGs que quebram linha: lado a lado no computador, dois por linha no celular |
 | `caption` | **texto simples** |
+
+---
+
+## Medicao
+
+O multímetro ligado a um circuito de farol (bateria, fusível, interruptor,
+lâmpada, retorno pela massa), numa das cinco medições. O visor fica em cima, os
+nomes das entradas (A, COM, VΩ) logo abaixo e os furos por último — as pontas
+saem para baixo e riscariam um nome que estivesse embaixo do furo. A entrada
+usada pela ponta vermelha aparece preenchida. A ponta vermelha sai no tom 2 e a
+preta na cor do texto. As setas azuis da corrente aparecem quando ela está
+passando.
+
+O multímetro muda de lugar conforme o ponto medido, para nenhuma ponta cruzar
+um fio do circuito: **à direita** quando as pontas vão à lâmpada ou à massa
+(`disponivel`, `queda` na carga ou na massa); **em cima** quando vão ao fio de
+cima (`corrente`, `queda` no conector oxidado). Quando a vermelha precisa
+cruzar a preta, passa por cima com uma borda da cor do fundo.
+
+```mdx
+<Medicao modo="fonte" leitura="12.6\,\text{V}" caption="..." />
+<Medicao modo="disponivel" leitura="12\,\text{V}" caption="..." />
+<Medicao modo="disponivel" semCarga leitura="12\,\text{V}" caption="..." />
+<Medicao modo="queda" leitura="12\,\text{V}" caption="..." />
+<Medicao modo="queda" alvo="oxidacao" oxidacao leitura="2.4\,\text{V}" caption="..." />
+<Medicao modo="queda" alvo="massa" leitura="2.4\,\text{V}" caption="..." />
+<Medicao modo="corrente" leitura="5\,\text{A}" caption="..." />
+<Medicao modo="resistencia" leitura="0.3\,\Omega" caption="..." />
+```
+
+| Prop | O que faz |
+|---|---|
+| `modo` | `'fonte'` (bateria sozinha, sem carga), `'disponivel'`, `'queda'`, `'corrente'` (circuito aberto, multímetro em série) ou `'resistencia'` (lâmpada fora do circuito) |
+| `leitura` | LaTeX no visor |
+| `alvo` | só em `queda`: `'carga'` (padrão, sobre a lâmpada), `'oxidacao'` (sobre o conector oxidado) ou `'massa'` (do terminal negativo da lâmpada ao negativo da bateria) |
+| `oxidacao` | desenha um conector oxidado, no tom 3, no fio de cima |
+| `semCarga` | tira a lâmpada do soquete; não passa corrente |
+| `corrente` | `false` tira as setas da corrente |
+| `caption` | **texto simples** |
+
+---
+
+# AUT-116: termos clicáveis e desenhos do motor
+
+## Termos em inglês: `Termo`, o plugin e o dicionário
+
+Nas lições da AUT-116, as peças e os termos técnicos ficam **em inglês** no
+texto, e um toque no termo mostra o português. Três peças fazem isso:
+
+- `src/data/termos.json` — o dicionário. Cada termo tem `en` (a chave),
+  `pt`, `def` (uma linha, em português), `var` (outras grafias; o plural com
+  -s/-es/-ies é automático) e `licao` (a lição em que é ensinado, chave de
+  `licoes`). O glossário (`TabelaTermos`) é gerado dele.
+- `src/plugins/remark-termos.js` — procura os termos no texto das páginas de
+  `docs/aut-116-*` e troca cada um por `<Termo k="...">`. Não mexe em títulos,
+  links, código, fórmulas, `<summary>` nem dentro de componentes. Uma forma que
+  aparece em dois termos derruba o build, com a mensagem dizendo quais.
+- `src/components/Termo` + `src/theme/Root.js` — o botão no texto e o balão
+  que mostra `pt` e `def`. O balão escuta o clique em **qualquer** elemento
+  com `data-termo`, então os rótulos das figuras usam o mesmo balão.
+
+Ninguém escreve `<Termo>` à mão: escreva o termo em inglês no texto e confira
+se ele está no dicionário. Termo novo entra no `termos.json`.
+`node scripts/conferir-termos.mjs` confere se toda `licao` existe e lista os
+termos que nenhuma lição usa.
+
+### Figuras do livro: links para o VitalSource
+
+O livro da AUT-116 está no VitalSource do aluno. `src/data/livro.json` diz em
+que página está cada figura (`"1-13": 7`), e toda menção “Figura 1-13” —
+“Figuras 1-11 e 1-12”, “Figura 1-24, parte B” — vira link para essa página:
+no texto, pelo plugin `src/plugins/remark-figuras-livro.js`; nas legendas,
+pelo componente `LegendaLivro`, que todos os desenhos da AUT-116 usam no
+`<figcaption>`. A leitura das menções fica em `src/plugins/figuras-livro.js`.
+Capítulo novo: acrescente as páginas das figuras no `livro.json`, conferindo
+cada uma no leitor (`.../page/N` abre a página N). As figuras nunca são
+copiadas: o repositório é público.
+
+Cópia local do aluno: no `npm run start` (e só nele), `material/` vira pasta
+estática (`staticDirectories` em `docusaurus.config.js`), e o `LegendaLivro`
+mostra embaixo da legenda a imagem `material/livro/<número>.png` de cada
+figura citada (“Figura 1-13C” procura `1-13.png`). Arquivo ausente: nada
+aparece. O `npm run build` não inclui `material/` nem tenta as imagens.
+
+### Rótulos de figura: `RotuloTermo`
+
+`src/components/diagramas/RotuloTermo.jsx` é o rótulo de SVG dos desenhos do
+motor: texto na fonte do site, sublinhado pontilhado, clicável quando tem `k`.
+
+| Prop | O que faz |
+|---|---|
+| `k` | chave do termo no dicionário; sem ela, o rótulo é texto comum |
+| `texto` | o que aparece (padrão: `k`). `\n` quebra a linha |
+| `x`, `y`, `anchor` | posição do meio da primeira linha |
+| `para` | ponta da linha de chamada, na peça |
+| `de` | começo da linha de chamada (padrão: ao lado do texto) |
+| `fs`, `tone` | tamanho e cor (tom 1 a 3) |
+
+O rótulo tem um contorno na cor do papel, para continuar legível quando passa
+sobre um traço. Por isso ele **não** pode ficar em cima de uma linha que
+importa: o contorno apaga o pedaço de baixo.
+
+## Motor
+
+Motor de um cilindro em corte, visto de frente: bloco com galerias de água,
+pistão com anéis, biela, virabrequim, cabeçote com duas válvulas inclinadas,
+vela no meio e um comando sobre cada válvula. A válvula de admissão é maior que
+a de escape.
+
+Tudo sai de `fase`, o ângulo do ciclo em graus (0 a 720; 0 = PMS no começo da
+admissão): posição do pistão, abertura das válvulas, giro dos comandos (metade
+do ângulo), cor do gás e setas.
+
+```mdx
+<Motor rotulos="baixo" caption="..." />            {/* nomes da parte de baixo */}
+<Motor rotulos="cima" fase={0} caption="..." />    {/* nomes da parte de cima */}
+<Motor tempo="admissao" rotulos="nenhum" caption="..." />
+<Motor fase={180} rotulos="nenhum" marcas caption="..." />  {/* TDC, BDC, stroke */}
+<Motor destaque={['crankshaft']} caption="..." />
+```
+
+| Prop | O que faz |
+|---|---|
+| `fase` | ângulo do ciclo, 0 a 720 (padrão 300: compressão, válvulas fechadas) |
+| `tempo` | `'admissao'`, `'compressao'`, `'combustao'`, `'escape'` (o meio de cada tempo), `'pms'`, `'pmi'`. Liga o gás e as setas |
+| `rotulos` | `'baixo'`, `'cima'` ou `'nenhum'` |
+| `gas`, `setas` | forçam o gás e as setas com `fase` |
+| `marcas` | linhas do TDC e do BDC e a cota do stroke, à direita. Use com `rotulos="nenhum"` |
+| `destaque` | peças em laranja: `'cylinder block'`, `'cylinder head'`, `'piston'`, `'piston ring'`, `'piston pin'`, `'connecting rod'`, `'crankshaft'`, `'spark plug'`, `'intake valve'`, `'exhaust valve'`, `'valve'` |
+| `caption` | texto simples |
+
+Cores: tom 1 (azul) é a mistura fresca; tom 2 (laranja) é o gás queimando ou
+queimado — e a peça em destaque, que só aparece em figura sem gás —; tom 3
+(verde) é o líquido nas galerias de água.
+
+As válvulas abrem exatamente no PMS e no PMI, sem antecipação nem atraso: é a
+simplificação do livro. A lição que tratar do tempo de válvulas real precisa
+dizer isso.
+
+## CicloQuatroTempos
+
+O `Motor` com um controle deslizante de 0° a 720° e quatro botões que pulam
+para o meio de cada tempo. Ao lado, o nome do tempo (clicável), o ângulo do
+virabrequim e do comando, o sentido do pistão e o estado de cada válvula.
+
+```mdx
+<CicloQuatroTempos caption="..." />
+```
+
+## Pistao
+
+| `modo` | O que mostra |
+|---|---|
+| `'conjunto'` (padrão) | pistão no cilindro: dois anéis de compressão, anel de óleo, pino, biela e a folga (exagerada) |
+| `'compressao'` | uma canaleta ampliada: a pressão desce pela folga, entra atrás do anel e o aperta contra a parede |
+| `'oleo'` | o anel de óleo descendo e raspando a película de óleo, que volta para baixo |
+
+Tom 2 é a pressão da combustão; tom 1 é o óleo.
+
+## ComandoValvula
+
+Trem de válvulas com vareta (OHV): came, tucho, vareta, balancim, mola e
+válvula. `aberta` gira o came com o ressalto para cima e mostra as setas do
+movimento em tom 2.
+
+```mdx
+<ComandoValvula caption="..." />
+<ComandoValvula aberta caption="..." />
+```
+
+## Sincronismo
+
+Engrenagem do virabrequim (18 dentes) e do comando (36), com a correia e uma
+marca em cada. `voltas` é quanto o virabrequim girou desde o início; a marca do
+comando anda a metade.
+
+```mdx
+<Sincronismo voltas={0} caption="..." />
+<Sincronismo voltas={1} caption="..." />
+```
+
+## TremDeForca
+
+Vista de cima, frente para cima. `tipo="traseira"` (padrão): motor, embreagem,
+câmbio, eixo cardã, diferencial e semieixos traseiros. `tipo="dianteira"`:
+motor deitado, embreagem, transeixo e semieixos dianteiros, com eixo não
+motriz atrás. O caminho da força sai em tom 2.
+
+## Fluxo
+
+Caminho de um sistema em blocos, em HTML (vira coluna no celular e quando tem
+mais de quatro blocos). Cada bloco tem o nome em inglês, clicável, e uma nota
+em português.
+
+```mdx
+<Fluxo
+  etapas={[
+    {k: 'oil pan', nota: 'guarda o óleo'},
+    {k: 'oil pump', nota: 'empurra o óleo', tone: 1},
+  ]}
+  volta="o óleo escorre de volta para o oil pan"
+  caption="..."
+/>
+```
+
+| Campo | O que faz |
+|---|---|
+| `k` | chave do termo (o nome que aparece, se não houver `texto`) |
+| `texto` | nome mostrado, se diferente da chave |
+| `nota` | o que acontece ali, em português |
+| `tone` | 1, 2 ou 3: pinta o bloco |
+
+## Biela, Coletores, Arrefecimento, Lubrificacao, PartidaCarga
+
+Desenhos de peças, cada um equivalente a uma figura do livro (1-6, 1-23, 1-17,
+1-18, 1-15 e 1-16). Só recebem `caption`; `PartidaCarga` recebe também
+`modo="partida"` (padrão) ou `modo="carga"`. Os estilos e as peças comuns
+(seta, figura com legenda, engrenagem) ficam em `src/components/diagramas/`
+(`pecas.module.css` e `util.jsx`). Os tons de cada um estão no comentário do
+topo do arquivo; em todos, o pontilhado na cor do texto é combustível.
+
+O `Motor` também desenha o fuel injector: `injetor="indireto"` (antes do
+intake port, injeção indireta) ou `injetor="direto"` (com a ponta dentro da
+combustion chamber, GDI), com o rótulo clicável. Use com `rotulos="nenhum"`.
 

@@ -1,0 +1,685 @@
+---
+title: Drive train
+---
+
+import TremDeForca from '@site/src/components/TremDeForca';
+import Fluxo from '@site/src/components/Fluxo';
+
+# Drive train
+
+> **Pergunta central:** o crankshaft gira na frente do carro. Como esse giro
+> chega até as rodas — e por que ele precisa mudar de velocidade no caminho?
+
+## A queixa: o motor sobe de giro, mas o carro não acompanha
+
+Um cliente chega com um carro de manual transmission e diz:
+
+> “Na estrada, quando eu piso fundo, o ponteiro do conta-giros sobe, mas o
+> carro quase não ganha velocidade. Às vezes sinto um cheiro de queimado.”
+
+O conta-giros é o relógio do painel que mostra quantas voltas por minuto o
+crankshaft está dando, em rpm. Então o cliente está dizendo duas coisas. A
+primeira: o engine está girando mais rápido. A segunda: as rodas não estão
+girando mais rápido na mesma proporção.
+
+Até aqui, o capítulo estudou o engine por dentro. Esta lição segue o giro do
+crankshaft para fora do engine, até as rodas. No fim dela, você vai saber dizer
+por que, numa marcha engatada, o giro do engine e o giro das rodas andam
+sempre juntos. Também vai saber o que significa quando eles se separam, como
+na queixa deste cliente.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| drive train | trem de força | o conjunto que leva o giro do engine até as rodas que empurram o carro |
+| drive wheels | rodas motrizes | as rodas que recebem a força do engine |
+| torque | torque (força de giro) | o quanto uma força consegue fazer um eixo girar |
+| gear | engrenagem; marcha | roda dentada; no câmbio, também cada marcha |
+| gear ratio | relação de marchas | quantas voltas a entrada dá para cada volta da saída |
+| clutch | embreagem | liga e desliga o engine da manual transmission |
+| transmission | câmbio (caixa de marchas) | conjunto de gears que muda a relação entre o giro do engine e o das rodas |
+| manual transmission | câmbio manual | o motorista troca as marchas com a alavanca e a clutch |
+| automatic transmission | câmbio automático | troca as marchas sozinha, com pressão de fluido |
+| differential | diferencial | divide o giro entre as duas rodas e deixa uma girar mais que a outra na curva |
+| transaxle | transeixo | transmission e differential juntos numa só carcaça |
+| drive shaft | eixo cardã | eixo comprido que liga a transmission ao differential traseiro |
+| drive axle | semieixo | eixo que liga o differential a uma roda motriz |
+| dead axle | eixo não motriz | eixo que só segura as rodas, sem receber força |
+| rear-wheel drive | tração traseira | as rodas de trás são as motrizes |
+| front-wheel drive | tração dianteira | as rodas da frente são as motrizes |
+| all-wheel drive | tração integral | as quatro rodas são motrizes |
+
+## Onde isso aparece
+
+O drive train está em todo veículo. A ideia desta lição — a gear ratio — volta
+em várias disciplinas da Wake Tech:
+
+- **AUT-231** (*Manual Transmissions/Transaxles/Drive Trains*): clutch, manual
+  transmission, transaxle, drive shaft e differential, por dentro.
+- **AUT-221** (*Automatic Transmissions/Transaxles*): a automatic transmission,
+  o torque converter e os planetary gear sets.
+- **AUT-123** (*Powertrain Diagnosis & Service*): diagnóstico e manutenção do
+  conjunto todo.
+
+Na prova ASE, o assunto é das áreas **A2** (*Automatic Transmission/Transaxle*)
+e **A3** (*Manual Drive Train and Axles*). Na AUT-116 você precisa do quadro
+geral: saber o caminho do giro e o papel de cada peça. É o que o livro pede no
+objetivo 1.4.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição usa duas peças e um fato de lições anteriores:
+
+- o crankshaft e o flywheel, da lição
+  [Block, piston, connecting rod e crankshaft](./bloco-pistao-biela-e-virabrequim);
+- o power stroke, da lição [O four-stroke cycle](./ciclo-de-quatro-tempos).
+
+Responda antes de seguir:
+
+1. Que tipo de movimento sai do engine pelo crankshaft: o sobe e desce ou o
+   giro?
+2. Num cylinder, quantas voltas do crankshaft acontecem para cada power stroke?
+3. Para que serve o flywheel?
+
+<details>
+<summary>Respostas</summary>
+
+1. O giro (rotary motion). O sobe e desce dos pistons fica dentro do engine. O
+   crankshaft transforma esse vaivém em giro, e é o giro que sai pela ponta de
+   trás do crankshaft.
+2. Duas voltas. O four-stroke cycle tem quatro strokes, e cada volta do
+   crankshaft corresponde a dois strokes. Então cada cylinder empurra o
+   crankshaft uma vez a cada duas voltas.
+3. O flywheel é um disco pesado na ponta de trás do crankshaft. O peso dele
+   mantém o crankshaft girando entre um power stroke e o próximo, e o giro sai
+   mais uniforme. Ele também tem a ring gear, onde o starter engata para dar a
+   partida.
+
+</details>
+
+Se alguma resposta não veio, releia a lição correspondente antes de continuar.
+O flywheel importa aqui: é nele que a clutch é montada.
+
+## Intuição: força de giro e velocidade de giro se trocam
+
+### O que é força de giro
+
+Pense numa chave de roda apertando uma porca. Se você empurra a ponta de uma
+chave curta, a porca resiste. Agora use uma chave com o cabo duas vezes mais
+comprido e empurre com a mesma força: a porca gira com muito menos esforço.
+
+O que fez a porca girar não foi só a força da sua mão. Foi a força **e** a
+distância entre a mão e o centro da porca. Essa combinação é a força de giro,
+que em inglês se chama torque. Força maior ou braço mais comprido dá mais
+torque.
+
+O torque se mede multiplicando a força pela distância. Se você empurra com
+50 lb na ponta de uma chave de 1 ft, o torque é 50 lb-ft. Com a mesma força
+numa chave de 2 ft, o torque é 100 lb-ft. A unidade lb-ft quer dizer libra-pé:
+libras de força vezes pés de distância. É a mesma unidade dos torques de aperto
+do manual de serviço. (Não confunda com lb-in, libra-polegada: 1 lb-ft vale
+12 lb-in.)
+
+### A bicicleta: trocar força por velocidade
+
+Para arrancar numa subida de bicicleta, você põe a corrente na coroa pequena da
+frente e na catraca grande de trás. A pedalada fica leve, mas você pedala
+muitas vezes e anda pouco. No plano, você faz o contrário: coroa grande na
+frente e catraca pequena atrás. Cada pedalada leva a bicicleta longe, mas
+empurrar o pedal fica pesado.
+
+As suas pernas são o engine. A roda de trás são as drive wheels. A troca de
+coroa e catraca é a transmission. Repare no que acontece em cada caso:
+
+- **marcha leve:** a perna dá muitas voltas para cada volta da roda, e a roda
+  recebe muita força de giro. Serve para tirar o carro do lugar.
+- **marcha pesada:** a perna dá poucas voltas para cada volta da roda, e a
+  roda recebe menos força de giro. Serve para manter velocidade.
+
+O que se ganha em força de giro se perde em velocidade de giro, e o contrário
+também vale. Nenhuma marcha cria energia. A transmission só escolhe como dividir
+o trabalho do engine entre força e velocidade.
+
+**Onde a comparação para de valer.** Na bicicleta, a corrente liga a coroa e a
+catraca, e as duas giram no mesmo sentido. No carro, a transmission usa gears
+encostadas dente com dente, e duas gears encostadas giram em sentidos opostos.
+É isso que permite a marcha a ré: com uma gear a mais no caminho, entre as
+duas, o sentido do giro inverte. Outra diferença: a bicicleta não tem differential nem
+clutch.
+
+### Por que o engine precisa disso
+
+O engine de um carro trabalha bem numa faixa de rotação, de algumas centenas a
+alguns milhares de rpm. Já as rodas vão de parado a cerca de 800 rpm na estrada (60 mph, com um pneu
+típico).
+Sem uma transmission no meio, o engine teria que girar devagar para o carro
+sair do lugar. Nessa rotação baixa, ele faz pouca força. E para o carro andar
+rápido, o engine teria que girar alto demais. A transmission resolve as duas
+pontas: dá muito torque para arrancar e deixa o engine girar mais baixo na
+estrada.
+
+## Modelo visual: o caminho do giro
+
+O giro sai do crankshaft e passa por uma sequência de peças até as drive
+wheels. Num carro de motor dianteiro com rear-wheel drive e manual transmission,
+o caminho é este:
+
+<Fluxo
+  etapas={[
+    {k: 'engine', nota: 'o crankshaft gira'},
+    {k: 'clutch', nota: 'liga ou desliga o engine da transmission'},
+    {k: 'transmission', nota: 'escolhe a gear ratio'},
+    {k: 'drive shaft', nota: 'leva o giro para trás'},
+    {k: 'differential', nota: 'vira o giro 90° e divide entre as rodas'},
+    {k: 'drive axle', nota: 'um para cada roda'},
+    {k: 'drive wheels', nota: 'empurram o carro', tone: 2},
+  ]}
+  caption="O caminho do giro num carro de motor dianteiro e tração traseira. Toque em cada nome para ver o português."
+/>
+
+Visto de cima, o mesmo carro fica assim. O caminho da força está em laranja:
+
+<TremDeForca caption="Motor na frente, tração traseira, visto de cima. A drive shaft corre por baixo do carro até o differential, e os drive axles levam o giro às rodas de trás. As rodas da frente só esterçam. Compare com a Figura 1-26A do livro." />
+
+Num carro de front-wheel drive, quase tudo fica na frente. O engine fica
+deitado, atravessado no cofre, e a transmission e o differential ficam juntos
+numa peça só, o transaxle. Não existe drive shaft: os drive axles saem do
+transaxle direto para as rodas da frente. Atrás, as rodas ficam presas num
+dead axle, que só sustenta o peso.
+
+<TremDeForca tipo="dianteira" caption="Motor na frente, deitado, tração dianteira. O transaxle junta a transmission e o differential; os drive axles passam por baixo do motor até as rodas da frente. Atrás, um dead axle. Compare com a Figura 1-26B do livro." />
+
+Num carro de all-wheel drive, as quatro rodas recebem força. Existem vários
+arranjos, com peças a mais que dividem o giro entre a frente e a traseira. Eles
+ficam para a AUT-231 e a AUT-123.
+
+## Ponte para a formalização: contando dentes
+
+Volte à transmission. Por dentro, ela é um conjunto de gears. Imagine duas
+gears encostadas, dente com dente. A de entrada, ligada ao engine, tem 12
+dentes. A de saída tem 36.
+
+Quando a gear de entrada dá uma volta, 12 dentes dela passam pelo ponto de
+contato. Do outro lado, passam os mesmos 12 dentes da gear de saída — e 12
+dentes são só um terço da volta da gear grande. Para a gear de saída dar uma
+volta inteira, os 36 dentes dela precisam passar, e isso leva três voltas da
+gear de entrada.
+
+Então a relação entre as voltas sai da contagem dos dentes:
+
+$$
+\frac{36\ \text{dentes}}{12\ \text{dentes}} = 3
+$$
+
+A entrada dá 3 voltas para cada volta da saída. É por isso que se escreve
+**3:1** (lê-se “três para um”).
+
+E a força de giro? A gear grande tem o raio três vezes maior. O empurrão no
+dente dela acontece três vezes mais longe do centro, como na chave de roda com
+o cabo mais comprido. Por isso o torque na saída fica três vezes maior que o da
+entrada, descontadas as perdas por atrito.
+
+## Formalização
+
+> **Gear ratio** (relação de marchas) é quantas voltas a entrada dá para cada
+> volta da saída. Numa gear ratio de 3:1, a saída gira três vezes mais devagar
+> que a entrada e recebe três vezes mais torque, sem contar as perdas.
+
+As duas contas, escritas uma vez:
+
+$$
+\text{rpm da saída} = \frac{\text{rpm da entrada}}{\text{gear ratio}}
+\qquad
+\text{torque da saída} \approx \text{torque da entrada} \times \text{gear ratio}
+$$
+
+O sinal $\approx$ (aproximadamente) está ali porque uma parte do torque se perde
+em atrito dentro da transmission. Para entender o sistema, essa perda pode ser
+ignorada. Num cálculo de projeto, não pode.
+
+- **Exemplo:** primeira marcha com gear ratio de 3:1. A saída gira três vezes mais
+  devagar que o engine e recebe o triplo de torque. É a marcha de arrancar.
+- **Contraexemplo:** uma gear ratio de 1:1. A entrada e a saída giram juntas, na
+  mesma rotação, e o torque passa igual. Nessa marcha a transmission não
+  multiplica nada, e ela continua sendo uma marcha. Muitas transmissions têm uma
+  marcha 1:1. Algumas têm marchas com gear ratio menor que 1, como 0.7:1: a saída
+  gira **mais rápido** que o engine. Essas marchas servem para rodar na estrada
+  com o engine em rotação baixa.
+
+Agora as peças, cada uma com o que faz e o que não faz.
+
+**Clutch.** Fica entre o engine e a manual transmission, presa ao flywheel.
+Quando o motorista pisa no pedal, a clutch solta o engine da transmission:
+o crankshaft continua girando, mas o giro não passa. É assim que dá para parar
+o carro com o engine ligado e trocar de marcha sem arranhar as gears. Quando
+o pedal sobe, a clutch aperta um disco de atrito contra o flywheel, e os dois
+passam a girar juntos. **Contraexemplo:** um carro de automatic transmission
+não tem clutch nem pedal de clutch. Quem faz o papel de deixar o engine girar
+com o carro parado é o torque converter, um acoplamento que usa fluido.
+
+**Transmission.** Escolhe a gear ratio. Na **manual transmission**, o motorista
+escolhe a marcha pela shift lever, ligada à transmission por alavancas, cabos ou
+hastes. Na **automatic transmission**, a troca é feita por pressão de fluido
+(um sistema hidráulico), com o torque converter e os planetary gear sets. O
+motorista ainda escolhe a posição da shift lever — frente, ré, ponto morto —,
+mas não troca as marchas.
+
+**Differential.** Faz duas coisas. Primeiro, vira o giro em 90°: o drive shaft
+gira de frente para trás, e as rodas giram de lado a lado. Segundo, deixa as
+duas rodas girarem em velocidades diferentes. Isso importa na curva: a roda de
+fora percorre um caminho maior que a de dentro no mesmo tempo. Imagine que,
+numa curva, a roda de fora dê 11 voltas e a de dentro 9 (números só para o
+exemplo). Se as duas rodas estivessem presas no mesmo eixo, uma delas teria que
+arrastar no asfalto. O differential permite essa diferença. O differential
+também tem uma gear ratio própria, que se multiplica pela da marcha: relação
+total = gear ratio da marcha × gear ratio do differential.
+
+**Transaxle.** É a transmission e o differential numa carcaça só. É comum em
+front-wheel drive, e aparece também em carros de motor traseiro com tração
+traseira. **Contraexemplo:** um carro de motor dianteiro e rear-wheel drive, em
+geral, não usa transaxle. Nele, a transmission fica atrás do engine, e o differential fica
+lá atrás, entre as rodas, ligado pelo drive shaft.
+
+**Drive shaft.** Eixo comprido que leva o giro da transmission ao differential
+traseiro, num carro de motor dianteiro e rear-wheel drive. Num carro de
+front-wheel drive com transaxle, ele não existe.
+
+**Drive axle.** Leva o giro do differential até a roda. Em picapes e em muitos
+carros de rear-wheel drive, é um eixo de aço rígido dentro de uma carcaça; nos
+de suspensão traseira independente, são semieixos com juntas, como no
+transaxle. Num transaxle,
+os drive axles são dois eixos com juntas flexíveis, porque as rodas da frente
+sobem e descem com a suspensão e também esterçam. **Contraexemplo:** um dead
+axle segura as rodas, mas não recebe força nenhuma. As rodas de trás de um
+carro de front-wheel drive ficam num dead axle.
+
+## Como falha e como diagnosticar
+
+Na AUT-116, o objetivo não é consertar o drive train — isso é das disciplinas
+AUT-231, AUT-221 e AUT-123. O objetivo é perceber quando o problema está no
+drive train e não no engine. A gear ratio dá a ferramenta para isso.
+
+**O que o sistema deveria fazer.** Com uma marcha engatada e a clutch solta, o
+engine e as rodas estão ligados por gears. Gear não escorrega: cada volta da
+saída exige um número fixo de voltas do engine. Então, numa marcha fixa, se o
+carro dobra a velocidade, o rpm do engine também dobra. O conta-giros e o
+velocímetro andam juntos.
+
+**Sintoma 1 — o rpm sobe, a velocidade não acompanha.** Se o rpm sobe e as
+rodas não aceleram na mesma proporção, alguma peça entre o engine e as rodas
+está deixando o giro escorregar. As gears não escorregam, mas um disco de
+atrito pode escorregar. Numa manual transmission, a suspeita é a clutch. Numa
+automatic transmission, a suspeita é a própria transmission, que também usa
+peças de atrito por dentro.
+
+**Sintoma 2 — a vibração.** Uma vibração pode vir do engine ou do drive train.
+O teste que separa as duas possibilidades usa a mesma ideia de “o que anda junto
+com o quê”:
+
+| Observação | O que ela sugere | Por quê |
+|---|---|---|
+| a vibração muda com o rpm do engine, mesmo com o carro parado em neutro | engine ou algo que gira com ele | em neutro, as rodas não estão ligadas ao engine; o que vibra só pode ser do engine para a frente |
+| a vibração muda com a velocidade do carro, em qualquer marcha | drive shaft, drive axles, rodas ou pneus | essas peças giram sempre na velocidade das rodas, qualquer que seja a marcha |
+| estalos ao fazer curva acelerando, num carro de front-wheel drive | juntas dos drive axles | as juntas flexíveis trabalham dobradas na curva; junta gasta estala nessa posição |
+
+**O que cada teste descarta.** Se a vibração aparece com o carro parado e o
+engine acelerado em neutro, o drive shaft está descartado: em neutro ele está
+parado. Se a vibração some em neutro e só aparece com o carro andando, o engine
+fica menos provável, e o drive train e as rodas entram na lista.
+
+## Na oficina: identificar o drive train de um carro
+
+:::danger Segurança antes de olhar embaixo do carro
+
+- **Nunca fique embaixo de um carro apoiado só no macaco.** Use o elevador da
+  oficina ou cavaletes nos pontos de apoio indicados pelo fabricante. O macaco
+  serve para levantar, não para sustentar.
+- **Rodas no ar e engine ligado em marcha são um risco sério.** Com o carro no
+  elevador, as drive wheels, o drive shaft e os drive axles giram se uma marcha
+  estiver engatada. Mantenha mãos, roupa larga, cabelo e ferramentas longe de
+  tudo que gira. Não faça teste com as rodas no ar sem a orientação do
+  instrutor.
+- **Com as rodas no chão, freio de mão puxado e calço nas rodas** antes de
+  trabalhar com o engine ligado. Um carro de manual transmission engatado pode
+  andar quando o engine pega.
+- **Peças quentes:** depois de rodar, a transmission, o differential e o
+  escapamento ficam quentes o bastante para queimar. Use safety glasses e
+  gloves ao lidar com fluidos e peças embaixo do carro.
+
+:::
+
+Para saber que tipo de drive train um carro tem, olhe as peças, não o modelo.
+Com o carro no elevador:
+
+1. **Procure um drive shaft.** Siga com os olhos, por baixo do carro, a linha
+   do centro, de trás da transmission até o eixo traseiro. Um tubo comprido
+   indo da frente para trás indica rear-wheel drive ou all-wheel drive.
+2. **Olhe as rodas da frente por trás.** Se de cada lado sai um eixo do
+   transaxle e entra no cubo da roda (o wheel hub), as rodas da frente são
+   motrizes.
+3. **Olhe o eixo de trás.** Um differential no meio — uma peça arredondada,
+   maior que o eixo — indica rodas de trás motrizes. Um eixo sem differential é
+   um dead axle.
+4. **Confirme no manual de serviço.** O service manual diz o tipo de drive
+   train, o fluido de cada peça e a quantidade. Fluido e capacidade **nunca**
+   se adivinham: transmission, transaxle e differential podem usar fluidos
+   diferentes entre si.
+
+## Exemplos resolvidos
+
+**Exemplo 1 — rpm na saída.** Uma transmission está numa marcha de 3:1, e o
+engine gira a 2400 rpm. A quantas rpm gira a saída da transmission?
+
+A gear ratio de 3:1 diz que a entrada dá 3 voltas para cada volta da saída.
+Então a saída gira três vezes mais devagar:
+
+$$
+\text{rpm da saída} = \frac{2400}{3} = 800\ \text{rpm}
+$$
+
+Os valores são ilustrativos, escolhidos para a conta ficar clara.
+
+**Exemplo 2 — torque na saída.** *Pause e tente antes de ler.* O mesmo engine
+entrega 150 lb-ft de torque na entrada da transmission (valor só para o
+exemplo). Na marcha de 3:1, quanto torque chega à saída, desprezando as perdas?
+
+<details>
+<summary>Solução</summary>
+
+O torque é multiplicado pela gear ratio:
+
+$$
+150\ \text{lb-ft} \times 3 = 450\ \text{lb-ft}
+$$
+
+Repare no par dos exemplos 1 e 2. A saída gira três vezes mais devagar
+(800 rpm, contra os 2400 rpm do engine) e recebe três vezes mais torque. É a
+troca da bicicleta: força de giro por velocidade de giro.
+
+</details>
+
+**Exemplo 3 — por que o engine gira mais baixo na estrada.** *Pause e tente.*
+Para o carro andar numa certa velocidade, a saída da transmission precisa girar
+a 1000 rpm. Quanto gira o engine em primeira marcha (3:1)? E em quarta (1:1)?
+
+<details>
+<summary>Solução</summary>
+
+Agora a conta vai no sentido contrário. Sabemos a saída e queremos a entrada.
+A entrada dá tantas voltas quanto a gear ratio para cada volta da saída:
+
+$$
+\text{rpm do engine} = \text{rpm da saída} \times \text{gear ratio}
+$$
+
+- primeira: $1000 \times 3 = 3000\ \text{rpm}$;
+- quarta: $1000 \times 1 = 1000\ \text{rpm}$.
+
+Na mesma velocidade do carro, o engine gira a 3000 rpm em primeira e a
+1000 rpm em quarta. É por isso que se troca de marcha: na estrada, a marcha
+alta deixa o engine girar baixo, com menos ruído, menos desgaste e menos
+consumo.
+
+</details>
+
+**Exemplo 4 — resolvendo a queixa.** *Pause e tente.* Volte ao cliente da
+abertura. O carro dele está em quarta, com gear ratio de 1:1, e o differential tem
+uma gear ratio própria de 3:1 (valores só para o exemplo). Numa certa velocidade, as
+rodas giram a 700 rpm. Que rpm o conta-giros deveria mostrar? Se ele mostra
+2800 rpm nessa mesma velocidade, o que isso quer dizer?
+
+<details>
+<summary>Solução</summary>
+
+Cada etapa multiplica as voltas da etapa seguinte pela própria gear ratio. Saindo
+das rodas e voltando até o engine:
+
+$$
+700 \times 3 \times 1 = 2100\ \text{rpm}
+$$
+
+O differential multiplica por 3, e a quarta marcha, por 1. Então, com as rodas a
+700 rpm, o engine deveria girar a 2100 rpm.
+
+O conta-giros mostra 2800 rpm, 700 rpm a mais do que as gears permitem. Gears
+encostadas dente com dente não deixam isso acontecer. Então alguma peça de
+atrito está escorregando entre o engine e as rodas. Num carro de manual
+transmission, a peça de atrito no caminho é a clutch. O cheiro de queimado
+combina com isso: o material de atrito da clutch esquenta quando escorrega.
+
+**O que muda:** o rpm do engine, que sobe sem levar as rodas junto. **O que
+permanece igual:** as gear ratios, que são fixas — por isso a diferença aponta
+para a peça que escorrega, e não para as gears. A confirmação da clutch e o
+reparo são assunto da AUT-231. O diagnóstico de onde procurar começou com uma
+conta de gear ratio.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que uma marcha que multiplica o torque por 3 não “cria” força do nada?
+2. Por que um carro de automatic transmission consegue ficar parado num sinal
+   com uma marcha engatada e o engine ligado, sem clutch?
+3. Por que o differential precisa deixar as rodas girarem em velocidades
+   diferentes?
+4. Por que um carro de front-wheel drive com transaxle não tem drive shaft?
+5. Uma vibração aparece só com o carro andando e não muda quando você troca de
+   marcha. Por que isso aponta para o drive train ou as rodas, e não para o
+   engine?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o torque que ganha na saída é pago com velocidade de giro: a saída
+   gira três vezes mais devagar. A transmission só divide o trabalho do engine
+   de outro jeito, e ainda perde um pouco em atrito.
+2. Porque o torque converter liga o engine à transmission por meio de fluido.
+   Com o engine em marcha lenta (idle), o fluido não empurra com força
+   suficiente para mover o carro contra o freio, e o engine continua girando.
+3. Porque, na curva, a roda de fora percorre um caminho maior que a de dentro no
+   mesmo tempo. Se as duas fossem obrigadas a girar igual, uma arrastaria no
+   chão.
+4. Porque a transmission e o differential estão juntos no transaxle, na frente,
+   ao lado das rodas motrizes. O drive shaft só é preciso quando o differential
+   está longe da transmission, lá atrás.
+5. Porque, numa velocidade fixa do carro, trocar de marcha muda o rpm do engine,
+   mas não muda o giro do drive shaft, dos drive axles e das rodas. Se a
+   vibração não muda com a marcha, ela acompanha o que gira na velocidade das
+   rodas.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Na figura de rear-wheel drive desta lição, qual é a peça entre a
+transmission e o differential?
+
+b) Qual é o nome, em inglês, do câmbio e do differential juntos numa só
+carcaça?
+
+c) Que peça segura as rodas de trás de um carro de front-wheel drive?
+
+### 2. Explicação
+
+Explique com suas palavras para que serve a clutch e por que um carro de
+automatic transmission não precisa dela.
+
+### 3. Aplicação direta
+
+Uma marcha tem gear ratio de 2.5:1. O engine gira a 2000 rpm e entrega
+120 lb-ft (valores ilustrativos).
+
+a) Quantas rpm tem a saída?
+
+b) Quanto torque chega à saída, desprezando as perdas?
+
+### 4. Variação
+
+Uma gear de entrada com 15 dentes move uma gear de saída com 45 dentes.
+
+a) Qual é a gear ratio?
+
+b) Se a saída precisa girar a 1200 rpm, quanto gira o engine nessa marcha? E
+numa marcha de 1:1?
+
+<details>
+<summary>Dica</summary>
+
+Para a gear ratio, divida os dentes da saída pelos dentes da entrada. Para o rpm do
+engine, a conta é a do exemplo 3: você conhece a saída e quer a entrada.
+
+</details>
+
+### 5. Caso de diagnóstico
+
+Um cliente de um carro de front-wheel drive diz que ouve um estalo repetido
+quando faz uma curva fechada acelerando, como ao sair de um estacionamento. Em
+linha reta, o barulho some.
+
+a) Que peça do drive train é a suspeita principal?
+
+b) Por que o barulho aparece só na curva?
+
+c) Antes de olhar embaixo do carro, que cuidado de segurança vem primeiro?
+
+### 6. Justificativa
+
+O técnico compara a vibração do carro parado, em neutro, com o engine acelerado,
+com a vibração do carro andando. Por que esse teste ajuda a separar um problema
+do engine de um problema do drive train?
+
+### 7. Formato ASE
+
+**1.** Technician A says a transaxle combines the transmission and the
+differential in one housing. Technician B says a transaxle is used only on
+front-wheel-drive vehicles. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+**2.** Which component connects the transmission to the differential on a
+front-engine, rear-wheel-drive vehicle?
+
+- A. Drive shaft
+- B. Clutch
+- C. Drive axle
+- D. Transaxle
+
+**3.** A vehicle with a manual transmission is driven in fourth gear. When the
+driver accelerates, engine rpm rises quickly, but road speed increases only a
+little. Technician A says the clutch may be slipping. Technician B says the
+gears in the transmission are most likely slipping on each other. Who is
+correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) O drive shaft.
+
+b) Transaxle.
+
+c) Um dead axle: ele segura as rodas, mas não recebe força do engine.
+
+**2. Explicação**
+
+A clutch liga e desliga o engine da manual transmission. Pisando no pedal, o
+engine continua girando, mas o giro não passa para a transmission: dá para
+parar o carro e trocar de marcha com o engine ligado. Na automatic
+transmission, esse papel é do torque converter, que liga o engine à
+transmission por fluido e deixa o engine girar com o carro parado.
+
+**3. Aplicação direta**
+
+a) $2000 \div 2.5 = 800\ \text{rpm}$.
+
+b) $120 \times 2.5 = 300\ \text{lb-ft}$.
+
+Se você encontrou 5000 rpm no item a, multiplicou em vez de dividir. Numa
+gear ratio maior que 1, a saída gira **mais devagar** que o engine, então o número
+tem que diminuir.
+
+**4. Variação**
+
+a) $45 \div 15 = 3$, ou seja, 3:1.
+
+b) $1200 \times 3 = 3600\ \text{rpm}$ nessa marcha. Na marcha de 1:1,
+$1200 \times 1 = 1200\ \text{rpm}$. Para a mesma velocidade na saída, a marcha
+mais alta deixa o engine girar 2400 rpm mais baixo.
+
+**5. Caso de diagnóstico**
+
+a) As juntas flexíveis dos drive axles (os CV axles), que ligam o transaxle às
+rodas da frente.
+
+b) Na curva, a roda da frente está esterçada, e a junta trabalha dobrada. Uma
+junta gasta folga e estala nessa posição. Em linha reta, ela trabalha quase
+reta, e o estalo some.
+
+c) O carro no elevador ou em cavaletes nos pontos de apoio do fabricante — nunca
+só no macaco. E nada de girar as rodas com o engine engatado sem a orientação
+do instrutor.
+
+**6. Justificativa**
+
+Em neutro, com o carro parado, o engine está desligado das rodas. O drive
+shaft, os drive axles e as rodas não giram. Se a vibração aparece nessa
+condição, ela vem do engine ou do que gira com ele. Se só aparece com o carro
+andando, ela acompanha peças que giram na velocidade das rodas. O teste separa
+as duas famílias de peças antes de qualquer desmontagem.
+
+**7. Formato ASE**
+
+**Questão 1 — resposta A (A only).** O técnico A está certo: o transaxle é a
+transmission e o differential numa carcaça só. O técnico B está errado porque
+diz “only”: o transaxle é comum em front-wheel drive, mas também aparece em
+carros de motor traseiro com tração traseira. Na prova, palavras absolutas como
+*only*, *always* e *never* pedem atenção.
+
+**Questão 2 — resposta A (drive shaft).** O drive shaft leva o giro da
+transmission, na frente, até o differential, atrás. A clutch (B) fica entre o
+engine e a transmission, não entre a transmission e o differential. O drive
+axle (C) vai do differential até a roda. O transaxle (D) junta transmission e
+differential; num carro de motor dianteiro e rear-wheel drive, em geral, eles
+ficam separados.
+
+**Questão 3 — resposta A (A only).** Com uma marcha engatada, as gears ficam
+encostadas dente com dente e não escorregam: o rpm do engine e a velocidade
+das rodas deveriam andar juntos. Quando o rpm sobe sem a velocidade
+acompanhar, a peça que pode escorregar é a de atrito: a clutch. Por isso A
+está certo e B está errado.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o drive train leva o giro do crankshaft até as drive
+  wheels e, no caminho, a transmission troca velocidade de giro por força de
+  giro. A gear ratio diz quanto: numa gear ratio de 3:1, a saída gira três vezes
+  mais devagar e recebe três vezes mais torque.
+- **Quando usar:** para prever o rpm do engine numa marcha, para entender por
+  que se troca de marcha e para perceber quando algo escorrega entre o engine e
+  as rodas (o rpm sobe sem a velocidade acompanhar).
+- **Com o que se conecta:** com o crankshaft e o flywheel da lição 2 — a clutch
+  é presa ao flywheel — e com o power stroke da lição 4, que é a origem do giro.
+  Continua na AUT-231, na AUT-221 e na AUT-123.
+- **As três configurações:** rear-wheel drive (transmission, drive shaft e
+  differential traseiro), front-wheel drive (transaxle e drive axles na frente,
+  dead axle atrás) e all-wheel drive (as quatro rodas motrizes).
+
+**Termos em inglês desta lição:** drive train · drive wheels · torque · gear ·
+gear ratio · clutch · transmission · manual transmission · automatic
+transmission · torque converter · planetary gear set · shift lever ·
+differential · transaxle · drive shaft · drive axle · dead axle · wheel hub ·
+rear-wheel drive · front-wheel drive · all-wheel drive.

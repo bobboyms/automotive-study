@@ -1,0 +1,81 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.frente {
+  font-size: 14px;
+  fill: var(--ifm-color-emphasis-700);
+  font-family: var(--ifm-font-family-base);
+}
+
+.roda {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.rodaMotriz {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--mv-tone-2);
+  stroke-width: 3.5;
+}
+
+.motor {
+  fill: var(--ifm-color-emphasis-300);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.peca {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.difer {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+}
+
+.fino {
+  stroke: var(--ifm-color-emphasis-600);
+  stroke-width: 3;
+}
+
+.forca {
+  stroke: var(--mv-tone-2);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.forcaGrossa {
+  stroke: var(--mv-tone-2);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.giro {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2;
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}

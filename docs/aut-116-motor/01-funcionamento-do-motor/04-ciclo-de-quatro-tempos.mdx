@@ -1,0 +1,776 @@
+---
+title: O four-stroke cycle
+---
+
+import Motor from '@site/src/components/Motor';
+import CicloQuatroTempos from '@site/src/components/CicloQuatroTempos';
+
+# O four-stroke cycle
+
+> **Pergunta central:** o piston sobe e desce o tempo todo, mas só em uma de
+> cada quatro passadas ele recebe força. O que acontece nas outras três, e por
+> que cada uma é indispensável?
+
+## A queixa: o motor que treme parado
+
+Um cliente chega com um sedã de quatro cylinders e reclama:
+
+> “Parado no semáforo, o carro treme inteiro. Na estrada ele anda, mas está
+> mais fraco. E a luz do motor acendeu.”
+
+A luz é a **check engine light**. O técnico liga o **scan tool** e encontra um
+**DTC** de **misfire** no cylinder 3. Um misfire é um ciclo em que o cylinder
+não queima a mistura. Então, em vez de quatro cylinders empurrando o
+crankshaft, só três empurram. O motor perde força e passa a girar aos trancos,
+e por isso treme.
+
+O código diz **qual** cylinder falha, mas não diz **por quê**. A falta de
+faísca, a falta de combustível ou um vazamento podem causar o mesmo misfire.
+Para separar essas causas, você precisa saber o que o cylinder tem de fazer, um
+passo de cada vez, para produzir força. Esses passos são o assunto desta lição.
+No fim, voltamos a este carro com um teste na mão.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| four-stroke cycle | ciclo de quatro tempos | as quatro passadas do piston que produzem uma passada com força |
+| stroke | tempo (curso) | uma passada do piston, do TDC ao BDC ou do BDC ao TDC |
+| intake stroke | tempo de admissão | o piston desce e o cilindro se enche de mistura |
+| compression stroke | tempo de compressão | o piston sobe com as valves fechadas e aperta a mistura |
+| power stroke | tempo de combustão (expansão) | a mistura queima e a pressão empurra o piston para baixo |
+| exhaust stroke | tempo de escape | o piston sobe e empurra o gás queimado para fora |
+| revolution | volta | um giro completo do crankshaft: 360° |
+| rpm | rotações por minuto | quantas voltas o crankshaft dá em um minuto |
+| idle | marcha lenta | o motor ligado, sem acelerar, com o carro parado |
+| vacuum | vácuo | pressão mais baixa que a do ar em volta |
+| atmospheric pressure | pressão atmosférica | a pressão do ar em volta de nós |
+| misfire | falha de combustão | um ciclo em que o cilindro não queima a mistura |
+| compression test | teste de compressão | medir a pressão máxima que cada cilindro consegue fazer |
+| compression gauge | manômetro de compressão | o relógio que se rosqueia no lugar da spark plug para esse teste |
+
+Os fenômenos desta lição continuam em português: **pressão** (*pressure*),
+**volume** (*volume*), **vazamento** (*leak*).
+
+## Onde isso aparece
+
+O four-stroke cycle é o funcionamento básico de quase todo motor de carro, a
+gasolina ou a diesel. Ele é o objetivo 1.2 do capítulo 1 do livro (*Summarize
+the four-stroke cycle*). Na Wake Tech, aparece em toda a **AUT-116** e volta em
+todo o diagnóstico de desempenho, nas disciplinas AUT-181, AUT-183 e AUT-281.
+Na prova ASE, cai na área **A1** (*Engine Repair*) e na **A8** (*Engine
+Performance*), quase sempre como raciocínio: “em que stroke as duas valves
+estão fechadas?”, “o que um vazamento faz com a compressão?”.
+
+## Ideias anteriores que voltam aqui
+
+Esta lição junta as três anteriores. Responda antes de seguir:
+
+1. Em [O motor de combustão interna](./motor-de-combustao-interna): por que a
+   queima da mistura empurra o piston?
+2. Em [Block, piston, connecting rod e crankshaft](./bloco-pistao-biela-e-virabrequim):
+   o que são o TDC e o BDC, e quantos strokes cabem em uma volta do
+   crankshaft?
+3. Em [Cylinder head e valves](./cabecote-e-valvulas): quem abre uma valve,
+   quem fecha, e a que velocidade gira o camshaft em relação ao crankshaft?
+
+<details>
+<summary>Respostas</summary>
+
+1. A queima solta calor. O gás preso na combustion chamber esquenta e a
+   pressão dele sobe muito. Essa pressão empurra todas as paredes da câmara,
+   mas o piston é a única parede que pode se mover, e por isso desce.
+2. O TDC (*top dead center*) é o ponto mais alto do piston no cylinder, e o
+   BDC (*bottom dead center*) é o mais baixo. Um stroke é a passada de um ao
+   outro. Em uma volta do crankshaft, o piston desce uma vez e sobe uma vez:
+   são **dois** strokes.
+3. O cam lobe do camshaft empurra a valve e a abre. A valve spring a fecha de
+   novo. O camshaft gira à **metade** da velocidade do crankshaft: uma volta
+   do camshaft para cada duas do crankshaft.
+
+</details>
+
+Se alguma resposta não veio, releia a lição indicada antes de continuar. Esta
+lição usa as três ideias o tempo todo.
+
+## Intuição: respirar, apertar, explodir, soltar
+
+O cylinder trabalha como um pulmão que, de vez em quando, recebe um empurrão.
+Acompanhe uma rodada inteira:
+
+1. **Encher.** O piston desce e abre espaço. A mistura de ar e combustível
+   entra para ocupar esse espaço.
+2. **Apertar.** O piston sobe com tudo fechado e espreme a mistura num espaço
+   pequeno.
+3. **Queimar.** A mistura apertada queima. A pressão sobe muito e empurra o
+   piston para baixo com força. É a única passada que entrega força ao
+   crankshaft.
+4. **Esvaziar.** O piston sobe de novo, agora com a saída aberta, e empurra o
+   gás queimado para fora.
+
+Depois disso, o cylinder está vazio e pronto para encher de novo. São quatro
+passadas do piston, e só a terceira produz força. As outras três preparam a
+terceira: sem encher, não há o que queimar; sem apertar, a queima é fraca; sem
+esvaziar, não cabe mistura nova.
+
+A comparação com o pulmão vale para a ideia de encher e esvaziar. Ela para de
+valer num ponto importante: o pulmão puxa o ar com músculo, e o cylinder não
+puxa nada. Quem empurra a mistura para dentro é o ar de fora, como você vai
+ver no intake stroke.
+
+## Modelo visual: os quatro strokes
+
+Gire o crankshaft com o controle abaixo. Ele vai de 0° a 720°: duas voltas, um
+ciclo inteiro. Observe três coisas: em que sentido o piston anda, qual valve
+está aberta e a cor do gás. O azul é a mistura fresca e o laranja é o gás
+queimando ou queimado.
+
+<CicloQuatroTempos caption="Ciclo de quatro tempos para girar com a mão. O controle é o crankshaft, de 0° a 720°. Os botões pulam para o meio de cada stroke. Compare com a Figura 1-13 do livro." />
+
+Repare em duas coisas enquanto gira. Primeiro, o piston desce **duas** vezes
+por ciclo, a 0°–180° e a 360°–540°, mas só na primeira descida a intake valve
+abre. Segundo, o camshaft anda a metade: quando o crankshaft chega a 720°, o
+camshaft está em 360°, uma volta só.
+
+Os quatro strokes, um por um:
+
+<Motor tempo="admissao" rotulos="nenhum" caption="Intake stroke: o piston desce, a intake valve está aberta e a exhaust valve fechada. A mistura (azul) entra pelo intake port. Compare com a Figura 1-13A do livro." />
+
+<Motor tempo="compressao" rotulos="nenhum" caption="Compression stroke: o piston sobe e as duas valves estão fechadas. A mistura fica apertada na combustion chamber. Compare com a Figura 1-13B do livro." />
+
+<Motor tempo="combustao" rotulos="nenhum" caption="Power stroke: a mistura queimou perto do TDC. O gás quente (laranja) faz pressão e empurra o piston para baixo. As duas valves continuam fechadas. Compare com a Figura 1-13C do livro." />
+
+<Motor tempo="escape" rotulos="nenhum" caption="Exhaust stroke: o piston sobe, a exhaust valve está aberta e o gás queimado sai pelo exhaust port. Compare com a Figura 1-13D do livro." />
+
+A tabela resume o que cada stroke faz. Ela é o que você precisa saber de cor
+para a prova e para o diagnóstico.
+
+| Stroke | Ângulo do crankshaft | Piston | Intake valve | Exhaust valve | O que acontece |
+|---|---|---|---|---|---|
+| intake stroke | 0° a 180° | desce | aberta | fechada | a mistura entra |
+| compression stroke | 180° a 360° | sobe | fechada | fechada | a mistura é apertada |
+| power stroke | 360° a 540° | desce | fechada | fechada | a queima empurra o piston |
+| exhaust stroke | 540° a 720° | sobe | fechada | aberta | o gás queimado sai |
+
+## Cada stroke, com a causa física
+
+### Intake stroke: quem empurra a mistura é o ar de fora
+
+No intake stroke, a intake valve está aberta e a exhaust valve está fechada. O
+piston desce do TDC ao BDC. Com isso, o espaço dentro do cylinder aumenta.
+
+O gás que já estava ali agora ocupa um espaço maior. Por isso, a pressão dele
+cai abaixo da atmospheric pressure, a pressão do ar em volta do carro. Uma
+pressão menor que a do ar em volta é o que se chama de **vacuum**.
+
+Agora há duas pressões diferentes. Fora do motor, o ar está na atmospheric
+pressure; dentro do cylinder, a pressão é menor. O ar sempre corre do lugar de
+pressão maior para o de pressão menor. Então o ar de fora entra pelo intake
+manifold, passa pelo intake port e pela intake valve aberta e enche o
+cylinder. O combustível vai junto com esse ar.
+
+> **Erro comum:** dizer que o piston “puxa” ou “chupa” a mistura. A frase é
+> tentadora porque parece que o cylinder aspira, como um canudo. Mas vácuo não
+> puxa nada. O piston só abre espaço e baixa a pressão. Quem empurra a mistura
+> para dentro é a atmospheric pressure do lado de fora. Isso importa no
+> diagnóstico: qualquer coisa que atrapalhe o caminho do ar até o cylinder,
+> como um filtro entupido, deixa entrar menos mistura, e o power stroke sai
+> mais fraco.
+
+**Onde entra o combustível.** Isso depende do sistema de injeção. O livro
+lembra dois casos. Na **multiport fuel injection**, um fuel injector para cada
+cylinder borrifa a gasolina no ar perto do intake port. Na **throttle body
+injection**, um sistema mais antigo, a gasolina entra mais cedo, no começo do
+intake manifold, junto ao throttle body. Nos dois casos, o cylinder recebe a
+mistura pronta no intake stroke. A lição 7 volta a esses sistemas.
+
+### Compression stroke: apertar para queimar melhor
+
+No compression stroke, as duas valves estão fechadas. O piston sobe do BDC ao
+TDC. A mistura não tem por onde sair, então fica apertada num espaço cada vez
+menor, até caber na combustion chamber.
+
+Apertar a mistura tem duas consequências. A pressão dela sobe, e a temperatura
+dela também sobe. Uma mistura apertada e quente queima mais rápido e mais por
+inteiro. Por isso, a queima no stroke seguinte empurra o piston com muito mais
+força do que empurraria uma mistura solta.
+
+Para isso funcionar, **nada pode vazar**. A mistura só fica apertada se a
+combustion chamber estiver fechada por todos os lados: as valves assentadas na
+valve seat, os piston rings vedando a parede do cylinder, a head gasket
+vedando o encontro do cylinder head com o block. Se um desses pontos vaza,
+parte da mistura escapa enquanto o piston sobe. A pressão no fim do compression
+stroke fica baixa, e a mistura pode nem chegar a queimar.
+
+### Power stroke: o único que entrega força
+
+Perto do fim do compression stroke, com o piston chegando ao TDC, a spark plug
+solta a faísca. A mistura começa a queimar. As duas valves continuam fechadas.
+
+A queima solta calor. O gás preso na câmara esquenta e a pressão dele sobe
+muito. Essa pressão empurra todas as paredes da câmara, mas só o piston pode se
+mover. Por isso o piston é empurrado para baixo, do TDC ao BDC, com uma força
+de várias toneladas. A connecting rod passa esse empurrão para o crankshaft, e
+o crankshaft gira. A lição 1 mostrou de onde vem esse número tão grande.
+
+O power stroke é o **único** stroke que entrega força ao crankshaft. Os outros
+três **gastam** força: alguém precisa descer o piston no intake stroke, subir
+no compression stroke e subir de novo no exhaust stroke.
+
+### Exhaust stroke: abrir espaço para o próximo ciclo
+
+No exhaust stroke, a exhaust valve está aberta e a intake valve continua
+fechada. O piston sobe do BDC ao TDC e empurra o gás queimado para fora, pelo
+exhaust port, até o exhaust manifold e o escapamento.
+
+No fim do exhaust stroke, o piston está de novo no TDC, com o cylinder quase
+vazio. A intake valve abre, e o próximo intake stroke começa. O ciclo se repete
+enquanto o motor estiver ligado.
+
+### Quem gira o motor nos três strokes sem força
+
+Se só um stroke em quatro entrega força, alguém precisa girar o crankshaft nos
+outros três. Esse papel é do **flywheel**. O flywheel é um disco pesado na
+traseira do crankshaft (lição 2). No power stroke, ele ganha velocidade, e
+depois continua girando pelo próprio peso. É esse giro guardado que leva o
+piston pelos strokes de intake, compression e exhaust.
+
+Num motor de vários cylinders, os outros cylinders também ajudam. Enquanto um
+cylinder está no compression stroke, outro está no power stroke. A seção de
+formalização faz essa conta.
+
+### Diesel também tem quatro tempos
+
+O diesel engine também segue o four-stroke cycle, com uma diferença em dois
+strokes. No intake stroke, entra só ar. No fim do compression stroke, o ar está
+tão apertado que fica muito quente. O diesel é injetado nesse ar quente e
+queima sozinho, sem spark plug. A lição 7 detalha o sistema.
+
+:::note Simplificação deste desenho
+
+Nesta lição, cada valve abre exatamente no TDC ou no BDC e fecha exatamente no
+ponto seguinte. No motor real, as valves abrem um pouco antes e fecham um pouco
+depois, e a faísca acontece um pouco antes do TDC. Isso aproveita melhor o
+movimento do gás. O livro trata desses detalhes em capítulos adiante. Para
+entender o ciclo, os pontos exatos bastam como modelo, e são o que a prova
+pergunta neste nível.
+
+:::
+
+## Ponte para a formalização
+
+Até aqui, o ciclo foi descrito em passadas do piston. Mas, na oficina, o que
+você mede é o giro do crankshaft, em rpm: é o número que aparece no
+tacômetro e no scan tool. Então vale traduzir o ciclo para o crankshaft.
+
+Cada stroke é meia volta do crankshaft, porque o piston vai de um extremo ao
+outro enquanto a manivela gira de cima para baixo. Quatro strokes por ciclo
+dão quatro meias voltas. Com essa ponte, dá para converter rpm em ciclos por
+minuto, em power strokes por minuto e em rotação do camshaft.
+
+## Formalização
+
+> **Four-stroke cycle:** a sequência intake → compression → power → exhaust.
+> Cada stroke é meia volta do crankshaft (180°). Um ciclo completo são quatro
+> strokes, ou seja, **duas voltas do crankshaft (720°)** e **um** power
+> stroke em cada cylinder.
+
+$$
+1\ \text{stroke} = 180^\circ \qquad 1\ \text{ciclo} = 4 \times 180^\circ = 720^\circ = 2\ \text{voltas}
+$$
+
+Daí saem três relações, válidas para cada cylinder:
+
+$$
+\text{ciclos por minuto} = \frac{\text{rpm}}{2}
+\qquad
+\text{power strokes por minuto} = \frac{\text{rpm}}{2}
+\qquad
+\text{rpm do camshaft} = \frac{\text{rpm}}{2}
+$$
+
+Todas dividem por 2 pelo mesmo motivo: um ciclo inteiro custa duas voltas do
+crankshaft. O camshaft dá uma volta por ciclo, porque cada valve abre uma vez
+por ciclo.
+
+**Exemplo:** um motor em idle a 800 rpm (valor ilustrativo; a rotação de idle
+de cada carro está no service manual). Em cada cylinder:
+
+$$
+\text{ciclos por minuto} = \frac{800}{2} = 400
+$$
+
+O piston sobe 800 vezes e desce 800 vezes por minuto, porque cada volta tem uma
+subida e uma descida. O camshaft gira a $800 \div 2 = 400$ rpm.
+
+**Contraexemplo:** um motor **de dois tempos**, como o de muitas motosserras e
+motos antigas, faz o ciclo inteiro em uma volta só. Nele, as contas acima não
+valem: há um power stroke por volta, e não por duas. Os motores de carro deste
+curso são todos de quatro tempos, por isso a divisão por 2 vale aqui.
+
+### Mais de um cylinder
+
+Num multicylinder engine, cada cylinder faz o próprio ciclo, em momentos
+diferentes. O fabricante distribui os power strokes ao longo das duas voltas,
+para o crankshaft receber um empurrão em intervalos iguais. O intervalo é:
+
+$$
+\text{graus entre power strokes} = \frac{720^\circ}{\text{número de cylinders}}
+$$
+
+Num motor de 4 cylinders, $720^\circ \div 4 = 180^\circ$: um power stroke a cada
+meia volta, ou seja, **dois por volta**. Num de 8 cylinders,
+$720^\circ \div 8 = 90^\circ$. Mais cylinders dão empurrões mais próximos, e por
+isso o motor gira mais liso. Essa conta supõe intervalos iguais, que é o caso
+da maioria dos motores de rua; o service manual de cada motor mostra a ordem
+de queima.
+
+## Como falha e como diagnosticar
+
+O ciclo depende de quatro condições. Cada uma pode falhar, e cada falha produz
+o mesmo sintoma visível: o cylinder não faz o power stroke, ou faz fraco. Isso
+é um misfire.
+
+| O que o cylinder precisa | O que falha | Como confirmar |
+|---|---|---|
+| mistura entrando no intake stroke | fuel injector sem pulso, intake valve que não abre | testes do fuel system (lição 7) |
+| mistura apertada no compression stroke | vazamento: piston ring gasto, valve que não assenta, head gasket queimada | compression test |
+| faísca no fim do compression stroke | spark plug, ignition coil ou cabo com defeito | testes do ignition system (lição 5) |
+| gás saindo no exhaust stroke | exhaust valve que não abre, escapamento entupido | testes de restrição (capítulos adiante) |
+
+O que o sistema deveria fazer: cada cylinder, a cada duas voltas, aperta a
+mistura com as valves fechadas. Se a pressão no fim do compression stroke está
+baixa, sobrou algum caminho de vazamento. O compression test mede justamente
+essa pressão.
+
+### O compression test
+
+A ideia do teste é simples de dizer e pede cuidado para fazer — os riscos e o
+passo a passo estão na seção “Na oficina”, mais abaixo; leia antes de fazer.
+Em resumo: a spark plug sai do cylinder e, no lugar dela, entra um
+**compression gauge**, um relógio que marca a maior pressão que recebeu. Com a
+ignição e a injeção desabilitadas, como manda o service manual, o starter
+motor gira o motor por alguns compression strokes, e o relógio mostra a
+pressão máxima.
+
+O que cada resultado significa:
+
+- **Todos os cylinders parecidos e dentro do que o manual pede:** a vedação
+  está boa. O misfire vem de outra coisa: faísca ou combustível.
+- **Um cylinder bem mais baixo que os outros:** esse cylinder vaza. Ainda não
+  se sabe onde.
+- **Dois cylinders vizinhos baixos:** suspeita forte de head gasket queimada
+  entre os dois. A head gasket é a peça que separa um cylinder do vizinho.
+- **Zero ou quase zero:** vazamento grande, como uma valve que não fecha ou um
+  piston furado.
+
+O número exato que conta como “bom” e a diferença aceitável entre cylinders
+estão no service manual de cada motor. Não use um número de cabeça.
+
+O **wet compression test** (teste molhado) separa os piston rings das
+outras causas. Ponha uma pequena quantidade de óleo de motor no cylinder
+baixo, pelo furo da spark plug, e repita o teste. O óleo forma uma película que
+veda por um momento a folga dos piston rings. Então:
+
+- se a pressão **sobe bastante**, o vazamento estava nos piston rings, que o
+  óleo vedou;
+- se a pressão **quase não muda**, o vazamento está num lugar que o óleo não
+  alcança: uma valve que não assenta ou a head gasket.
+
+> **Erro comum:** concluir “piston rings gastos” só porque a compressão está
+> baixa. A conclusão é tentadora porque os rings são a peça mais famosa da
+> vedação. Mas uma exhaust valve queimada dá a mesma leitura baixa. Sem o teste
+> molhado, você pode desmontar o motor inteiro para trocar rings que estavam
+> bons.
+
+## Na oficina: o compression test
+
+:::danger Antes de começar
+
+- **O motor vai girar.** Com o starter motor acionado, a drive belt, as polias e
+  o ventilador giram. Mantenha mãos, roupas, cabelo e ferramentas longe deles.
+- **Desabilite a ignição e a injeção** do jeito que o service manual manda
+  (normalmente tirando um fusível ou relay). Com a spark plug fora e a ignição
+  ligada, a faísca pode saltar no cabo ou no conector e dar choque, ou
+  acender o combustível que sai pelo furo da spark plug.
+- **Motor quente queima.** O exhaust manifold e o coolant ficam muito quentes.
+  Alguns manuais pedem o teste com o motor na temperatura de trabalho: nesse
+  caso, use gloves e trabalhe longe do exhaust manifold.
+- **Use safety glasses.** Ao girar o motor sem as spark plugs, sai ar, óleo e
+  sujeira pelos furos.
+- **Combustível e vapores:** trabalhe em local ventilado, sem chama nem
+  faísca por perto.
+
+:::
+
+Ferramentas: compression gauge com o adaptador de rosca certo para a spark
+plug, chave de vela, e uma battery bem carregada, para o motor girar sempre na
+mesma rotação durante o teste.
+
+Procedimento geral, sem números de um veículo específico:
+
+1. Leia o procedimento no service manual: como desabilitar a ignição e a
+   injeção, se o motor deve estar quente, e qual é a leitura esperada.
+2. Desabilite a ignição e a injeção.
+3. Tire as spark plugs, anotando de qual cylinder saiu cada uma.
+4. Rosqueie o compression gauge no furo do cylinder 1.
+5. Abra o throttle valve (acelerador no fundo), para o ar entrar livre.
+6. Gire o motor pelo número de compression strokes que o manual indicar e
+   anote a leitura máxima.
+7. Zere o relógio e repita em cada cylinder.
+8. Compare as leituras entre si e com o manual. Se algum cylinder ficou baixo,
+   faça o wet test nele.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — rpm em ciclos
+
+Um motor de quatro cylinders gira a 2400 rpm na estrada (valor ilustrativo).
+Quantos ciclos por minuto faz cada cylinder? Quanto tempo dura um stroke?
+
+**Solução.** Um ciclo custa duas voltas:
+
+$$
+\text{ciclos por minuto} = \frac{2400}{2} = 1200
+$$
+
+Para o tempo de um stroke, primeiro o tempo de uma volta. São 2400 voltas em
+60 s, então uma volta leva $60 \div 2400 = 0.025\,\text{s}$. Um stroke é meia
+volta:
+
+$$
+\text{tempo de um stroke} = \frac{0.025}{2} = 0.0125\,\text{s} = 12.5\,\text{ms}
+$$
+
+Em pouco mais de um centésimo de segundo, a mistura entra, ou é apertada, ou
+queima, ou sai. É por isso que o livro pede que você consiga imaginar o ciclo:
+ninguém vê isso acontecer.
+
+### Exemplo 2 — power strokes por volta (pause e tente)
+
+Um motor de 6 cylinders está em idle a 600 rpm (ilustrativo). Quantos power
+strokes por minuto o crankshaft recebe, somando todos os cylinders? E de quantos
+em quantos graus?
+
+Pause e tente antes de abrir.
+
+<details>
+<summary>Solução</summary>
+
+Cada cylinder faz um power stroke por ciclo, e faz $600 \div 2 = 300$ ciclos por
+minuto. Com 6 cylinders:
+
+$$
+6 \times 300 = 1800\ \text{power strokes por minuto}
+$$
+
+O intervalo é $720^\circ \div 6 = 120^\circ$. Então são três power strokes por
+volta, porque $360^\circ \div 120^\circ = 3$.
+
+</details>
+
+### Exemplo 3 — o motor girou 540°: onde está o cylinder? (pause e tente)
+
+Um cylinder começa no TDC, no início do intake stroke. O crankshaft gira 540°.
+Em que ponto o piston está, e em que stroke o cylinder vai entrar?
+
+<details>
+<summary>Solução</summary>
+
+Cada stroke é 180°. Então $540 \div 180 = 3$ strokes completos: intake,
+compression e power. O piston está no fim do power stroke, ou seja, no BDC. O
+próximo stroke é o exhaust stroke, com a exhaust valve abrindo.
+
+Confira no controle do ciclo interativo, levando o crankshaft a 540°.
+
+</details>
+
+### Exemplo 4 — leitura de um compression test (pause e tente)
+
+Um motor de quatro cylinders dá estas leituras (valores ilustrativos, só para o
+exemplo): cylinder 1, 150 psi (1034 kPa); cylinder 2, 148 psi (1020 kPa);
+cylinder 3, 95 psi (655 kPa); cylinder 4, 152 psi (1048 kPa). Qual cylinder
+vaza, e qual é o próximo teste?
+
+<details>
+<summary>Solução</summary>
+
+Três cylinders estão perto uns dos outros, entre 148 e 152 psi. O cylinder 3
+está muito abaixo, a 95 psi. Então ele vaza no compression stroke. O cylinder
+vizinho não está baixo, por isso a head gasket entre dois cylinders é menos
+provável.
+
+O próximo teste é o wet test no cylinder 3. Se a leitura subir bastante,
+os piston rings são os suspeitos; se quase não mudar, uma das valves desse
+cylinder não está assentando.
+
+</details>
+
+## A queixa, resolvida
+
+Volte ao sedã que treme no semáforo, com misfire no cylinder 3.
+
+O que o sistema deveria fazer: o cylinder 3, a cada duas voltas, encher,
+apertar, queimar e esvaziar. O misfire diz que o power stroke dele falha. As
+causas possíveis, pela tabela de diagnóstico, são falta de mistura, falta de
+faísca ou vazamento na compressão.
+
+O técnico faz o compression test e encontra as leituras do Exemplo 4: o
+cylinder 3 a 95 psi, bem abaixo dos outros. Então o cylinder 3 vaza no
+compression stroke. A mistura escapa enquanto o piston sobe, chega fraca ao
+fim do stroke e não queima direito.
+
+O wet test leva o cylinder 3 de 95 para 100 psi (ilustrativo): quase nada.
+O óleo vedou a folga dos piston rings e a pressão não subiu, então o vazamento
+não está nos rings. Sobram as valves desse cylinder.
+
+**O que muda:** só a vedação do cylinder 3. **O que permanece igual:** a
+faísca e o combustível podem estar perfeitos, e mesmo assim o cylinder falha,
+porque falta o aperto do compression stroke. Para confirmar qual valve vaza, o
+passo seguinte é um cylinder leakage test, que você verá em
+capítulos adiante. Nesse teste, o técnico põe ar comprimido no cylinder e
+escuta por onde ele sai: ar saindo pelo escapamento aponta a exhaust valve;
+pelo throttle body, a intake valve.
+
+## Perguntas de verificação
+
+1. Por que o piston desce duas vezes por ciclo, mas só uma das descidas
+   produz força?
+2. No intake stroke, o que de fato empurra a mistura para dentro do cylinder?
+3. Por que as duas valves precisam estar fechadas no compression stroke e no
+   power stroke?
+4. O que faz o crankshaft continuar girando nos três strokes que não produzem
+   força?
+5. Por que o camshaft gira à metade da velocidade do crankshaft?
+
+<details>
+<summary>Respostas</summary>
+
+1. Uma descida é o intake stroke, em que o piston só abre espaço para a
+   mistura entrar. A outra é o power stroke, em que a pressão da queima
+   empurra o piston. Só na segunda há gás quente fazendo força sobre ele.
+2. A atmospheric pressure do ar de fora. O piston, descendo, deixa a pressão no
+   cylinder abaixo da de fora (vacuum), e o ar corre da pressão maior para a
+   menor.
+3. No compression stroke, para a mistura ficar apertada em vez de escapar. No
+   power stroke, para a pressão da queima agir sobre o piston em vez de sair
+   pelos dutos.
+4. O flywheel, que guarda o giro do power stroke, e, nos motores de vários
+   cylinders, os power strokes dos outros cylinders.
+5. Cada valve abre uma vez por ciclo, e um ciclo leva duas voltas do
+   crankshaft. Então o camshaft precisa dar uma volta enquanto o crankshaft dá
+   duas.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Escreva em inglês o nome de cada stroke, na ordem.
+
+b) Em qual stroke a exhaust valve está aberta?
+
+c) O que significa a sigla rpm?
+
+### 2. Explicação
+
+a) Explique com suas palavras por que a mistura apertada empurra o piston com
+mais força do que a mistura solta.
+
+b) Explique por que um vazamento na head gasket atrapalha o power stroke, e não
+só o compression stroke.
+
+### 3. Aplicação direta
+
+a) Um motor gira a 3000 rpm (ilustrativo). Quantos ciclos por minuto faz cada
+cylinder?
+
+b) Nesse mesmo motor, se ele tiver 4 cylinders, quantos power strokes por
+minuto o crankshaft recebe no total?
+
+c) A que rotação gira o camshaft de um motor a 1200 rpm?
+
+### 4. Variação
+
+a) O crankshaft de um cylinder deu 2.5 voltas a partir do TDC no início do
+intake stroke. Quantos strokes foram completados, e em qual stroke o cylinder
+está entrando?
+
+b) Um motor de 8 cylinders: de quantos em quantos graus acontece um power
+stroke? Compare com o de 4 cylinders.
+
+### 5. Caso de diagnóstico
+
+Um motor de quatro cylinders tem misfire nos cylinders 2 e 3. O compression
+test dá (valores ilustrativos): cylinder 1, 145 psi; cylinder 2, 60 psi;
+cylinder 3, 62 psi; cylinder 4, 148 psi. O wet test quase não muda os
+cylinders 2 e 3. Qual é a causa provável e por quê? Que outro sinal você
+procuraria para confirmar?
+
+<details>
+<summary>Dica</summary>
+
+Os dois cylinders baixos são vizinhos. Que peça separa um cylinder do
+vizinho?
+
+</details>
+
+### 6. Justificativa
+
+a) Por que o compression test é feito com o throttle valve aberto?
+
+b) Por que o wet test separa os piston rings das valves?
+
+### 7. Formato ASE
+
+**1.** While discussing the four-stroke cycle, Technician A says that only one
+of every two downward movements of the piston is a power stroke. Technician B
+says that the piston delivers power every time it moves down. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+**2.** In a four-stroke engine, both the intake valve and the exhaust valve are
+closed during the:
+
+- A. intake and exhaust strokes.
+- B. compression and power strokes.
+- C. intake and compression strokes.
+- D. power and exhaust strokes.
+
+**3.** An engine idling at 900 rpm completes how many four-stroke cycles per
+minute in each cylinder?
+
+- A. 225
+- B. 450
+- C. 900
+- D. 1800
+
+**4.** A compression test shows one cylinder much lower than the others.
+Technician A says that if the reading rises a lot after a small amount of oil
+is added to the cylinder, worn piston rings are the likely cause. Technician B
+says that a valve that does not seat would also make the reading rise a lot
+after adding oil. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) Intake stroke, compression stroke, power stroke, exhaust stroke.
+
+b) No exhaust stroke.
+
+c) *Revolutions per minute*: rotações (voltas) do crankshaft por minuto.
+
+**2. Explicação**
+
+a) Apertar a mistura deixa a pressão e a temperatura dela mais altas antes da
+faísca. A mistura apertada e quente queima mais rápido e mais por inteiro. Por
+isso, a pressão que ela faz ao queimar é maior, e a força no piston também.
+
+b) No compression stroke, parte da mistura escapa pela head gasket e o aperto
+fica fraco. No power stroke, a pressão da queima também escapa pelo mesmo
+caminho em vez de empurrar o piston. As duas perdas somam, e o power stroke
+sai fraco ou nem acontece.
+
+**3. Aplicação direta**
+
+a) $3000 \div 2 = 1500$ ciclos por minuto.
+
+b) $4 \times 1500 = 6000$ power strokes por minuto. Se você encontrou 12 000,
+provavelmente esqueceu de dividir as rpm por 2: cada cylinder faz só um power
+stroke a cada **duas** voltas.
+
+c) $1200 \div 2 = 600$ rpm.
+
+**4. Variação**
+
+a) Cada volta tem dois strokes, então $2.5 \times 2 = 5$ strokes. O ciclo tem
+4: depois dos 4 primeiros, o cylinder completou mais um intake stroke. Ele
+está no BDC, entrando no compression stroke. Em graus: $2.5 \times 360^\circ =
+900^\circ$, e $900^\circ - 720^\circ = 180^\circ$ do segundo ciclo, o fim do
+intake stroke.
+
+b) $720^\circ \div 8 = 90^\circ$. O de 4 cylinders recebe um power stroke a cada
+180°; o de 8, com o dobro de cylinders, recebe um empurrão a cada 90°, e gira
+mais liso.
+
+**5. Caso de diagnóstico**
+
+Os cylinders 2 e 3 estão baixos e são vizinhos; o 1 e o 4 estão normais. O
+wet test quase não muda nada, então o vazamento não está nos piston
+rings. A causa provável é a head gasket queimada entre os cylinders 2 e 3: a
+mistura de um passa para o outro, e os dois perdem compressão. Para confirmar,
+procure sinais de que a gasket também deixa passar coolant: perda de coolant
+sem vazamento visível, fumaça branca no escapamento ou bolhas no radiator com o
+motor funcionando — a radiator cap é retirada com o motor **frio**, antes de
+ligar; nunca abra a tampa com o motor quente (lição 6). Não conclua “dois cylinders com rings gastos” — a chance de
+dois cylinders vizinhos gastarem os rings ao mesmo tempo é pequena, e o teste
+molhado já descartou os rings.
+
+**6. Justificativa**
+
+a) Com o throttle valve fechado, o ar mal entra no cylinder durante o teste. A
+pressão no fim do compression stroke sai baixa em todos os cylinders, e a
+leitura não mostra a vedação de verdade. Aberto, o cylinder enche bem e a
+leitura compara só a vedação.
+
+b) O óleo veda por um momento a folga entre o piston e a parede do cylinder,
+que é onde os piston rings trabalham. Ele não chega às valve seats, no alto da
+câmara. Então, se a pressão sobe com o óleo, o vazamento era nos rings; se não
+sobe, está em outro lugar.
+
+**7. Formato ASE**
+
+**1. A (A only).** O piston desce duas vezes por ciclo: no intake stroke e no
+power stroke. Só a segunda descida é um power stroke, então “um a cada dois
+movimentos para baixo” está certo. O Técnico B erra porque a descida do intake
+stroke não entrega força: ela consome força para baixar o piston.
+
+**2. B.** No compression stroke, as duas valves ficam fechadas para a mistura
+ser apertada; no power stroke, para a pressão da queima empurrar o piston.
+**A** está errada: no intake stroke a intake valve está aberta, e no exhaust
+stroke a exhaust valve está aberta. **C** erra o intake stroke. **D** erra o
+exhaust stroke.
+
+**3. B (450).** Um ciclo leva duas voltas, então $900 \div 2 = 450$. **C (900)**
+confunde voltas com ciclos. **D (1800)** multiplica por 2 em vez de dividir.
+**A (225)** divide por 4, confundindo strokes com voltas.
+
+**4. A (A only).** O óleo veda a folga dos piston rings, e só ela. Se a leitura
+sobe bastante, os rings eram o caminho do vazamento. O Técnico B erra: uma
+valve que não assenta vaza no alto da câmara, onde o óleo não chega, e por isso
+a leitura quase não muda no wet test. É exatamente essa diferença que faz
+o wet test útil.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o four-stroke cycle é intake, compression, power e
+  exhaust. Cada stroke é meia volta do crankshaft; o ciclo inteiro são duas
+  voltas e um único power stroke por cylinder.
+- **Quando usar:** para prever o que cada valve e o piston deveriam estar
+  fazendo num ângulo do crankshaft; para converter rpm em ciclos (dividir por
+  2); e para pensar num misfire: falta mistura, falta faísca ou falta
+  vedação?
+- **Com o que se conecta:** com a pressão da queima (lição 1), com o piston, o
+  crankshaft e o flywheel (lição 2), com as valves e o camshaft a meia
+  velocidade (lição 3). Adiante, com o ignition system (lição 5) e o fuel
+  system (lição 7), que alimentam a faísca e a mistura no momento certo do
+  ciclo.
+
+Termos em inglês desta lição: four-stroke cycle, stroke, intake stroke,
+compression stroke, power stroke, exhaust stroke, revolution, rpm, idle,
+vacuum, atmospheric pressure, misfire, compression test, compression gauge,
+multiport fuel injection, throttle body injection, check engine light, scan
+tool, DTC.

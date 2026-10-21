@@ -1,0 +1,124 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.parede {
+  fill: var(--ifm-color-emphasis-300);
+}
+
+.paredeContorno {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.hachura {
+  stroke: var(--ifm-color-emphasis-600);
+  stroke-width: 1.2;
+}
+
+.pistao {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.biela {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.pino {
+  fill: var(--ifm-color-emphasis-200);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.anel {
+  fill: var(--ifm-font-color-base);
+}
+
+.anelOleo {
+  fill: var(--ifm-color-emphasis-600);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.4;
+}
+
+.gas {
+  fill: var(--mv-tone-2);
+  fill-opacity: 0.3;
+}
+
+.oleo {
+  fill: var(--mv-tone-1);
+  fill-opacity: 0.75;
+}
+
+.furo {
+  stroke: var(--mv-tone-1);
+  stroke-width: 6;
+  opacity: 0.4;
+}
+
+.pressao,
+.oleoSeta,
+.movimento,
+.cota {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pressao {
+  stroke: var(--mv-tone-2);
+  stroke-width: 3;
+}
+
+.oleoSeta {
+  stroke: var(--mv-tone-1);
+  stroke-width: 3;
+}
+
+.movimento {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 3;
+}
+
+.cota {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.4;
+}
+
+.guia {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.chamada {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1;
+}
+
+.ponto {
+  fill: var(--ifm-font-color-base);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}

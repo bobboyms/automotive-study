@@ -47,7 +47,9 @@ caminho", funcionam melhor que rótulos genéricos.
    manhã". A lição **volta e resolve essa queixa** assim que a ferramenta fica
    pronta: a ideia precisa pagar o que prometeu na abertura.
 2. **Mapa das ideias** — glossário mínimo dos termos que a lição vai construir,
-   em tabela com três colunas: português · inglês · o que é, em uma linha.
+   em tabela com três colunas: português · inglês · o que é, em uma linha. Na
+   AUT-116 em diante, a ordem é inglês · português · o que é, e o texto da
+   lição usa o termo em inglês (convenção em `CLAUDE.md`, “Idioma e escrita”).
 3. **Onde isso aparece** — em que sistemas do carro, em qual disciplina da Wake
    Tech e em qual área da prova ASE.
 4. **Ideias anteriores que voltam aqui** — nomeadas explicitamente, com link
@@ -280,8 +282,12 @@ ideia, não pelo que é mais rápido de escrever:
 
 Duas obrigações ao entregar qualquer desenho:
 
-- **Olhe a página renderizada**, não só o código-fonte. Rótulo cortado,
-  sobreposição e estouro no celular não aparecem no diff.
+- **Confira renderizado e corrija até ficar perfeito.** Rode
+  `npm run build && npm run figuras`, abra cada folha de `.figuras/` e olhe cada
+  figura no claro, no escuro e no celular. Achou rótulo pequeno, texto
+  encostando, linha apagada, fio cruzando fio ou desenho cortado: corrija e
+  rode de novo, até não sobrar nada. O ciclo e as regras de desenho estão em
+  `CLAUDE.md` (seção “Figuras”) e em `src/components/README.md`.
 - **Nunca mais de três cores.** Quando um diagrama parece precisar de uma
   quarta, quase sempre duas regiões representam a mesma coisa e devem dividir a
   mesma cor. Em esquema elétrico, siga a convenção do manual quando ela existir
@@ -380,7 +386,8 @@ Antes de entregar qualquer lição nova ou revisada (além do checklist técnico
 - [ ] todo procedimento com risco traz o aviso de segurança antes do primeiro
       passo;
 - [ ] nenhuma especificação de memória; todo valor ilustrativo está marcado;
-- [ ] todo termo técnico tem o par em inglês na primeira aparição;
+- [ ] todo termo técnico tem o par em inglês na primeira aparição (na
+      AUT-116: o termo está em inglês no texto e existe no dicionário);
 - [ ] há questões no formato ASE, com gabarito que explica cada alternativa;
 - [ ] as perguntas de verificação têm resposta;
 - [ ] a passada de linguagem foi feita no texto novo ou alterado: termo
@@ -388,7 +395,8 @@ Antes de entregar qualquer lição nova ou revisada (além do checklist técnico
       nenhuma figura de linguagem por explicar · conectivos e referências
       escritos, sem "isso" solto e sem número de origem desconhecida ·
       nenhum "basta / apenas / é só / simplesmente / obviamente / fácil";
-- [ ] todo desenho novo foi conferido **na página renderizada**, nos temas claro
-      e escuro e numa largura de celular;
+- [ ] todo desenho novo ou alterado passou por `npm run figuras` e foi olhado
+      na folha, nos temas claro e escuro e no celular, e corrigido até não ter
+      nenhum defeito;
 - [ ] releitura final na pele do aluno: que pergunta ele faria que o texto não
       responde?
