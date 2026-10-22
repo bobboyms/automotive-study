@@ -111,13 +111,13 @@ export default function FioEletrons({corrente = false, caption}) {
             <SvgMath
               x={X0 + 10}
               y={Y1 + 22}
-              math="\text{polo }-"
+              math="\text{terminal −}"
               fontSize={16}
             />
             <SvgMath
               x={X1 - 10}
               y={Y1 + 22}
-              math="\text{polo }+"
+              math="\text{terminal +}"
               fontSize={16}
             />
           </g>
@@ -128,8 +128,8 @@ export default function FioEletrons({corrente = false, caption}) {
           y={Y0 - 16}
           math={
             corrente
-              ? '\\text{com bateria: todos andam para o polo }+'
-              : '\\text{sem bateria: cada um para um lado}'
+              ? '\\text{com battery: todos andam para o terminal +}'
+              : '\\text{sem battery: cada um para um lado}'
           }
           fontSize={16}
           tone={1}

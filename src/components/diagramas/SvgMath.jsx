@@ -1,5 +1,7 @@
 import React from 'react';
 import metricas from 'katex/src/fontMetricsData';
+import RotuloTermo from './RotuloTermo';
+import chaveDoTermo from './termos';
 
 // Rótulo em LaTeX dentro de um SVG, desenhado como <text> de SVG com as
 // fontes do KaTeX: o diagrama sai na mesma fonte das fórmulas ao redor, e um
@@ -19,6 +21,11 @@ import metricas from 'katex/src/fontMetricsData';
 //   expoente `^x` ou `^{xy}`
 // Qualquer outro comando derruba o build, para nenhum rótulo sair errado sem
 // ninguém ver. Se uma lição precisar de mais, acrescente aqui.
+//
+// Rótulo que é só texto — `\text{fuse}`, `\text{queimada}` — vira o
+// `RotuloTermo` das figuras da AUT-116, na fonte do site. Se o texto for um
+// termo do dicionário, ele ganha o sublinhado pontilhado e o clique, que
+// mostra o português no balão.
 
 // O CSS do KaTeX aumenta toda fórmula para 1.21 em; os tamanhos dos
 // componentes foram acertados com esse aumento, então ele continua aqui.
@@ -217,6 +224,11 @@ export default function SvgMath({
   halo = false,
 }) {
   const fs = fontSize * ESCALA;
+  const soTexto = /^\\text\{([^{}]+)\}$/.exec(String(math).trim());
+  if (soTexto) {
+    const termo = chaveDoTermo(soTexto[1]);
+    return <RotuloTermo k={termo} texto={soTexto[1]} x={x} y={y} anchor={anchor} fs={fs} tone={tone} />;
+  }
   // `y` é o meio do rótulo: a linha de base fica um terço do tamanho da fonte
   // abaixo, o que centra as maiúsculas e os números na altura pedida.
   return (

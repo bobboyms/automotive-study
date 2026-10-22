@@ -153,14 +153,14 @@ fonte, proteção, controle, carga, massa.
 | `fusivel` | `false` remove o fusível (padrão `true`) |
 | `interruptor` | `'fechado'` (padrão), `'aberto'` ou `null` para remover |
 | `carga` | `'lampada'` (padrão) ou `'resistor'` |
-| `rotuloCarga` | LaTeX ao lado da carga (padrão: “lâmpada” ou “resistor”) |
+| `rotuloCarga` | LaTeX ao lado da carga (padrão: “bulb” ou “resistor”) |
 | `retorno` | `'fio'` (padrão) ou `'massa'`, que desenha o símbolo de massa e a carroceria |
 | `corrente` | desenha as setas da corrente. Não aparecem se o circuito estiver aberto |
 | `sentido` | `'convencional'` (padrão, do + para o −) ou `'eletrons'` |
 | `rotuloCorrente` | LaTeX junto das setas, como `I` ou `4\,\text{A}` |
 | `quebra` | desenha um fio rompido no fio de cima; o circuito fica aberto |
 | `curto` | desenha um caminho do positivo à massa antes da carga; as setas passam por ele |
-| `nomes` | `false` tira os nomes “fusível” e “interruptor” |
+| `nomes` | `false` tira os nomes “fuse” e “switch” |
 | `caption` | **texto simples**, não LaTeX — legenda abaixo da figura |
 
 A bateria segue o símbolo dos esquemas: placa longa é o positivo, placa curta e
@@ -268,7 +268,7 @@ barra é **dupla**. As props com aspas duplas continuam com barra simples.
 | `cargas` | lista de cargas, cada uma `{tipo, rotulo, queda, corrente, aberta}` (ver abaixo) |
 | `fonte` | LaTeX ao lado da bateria (padrão `12\,\text{V}`) |
 | `fusivel`, `interruptor` | desenham o fusível e o interruptor fechado na parte comum |
-| `nomes` | `false` tira os nomes “fusível” e “interruptor” |
+| `nomes` | `false` tira os nomes “fuse” e “switch” |
 | `corrente` | desenha as setas. Em série, somem se alguma carga estiver aberta; em paralelo, some só a do ramo aberto |
 | `rotuloCorrente` | LaTeX da corrente total |
 | `curto` | só em paralelo: um ramo a mais, tracejado, sem carga |
@@ -290,7 +290,7 @@ Os tons seguem os papéis do `Circuito`: azul é corrente, laranja é carga, ver
 
 O tamanho dos rótulos é calculado a partir da largura do desenho, para continuar
 legível no celular — por isso uma figura com mais ramos sai com letras maiores.
-“fusível” vai embaixo do fio e “interruptor” em cima: na mesma linha, os dois
+“fuse” vai embaixo do fio e “switch” em cima: na mesma linha, os dois
 se encostavam. Em paralelo, a corrente total aparece junto da seta do fio da
 bateria, que é por onde ela passa.
 
@@ -360,21 +360,27 @@ cruzar a preta, passa por cima com uma borda da cor do fundo.
 
 ---
 
-# AUT-116: termos clicáveis e desenhos do motor
+# Termos clicáveis (TRN-120 e AUT-116) e desenhos do motor
 
 ## Termos em inglês: `Termo`, o plugin e o dicionário
 
-Nas lições da AUT-116, as peças e os termos técnicos ficam **em inglês** no
-texto, e um toque no termo mostra o português. Três peças fazem isso:
+Nas lições da TRN-120 e da AUT-116, as peças e os termos técnicos ficam
+**em inglês** no texto, e um toque no termo mostra o português. Três peças
+fazem isso:
 
 - `src/data/termos.json` — o dicionário. Cada termo tem `en` (a chave),
   `pt`, `def` (uma linha, em português), `var` (outras grafias; o plural com
-  -s/-es/-ies é automático) e `licao` (a lição em que é ensinado, chave de
-  `licoes`). O glossário (`TabelaTermos`) é gerado dele.
+  -s/-es/-ies é automático), `so` (opcional: pedaços do caminho das páginas
+  em que o termo vale — “power” só na TRN-120, porque na AUT-116 é o power
+  stroke) e `licao` (a lição em que é ensinado, chave de `licoes`, que dá o
+  título e a URL). O glossário (`TabelaTermos curso="..."`) é gerado dele.
 - `src/plugins/remark-termos.js` — procura os termos no texto das páginas de
-  `docs/aut-116-*` e troca cada um por `<Termo k="...">`. Não mexe em títulos,
-  links, código, fórmulas, `<summary>` nem dentro de componentes. Uma forma que
-  aparece em dois termos derruba o build, com a mensagem dizendo quais.
+  `docs/trn-120-*` e `docs/aut-116-*` e troca cada um por `<Termo k="...">`.
+  Não mexe em títulos, links, código, fórmulas, `<summary>` nem dentro de
+  componentes. Uma forma que aparece em dois termos derruba o build, com a
+  mensagem dizendo quais. Siglas (COM, MIL, AC) só são achadas em
+  maiúsculas — senão “com” e “mil” do português virariam botão. Termo de
+  várias palavras é achado também quebrado no fim da linha.
 - `src/components/Termo` + `src/theme/Root.js` — o botão no texto e o balão
   que mostra `pt` e `def`. O balão escuta o clique em **qualquer** elemento
   com `data-termo`, então os rótulos das figuras usam o mesmo balão.
@@ -419,6 +425,12 @@ motor: texto na fonte do site, sublinhado pontilhado, clicável quando tem `k`.
 O rótulo tem um contorno na cor do papel, para continuar legível quando passa
 sobre um traço. Por isso ele **não** pode ficar em cima de uma linha que
 importa: o contorno apaga o pedaço de baixo.
+
+Nos desenhos de circuito da TRN-120, os rótulos passam pelo `SvgMath`. Um
+rótulo que é só texto — `math="\text{fuse}"`, `rotulo: '\\text{trailer}'` —
+vira um `RotuloTermo` sozinho, na fonte do site; se o texto for um termo do
+dicionário (`src/components/diagramas/termos.js` faz a busca), ganha também
+o clique. Rótulo com grandeza (`12\,\text{V}`, `R_1`) continua em KaTeX.
 
 ## Motor
 

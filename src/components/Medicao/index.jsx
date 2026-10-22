@@ -181,10 +181,10 @@ export default function Medicao({
         <rect className={styles.post} x={284} y={180} width={22} height={10} />
         <SvgMath x={225} y={208} math="-" fontSize={20} />
         <SvgMath x={295} y={208} math="+" fontSize={20} />
-        <SvgMath x={260} y={246} math="\text{bateria}" fontSize={FS} />
+        <SvgMath x={260} y={246} math="\text{battery}" fontSize={FS} />
         <Ponta J={J} de="COM" para={[225, 180]} c1={[J.COM, 140]} c2={[225, 150]} cor="preta" />
         <Ponta J={J} de="V" para={[295, 180]} c1={[J.V, 140]} c2={[295, 150]} cor="vermelha" />
-        <SvgMath x={260} y={296} math="\text{nenhuma carga ligada}" fontSize={FS} />
+        <SvgMath x={260} y={296} math="\text{nenhuma load ligada}" fontSize={FS} />
         <Multimetro leitura={leitura} vermelhaEm={vermelhaEm} MX={MX} MY={MY} />
       </Figura>
     );
@@ -202,7 +202,7 @@ export default function Medicao({
         <Lampada x={cx} y={190} deitada />
         <Ponta J={J} de="COM" para={[cx - 22, 190]} c1={[J.COM, 150]} c2={[cx - 22, 160]} cor="preta" />
         <Ponta J={J} de="V" para={[cx + 22, 190]} c1={[J.V, 150]} c2={[cx + 22, 160]} cor="vermelha" />
-        <SvgMath x={cx} y={240} math="\text{lâmpada fora do circuito}" fontSize={FS} />
+        <SvgMath x={cx} y={240} math="\text{bulb fora do circuit}" fontSize={FS} />
         <Multimetro leitura={leitura} vermelhaEm={vermelhaEm} MX={MX} MY={MY} />
       </Figura>
     );
@@ -317,7 +317,7 @@ export default function Medicao({
             className={styles.fault}
             d={`M ${OXI_X - 16} ${T} l 4 -7 l 6 14 l 6 -14 l 6 14 l 6 -14 l 4 7`}
           />
-          <SvgMath x={OXI_X} y={T + 24} math="\text{oxidado}" fontSize={FS} tone={3} />
+          <SvgMath x={OXI_X} y={T + 24} math="\text{corrosion}" fontSize={FS} tone={3} />
         </g>
       )}
 
@@ -336,7 +336,7 @@ export default function Medicao({
         <g>
           <circle className={styles.openEnd} cx={R} cy={LOAD_Y - 22} r={3.5} />
           <circle className={styles.openEnd} cx={R} cy={LOAD_Y + 22} r={3.5} />
-          <SvgMath x={R - 14} y={LOAD_Y} math="\text{sem lâmpada}" anchor="end" fontSize={FS} />
+          <SvgMath x={R - 14} y={LOAD_Y} math="\text{sem bulb}" anchor="end" fontSize={FS} />
         </g>
       ) : (
         <Lampada x={R} y={LOAD_Y} />
@@ -344,7 +344,7 @@ export default function Medicao({
 
       {/* fio de baixo: o retorno pela massa */}
       <line className={styles.wire} x1={L} y1={B} x2={R} y2={B} />
-      <SvgMath x={L + 80} y={B - 18} math="\text{massa}" fontSize={FS} />
+      <SvgMath x={L + 80} y={B - 18} math="\text{ground}" fontSize={FS} />
 
       {/* corrente */}
       {circula && (

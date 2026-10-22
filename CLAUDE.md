@@ -123,24 +123,22 @@ Norte, não para uma área ASE.
 
 - Todo o texto visível é em **português com acentuação e cedilha completas**.
 - **Termos em inglês.** O aluno precisa reconhecer o termo em inglês na aula,
-  no manual e na prova, então o inglês nunca é opcional. Há duas convenções,
-  por disciplina:
-  - **TRN-120:** na primeira aparição do termo na página, o português em
-    negrito e o inglês em itálico entre parênteses: **pastilha de freio**
-    (*brake pad*). Daí em diante, o português.
-  - **AUT-116 em diante** (pedido do aluno, que estuda nos EUA): **peças e
-    termos técnicos ficam em inglês no texto**, sem tradução ao lado — “o
-    piston desce e a connecting rod gira o crankshaft”. O plugin
-    `src/plugins/remark-termos.js` transforma cada termo do dicionário
-    `src/data/termos.json` num botão; o toque mostra o português e uma
-    definição. Todo termo usado precisa estar no dicionário (termo novo entra
-    lá). O artigo segue o gênero da palavra em português: **o** piston (o
-    pistão), **a** connecting rod (a biela). Fenômenos físicos (pressão,
-    calor, força, atrito) ficam em português. A tabela “Mapa das ideias” tem
-    as colunas Inglês · Português · O que é. Detalhes em
-    `src/components/README.md`, seção “AUT-116”.
-  - **Figuras:** na AUT-116, os rótulos das figuras também são em inglês e
-    clicáveis (`RotuloTermo`).
+  no manual e na prova, então o inglês nunca é opcional. A convenção vale para
+  todas as disciplinas (pedido do aluno, que estuda nos EUA): **peças e termos
+  técnicos ficam em inglês no texto**, sem tradução ao lado — “o piston desce
+  e a connecting rod gira o crankshaft”, “a current passa pelo fuse e volta
+  pelo ground”. O plugin `src/plugins/remark-termos.js` transforma cada termo
+  do dicionário `src/data/termos.json` num botão; o toque mostra o português
+  e uma definição. Todo termo usado precisa estar no dicionário (termo novo
+  entra lá). O artigo segue o gênero da palavra em português: **o** piston (o
+  pistão), **a** connecting rod (a biela), **a** voltage (a tensão). Na
+  eletricidade, as grandezas — voltage, current, resistance, power — também
+  ficam em inglês. Física pura e fenômenos (átomo, elétron, carga elétrica,
+  energia, pressão, calor, força, atrito) ficam em português. A tabela “Mapa
+  das ideias” tem as colunas Inglês · Português · O que é. Detalhes em
+  `src/components/README.md`, seção “Termos em inglês”.
+  - **Figuras:** os rótulos das figuras também são em inglês e clicáveis
+    (`RotuloTermo`, ou um `SvgMath` cujo rótulo é só `\text{termo}`).
 - **Termos que a oficina usa em inglês** — *scan tool*, DTC, OBD-II, *freeze
   frame* — ficam em inglês, explicados na primeira aparição.
 - **Siglas:** expanda em inglês e traduza: **PCM** (*Powertrain Control
@@ -222,9 +220,10 @@ do corpo. Se o título ficar longo demais para a barra lateral, use
 `sidebars.js` não é gerado automaticamente. Toda página nova precisa ser
 adicionada lá, ou ela existe no site sem nenhum caminho de navegação até ela.
 
-Cada disciplina é uma categoria com o código e o nome em português
-(`'TRN-120 — Eletricidade básica'`). As lições dentro dela são numeradas à mão:
-`'3. Lei de Ohm'`. Esses números **não** têm relação com o prefixo do arquivo —
+Cada disciplina é uma categoria com o código e o nome oficial em inglês
+(`'TRN-120 — Basic Transportation Electricity'`), dividida em subcategorias
+por tópico ou capítulo. As lições são numeradas à mão, na disciplina inteira:
+`"4. Ohm's law"`. Esses números **não** têm relação com o prefixo do arquivo —
 mantê-los sincronizados é responsabilidade de quem edita.
 
 ### Inserir uma lição no meio de uma disciplina
@@ -390,9 +389,9 @@ Toda entrega passa por esta lista:
 - [ ] todas as contas, conversões e o gabarito conferidos por cálculo;
 - [ ] nenhuma especificação de memória; valores ilustrativos marcados;
 - [ ] avisos de segurança antes de todo passo com risco;
-- [ ] termos técnicos com o par em inglês na primeira aparição, e incluídos em
-      `docs/glossario.mdx` (na AUT-116: termo em inglês no texto, presente em
-      `src/data/termos.json`; `node scripts/conferir-termos.mjs` passa);
+- [ ] termos técnicos em inglês no texto e presentes em
+      `src/data/termos.json` (o glossário sai dele);
+      `node scripts/conferir-termos.mjs` passa;
 - [ ] acentuação completa no texto que você escreveu;
 - [ ] o checklist didático da skill `tutor-automotivo` foi aplicado.
 

@@ -1,75 +1,80 @@
 ---
-title: Lei de Ohm
+title: Ohm's law
 ---
 
 import Circuito from '@site/src/components/Circuito';
 import TrianguloOhm from '@site/src/components/TrianguloOhm';
 
-# Lei de Ohm
+# Ohm's law
 
-> **Pergunta central:** sabendo dois números de um circuito, como prever o
+> **Pergunta central:** sabendo dois números de um circuit, como prever o
 > terceiro — e como usar essa previsão para achar um defeito?
 
-## A queixa: o fusível que queima toda vez
+## A queixa: o fuse que queima toda vez
 
 Um cliente reclama:
 
-> “O fusível do farol de milha queima toda vez que eu ligo o farol. Já troquei
+> “O fuse do fog lamp queima toda vez que eu ligo o fog lamp. Já troquei
 > três vezes.”
 
-O farol de milha (*fog lamp*) é a lâmpada baixa, no para-choque, para neblina.
-Para este exemplo, imagine que o circuito dele tem um fusível de 10 A e uma
-lâmpada que, acesa, oferece cerca de 3 Ω de resistência. São valores
-ilustrativos, escolhidos para a conta ficar clara; os de um carro real estão no
-manual.
+O fog lamp é a luz baixa, no para-choque, para neblina. Para este exemplo,
+imagine que o circuit dele tem um fuse de 10 A e uma bulb que, acesa, oferece
+cerca de 3 Ω de resistance. São valores ilustrativos, escolhidos para a conta
+ficar clara; os de um carro real estão no manual.
 
-O fusível existe para queimar quando a corrente passa do limite dele. Se ele
-queima toda vez, a corrente está passando de 10 A. Mas a lâmpada é a mesma de
-sempre, e a bateria também. **De onde vem tanta corrente?**
+O fuse existe para queimar quando a current passa do limite dele. Se ele
+queima toda vez, a current está passando de 10 A. Mas a bulb é a mesma de
+sempre, e a battery também. **De onde vem tanta current?**
 
-Na lição anterior vimos que a resistência no caminho decide a corrente. Esta
+Na lição anterior vimos que a resistance no caminho decide a current. Esta
 lição transforma essa frase numa conta, e a conta vai dizer onde está o defeito.
 
 ## Mapa das ideias
 
-| Português | Inglês | O que é |
+| Inglês | Português | O que é |
 |---|---|---|
-| lei de Ohm | *Ohm's law* | a relação entre tensão, corrente e resistência: $V = I \times R$ |
-| diretamente proporcional | *directly proportional* | quando uma grandeza dobra, a outra também dobra |
-| inversamente proporcional | *inversely proportional* | quando uma grandeza dobra, a outra cai pela metade |
-| curto à massa | *short to ground* | caminho indesejado, sem carga, entre o positivo e a massa |
-| queda de tensão | *voltage drop* | a parte da tensão que fica num trecho do circuito |
+| Ohm's law | lei de Ohm | a relação entre voltage, current e resistance: $V = I \times R$ |
+| Ohm's law triangle | triângulo da lei de Ohm | desenho com V em cima e I e R embaixo, para lembrar as três formas da lei |
+| directly proportional | diretamente proporcional | quando uma grandeza dobra, a outra também dobra |
+| inversely proportional | inversamente proporcional | quando uma grandeza dobra, a outra cai pela metade |
+| short to ground | curto à massa | caminho indesejado, sem load, entre o positivo e o ground |
+| voltage drop | queda de tensão | a parte da voltage que fica num trecho do circuit |
+| fog lamp | farol de milha | farol baixo, no para-choque, para neblina |
+| relay | relé | switch comandado por eletricidade |
+| reference voltage | tensão de referência | voltage fixa que o control module manda para um sensor |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
 
 ## Onde isso aparece
 
-A lei de Ohm é a conta mais usada do diagnóstico elétrico. Com ela você:
+A Ohm's law é a conta mais usada do diagnóstico elétrico. Com ela você:
 
-- prevê quanta corrente um circuito **deveria** puxar, antes de medir;
-- confere se uma leitura do multímetro faz sentido;
-- explica por que um defeito produz o sintoma que produz: carga fraca, carga
-  parada ou fusível queimado.
+- prevê quanta current um circuit **deveria** puxar, antes de medir;
+- confere se uma leitura do multimeter faz sentido;
+- explica por que um defeito produz o sintoma que produz: load fraca, load
+  parada ou fuse queimado.
 
 Na Wake Tech, ela é o centro da teoria elétrica básica da **TRN-120**. Na prova
 ASE, aparece na área **A6** como conta direta e, mais vezes ainda, como
-raciocínio: “se a resistência aumentou, o que aconteceu com a corrente?”.
+raciocínio: “se a resistance aumentou, o que aconteceu com a current?”.
 
 ## Ideias anteriores que voltam aqui
 
 Esta lição usa as três grandezas de
-[Tensão, corrente e resistência](./tensao-corrente-e-resistencia). Responda
+[Voltage, current e resistance](./tensao-corrente-e-resistencia). Responda
 antes de seguir:
 
 1. Qual é a letra e a unidade de cada uma das três grandezas?
-2. Na tabela de falhas da lição anterior, o que acontece com a corrente quando a
-   resistência no caminho aumenta?
+2. Na tabela de falhas da lição anterior, o que acontece com a current quando a
+   resistance no caminho aumenta?
 3. Quanto é 2.2 kΩ em ohms?
 
 <details>
 <summary>Respostas</summary>
 
-1. Tensão: $V$, em volts (V). Corrente: $I$, em ampères (A). Resistência: $R$,
+1. Voltage: $V$, em volts (V). Current: $I$, em amps (A). Resistance: $R$,
    em ohms (Ω).
-2. A corrente diminui. É o caso da resistência alta: a carga funciona, mas fraca.
+2. A current diminui. É o caso da high resistance: a load funciona, mas fraca.
 3. Quilo quer dizer vezes 1000: $2.2 \times 1000 = 2200\,\Omega$.
 
 </details>
@@ -84,29 +89,29 @@ Volte à mangueira de jardim da lição anterior.
   aumenta e sai **menos** água.
 
 O fluxo depende das duas coisas ao mesmo tempo. Ele cresce com o empurrão e
-diminui com o aperto. No circuito é igual: a corrente cresce com a tensão e
-diminui com a resistência. A lei de Ohm diz **quanto**.
+diminui com o aperto. No circuit é igual: a current cresce com a voltage e
+diminui com a resistance. A Ohm's law diz **quanto**.
 
 ## Modelo visual: duas tabelas
 
-Imagine um circuito de laboratório com uma fonte de tensão ajustável e um
-resistor. Primeiro, deixamos o resistor fixo em 4 Ω e mudamos a tensão.
+Imagine um circuit de laboratório com uma fonte de voltage ajustável e um
+resistor. Primeiro, deixamos o resistor fixo em 4 Ω e mudamos a voltage.
 
-| Tensão ($V$) | Resistência ($R$) | Corrente ($I$) |
+| Voltage ($V$) | Resistance ($R$) | Current ($I$) |
 |---|---|---|
 | 3 V | 4 Ω | 0.75 A |
 | 6 V | 4 Ω | 1.5 A |
 | 9 V | 4 Ω | 2.25 A |
 | 12 V | 4 Ω | 3 A |
 
-Repare: de 3 V para 6 V a tensão dobrou, e a corrente também dobrou, de 0.75 A
-para 1.5 A. De 3 V para 12 V a tensão ficou quatro vezes maior, e a corrente
-também. Com a resistência fixa, **a corrente acompanha a tensão na mesma
+Repare: de 3 V para 6 V a voltage dobrou, e a current também dobrou, de 0.75 A
+para 1.5 A. De 3 V para 12 V a voltage ficou quatro vezes maior, e a current
+também. Com a resistance fixa, **a current acompanha a voltage na mesma
 proporção**. Isso se chama ser **diretamente proporcional**.
 
-Agora deixamos a tensão fixa em 12 V e trocamos o resistor.
+Agora deixamos a voltage fixa em 12 V e trocamos o resistor.
 
-| Tensão ($V$) | Resistência ($R$) | Corrente ($I$) |
+| Voltage ($V$) | Resistance ($R$) | Current ($I$) |
 |---|---|---|
 | 12 V | 1 Ω | 12 A |
 | 12 V | 2 Ω | 6 A |
@@ -115,39 +120,39 @@ Agora deixamos a tensão fixa em 12 V e trocamos o resistor.
 | 12 V | 6 Ω | 2 A |
 | 12 V | 12 Ω | 1 A |
 
-De 1 Ω para 2 Ω a resistência dobrou, e a corrente caiu pela metade, de 12 A
-para 6 A. De 2 Ω para 6 Ω a resistência triplicou, e a corrente caiu para um
-terço, de 6 A para 2 A. Com a tensão fixa, **a corrente faz o contrário da
-resistência**. Isso se chama ser **inversamente proporcional**.
+De 1 Ω para 2 Ω a resistance dobrou, e a current caiu pela metade, de 12 A
+para 6 A. De 2 Ω para 6 Ω a resistance triplicou, e a current caiu para um
+terço, de 6 A para 2 A. Com a voltage fixa, **a current faz o contrário da
+resistance**. Isso se chama ser **inversamente proporcional**.
 
 ## Ponte para a formalização
 
-As duas tabelas escondem a mesma regra. Para ver qual, multiplique a corrente
-pela resistência em cada linha da segunda tabela:
+As duas tabelas escondem a mesma regra. Para ver qual, multiplique a current
+pela resistance em cada linha da segunda tabela:
 
 $$
 12 \times 1 = 12 \qquad 6 \times 2 = 12 \qquad 4 \times 3 = 12 \qquad 2 \times 6 = 12
 $$
 
-Dá sempre 12, e 12 é exatamente a tensão. Na primeira tabela acontece o mesmo:
+Dá sempre 12, e 12 é exatamente a voltage. Na primeira tabela acontece o mesmo:
 $0.75 \times 4 = 3$, $1.5 \times 4 = 6$, $2.25 \times 4 = 9$ e $3 \times 4 = 12$.
-Cada produto é a tensão daquela linha.
+Cada produto é a voltage daquela linha.
 
-Então, em todas as linhas das duas tabelas, **corrente vezes resistência dá a
-tensão**. Essa é a lei de Ohm.
+Então, em todas as linhas das duas tabelas, **current vezes resistance dá a
+voltage**. Essa é a Ohm's law.
 
 ## Formalização
 
-> **Lei de Ohm** (*Ohm's law*): a tensão sobre uma resistência é igual à
-> corrente que passa por ela vezes o valor da resistência.
+> **Ohm's law:** a voltage sobre uma resistance é igual à current que passa
+> por ela vezes o valor da resistance.
 >
 > $$
 > V = I \times R
 > $$
 >
-> com $V$ em volts, $I$ em ampères e $R$ em ohms.
+> com $V$ em volts, $I$ em amps e $R$ em ohms.
 
-A lei também define as unidades umas pelas outras: **1 volt empurra 1 ampère
+A lei também define as unidades umas pelas outras: **1 volt empurra 1 amp
 através de 1 ohm.**
 
 Na aula e no livro, a mesma lei costuma aparecer escrita em inglês assim:
@@ -155,12 +160,12 @@ Na aula e no livro, a mesma lei costuma aparecer escrita em inglês assim:
 > *Current is directly proportional to voltage and inversely proportional to
 > resistance.*
 
-Em português: a corrente é diretamente proporcional à tensão e inversamente
-proporcional à resistência. As duas partes da frase são as duas tabelas do
-modelo visual. Na primeira tabela, a resistência ficou fixa, e a corrente
-acompanhou a tensão: dobrou quando a tensão dobrou. Na segunda, a tensão ficou
-fixa, e a corrente fez o contrário da resistência: caiu pela metade quando a
-resistência dobrou.
+Ou seja: a current é diretamente proporcional à voltage e inversamente
+proporcional à resistance. As duas partes da frase são as duas tabelas do
+modelo visual. Na primeira tabela, a resistance ficou fixa, e a current
+acompanhou a voltage: dobrou quando a voltage dobrou. Na segunda, a voltage
+ficou fixa, e a current fez o contrário da resistance: caiu pela metade quando
+a resistance dobrou.
 
 ### As três formas da lei
 
@@ -181,23 +186,23 @@ Ficamos com as três formas:
 
 | Quero achar | Conta | Em palavras |
 |---|---|---|
-| a tensão | $V = I \times R$ | corrente vezes resistência |
-| a corrente | $I = \dfrac{V}{R}$ | tensão dividida pela resistência |
-| a resistência | $R = \dfrac{V}{I}$ | tensão dividida pela corrente |
+| a voltage | $V = I \times R$ | current vezes resistance |
+| a current | $I = \dfrac{V}{R}$ | voltage dividida pela resistance |
+| a resistance | $R = \dfrac{V}{I}$ | voltage dividida pela current |
 
 **O que muda** de uma forma para outra é a posição das letras. **O que
 permanece igual** é a relação entre os três números. Confira com uma linha da
 tabela: com 12 V e 3 Ω, $I = 12 \div 3 = 4\,\text{A}$; com 12 V e 4 A,
 $R = 12 \div 4 = 3\,\Omega$; com 4 A e 3 Ω, $V = 4 \times 3 = 12\,\text{V}$. As
-três contas descrevem o mesmo circuito.
+três contas descrevem o mesmo circuit.
 
-### O triângulo da lei de Ohm
+### O Ohm's law triangle
 
-Na aula, a lei de Ohm costuma aparecer desenhada como um triângulo, o
-**triângulo da lei de Ohm** (*Ohm's law triangle*). Ele serve para lembrar as
-três formas da tabela acima sem refazer a conta de isolar a letra.
+Na aula, a Ohm's law costuma aparecer desenhada como um triângulo, o **Ohm's
+law triangle**. Ele serve para lembrar as três formas da tabela acima sem
+refazer a conta de isolar a letra.
 
-<TrianguloOhm caption="O triângulo da lei de Ohm. A linha deitada separa o V, em cima, do I e do R, embaixo, e quer dizer “dividido por”. A linha em pé separa o I do R e quer dizer “vezes”. Os sinais em azul lembram o que cada linha significa." />
+<TrianguloOhm caption="O Ohm's law triangle. A linha deitada separa o V, em cima, do I e do R, embaixo, e quer dizer “dividido por”. A linha em pé separa o I do R e quer dizer “vezes”. Os sinais em azul lembram o que cada linha significa." />
 
 O triângulo se usa em três passos:
 
@@ -216,134 +221,136 @@ $V = I \times R$, dividindo os dois lados como mostramos acima.
 
 **O triângulo com as unidades.** Muitos instrutores escrevem as unidades no
 lugar das letras: V em cima, A e Ω embaixo. O A ocupa o lugar do I, porque o
-ampère é a unidade da corrente. O Ω ocupa o lugar do R, porque o ohm é a unidade
-da resistência. O V em cima vale pelas duas coisas: é a letra da tensão e também
-a unidade dela, o volt.
+amp é a unidade da current. O Ω ocupa o lugar do R, porque o ohm é a unidade
+da resistance. O V em cima vale pelas duas coisas: é a letra da voltage e
+também a unidade dela, o volt.
 
-<TrianguloOhm unidades caption="O mesmo triângulo escrito com as unidades: volts em cima, ampères e ohms embaixo." />
+<TrianguloOhm unidades caption="O mesmo triângulo escrito com as unidades: volts em cima, amps e ohms embaixo." />
 
 Essa versão tem uma vantagem: ela também diz a unidade do resultado. Volts
-divididos por ohms dão ampères: $12\,\text{V} \div 3\,\Omega = 4\,\text{A}$.
-Volts divididos por ampères dão ohms:
-$12\,\text{V} \div 4\,\text{A} = 3\,\Omega$. Ampères vezes ohms dão volts:
+divididos por ohms dão amps: $12\,\text{V} \div 3\,\Omega = 4\,\text{A}$.
+Volts divididos por amps dão ohms:
+$12\,\text{V} \div 4\,\text{A} = 3\,\Omega$. Amps vezes ohms dão volts:
 $4\,\text{A} \times 3\,\Omega = 12\,\text{V}$. Mas o triângulo não converte
-prefixos: kΩ e mA continuam precisando virar ohms e ampères antes da conta,
+prefixos: kΩ e mA continuam precisando virar ohms e amps antes da conta,
 como mostra a seção “Unidades antes da conta”, mais abaixo.
 
-> **Erro comum:** procurar a resistência e dividir na ordem errada, fazendo
+> **Erro comum:** procurar a resistance e dividir na ordem errada, fazendo
 > $I \div V$. Com 4 A e 12 V, essa conta dá $4 \div 12 \approx 0.33$, e não os
 > 3 Ω certos. O triângulo protege desse erro, porque o V está sempre em cima:
-> **sempre que a lei de Ohm pede uma divisão, a tensão é o número de cima.** Se
-> a sua conta pôs a tensão embaixo, ela está invertida.
+> **sempre que a Ohm's law pede uma divisão, a voltage é o número de cima.** Se
+> a sua conta pôs a voltage embaixo, ela está invertida.
 
 ### Exemplo e contraexemplo
 
-- **Exemplo:** num resistor de 4 Ω ligado a 12 V, a corrente é
-  $I = 12 \div 4 = 3\,\text{A}$. Medindo com o multímetro, você encontra 3 A. A
+- **Exemplo:** num resistor de 4 Ω ligado a 12 V, a current é
+  $I = 12 \div 4 = 3\,\text{A}$. Medindo com o multimeter, você encontra 3 A. A
   lei prevê o que acontece.
-- **Contraexemplo: a lâmpada fria.** Meça com o multímetro a resistência de uma
-  lâmpada fora do carro. O valor sai **bem menor** que a resistência dela acesa.
-  O filamento é de metal, e metal tem mais resistência quente do que frio, como
-  vimos na lição anterior. Aceso, o filamento fica incandescente, e a
-  resistência sobe muito. Se você usar a resistência fria para prever a
-  corrente da lâmpada acesa, a conta sai errada. A lei de Ohm continua valendo
-  em cada instante; o que não vale é tratar a resistência da lâmpada como um
-  número fixo. Neste capítulo, quando falarmos da resistência de uma lâmpada,
-  é sempre a resistência **acesa**.
+- **Contraexemplo: a bulb fria.** Meça com o multimeter a resistance de uma
+  bulb fora do carro. O valor sai **bem menor** que a resistance dela acesa.
+  O filament é de metal, e metal tem mais resistance quente do que frio, como
+  vimos na lição anterior. Aceso, o filament fica incandescente, e a
+  resistance sobe muito. Se você usar a resistance fria para prever a current
+  da bulb acesa, a conta sai errada. A Ohm's law continua valendo em cada
+  instante; o que não vale é tratar a resistance da bulb como um número fixo.
+  Neste capítulo, quando falarmos da resistance de uma bulb, é sempre a
+  resistance **acesa**.
 
 ### Unidades antes da conta
 
-A lei de Ohm só funciona com volts, ampères e ohms. Se um valor vier com
+A Ohm's law só funciona com volts, amps e ohms. Se um valor vier com
 prefixo — mA, kΩ —, converta antes de fazer a conta.
 
 > **Erro comum:** dividir 12 V por 2.2 kΩ fazendo $12 \div 2.2$. O resultado,
-> 5.45, parece uma corrente em ampères, mas está errado por um fator de 1000. O
+> 5.45, parece uma current em amps, mas está errado por um fator de 1000. O
 > certo é converter primeiro: $2.2\,\text{k}\Omega = 2200\,\Omega$, e
-> $12 \div 2200 = 0.00545\,\text{A}$, ou seja, cerca de 5.45 mA. Uma corrente
-> de 5 A num circuito de sensor queimaria o sensor; 5 mA é o valor que faz
+> $12 \div 2200 = 0.00545\,\text{A}$, ou seja, cerca de 5.45 mA. Uma current
+> de 5 A num circuit de sensor queimaria o sensor; 5 mA é o valor que faz
 > sentido.
 
 ## Como falha e como diagnosticar
 
 A tabela de falhas da lição anterior agora pode ser lida pela fórmula
-$I = V \div R$, com a tensão da bateria fixa em 12 V.
+$I = V \div R$, com a voltage da battery fixa em 12 V.
 
 | Falha | O que acontece com $R$ | O que $I = V \div R$ prevê | Sintoma |
 |---|---|---|---|
-| circuito aberto | fica enorme | $V$ dividido por um número enorme: quase zero | a carga não funciona |
-| resistência alta | aumenta | $V$ dividido por um número maior: corrente menor | a carga funciona fraca |
-| curto à massa | fica quase zero | $V$ dividido por um número minúsculo: corrente enorme | o fusível queima |
+| open circuit | fica enorme | $V$ dividido por um número enorme: quase zero | a load não funciona |
+| high resistance | aumenta | $V$ dividido por um número maior: current menor | a load funciona fraca |
+| short to ground | fica quase zero | $V$ dividido por um número minúsculo: current enorme | o fuse queima |
 
-A lei de Ohm também dá ao técnico um hábito importante: **prever antes de
-medir.** Se você sabe a tensão e a resistência normal de uma carga, sabe quanta
-corrente ela deveria puxar. Medindo a corrente real e comparando, você descobre
+A Ohm's law também dá ao técnico um hábito importante: **prever antes de
+medir.** Se você sabe a voltage e a resistance normal de uma load, sabe quanta
+current ela deveria puxar. Medindo a current real e comparando, você descobre
 de que lado o defeito está:
 
-- corrente **igual** à prevista: o caminho está bom, e o problema está em outro
+- current **igual** à prevista: o caminho está bom, e o problema está em outro
   lugar;
-- corrente **menor**: há resistência a mais no caminho;
-- corrente **zero**: o caminho está aberto;
-- corrente **maior**, ou fusível queimando: há um caminho com resistência
-  menor que o normal, um curto.
+- current **menor**: há resistance a mais no caminho;
+- current **zero**: o caminho está aberto;
+- current **maior**, ou fuse queimando: há um caminho com resistance menor que
+  o normal, um short circuit.
 
 ### A queixa resolvida
 
-Primeiro, quanto o farol de milha **deveria** puxar. Com 12 V e a lâmpada acesa
-com 3 Ω:
+Primeiro, quanto o fog lamp **deveria** puxar. Com 12 V e a bulb acesa com
+3 Ω:
 
 $$
 I = \frac{V}{R} = \frac{12}{3} = 4\,\text{A}
 $$
 
-São 4 A, bem abaixo dos 10 A do fusível. Com o circuito normal, o fusível não
-teria motivo para queimar.
+São 4 A, bem abaixo dos 10 A do fuse. Com o circuit normal, o fuse não teria
+motivo para queimar.
 
-Para queimar, a corrente precisa passar de 10 A. Pela fórmula, com os mesmos
-12 V, isso só acontece se a resistência do caminho ficar **menor** que a da
-lâmpada. Ao inspecionar a fiação, o técnico acha o motivo: o fio que vai até o
-farol passa perto da roda, e o atrito gastou a capa de plástico. O cobre do fio
-está encostando na lataria.
+Para queimar, a current precisa passar de 10 A. Pela fórmula, com os mesmos
+12 V, isso só acontece se a resistance do caminho ficar **menor** que a da
+bulb. Ao inspecionar o wiring, o técnico acha o motivo: o wire que vai até o
+fog lamp passa perto da roda, e o atrito gastou a capa de plástico. O cobre do
+wire está encostando na lataria.
 
 <Circuito
   curto
   retorno="massa"
   corrente
-  caption="Curto à massa: o fio positivo encosta na lataria antes de chegar à lâmpada. A corrente encontra um caminho quase sem resistência e passa por ali, pulando a lâmpada."
+  caption="Short to ground: o wire positivo encosta na lataria antes de chegar à bulb. A current encontra um caminho quase sem resistance e passa por ali, pulando a bulb."
 />
 
-A lataria é a massa. Então a corrente ganhou um caminho do positivo até a massa
-que **pula a lâmpada**. Esse caminho é formado por metal encostado em metal, com uma resistência
-muito pequena. Imagine que seja 0.05 Ω, valor ilustrativo:
+A lataria é o ground. Então a current ganhou um caminho do positivo até o
+ground que **pula a bulb**. Esse caminho é formado por metal encostado em
+metal, com uma resistance muito pequena. Imagine que seja 0.05 Ω, valor
+ilustrativo:
 
 $$
 I = \frac{V}{R} = \frac{12}{0.05} = 240\,\text{A}
 $$
 
-São 240 A passando por um fusível de 10 A. O fusível derrete no mesmo instante —
-e é exatamente para isso que ele existe. **O fusível não é o defeito; ele é o
-aviso.** O defeito é o curto, e o reparo é consertar o fio e protegê-lo do
-atrito. Trocar o fusível pela quarta vez não resolve nada.
+São 240 A passando por um fuse de 10 A. O fuse derrete no mesmo instante — e é
+exatamente para isso que ele existe. **O fuse não é o defeito; ele é o
+aviso.** O defeito é o short circuit, e o reparo é consertar o wire e
+protegê-lo do atrito. Trocar o fuse pela quarta vez não resolve nada.
 
-## Na oficina: o fusível certo
+## Na oficina: o fuse certo
 
-:::danger Nunca aumente o fusível
+:::danger Nunca aumente o fuse
 
-- **Nunca troque um fusível por outro de amperagem maior** e nunca o substitua
-  por um pedaço de fio ou papel-alumínio. O fusível é escolhido para proteger o
-  **fio** do circuito. Com 240 A passando por um fio fino e sem fusível para
-  cortar, o fio esquenta até derreter a capa, e o carro pode pegar fogo.
-- **Desligue a bateria** antes de reparar um fio em curto. Siga a ordem da
-  lição [O circuito elétrico](./o-circuito-eletrico): o negativo sai primeiro.
-- Fusível queimado sempre tem uma causa. Ache a causa antes de dar o reparo por
+- **Nunca troque um fuse por outro de amperage maior** e nunca o substitua
+  por um pedaço de wire ou papel-alumínio. O fuse é escolhido para proteger o
+  **wire** do circuit. Com 240 A passando por um wire fino e sem fuse para
+  cortar, o wire esquenta até derreter a capa, e o carro pode pegar fogo.
+- **Desligue a battery** antes de reparar um wire em short circuit. Siga a
+  ordem da lição [O electrical circuit](./o-circuito-eletrico): o cable do
+  negative terminal sai primeiro.
+- Fuse queimado sempre tem uma causa. Ache a causa antes de dar o reparo por
   terminado.
 
 :::
 
 ## Exemplos resolvidos
 
-### Exemplo 1: a corrente de uma lâmpada
+### Exemplo 1: a current de uma bulb
 
-Um circuito de 12 V alimenta uma lâmpada que, acesa, tem 6 Ω. Qual é a corrente?
+Um circuit de 12 V alimenta uma bulb que, acesa, tem 6 Ω. Qual é a current?
 
 Conhecemos $V$ e $R$ e queremos $I$. A forma que deixa $I$ sozinho é
 $I = V \div R$:
@@ -354,12 +361,11 @@ $$
 
 Confira pela forma original: $V = I \times R = 2 \times 6 = 12\,\text{V}$. Bate.
 
-### Exemplo 2: a bobina de um relé
+### Exemplo 2: a relay coil
 
-**Pause e tente:** um **relé** (*relay*) é um interruptor comandado por
-eletricidade. Dentro dele há uma bobina, um fio enrolado. Imagine uma bobina de
-80 Ω (valor típico, só para a conta) ligada a 12 V. Que corrente ela puxa, em
-miliampères?
+**Pause e tente:** um **relay** é um switch comandado por eletricidade. Dentro
+dele há uma relay coil, um wire enrolado. Imagine uma relay coil de 80 Ω (valor
+típico, só para a conta) ligada a 12 V. Que current ela puxa, em milliamps?
 
 <details>
 <summary>Solução</summary>
@@ -370,18 +376,18 @@ $$
 I = \frac{V}{R} = \frac{12}{80} = 0.15\,\text{A}
 $$
 
-Em miliampères, multiplique por 1000: $0.15 \times 1000 = 150\,\text{mA}$.
+Em milliamps, multiplique por 1000: $0.15 \times 1000 = 150\,\text{mA}$.
 
-Repare no tamanho: a bobina puxa pouca corrente. É por isso que o relé existe. O
-interruptor do painel aciona só essa corrente pequena, e o relé, por sua vez,
-liga uma carga de corrente alta. A lição de relés desenvolve essa ideia.
+Repare no tamanho: a relay coil puxa pouca current. É por isso que o relay
+existe. O switch do painel aciona só essa current pequena, e o relay, por sua
+vez, liga uma load de current alta. A lição de relays desenvolve essa ideia.
 
 </details>
 
-### Exemplo 3: descobrir a resistência
+### Exemplo 3: descobrir a resistance
 
-**Pause e tente:** com a lâmpada acesa, você mede 12 V sobre ela e 2 A passando
-por ela. Qual é a resistência da lâmpada acesa?
+**Pause e tente:** com a bulb acesa, você mede 12 V sobre ela e 2 A passando
+por ela. Qual é a resistance da bulb acesa?
 
 <details>
 <summary>Solução</summary>
@@ -392,45 +398,46 @@ $$
 R = \frac{V}{I} = \frac{12}{2} = 6\,\Omega
 $$
 
-Esse é um jeito de conhecer a resistência **acesa** da lâmpada: medir tensão e
-corrente com ela funcionando, e calcular. Medir com o ohmímetro, com a lâmpada
+Esse é um jeito de conhecer a resistance **acesa** da bulb: medir voltage e
+current com ela funcionando, e calcular. Medir com o ohmmeter, com a bulb
 fria, daria um valor bem menor — o contraexemplo da formalização.
 
 </details>
 
-### Exemplo 4: o terminal oxidado do motor de partida
+### Exemplo 4: o terminal oxidado do starter motor
 
-**Pause e tente:** o motor de partida puxa 150 A (valor típico). No caminho dele,
-um terminal oxidado tem 0.01 Ω de resistência. Quantos volts ficam nesse
-terminal? Se a bateria tem 12.6 V, quanto sobra para o motor de partida?
+**Pause e tente:** o starter motor puxa 150 A (valor típico). No caminho dele,
+um terminal oxidado tem 0.01 Ω de resistance. Quantos volts ficam nesse
+terminal? Se a battery tem 12.6 V, quanto sobra para o starter motor?
 
 <details>
 <summary>Solução</summary>
 
-Agora conhecemos $I$ e $R$ do terminal, e queremos $V$ — a tensão que fica nele:
+Agora conhecemos $I$ e $R$ do terminal, e queremos $V$ — a voltage que fica
+nele:
 
 $$
 V = I \times R = 150 \times 0.01 = 1.5\,\text{V}
 $$
 
-Esses 1.5 V ficam no terminal e não chegam ao motor de partida. Dos 12.6 V da
-bateria, sobram $12.6 - 1.5 = 11.1\,\text{V}$ para o motor, e ele gira mais
-devagar.
+Esses 1.5 V ficam no terminal e não chegam ao starter motor. Dos 12.6 V da
+battery, sobram $12.6 - 1.5 = 11.1\,\text{V}$ para o starter motor, e ele gira
+mais devagar.
 
-Repare que 0.01 Ω é uma resistência minúscula — o multímetro, no modo de
-resistência, mal consegue mostrar. Mesmo assim ela rouba 1.5 V, porque a
-corrente é enorme. **Com corrente alta, uma resistência pequena faz um estrago
-grande.** A tensão que fica num trecho do caminho tem nome: **queda de tensão**
-(*voltage drop*). Ela é a principal ferramenta para achar resistência alta, e
-tem uma lição própria mais adiante.
+Repare que 0.01 Ω é uma resistance minúscula — o multimeter, no modo de
+resistance, mal consegue mostrar. Mesmo assim ela rouba 1.5 V, porque a
+current é enorme. **Com current alta, uma resistance pequena faz um estrago
+grande.** A voltage que fica num trecho do caminho tem nome: **voltage drop**.
+Ela é a principal ferramenta para achar high resistance, e tem uma lição
+própria mais adiante.
 
 </details>
 
-### Exemplo 5: um circuito de sensor
+### Exemplo 5: um circuit de sensor
 
-**Pause e tente:** muitos sensores do motor trabalham com uma tensão de
-referência de 5 V, mandada pelo módulo. Num desses circuitos, a resistência
-total é 2.2 kΩ. Qual é a corrente, em miliampères?
+**Pause e tente:** muitos sensors do engine trabalham com uma reference voltage
+de 5 V, mandada pelo control module. Num desses circuits, a resistance total é
+2.2 kΩ. Qual é a current, em milliamps?
 
 <details>
 <summary>Solução</summary>
@@ -442,24 +449,24 @@ $$
 I = \frac{V}{R} = \frac{5}{2200} \approx 0.00227\,\text{A}
 $$
 
-Em miliampères: $0.00227 \times 1000 \approx 2.27\,\text{mA}$.
+Em milliamps: $0.00227 \times 1000 \approx 2.27\,\text{mA}$.
 
 Se você encontrou 2.27 A, fez a conta com 2.2 em vez de 2200 — o erro comum da
-formalização. Uma corrente de mais de 2 A num circuito de sensor não faz
-sentido; poucos miliampères, sim.
+formalização. Uma current de mais de 2 A num circuit de sensor não faz
+sentido; poucos milliamps, sim.
 
 </details>
 
 ## Perguntas de verificação
 
 1. Nas duas tabelas do modelo visual, o produto $I \times R$ deu sempre a
-   tensão. Por que isso permite escrever $I = V \div R$?
-2. Com a mesma bateria, por que um curto faz a corrente subir tanto?
-3. O fusível do farol de milha queimou por defeito do fusível?
-4. Por que a resistência medida numa lâmpada fria não serve para prever a
-   corrente dela acesa?
-5. No exemplo 4, uma resistência de só 0.01 Ω tirou 1.5 V do motor de partida.
-   Num circuito de lâmpada de 4 A, a mesma resistência tiraria quanto?
+   voltage. Por que isso permite escrever $I = V \div R$?
+2. Com a mesma battery, por que um short circuit faz a current subir tanto?
+3. O fuse do fog lamp queimou por defeito do fuse?
+4. Por que a resistance medida numa bulb fria não serve para prever a current
+   dela acesa?
+5. No exemplo 4, uma resistance de só 0.01 Ω tirou 1.5 V do starter motor.
+   Num circuit de bulb de 4 A, a mesma resistance tiraria quanto?
 6. No triângulo, tapando o I, sobra o V em cima do R. Por que isso quer dizer
    $V \div R$, e não $V \times R$?
 
@@ -470,18 +477,18 @@ sentido; poucos miliampères, sim.
    número mantém os lados iguais. Dividindo por $R$, o lado direito volta a ser
    $I$, e fica $I = V \div R$. Numa linha da tabela: $12 = 4 \times 3$; dividindo
    os dois lados por 3, $4 = 12 \div 3$.
-2. Porque a corrente é a tensão dividida pela resistência. A tensão continua a
-   mesma, 12 V. A resistência do caminho cai de alguns ohms, os da lâmpada, para
+2. Porque a current é a voltage dividida pela resistance. A voltage continua a
+   mesma, 12 V. A resistance do caminho cai de alguns ohms, os da bulb, para
    quase zero. Dividir 12 por um número quase zero dá um resultado enorme.
-3. Não. O fusível fez o trabalho dele: cortou o circuito quando a corrente
-   passou do limite. O defeito é o curto que fez a corrente subir.
-4. Porque o filamento é de metal, e a resistência do metal aumenta muito com a
-   temperatura. Acesa, a lâmpada tem uma resistência bem maior que fria. Usar o
-   valor frio na conta prevê uma corrente maior do que a real.
+3. Não. O fuse fez o trabalho dele: cortou o circuit quando a current passou do
+   limite. O defeito é o short circuit que fez a current subir.
+4. Porque o filament é de metal, e a resistance do metal aumenta muito com a
+   temperatura. Acesa, a bulb tem uma resistance bem maior que fria. Usar o
+   valor frio na conta prevê uma current maior do que a real.
 5. $V = I \times R = 4 \times 0.01 = 0.04\,\text{V}$. Quase nada. A mesma
-   resistência rouba pouco num circuito de corrente baixa e muito num circuito
-   de corrente alta. É por isso que terminais e cabos do motor de partida são
-   tão sensíveis a oxidação.
+   resistance rouba pouco num circuit de current baixa e muito num circuit de
+   current alta. É por isso que terminals e cables do starter motor são tão
+   sensíveis a oxidação.
 6. Porque a linha deitada do triângulo funciona como o traço de uma fração: o
    que está em cima é dividido pelo que está embaixo. A multiplicação só
    aparece quando as duas grandezas que sobram ficam lado a lado, separadas pela
@@ -493,61 +500,61 @@ sentido; poucos miliampères, sim.
 
 ### 1. Reconhecimento
 
-Para cada situação, diga qual forma da lei de Ohm você usaria:
+Para cada situação, diga qual forma da Ohm's law você usaria:
 
-a) você sabe a tensão e a resistência e quer a corrente;
+a) você sabe a voltage e a resistance e quer a current;
 
-b) você mediu a tensão e a corrente e quer a resistência;
+b) você mediu a voltage e a current e quer a resistance;
 
-c) você sabe a corrente e a resistência de um trecho e quer a tensão que fica
+c) você sabe a current e a resistance de um trecho e quer a voltage que fica
 nele.
 
 ### 2. Explicação
 
-Com a tensão fixa, por que dobrar a resistência corta a corrente pela metade?
+Com a voltage fixa, por que dobrar a resistance corta a current pela metade?
 Explique com a mangueira e também com a fórmula.
 
 ### 3. Aplicação direta
 
-a) 12 V sobre 6 Ω. Qual é a corrente?
+a) 12 V sobre 6 Ω. Qual é a current?
 
-b) 12 V e 0.5 A. Qual é a resistência?
+b) 12 V e 0.5 A. Qual é a resistance?
 
-c) 2 A passando por 1.5 Ω. Qual é a tensão sobre esse trecho?
+c) 2 A passando por 1.5 Ω. Qual é a voltage sobre esse trecho?
 
-d) 12 V sobre 4.8 Ω. Qual é a corrente?
+d) 12 V sobre 4.8 Ω. Qual é a current?
 
 ### 4. Variação
 
-O farol de milha da queixa tem 3 Ω aceso. Com o motor funcionando, o sistema
-trabalha perto de 14 V em vez de 12 V. Que corrente a lâmpada puxa agora?
-Compare com os 4 A da queixa e explique a diferença. Considere que a
-resistência da lâmpada acesa continua 3 Ω.
+O fog lamp da queixa tem 3 Ω aceso. Com o engine funcionando, o sistema
+trabalha perto de 14 V em vez de 12 V. Que current a bulb puxa agora? Compare
+com os 4 A da queixa e explique a diferença. Considere que a resistance da bulb
+acesa continua 3 Ω.
 
 ### 5. Caso de diagnóstico
 
-Uma buzina deveria puxar cerca de 5 A em 12 V (valor ilustrativo).
+Uma horn deveria puxar cerca de 5 A em 12 V (valor ilustrativo).
 
-a) Qual é a resistência normal do circuito da buzina?
+a) Qual é a resistance normal do circuit da horn?
 
-b) Você mede 2 A, e a buzina toca fraca. Qual é a resistência total do circuito
-agora? Quanto de resistência apareceu a mais, e onde você procuraria?
+b) Você mede 2 A, e a horn toca fraca. Qual é a resistance total do circuit
+agora? Quanto de resistance apareceu a mais, e onde você procuraria?
 
-c) Em outro carro, você mede 0 A, e a buzina não toca. O que isso indica?
+c) Em outro carro, você mede 0 A, e a horn não toca. O que isso indica?
 
 <details>
 <summary>Dica para o exercício 5</summary>
 
-Nos itens a e b, a incógnita é a resistência, então a forma é $R = V \div I$.
-A resistência a mais é a diferença entre os dois resultados.
+Nos itens a e b, a incógnita é a resistance, então a forma é $R = V \div I$.
+A resistance a mais é a diferença entre os dois resultados.
 
 </details>
 
 ### 6. Justificativa
 
-Um cliente propõe: “Se o fusível de 10 A queima, coloca um de 30 A.” Use a lei
-de Ohm e a queixa desta lição para explicar por que isso não resolve e ainda
-cria um risco.
+Um cliente propõe: “Se o fuse de 10 A queima, coloca um de 30 A.” Use a Ohm's
+law e a queixa desta lição para explicar por que isso não resolve e ainda cria
+um risco.
 
 ### 7. Formato ASE
 
@@ -592,59 +599,60 @@ replaced. Which of these is the most likely cause?
    d) $I = 12 \div 4.8 = 2.5\,\text{A}$.
 
    Se você encontrou 6 Ω no item b, dividiu 12 por 2 em vez de 0.5: confira o
-   valor da corrente no enunciado. Se encontrou 72 A no item a, multiplicou em
+   valor da current no enunciado. Se encontrou 72 A no item a, multiplicou em
    vez de dividir.
 
-4. $I = 14 \div 3 \approx 4.67\,\text{A}$. A corrente subiu de 4 A para cerca de
-   4.67 A porque a tensão subiu e a resistência ficou a mesma: corrente e
-   tensão são diretamente proporcionais. É por isso que as lâmpadas do carro
-   brilham um pouco mais com o motor funcionando.
+4. $I = 14 \div 3 \approx 4.67\,\text{A}$. A current subiu de 4 A para cerca de
+   4.67 A porque a voltage subiu e a resistance ficou a mesma: current e
+   voltage são diretamente proporcionais. É por isso que as bulbs do carro
+   brilham um pouco mais com o engine funcionando.
 
 5. a) $R = 12 \div 5 = 2.4\,\Omega$.
 
-   b) $R = 12 \div 2 = 6\,\Omega$. A resistência a mais é
-   $6 - 2.4 = 3.6\,\Omega$. A buzina toca fraca porque passa menos corrente. A
-   resistência extra está em algum ponto do caminho: um terminal oxidado, uma
-   massa ruim, um contato gasto no botão ou no relé. O próximo passo é medir a
-   queda de tensão em cada trecho, o que a lição de queda de tensão ensina.
+   b) $R = 12 \div 2 = 6\,\Omega$. A resistance a mais é
+   $6 - 2.4 = 3.6\,\Omega$. A horn toca fraca porque passa menos current. A
+   resistance extra está em algum ponto do caminho: um terminal oxidado, um
+   ground ruim, um contato gasto no botão ou no relay. O próximo passo é medir a
+   voltage drop em cada trecho, o que a lição de voltage drop ensina.
 
-   c) Corrente zero quer dizer caminho interrompido: circuito aberto. Pode ser
-   fusível queimado, fio rompido, relé que não fecha ou a própria buzina aberta.
+   c) Current zero quer dizer caminho interrompido: open circuit. Pode ser
+   fuse queimado, wire rompido, relay que não fecha ou a própria horn aberta.
 
-6. O fusível queima porque a corrente passou do limite — na queixa, por causa de
-   um curto que levou a corrente a 240 A. Um fusível de 30 A também queimaria
-   com 240 A; ou seja, não resolve. E cria um risco: o fusível foi escolhido
-   para proteger o fio. Num defeito que produza, por exemplo, 25 A, o fusível
-   de 30 A não corta, e o fio fino, feito para cerca de 10 A, esquenta até
-   derreter a capa. O certo é achar e reparar o curto.
+6. O fuse queima porque a current passou do limite — na queixa, por causa de
+   um short circuit que levou a current a 240 A. Um fuse de 30 A também
+   queimaria com 240 A; ou seja, não resolve. E cria um risco: o fuse foi
+   escolhido para proteger o wire. Num defeito que produza, por exemplo, 25 A,
+   o fuse de 30 A não corta, e o wire fino, feito para cerca de 10 A, esquenta
+   até derreter a capa. O certo é achar e reparar o short circuit.
 
 7. **Question 1: B.** $I = V \div R = 12 \div 4 = 3\,\text{A}$. A alternativa A
    vem de dividir ao contrário, $4 \div 12$. A C vem de subtrair, $12 - 4$. A D
    vem de multiplicar, $12 \times 4$.
 
-   **Question 2: A.** O técnico A está certo: com a tensão fixa, corrente e
-   resistência são inversamente proporcionais. O técnico B está errado: com a
-   resistência fixa, a corrente **aumenta** quando a tensão aumenta.
+   **Question 2: A.** O técnico A está certo: com a voltage fixa, current e
+   resistance são inversamente proporcionais. O técnico B está errado: com a
+   resistance fixa, a current **aumenta** quando a voltage aumenta.
 
-   **Question 3: B.** Fusível queimando na hora indica corrente muito acima do
-   normal, e isso exige resistência muito abaixo do normal: um curto. Filamento
-   aberto (A) deixaria a corrente em zero. Resistência alta na massa (C) e
-   soquete corroído (D) diminuiriam a corrente, e a lâmpada ficaria fraca ou
-   apagada, sem queimar o fusível.
+   **Question 3: B.** Fuse queimando na hora indica current muito acima do
+   normal, e isso exige resistance muito abaixo do normal: um short circuit. O
+   filament aberto (A) deixaria a current em zero. High resistance no ground (C)
+   e socket corroído (D) diminuiriam a current, e a bulb ficaria fraca ou
+   apagada, sem queimar o fuse.
 
 </details>
 
 ## Revisão
 
 - **A ideia central:** $V = I \times R$. Com dois dos três números, a lei dá o
-  terceiro. A corrente cresce com a tensão e cai com a resistência.
-- **Quando usar:** para prever quanta corrente um circuito deveria puxar,
-  conferir se uma medição faz sentido e explicar o sintoma de cada falha. Converta
-  mA e kΩ antes de fazer a conta.
-- **Com o que se conecta:** a lei de Ohm diz quanto passa; ainda falta dizer
-  quanto trabalho isso faz — quanto a lâmpada ilumina, quanto o terminal
-  oxidado esquenta. É a próxima lição: [Potência elétrica](./potencia-eletrica).
+  terceiro. A current cresce com a voltage e cai com a resistance.
+- **Quando usar:** para prever quanta current um circuit deveria puxar,
+  conferir se uma medição faz sentido e explicar o sintoma de cada falha.
+  Converta mA e kΩ antes de fazer a conta.
+- **Com o que se conecta:** a Ohm's law diz quanto passa; ainda falta dizer
+  quanto trabalho isso faz — quanto a bulb ilumina, quanto o terminal oxidado
+  esquenta. É a próxima lição: [Electrical power](./potencia-eletrica).
 
-**Termos em inglês desta lição:** *Ohm's law*, *directly proportional*,
-*inversely proportional*, *Ohm's law triangle*, *short to ground*,
-*voltage drop*, *fog lamp*, *relay*, *reference voltage*.
+**Termos desta lição para revisar:** Ohm's law, Ohm's law triangle, directly
+proportional, inversely proportional, short to ground, short circuit, voltage
+drop, fog lamp, relay, relay coil, reference voltage, filament, ohmmeter,
+horn.

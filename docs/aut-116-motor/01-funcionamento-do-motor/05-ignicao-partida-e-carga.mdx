@@ -21,7 +21,7 @@ Uma cliente chega à oficina e conta:
 > outra chupeta para chegar aqui.”
 
 **Chupeta** é ligar a battery de outro carro na battery do carro parado, com
-dois cabos, para dar a partida. Na Wake Tech você vai ouvir isso como
+dois cables, para dar a partida. Na Wake Tech você vai ouvir isso como
 jump start.
 
 Repare em três fatos da queixa. Com a chupeta, o carro pega na hora. Depois de
@@ -40,20 +40,29 @@ volta e é resolvida com uma medição.
 |---|---|---|
 | ignition system | sistema de ignição | produz a faísca na spark plug no momento certo |
 | spark plug | vela de ignição | solta a faísca dentro da combustion chamber |
-| spark plug wire | cabo de vela | leva a alta tensão da ignition coil até a spark plug |
+| spark plug wire | cabo de vela | leva a alta voltage da ignition coil até a spark plug |
 | ignition coil | bobina de ignição | transforma os 12 V da battery em dezenas de milhares de volts |
-| switching device | dispositivo de chaveamento | liga e corta a corrente da ignition coil |
+| switching device | dispositivo de chaveamento | liga e corta a current da ignition coil |
 | starting system | sistema de partida | gira o crankshaft até o engine funcionar sozinho |
 | battery | bateria | guarda energia química e entrega como energia elétrica |
 | ignition switch | chave de ignição | a chave que liga o carro e aciona a partida |
-| solenoid | solenoide | relé de corrente alta entre a battery e o starter motor |
-| starter motor | motor de partida | motor elétrico que gira o flywheel |
+| solenoid | solenoide | relay de current alta entre a battery e o starter motor |
+| starter motor | motor de partida | electric motor que gira o flywheel |
 | ring gear | cremalheira do volante | engrenagem grande em volta do flywheel |
 | charging system | sistema de carga | recarrega a battery e alimenta o carro com o engine ligado |
 | alternator | alternador | gerador movido pelo engine |
-| voltage regulator | regulador de tensão | controla a tensão que o alternator produz |
+| voltage regulator | regulador de tensão | controla a voltage que o alternator produz |
 | drive belt | correia dos acessórios | leva o giro da crankshaft pulley até o alternator |
-| magnetic field | campo magnético | a região em volta de um ímã (ou de um fio com corrente) onde ele atrai o ferro |
+| magnetic field | campo magnético | a região em volta de um ímã (ou de um wire com current) onde ele atrai o ferro |
+| voltage | tensão | o empurrão elétrico, em volts: 12 V da battery, 14.5 V do alternator |
+| current | corrente | o fluxo de eletricidade, em amps: centenas de amps na partida |
+| resistance | resistência | a dificuldade à passagem da current, em ohms: um cable fino tem mais |
+| power | potência | volts vezes amps, em watts |
+| battery cable | cabo da bateria | o cable grosso que leva a current da partida |
+| ground | massa | o caminho de volta da current até a battery, pela carroceria |
+| voltage drop | queda de tensão | a parte da voltage que fica num cable ou numa conexão |
+| state of charge | estado de carga | quanto de energia a battery tem guardada |
+| load test | teste com carga | teste que puxa current alta da battery para ver se ela aguenta a partida |
 
 ## Onde isso aparece
 
@@ -65,47 +74,47 @@ por boa parte das queixas de “o carro não pega”.
   sistemas que trabalham em volta do engine. A battery, o starting system e o
   charging system são estudados a fundo na **TRN-120**. O ignition system
   volta em detalhe em **AUT-181** e **AUT-183** (*Engine Performance*).
-- Na prova ASE, a battery, a partida e a carga são da área **A6**
+- Na prova ASE, a battery, o starting system e o charging system são da área **A6**
   (*Electrical/Electronic Systems*). A ignição é da área **A8** (*Engine
   Performance*). Na área **A1** (*Engine Repair*), os três aparecem quando é
   preciso separar um defeito mecânico de um defeito elétrico.
 
 ## Ideias anteriores que voltam aqui
 
-Esta lição usa duas fontes de ideias.
+Esta lição usa ideias de dois lugares.
 
-Da **TRN-120**: a fonte que empurra os elétrons, em
+Da **TRN-120**: a power source que empurra os elétrons, em
 [O que é eletricidade](../../trn-120-eletricidade/o-que-e-eletricidade); o
-caminho completo e o retorno pela massa, em
-[O circuito elétrico](../../trn-120-eletricidade/o-circuito-eletrico); e as
-contas de [Lei de Ohm](../../trn-120-eletricidade/lei-de-ohm) e
-[Potência elétrica](../../trn-120-eletricidade/potencia-eletrica).
+complete circuit e o retorno pelo ground, em
+[O electrical circuit](../../trn-120-eletricidade/o-circuito-eletrico); e as
+contas de [Ohm's law](../../trn-120-eletricidade/lei-de-ohm) e
+[Electrical power](../../trn-120-eletricidade/potencia-eletrica).
 
 Da lição anterior desta disciplina: os quatro tempos, em
 [O four-stroke cycle](./ciclo-de-quatro-tempos).
 
 Responda antes de seguir:
 
-1. No carro existem duas fontes que empurram os elétrons. Quais são, e que tipo
+1. No carro existem duas power sources que empurram os elétrons. Quais são, e que tipo
    de energia cada uma gasta?
-2. Uma corrente de 150 A passa por um trecho de cabo com 0.01 Ω. Quanta tensão
+2. Uma current de 150 A passa por um trecho de cable com 0.01 Ω. Quanta voltage
    fica nesse trecho?
 3. Em que tempo do four-stroke cycle a mistura precisa começar a queimar? Em
    que posição está o piston nesse momento?
-4. Que efeito da corrente faz funcionar o starter motor e os relés?
+4. Que efeito da current faz funcionar o starter motor e os relays?
 
 <details>
 <summary>Respostas</summary>
 
 1. A battery, que gasta energia química, e o alternator, que gasta energia de
    movimento — o giro do engine — e converte com ímãs.
-2. Pela lei de Ohm, $V = I \times R = 150 \times 0.01 = 1.5\,\text{V}$. Essa
-   tensão fica no cabo, em forma de calor, e não chega ao que está depois dele.
+2. Pela Ohm's law, $V = I \times R = 150 \times 0.01 = 1.5\,\text{V}$. Essa
+   voltage fica no cable, em forma de calor, e não chega ao que está depois dele.
 3. No fim do compression stroke, com o piston perto do TDC. A queima empurra o
    piston para baixo no tempo seguinte, o power stroke.
-4. O magnetismo: corrente passando num fio enrolado cria um ímã.
+4. O magnetismo: current passando num wire enrolado cria um ímã.
 
-Se errou a 2, releia a lição de lei de Ohm antes de continuar. Ela volta no
+Se errou a 2, releia a lição de Ohm's law antes de continuar. Ela volta no
 starting system.
 
 </details>
@@ -123,7 +132,7 @@ cylinder certo e na hora certa. Quem acende é o ignition system.
 
 Tudo isso gasta energia elétrica da battery. Uma partida gasta muita. Então,
 depois que o engine pega, alguém precisa devolver essa energia à battery, e
-também alimentar faróis, rádio e módulos enquanto o carro anda. Quem faz isso é
+também alimentar headlamps, rádio e módulos enquanto o carro anda. Quem faz isso é
 o charging system.
 
 Uma comparação com uma bicicleta elétrica ajuda a guardar os papéis:
@@ -146,16 +155,16 @@ não é energia de graça: o engine gasta um pouco de força para girá-lo.
   etapas={[
     {k: 'battery', nota: 'fornece os 12 V'},
     {k: 'ignition switch', nota: 'liga o sistema'},
-    {k: 'switching device', nota: 'liga e corta a corrente da coil, no ritmo do crankshaft'},
-    {k: 'ignition coil', nota: 'cada corte vira um pulso de alta tensão', tone: 2},
-    {k: 'spark plug wire', nota: 'leva a alta tensão até a spark plug, quando existe', tone: 2},
+    {k: 'switching device', nota: 'liga e corta a current da coil, no ritmo do crankshaft'},
+    {k: 'ignition coil', nota: 'cada corte vira um pulso de alta voltage', tone: 2},
+    {k: 'spark plug wire', nota: 'leva a alta voltage até a spark plug, quando existe', tone: 2},
     {k: 'spark plug', nota: 'a faísca salta na ponta, dentro da câmara', tone: 2},
   ]}
-  caption="O caminho da ignição. Em laranja, a parte de alta tensão. Em muitos carros recentes, a ignition coil fica montada em cima da spark plug, e o spark plug wire não existe. Compare com a Figura 1-14 do livro."
+  caption="O caminho da ignição. Em laranja, a parte de alta voltage. Em muitos carros recentes, a ignition coil fica montada em cima da spark plug, e o spark plug wire não existe. Compare com a Figura 1-14 do livro."
 />
 
 O switching device precisa saber a posição do crankshaft para cortar a
-corrente na hora certa. Por isso ele recebe o sinal de um sensor de rotação
+current na hora certa. Por isso ele recebe o sinal de um sensor de rotação
 (engine speed sensor). Esse sensor fica perto de uma roda dentada que gira com
 o crankshaft.
 
@@ -171,21 +180,21 @@ o crankshaft.
 
 <Fluxo
   etapas={[
-    {k: 'battery', nota: 'entrega a corrente grande da partida', tone: 2},
-    {k: 'ignition switch', texto: 'ignition switch (start)', nota: 'manda uma corrente pequena ao solenoid'},
-    {k: 'solenoid', nota: 'fecha o contato da corrente grande', tone: 2},
+    {k: 'battery', nota: 'entrega a current grande da partida', tone: 2},
+    {k: 'ignition switch', texto: 'ignition switch (start)', nota: 'manda uma current pequena ao solenoid'},
+    {k: 'solenoid', nota: 'fecha o contato da current grande', tone: 2},
     {k: 'starter motor', nota: 'gira e engata a engrenagem pequena', tone: 2},
     {k: 'ring gear', nota: 'a engrenagem grande do flywheel'},
     {k: 'crankshaft', nota: 'gira, e o engine começa o ciclo'},
   ]}
-  caption="O caminho da partida. Em laranja, o caminho da corrente grande: battery, solenoid e starter motor. A ignition switch só comanda o solenoid, com uma corrente pequena. Compare com a Figura 1-15 do livro."
+  caption="O caminho da partida. Em laranja, o caminho da current grande: battery, solenoid e starter motor. A ignition switch só comanda o solenoid, com uma current pequena. Compare com a Figura 1-15 do livro."
 />
 
 O mesmo caminho, desenhado com as peças, olhando o engine por trás:
 
 <PartidaCarga
   modo="partida"
-  caption="O starting system. O cabo grosso (laranja) leva a corrente grande da battery ao solenoid e ao starter motor; o fio fino leva só o comando da ignition switch. A engrenagem pequena do starter motor engata no ring gear do flywheel e gira o crankshaft. Compare com a Figura 1-15 do livro."
+  caption="O starting system. O cable grosso (laranja) leva a current grande da battery ao solenoid e ao starter motor; o wire fino leva só o comando da ignition switch. A engrenagem pequena do starter motor engata no ring gear do flywheel e gira o crankshaft. Compare com a Figura 1-15 do livro."
 />
 
 ### Charging: do crankshaft de volta para a battery
@@ -195,31 +204,31 @@ O mesmo caminho, desenhado com as peças, olhando o engine por trás:
     {k: 'crankshaft pulley', nota: 'gira junto com o crankshaft'},
     {k: 'drive belt', nota: 'leva o giro até a polia do alternator'},
     {k: 'alternator', nota: 'converte giro em eletricidade, com ímãs', tone: 1},
-    {k: 'voltage regulator', nota: 'segura a tensão perto de 14.5 V (típico)', tone: 1},
+    {k: 'voltage regulator', nota: 'segura a voltage perto de 14.5 V (típico)', tone: 1},
     {k: 'battery', nota: 'recebe a recarga; o carro todo usa essa energia'},
   ]}
-  caption="O caminho da carga. Com o engine funcionando, o alternator passa a ser a fonte do carro. Ele alimenta tudo e devolve à battery a energia gasta na partida. Compare com a Figura 1-16 do livro."
+  caption="O caminho do charging. Com o engine funcionando, o alternator passa a ser a power source do carro. Ele alimenta tudo e devolve à battery a energia gasta na partida. Compare com a Figura 1-16 do livro."
 />
 
 E com as peças, olhando o engine pela frente:
 
 <PartidaCarga
   modo="carga"
-  caption="O charging system. A crankshaft pulley move a drive belt, que gira a polia do alternator (e a da water pump). O alternator, controlado pelo voltage regulator, manda a corrente de recarga (azul) para a battery. Compare com a Figura 1-16 do livro."
+  caption="O charging system. A crankshaft pulley move a drive belt, que gira a polia do alternator (e a da water pump). O alternator, controlado pelo voltage regulator, manda a current de recarga (azul) para a battery. Compare com a Figura 1-16 do livro."
 />
 
 ## Ponte para a formalização
 
-Os três caminhos acima usam as mesmas ideias da TRN-120. Cada um é um circuito
-completo, com fonte, condutor, carga e retorno pela massa. A battery e o
-alternator são as duas fontes. Os efeitos da corrente aparecem de novo: o
-**magnetismo** move o starter motor, fecha o solenoid e produz a alta tensão
-da ignition coil; o **calor** aparece em todo cabo e todo terminal por onde
-passa corrente.
+Os três caminhos acima usam as mesmas ideias da TRN-120. Cada um é um complete
+circuit, com power source, conductor, load e retorno pelo ground. A battery e o
+alternator são as duas power sources. Os efeitos da current aparecem de novo: o
+**magnetismo** move o starter motor, fecha o solenoid e produz a alta voltage
+da ignition coil; o **calor** aparece em todo cable e todo terminal por onde
+passa current.
 
-Por isso as contas de lei de Ohm e de potência valem aqui sem nenhuma
+Por isso as contas de Ohm's law e de power valem aqui sem nenhuma
 adaptação. A única coisa nova é o tamanho dos números: a partida puxa centenas
-de ampères, e a faísca precisa de dezenas de milhares de volts.
+de amps, e a faísca precisa de dezenas de milhares de volts.
 
 ## Formalização
 
@@ -229,30 +238,30 @@ de ampères, e a faísca precisa de dezenas de milhares de volts.
 > fim do compression stroke, para acender a mistura comprimida. Só o engine a
 > gasolina precisa dele.
 
-A peça central é a **ignition coil**. Ela tem dois enrolamentos de fio em volta
+A peça central é a **ignition coil**. Ela tem dois enrolamentos de wire em volta
 de um núcleo de ferro. O primeiro, o **primary winding**, tem poucas voltas de
-fio grosso e recebe os 12 V da battery. O segundo, o **secondary winding**, tem
-milhares de voltas de fio fino e é ligado à spark plug.
+wire grosso e recebe os 12 V da battery. O segundo, o **secondary winding**, tem
+milhares de voltas de wire fino e é ligado à spark plug.
 
 A coil funciona em dois passos. Este é o ponto que mais confunde na lição, então
 vá devagar:
 
-1. **O switching device liga a corrente** no primary winding. A corrente cria
-   um campo magnético em volta do enrolamento — o efeito magnético da corrente
+1. **O switching device liga a current** no primary winding. A current cria
+   um campo magnético em volta do enrolamento — o efeito magnético da current
    que você viu na TRN-120. Nesse momento **não sai faísca**.
-2. **O switching device corta a corrente.** O campo magnético some de repente.
-   Quando um campo magnético varia rápido perto de um fio enrolado, ele empurra
-   os elétrons desse fio: aparece uma tensão. Como o secondary winding tem
-   milhares de voltas, a tensão em cada volta se soma. O resultado passa de
-   60 000 V, segundo o livro. É essa tensão que salta pelo espaço na ponta da
+2. **O switching device corta a current.** O campo magnético some de repente.
+   Quando um campo magnético varia rápido perto de um wire enrolado, ele empurra
+   os elétrons desse wire: aparece uma voltage. Como o secondary winding tem
+   milhares de voltas, a voltage em cada volta se soma. O resultado passa de
+   60 000 V, segundo o livro. É essa voltage que salta pelo espaço na ponta da
    spark plug, o **spark plug gap**, e forma a faísca.
 
 Para ter uma ideia do tamanho: $60\,000 \div 12 = 5000$. A faísca usa uma
-tensão cerca de cinco mil vezes maior que a da battery.
+voltage cerca de cinco mil vezes maior que a da battery.
 
 **O que muda e o que fica igual:** a energia vem toda da battery (ou do
 alternator, com o engine ligado). A coil não cria energia. Ela troca muita
-corrente com pouca tensão por pouca corrente com muita tensão, por um instante.
+current com pouca voltage por pouca current com muita voltage, por um instante.
 
 O **switching device** é eletrônico. Nos carros atuais ele faz parte de um
 módulo, a **electronic control unit**, ou do próprio control module do engine.
@@ -281,18 +290,18 @@ ponta. Durante a partida, essa engrenagem engata no **ring gear**, a engrenagem
 grande em volta do flywheel. Como o flywheel é preso ao crankshaft, o
 crankshaft gira junto.
 
-O starter motor puxa uma corrente muito grande. Passar essa corrente pela
-ignition switch, que fica no painel, exigiria fios grossos até lá e uma chave
-enorme. Por isso existe o **solenoid**: um relé de corrente alta, montado
+O starter motor puxa uma current muito grande. Passar essa current pela
+ignition switch, que fica no painel, exigiria wires grossos até lá e uma chave
+enorme. Por isso existe o **solenoid**: um relay de current alta, montado
 perto do starter motor ou em cima dele. A ignition switch manda ao solenoid uma
-corrente pequena. O solenoid fecha um contato grosso e liga a battery ao starter
-motor por um cabo curto e grosso. Quando a cliente solta a chave, o solenoid
+current pequena. O solenoid fecha um contato grosso e liga a battery ao starter
+motor por um cable curto e grosso. Quando a cliente solta a chave, o solenoid
 abre, e o starter motor para.
 
-- **Exemplo:** um cabo do starter motor curto e grosso, ligado da battery ao
+- **Exemplo:** um cable do starter motor curto e grosso, ligado da battery ao
   solenoid.
-- **Contraexemplo:** o fio fino da ignition switch até o solenoid. Ele faz
-  parte do starting system, mas nunca leva a corrente grande: só comanda.
+- **Contraexemplo:** o wire fino da ignition switch até o solenoid. Ele faz
+  parte do starting system, mas nunca leva a current grande: só comanda.
 
 ### Charging system
 
@@ -302,29 +311,29 @@ abre, e o starter motor para.
 
 O **alternator** é um gerador. A **drive belt** liga a polia dele à
 crankshaft pulley, e por isso ele gira sempre que o engine gira. Dentro dele,
-ímãs girando perto de enrolamentos de fio produzem a corrente — a fonte por
+ímãs girando perto de enrolamentos de wire produzem a current — a power source por
 energia de movimento que você viu na TRN-120.
 
 O **voltage regulator** controla quanto o alternator produz. Segundo o livro,
 ele mantém a saída perto de **14.5 V**. Uma battery carregada, em repouso, fica
 perto de **12.5 V** — na TRN-120 usamos 12.6 V para uma battery bem carregada,
 e cerca de 14 V para o alternator. Os valores são típicos e mudam um pouco de
-uma fonte para outra; a faixa certa de cada carro está no service manual.
+uma referência para outra; a faixa certa de cada carro está no service manual.
 
-Por que a diferença importa? Porque a corrente vai do ponto de tensão mais alta
-para o de tensão mais baixa. Com 14.5 V de um lado e 12.5 V do outro, sobram
-$14.5 - 12.5 = 2\,\text{V}$ empurrando corrente para dentro da battery. É isso
+Por que a diferença importa? Porque a current vai do ponto de voltage mais alta
+para o de voltage mais baixa. Com 14.5 V de um lado e 12.5 V do outro, sobram
+$14.5 - 12.5 = 2\,\text{V}$ empurrando current para dentro da battery. É isso
 que recarrega a battery. Se a saída do alternator ficasse em 12.5 V, a
 diferença seria zero, e nada entraria.
 
-- **Exemplo:** com o engine ligado e os faróis acesos, quem alimenta os faróis
-  é o alternator. A battery está recebendo carga, não entregando.
-- **Contraexemplo:** com o engine desligado e os faróis acesos, quem alimenta
-  os faróis é a battery. O alternator não gira, então não produz nada.
+- **Exemplo:** com o engine ligado e os headlamps acesos, quem alimenta os headlamps
+  é o alternator. A battery está recebendo current, não entregando.
+- **Contraexemplo:** com o engine desligado e os headlamps acesos, quem alimenta
+  os headlamps é a battery. O alternator não gira, então não produz nada.
 
 > **Erro comum:** achar que o alternator “recarrega a battery” e mais nada. Com
-> o engine funcionando, ele é a fonte de tudo: ignição, injeção, faróis,
-> ventiladores, módulos. A battery só volta a trabalhar como fonte quando o
+> o engine funcionando, ele é a power source de tudo: ignição, injeção, headlamps,
+> ventiladores, módulos. A battery só volta a trabalhar como power source quando o
 > alternator não dá conta, ou quando o engine para. Por isso um alternator
 > fraco aparece primeiro como battery descarregada: a battery cobre a diferença
 > até se esgotar.
@@ -340,20 +349,20 @@ causas:
 |---|---|---|
 | nada; ou só um clique; ou o starter motor gira devagar | o crankshaft não gira na velocidade necessária | starting system e battery |
 | o crankshaft gira normal, mas o engine não pega | o starting system fez o trabalho dele | ignition, combustível ou compressão |
-| pega com chupeta e anda bem, mas a battery fica fraca de novo | a battery não está sendo recarregada, ou não segura a carga | charging system e battery |
+| pega com chupeta e anda bem, mas a battery fica fraca de novo | a battery não está sendo recarregada, ou não segura a charge | charging system e battery |
 
 O que cada teste descarta:
 
-- **Tensão da battery em repouso**, com o multímetro, como você aprendeu em
-  [Medições com o multímetro](../../trn-120-eletricidade/medicoes-com-multimetro).
+- **Voltage da battery em repouso**, com o multimeter, como você aprendeu em
+  [Medições com o multimeter](../../trn-120-eletricidade/medicoes-com-multimetro).
   Perto de 12.5 V, a battery está carregada. Bem abaixo disso, ela está
   descarregada. Esse número não diz se ela aguenta a partida — isso precisa de
-  um teste com carga, estudado na TRN-120.
-- **Tensão da battery com o engine funcionando.** Se o charging system
-  funciona, a leitura sobe acima da tensão de repouso, para perto do valor do
+  um load test, estudado na TRN-120.
+- **Voltage da battery com o engine funcionando.** Se o charging system
+  funciona, a leitura sobe acima da voltage de repouso, para perto do valor do
   service manual. Se fica igual à de repouso, ou cai, o alternator não está
   carregando.
-- **Teste de faísca**, quando o engine gira mas não pega (alta tensão: leia
+- **Teste de faísca**, quando o engine gira mas não pega (alta voltage: leia
   antes os avisos da seção “Na oficina”). Um **spark tester**
   ligado no lugar da spark plug mostra se a faísca sai. Sem faísca em todos os
   cylinders, o problema é algo comum a todos: o switching device, o sinal do
@@ -369,22 +378,22 @@ está bem. A ignição também está bem, porque o engine pega e anda até o tra
 Sobra a pergunta: por que a battery amanhece fraca **depois** de uma hora
 rodando? Se o charging system funcionasse, essa hora rodando teria recarregado
 a battery. Então ou o alternator não está recarregando, ou a battery não segura a
-carga.
+charge.
 
-O técnico mede a tensão nos polos da battery com o engine funcionando e tudo
+O técnico mede a voltage nos battery terminals com o engine funcionando e tudo
 desligado. Lê **11.8 V** (leitura ilustrativa). Com o engine desligado, antes,
 tinha lido 12.0 V.
 
 - O sistema deveria fazer: com o engine ligado, o voltage regulator deveria
-  manter a tensão perto de 14.5 V (o valor exato está no service manual).
-- O que foi medido: 11.8 V, menos que a tensão de repouso.
-- O princípio que liga as duas coisas: a corrente só entra na battery se a
-  tensão do alternator for maior que a dela. Com 11.8 V, ninguém empurra
-  corrente para dentro. Pior: a battery está alimentando o carro sozinha.
-- O que muda: a battery perde carga enquanto o carro anda, em vez de ganhar.
+  manter a voltage perto de 14.5 V (o valor exato está no service manual).
+- O que foi medido: 11.8 V, menos que a voltage de repouso.
+- O princípio que liga as duas coisas: a current só entra na battery se a
+  voltage do alternator for maior que a dela. Com 11.8 V, ninguém empurra
+  current para dentro. Pior: a battery está alimentando o carro sozinha.
+- O que muda: a battery perde charge enquanto o carro anda, em vez de ganhar.
   Uma hora de ida e volta é suficiente para ela amanhecer sem força para a
   partida. O que não
-  muda: a ignição e a partida funcionam, enquanto houver carga.
+  muda: a ignição e a partida funcionam, enquanto houver charge.
 
 Próximo teste, do mais simples para o mais caro: **olhar a drive belt**. Uma
 drive belt rompida ou patinando deixa o alternator parado ou lento, e a leitura
@@ -398,17 +407,18 @@ descarregada depois de alguns dias.
 
 :::danger Riscos antes de qualquer teste
 
-- **Battery: curto com ferramenta.** Uma chave de boca que encosta no polo
-  positivo e no metal do carro ao mesmo tempo vira um caminho de resistência
-  quase zero. A corrente fica enorme, a ferramenta esquenta até ficar
+- **Battery: short circuit com ferramenta.** Uma chave de boca que encosta no
+  positive terminal e no metal do carro ao mesmo tempo vira um caminho de resistance
+  quase zero. A current fica enorme, a ferramenta esquenta até ficar
   incandescente e pode soldar no lugar. Tire anéis, relógio e pulseiras.
 - **Battery: gás hidrogênio.** A battery solta hidrogênio, que explode com uma
   faísca. Nada de chama, cigarro ou faísca perto dela. Use **safety glasses**:
   ela também contém ácido.
-- **Ordem dos cabos.** Ao desconectar, solte primeiro o cabo **negativo**; ao
-  conectar, ligue o negativo **por último**. Assim, se a ferramenta encostar no
-  metal enquanto você mexe no positivo, não há curto: o negativo já está solto.
-- **Alta tensão da ignição.** A ignition coil produz dezenas de milhares de
+- **Ordem dos battery cables.** Ao desconectar, solte primeiro o cable do
+  **negative terminal**; ao conectar, ligue esse cable **por último**. Assim, se
+  a ferramenta encostar no metal enquanto você mexe no positive terminal, não há
+  short circuit: o cable negativo já está solto.
+- **Alta voltage da ignição.** A ignition coil produz dezenas de milhares de
   volts. Não segure spark plug wire, coil ou spark plug com o engine girando.
   Faça teste de faísca só com o spark tester.
 - **Peças girando.** Com o engine ligado, a drive belt, as polias e o cooling
@@ -417,55 +427,55 @@ descarregada depois de alguns dias.
 
 :::
 
-Ferramentas desta lição: o multímetro, que você já usou na TRN-120, e o spark
+Ferramentas desta lição: o multimeter, que você já usou na TRN-120, e o spark
 tester. O procedimento de teste da battery, do starting system e do charging
 system, e os valores aceitáveis, vêm do service manual do veículo. Use **gloves**
 ao mexer na battery.
 
 ## Exemplos resolvidos
 
-### Exemplo 1: a potência do starter motor
+### Exemplo 1: a power do starter motor
 
-Na lição [Potência elétrica](../../trn-120-eletricidade/potencia-eletrica) da
+Na lição [Electrical power](../../trn-120-eletricidade/potencia-eletrica) da
 TRN-120, um starter motor recebia 11.1 V e puxava 150 A (valores ilustrativos).
-A potência dele é:
+A power dele é:
 
 $$
 P = V \times I = 11.1 \times 150 = 1665\,\text{W}
 $$
 
-São cerca de 1.7 kW. Nenhuma outra peça do carro puxa tanta corrente da
+São cerca de 1.7 kW. Nenhuma outra peça do carro puxa tanta current da
 battery. É por isso que a partida é o momento mais duro da vida da battery, e
 que alguns minutos seguidos de partida podem descarregá-la, como o livro
 comenta.
 
-### Exemplo 2: por que o cabo do starter motor é grosso
+### Exemplo 2: por que o cable do starter motor é grosso
 
 **Pause e tente:** durante a partida, imagine que a battery entregue 12 V e que
-o starter motor puxe os mesmos 150 A. Compare dois cabos: um grosso, com
-0.002 Ω, e um fino, com 0.05 Ω (resistências ilustrativas). Quanta tensão
-chega ao starter motor em cada caso? Quanto calor fica em cada cabo?
+o starter motor puxe os mesmos 150 A. Compare dois cables: um grosso, com
+0.002 Ω, e um fino, com 0.05 Ω (resistances ilustrativas). Quanta voltage
+chega ao starter motor em cada caso? Quanto calor fica em cada cable?
 
 <details>
 <summary>Solução</summary>
 
-Cabo grosso. A tensão que fica no cabo é
+Cable grosso. A voltage que fica no cable é
 $V = I \times R = 150 \times 0.002 = 0.3\,\text{V}$. Ao starter motor chegam
-$12 - 0.3 = 11.7\,\text{V}$. O calor no cabo é
+$12 - 0.3 = 11.7\,\text{V}$. O calor no cable é
 $P = V \times I = 0.3 \times 150 = 45\,\text{W}$.
 
-Cabo fino. A tensão que fica no cabo é
+Cable fino. A voltage que fica no cable é
 $V = 150 \times 0.05 = 7.5\,\text{V}$. Ao starter motor chegam só
-$12 - 7.5 = 4.5\,\text{V}$. O calor no cabo é
+$12 - 7.5 = 4.5\,\text{V}$. O calor no cable é
 $P = 7.5 \times 150 = 1125\,\text{W}$.
 
-Com o cabo fino, o starter motor recebe menos da metade da tensão e mal gira.
-E o cabo vira um aquecedor de mais de 1 kW: derrete o isolamento. **O que não
-muda** entre os dois casos é a fórmula; **o que muda** é a resistência do
+Com o cable fino, o starter motor recebe menos da metade da voltage e mal gira.
+E o cable vira um aquecedor de mais de 1 kW: derrete o insulation. **O que não
+muda** entre os dois casos é a fórmula; **o que muda** é a resistance do
 caminho. Com 150 A, cada milésimo de ohm conta.
 
-(Na prática, a corrente também cairia com o cabo fino, porque a resistência
-total aumentou. A conta com a mesma corrente serve para mostrar o tamanho do
+(Na prática, a current também cairia com o cable fino, porque a resistance
+total aumentou. A conta com a mesma current serve para mostrar o tamanho do
 problema.)
 
 </details>
@@ -484,34 +494,34 @@ cylinder recebe $3000 \div 2 = 1500$ faíscas. Os quatro cylinders juntos:
 $1500 \times 4 = 6000$ faíscas por minuto. Por segundo:
 $6000 \div 60 = 100$ faíscas.
 
-Cem vezes por segundo, o switching device liga a corrente da coil, espera o
+Cem vezes por segundo, o switching device liga a current da coil, espera o
 campo magnético se formar e corta no instante certo. É por isso que esse
 trabalho é eletrônico: um contato mecânico, como os antigos points, se gasta
 fazendo isso.
 
 </details>
 
-### Exemplo 4: a corrente que entra na battery
+### Exemplo 4: a current que entra na battery
 
 **Pause e tente:** com o engine ligado, o alternator mantém 14.5 V. A battery
-está meio descarregada, em 12.5 V. Imagine que entre as duas tensões exista
-uma resistência de 0.1 Ω — a resistência interna da battery e dos cabos, valor
-ilustrativo e simplificado. Quanta corrente entra na battery? E quando a
+está meio descarregada, em 12.5 V. Imagine que entre as duas voltages exista
+uma resistance de 0.1 Ω — a resistance interna da battery e dos cables, valor
+ilustrativo e simplificado. Quanta current entra na battery? E quando a
 battery já subiu para 14.0 V?
 
 <details>
 <summary>Solução</summary>
 
-A tensão que sobra para empurrar a corrente é a diferença:
+A voltage que sobra para empurrar a current é a diferença:
 $14.5 - 12.5 = 2\,\text{V}$. Pela lei de Ohm,
 $I = V \div R = 2 \div 0.1 = 20\,\text{A}$.
 
 Com a battery em 14.0 V, sobram $14.5 - 14.0 = 0.5\,\text{V}$, e
 $I = 0.5 \div 0.1 = 5\,\text{A}$.
 
-À medida que a battery se recarrega, a tensão dela sobe, a diferença diminui e
-a corrente de recarga cai sozinha. É assim que o voltage regulator evita
-encher demais a battery: ele não deixa a tensão do alternator subir além do
+À medida que a battery se recarrega, a voltage dela sobe, a diferença diminui e
+a current de recarga cai sozinha. É assim que o voltage regulator evita
+encher demais a battery: ele não deixa a voltage do alternator subir além do
 valor certo.
 
 </details>
@@ -519,7 +529,7 @@ valor certo.
 ### Exemplo 5: o alternator não é de graça
 
 **Pause e tente:** um alternator entrega 60 A a 14.5 V (valores ilustrativos)
-com faróis, ventilação e desembaçador ligados. Quanta potência elétrica ele
+com headlamps, ventilação e desembaçador ligados. Quanta power ele
 produz? Quantos cavalos o engine gasta, no mínimo, para girá-lo?
 
 <details>
@@ -536,7 +546,7 @@ sobe um pouco quando muitos acessórios elétricos estão ligados.
 
 ## Perguntas de verificação
 
-1. Por que a ignition coil solta a faísca quando a corrente é **cortada**, e não
+1. Por que a ignition coil solta a faísca quando a current é **cortada**, e não
    quando é ligada?
 2. Por que existe o solenoid? Por que a ignition switch não liga o starter
    motor diretamente?
@@ -549,17 +559,17 @@ sobe um pouco quando muitos acessórios elétricos estão ligados.
 <details>
 <summary>Respostas</summary>
 
-1. Enquanto a corrente circula sem mudar, o campo magnético fica parado, e um
-   campo parado não empurra os elétrons do secondary winding. A alta tensão só
+1. Enquanto a current circula sem mudar, o campo magnético fica parado, e um
+   campo parado não empurra os elétrons do secondary winding. A alta voltage só
    aparece quando o campo **varia** rápido — e a variação mais rápida é o
    campo sumindo de uma vez, no corte.
-2. O starter motor puxa centenas de ampères. Levar essa corrente até o painel
-   exigiria cabos grossos e longos, com muita resistência no caminho, e uma
-   chave capaz de aguentar essa corrente. O solenoid fecha o caminho grande
-   perto do starter motor, por um cabo curto, e a ignition switch só manda uma
-   corrente pequena para comandá-lo.
-3. A diferença de tensão entre o alternator e a battery seria zero, e nenhuma
-   corrente entraria na battery. A energia gasta em cada partida nunca seria
+2. O starter motor puxa centenas de amps. Levar essa current até o painel
+   exigiria cables grossos e longos, com muita resistance no caminho, e uma
+   chave capaz de aguentar essa current. O solenoid fecha o caminho grande
+   perto do starter motor, por um cable curto, e a ignition switch só manda uma
+   current pequena para comandá-lo.
+3. A diferença de voltage entre o alternator e a battery seria zero, e nenhuma
+   current entraria na battery. A energia gasta em cada partida nunca seria
    devolvida, e a battery descarregaria aos poucos, até o carro não pegar mais.
 4. O trabalho do starting system é girar o crankshaft. Se ele girou na
    velocidade normal, esse trabalho foi feito. O que falta está em outro lugar:
@@ -588,7 +598,7 @@ estar rodando na estrada.
 ### 3. Aplicação direta
 
 a) Um starter motor recebe 10.5 V e puxa 180 A (valores ilustrativos). Qual é
-a potência dele, em watts?
+a power dele, em watts?
 
 b) Um engine de seis cylinders gira a 2400 rpm. Quantas faíscas por segundo o
 ignition system produz?
@@ -603,7 +613,7 @@ milissegundos?
 ### 5. Caso de diagnóstico
 
 Um cliente diz: “Virei a chave e só ouvi um clique. O motor não girou.” Os
-faróis acendem, mas ficam fracos quando ele tenta a partida. A battery mede
+headlamps acendem, mas ficam fracos quando ele tenta a partida. A battery mede
 11.9 V em repouso (leitura ilustrativa).
 
 a) Que sistema você investiga primeiro?
@@ -615,7 +625,7 @@ c) Qual é o próximo passo antes de condenar o starter motor?
 
 ### 6. Justificativa
 
-Por que o teste de tensão da battery com o engine funcionando diz algo sobre o
+Por que o teste de voltage da battery com o engine funcionando diz algo sobre o
 charging system, e o mesmo teste com o engine desligado não diz?
 
 ### 7. Formato ASE
@@ -658,7 +668,7 @@ Technician B says the battery is being overcharged. Who is right?
 <summary>Dica para o exercício 5</summary>
 
 Pense no que um clique sem giro quer dizer: o solenoid tentou ligar o starter
-motor, mas o starter motor não girou. Agora pergunte se a fonte tinha força
+motor, mas o starter motor não girou. Agora pergunte se a power source tinha força
 para isso.
 
 </details>
@@ -670,11 +680,11 @@ para isso.
    starting. Ignition coil e spark plug: ignition.
    b) A spark plug. O diesel acende pelo calor do ar comprimido.
 
-2. Na partida, a battery entrega uma corrente grande ao starter motor, pelo
+2. Na partida, a battery entrega uma current grande ao starter motor, pelo
    solenoid, e o starter motor gira o crankshaft pelo ring gear. Quando o
    engine pega, o starter motor desliga. A partir daí o alternator, girado pela
    drive belt, alimenta o carro inteiro e recarrega a battery, que só volta a
-   trabalhar como fonte se o alternator não der conta ou se o engine parar.
+   trabalhar como power source se o alternator não der conta ou se o engine parar.
 
 3. a) $P = 10.5 \times 180 = 1890\,\text{W}$.
    b) Cada cylinder recebe $2400 \div 2 = 1200$ faíscas por minuto. Seis
@@ -691,61 +701,61 @@ para isso.
 
 5. a) O starting system e a battery: o crankshaft não girou.
    b) A battery está abaixo dos 12.5 V de uma battery carregada: está
-   descarregada. Os faróis que enfraquecem na partida confirmam que a fonte
-   cai quando a corrente grande é pedida.
-   c) Recarregar a battery (ou testá-la com carga, pelo procedimento do service
+   descarregada. Os headlamps que enfraquecem na partida confirmam que a power source
+   cai quando a current grande é pedida.
+   c) Recarregar a battery (ou fazer o load test, pelo procedimento do service
    manual) e repetir a partida. Se, com a battery boa, o clique continuar, aí
-   sim a investigação passa para o solenoid, o starter motor e os cabos — com
-   as medições de queda de tensão da TRN-120. Condenar o starter motor com a
+   sim a investigação passa para o solenoid, o starter motor e os cables — com
+   as medições de voltage drop da TRN-120. Condenar o starter motor com a
    battery fraca é trocar peça antes de confirmar a causa.
 
 6. Com o engine desligado, o alternator não gira, e a leitura mostra só a
-   tensão da battery em repouso. Com o engine funcionando, a leitura nos polos
-   da battery é a tensão que o alternator está mantendo. Se ela subiu acima da
-   tensão de repouso, o charging system está empurrando corrente para dentro
+   voltage da battery em repouso. Com o engine funcionando, a leitura nos battery
+   terminals é a voltage que o alternator está mantendo. Se ela subiu acima da
+   voltage de repouso, o charging system está empurrando current para dentro
    da battery; se não subiu, não está.
 
-7. **Question 1 — B.** A coil carrega o campo magnético enquanto a corrente
-   circula e solta a alta tensão quando a corrente é cortada e o campo some.
-   Technician A descreve o momento errado: ao ligar a corrente, nada salta na
+7. **Question 1 — B.** A coil carrega o campo magnético enquanto a current
+   circula e solta a alta voltage quando a current é cortada e o campo some.
+   Technician A descreve o momento errado: ao ligar a current, nada salta na
    spark plug. Por isso A, C e D estão erradas.
 
    **Question 2 — B.** O starter motor tem a engrenagem pequena que engata no
    ring gear. A: o alternator é movido pela drive belt, não gira o engine. C: o
    voltage regulator só controla a saída do alternator. D: a ignition coil
-   produz a alta tensão da faísca e não tem engrenagem.
+   produz a alta voltage da faísca e não tem engrenagem.
 
-   **Question 3 — A.** Com o engine funcionando, a tensão deveria subir para
+   **Question 3 — A.** Com o engine funcionando, a voltage deveria subir para
    perto do valor do service manual (o livro cita cerca de 14.5 V). 12.3 V
    indica que o alternator não está carregando, e uma drive belt rompida ou
    patinando é a causa mais simples de verificar. Technician B está errado:
-   sobrecarga apareceria como tensão **alta demais**, não baixa. Por isso B, C
+   sobrecarga apareceria como voltage **alta demais**, não baixa. Por isso B, C
    e D estão erradas.
 
    **Question 4 — C.** O diesel engine acende o combustível com o calor do ar
    comprimido, sem spark plug. Ele tem pistons (A), precisa de starter motor
-   (B) para a partida e de alternator (D) para a carga.
+   (B) para a partida e de alternator (D) para o charging.
 
 </details>
 
 ## Revisão
 
 - **Ignition:** a ignition coil acumula energia num campo magnético enquanto a
-  corrente passa e produz mais de 60 000 V quando o switching device corta a
-  corrente. A faísca sai na spark plug no fim do compression stroke. Só o
+  current passa e produz mais de 60 000 V quando o switching device corta a
+  current. A faísca sai na spark plug no fim do compression stroke. Só o
   engine a gasolina tem.
-- **Starting:** a ignition switch comanda o solenoid com corrente pequena; o
-  solenoid liga a battery ao starter motor com corrente grande; o starter motor
+- **Starting:** a ignition switch comanda o solenoid com current pequena; o
+  solenoid liga a battery ao starter motor com current grande; o starter motor
   engata no ring gear do flywheel e gira o crankshaft.
 - **Charging:** o alternator, movido pela drive belt, alimenta o carro com o
-  engine ligado. O voltage regulator mantém a tensão acima da tensão da
+  engine ligado. O voltage regulator mantém a voltage acima da voltage da
   battery, e é essa diferença que recarrega a battery.
 - **Diagnóstico:** observe primeiro o que acontece na partida. Não gira → starting
   e battery. Gira e não pega → ignição, combustível ou compressão. Pega com
-  chupeta e descarrega de novo → charging e battery. Meça a tensão da battery
+  chupeta e descarrega de novo → charging e battery. Meça a voltage da battery
   com o engine desligado e depois ligado.
-- **Conexões:** lei de Ohm e potência da TRN-120 explicam o cabo grosso do
-  starter motor e a corrente de recarga; o four-stroke cycle explica a hora da
+- **Conexões:** Ohm's law e power da TRN-120 explicam o cable grosso do
+  starter motor e a current de recarga; o four-stroke cycle explica a hora da
   faísca.
 
 **Termos em inglês para revisar:** ignition system, spark plug, spark plug

@@ -1,28 +1,28 @@
 ---
-title: O circuito elétrico
+title: O electrical circuit
 ---
 
 import Circuito from '@site/src/components/Circuito';
 
-# O circuito elétrico
+# O electrical circuit
 
-> **Pergunta central:** por que uma lâmpada nova, num soquete que parece
+> **Pergunta central:** por que uma bulb nova, num socket que parece
 > perfeito, pode continuar apagada?
 
-## A queixa: a luz de freio que não acende
+## A queixa: a brake light que não acende
 
 Uma cliente chega à oficina e diz:
 
 > “A luz de freio do lado esquerdo não acende. Eu mesma troquei a lâmpada, e a
 > nova também não acendeu.”
 
-Você confere. Com o pedal de freio apertado, a luz de freio direita acende. A
-terceira luz de freio, no alto do vidro traseiro, também acende. Só a esquerda
-fica apagada.
+Você confere. Com o pedal de freio apertado, a brake light direita acende. A
+center high-mounted stop lamp (CHMSL), no alto do vidro traseiro, também
+acende. Só a esquerda fica apagada.
 
-A primeira suspeita é a lâmpada nova ter vindo com defeito. Então você tira a
-lâmpada do lado esquerdo e coloca no soquete do lado direito. Ela acende. **A
-lâmpada está boa.** Mesmo assim, no lado esquerdo, ela não acende.
+A primeira suspeita é a bulb nova ter vindo com defeito. Então você tira a
+bulb do lado esquerdo e coloca no socket do lado direito. Ela acende. **A
+bulb está boa.** Mesmo assim, no lado esquerdo, ela não acende.
 
 Ao final desta lição você vai saber explicar o que está acontecendo e onde
 procurar o defeito. Para isso, precisamos entender uma ideia que sustenta todo o
@@ -31,22 +31,29 @@ caminho completo, de ida e de volta.**
 
 ## Mapa das ideias
 
-| Português | Inglês | O que é |
+| Inglês | Português | O que é |
 |---|---|---|
-| ampère (A) | *ampere*, *amp* | unidade que mede quanta corrente passa |
-| circuito | *circuit* | o caminho por onde a corrente passa |
-| circuito completo | *complete circuit* | caminho contínuo, que sai da fonte e volta para ela |
-| circuito aberto | *open circuit* | caminho interrompido em algum ponto: a corrente para |
-| fonte | *power source* | o que empurra a corrente: a bateria ou o alternador |
-| carga | *load* | o que usa a corrente para trabalhar: lâmpada, motor, resistor |
-| proteção | *circuit protection* | o que corta o circuito quando a corrente passa do limite, como o fusível |
-| controle | *control* | o que liga e desliga o circuito, como o interruptor |
-| massa | *ground* | o caminho de volta para a bateria, quase sempre pela carroceria |
+| amp (ampere), A | ampère | unidade que mede quanta current passa |
+| circuit | circuito | o caminho por onde a current passa |
+| complete circuit | circuito completo | caminho contínuo, que sai da power source e volta para ela |
+| open circuit | circuito aberto | caminho interrompido em algum ponto: a current para |
+| power source | fonte | o que empurra a current: a battery ou o alternator |
+| load | carga (consumidor) | o que usa a current para trabalhar: bulb, electric motor, resistor |
+| circuit protection | proteção | o que corta o circuit quando a current passa do limite, como o fuse |
+| fuse | fusível | proteção com um fio fino de metal que derrete se a current passar do limite |
+| control | controle | o que liga e desliga o circuit, como o switch |
+| switch | interruptor | peça que abre e fecha o caminho, encostando ou afastando dois contatos |
+| ground | massa | o caminho de volta para a battery, quase sempre pela carroceria |
+| bulb, socket, filament | lâmpada, soquete, filamento | a lâmpada, o encaixe dela e o fio fino que brilha dentro dela |
+| conventional theory | sentido convencional | current do positivo para o negativo, como nos esquemas |
+| electron theory | sentido dos elétrons | elétrons do negativo para o positivo |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
 
 ## Onde isso aparece
 
-Em **todo** sistema elétrico do carro: luzes, motor de partida, vidros
-elétricos, sensores, módulos eletrônicos. Cada um deles é um ou mais circuitos.
+Em **todo** sistema elétrico do carro: luzes, starter motor, vidros
+elétricos, sensors, control modules. Cada um deles é um ou mais circuits.
 
 Na Wake Tech, este é o primeiro tópico da **TRN-120** (*Basic Transportation
 Electricity*). Na prova ASE, ele é a base da área **A6** (*Electrical/Electronic
@@ -59,8 +66,8 @@ Esta lição se apoia em [O que é eletricidade](./o-que-e-eletricidade). Respon
 antes de seguir:
 
 1. O que é um elétron livre, e por que o cobre conduz e o plástico não?
-2. Num fio solto na bancada, os elétrons livres estão parados? Há corrente?
-3. A bateria fabrica os elétrons que passam pelo fio?
+2. Num wire solto na bancada, os elétrons livres estão parados? Há current?
+3. A battery fabrica os elétrons que passam pelo wire?
 
 <details>
 <summary>Respostas</summary>
@@ -70,391 +77,395 @@ antes de seguir:
    conduz. O plástico quase não tem elétrons livres: os dele ficam presos, por
    isso ele isola.
 2. Não estão parados: se agitam o tempo todo, mas cada um para um lado. Por isso
-   não há corrente. Corrente é os elétrons andando juntos, na mesma direção.
-3. Não. Os elétrons já estão no fio. A bateria empurra esses elétrons, gastando a
+   não há current. Current é os elétrons andando juntos, na mesma direção.
+3. Não. Os elétrons já estão no wire. A battery empurra esses elétrons, gastando a
    energia química que ela guarda.
 
 </details>
 
 Se alguma resposta não veio, releia a parte correspondente da lição anterior.
-Esta lição pega essas ideias e acrescenta uma condição: para a fonte conseguir
-empurrar os elétrons, eles precisam de um caminho.
+Esta lição pega essas ideias e acrescenta uma condição: para a power source
+conseguir empurrar os elétrons, eles precisam de um caminho.
 
 Você também já viu essa condição no dia a dia. Pense numa lanterna de pilha: o
 que o botão faz por dentro quando você liga? Ele encosta uma lâmina de metal na
-outra. Com as lâminas encostadas, a lâmpada acende; separadas, apaga. É isso que
+outra. Com as lâminas encostadas, a bulb acende; separadas, apaga. É isso que
 esta lição explica.
 
 ## Intuição: um caminho de ida e volta
 
-Na lição anterior, a bateria empurrava os elétrons de um pedaço de fio, com uma
-ponta em cada polo. Agora repare no que essa montagem tem: o fio sai do polo
-negativo e chega ao polo positivo. Os elétrons saem de um polo, atravessam o fio
-e voltam para a bateria pelo outro polo. Eles andam numa **volta completa**.
+Na lição anterior, a battery empurrava os elétrons de um pedaço de wire, com uma
+ponta em cada terminal. Agora repare no que essa montagem tem: o wire sai do
+negative terminal e chega ao positive terminal. Os elétrons saem de um terminal,
+atravessam o wire e voltam para a battery pelo outro terminal. Eles andam numa
+**volta completa**.
 
-Essa volta não é um detalhe da montagem; ela é obrigatória. O polo negativo só
-consegue continuar empurrando elétrons para dentro do fio se, do outro lado, o
-polo positivo estiver recebendo a mesma quantidade de volta. Quando o caminho
-passa por uma lâmpada, a corrente atravessa o filamento, esquenta o filamento e
-ele brilha.
+Essa volta não é um detalhe da montagem; ela é obrigatória. O negative terminal
+só consegue continuar empurrando elétrons para dentro do wire se, do outro lado,
+o positive terminal estiver recebendo a mesma quantidade de volta. Quando o
+caminho passa por uma bulb, a current atravessa o filament, esquenta o filament
+e ele brilha.
 
 Uma comparação ajuda a ver isso: a **corrente de bicicleta**.
 
-- O pedal é a bateria: é ele que empurra.
-- Os elos da corrente são os elétrons do fio. Eles já estão montados no lugar
-  antes de você pedalar. O pedal não fabrica elos; ele movimenta os que já
-  estão lá.
-- A roda traseira é a lâmpada: é onde o movimento vira trabalho.
+- O pedal é a battery: é ele que empurra.
+- Os elos da corrente da bicicleta são os elétrons do wire. Eles já estão
+  montados no lugar antes de você pedalar. O pedal não fabrica elos; ele
+  movimenta os que já estão lá.
+- A roda traseira é a bulb: é onde o movimento vira trabalho.
 
 Agora repare em três coisas que a bicicleta mostra.
 
-1. **A corrente é um laço fechado.** Ela sai do pedal, passa pela roda e volta
-   para o pedal. No circuito elétrico é igual: a corrente sai da bateria, passa
-   pela lâmpada e volta para a bateria.
+1. **A corrente da bicicleta é um laço fechado.** Ela sai do pedal, passa pela
+   roda e volta para o pedal. No electrical circuit é igual: a current sai da
+   battery, passa pela bulb e volta para a battery.
 2. **Quando você pedala, todos os elos se movem juntos.** Não é o elo do pedal
    que viaja até a roda. É a mesma ideia das bolinhas no tubo da lição
-   anterior: por isso a lâmpada acende no mesmo instante em que você liga o
-   interruptor, mesmo com um fio de vários metros.
+   anterior: por isso a bulb acende no mesmo instante em que você liga o
+   switch, mesmo com um wire de vários metros.
 3. **Se a corrente da bicicleta arrebentar em qualquer ponto, tudo para.** Não
-   para só “depois” do ponto quebrado: para em todo o laço. No circuito
-   elétrico, um fio rompido em qualquer ponto apaga a lâmpada, porque nenhum
+   para só “depois” do ponto quebrado: para em todo o laço. No electrical
+   circuit, um wire rompido em qualquer ponto apaga a bulb, porque nenhum
    elétron do laço consegue se mover.
 
 A comparação tem limites, e vale saber onde ela para de funcionar. Os elos da
 bicicleta são presos uns aos outros, e os elétrons não são: eles se empurram à
 distância, por força elétrica. E a corrente da bicicleta é um laço único, sem
-ramificação. O circuito elétrico pode se dividir em caminhos paralelos — a
-lição [Circuito em paralelo](./circuito-em-paralelo) trata disso.
+ramificação. O electrical circuit pode se dividir em caminhos paralelos — a
+lição [Parallel circuit](./circuito-em-paralelo) trata disso.
 
-Uma consequência importante sai da imagem da bicicleta. **A lâmpada não gasta
-elétrons.** O mesmo número de elos que entra na roda sai da roda. Na lâmpada, a
+Uma consequência importante sai da imagem da bicicleta. **A bulb não gasta
+elétrons.** O mesmo número de elos que entra na roda sai da roda. Na bulb, a
 quantidade de elétrons que entra por um lado é a mesma que sai pelo outro. O que
-a lâmpada usa é a **energia** que a bateria deu a esses elétrons. Guarde essa
+a bulb usa é a **energia** que a battery deu a esses elétrons. Guarde essa
 diferença; ela volta na próxima lição.
 
-## Modelo visual: as partes de um circuito
+## Modelo visual: as partes de um circuit
 
-Os esquemas elétricos dos manuais desenham todo circuito com as mesmas peças,
-quase sempre nesta ordem: fonte, proteção, controle, carga e o caminho de volta.
+Os esquemas elétricos dos manuais desenham todo circuit com as mesmas peças,
+quase sempre nesta ordem: power source, circuit protection, control, load e o
+caminho de volta.
 
 <Circuito
   corrente
-  caption="Circuito completo. A corrente sai do polo positivo (+) da bateria, passa pelo fusível, pelo interruptor e pela lâmpada, e volta pelo fio de baixo até o polo negativo (−). As setas azuis mostram o sentido convencional da corrente."
+  caption="Complete circuit. A current sai do positive terminal (+) da battery, passa pelo fuse, pelo switch e pela bulb, e volta pelo wire de baixo até o negative terminal (−). As setas azuis mostram o sentido convencional da current."
 />
 
 Cada parte tem uma função.
 
-- **Fonte** (*power source*): a bateria, com o motor desligado; com o motor
-  funcionando, o alternador também. Ela é o pedal da bicicleta: empurra a
-  corrente. Na figura, a bateria é o símbolo da esquerda. A placa longa é o polo
-  positivo (+), e a placa curta e grossa é o negativo (−).
-- **Proteção** (*circuit protection*): o **fusível** (*fuse*). Ele tem dentro um
-  fio fino de metal que derrete se a corrente passar do limite. Quando ele
-  derrete, o circuito abre e o fio do carro não pega fogo.
-- **Controle** (*control*): o **interruptor** (*switch*). Ele liga e desliga o
-  circuito, encostando ou afastando dois contatos de metal.
-- **Carga** (*load*): a lâmpada. É a peça que transforma a energia elétrica em
-  outra coisa — luz e calor, no caso da lâmpada; movimento, no caso de um motor.
-- **Condutores** (*conductors*): os fios, que ligam tudo isso.
+- **Power source**: a battery, com o engine desligado; com o engine
+  funcionando, o alternator também. Ela é o pedal da bicicleta: empurra a
+  current. Na figura, a battery é o símbolo da esquerda. A placa longa é o
+  positive terminal (+), e a placa curta e grossa é o negative terminal (−).
+- **Circuit protection**: o **fuse**. Ele tem dentro um fio fino de metal que
+  derrete se a current passar do limite. Quando ele derrete, o circuit abre e o
+  wire do carro não pega fogo.
+- **Control**: o **switch**. Ele liga e desliga o circuit, encostando ou
+  afastando dois contatos de metal.
+- **Load**: a bulb. É a peça que transforma a energia elétrica em outra coisa —
+  luz e calor, no caso da bulb; movimento, no caso de um electric motor.
+- **Conductors**: os wires, que ligam tudo isso.
 
-Uma palavra pede atenção aqui. Em português, **carga** tem dois sentidos
-diferentes, e em inglês eles são duas palavras:
+Uma palavra pede atenção aqui. Em português, **carga** tem três sentidos
+diferentes, e em inglês eles são palavras diferentes:
 
-- **carga** como consumidor, a peça que usa a corrente: em inglês, *load*;
-- **carga** como estado da bateria, “a bateria está sem carga”: em inglês,
-  *charge*.
+- **carga** como consumidor, a peça que usa a current: em inglês, **load**;
+- **carga** como estado da battery, “a bateria está sem carga”: em inglês,
+  **state of charge** (ou só *charge*);
+- **carga elétrica**, a propriedade do elétron e do próton da lição anterior:
+  em inglês, *electric charge*.
 
-Neste material, “carga” sozinha quer dizer sempre o consumidor, *load*. Quando
-for a outra, o texto vai dizer “carga da bateria” ou “carga elétrica”.
+Neste material, o consumidor é sempre **load**, e o estado da battery é o
+**state of charge**. “Carga elétrica”, em português, é sempre a da física.
 
 ### O retorno pela carroceria
 
-No carro, o caminho de volta quase nunca é um fio. A carroceria e o chassi são de
-aço, e aço conduz eletricidade. O cabo negativo da bateria é parafusado na
-carroceria e no motor. Por isso, cada carga do carro precisa de um fio só, o que
-leva o positivo até ela. A volta acontece por um parafuso que liga a carga à
-lataria mais próxima. Esse caminho de volta se chama **massa** (*ground*).
+No carro, o caminho de volta quase nunca é um wire. A carroceria e o chassi são
+de aço, e aço conduz eletricidade. O battery cable negativo é parafusado na
+carroceria e no engine. Por isso, cada load do carro precisa de um wire só, o
+que leva o positivo até ela. A volta acontece por um parafuso que liga a load à
+lataria mais próxima. Esse caminho de volta se chama **ground**; quando ele
+passa pela lataria, é o **chassis ground**.
 
 <Circuito
   retorno="massa"
   corrente
-  caption="O mesmo circuito, agora com o retorno pela carroceria. A lâmpada está ligada à lataria por um parafuso, e o polo negativo da bateria também. O símbolo de três traços é o símbolo de massa nos esquemas elétricos."
+  caption="O mesmo circuit, agora com o retorno pela carroceria (chassis ground). A bulb está ligada à lataria por um parafuso, e o negative terminal da battery também. O símbolo de três traços é o símbolo de ground nos esquemas elétricos."
 />
 
-O fabricante faz assim porque economiza cobre, peso e espaço: metade dos fios
-seria só de volta. Mas existe um custo, e ele aparece no diagnóstico. **A ligação
-de massa faz parte do circuito.** Um parafuso de massa solto ou enferrujado
-interrompe o caminho do mesmo jeito que um fio cortado.
+O fabricante faz assim porque economiza cobre, peso e espaço: metade dos wires
+seria só de volta. Mas existe um custo, e ele aparece no diagnóstico. **A
+ligação de ground faz parte do circuit.** Um parafuso de ground solto ou
+enferrujado interrompe o caminho do mesmo jeito que um wire cortado.
 
 ## Ponte para a formalização
 
-Até aqui, a corrente foi “o movimento dos elétrons”. Para trabalhar com ela na
-oficina, precisamos de uma forma de dizer **quanta** corrente está passando. A
-ideia é contar quantos elétrons atravessam um ponto do fio a cada segundo — do
+Até aqui, a current foi “o movimento dos elétrons”. Para trabalhar com ela na
+oficina, precisamos de uma forma de dizer **quanta** current está passando. A
+ideia é contar quantos elétrons atravessam um ponto do wire a cada segundo — do
 mesmo jeito que se mede o fluxo de carros numa estrada contando quantos passam
 por uma placa a cada minuto.
 
-O número de elétrons é enorme. Uma corrente de 1 ampère corresponde a cerca de
+O número de elétrons é enorme. Uma current de 1 amp corresponde a cerca de
 6.24 × 10¹⁸ elétrons por segundo — seis bilhões de bilhões. Ninguém conta isso
-um por um: o multímetro faz a medição e mostra o resultado já em ampères. O que
-você precisa guardar é o que o ampère mede, não esse número.
+um por um: o multimeter faz a medição e mostra o resultado já em amps. O que
+você precisa guardar é o que o amp mede, não esse número.
 
 ## Formalização
 
-Condutor e isolante foram definidos na lição
+Conductor e insulator foram definidos na lição
 [O que é eletricidade](./o-que-e-eletricidade). Aqui eles ganham um papel: os
-**condutores** formam o caminho — fios, terminais, a carroceria —, e os
-**isolantes** mantêm a corrente dentro dele.
+**conductors** formam o caminho — wires, terminals, a carroceria —, e os
+**insulators** mantêm a current dentro dele.
 
-> **Corrente elétrica** (*current*) é o movimento em conjunto dos elétrons
-> livres por um condutor, como na lição anterior. Agora ela ganha uma unidade:
-> a quantidade de corrente é medida em **ampères** (*amperes*), com o símbolo
+> **Current** (corrente elétrica) é o movimento em conjunto dos elétrons
+> livres por um conductor, como na lição anterior. Agora ela ganha uma unidade:
+> a quantidade de current é medida em **amps** (ampères), com o símbolo
 > **A**.
 
-- Exemplo: com a luz de freio acesa, há corrente passando pelo filamento da
-  lâmpada.
-- Contraexemplo: num fio de cobre solto na bancada, os elétrons existem e se
-  agitam, mas não há corrente, porque não há caminho completo nem nada
+- Exemplo: com a brake light acesa, há current passando pelo filament da
+  bulb.
+- Contraexemplo: num wire de cobre solto na bancada, os elétrons existem e se
+  agitam, mas não há current, porque não há caminho completo nem nada
   empurrando os elétrons numa direção.
 
-> **Circuito completo** (*complete circuit*), também chamado circuito fechado,
-> é um caminho contínuo de condutores que sai de um polo da fonte, passa pela
-> carga e volta ao outro polo.
+> **Complete circuit**, também chamado **closed circuit** (circuito fechado),
+> é um caminho contínuo de conductors que sai de um terminal da power source,
+> passa pela load e volta ao outro terminal.
 >
-> **Circuito aberto** (*open circuit*) é um circuito com o caminho interrompido
-> em algum ponto. Num circuito aberto, a corrente é zero em todo o laço.
+> **Open circuit** é um circuit com o caminho interrompido em algum ponto. Num
+> open circuit, a current é zero em todo o laço.
 
-- Exemplos de circuito aberto: fio rompido, fusível queimado, interruptor
-  desligado, filamento da lâmpada partido, parafuso de massa solto, terminal
-  corroído.
-- Contraexemplo: um fio com a capa de plástico rachada, mas com o cobre
-  inteiro, **não** é um circuito aberto. O caminho continua completo e a carga
-  funciona. Esse fio tem outro risco — encostar o cobre na lataria —, que é
-  assunto da lição sobre curto-circuito.
+- Exemplos de open circuit: wire rompido, fuse queimado, switch desligado,
+  filament da bulb partido, parafuso de ground solto, terminal corroído.
+- Contraexemplo: um wire com a capa de plástico rachada, mas com o cobre
+  inteiro, **não** é um open circuit. O caminho continua completo e a load
+  funciona. Esse wire tem outro risco — encostar o cobre na lataria —, que é
+  assunto da lição sobre short circuit.
 
 <Circuito
   quebra
-  caption="Circuito aberto: o fio rompido interrompe o caminho. A corrente para no laço inteiro, e não só depois do ponto rompido. Por isso não há setas nesta figura."
+  caption="Open circuit: o wire rompido interrompe o caminho. A current para no laço inteiro, e não só depois do ponto rompido. Por isso não há setas nesta figura."
 />
 
 ### Aberto e fechado: o contrário da torneira
 
 Este é o ponto que mais confunde no começo. Com torneira, “aberta” quer dizer
-que a água passa. Com interruptor é o contrário.
+que a água passa. Com switch é o contrário.
 
-- **Interruptor fechado** (*closed*): os contatos estão encostados, o caminho
-  está completo e a corrente passa. A carga está **ligada**.
-- **Interruptor aberto** (*open*): os contatos estão separados, o caminho está
-  interrompido e a corrente não passa. A carga está **desligada**.
+- **Switch fechado** (*closed*): os contatos estão encostados, o caminho
+  está completo e a current passa. A load está **ligada**.
+- **Switch aberto** (*open*): os contatos estão separados, o caminho está
+  interrompido e a current não passa. A load está **desligada**.
 
 A palavra descreve o caminho, não a passagem: caminho fechado é caminho sem
-interrupção. A mesma lógica vale para o circuito inteiro: “circuito aberto” é um
-circuito que não funciona.
+interrupção. A mesma lógica vale para o circuit inteiro: “open circuit” é um
+circuit que não funciona.
 
 <Circuito
   interruptor="aberto"
-  caption="Interruptor aberto: os contatos estão separados, então o circuito está desligado. Em inglês, open switch."
+  caption="Switch aberto (open switch): os contatos estão separados, então o circuit está desligado."
 />
 
-### O sentido da corrente: convencional e dos elétrons
+### O sentido da current: conventional theory e electron theory
 
-Os elétrons têm carga negativa. Por isso, no fio, eles saem do polo negativo da
-bateria, passam pela carga e chegam ao polo positivo. Esse é o **sentido dos
-elétrons** (*electron theory*).
+Os elétrons têm carga negativa. Por isso, no wire, eles saem do negative
+terminal da battery, passam pela load e chegam ao positive terminal. Esse é o
+sentido dos elétrons, a **electron theory**.
 
 Mas os esquemas elétricos, os manuais e a maior parte dos livros da área usam o
-sentido contrário: do positivo para o negativo. Esse é o **sentido
-convencional** (*conventional theory*). A razão é histórica. Os cientistas
-escolheram essa direção no século XVIII, antes de alguém saber que existia o
-elétron. Quando o elétron foi descoberto, em 1897, a convenção já estava em
-todos os livros e ficou.
+sentido contrário: do positivo para o negativo. Esse é o sentido convencional, a
+**conventional theory**. A razão é histórica. Os cientistas escolheram essa
+direção no século XVIII, antes de alguém saber que existia o elétron. Quando o
+elétron foi descoberto, em 1897, a convenção já estava em todos os livros e
+ficou.
 
 <Circuito
   corrente
   sentido="eletrons"
-  caption="O mesmo circuito, com as setas no sentido dos elétrons: saem do negativo e voltam ao positivo. Compare com a primeira figura da lição, que usa o sentido convencional."
+  caption="O mesmo circuit, com as setas no sentido dos elétrons (electron theory): saem do negativo e voltam ao positivo. Compare com a primeira figura da lição, que usa a conventional theory."
 />
 
 As duas descrições são do mesmo fenômeno, e nenhuma delas muda o diagnóstico: o
 que importa é se o caminho está completo. **Neste material, toda seta de
-corrente está no sentido convencional**, do positivo para o negativo, porque é
+current está no sentido convencional**, do positivo para o negativo, porque é
 assim que os esquemas do fabricante desenham.
 
 ## Como falha e como diagnosticar
 
-Um circuito pode falhar de três jeitos: **aberto**, **em curto** ou **com
-resistência alta**. Esta lição trata do primeiro; os outros dois têm lições
+Um circuit pode falhar de três jeitos: **open circuit**, **short circuit** ou
+**high resistance**. Esta lição trata do primeiro; os outros dois têm lições
 próprias mais adiante.
 
-O sintoma de um circuito aberto é característico: **a carga não funciona de
+O sintoma de um open circuit é característico: **a load não funciona de
 jeito nenhum.** Ela não fica fraca nem pisca — fica completamente parada. Isso
-acontece porque, num laço interrompido, a corrente é zero.
+acontece porque, num laço interrompido, a current é zero.
 
 Para achar o ponto aberto, duas perguntas organizam o raciocínio.
 
-1. **O que é compartilhado, e o que é exclusivo?** Muitas cargas dividem o mesmo
-   fusível e o mesmo interruptor. Se uma delas funciona, as partes que ela
-   compartilha com a carga parada estão boas. O defeito está na parte exclusiva
-   da carga parada.
-2. **Em que lado da carga está a interrupção?** Do lado que alimenta (do
-   positivo até a carga), na própria carga, ou do lado da massa (da carga até a
+1. **O que é compartilhado, e o que é exclusivo?** Muitas loads dividem o mesmo
+   fuse e o mesmo switch. Se uma delas funciona, as partes que ela
+   compartilha com a load parada estão boas. O defeito está na parte exclusiva
+   da load parada.
+2. **Em que lado da load está a interrupção?** Do lado que alimenta (do
+   positivo até a load), na própria load, ou do lado do ground (da load até a
    carroceria)?
 
 | O que você observa | O que isso mostra | Próximo passo |
 |---|---|---|
-| todas as cargas de um fusível paradas | a interrupção está numa parte compartilhada | conferir o fusível e a alimentação dele |
-| uma carga parada, as vizinhas funcionando | as partes compartilhadas estão boas | procurar na parte exclusiva da carga parada |
-| a carga funciona quando você mexe no conector | o contato abre e fecha com a pressão | limpar ou reparar o terminal |
+| todas as loads de um fuse paradas | a interrupção está numa parte compartilhada | conferir o fuse e a alimentação dele |
+| uma load parada, as vizinhas funcionando | as partes compartilhadas estão boas | procurar na parte exclusiva da load parada |
+| a load funciona quando você mexe no connector | o contato abre e fecha com a pressão | limpar ou reparar o terminal |
 | peça nova também não funciona | a peça não era o problema | procurar o ponto aberto no caminho |
 
 ### A queixa resolvida
 
-Agora volte à luz de freio da abertura.
+Agora volte à brake light da abertura.
 
-- A luz direita e a terceira luz acendem quando o pedal é apertado. As três
-  luzes dividem o fusível e o interruptor do pedal de freio. Então **o fusível
-  e o interruptor estão bons**: se um deles estivesse aberto, as três estariam
+- A brake light direita e a CHMSL acendem quando o pedal é apertado. As três
+  luzes dividem o fuse e o brake light switch do pedal de freio. Então **o fuse
+  e o switch estão bons**: se um deles estivesse aberto, as três estariam
   apagadas.
-- A lâmpada nova acendeu no lado direito. Então **a lâmpada está boa.**
-- Sobra a parte exclusiva do lado esquerdo: o fio que leva o positivo até o
-  soquete esquerdo, os contatos do próprio soquete e a ligação de massa da
-  lanterna esquerda.
+- A bulb nova acendeu no lado direito. Então **a bulb está boa.**
+- Sobra a parte exclusiva do lado esquerdo: o wire que leva o positivo até o
+  socket esquerdo, os contatos do próprio socket e a ligação de ground da
+  taillight esquerda.
 
-O circuito do lado esquerdo está aberto num desses três lugares. A lanterna
-traseira fica exposta a água e sujeira, e por isso soquete corroído e massa
-oxidada são causas frequentes. O próximo teste é verificar, com o pedal
-apertado, se a tensão chega ao soquete esquerdo. Se chega, o ponto aberto está do
-lado da massa. Se não chega, está no fio de alimentação. Esse teste usa o
-multímetro, ensinado na lição
-[Medições com o multímetro](./medicoes-com-multimetro), ou a lâmpada de teste.
+O circuit do lado esquerdo está aberto num desses três lugares. A taillight
+fica exposta a água e sujeira, e por isso socket corroído e ground oxidado são
+causas frequentes. O próximo teste é verificar, com o pedal apertado, se a
+voltage chega ao socket esquerdo. Se chega, o ponto aberto está do lado do
+ground. Se não chega, está no wire de alimentação. Esse teste usa o
+multimeter, ensinado na lição
+[Medições com o multimeter](./medicoes-com-multimetro), ou a test light.
 
-Repare no que **não** foi feito: trocar a lanterna inteira, o interruptor do
-pedal ou o fusível “para ver se resolve”. Cada conclusão acima veio de uma
-observação, e cada observação descartou uma parte do circuito.
+Repare no que **não** foi feito: trocar a taillight inteira, o brake light
+switch ou o fuse “para ver se resolve”. Cada conclusão acima veio de uma
+observação, e cada observação descartou uma parte do circuit.
 
 ## Na oficina: segurança com 12 volts
 
-:::danger Antes de mexer em qualquer circuito
+:::danger Antes de mexer em qualquer circuit
 
-- **Tire anéis, relógio e pulseira.** Os 12 V da bateria não dão choque
+- **Tire anéis, relógio e pulseira.** Os 12 V da battery não dão choque
   perceptível na pele seca. O perigo é outro: um anel de metal que encosta ao
-  mesmo tempo no positivo e na lataria fecha um circuito sem carga nenhuma. Por
-  esse caminho passam centenas de ampères, e o anel esquenta a ponto de queimar
+  mesmo tempo no positivo e na lataria fecha um circuit sem load nenhuma. Por
+  esse caminho passam centenas de amps, e o anel esquenta a ponto de queimar
   o dedo em segundos. Uma chave de boca no mesmo lugar solta faíscas e pode
   derreter.
-- **A bateria solta gás hidrogênio, que é explosivo.** Nada de faísca, chama ou
-  cigarro perto dela. Use óculos de proteção.
-- **Ao desligar a bateria, tire o cabo negativo primeiro. Ao ligar, coloque o
-  negativo por último.** A razão está nesta lição: com o negativo solto, a
-  carroceria deixa de estar ligada à bateria. Se a chave encostar no polo
-  positivo e na lataria ao mesmo tempo, não existe caminho de volta, e nada
-  acontece. Com o negativo ligado, esse mesmo encosto fecha um circuito sem
-  carga.
-- **Desligar a bateria pode apagar memórias** de rádio, módulos e ajustes do
-  motor. Confira no manual do veículo se existe um procedimento para isso.
-- **Cabos laranja são de alta tensão**, em carros híbridos e elétricos: centenas
-  de volts, que matam. Não toque neles sem o treinamento específico (disciplinas
-  EVX) e sem seguir o procedimento do fabricante.
+- **A battery solta gás hidrogênio, que é explosivo.** Nada de faísca, chama ou
+  cigarro perto dela. Use safety glasses.
+- **Ao desligar a battery, tire o battery cable negativo primeiro. Ao ligar,
+  coloque o negativo por último.** A razão está nesta lição: com o negativo
+  solto, a carroceria deixa de estar ligada à battery. Se a chave encostar no
+  positive terminal e na lataria ao mesmo tempo, não existe caminho de volta, e
+  nada acontece. Com o negativo ligado, esse mesmo encosto fecha um circuit sem
+  load.
+- **Desligar a battery pode apagar memórias** de rádio, control modules e
+  ajustes do engine. Confira no manual do veículo se existe um procedimento
+  para isso.
+- **Wires laranja são de alta voltage**, em carros híbridos e elétricos:
+  centenas de volts, que matam. Não toque neles sem o treinamento específico
+  (disciplinas EVX) e sem seguir o procedimento do fabricante.
 
 :::
 
 ## Exemplos resolvidos
 
-### Exemplo 1: o interruptor do lado da massa
+### Exemplo 1: o switch do lado do ground
 
-Em muitos carros, a luz de teto (*dome light*) acende quando a porta abre. O
-interruptor fica no batente da porta. Mas nesse circuito ele costuma ficar
-**depois** da lâmpada: o positivo chega à lâmpada o tempo todo, e o interruptor
-liga a lâmpada à massa quando a porta abre.
+Em muitos carros, a dome light acende quando a porta abre. O switch fica no
+batente da porta. Mas nesse circuit ele costuma ficar **depois** da bulb: o
+positivo chega à bulb o tempo todo, e o switch liga a bulb ao ground quando a
+porta abre.
 
-A lâmpada acende do mesmo jeito? Sim. O laço é o mesmo: bateria, lâmpada,
-interruptor, massa, bateria. Com a porta aberta, os contatos do interruptor se
-encostam e o laço fica completo. Com a porta fechada, o laço fica aberto. **O
-lugar do interruptor no laço não muda o fato de que ele abre e fecha o
-caminho.** Isso mostra por que o diagnóstico precisa olhar o lado da massa tanto
-quanto o lado do positivo.
+A bulb acende do mesmo jeito? Sim. O laço é o mesmo: battery, bulb, switch,
+ground, battery. Com a porta aberta, os contatos do switch se encostam e o laço
+fica completo. Com a porta fechada, o laço fica aberto. **O lugar do switch no
+laço não muda o fato de que ele abre e fecha o caminho.** Isso mostra por que o
+diagnóstico precisa olhar o lado do ground tanto quanto o lado do positivo.
 
-### Exemplo 2: um fusível e três lâmpadas
+### Exemplo 2: um fuse e três bulbs
 
-**Pause e tente:** as duas lanternas traseiras e a luz da placa estão no mesmo
-fusível. As três se apagaram ao mesmo tempo. Onde você procura primeiro?
+**Pause e tente:** as duas taillights e a license plate light estão no mesmo
+fuse. As três se apagaram ao mesmo tempo. Onde você procura primeiro?
 
 <details>
 <summary>Solução</summary>
 
-As três cargas apagaram juntas. Seria muita coincidência três lâmpadas queimarem
+As três loads apagaram juntas. Seria muita coincidência três bulbs queimarem
 no mesmo instante. O que elas têm em comum são as partes compartilhadas: o
-fusível, o interruptor das luzes e o fio que sai do fusível antes de se dividir.
-Então a procura começa ali, e o fusível vem primeiro porque é o teste mais
-simples. Se o fusível estiver queimado, existe ainda uma pergunta: **por que** ele
-queimou? Um fusível queima quando a corrente passa do limite, e isso costuma ter
-uma causa — a lição de curto-circuito trata dela. Trocar o fusível sem achar a
-causa pode resolver por dez minutos.
+fuse, o switch das luzes e o wire que sai do fuse antes de se dividir. Então a
+procura começa ali, e o fuse vem primeiro porque é o teste mais simples. Se o
+fuse estiver queimado, existe ainda uma pergunta: **por que** ele queimou? Um
+fuse queima quando a current passa do limite, e isso costuma ter uma causa — a
+lição de short circuit trata dela. Trocar o fuse sem achar a causa pode
+resolver por dez minutos.
 
 </details>
 
-### Exemplo 3: o farol que acende quando você mexe no conector
+### Exemplo 3: o headlamp que acende quando você mexe no connector
 
-**Pause e tente:** o farol baixo direito às vezes apaga. Quando você aperta o
-conector atrás do farol, ele volta a acender. O que está acontecendo no
-circuito?
+**Pause e tente:** o headlamp baixo direito às vezes apaga. Quando você aperta o
+connector atrás do headlamp, ele volta a acender. O que está acontecendo no
+circuit?
 
 <details>
 <summary>Solução</summary>
 
-O conector tem terminais de metal que se encostam para completar o caminho.
+O connector tem terminals de metal que se encostam para completar o caminho.
 Quando o terminal está frouxo, sujo ou corroído, o contato fica ruim. Com a
 pressão da mão, as partes de metal se encostam e o caminho se completa; sem a
-pressão, elas se afastam e o circuito abre. É um **circuito aberto
-intermitente** (*intermittent open*): aberto em alguns momentos, fechado em
-outros. O reparo é limpar ou trocar os terminais, e não trocar o farol.
+pressão, elas se afastam e o circuit abre. É um **intermittent open**: aberto
+em alguns momentos, fechado em outros. O reparo é limpar ou trocar os
+terminals, e não trocar o headlamp.
 
 </details>
 
 ### Exemplo 4: a chave entre o positivo e a lataria
 
-**Pause e tente:** um técnico tirou o cabo negativo da bateria e deixou o cabo
-solto, longe do polo. Depois, sem querer, encostou uma chave de boca no polo
-positivo e na lataria ao mesmo tempo. Sai faísca?
+**Pause e tente:** um técnico tirou o battery cable negativo e deixou o cabo
+solto, longe do terminal. Depois, sem querer, encostou uma chave de boca no
+positive terminal e na lataria ao mesmo tempo. Sai faísca?
 
 <details>
 <summary>Solução</summary>
 
-Não sai. A chave liga o polo positivo à lataria, mas a lataria não está mais
-ligada ao polo negativo — o cabo que fazia essa ligação foi tirado. Sem caminho
-de volta até o negativo, o laço não fecha, e a corrente é zero. É exatamente por
-isso que o cabo negativo sai primeiro.
+Não sai. A chave liga o positive terminal à lataria, mas a lataria não está mais
+ligada ao negative terminal — o cabo que fazia essa ligação foi tirado. Sem
+caminho de volta até o negativo, o laço não fecha, e a current é zero. É
+exatamente por isso que o battery cable negativo sai primeiro.
 
 </details>
 
 ## Perguntas de verificação
 
-1. Por que trocar a lâmpada não resolveu a queixa da luz de freio?
-2. Se a bateria não fabrica elétrons, de onde vêm os elétrons que passam pela
-   lâmpada?
-3. Qual é o papel da carroceria no circuito da luz de freio?
-4. Por que “interruptor aberto” quer dizer desligado?
+1. Por que trocar a bulb não resolveu a queixa da brake light?
+2. Se a battery não fabrica elétrons, de onde vêm os elétrons que passam pela
+   bulb?
+3. Qual é o papel da carroceria no circuit da brake light?
+4. Por que “switch aberto” quer dizer desligado?
 5. A seta convencional e a seta dos elétrons apontam para lados opostos. Essa
-   diferença muda o diagnóstico de um circuito aberto?
+   diferença muda o diagnóstico de um open circuit?
 
 <details>
 <summary>Respostas</summary>
 
-1. Porque o defeito não estava na lâmpada. A carga só funciona com o caminho
-   completo, e o caminho estava interrompido em outro ponto: no fio, no soquete
-   ou na massa. Uma lâmpada boa num circuito aberto continua apagada.
-2. Eles já estavam no fio. Todo metal tem elétrons que conseguem se mover. A
-   bateria não coloca elétrons novos no circuito; ela empurra os que já estão
+1. Porque o defeito não estava na bulb. A load só funciona com o caminho
+   completo, e o caminho estava interrompido em outro ponto: no wire, no socket
+   ou no ground. Uma bulb boa num open circuit continua apagada.
+2. Eles já estavam no wire. Todo metal tem elétrons que conseguem se mover. A
+   battery não coloca elétrons novos no circuit; ela empurra os que já estão
    lá, como o pedal movimenta os elos que já estão na corrente da bicicleta.
-3. A carroceria é o caminho de volta, a massa. A corrente sai da lâmpada, passa
-   pela lataria e chega ao cabo negativo da bateria. Se a ligação da lâmpada
-   com a lataria falhar, o circuito abre.
+3. A carroceria é o caminho de volta, o ground. A current sai da bulb, passa
+   pela lataria e chega ao battery cable negativo. Se a ligação da bulb com a
+   lataria falhar, o circuit abre.
 4. Porque “aberto” descreve o caminho, e não a passagem. Com os contatos
-   separados, o caminho tem uma interrupção — está aberto —, e a corrente não
+   separados, o caminho tem uma interrupção — está aberto —, e a current não
    passa.
-5. Não muda. O circuito aberto é uma interrupção no laço, e ela para a corrente
+5. Não muda. O open circuit é uma interrupção no laço, e ela para a current
    em qualquer um dos dois sentidos. O sentido importa para ler esquemas e
-   alguns componentes eletrônicos, como o diodo, que vamos ver mais adiante.
+   alguns componentes eletrônicos, como o diode, que vamos ver mais adiante.
 
 </details>
 
@@ -462,58 +473,58 @@ isso que o cabo negativo sai primeiro.
 
 ### 1. Reconhecimento
 
-a) Classifique cada material como condutor ou isolante: cobre, borracha, aço da
-carroceria, plástico do conector, água com sal da estrada.
+a) Classifique cada material como conductor ou insulator: cobre, borracha, aço
+da carroceria, plástico do connector, água com sal da estrada.
 
-b) Num circuito de buzina, diga se cada peça é fonte, proteção, controle ou
-carga: a bateria, o fusível, o botão no volante, a buzina.
+b) Num circuit de horn, diga se cada peça é power source, circuit protection,
+control ou load: a battery, o fuse, o botão no volante, a horn.
 
 ### 2. Explicação
 
-Explique com suas palavras por que um parafuso de massa enferrujado pode apagar
-uma lâmpada, mesmo com o fio positivo perfeito.
+Explique com suas palavras por que um parafuso de ground enferrujado pode apagar
+uma bulb, mesmo com o wire positivo perfeito.
 
 ### 3. Aplicação direta
 
-Para cada situação, diga se o circuito está **completo** ou **aberto**:
+Para cada situação, diga se o circuit está **completo** ou **aberto**:
 
-a) o fusível do circuito está queimado;
+a) o fuse do circuit está queimado;
 
-b) o interruptor está fechado e todas as ligações estão boas;
+b) o switch está fechado e todas as ligações estão boas;
 
-c) o parafuso que liga a lanterna à lataria está solto;
+c) o parafuso que liga a taillight à lataria está solto;
 
-d) a capa de plástico do fio está rachada, mas o cobre está inteiro;
+d) a capa de plástico do wire está rachada, mas o cobre está inteiro;
 
-e) o filamento da lâmpada partiu.
+e) o filament da bulb partiu.
 
 ### 4. Variação
 
-Num circuito de luz de porta-malas, o interruptor fica entre a lâmpada e a
-massa. O positivo chega à lâmpada o tempo todo. Com o porta-malas aberto, o
-interruptor fecha. A lâmpada acende? Explique usando a ideia de laço.
+Num circuit de trunk light, o switch fica entre a bulb e o ground. O positivo
+chega à bulb o tempo todo. Com o porta-malas aberto, o switch fecha. A bulb
+acende? Explique usando a ideia de laço.
 
 ### 5. Caso de diagnóstico
 
-As duas luzes de ré estão no mesmo fusível e são acionadas pelo mesmo
-interruptor na transmissão. Responda em dois casos:
+As duas backup lights estão no mesmo fuse e são acionadas pelo mesmo switch na
+transmission. Responda em dois casos:
 
-a) as duas luzes de ré não acendem;
+a) as duas backup lights não acendem;
 
-b) só a luz de ré direita não acende.
+b) só a backup light direita não acende.
 
-Em cada caso, diga em que parte do circuito você procura primeiro, e por quê.
+Em cada caso, diga em que parte do circuit você procura primeiro, e por quê.
 
 ### 6. Justificativa
 
-Explique por que, ao desligar a bateria, o cabo negativo deve ser tirado
-primeiro. Use a ideia de caminho completo na sua resposta.
+Explique por que, ao desligar a battery, o battery cable negativo deve ser
+tirado primeiro. Use a ideia de caminho completo na sua resposta.
 
 <details>
 <summary>Dica para o exercício 6</summary>
 
-Imagine a chave de boca encostando no polo positivo e na lataria ao mesmo tempo.
-Em qual das duas ordens esse encosto fecha um laço?
+Imagine a chave de boca encostando no positive terminal e na lataria ao mesmo
+tempo. Em qual das duas ordens esse encosto fecha um laço?
 
 </details>
 
@@ -549,75 +560,75 @@ been replaced with a known-good bulb. Which of these is the most likely cause?
 <details>
 <summary>Respostas para conferência</summary>
 
-1. a) Condutores: cobre, aço da carroceria e água com sal. Isolantes: borracha
-   e plástico do conector. Se você colocou a água com sal entre os isolantes,
+1. a) Conductors: cobre, aço da carroceria e água com sal. Insulators: borracha
+   e plástico do connector. Se você colocou a água com sal entre os insulators,
    releia o caso que engana na lição
-   [O que é eletricidade](./o-que-e-eletricidade#condutor-isolante-e-semicondutor):
-   ela conduz o bastante para provocar corrosão e caminhos indesejados.
+   [O que é eletricidade](./o-que-e-eletricidade#conductor-insulator-e-semiconductor):
+   ela conduz o bastante para provocar corrosion e caminhos indesejados.
 
-   b) Bateria: fonte. Fusível: proteção. Botão no volante: controle. Buzina:
-   carga.
+   b) Battery: power source. Fuse: circuit protection. Botão no volante:
+   control. Horn: load.
 
-2. A massa é o caminho de volta da corrente até a bateria. A ferrugem não
+2. O ground é o caminho de volta da current até a battery. A ferrugem não
    conduz bem e afasta o metal do parafuso do metal da lataria. Com isso, o
    caminho de volta fica interrompido. Um laço interrompido em qualquer ponto
-   tem corrente zero, então a lâmpada apaga mesmo com o lado positivo perfeito.
+   tem current zero, então a bulb apaga mesmo com o lado positivo perfeito.
 
 3. a) Aberto. b) Completo. c) Aberto. d) Completo: o cobre inteiro mantém o
-   caminho; a capa rachada é outro problema, risco de curto. e) Aberto: o
-   filamento é parte do caminho dentro da lâmpada.
+   caminho; a capa rachada é outro problema, risco de short circuit. e) Aberto:
+   o filament é parte do caminho dentro da bulb.
 
-4. Acende. O laço é bateria, lâmpada, interruptor, massa e de volta à bateria.
-   Com o interruptor fechado, o laço fica completo. A posição do interruptor,
-   antes ou depois da carga, não muda isso.
+4. Acende. O laço é battery, bulb, switch, ground e de volta à battery. Com o
+   switch fechado, o laço fica completo. A posição do switch, antes ou depois
+   da load, não muda isso.
 
 5. a) As duas pararam juntas, então a procura começa nas partes compartilhadas:
-   o fusível, o interruptor na transmissão e o fio comum antes de se dividir.
-   O fusível é o teste mais simples e vem primeiro.
+   o fuse, o switch na transmission e o wire comum antes de se dividir. O fuse
+   é o teste mais simples e vem primeiro.
 
    b) A esquerda funciona, então as partes compartilhadas estão boas. A procura
-   vai para a parte exclusiva da direita: a lâmpada, o soquete, o fio dela e a
-   massa dela. Se você foi direto ao fusível no item b, repare que um fusível
+   vai para a parte exclusiva da direita: a bulb, o socket, o wire dela e o
+   ground dela. Se você foi direto ao fuse no item b, repare que um fuse
    queimado apagaria as duas.
 
-6. Com o negativo tirado primeiro, a lataria deixa de estar ligada à bateria.
+6. Com o negativo tirado primeiro, a lataria deixa de estar ligada à battery.
    Se a chave encostar no positivo e na lataria, não há caminho de volta até o
    negativo, e o laço não fecha. Na ordem contrária, com o negativo ainda
-   ligado, esse encosto fecha um laço sem carga nenhuma, com corrente altíssima,
+   ligado, esse encosto fecha um laço sem load nenhuma, com current altíssima,
    faísca e risco de queimadura.
 
 7. **Question 1: C.** As duas afirmações estão certas, porque descrevem o mesmo
-   fenômeno de dois pontos de vista. O técnico A usa o sentido convencional,
-   que é o dos esquemas elétricos. O técnico B usa o sentido real dos elétrons.
-   As alternativas A e B estão erradas porque cada uma descarta uma afirmação
-   verdadeira.
+   fenômeno de dois pontos de vista. O técnico A usa a conventional theory,
+   que é a dos esquemas elétricos. O técnico B usa o sentido real dos elétrons,
+   a electron theory. As alternativas A e B estão erradas porque cada uma
+   descarta uma afirmação verdadeira.
 
-   **Question 2: D.** Um circuito precisa de fonte, carga e caminho de volta
-   para existir. O interruptor é útil para ligar e desligar, mas um circuito
-   sem interruptor funciona — fica ligado o tempo todo. Por isso a resposta é
-   D, a única peça dispensável.
+   **Question 2: D.** Um circuit precisa de power source, load e caminho de
+   volta para existir. O switch é útil para ligar e desligar, mas um circuit
+   sem switch funciona — fica ligado o tempo todo. Por isso a resposta é D, a
+   única peça dispensável.
 
-   **Question 3: C.** É o caso da abertura da lição. A luz direita e a terceira
-   luz funcionam, então o fusível (A) e o interruptor de freio (B) estão bons:
-   eles são compartilhados pelas três luzes. Uma bateria descarregada (D)
-   afetaria todas as luzes, não uma só. Sobra a parte exclusiva da lanterna
-   esquerda, e a massa ruim é a única alternativa dessa parte.
+   **Question 3: C.** É o caso da abertura da lição. A brake light direita e a
+   CHMSL funcionam, então o fuse (A) e o brake light switch (B) estão bons:
+   eles são compartilhados pelas três luzes. Uma battery descarregada (D)
+   afetaria todas as luzes, não uma só. Sobra a parte exclusiva da taillight
+   esquerda, e o ground ruim é a única alternativa dessa parte.
 
 </details>
 
 ## Revisão
 
-- **A ideia central:** a corrente só circula num caminho completo, que sai de um
-  polo da fonte, passa pela carga e volta ao outro polo. Uma interrupção em
-  qualquer ponto para a corrente no laço inteiro.
-- **Quando usar:** sempre que uma carga não funciona de jeito nenhum. Procure o
+- **A ideia central:** a current só circula num caminho completo, que sai de
+  um terminal da power source, passa pela load e volta ao outro terminal. Uma
+  interrupção em qualquer ponto para a current no laço inteiro.
+- **Quando usar:** sempre que uma load não funciona de jeito nenhum. Procure o
   ponto aberto, separando o que é compartilhado do que é exclusivo.
 - **Com o que se conecta:** a próxima lição dá nome e unidade às três grandezas
-  que agem nesse caminho — o empurrão da fonte, o fluxo e a dificuldade de
-  passagem: [Tensão, corrente e resistência](./tensao-corrente-e-resistencia).
+  que agem nesse caminho — o empurrão da power source, o fluxo e a dificuldade
+  de passagem: [Voltage, current e resistance](./tensao-corrente-e-resistencia).
 
-**Termos em inglês desta lição:** *electron*, *conductor*, *insulator*,
-*current*, *amperes*, *circuit*, *complete circuit*, *open circuit*,
-*intermittent open*, *power source*, *load*, *charge*, *circuit protection*,
-*fuse*, *control*, *switch*, *closed*, *open*, *ground*, *conventional theory*,
-*electron theory*, *dome light*, *CHMSL*.
+**Termos desta lição para revisar:** circuit, electrical circuit, complete
+circuit, closed circuit, open circuit, intermittent open, current, amp, power
+source, load, state of charge, circuit protection, fuse, control, switch,
+ground, chassis ground, bulb, socket, filament, brake light, CHMSL, taillight,
+dome light, conductor, insulator, conventional theory, electron theory.

@@ -355,7 +355,7 @@ export default function Associacao({
             <SvgMath
               x={curtoX + 16}
               y={LOAD_Y}
-              math="\text{curto}"
+              math="\text{short}"
               anchor="start"
               fontSize={fs - 1}
               tone={3}
@@ -418,7 +418,7 @@ export default function Associacao({
             <SvgMath
               x={fuseX}
               y={T + 24}
-              math="\text{fusível}"
+              math="\text{fuse}"
               fontSize={fs - 1}
             />
           )}
@@ -426,7 +426,7 @@ export default function Associacao({
             <SvgMath
               x={swX}
               y={T - 24}
-              math="\text{interruptor}"
+              math="\text{switch}"
               fontSize={fs - 1}
             />
           )}

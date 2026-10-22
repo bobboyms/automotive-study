@@ -1,16 +1,16 @@
 ---
-title: Medições com o multímetro
+title: Medições com o multimeter
 ---
 
 import Medicao from '@site/src/components/Medicao';
 
-# Medições com o multímetro
+# Medições com o multimeter
 
-> **Pergunta central:** como ligar o multímetro para cada medição — tensão da
-> fonte, tensão disponível, queda de tensão, corrente e resistência —, em que
-> estado o circuito precisa estar, e o que cada leitura diz sobre ele?
+> **Pergunta central:** como ligar o multimeter para cada medição — source
+> voltage, available voltage, voltage drop, current e resistance —, em que
+> estado o circuit precisa estar, e o que cada leitura diz sobre ele?
 
-## A queixa: “a tensão está chegando”
+## A queixa: “a voltage está chegando”
 
 Um cliente reclama:
 
@@ -18,64 +18,67 @@ Um cliente reclama:
 > farol, mediram 12 volts nele e disseram que a parte elétrica está boa. Então
 > trocaram a lâmpada. Continua fraco.”
 
-A outra oficina fez uma medição de verdade, e o número estava certo: o conector
-tinha mesmo 12 V. Mesmo assim, o farol continua fraco. Ou seja, a medição foi
-feita, mas não respondeu à pergunta certa.
+A outra oficina fez uma medição de verdade, e o número estava certo: o
+connector tinha mesmo 12 V. Mesmo assim, o headlamp continua fraco. Ou seja, a
+medição foi feita, mas não respondeu à pergunta certa.
 
 Ao final desta lição você vai saber o que faltou naquela medição, que medição
 faria no lugar dela e o que esperaria ler. O ponto de partida é uma pergunta
 que o instrutor deixa no quadro: *does current need to be flowing?* — precisa
-estar passando corrente?
+estar passando current?
 
 ## Mapa das ideias
 
-| Português | Inglês | O que é |
+| Inglês | Português | O que é |
 |---|---|---|
-| multímetro digital | *digital multimeter* (DMM) | instrumento que mede tensão, corrente e resistência e mostra o número num visor |
-| ponta de prova | *test lead* | cada um dos dois fios do multímetro: vermelho e preto |
-| entrada comum | *COM* | entrada do multímetro onde vai a ponta preta, em todas as medições |
-| seletor | *selector*, *rotary switch* | botão giratório que escolhe o que o multímetro mede |
-| tensão da fonte | *source voltage* | a tensão da bateria, medida nos polos dela, sem carga ligada |
-| tensão disponível | *available voltage* | a tensão que chega a um ponto do circuito, medida entre esse ponto e a massa |
-| queda de tensão | *voltage drop* | a tensão que fica numa peça ou num trecho, medida com uma ponta de cada lado |
-| isolar o componente | *isolate the component* | desligar a peça do circuito antes de medir a resistência dela |
-| OL | *over limit* | o que o visor mostra quando a leitura passa do que ele consegue medir; no ohmímetro, quer dizer caminho aberto |
-| medir por trás do conector | *back-probing* | encostar a ponta no terminal pela parte de trás do conector, sem desligá-lo |
+| digital multimeter (DMM) | multímetro digital | instrumento que mede voltage, current e resistance e mostra o número num visor |
+| voltmeter, ammeter, ohmmeter | voltímetro, amperímetro, ohmímetro | o multimeter medindo voltage, current ou resistance |
+| test lead | ponta de prova | cada um dos dois fios do multimeter: vermelho e preto |
+| COM | entrada comum | entrada do multimeter onde vai a test lead preta, em todas as medições |
+| selector (rotary switch) | seletor | botão giratório que escolhe o que o multimeter mede |
+| auto-ranging | escala automática | multimeter que escolhe sozinho a escala da medição |
+| source voltage | tensão da fonte | a voltage da battery, medida nos terminals dela, sem load ligada |
+| available voltage | tensão disponível | a voltage que chega a um ponto do circuit, medida entre esse ponto e o ground |
+| voltage drop | queda de tensão | a voltage que fica numa peça ou num trecho, medida com uma test lead de cada lado |
+| isolate the component | isolar o componente | desligar a peça do circuit antes de medir a resistance dela |
+| OL (over limit) | acima do limite | o que o visor mostra quando a leitura passa do que ele consegue medir; no ohmmeter, quer dizer caminho aberto |
+| back-probing | medir por trás do conector | encostar a ponta no terminal pela parte de trás do connector, sem desligá-lo |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
 
 ## Onde isso aparece
 
-O multímetro é a ferramenta de diagnóstico elétrico mais usada na oficina. Toda
-medição das lições anteriores — os 12.6 V da bateria, os 4 A do farol de milha,
+O multimeter é a ferramenta de diagnóstico elétrico mais usada na oficina.
+Toda medição das lições anteriores — os 12.6 V da battery, os 4 A do fog lamp,
 os 1.5 V do terminal oxidado — sai dele.
 
-Na Wake Tech, o uso do multímetro é o *test equipment* da descrição da
+Na Wake Tech, o uso do multimeter é o *test equipment* da descrição da
 **TRN-120**, e é prática de laboratório em quase todas as disciplinas
-seguintes: sensores em desempenho do motor, ABS em freios, compressor em
+seguintes: sensors em desempenho do engine, ABS em freios, compressor em
 climatização. Na prova ASE, área **A6**, há questões sobre como ligar o
 instrumento e, principalmente, sobre o que uma leitura significa.
 
 ## Ideias anteriores que voltam aqui
 
-1. Na lição [Tensão, corrente e resistência](./tensao-corrente-e-resistencia):
+1. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia):
    onde se mede cada uma das três grandezas — entre dois pontos, através do
-   circuito, ou com o circuito desligado?
-2. Na lição [Circuito em série](./circuito-em-serie): num circuito em série
-   aberto, que tensão o voltímetro mostra sobre o ponto aberto? E sobre as peças
-   boas?
-3. Na lição [Circuito em paralelo](./circuito-em-paralelo): o voltímetro é
-   ligado em série ou em paralelo com a peça? E o amperímetro?
+   circuit, ou com o circuit desligado?
+2. Na lição [Series circuit](./circuito-em-serie): num series circuit aberto,
+   que voltage o voltmeter mostra sobre o ponto aberto? E sobre as peças boas?
+3. Na lição [Parallel circuit](./circuito-em-paralelo): o voltmeter é ligado
+   em série ou em paralelo com a peça? E o ammeter?
 
 <details>
 <summary>Respostas</summary>
 
-1. A tensão se mede **entre dois pontos**, com o circuito funcionando. A
-   corrente se mede **através** do circuito, com o caminho passando pelo
-   instrumento. A resistência se mede com o circuito **desligado**, porque o
-   multímetro usa a própria pilha.
-2. Sobre o ponto aberto, a tensão inteira da fonte. Sobre as peças boas, zero,
-   porque não passa corrente e $V = I \times R = 0$.
-3. O voltímetro é ligado em paralelo: uma ponta de cada lado da peça. O
-   amperímetro é ligado em série: ele vira uma peça a mais no caminho.
+1. A voltage se mede **entre dois pontos**, com o circuit funcionando. A
+   current se mede **através** do circuit, com o caminho passando pelo
+   instrumento. A resistance se mede com o circuit **desligado**, porque o
+   multimeter usa a própria battery interna.
+2. Sobre o ponto aberto, a source voltage inteira. Sobre as peças boas, zero,
+   porque não passa current e $V = I \times R = 0$.
+3. O voltmeter é ligado em paralelo: uma test lead de cada lado da peça. O
+   ammeter é ligado em série: ele vira uma peça a mais no caminho.
 
 </details>
 
@@ -86,143 +89,142 @@ entender o que acontece dentro dela sem cortá-la à toa.
 
 - **Para saber a pressão**, você encosta um medidor de pressão em dois pontos e
   compara. A mangueira continua inteira, e a água continua passando. É assim
-  que se mede **tensão**: entre dois pontos, sem abrir nada.
+  que se mede **voltage**: entre dois pontos, sem abrir nada.
 - **Para saber quanta água passa**, você precisa cortar a mangueira e instalar
   um medidor de vazão no meio, de modo que toda a água passe por dentro dele. É
-  assim que se mede **corrente**: o circuito é aberto, e o multímetro entra no
+  assim que se mede **current**: o circuit é aberto, e o multimeter entra no
   caminho.
 - **Para saber se a mangueira está entupida**, você a tira da torneira e sopra
   por ela com o seu próprio ar. Se ela continuasse ligada, a água da torneira
-  atrapalharia o teste. É assim que se mede **resistência**: com a peça fora do
-  circuito, usando a pilha do próprio multímetro.
+  atrapalharia o teste. É assim que se mede **resistance**: com a peça fora do
+  circuit, usando a battery interna do próprio multimeter.
 
 A comparação tem um limite. O medidor de pressão de verdade mede a pressão num
-ponto em relação ao ar em volta. A tensão não tem esse “ar em volta”: ela só
-existe como comparação entre dois pontos, e por isso o multímetro sempre usa as
-duas pontas.
+ponto em relação ao ar em volta. A voltage não tem esse “ar em volta”: ela só
+existe como comparação entre dois pontos, e por isso o multimeter sempre usa as
+duas test leads.
 
-## Modelo visual: o multímetro e as cinco medições
+## Modelo visual: o multimeter e as cinco medições
 
-:::danger Antes de ligar o multímetro
+:::danger Antes de ligar o multimeter
 
-- **Nunca meça resistência num circuito ligado.** A tensão do carro, somada à
-  da pilha do multímetro, dá uma leitura errada e pode estragar o instrumento.
-- **Na posição de corrente, o multímetro é quase um fio.** Com a ponta vermelha
-  na entrada de corrente, encostar as pontas nos dois polos da bateria, ou nos
-  dois lados de uma carga, fecha um curto através do instrumento. O fusível
-  interno queima, ou o multímetro estraga. Antes de medir tensão, confira se a
-  ponta vermelha voltou para a entrada V/Ω.
-- **Respeite o limite de corrente** escrito ao lado da entrada de corrente.
-  Correntes grandes, como a do motor de partida, não se medem com as pontas: elas
-  se medem com a pinça amperimétrica, que vem numa lição própria.
-- **Tire anéis, relógio e pulseira**, e mantenha mãos, pontas e fios longe de
-  ventoinhas, correias e peças quentes quando o motor estiver funcionando.
-- **Cabos laranja são de alta tensão**, em híbridos e elétricos. Medição nesses
-  sistemas exige treinamento específico (disciplinas EVX), um multímetro com a
-  classificação de segurança exigida pelo fabricante e o procedimento do
-  manual. Não use nesses circuitos o que esta lição ensina para 12 V.
+- **Nunca meça resistance num circuit ligado.** A voltage do carro, somada à
+  da battery interna do multimeter, dá uma leitura errada e pode estragar o
+  instrumento.
+- **Na posição de current, o multimeter é quase um wire.** Com a test lead
+  vermelha na entrada de current, encostar as test leads nos dois terminals da
+  battery, ou nos dois lados de uma load, fecha um short circuit através do
+  instrumento. O fuse interno queima, ou o multimeter estraga. Antes de medir
+  voltage, confira se a test lead vermelha voltou para a entrada V/Ω.
+- **Respeite o limite de current** escrito ao lado da entrada de current.
+  Currents grandes, como a do starter motor, não se medem com as test leads:
+  elas se medem com o clamp-on ammeter, que vem numa lição própria.
+- **Tire anéis, relógio e pulseira**, e mantenha mãos, test leads e wires
+  longe de cooling fans, drive belts e peças quentes quando o engine estiver
+  funcionando.
+- **Cables laranja são de alta voltage**, em híbridos e elétricos. Medição
+  nesses sistemas exige treinamento específico (disciplinas EVX), um multimeter
+  com a classificação de segurança exigida pelo fabricante e o procedimento do
+  manual. Não use nesses circuits o que esta lição ensina para 12 V.
 
 :::
 
-### As partes do multímetro
+### As partes do multimeter
 
-O **multímetro digital** (*digital multimeter*, DMM) tem três partes que
-importam para medir:
+O **digital multimeter** (DMM) tem três partes que importam para medir:
 
 | Parte | O que faz |
 |---|---|
 | visor | mostra o número e a unidade: V, A, Ω, com os prefixos m, k e M |
-| seletor | o botão giratório que escolhe a grandeza. No carro, a tensão é contínua: escolha o V com uma linha reta em cima (ou “VDC”), e não o V com uma onda (~) |
-| entradas | os buracos onde se encaixam as pontas de prova |
+| selector | o botão giratório que escolhe a grandeza. No carro, a voltage é DC: escolha o V com uma linha reta em cima (ou “VDC”), e não o V com uma onda (~) |
+| entradas | os buracos onde se encaixam as test leads |
 
-As entradas são três, na maioria dos multímetros:
+As entradas são três, na maioria dos multimeters:
 
-- **COM**, a entrada comum. A **ponta preta vai sempre aqui**, em qualquer
+- **COM**, a entrada comum. A **test lead preta vai sempre aqui**, em qualquer
   medição.
-- **V/Ω**, para tensão e resistência. É onde a ponta vermelha fica quase
+- **V/Ω**, para voltage e resistance. É onde a test lead vermelha fica quase
   sempre.
-- **A**, para corrente. A ponta vermelha só vai aqui quando você mede
-  corrente. Muitos multímetros têm duas entradas de corrente: uma marcada
-  10A ou A, para correntes maiores, e outra marcada mA, para miliampères.
+- **A**, para current. A test lead vermelha só vai aqui quando você mede
+  current. Muitos multimeters têm duas entradas de current: uma marcada 10A ou
+  A, para currents maiores, e outra marcada mA, para milliamps.
 
-Muitos multímetros escolhem a escala sozinhos (*auto-ranging*). Nos que não
-escolhem, gire o seletor para uma escala **acima** do valor que você espera
-ler. Se a leitura passar da escala, o visor mostra **OL** (*over limit*), e
-você sobe a escala.
+Muitos multimeters escolhem a escala sozinhos: são auto-ranging. Nos que não
+escolhem, gire o selector para uma escala **acima** do valor que você espera
+ler. Se a leitura passar da escala, o visor mostra **OL** (over limit), e você
+sobe a escala.
 
 ### As cinco medições
 
-Os desenhos abaixo usam o mesmo circuito de farol: bateria, fusível,
-interruptor, lâmpada e retorno pela massa. A ponta vermelha aparece em laranja,
-e a preta na cor do texto. As setas azuis mostram a corrente, quando ela está
-passando.
+Os desenhos abaixo usam o mesmo circuit de headlamp: battery, fuse, switch,
+bulb e retorno pelo ground. A test lead vermelha aparece em laranja, e a preta
+na cor do texto. As setas azuis mostram a current, quando ela está passando.
 
-**1. Tensão da fonte** (*source voltage*): uma ponta em cada polo da bateria,
-com nenhuma carga ligada.
+**1. Source voltage:** uma test lead em cada terminal da battery, com nenhuma
+load ligada.
 
 <Medicao
   modo="fonte"
   leitura="12.6\,\text{V}"
-  caption="Tensão da fonte: ponta vermelha no positivo, ponta preta no negativo, com tudo desligado. Leitura típica de uma bateria carregada em repouso: cerca de 12.6 V."
+  caption="Source voltage: test lead vermelha no positive terminal, test lead preta no negative terminal, com tudo desligado. Leitura típica de uma battery carregada em repouso: cerca de 12.6 V."
 />
 
-**2. Tensão disponível** (*available voltage*): ponta preta numa massa boa,
-ponta vermelha no ponto que você quer testar — aqui, o terminal positivo da
-lâmpada.
+**2. Available voltage:** test lead preta num ground bom, test lead vermelha no
+ponto que você quer testar — aqui, o terminal positivo da bulb.
 
 <Medicao
   modo="disponivel"
   leitura="12\,\text{V}"
-  caption="Tensão disponível: ponta preta na massa, ponta vermelha no terminal positivo da lâmpada, com o farol aceso. A leitura diz quanto da tensão chega até esse ponto."
+  caption="Available voltage: test lead preta no ground, test lead vermelha no terminal positivo da bulb, com o headlamp aceso. A leitura diz quanto da voltage chega até esse ponto."
 />
 
-**3. Queda de tensão** (*voltage drop*): a peça que você quer testar fica no
-meio das duas pontas — uma ponta de cada lado dela —, com a corrente passando.
+**3. Voltage drop:** a peça que você quer testar fica no meio das duas test
+leads — uma de cada lado dela —, com a current passando.
 
 <Medicao
   modo="queda"
   leitura="12\,\text{V}"
-  caption="Queda de tensão sobre a lâmpada: uma ponta de cada lado dela, com o farol aceso. A leitura é a parte da tensão que fica na lâmpada."
+  caption="Voltage drop sobre a bulb: uma test lead de cada lado dela, com o headlamp aceso. A leitura é a parte da voltage que fica na bulb."
 />
 
-**4. Corrente** (*current*): o circuito é aberto num ponto, e o multímetro é
-ligado em série, fechando o caminho de novo. A ponta vermelha vai na entrada A.
+**4. Current:** o circuit é aberto num ponto, e o multimeter é ligado em série,
+fechando o caminho de novo. A test lead vermelha vai na entrada A.
 
 <Medicao
   modo="corrente"
   leitura="5\,\text{A}"
-  caption="Corrente: o fio é aberto, e as duas pontas ligam as duas pontas abertas. Toda a corrente do farol passa por dentro do multímetro. Valor ilustrativo."
+  caption="Current: o wire é aberto, e as duas test leads ligam as duas pontas abertas. Toda a current do headlamp passa por dentro do multimeter. Valor ilustrativo."
 />
 
-**5. Resistência** (Ω): a peça é tirada do circuito, e o multímetro mede com a
-própria pilha.
+**5. Resistance** (Ω): a peça é tirada do circuit, e o multimeter mede com a
+própria battery interna.
 
 <Medicao
   modo="resistencia"
   leitura="0.3\,\Omega"
-  caption="Resistência: a lâmpada fora do circuito, uma ponta em cada terminal. A leitura de uma lâmpada fria é bem menor que a resistência dela acesa, como mostrou a lição de lei de Ohm. Valor ilustrativo."
+  caption="Resistance: a bulb fora do circuit, uma test lead em cada terminal. A leitura de uma bulb fria é bem menor que a resistance dela acesa, como mostrou a lição de Ohm's law. Valor ilustrativo."
 />
 
 ## Ponte para a formalização
 
-As cinco medições usam só três posições do seletor: tensão, corrente e
-resistência. Três delas são tensão. O que muda entre elas é **onde vão as duas
-pontas**, e por isso **qual pergunta** a leitura responde.
+As cinco medições usam só três posições do selector: voltage, current e
+resistance. Três delas são voltage. O que muda entre elas é **onde vão as duas
+test leads**, e por isso **qual pergunta** a leitura responde.
 
-A tensão, como vimos na lição 3, é sempre uma comparação entre dois pontos.
-Então a pergunta que você faz ao circuito é decidida pelos dois pontos que você
+A voltage, como vimos na lição 3, é sempre uma comparação entre dois pontos.
+Então a pergunta que você faz ao circuit é decidida pelos dois pontos que você
 escolhe:
 
-- os dois polos da bateria: quanto a fonte tem?
-- um ponto do circuito e a massa: quanto chega até aqui?
+- os dois terminals da battery: quanto a power source tem?
+- um ponto do circuit e o ground: quanto chega até aqui?
 - os dois lados de uma peça: quanto fica nesta peça?
 
-E as três medições de tensão têm uma coisa em comum que a corrente e a
-resistência não têm: **o multímetro não abre o circuito.** Ele fica em
-paralelo com o que está medindo, como um ramo a mais. Isso só funciona porque o
-voltímetro tem uma resistência interna muito alta — em muitos multímetros de
-oficina, da ordem de 10 MΩ. Pela lei de Ohm, quase nenhuma corrente passa por
-esse ramo, e o circuito continua funcionando como se o multímetro não
+E as três medições de voltage têm uma coisa em comum que a current e a
+resistance não têm: **o multimeter não abre o circuit.** Ele fica em paralelo
+com o que está medindo, como um branch a mais. Isso só funciona porque o
+voltmeter tem uma resistance interna muito alta — em muitos multimeters de
+oficina, da ordem de 10 MΩ. Pela Ohm's law, quase nenhuma current passa por
+esse branch, e o circuit continua funcionando como se o multimeter não
 estivesse ali.
 
 ## Formalização: as cinco medições
@@ -230,262 +232,264 @@ estivesse ali.
 Nas aulas, cada medição costuma vir com uma regra curta, em inglês. Elas estão
 citadas abaixo, cada uma explicada.
 
-### 1. Tensão da fonte
+### 1. Source voltage
 
 > *Check your battery with no loads on.*
 
-- **Seletor:** tensão contínua (V com a linha reta).
-- **Pontas:** vermelha no polo positivo, preta no polo negativo.
-- **Circuito:** tudo desligado — nenhuma carga ligada.
-- **Responde:** quanto a bateria tem, em repouso.
+- **Selector:** DC voltage (V com a linha reta).
+- **Test leads:** vermelha no positive terminal, preta no negative terminal.
+- **Circuit:** tudo desligado — nenhuma load ligada.
+- **Responde:** quanto a battery tem, em repouso.
 
-**Por que sem carga:** a bateria também tem uma resistência pequena por dentro.
-Quando uma carga puxa corrente, essa resistência interna fica em série com a
-carga, e, como na lição de circuito em série, ela fica com uma pequena queda de
-tensão. A tensão nos polos cai um pouco. Com tudo desligado, não passa corrente,
-não há queda dentro da bateria, e a leitura mostra o que ela tem guardado. O que
-essa leitura diz sobre o estado de carga da bateria é assunto da lição de
-bateria.
+**Por que sem load:** a battery também tem uma resistance pequena por dentro.
+Quando uma load puxa current, essa resistance interna fica em série com a
+load, e, como na lição de series circuit, ela fica com uma pequena voltage
+drop. A voltage nos terminals cai um pouco. Com tudo desligado, não passa
+current, não há voltage drop dentro da battery, e a leitura mostra o que ela
+tem guardado. O que essa leitura diz sobre o state of charge da battery é
+assunto da lição sobre a battery.
 
 - **Exemplo:** carro desligado, portas fechadas, luzes apagadas. O visor mostra
-  12.6 V (valor típico de uma bateria carregada).
-- **Contraexemplo:** medir com os faróis acesos. A leitura sai um pouco menor,
-  e você não sabe quanto dessa diferença é da bateria e quanto é da corrente dos
-  faróis. Essa leitura existe e é útil — é um teste com carga —, mas não é a
-  tensão da fonte em repouso.
+  12.6 V (valor típico de uma battery carregada).
+- **Contraexemplo:** medir com os headlamps acesos. A leitura sai um pouco
+  menor, e você não sabe quanto dessa diferença é da battery e quanto é da
+  current dos headlamps. Essa leitura existe e é útil — é um teste com load —,
+  mas não é a source voltage em repouso.
 
-### 2. Tensão disponível
+### 2. Available voltage
 
 > *Black on a good ground and red at the point of measurement.*
 
-- **Seletor:** tensão contínua.
-- **Pontas:** preta numa **massa boa** — o polo negativo da bateria ou um
-  ponto de massa limpo da carroceria; vermelha no ponto que você quer testar.
-- **Circuito:** ligado.
-- **Responde:** quanto da tensão da bateria chega até este ponto?
+- **Selector:** DC voltage.
+- **Test leads:** preta num **ground bom** — o negative terminal da battery ou
+  um ponto de ground limpo da carroceria; vermelha no ponto que você quer
+  testar.
+- **Circuit:** ligado.
+- **Responde:** quanto da voltage da battery chega até este ponto?
 
-**A pergunta do quadro: precisa estar passando corrente?** A resposta tem duas
+**A pergunta do quadro: precisa estar passando current?** A resposta tem duas
 partes, e as duas importam.
 
-A primeira: **para o multímetro mostrar um número, não.** Na lição de circuito
-em série, o voltímetro mostrou 12 V sobre um resistor rompido, com a corrente
-em zero. Tensão existe sem corrente, e o multímetro a mede.
+A primeira: **para o multimeter mostrar um número, não.** Na lição de series
+circuit, o voltmeter mostrou 12 V sobre um resistor rompido, com a current em
+zero. Voltage existe sem current, e o multimeter a mede.
 
-A segunda: **para a leitura servir de diagnóstico, sim.** Sem corrente, nenhuma
-resistência do caminho tem queda de tensão, porque $V = I \times R$ e $I$ é
-zero. Um conector oxidado, um cabo com quase todos os fios de cobre rompidos,
-uma emenda ruim: nada disso aparece. O ponto mostra a tensão inteira da
-bateria, como se o caminho estivesse perfeito. A resistência a mais só “aparece”
-quando a corrente passa por ela e deixa nela uma parte da tensão.
+A segunda: **para a leitura servir de diagnóstico, sim.** Sem current, nenhuma
+resistance do caminho tem voltage drop, porque $V = I \times R$ e $I$ é zero.
+Um connector oxidado, um cable com quase todos os filetes de cobre rompidos,
+uma emenda ruim: nada disso aparece. O ponto mostra a voltage inteira da
+battery, como se o caminho estivesse perfeito. A resistance a mais só
+“aparece” quando a current passa por ela e deixa nela uma parte da voltage.
 
-> **Erro comum:** medir a tensão disponível com a carga desligada — ou com o
-> conector solto — e concluir que o caminho está bom porque a leitura deu
-> 12 V. Um único fio de cobre, sobrando de um cabo quase todo rompido, mostra
-> 12 V sem carga nenhuma. Mas ele não aguenta a corrente do farol. **Uma
-> tensão sem carga prova que o caminho existe, não que ele é bom.** Meça com a
-> carga funcionando.
+> **Erro comum:** medir a available voltage com a load desligada — ou com o
+> connector solto — e concluir que o caminho está bom porque a leitura deu
+> 12 V. Um único filete de cobre, sobrando de um cable quase todo rompido,
+> mostra 12 V sem load nenhuma. Mas ele não aguenta a current do headlamp.
+> **Uma voltage sem load prova que o caminho existe, não que ele é bom.** Meça
+> com a load funcionando.
 
-- **Exemplo:** farol aceso, ponta preta no negativo da bateria, ponta vermelha
-  no terminal positivo da lâmpada. A leitura perto da tensão da bateria diz que
-  o lado positivo do caminho está bom.
-- **Contraexemplo:** a mesma medição com a ponta preta num parafuso pintado ou
-  enferrujado. A tinta isola, e a leitura sai errada ou instável. Por isso a
-  regra diz *good* ground: a ponta preta precisa estar num ponto que seja massa
-  de verdade.
+- **Exemplo:** headlamp aceso, test lead preta no negative terminal da
+  battery, test lead vermelha no terminal positivo da bulb. A leitura perto da
+  voltage da battery diz que o lado positivo do caminho está bom.
+- **Contraexemplo:** a mesma medição com a test lead preta num parafuso
+  pintado ou enferrujado. A tinta isola, e a leitura sai errada ou instável.
+  Por isso a regra diz *good* ground: a test lead preta precisa estar num
+  ponto que seja ground de verdade.
 
-### 3. Queda de tensão
+### 3. Voltage drop
 
 > *Put what you want to measure in the middle of your leads, with current
 > flowing.*
 
-- **Seletor:** tensão contínua.
-- **Pontas:** uma de cada lado da peça ou do trecho que você quer testar — a
-  peça fica “no meio” das pontas. A vermelha no lado mais próximo do positivo
-  da bateria.
-- **Circuito:** ligado, **com corrente passando**. Aqui não há dúvida: sem
-  corrente, a queda é zero em qualquer peça inteira, e a medição não diz nada.
-- **Responde:** quanto da tensão fica nesta peça ou neste trecho?
+- **Selector:** DC voltage.
+- **Test leads:** uma de cada lado da peça ou do trecho que você quer testar —
+  a peça fica “no meio” das test leads. A vermelha no lado mais próximo do
+  positive terminal da battery.
+- **Circuit:** ligado, **com current passando**. Aqui não há dúvida: sem
+  current, a voltage drop é zero em qualquer peça inteira, e a medição não diz
+  nada.
+- **Responde:** quanto da voltage fica nesta peça ou neste trecho?
 
-Pela regra das quedas, da lição de circuito em série, as quedas de um laço
-somadas dão a tensão da fonte. Então o que o técnico quer ver é: **quase toda
-a tensão na carga, quase nada no caminho.** Num fio, conector ou interruptor
-bom, a queda fica perto de zero. O limite aceitável para cada trecho vem do
-manual do veículo ou da orientação do instrutor.
+Pela regra das voltage drops, da lição de series circuit, as voltage drops de
+um laço somadas dão a source voltage. Então o que o técnico quer ver é:
+**quase toda a voltage na load, quase nada no caminho.** Num wire, connector ou
+switch bom, a voltage drop fica perto de zero. O limite aceitável para cada
+trecho vem do manual do veículo ou da orientação do instrutor.
 
-- **Exemplo:** uma ponta de cada lado de um conector, com o farol aceso. Leitura
-  perto de zero: o conector está bom.
-- **Contraexemplo:** a mesma medição com o farol apagado. A leitura também dá
-  zero — mas agora porque não passa corrente, e não porque o conector é bom. A
-  leitura é igual e o significado é outro. É por isso que a regra diz *with
+- **Exemplo:** uma test lead de cada lado de um connector, com o headlamp
+  aceso. Leitura perto de zero: o connector está bom.
+- **Contraexemplo:** a mesma medição com o headlamp apagado. A leitura também
+  dá zero — mas agora porque não passa current, e não porque o connector é bom.
+  A leitura é igual e o significado é outro. É por isso que a regra diz *with
   current flowing*.
 
-> **Erro comum:** ver o sinal de menos no visor e achar que o multímetro está
-> com defeito. O sinal de menos quer dizer que as pontas estão invertidas em
-> relação ao sentido da tensão. O número continua certo. Inverta as pontas, ou
-> leia o valor sem o sinal.
+> **Erro comum:** ver o sinal de menos no visor e achar que o multimeter está
+> com defeito. O sinal de menos quer dizer que as test leads estão invertidas
+> em relação ao sentido da voltage. O número continua certo. Inverta as test
+> leads, ou leia o valor sem o sinal.
 
-### 4. Corrente
+### 4. Current
 
 > *The DMM must be connected in series, with current flowing.*
 
-- **Seletor:** corrente contínua (A com a linha reta).
-- **Pontas:** a vermelha na entrada **A** (ou mA); a preta no COM. O circuito
-  é aberto num ponto, e cada ponta vai numa das pontas abertas.
-- **Circuito:** ligado, com a carga funcionando.
-- **Responde:** quanta corrente passa por este circuito?
+- **Selector:** DC current (A com a linha reta).
+- **Test leads:** a vermelha na entrada **A** (ou mA); a preta no COM. O
+  circuit é aberto num ponto, e cada test lead vai numa das pontas abertas.
+- **Circuit:** ligado, com a load funcionando.
+- **Responde:** quanta current passa por este circuit?
 
-Na prática, um jeito comum de abrir o circuito é tirar o fusível e encostar as
-pontas nos dois terminais do soquete do fusível. A corrente que passaria pelo
-fusível passa pelo multímetro. Só que, assim, **o multímetro fica sem a proteção
-do fusível do circuito**. Se houver um curto, quem queima é o fusível interno do
-instrumento. Antes de medir corrente, tenha uma ideia da corrente esperada,
-pela lei de Ohm ou pela potência da carga, e confira o limite da entrada.
+Na prática, um jeito comum de abrir o circuit é tirar o fuse e encostar as
+test leads nos dois terminals do socket do fuse. A current que passaria pelo
+fuse passa pelo multimeter. Só que, assim, **o multimeter fica sem a proteção
+do fuse do circuit**. Se houver um short circuit, quem queima é o fuse interno
+do instrumento. Antes de medir current, tenha uma ideia da current esperada,
+pela Ohm's law ou pela power da load, e confira o limite da entrada.
 
-- **Exemplo:** o farol de 2.4 Ω, em 12 V, deveria puxar
-  $I = 12 \div 2.4 = 5\,\text{A}$. Com o multímetro em série, a leitura de 5 A
-  confirma que o circuito puxa o que deveria.
-- **Contraexemplo:** encostar as pontas, com a vermelha na entrada A, uma de
-  cada lado da lâmpada, “como na queda de tensão”. O multímetro fica em
-  paralelo com a lâmpada, como um ramo quase sem resistência: é um curto. Pela
-  lição de circuito em paralelo, a corrente desse ramo se soma às outras e
-  passa pelo fusível — o do multímetro ou o do circuito.
+- **Exemplo:** o headlamp de 2.4 Ω, em 12 V, deveria puxar
+  $I = 12 \div 2.4 = 5\,\text{A}$. Com o multimeter em série, a leitura de 5 A
+  confirma que o circuit puxa o que deveria.
+- **Contraexemplo:** encostar as test leads, com a vermelha na entrada A, uma
+  de cada lado da bulb, “como na voltage drop”. O multimeter fica em paralelo
+  com a bulb, como um branch quase sem resistance: é um short circuit. Pela
+  lição de parallel circuit, a current desse branch se soma às outras e passa
+  pelo fuse — o do multimeter ou o do circuit.
 
-### 5. Resistência
+### 5. Resistance
 
 > *The component must be isolated.*
 
-- **Seletor:** Ω.
-- **Pontas:** uma em cada terminal da peça. A cor não importa para a maioria
-  das peças.
-- **Circuito:** **desligado**, e a peça **desligada do circuito** — conector
+- **Selector:** Ω.
+- **Test leads:** uma em cada terminal da peça. A cor não importa para a
+  maioria das peças.
+- **Circuit:** **desligado**, e a peça **desligada do circuit** — connector
   solto ou peça retirada.
-- **Responde:** quanta resistência a peça tem? Existe caminho por dentro dela?
+- **Responde:** quanta resistance a peça tem? Existe caminho por dentro dela?
 
 **Por que isolada:** há dois motivos.
 
-1. O multímetro mede resistência mandando uma corrente pequena da própria
-   pilha e medindo a tensão que ela produz. Se o circuito estiver ligado, a
-   tensão do carro se mistura com a da pilha, e a leitura sai errada — além do
-   risco para o instrumento.
-2. Mesmo com o circuito desligado, se a peça continuar ligada aos fios, outras
-   peças podem ficar em paralelo com ela. O multímetro mede o conjunto, e, pela
-   lição de circuito em paralelo, o conjunto tem resistência **menor** que a
-   peça sozinha.
+1. O multimeter mede resistance mandando uma current pequena da própria
+   battery interna e medindo a voltage que ela produz. Se o circuit estiver
+   ligado, a voltage do carro se mistura com a da battery interna, e a leitura
+   sai errada — além do risco para o instrumento.
+2. Mesmo com o circuit desligado, se a peça continuar ligada aos wires, outras
+   peças podem ficar em paralelo com ela. O multimeter mede o conjunto, e, pela
+   lição de parallel circuit, o conjunto tem resistance **menor** que a peça
+   sozinha.
 
-Antes de medir, encoste as duas pontas uma na outra. O visor mostra a
-resistência das próprias pontas, alguns décimos de ohm em muitos multímetros.
-Em peças de resistência baixa, desconte esse valor da leitura. E se o visor
-mostrar **OL** com as pontas na peça, a resistência passou do que o multímetro
-consegue medir: a peça está aberta, sem caminho por dentro.
+Antes de medir, encoste as duas test leads uma na outra. O visor mostra a
+resistance das próprias test leads, alguns décimos de ohm em muitos
+multimeters. Em peças de resistance baixa, desconte esse valor da leitura. E se
+o visor mostrar **OL** com as test leads na peça, a resistance passou do que o
+multimeter consegue medir: a peça está aberta, sem caminho por dentro.
 
-- **Exemplo:** a bobina de um relé, tirada do soquete. A leitura dá a
-  resistência da bobina, que se compara com o manual.
-- **Contraexemplo:** medir a mesma bobina com o relé no soquete e o carro
-  ligado. A leitura mistura a tensão do carro com a medição — não vale nada, e
+- **Exemplo:** a bobina de um relay, tirado do socket. A leitura dá a
+  resistance da bobina, que se compara com o manual.
+- **Contraexemplo:** medir a mesma bobina com o relay no socket e o carro
+  ligado. A leitura mistura a voltage do carro com a medição — não vale nada, e
   arrisca o instrumento.
 
 ### Resumo das cinco
 
-| Medição | Seletor | Ponta vermelha | Ponta preta | Circuito | Corrente passando? |
+| Medição | Selector | Test lead vermelha | Test lead preta | Circuit | Current passando? |
 |---|---|---|---|---|---|
-| tensão da fonte | V contínua | polo positivo | polo negativo | sem carga | não |
-| tensão disponível | V contínua | ponto testado | massa boa | ligado | para diagnóstico, sim |
-| queda de tensão | V contínua | lado do positivo da peça | lado da massa da peça | ligado | sim |
-| corrente | A contínua, entrada A | uma ponta aberta | a outra ponta aberta | ligado, aberto num ponto | sim, por dentro do multímetro |
-| resistência | Ω | um terminal | o outro terminal | desligado, peça isolada | não pode |
+| source voltage | V DC | positive terminal | negative terminal | sem load | não |
+| available voltage | V DC | ponto testado | ground bom | ligado | para diagnóstico, sim |
+| voltage drop | V DC | lado do positivo da peça | lado do ground da peça | ligado | sim |
+| current | A DC, entrada A | uma ponta aberta | a outra ponta aberta | ligado, aberto num ponto | sim, por dentro do multimeter |
+| resistance | Ω | um terminal | o outro terminal | desligado, peça isolada | não pode |
 
-**O que muda** de uma medição para outra: a posição do seletor, a entrada da
-ponta vermelha, os dois pontos medidos e o estado do circuito. **O que
-permanece igual:** a ponta preta no COM, e a lei de Ohm por trás de toda
+**O que muda** de uma medição para outra: a posição do selector, a entrada da
+test lead vermelha, os dois pontos medidos e o estado do circuit. **O que
+permanece igual:** a test lead preta no COM, e a Ohm's law por trás de toda
 leitura.
 
 ## Como falha e como diagnosticar
 
-As medições não são escolhidas ao acaso. Num circuito com sintoma, elas seguem
+As medições não são escolhidas ao acaso. Num circuit com sintoma, elas seguem
 uma ordem, do mais simples para o mais específico.
 
-1. **Tensão da fonte:** a bateria tem o que deveria? Se não tem, o problema
-   pode nem ser o circuito.
-2. **Tensão disponível, com a carga funcionando:** a tensão chega à carga?
-3. **Quedas de tensão, com a carga funcionando:** se não chega o bastante, em
-   que trecho ela fica? Mede-se o lado positivo, a carga e o lado da massa,
-   trecho por trecho.
-4. **Resistência, com a peça isolada:** para confirmar uma peça suspeita depois
-   que as medições de tensão apontaram para ela.
-5. **Corrente:** para confirmar que o circuito puxa o que deveria, antes e
+1. **Source voltage:** a battery tem o que deveria? Se não tem, o problema
+   pode nem ser o circuit.
+2. **Available voltage, com a load funcionando:** a voltage chega à load?
+3. **Voltage drops, com a load funcionando:** se não chega o bastante, em que
+   trecho ela fica? Mede-se o lado positivo, a load e o lado do ground, trecho
+   por trecho.
+4. **Resistance, com a peça isolada:** para confirmar uma peça suspeita depois
+   que as medições de voltage apontaram para ela.
+5. **Current:** para confirmar que o circuit puxa o que deveria, antes e
    depois do reparo.
 
 | O que você mede | O que lê | O que isso quer dizer |
 |---|---|---|
-| tensão disponível na carga, com a carga funcionando | perto da tensão da bateria | o lado positivo do caminho está bom |
-| tensão disponível na carga, com a carga funcionando | bem abaixo da tensão da bateria | há resistência a mais no lado positivo |
-| tensão disponível na carga, com a carga funcionando | zero | o lado positivo está aberto antes desse ponto |
-| queda de tensão sobre um conector, fio ou interruptor | perto de zero | o trecho está bom |
-| queda de tensão sobre um conector, fio ou interruptor | uma parte grande da tensão | é ali a resistência a mais |
-| queda de tensão no lado da massa | uma parte grande da tensão | massa ruim |
-| resistência da peça isolada | OL | a peça está aberta |
+| available voltage na load, com a load funcionando | perto da voltage da battery | o lado positivo do caminho está bom |
+| available voltage na load, com a load funcionando | bem abaixo da voltage da battery | há resistance a mais no lado positivo |
+| available voltage na load, com a load funcionando | zero | o lado positivo está aberto antes desse ponto |
+| voltage drop sobre um connector, wire ou switch | perto de zero | o trecho está bom |
+| voltage drop sobre um connector, wire ou switch | uma parte grande da voltage | é ali a resistance a mais |
+| voltage drop no lado do ground | uma parte grande da voltage | ground ruim |
+| resistance da peça isolada | OL | a peça está aberta |
 
 ### A queixa resolvida
 
-A outra oficina tirou o conector do farol e mediu 12 V nele. Com o conector
-solto, a lâmpada estava fora do circuito, e **não passava corrente**. Sem
-corrente, nenhuma resistência do caminho teria queda, e a leitura daria 12 V com
-o caminho bom ou ruim. A medição não podia achar o defeito.
+A outra oficina tirou o connector do headlamp e mediu 12 V nele. Com o
+connector solto, a bulb estava fora do circuit, e **não passava current**. Sem
+current, nenhuma resistance do caminho teria voltage drop, e a leitura daria
+12 V com o caminho bom ou ruim. A medição não podia achar o defeito.
 
-O que fazer no lugar: ligar o conector, acender o farol e medir **com a
-corrente passando**. Para os números, use o farol do exemplo 3 da lição de
-circuito em série: lâmpada de 2.4 Ω acesa e um conector oxidado de 0.6 Ω no
-lado positivo (valores ilustrativos).
+O que fazer no lugar: ligar o connector, acender o headlamp e medir **com a
+current passando**. Para os números, use o headlamp do exemplo 3 da lição de
+series circuit: bulb de 2.4 Ω acesa e um connector oxidado de 0.6 Ω no lado
+positivo (valores ilustrativos).
 
 <Medicao
   modo="disponivel"
   oxidacao
   leitura="9.6\,\text{V}"
-  caption="Com o farol aceso, a tensão disponível no terminal positivo da lâmpada cai para 9.6 V. O conector oxidado fica com o resto."
+  caption="Com o headlamp aceso, a available voltage no terminal positivo da bulb cai para 9.6 V. O connector oxidado fica com o resto."
 />
 
-- **Tensão disponível** no terminal positivo da lâmpada, com o farol aceso:
-  9.6 V, e não 12 V. A corrente é $12 \div (2.4 + 0.6) = 4\,\text{A}$, e o
-  conector fica com $4 \times 0.6 = 2.4\,\text{V}$. A lâmpada recebe só o que
+- **Available voltage** no terminal positivo da bulb, com o headlamp aceso:
+  9.6 V, e não 12 V. A current é $12 \div (2.4 + 0.6) = 4\,\text{A}$, e o
+  connector fica com $4 \times 0.6 = 2.4\,\text{V}$. A bulb recebe só o que
   sobra: $12 - 2.4 = 9.6\,\text{V}$.
-- **Queda de tensão** com uma ponta de cada lado do conector: 2.4 V. É ali que a
-  tensão fica.
+- **Voltage drop** com uma test lead de cada lado do connector: 2.4 V. É ali
+  que a voltage fica.
 
 <Medicao
   modo="queda"
   alvo="oxidacao"
   oxidacao
   leitura="2.4\,\text{V}"
-  caption="A queda de tensão sobre o conector oxidado, com o farol aceso: 2.4 V ficam no conector, em vez de chegar à lâmpada."
+  caption="A voltage drop sobre o connector oxidado, com o headlamp aceso: 2.4 V ficam no connector, em vez de chegar à bulb."
 />
 
-**O que mudou** entre a medição da outra oficina e esta: a corrente passando.
-**O que permaneceu igual:** o conector, a lâmpada e a bateria. A resistência
-do conector estava lá o tempo todo; só a corrente a deixou aparecer.
+**O que mudou** entre a medição da outra oficina e esta: a current passando.
+**O que permaneceu igual:** o connector, a bulb e a battery. A resistance do
+connector estava lá o tempo todo; só a current a deixou aparecer.
 
-O reparo é limpar ou trocar o terminal do conector. E a verificação depois do
-reparo usa as mesmas medições: com o farol aceso, a queda sobre o conector deve
-ficar perto de zero, e a tensão disponível na lâmpada, perto da tensão da
-bateria. Trocar a lâmpada, como a outra oficina fez, não podia resolver: a
-lâmpada era a única peça boa que recebia menos tensão do que devia.
+O reparo é limpar ou trocar o terminal do connector. E a verificação depois do
+reparo usa as mesmas medições: com o headlamp aceso, a voltage drop sobre o
+connector deve ficar perto de zero, e a available voltage na bulb, perto da
+voltage da battery. Trocar a bulb, como a outra oficina fez, não podia
+resolver: a bulb era a única peça boa que recebia menos voltage do que devia.
 
-## Na oficina: medir sem estragar o circuito
+## Na oficina: medir sem estragar o circuit
 
-:::warning Cuidados com os terminais e os fios
+:::warning Cuidados com os terminals e os wires
 
-- **Não fure a capa dos fios** com a ponta de prova para medir. O furo deixa
-  entrar água, e o cobre oxida por dentro da capa — criando exatamente o tipo de
-  resistência que você estava procurando.
-- **Prefira medir por trás do conector** (*back-probing*): uma ponta fina entra
-  pela parte de trás do conector, ao lado do fio, até encostar no terminal, com
-  o conector ligado e o circuito funcionando. Use pontas próprias para isso,
-  sem forçar a vedação do conector.
-- **Não enfie a ponta de prova na parte da frente do terminal fêmea.** Ela
-  alarga o terminal, e ele perde a pressão de contato — outro defeito criado
-  pela medição.
-- **Os módulos eletrônicos do carro trabalham com correntes pequenas.** O
-  multímetro digital, com a resistência interna alta, não carrega esses
-  circuitos. Uma lâmpada de teste, sim, e pode danificar um módulo. A lição de
+- **Não fure o insulation dos wires** com a test lead para medir. O furo deixa
+  entrar água, e o cobre oxida por dentro do insulation — criando exatamente o
+  tipo de resistance que você estava procurando.
+- **Prefira o back-probing:** uma ponta fina entra pela parte de trás do
+  connector, ao lado do wire, até encostar no terminal, com o connector ligado
+  e o circuit funcionando. Use pontas próprias para isso, sem forçar a vedação
+  do connector.
+- **Não enfie a test lead na parte da frente do terminal fêmea.** Ela alarga o
+  terminal, e ele perde a pressão de contato — outro defeito criado pela
+  medição.
+- **Os módulos eletrônicos do carro trabalham com currents pequenas.** O
+  digital multimeter, com a resistance interna alta, não carrega esses
+  circuits. Uma test light, sim, e pode danificar um módulo. A lição de
   instrumentos de teste compara os dois.
 
 :::
@@ -494,157 +498,160 @@ lâmpada era a única peça boa que recebia menos tensão do que devia.
 
 ### Exemplo 1: prever as leituras
 
-O farol da queixa: bateria de 12 V, conector oxidado de 0.6 Ω e lâmpada de
-2.4 Ω acesa, em série. Preveja o que o multímetro mostra em cada medição, com o
-farol aceso.
+O headlamp da queixa: battery de 12 V, connector oxidado de 0.6 Ω e bulb de
+2.4 Ω acesa, em série. Preveja o que o multimeter mostra em cada medição, com
+o headlamp aceso.
 
-Primeiro a corrente, para o circuito inteiro:
+Primeiro a current, para o circuit inteiro:
 $I = 12 \div (0.6 + 2.4) = 12 \div 3 = 4\,\text{A}$. Depois, cada leitura:
 
 | Medição | Leitura prevista | De onde vem |
 |---|---|---|
-| corrente, com o multímetro em série | 4 A | $12 \div 3$ |
-| queda sobre o conector | 2.4 V | $4 \times 0.6$ |
-| queda sobre a lâmpada | 9.6 V | $4 \times 2.4$ |
-| tensão disponível no terminal positivo da lâmpada | 9.6 V | $12 - 2.4$ |
+| current, com o multimeter em série | 4 A | $12 \div 3$ |
+| voltage drop sobre o connector | 2.4 V | $4 \times 0.6$ |
+| voltage drop sobre a bulb | 9.6 V | $4 \times 2.4$ |
+| available voltage no terminal positivo da bulb | 9.6 V | $12 - 2.4$ |
 
-Conferindo pela regra das quedas: $2.4 + 9.6 = 12\,\text{V}$. Repare que, neste
-circuito, a tensão disponível na lâmpada e a queda sobre a lâmpada dão o mesmo
-número. Isso acontece porque o lado da massa está bom e não fica com nada.
+Conferindo pela regra das voltage drops: $2.4 + 9.6 = 12\,\text{V}$. Repare
+que, neste circuit, a available voltage na bulb e a voltage drop sobre a bulb
+dão o mesmo número. Isso acontece porque o lado do ground está bom e não fica
+com nada.
 
-### Exemplo 2: o lado da massa
+### Exemplo 2: o lado do ground
 
-**Pause e tente:** outro farol fraco. Agora, com o farol aceso, a tensão
-disponível no terminal positivo da lâmpada dá 12 V, mas a queda sobre a lâmpada
-dá só 9.6 V. Onde estão os 2.4 V que faltam? Que medição confirma?
+**Pause e tente:** outro headlamp fraco. Agora, com o headlamp aceso, a
+available voltage no terminal positivo da bulb dá 12 V, mas a voltage drop
+sobre a bulb dá só 9.6 V. Onde estão os 2.4 V que faltam? Que medição
+confirma?
 
 <details>
 <summary>Solução</summary>
 
-A tensão chega inteira ao terminal positivo, então o lado positivo está bom. Mas
-a lâmpada só fica com 9.6 V. Pela regra das quedas, os
+A voltage chega inteira ao terminal positivo, então o lado positivo está bom.
+Mas a bulb só fica com 9.6 V. Pela regra das voltage drops, os
 $12 - 9.6 = 2.4\,\text{V}$ que faltam estão em outro trecho do laço — e o
-único que sobrou é o lado da massa, do terminal negativo da lâmpada até o
-negativo da bateria.
+único que sobrou é o lado do ground, do terminal negativo da bulb até o
+negative terminal da battery.
 
-Para confirmar, meça a queda de tensão no lado da massa: ponta vermelha no
-terminal negativo da lâmpada, ponta preta no negativo da bateria, com o farol
-aceso.
+Para confirmar, meça a voltage drop no lado do ground: test lead vermelha no
+terminal negativo da bulb, test lead preta no negative terminal da battery,
+com o headlamp aceso.
 
 <Medicao
   modo="queda"
   alvo="massa"
   leitura="2.4\,\text{V}"
-  caption="Queda de tensão no lado da massa: do terminal negativo da lâmpada até o negativo da bateria, com o farol aceso. Os 2.4 V que faltavam na lâmpada estão aqui."
+  caption="Voltage drop no lado do ground: do terminal negativo da bulb até o negative terminal da battery, com o headlamp aceso. Os 2.4 V que faltavam na bulb estão aqui."
 />
 
-A leitura de 2.4 V mostra uma massa ruim. A tensão disponível no positivo não
-podia mostrar esse defeito, porque ele está do outro lado da lâmpada. É por isso
+A leitura de 2.4 V mostra um ground ruim. A available voltage no positivo não
+podia mostrar esse defeito, porque ele está do outro lado da bulb. É por isso
 que o diagnóstico mede os dois lados.
 
 </details>
 
-### Exemplo 3: a resistência que mente
+### Exemplo 3: a resistance que mente
 
-**Pause e tente:** dois relés iguais, cada um com uma bobina de 80 Ω (valor
-típico, só para a conta), estão ligados em paralelo no mesmo circuito. Com o
-carro desligado, mas com os dois relés no lugar, você mede a resistência de uma
-das bobinas pelos terminais do soquete. O que o multímetro mostra? Por que a
-regra manda isolar o componente?
+**Pause e tente:** dois relays iguais, cada um com uma bobina de 80 Ω (valor
+típico, só para a conta), estão ligados em paralelo no mesmo circuit. Com o
+carro desligado, mas com os dois relays no lugar, você mede a resistance de uma
+das bobinas pelos terminals do socket. O que o multimeter mostra? Por que a
+regra manda *isolate the component*?
 
 <details>
 <summary>Solução</summary>
 
-Com os dois relés no lugar, o multímetro enxerga as duas bobinas em paralelo.
-Pela lição de circuito em paralelo, dois ramos iguais dão metade da resistência
-de um: $80 \div 2 = 40\,\Omega$. Pelo produto sobre a soma:
+Com os dois relays no lugar, o multimeter enxerga as duas bobinas em paralelo.
+Pela lição de parallel circuit, dois branches iguais dão metade da resistance
+de um: $80 \div 2 = 40\,\Omega$. Pelo product over sum:
 $(80 \times 80) \div (80 + 80) = 6400 \div 160 = 40\,\Omega$.
 
-O multímetro mostra 40 Ω. Comparando com os 80 Ω do manual, você concluiria que
-a bobina está em curto parcial — e ela está perfeita. Tirando o relé do soquete
-e medindo direto nos terminais dele, a leitura dá 80 Ω. Isolar o componente
-tira do caminho tudo o que está em paralelo com ele.
+O multimeter mostra 40 Ω. Comparando com os 80 Ω do manual, você concluiria que
+a bobina está em short circuit parcial — e ela está perfeita. Tirando o relay
+do socket e medindo direto nos terminals dele, a leitura dá 80 Ω. Isolar o
+componente tira do caminho tudo o que está em paralelo com ele.
 
 </details>
 
-### Exemplo 4: descontar as pontas
+### Exemplo 4: descontar as test leads
 
-**Pause e tente:** com as pontas encostadas uma na outra, o multímetro mostra
-0.3 Ω. Medindo uma peça isolada, mostra 2.1 Ω. Qual é a resistência da peça? E
-se a leitura na peça fosse OL?
+**Pause e tente:** com as test leads encostadas uma na outra, o multimeter
+mostra 0.3 Ω. Medindo uma peça isolada, mostra 2.1 Ω. Qual é a resistance da
+peça? E se a leitura na peça fosse OL?
 
 <details>
 <summary>Solução</summary>
 
-As pontas estão em série com a peça durante a medição, e as resistências em
+As test leads estão em série com a peça durante a medição, e as resistances em
 série se somam. Então a peça tem $2.1 - 0.3 = 1.8\,\Omega$.
 
-Se a leitura fosse OL, a resistência estaria acima do que o multímetro consegue
-medir: a peça está aberta. Antes de concluir, confira se as pontas estão bem
-encostadas nos terminais — uma ponta encostada em sujeira ou óxido também
+Se a leitura fosse OL, a resistance estaria acima do que o multimeter consegue
+medir: a peça está aberta. Antes de concluir, confira se as test leads estão
+bem encostadas nos terminals — uma ponta encostada em sujeira ou óxido também
 mostra OL.
 
 </details>
 
-### Exemplo 5: a corrente pelo soquete do fusível
+### Exemplo 5: a current pelo socket do fuse
 
-**Pause e tente:** para medir a corrente do farol, um técnico tira o fusível de
-10 A do circuito e encosta as pontas nos dois terminais do soquete, com a
-vermelha na entrada A. Com o farol bom, de 2.4 Ω, que corrente ele espera ler? E
-se o fio do farol estivesse em curto à massa?
+**Pause e tente:** para medir a current do headlamp, um técnico tira o fuse de
+10 A do circuit e encosta as test leads nos dois terminals do socket, com a
+vermelha na entrada A. Com o headlamp bom, de 2.4 Ω, que current ele espera
+ler? E se o wire do headlamp estivesse em short to ground?
 
 <details>
 <summary>Solução</summary>
 
-Com o farol bom: $I = 12 \div 2.4 = 5\,\text{A}$. O multímetro está em série com
-o farol, no lugar do fusível, e mostra 5 A.
+Com o headlamp bom: $I = 12 \div 2.4 = 5\,\text{A}$. O multimeter está em série
+com o headlamp, no lugar do fuse, e mostra 5 A.
 
-Com um curto à massa, a corrente seria enorme — na lição de lei de Ohm, um curto
-de 0.05 Ω deu 240 A. Essa corrente passaria por dentro do multímetro, que agora
-ocupa o lugar do fusível do circuito. O fusível interno do multímetro queimaria.
-Por isso a regra: antes de medir corrente, tenha uma ideia da corrente esperada.
-Se o fusível do circuito estava queimado quando você chegou, suspeite de um
-curto antes de pôr o multímetro no lugar dele.
+Com um short to ground, a current seria enorme — na lição de Ohm's law, um
+short circuit de 0.05 Ω deu 240 A. Essa current passaria por dentro do
+multimeter, que agora ocupa o lugar do fuse do circuit. O fuse interno do
+multimeter queimaria. Por isso a regra: antes de medir current, tenha uma ideia
+da current esperada. Se o fuse do circuit estava queimado quando você chegou,
+suspeite de um short circuit antes de pôr o multimeter no lugar dele.
 
 </details>
 
 ## Perguntas de verificação
 
-1. Por que a ponta preta vai sempre na entrada COM, mas a vermelha muda de
+1. Por que a test lead preta vai sempre na entrada COM, mas a vermelha muda de
    entrada?
-2. Por que a tensão da fonte se mede sem carga, mas a queda de tensão se mede
-   com corrente passando?
-3. Um cabo com um único fio de cobre inteiro mostra 12 V na ponta, sem carga.
-   Por que essa leitura não prova que o fio está bom?
-4. Por que o voltímetro, ligado em paralelo com uma peça, não muda o
-   funcionamento do circuito, e o amperímetro, ligado do mesmo jeito, faz um
-   curto?
+2. Por que a source voltage se mede sem load, mas a voltage drop se mede com
+   current passando?
+3. Um cable com um único filete de cobre inteiro mostra 12 V na ponta, sem
+   load. Por que essa leitura não prova que o wire está bom?
+4. Por que o voltmeter, ligado em paralelo com uma peça, não muda o
+   funcionamento do circuit, e o ammeter, ligado do mesmo jeito, faz um short
+   circuit?
 5. Quais são os dois motivos para isolar um componente antes de medir a
-   resistência dele?
+   resistance dele?
 
 <details>
 <summary>Respostas</summary>
 
-1. Porque a ponta preta é a referência em todas as medições, e a entrada COM é
-   comum às três funções. A vermelha muda porque a corrente precisa passar por
-   um caminho interno diferente, de resistência quase zero, ligado à entrada A.
-   Tensão e resistência usam a entrada V/Ω.
-2. Porque as duas medições respondem a perguntas diferentes. A tensão da fonte
-   quer saber o que a bateria tem guardado, sem a pequena queda que a corrente
-   produz dentro dela. A queda de tensão quer saber quanto fica num trecho, e
-   uma resistência só fica com tensão quando passa corrente por ela:
+1. Porque a test lead preta é a referência em todas as medições, e a entrada
+   COM é comum às três funções. A vermelha muda porque a current precisa
+   passar por um caminho interno diferente, de resistance quase zero, ligado à
+   entrada A. Voltage e resistance usam a entrada V/Ω.
+2. Porque as duas medições respondem a perguntas diferentes. A source voltage
+   quer saber o que a battery tem guardado, sem a pequena voltage drop que a
+   current produz dentro dela. A voltage drop quer saber quanto fica num
+   trecho, e uma resistance só fica com voltage quando passa current por ela:
    $V = I \times R$, com $I$ igual a zero, dá zero.
-3. Porque, sem carga, a corrente é zero, e nem mesmo a resistência alta do
-   único fio de cobre produz queda. A ponta mostra a tensão inteira. Com a
-   carga ligada, a corrente passa por esse fio fino, e ele fica com uma parte
-   grande da tensão — ou esquenta até romper.
-4. Porque o voltímetro tem resistência interna muito alta, e quase nenhuma
-   corrente passa pelo ramo que ele forma. O amperímetro tem resistência quase
+3. Porque, sem load, a current é zero, e nem mesmo a resistance alta do único
+   filete de cobre produz voltage drop. A ponta mostra a voltage inteira. Com a
+   load ligada, a current passa por esse filete fino, e ele fica com uma parte
+   grande da voltage — ou esquenta até romper.
+4. Porque o voltmeter tem resistance interna muito alta, e quase nenhuma
+   current passa pelo branch que ele forma. O ammeter tem resistance quase
    zero, para não atrapalhar quando fica em série. Em paralelo com uma peça,
-   ele vira um ramo quase sem resistência, e a corrente desse ramo fica enorme.
-5. Primeiro, a tensão do carro atrapalha a medição, que usa a pilha do
-   multímetro, e pode estragar o instrumento. Segundo, peças ligadas em paralelo
-   com o componente entram na medição e baixam a leitura.
+   ele vira um branch quase sem resistance, e a current desse branch fica
+   enorme.
+5. Primeiro, a voltage do carro atrapalha a medição, que usa a battery interna
+   do multimeter, e pode estragar o instrumento. Segundo, peças ligadas em
+   paralelo com o componente entram na medição e baixam a leitura.
 
 </details>
 
@@ -652,49 +659,49 @@ curto antes de pôr o multímetro no lugar dele.
 
 ### 1. Reconhecimento
 
-Para cada medição, diga a posição do seletor, a entrada da ponta vermelha e se
-o circuito deve estar ligado ou desligado.
+Para cada medição, diga a posição do selector, a entrada da test lead vermelha
+e se o circuit deve estar ligado ou desligado.
 
-a) tensão da fonte;
+a) source voltage;
 
-b) queda de tensão sobre um interruptor;
+b) voltage drop sobre um switch;
 
-c) corrente de uma lâmpada;
+c) current de uma bulb;
 
-d) resistência da bobina de um relé.
+d) resistance da bobina de um relay.
 
 ### 2. Explicação
 
-Com suas palavras: por que uma queda de tensão medida com o circuito desligado
-não diz nada sobre o estado de um conector?
+Com suas palavras: por que uma voltage drop medida com o circuit desligado não
+diz nada sobre o estado de um connector?
 
 ### 3. Aplicação direta
 
-a) Com os faróis acesos, você mede a queda no lado positivo do caminho: 0.3 V;
-sobre a lâmpada: 11.5 V; no lado da massa: 0.2 V. Qual é a tensão da bateria
-nesse momento, com os faróis acesos?
+a) Com os headlamps acesos, você mede a voltage drop no lado positivo do
+caminho: 0.3 V; sobre a bulb: 11.5 V; no lado do ground: 0.2 V. Qual é a
+voltage da battery nesse momento, com os headlamps acesos?
 
-b) Com as pontas encostadas, o multímetro mostra 0.2 Ω. Numa peça isolada,
-mostra 5.0 Ω. Qual é a resistência da peça?
+b) Com as test leads encostadas, o multimeter mostra 0.2 Ω. Numa peça isolada,
+mostra 5.0 Ω. Qual é a resistance da peça?
 
-c) Medindo a corrente de uma luz de cortesia, o visor mostra 0.25 A. Quanto é
-isso em miliampères?
+c) Medindo a current de uma dome light, o visor mostra 0.25 A. Quanto é isso
+em milliamps?
 
 ### 4. Variação
 
-Volte à queixa, mas agora com o conector mais oxidado: 1.2 Ω em vez de 0.6 Ω,
-com a mesma lâmpada de 2.4 Ω, em 12 V. Preveja a corrente, a tensão disponível
-no terminal positivo da lâmpada e a queda sobre o conector, com o farol aceso.
-E o que a outra oficina leria, com o conector solto?
+Volte à queixa, mas agora com o connector mais oxidado: 1.2 Ω em vez de 0.6 Ω,
+com a mesma bulb de 2.4 Ω, em 12 V. Preveja a current, a available voltage no
+terminal positivo da bulb e a voltage drop sobre o connector, com o headlamp
+aceso. E o que a outra oficina leria, com o connector solto?
 
 ### 5. Caso de diagnóstico
 
-A buzina não toca. Você mede:
+O horn não toca. Você mede:
 
-- tensão da fonte: 12.6 V;
-- com o botão da buzina apertado, tensão disponível na saída do fusível da
-  buzina: 12 V;
-- com o botão apertado, tensão disponível no terminal positivo da buzina: 0 V.
+- source voltage: 12.6 V;
+- com o botão do horn apertado, available voltage na saída do fuse do horn:
+  12 V;
+- com o botão apertado, available voltage no terminal positivo do horn: 0 V.
 
 a) O que cada medição descarta?
 
@@ -705,16 +712,15 @@ c) Qual seria a próxima medição?
 <details>
 <summary>Dica para o exercício 5</summary>
 
-Imagine o caminho da corrente do fusível até a buzina, com tudo o que fica no
-meio. A tensão chega a um ponto e não chega ao outro. O defeito fica entre os
-dois.
+Imagine o caminho da current do fuse até o horn, com tudo o que fica no meio. A
+voltage chega a um ponto e não chega ao outro. O defeito fica entre os dois.
 
 </details>
 
 ### 6. Justificativa
 
-Explique por que o diagnóstico mede a tensão disponível e as quedas de tensão
-**antes** de tirar uma peça para medir a resistência dela.
+Explique por que o diagnóstico mede a available voltage e as voltage drops
+**antes** de tirar uma peça para medir a resistance dela.
 
 ### 7. Formato ASE
 
@@ -747,88 +753,88 @@ component with a DMM?
 <details>
 <summary>Respostas para conferência</summary>
 
-1. a) Tensão contínua; entrada V/Ω; sem carga ligada.
-   b) Tensão contínua; entrada V/Ω; ligado, com corrente passando pelo
-   interruptor.
-   c) Corrente contínua; entrada A (ou mA, se a corrente esperada for
-   pequena); ligado, com o circuito aberto num ponto e o multímetro em série.
-   d) Ω; entrada V/Ω; desligado, com o relé fora do soquete.
+1. a) DC voltage; entrada V/Ω; sem load ligada.
+   b) DC voltage; entrada V/Ω; ligado, com current passando pelo switch.
+   c) DC current; entrada A (ou mA, se a current esperada for pequena);
+   ligado, com o circuit aberto num ponto e o multimeter em série.
+   d) Ω; entrada V/Ω; desligado, com o relay fora do socket.
 
-2. Porque a queda de tensão num trecho é $V = I \times R$. Com o circuito
-   desligado, a corrente é zero, e a queda dá zero em qualquer conector — bom ou
-   oxidado. A leitura sai igual nos dois casos, então não separa um do outro. A
-   resistência do conector só aparece quando a corrente passa por ele.
+2. Porque a voltage drop num trecho é $V = I \times R$. Com o circuit
+   desligado, a current é zero, e a voltage drop dá zero em qualquer connector
+   — bom ou oxidado. A leitura sai igual nos dois casos, então não separa um do
+   outro. A resistance do connector só aparece quando a current passa por ele.
 
-3. a) Pela regra das quedas, as quedas do laço somadas dão a tensão da fonte:
-   $0.3 + 11.5 + 0.2 = 12\,\text{V}$. Repare que é menos que os 12.6 V típicos
-   em repouso: com os faróis puxando corrente, uma parte da tensão fica dentro
-   da própria bateria.
+3. a) Pela regra das voltage drops, as voltage drops do laço somadas dão a
+   source voltage: $0.3 + 11.5 + 0.2 = 12\,\text{V}$. Repare que é menos que
+   os 12.6 V típicos em repouso: com os headlamps puxando current, uma parte da
+   voltage fica dentro da própria battery.
 
-   b) $5.0 - 0.2 = 4.8\,\Omega$, porque as pontas ficam em série com a peça.
+   b) $5.0 - 0.2 = 4.8\,\Omega$, porque as test leads ficam em série com a
+   peça.
 
    c) $0.25 \times 1000 = 250\,\text{mA}$.
 
-4. Corrente: $I = 12 \div (1.2 + 2.4) = 12 \div 3.6 \approx 3.33\,\text{A}$.
-   Queda sobre o conector: $3.33 \times 1.2 \approx 4\,\text{V}$. Tensão
-   disponível na lâmpada: $12 - 4 = 8\,\text{V}$ (conferindo:
-   $3.33 \times 2.4 \approx 8\,\text{V}$). Com o conector solto, sem corrente,
-   a outra oficina leria 12 V do mesmo jeito: a leitura sem carga não muda com
-   o tamanho da oxidação.
+4. Current: $I = 12 \div (1.2 + 2.4) = 12 \div 3.6 \approx 3.33\,\text{A}$.
+   Voltage drop sobre o connector: $3.33 \times 1.2 \approx 4\,\text{V}$.
+   Available voltage na bulb: $12 - 4 = 8\,\text{V}$ (conferindo:
+   $3.33 \times 2.4 \approx 8\,\text{V}$). Com o connector solto, sem current,
+   a outra oficina leria 12 V do mesmo jeito: a leitura sem load não muda com o
+   tamanho da oxidação.
 
-   Se você encontrou 10 A, usou só a resistência da lâmpada, 2.4 Ω, e esqueceu
-   o conector. Em série, a corrente sai da resistência total.
+   Se você encontrou 10 A, usou só a resistance da bulb, 2.4 Ω, e esqueceu o
+   connector. Em série, a current sai da total resistance.
 
-5. a) A tensão da fonte de 12.6 V descarta a bateria descarregada. Os 12 V na
-   saída do fusível mostram que o fusível está bom e que a tensão chega até
-   ali. Os 0 V no terminal da buzina mostram que a tensão não chega à buzina —
-   então trocar a buzina não resolveria, porque ela nem está recebendo tensão.
+5. a) A source voltage de 12.6 V descarta a battery descarregada. Os 12 V na
+   saída do fuse mostram que o fuse está bom e que a voltage chega até ali. Os
+   0 V no terminal do horn mostram que a voltage não chega ao horn — então
+   trocar o horn não resolveria, porque ele nem está recebendo voltage.
 
-   b) Entre a saída do fusível e o terminal positivo da buzina: no fio, no relé
-   da buzina ou no próprio botão, conforme o diagrama do veículo.
+   b) Entre a saída do fuse e o terminal positivo do horn: no wire, no relay do
+   horn ou no próprio botão, conforme o diagrama do veículo.
 
-   c) Seguir o caminho pelo diagrama e medir a tensão disponível em pontos
+   c) Seguir o caminho pelo diagrama e medir a available voltage em pontos
    intermediários, com o botão apertado — por exemplo, na entrada e na saída do
-   relé. O ponto aberto fica entre o último ponto com tensão e o primeiro sem
-   tensão.
+   relay. O ponto aberto fica entre o último ponto com voltage e o primeiro sem
+   voltage.
 
-6. Porque as medições de tensão são feitas com o circuito montado e funcionando,
-   e apontam o trecho com defeito sem desmontar nada. Tirar peças à toa leva
-   tempo, pode danificar conectores e às vezes até “conserta” o defeito por
-   alguns dias, só por mexer no terminal. A resistência entra depois, para
-   confirmar a peça que as quedas de tensão já apontaram.
+6. Porque as medições de voltage são feitas com o circuit montado e
+   funcionando, e apontam o trecho com defeito sem desmontar nada. Tirar peças à
+   toa leva tempo, pode danificar connectors e às vezes até “conserta” o defeito
+   por alguns dias, só por mexer no terminal. A resistance entra depois, para
+   confirmar a peça que as voltage drops já apontaram.
 
-7. **Question 1: C.** Os dois estão certos. O voltímetro fica em paralelo, uma
-   ponta de cada lado da peça. O amperímetro fica em série, com a corrente
+7. **Question 1: C.** Os dois estão certos. O voltmeter fica em paralelo, uma
+   test lead de cada lado da peça. O ammeter fica em série, com a current
    passando por dentro dele.
 
-   **Question 2: A.** A bateria em repouso está boa, e 9.6 V com os faróis
-   acesos mostram que a tensão se perde no caminho até a lâmpada. O próximo
-   passo é a queda de tensão no lado positivo. A alternativa B já foi
-   respondida pela tensão da fonte. A C está errada duas vezes: resistência não
-   se mede com o circuito ligado, e a lâmpada nem é a suspeita principal. A D
-   não explica uma perda de tensão entre a bateria e a lâmpada.
+   **Question 2: A.** A battery em repouso está boa, e 9.6 V com os headlamps
+   acesos mostram que a voltage se perde no caminho até a bulb. O próximo passo
+   é a voltage drop no lado positivo. A alternativa B já foi respondida pela
+   source voltage. A C está errada duas vezes: resistance não se mede com o
+   circuit ligado, e a bulb nem é a suspeita principal. A D não explica uma
+   perda de voltage entre a battery e a bulb.
 
    **Question 3: C.** O componente precisa estar isolado. As alternativas A e B
-   põem tensão do carro na medição. A D descreve a ligação do amperímetro, não
-   do ohmímetro.
+   põem voltage do carro na medição. A D descreve a ligação do ammeter, não do
+   ohmmeter.
 
 </details>
 
 ## Revisão
 
-- **A ideia central:** as três medições de tensão usam a mesma posição do
-  seletor, e o que muda é onde vão as pontas. A fonte se mede sem carga; a
-  tensão disponível e a queda de tensão, com a corrente passando. A corrente se
-  mede em série, com a ponta vermelha na entrada A. A resistência se mede com o
-  componente isolado.
-- **Quando usar:** no diagnóstico de qualquer circuito, nesta ordem — fonte,
-  tensão disponível, quedas de tensão, e só depois resistência da peça
-  suspeita. E a corrente para conferir o circuito antes e depois do reparo.
-- **Com o que se conecta:** cada leitura é a lei de Ohm, a regra das quedas do
-  circuito em série ou a regra dos ramos do circuito em paralelo aplicada a um
-  número no visor. A lição de diagnóstico de circuitos usa estas medições para
-  achar circuito aberto, curto e resistência alta.
+- **A ideia central:** as três medições de voltage usam a mesma posição do
+  selector, e o que muda é onde vão as test leads. A source voltage se mede sem
+  load; a available voltage e a voltage drop, com a current passando. A current
+  se mede em série, com a test lead vermelha na entrada A. A resistance se mede
+  com o componente isolado.
+- **Quando usar:** no diagnóstico de qualquer circuit, nesta ordem — source
+  voltage, available voltage, voltage drops, e só depois resistance da peça
+  suspeita. E a current para conferir o circuit antes e depois do reparo.
+- **Com o que se conecta:** cada leitura é a Ohm's law, a regra das voltage
+  drops do series circuit ou a regra dos branches do parallel circuit aplicada
+  a um número no visor. A lição de diagnóstico de circuits usa estas medições
+  para achar open circuit, short circuit e high resistance.
 
-**Termos em inglês desta lição:** *digital multimeter* (DMM), *test lead*,
-*COM*, *selector*, *auto-ranging*, *source voltage*, *available voltage*,
-*voltage drop*, *isolate the component*, *over limit* (OL), *back-probing*.
+**Termos desta lição para revisar:** digital multimeter, DMM, voltmeter,
+ammeter, ohmmeter, test lead, COM, selector, auto-ranging, source voltage,
+available voltage, voltage drop, isolate the component, OL, back-probing.

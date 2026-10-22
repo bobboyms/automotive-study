@@ -6,8 +6,12 @@
 // dicionário `src/data/termos.json` e troca por <Termo k="...">, que ao ser
 // clicado mostra o nome em português e uma definição curta.
 //
-// Só age nas pastas listadas em PASTAS: as lições da TRN-120 seguem a
-// convenção antiga (português em negrito com o inglês ao lado).
+// Só age nas pastas listadas em PASTAS. Um termo com `so` (lista de pedaços
+// do caminho) só vira botão nessas páginas: “power” é potência na TRN-120,
+// mas na AUT-116 quase sempre é o power stroke.
+//
+// Siglas (forma toda em maiúsculas) só são achadas em maiúsculas: sem isso,
+// “COM” acharia o “com” do português, e “MIL” o “mil” de “cinco mil”.
 //
 // Não mexe em: títulos (o texto vai para o índice lateral sem passar pelo
 // React), links, código, fórmulas, <summary> (o clique abriria o <details>)
@@ -15,7 +19,7 @@
 
 const termos = require('../data/termos.json').termos;
 
-const PASTAS = ['/aut-116-'];
+const PASTAS = ['/trn-120-', '/aut-116-'];
 
 // Plural automático da última palavra: piston -> pistons, gas -> gases,
 // battery -> batteries. Sigla (tudo maiúsculo) não ganha plural.
@@ -32,7 +36,10 @@ function plurais(forma) {
 }
 
 const indice = new Map(); // forma em minúsculas -> chave (o `en` do termo)
+const siglas = new Set(); // formas que só valem em maiúsculas
+const so = new Map(); // chave -> pastas em que o termo vale
 for (const t of termos) {
+  if (t.so) so.set(t.en, t.so);
   for (const forma of [t.en, ...(t.var || [])]) {
     for (const f of plurais(forma)) {
       const chave = f.toLowerCase();
@@ -42,11 +49,14 @@ for (const t of termos) {
         );
       }
       indice.set(chave, t.en);
+      if (/^[A-Z0-9+]+$/.test(f) && /[A-Z]/.test(f)) siglas.add(f);
     }
   }
 }
 
-const escapar = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+// O espaço de um termo também aceita a quebra de linha: no markdown, “short
+// to\npower” quebrado no fim da linha é o mesmo texto.
+const escapar = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 // Formas mais longas primeiro: "piston pin" ganha de "piston".
 const formas = [...indice.keys()].sort((a, b) => b.length - a.length);
 // Fronteira de palavra que entende acento: sem ela, "fan" seria achado dentro
@@ -77,12 +87,15 @@ function termoNo(texto, chave) {
   };
 }
 
-function dividir(valor) {
+function dividir(valor, caminho) {
   const partes = [];
   let ultimo = 0;
   for (const m of valor.matchAll(RE)) {
+    const chave = indice.get(m[0].replace(/\s+/g, ' ').toLowerCase());
+    if (siglas.has(m[0].toUpperCase()) && m[0] !== m[0].toUpperCase()) continue;
+    if (so.has(chave) && !so.get(chave).some((p) => caminho.includes(p))) continue;
     if (m.index > ultimo) partes.push({type: 'text', value: valor.slice(ultimo, m.index)});
-    partes.push(termoNo(m[0], indice.get(m[0].toLowerCase())));
+    partes.push(termoNo(m[0], chave));
     ultimo = m.index + m[0].length;
   }
   if (!partes.length) return null;
@@ -90,7 +103,7 @@ function dividir(valor) {
   return partes;
 }
 
-function percorrer(no) {
+function percorrer(no, caminho) {
   if (!no.children) return;
   const filhos = [];
   for (const filho of no.children) {
@@ -99,14 +112,14 @@ function percorrer(no) {
     } else if (filho.type === 'mdxJsxFlowElement' || filho.type === 'mdxJsxTextElement') {
       // <details> e blocos parecidos: o conteúdo é markdown e recebe termos;
       // <summary> e componentes nossos (figuras), não.
-      if (filho.name === 'details') percorrer(filho);
+      if (filho.name === 'details') percorrer(filho, caminho);
       filhos.push(filho);
     } else if (filho.type === 'text') {
-      const partes = dividir(filho.value);
+      const partes = dividir(filho.value, caminho);
       if (partes) filhos.push(...partes);
       else filhos.push(filho);
     } else {
-      percorrer(filho);
+      percorrer(filho, caminho);
       filhos.push(filho);
     }
   }
@@ -117,8 +130,10 @@ module.exports = function remarkTermos() {
   return (tree, file) => {
     const caminho = (file.path || file.history?.[0] || '').split('\\').join('/');
     if (!PASTAS.some((p) => caminho.includes(p))) return;
-    percorrer(tree);
+    percorrer(tree, caminho);
   };
 };
 
 module.exports.indice = indice;
+module.exports.siglas = siglas;
+module.exports.RE = RE;

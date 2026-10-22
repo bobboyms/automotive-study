@@ -144,13 +144,13 @@ export default function Circuito({
               className={styles.wireThin}
               d={`M ${FUSE_X - 18} ${T} C ${FUSE_X - 6} ${T - 9}, ${FUSE_X + 6} ${T + 9}, ${FUSE_X + 18} ${T}`}
             />
-            {/* embaixo do fio: em cima, ao lado de “interruptor”, os dois
+            {/* embaixo do fio: em cima, ao lado de “switch”, os dois
                 nomes se encostavam no celular */}
             {nomes && (
               <SvgMath
                 x={FUSE_X}
                 y={T + 24}
-                math="\text{fusível}"
+                math="\text{fuse}"
                 fontSize={15}
               />
             )}
@@ -186,8 +186,8 @@ export default function Circuito({
             {nomes && (
               <SvgMath
                 x={SWITCH_X}
-                y={T - 33}
-                math="\text{interruptor}"
+                y={T - 37}
+                math="\text{switch}"
                 fontSize={15}
               />
             )}
@@ -200,11 +200,11 @@ export default function Circuito({
             <circle className={styles.faultEnd} cx={FAULT_X - 9} cy={T} r={2.5} />
             <circle className={styles.faultEnd} cx={FAULT_X + 9} cy={T} r={2.5} />
             {/* termina antes do fio da carga, para não cruzá-lo, e começa
-                depois do nome “fusível”, que fica na mesma altura */}
+                depois do nome “fuse”, que fica na mesma altura */}
             <SvgMath
               x={R - 6}
               y={T + 24}
-              math="\text{fio rompido}"
+              math="\text{open circuit}"
               anchor="end"
               fontSize={15}
               tone={3}
@@ -228,7 +228,7 @@ export default function Circuito({
             <SvgMath
               x={FAULT_X - 14}
               y={LOAD_Y}
-              math="\text{curto}"
+              math="\text{short}"
               anchor="end"
               fontSize={15}
               tone={3}
@@ -258,7 +258,7 @@ export default function Circuito({
           y={LOAD_Y}
           math={
             rotuloCarga ??
-            (carga === 'resistor' ? '\\text{resistor}' : '\\text{lâmpada}')
+            (carga === 'resistor' ? '\\text{resistor}' : '\\text{bulb}')
           }
           anchor="start"
           tone={2}
@@ -280,7 +280,7 @@ export default function Circuito({
             <SvgMath
               x={(L + R) / 2}
               y={B + 50}
-              math="\text{carroceria e chassi (massa)}"
+              math="\text{chassis ground}"
               fontSize={15}
             />
           </g>

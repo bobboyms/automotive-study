@@ -93,8 +93,8 @@ Responda antes de seguir:
 2. A pressão atmosférica. O piston desce e deixa no cylinder uma pressão mais
    baixa que a do ar em volta (vacuum). O ar de fora, com pressão maior,
    entra para ocupar esse espaço.
-3. Ele liga e desliga a corrente da ignition coil no momento certo. Quando a
-   corrente é cortada, a coil solta a alta tensão que vira faísca na spark
+3. Ele liga e desliga a current da ignition coil no momento certo. Quando a
+   current é cortada, a coil solta a alta voltage que vira faísca na spark
    plug.
 
 </details>
@@ -235,7 +235,7 @@ importantes:
 
 Com o motor frio, o ar comprimido pode não esquentar o bastante para acender o
 diesel, porque o metal frio do motor rouba calor do ar. Para isso existe a
-**glow plug**: uma resistência elétrica dentro da câmara que esquenta antes
+**glow plug**: um resistor elétrico dentro da câmara que esquenta antes
 da partida. Alguns motores a diesel têm ainda uma **precombustion chamber**,
 uma câmara pequena ligada à principal, onde o diesel começa a queimar.
 
@@ -248,11 +248,11 @@ quantidade injetada depende de uma coisa só: **quanto tempo o injector fica
 aberto**.
 
 E quem abre o injector? O control module. O injector é uma válvula elétrica:
-dentro dele há uma bobina. Quando o control module fecha o circuito e passa
-corrente por essa bobina, ela vira um eletroímã, puxa a agulha do bico e o bico
-abre. Quando o módulo corta a corrente, uma mola fecha o bico. É um circuito
-como os da TRN-120: uma fonte, uma carga (a bobina do injector) e um controle
-— só que o controle agora é o módulo.
+dentro dele há uma bobina. Quando o control module fecha o circuit e passa
+current por essa bobina, ela vira um eletroímã, puxa a agulha do bico e o bico
+abre. Quando o módulo corta a current, uma mola fecha o bico. É um circuit
+como os da TRN-120: uma power source, uma load (a bobina do injector) e um control
+— só que o control agora é o módulo.
 
 Então dosar o combustível virou um problema de tempo: o módulo precisa saber
 quanto ar entrou e calcular por quanto tempo abrir o injector. Para saber
@@ -390,10 +390,10 @@ um sinal sai da faixa esperada. Então ele grava um **diagnostic trouble code**
 (DTC) e acende a check engine light.
 
 Na oficina, o DTC é lido com um **scan tool**, um aparelho que se liga ao
-carro e conversa com o módulo. O código diz **em que circuito ou sistema** o
+carro e conversa com o módulo. O código diz **em que circuit ou sistema** o
 módulo viu um problema. Ele não diz qual peça trocar. É aqui que entra a
 regra anti-mágica: um código de “sensor de oxigênio com sinal fora da faixa”
-pode vir de um sensor ruim, de um fio rompido, ou de uma mistura realmente
+pode vir de um sensor ruim, de um wire rompido, ou de uma mistura realmente
 errada que o sensor está medindo certo.
 
 Alguns defeitos típicos, e o que cada teste separa:
@@ -402,7 +402,7 @@ Alguns defeitos típicos, e o que cada teste separa:
 |---|---|---|
 | cheiro de gasolina e check engine light | vazamento de vapor no EVAP system; vazamento de gasolina líquida | olhar primeiro se há gasolina pingando ou úmida nas linhas (líquido é emergência); depois, ler o DTC com o scan tool |
 | motor fraco, sem força, falha ao acelerar | pouca pressão de combustível; fuel injector entupido; ar entrando sem ser medido | medir a pressão de combustível pelo procedimento do manual; comparar os dados dos sensores no scan tool com a condição real |
-| motor a diesel não pega no frio, mas pega quente | glow plug sem funcionar | testar o circuito das glow plugs pelo manual: no motor quente elas não fazem falta, por isso o sintoma some |
+| motor a diesel não pega no frio, mas pega quente | glow plug sem funcionar | testar o circuit das glow plugs pelo manual: no motor quente elas não fazem falta, por isso o sintoma some |
 | consumo alto com o motor sempre frio no painel | engine coolant temperature sensor mandando sinal de motor frio | comparar a temperatura que o scan tool mostra com a temperatura real do motor |
 
 ## Na oficina
@@ -431,11 +431,11 @@ O procedimento geral, sem números de nenhum veículo:
 1. Ouça a queixa e pergunte quando o problema aparece: frio, quente, depois de
    abastecer, acelerando.
 2. Inspecione com os olhos e o nariz: vazamento de líquido, mangueira solta,
-   conector desligado.
+   connector desligado.
 3. Ligue o scan tool e leia os DTCs. Anote todos antes de apagar qualquer um.
 4. Abra o procedimento do manual de serviço para o código encontrado. As
    pressões de combustível, as faixas de sinal dos sensores e os testes de cada
-   circuito estão lá — variam de um veículo para outro.
+   circuit estão lá — variam de um veículo para outro.
 
 ## Exemplos resolvidos
 
@@ -685,7 +685,7 @@ milissegundo e compare com os 0.015 g que o motor precisava.
    pelo intake manifold, chega ao intake port do cylinder head e entra no cylinder
    pela intake valve aberta, no intake stroke.
 5. A luz só diz que o módulo gravou um DTC. O código aponta o sistema ou o
-   circuito em que um sinal saiu da faixa, e a causa pode ser o sensor, a
+   circuit em que um sinal saiu da faixa, e a causa pode ser o sensor, a
    fiação ou uma condição real do motor. Os testes do manual é que separam
    essas causas.
 6. Gasolina: $0.22 \div 14.7 = 0.01497\,\text{g}$, cerca de 0.015 g. Tempo:
@@ -699,13 +699,13 @@ milissegundo e compare com os 0.015 g que o motor precisava.
    escape.
 9. Na partida a frio, as glow plugs deveriam esquentar a câmara para o ar
    comprimido ficar quente o bastante para acender o diesel. A suspeita é o
-   circuito das glow plugs. À tarde, o motor e o ar já estão mais quentes, e
+   circuit das glow plugs. À tarde, o motor e o ar já estão mais quentes, e
    a compressão sozinha é suficiente para acender o diesel — por isso o defeito
    desaparece.
 10. Com o sinal de motor frio, o módulo injeta mais combustível, como faz numa
     partida a frio, porque parte da gasolina condensa nas paredes frias. Com o
     motor quente, esse combustível extra sobra. O próximo teste é conferir o
-    engine coolant temperature sensor e o circuito dele pelo procedimento do
+    engine coolant temperature sensor e o circuit dele pelo procedimento do
     manual: o sinal não corresponde à temperatura real.
 11. **C.** A está certo: o GDI tem a electric fuel pump no tanque e uma
     mechanical fuel pump de alta pressão no motor. B também está certo: o

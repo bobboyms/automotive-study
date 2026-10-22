@@ -47,9 +47,9 @@ caminho", funcionam melhor que rótulos genéricos.
    manhã". A lição **volta e resolve essa queixa** assim que a ferramenta fica
    pronta: a ideia precisa pagar o que prometeu na abertura.
 2. **Mapa das ideias** — glossário mínimo dos termos que a lição vai construir,
-   em tabela com três colunas: português · inglês · o que é, em uma linha. Na
-   AUT-116 em diante, a ordem é inglês · português · o que é, e o texto da
-   lição usa o termo em inglês (convenção em `CLAUDE.md`, “Idioma e escrita”).
+   em tabela com três colunas: inglês · português · o que é, em uma linha. O
+   texto da lição usa o termo em inglês (convenção em `CLAUDE.md`, “Idioma e
+   escrita”).
 3. **Onde isso aparece** — em que sistemas do carro, em qual disciplina da Wake
    Tech e em qual área da prova ASE.
 4. **Ideias anteriores que voltam aqui** — nomeadas explicitamente, com link
@@ -123,10 +123,12 @@ abrir o parafuso de sangria enquanto alguém pisa no pedal, para que o fluido
 empurre o ar para fora da linha". Depois de ensinado assim uma vez, o nome já
 pode andar sozinho.
 
-Palavras que parecem comuns e não são, e por isso pedem uma tradução na
-primeira vez que aparecem: **tensão, corrente, carga** (*load* e *charge* —
-duas palavras em inglês), **massa** (*ground*), **curto, circuito aberto,
-folga, curso, vácuo, compressão, intermitente, sinal, referência**.
+Palavras que parecem comuns e não são, e por isso pedem uma explicação na
+primeira vez que aparecem, mesmo com o botão do português: **voltage,
+current, load** (carga como consumidor) e **state of charge** (carga da
+battery) — em português as duas são “carga” —, **ground** (massa),
+**short circuit, open circuit, clearance, stroke, vácuo, compression,
+intermitente, sinal, referência**.
 
 ### 2. Uma ideia por frase
 
@@ -386,8 +388,8 @@ Antes de entregar qualquer lição nova ou revisada (além do checklist técnico
 - [ ] todo procedimento com risco traz o aviso de segurança antes do primeiro
       passo;
 - [ ] nenhuma especificação de memória; todo valor ilustrativo está marcado;
-- [ ] todo termo técnico tem o par em inglês na primeira aparição (na
-      AUT-116: o termo está em inglês no texto e existe no dicionário);
+- [ ] todo termo técnico está em inglês no texto e existe no dicionário
+      `src/data/termos.json`;
 - [ ] há questões no formato ASE, com gabarito que explica cada alternativa;
 - [ ] as perguntas de verificação têm resposta;
 - [ ] a passada de linguagem foi feita no texto novo ou alterado: termo

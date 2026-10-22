@@ -252,7 +252,7 @@ E mais:
 - Nomeie o princípio antes de usar o procedimento que depende dele.
 - Quando houver mais de um teste possível, compare e diga quando cada um é
   melhor.
-- Negrito para termos técnicos na primeira aparição, com o inglês em itálico ao
-  lado (na AUT-116 em diante, o termo fica em inglês no texto e vira botão com
-  o português — veja `CLAUDE.md`, “Idioma e escrita”); citação em bloco (`>`) para a pergunta central e para as definições que
-  o aluno deve guardar.
+- Termos técnicos em inglês no texto, que viram botão com o português (veja
+  `CLAUDE.md`, “Idioma e escrita”); negrito para destacar o termo na
+  definição; citação em bloco (`>`) para a pergunta central e para as
+  definições que o aluno deve guardar.
