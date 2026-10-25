@@ -75,6 +75,33 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 4 — Componentes do circuit',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/eletromagnetismo-e-rele',
+              label: '9. Electromagnetism e o relay',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/resistencias-variaveis-e-diodo',
+              label: '10. Resistances que mudam e o diode',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Tópico 5 — Wiring diagrams',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/simbolos-eletricos',
+              label: '11. Electrical symbols',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

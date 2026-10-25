@@ -86,6 +86,24 @@ conhecimento anterior.
    resistance. Onde vão as test leads, em que estado fica o circuit e por que
    uma voltage medida sem current pode enganar.
 
+### Tópico 4 — Componentes do circuit
+
+9. [Electromagnetism e o relay](./eletromagnetismo-e-rele) — a current cria
+   um campo magnético; a coil com iron core vira eletroímã. O relay usa esse
+   eletroímã para que uma current pequena (control circuit) ligue uma current
+   grande (load circuit). O clique que divide o diagnóstico em dois.
+10. [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo) —
+    variable resistor, potentiometer e thermistor (NTC e PTC): a base dos
+    sensores. O diode, que deixa a current passar num sentido só; o LED, o
+    photodiode e o clamping diode do relay.
+
+### Tópico 5 — Wiring diagrams
+
+11. [Electrical symbols](./simbolos-eletricos) — os símbolos dos wiring
+    diagrams, grupo por grupo, e onde cada peça entra no circuit; cores de
+    wire, splices, connectors, pins e ground points. Um diagram inteiro lido
+    para decidir onde medir, e flash cards para praticar.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -96,20 +114,21 @@ conhecimento anterior.
 
 ### Próximos tópicos (em preparação)
 
-9. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
-   fuse em série com um conjunto de bulbs em paralelo.
-10. **Control e circuit protection** — fuses, circuit breakers, switches e
-    relays.
-11. **Wiring diagrams** — símbolos, códigos de cor dos wires, connectors e
-    como seguir um circuit no esquema do fabricante.
-12. **Outros instrumentos de teste** — test light, clamp meter e fused jumper
+12. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+    fuse em série com um conjunto de bulbs em paralelo.
+13. **Control e circuit protection** — fuses, fusible links, circuit breakers,
+    tipos de switch e circuits de relay nos diagrams.
+14. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+    e os grounds, o component locator e como seguir um circuit por várias
+    páginas.
+15. **Outros instrumentos de teste** — test light, clamp meter e fused jumper
     wire.
-13. **Diagnóstico de circuits** — open circuit, short to ground, short to
+16. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-14. **Battery** — construção, state of charge, testes, recarga, jump start e
+17. **Battery** — construção, state of charge, testes, recarga, jump start e
     parasitic draw.
-15. **Starting system** — starter motor, solenoid e testes.
-16. **Charging system** — alternator, rectifier, voltage regulator e testes.
+18. **Starting system** — starter motor, solenoid e testes.
+19. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

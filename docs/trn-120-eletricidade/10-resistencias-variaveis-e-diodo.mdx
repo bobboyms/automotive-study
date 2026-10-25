@@ -1,0 +1,774 @@
+---
+title: Resistances que mudam e o diode
+---
+
+import Esquema from '@site/src/components/Esquema';
+import Reostato from '@site/src/components/Reostato';
+import CurvaTermistor from '@site/src/components/CurvaTermistor';
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Resistances que mudam e o diode
+
+> **Pergunta central:** até aqui, cada peça tinha uma resistance fixa. O que
+> muda quando a resistance depende de uma posição, da temperatura ou do
+> sentido da current — e por que essas peças são a base dos sensores do carro?
+
+## A queixa: a LED bulb que não acende
+
+Um cliente conta:
+
+> “Troquei as duas lâmpadas da placa por lâmpadas de LED. Uma acendeu, a outra
+> não. Comprei outra de LED, coloquei no lugar da que não acendia, e continua
+> apagada. Com a lâmpada antiga, acende. O carro não aceita LED?”
+
+O circuit da license plate light é o mesmo de sempre: battery, fuse, switch
+das luzes, socket e ground. Com a bulb antiga, de filament, ele funciona. Com
+a LED bulb, um dos lados não funciona — e uma LED bulb nova não mudou nada.
+Trocar peças de novo não vai resolver. Ao fim desta lição, você vai saber o
+que a LED bulb tem de diferente da bulb de filament, e qual é o teste de dez
+segundos que resolve a queixa.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| variable resistor | resistor variável | resistor cuja resistance muda, por um botão ou por uma peça que se move |
+| rheostat | reostato | variable resistor de dois terminais, em série com a load |
+| potentiometer | potenciômetro | variable resistor de três terminais; o wiper tira uma voltage que muda com a posição |
+| wiper | cursor | o contato que desliza sobre o resistor |
+| fuel level sensor | sensor de nível de combustível | variable resistor no tanque, movido por uma float |
+| float | boia | peça que flutua e sobe e desce com o nível do combustível |
+| fuel gauge | marcador de combustível | o ponteiro do painel que mostra o nível |
+| dimmer | regulador de brilho | botão que regula o brilho das luzes do instrument panel |
+| thermistor | termistor | resistor cuja resistance muda muito com a temperatura |
+| NTC thermistor | termistor NTC | a resistance cai quando a temperatura sobe |
+| PTC thermistor | termistor PTC | a resistance sobe quando a temperatura sobe |
+| diode | diodo | peça que deixa a current passar num sentido só |
+| anode / cathode | ânodo / cátodo | os dois terminais do diode; o cathode é o lado da faixa |
+| forward bias | polarização direta | diode ligado no sentido em que conduz |
+| reverse bias | polarização reversa | diode ligado no sentido em que bloqueia |
+| LED | diodo emissor de luz | diode que acende quando a current passa |
+| current-limiting resistor | resistor limitador de corrente | resistor em série com o LED, que segura a current |
+| photodiode | fotodiodo | diode que deixa passar mais current quanto mais luz recebe |
+| clamping diode | diodo de supressão | diode em paralelo com uma coil, que absorve o voltage spike |
+| polarity | polaridade | qual terminal vai ao positivo e qual vai ao negativo |
+| diode test | teste de diodo | função do multimeter que testa um diode |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+As peças desta lição estão em quase todos os sistemas do carro:
+
+- **variable resistors:** o fuel level sensor dentro do tanque, o dimmer das
+  luzes do instrument panel e o throttle position sensor (TPS), que informa ao
+  PCM quanto a borboleta está aberta;
+- **thermistors:** o engine coolant temperature sensor (ECT sensor) e o intake
+  air temperature sensor (IAT sensor), que a lição
+  [Fuel, computer e emissions](../aut-116-motor/funcionamento-do-motor/combustivel-computador-e-emissoes)
+  da AUT-116 apresentou;
+- **diodes:** dentro do alternator (o rectifier), em paralelo com a coil de
+  muitos relays, e em toda luz de LED — lanternas, brake lights, luzes do
+  painel;
+- **photodiodes:** no ambient light sensor, que acende os headlamps sozinho
+  quando escurece.
+
+Na Wake Tech, a TRN-120 usa estas peças para ler wiring diagrams e testar
+circuits. Elas voltam em peso em AUT-181 e AUT-183 (*Engine Performance*), em
+que os sensores do motor são o assunto principal. Na prova ASE, aparecem na
+área **A6** (diodes, LEDs, teste de componentes) e na **A8** (sensores do
+motor).
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   a tabela mostrou quatro coisas que mudam a resistance de um wire. Qual
+   delas não depende do tamanho nem do material?
+2. Pela [Ohm's law](./lei-de-ohm), com a voltage fixa em 12 V, o que acontece
+   com a current quando a resistance dobra?
+3. Na lição [Series circuit](./circuito-em-serie), como a voltage da battery
+   se divide entre duas loads em série?
+4. Na lição [Electromagnetism e o relay](./eletromagnetismo-e-rele), o que é o
+   voltage spike, e quando ele aparece?
+
+<details>
+<summary>Respostas</summary>
+
+1. A temperatura. Nos metais, um wire quente tem mais resistance que frio.
+   Nesta lição, você vai ver peças feitas de propósito para que esse efeito
+   seja grande — e uma peça em que ele vai ao contrário.
+2. A current cai pela metade. A current é a voltage dividida pela resistance:
+   $12 \div 6 = 2\,\text{A}$, e $12 \div 12 = 1\,\text{A}$.
+3. Em proporção à resistance de cada uma. A load com mais resistance fica com
+   a maior parte da voltage. Essa regra é o segredo dos sensores desta lição.
+4. É uma voltage alta e muito curta que a coil gera quando a current dela é
+   cortada de repente: o campo magnético some de uma vez e empurra os elétrons
+   da própria coil. Esta lição mostra a peça que absorve esse spike.
+
+</details>
+
+## Intuição: três tipos de torneira
+
+Pense nas peças desta lição como torneiras no caminho da água:
+
+- **o variable resistor é uma torneira de girar.** A mão (ou uma peça que se
+  move, como uma float) abre ou fecha a passagem aos poucos;
+- **o thermistor é uma torneira que se abre ou se fecha sozinha com o
+  calor.** Ninguém mexe nela: a temperatura decide;
+- **o diode é uma válvula de retenção.** Ela deixa a água passar num sentido
+  e fecha no outro, como a válvula que impede a água de voltar pelo cano.
+
+Na comparação com a água, a passagem mais aberta é a resistance menor. A
+comparação deixa de valer num ponto: uma torneira fechada para a água, mas um
+resistor nunca chega a parar a current — ele só a limita. Já o diode chega
+perto de parar a current no sentido bloqueado.
+
+Uma ideia atravessa a lição inteira. **Uma resistance que muda, numa
+voltage fixa, faz a current mudar** (Ohm's law). E, em série com outra
+resistance, **faz a voltage mudar** (a divisão da lição de series circuit).
+Uma voltage que muda conforme uma condição é exatamente o que um sensor
+precisa mandar para o módulo.
+
+## Modelo visual e formalização, parte 1: o variable resistor
+
+> **Variable resistor** é um resistor com um contato que desliza sobre ele, o
+> **wiper**. Mover o wiper muda o comprimento do resistor que a current
+> atravessa e, com isso, a resistance.
+
+No símbolo, a seta atravessada quer dizer “ajustável”. Ela aparece em dois
+jeitos de ligar a peça.
+
+### O rheostat: dois terminais, para controlar a current
+
+O **rheostat** usa uma ponta do resistor e o wiper: dois terminais. Ele fica
+em série com a load. Mais resistance no rheostat, menos current na load.
+
+Carros mais antigos usavam um rheostat como dimmer das luzes do instrument
+panel. Mexa no controle abaixo: ele move o wiper, e o desenho mostra a
+resistance do rheostat, a current e a power da bulb.
+
+<Reostato caption="Dimmer com rheostat. Com o rheostat em 0 Ω, a bulb recebe os 12 V inteiros e acende com 24 W. Com mais resistance no rheostat, a current cai, e a power da bulb cai mais depressa ainda. Valores ilustrativos: bulb de 6 Ω (fixa, para a conta ficar clara) e rheostat de 0 a 18 Ω." />
+
+Repare que a power da bulb cai muito mais que a current. Com o rheostat em
+6 Ω, a current cai à metade (2 A para 1 A), mas a power cai a um quarto (24 W
+para 6 W). A bulb fica com só metade da voltage, e metade da voltage com
+metade da current dá um quarto da power.
+
+### O potentiometer: três terminais, para mandar um sinal
+
+O **potentiometer** usa os três terminais: as duas pontas do resistor e o
+wiper. As duas pontas recebem uma voltage fixa. O wiper “pega” uma parte
+dessa voltage, conforme a posição.
+
+<TabelaSimbolos
+  itens={['variavel', 'potenciometro']}
+  caption="O variable resistor (à esquerda) e o potentiometer (à direita). No potentiometer, a seta que encosta no meio do resistor é o wiper: o terceiro terminal."
+/>
+
+É o mesmo raciocínio do series circuit. O resistor do potentiometer é como
+duas resistances em série, uma de cada lado do wiper. A voltage se divide em
+proporção a elas. Com o wiper no meio, ele fica com metade da voltage; perto
+de uma ponta, perto de zero ou perto do total.
+
+- **Exemplo:** o throttle position sensor. O PCM manda uma reference voltage
+  de 5 V para as pontas do potentiometer. O wiper é ligado à borboleta do
+  acelerador. Borboleta quase fechada, o sinal fica baixo; toda aberta, alto.
+  O PCM lê o sinal e sabe quanto o motorista pisou.
+- **Contraexemplo:** o rheostat do dimmer. Ele também é um variable resistor,
+  mas não manda sinal para ninguém: está em série com a load e controla a
+  current dela.
+
+O **fuel level sensor** é um variable resistor dentro do tanque. Uma **float**
+presa a uma haste sobe e desce com o nível do combustível, e a haste move o
+wiper. A resistance muda com o nível, e o fuel gauge (ou o módulo do painel)
+transforma essa resistance numa posição do ponteiro. Se a resistance alta
+quer dizer tanque cheio ou tanque vazio depende do fabricante: o manual traz a
+tabela.
+
+## Modelo visual e formalização, parte 2: o thermistor
+
+> **Thermistor** é um resistor feito de um material cuja resistance muda
+> muito com a temperatura — de propósito. Há dois tipos, pelo sentido da
+> mudança.
+
+<CurvaTermistor caption="Como a resistance muda com a temperatura. No NTC (azul), esquentou, a resistance cai. No PTC (laranja), esquentou, a resistance sobe. As curvas mostram só a forma: os números de cada sensor estão na tabela do manual." />
+
+- **NTC thermistor** (*negative temperature coefficient*, coeficiente de
+  temperatura negativo): a temperatura sobe, a resistance **cai**.
+  - **Exemplo:** o ECT sensor, que mede a temperatura do líquido de
+    arrefecimento. Motor frio, resistance alta; motor quente, resistance
+    baixa.
+  - **Contraexemplo:** o filament de uma bulb. Ele também muda com a
+    temperatura, mas no sentido contrário: aceso, tem mais resistance que
+    frio (a lição [Voltage, current e resistance](./tensao-corrente-e-resistencia)
+    mostrou isso). Então o filament não é NTC.
+- **PTC thermistor** (*positive temperature coefficient*): a temperatura
+  sobe, a resistance **sobe**. É o comportamento dos metais, só que muito mais
+  forte.
+  - **Exemplo:** alguns aquecedores e algumas peças de proteção usam PTC. A
+    peça esquenta, a resistance sobe, e a current cai sozinha.
+  - **Contraexemplo:** um resistor comum. A resistance dele quase não muda na
+    faixa de temperatura em que ele trabalha.
+
+<TabelaSimbolos
+  itens={['ntc', 'ptc']}
+  caption="Os símbolos do NTC e do PTC: o resistor com o traço que tem um “pé” deitado, que quer dizer “muda com a temperatura”. O −T e o +T dizem o tipo. Alguns manuais desenham o mesmo traço sobre o zigue-zague."
+/>
+
+### Como o PCM lê um NTC
+
+O PCM não mede a resistance do sensor direto. Ele monta um series circuit:
+manda a reference voltage de 5 V por um resistor fixo, que fica dentro do
+PCM, e daí para o sensor, que vai ao ground. Os dois estão em série, então os
+5 V se dividem entre eles, em proporção às resistances. O PCM mede a voltage
+que fica no sensor.
+
+- motor frio → sensor com resistance alta → o sensor fica com **a maior
+  parte** dos 5 V;
+- motor quente → sensor com resistance baixa → o sensor fica com **pouco**
+  dos 5 V.
+
+O exemplo 3, adiante, faz essa conta com números.
+
+## Modelo visual e formalização, parte 3: o diode
+
+> **Diode** é uma peça de dois terminais que deixa a current passar num
+> sentido e bloqueia no outro. O terminal por onde a current entra é o
+> **anode**; o terminal por onde ela sai é o **cathode**, marcado no corpo da
+> peça com uma faixa.
+
+O diode é feito de **semiconductor**, o material da lição
+[O que é eletricidade](./o-que-e-eletricidade): silício, com quatro elétrons
+na camada de fora. Dois tipos de silício, preparados de jeitos diferentes, são
+encostados um no outro. A junção entre eles conduz num sentido e bloqueia no
+outro. O porquê, átomo por átomo, é assunto de eletrônica; para a oficina,
+vale o comportamento.
+
+No símbolo, o triângulo é uma seta: ele aponta o sentido em que a current
+convencional passa. A barra na ponta do triângulo é o cathode — a mesma faixa
+pintada no corpo do diode.
+
+<Esquema
+  pecas={[{tipo: 'diodo', rotulo: '\\text{diode}', nota: '0.7\\,\\text{V}'}]}
+  carga={{tipo: 'lampada', rotulo: '\\text{bulb}', nota: '11.3\\,\\text{V}'}}
+  corrente
+  caption="Diode em forward bias: a seta aponta no sentido da current, do positivo da battery para a bulb. O diode conduz, e a bulb acende. O diode fica com uma voltage drop pequena, cerca de 0.7 V num diode de silício (valor típico); a bulb fica com o resto."
+/>
+
+<Esquema
+  pecas={[{tipo: 'diodo', rotulo: '\\text{diode}', invertido: true}]}
+  carga={{tipo: 'lampada', rotulo: '\\text{bulb}'}}
+  caption="O mesmo diode, virado: reverse bias. A seta aponta contra o sentido em que a current sairia da battery. O diode bloqueia, a current não passa, e a bulb fica apagada. Para o circuit, é como um open circuit."
+/>
+
+> **Forward bias** é o diode ligado com o anode do lado positivo: ele
+> conduz. **Reverse bias** é o diode ligado com o cathode do lado positivo:
+> ele bloqueia.
+
+- **Exemplo:** o diode da primeira figura, com a seta apontando para a bulb.
+- **Contraexemplo:** um wire, ou um resistor. Os dois deixam a current passar
+  igual nos dois sentidos: virar a peça não muda nada.
+
+Dois detalhes do diode em forward bias pegam o aluno de surpresa:
+
+1. **Ele não tem resistance fixa.** Até cerca de 0.6 V (silício, valor
+   típico), quase nenhuma current passa. Acima disso, a current sobe muito
+   com um aumento pequeno de voltage. Por isso não se usa a Ohm's law com um
+   “resistance do diode”: usa-se a voltage drop dele, perto de 0.7 V.
+2. **Ele não aguenta current ilimitada.** Ligado direto na battery, sem uma
+   load em série, o diode em forward bias puxa uma current enorme e queima.
+
+### O LED
+
+> **LED** (*light emitting diode*) é um diode que solta luz quando conduz. Ele
+> obedece às mesmas regras: só acende em forward bias.
+
+A voltage drop de um LED é maior que a de um diode comum e depende da cor:
+perto de 2 V num LED vermelho, perto de 3 V num branco (valores típicos). E o
+LED também queima com current demais. Por isso ele trabalha sempre com um
+**current-limiting resistor** em série, que fica com o resto da voltage.
+
+<Esquema
+  pecas={[
+    {tipo: 'fusivel', rotulo: '\\text{fuse}'},
+    {tipo: 'resistor', rotulo: '\\text{resistor}', nota: '500\\,\\Omega'},
+  ]}
+  carga={{tipo: 'led', rotulo: '\\text{LED}', nota: '2\\,\\text{V}'}}
+  corrente
+  rotuloCorrente="I = 20\,\text{mA}"
+  caption="Um LED vermelho com o current-limiting resistor em série. O LED fica com cerca de 2 V; o resistor fica com os outros 10 V e segura a current em 20 mA. Valores ilustrativos — o exemplo 5 faz a conta."
+/>
+
+Uma LED bulb de reposição, como a da queixa, traz esse resistor (ou um
+circuit que faz o mesmo papel) dentro da própria peça. Por fora, ela tem o
+mesmo encaixe da bulb de filament. Por dentro, tem **polarity**: um terminal
+precisa ir ao positivo, e o outro ao ground.
+
+- **Exemplo:** o LED de um brake light de fábrica, montado no sentido certo
+  pelo fabricante.
+- **Contraexemplo:** a bulb de filament. O filament é um wire: conduz igual
+  nos dois sentidos e acende de qualquer jeito que for encaixado.
+
+### O photodiode
+
+O **photodiode** é um diode feito para receber luz. Ligado em reverse bias,
+ele deixa passar uma current pequena, e essa current cresce com a luz que
+chega a ele. O ambient light sensor usa essa current para medir a luz de fora
+e decidir quando acender os headlamps. No símbolo, as setas **entram** no
+diode; no LED, elas **saem**.
+
+### O clamping diode do relay
+
+Volte ao voltage spike da lição [Electromagnetism e o relay](./eletromagnetismo-e-rele).
+Muitos relays trazem um diode ligado em paralelo com a coil, com o cathode
+virado para o 86, que é o lado positivo.
+
+<TabelaSimbolos
+  itens={['diodo', 'led', 'fotodiodo', 'releDiodo']}
+  caption="O diode, o LED (setas saindo), o photodiode (setas entrando) e o relay com o clamping diode em paralelo com a coil. No relay, o diode aponta para o 86: com a coil ligada do jeito certo, ele fica em reverse bias e não conduz."
+/>
+
+Siga o que acontece, em duas fases:
+
+1. **Coil ligada.** O 86 está no positivo, o 85 no ground. O diode está em
+   reverse bias: ele bloqueia e não interfere. Toda a current passa pela coil.
+2. **Coil desligada.** O campo some e a coil gera o voltage spike. Esse spike
+   tem o sentido contrário ao da voltage que alimentava a coil. Para ele, o
+   diode está em forward bias: a energia da coil circula pelo diode, em
+   volta, e se gasta ali em vez de subir para centenas de volts.
+
+Esse diode tem uma consequência prática: **o relay passa a ter polarity**.
+Ligado ao contrário (positivo no 85), o diode fica em forward bias desde o
+começo, ligado direto entre o positivo e o ground, sem nada para segurar a
+current. O fuse queima, ou o diode. É mais uma razão para trocar relay só por
+outro do mesmo part number.
+
+## Como falha e como diagnosticar
+
+O que cada peça **deveria** fazer, e como o defeito aparece:
+
+| Peça | Defeito comum | Sintoma | Teste |
+|---|---|---|---|
+| fuel level sensor | trilha gasta num ponto do resistor | ponteiro que pula ou cai num nível só | resistance no connector do tanque, comparada com a tabela do manual |
+| potentiometer (TPS) | ponto morto na trilha | o motor engasga numa posição do pedal | voltage do sinal subindo sem saltos enquanto a borboleta abre |
+| NTC (ECT sensor) | resistance fora da tabela | temperatura errada no scan tool; motor frio “parece” quente | resistance numa temperatura conhecida, comparada com a tabela |
+| diode | aberto: bloqueia nos dois sentidos | a load não funciona | diode test |
+| diode | em curto: conduz nos dois sentidos | perde a função; num relay, pode queimar o fuse | diode test |
+| LED | ligado ao contrário | não acende | girar a peça; available voltage no socket |
+
+### O diode test do multimeter
+
+O multimeter tem uma função própria para diodes: a **diode test**, marcada no
+selector com o símbolo do diode. Nessa função, ele manda uma current pequena
+pelas test leads e mostra a voltage drop do diode.
+
+- test lead vermelha no anode, preta no cathode (forward bias): o visor mostra
+  a voltage drop, perto de 0.5 a 0.7 V num diode de silício (valor típico);
+- invertendo as test leads (reverse bias): o visor mostra OL.
+
+| Leitura | O que quer dizer |
+|---|---|
+| perto de 0.6 V num sentido, OL no outro | diode bom |
+| OL nos dois sentidos | diode aberto |
+| perto de 0 V nos dois sentidos | diode em curto |
+
+Como na medição de resistance, a peça precisa estar **fora do circuit**, ou
+pelo menos com uma das pontas desligada. Outras peças ligadas a ela criam
+caminhos em paralelo, e a leitura deixa de ser só do diode.
+
+### A queixa resolvida
+
+Volte à LED bulb da placa.
+
+1. **O que o circuit deveria fazer:** levar 12 V ao socket com as luzes
+   ligadas, como faz para a bulb de filament.
+2. **O que já se sabe:** com a bulb antiga, de filament, o lado que “não
+   aceita LED” acende. Então battery, fuse, switch, wire, socket e ground
+   funcionam. Uma LED bulb nova também não acendeu, então a LED bulb provavelmente
+   não está queimada.
+3. **O princípio:** a bulb de filament acende nos dois sentidos; o LED só
+   acende em forward bias. Encaixada ao contrário, a LED bulb fica em reverse
+   bias e bloqueia a current, como na segunda figura do diode.
+4. **O teste:** tire a LED bulb, gire meia volta e encaixe de novo. Ela acende.
+
+A LED bulb do outro lado tinha sido encaixada, por acaso, no sentido certo. O
+carro aceita LED; o LED é que tem polarity. Algumas LED bulbs têm um circuit
+interno que as faz acender nos dois sentidos, mas a que o cliente comprou não
+tinha.
+
+**Verificar o reparo:** acenda as luzes e confira as duas license plate lights
+— e veja se nenhuma luz de aviso de “bulb queimada” acendeu no painel. Em
+alguns carros, o módulo que controla as luzes estranha a current baixa do LED.
+O manual do veículo diz se há essa verificação.
+
+## Na oficina: medir sensores com segurança
+
+:::warning Antes de medir um sensor do motor
+
+- **Nunca abra o sistema de arrefecimento com o motor quente.** O líquido
+  está quente e pressurizado, e pode espirrar e queimar. Se for preciso tirar
+  o ECT sensor, espere o motor esfriar e siga o procedimento do manual.
+- **Mãos longe das peças que se movem.** Para medir o TPS com o motor
+  desligado, a borboleta pode ser movida com a mão; nunca com o motor
+  funcionando.
+- **Resistance só com a chave desligada e o connector solto.** A medição de
+  resistance com o circuit energizado danifica o multimeter e dá leitura
+  errada (lição [Medições com o multimeter](./medicoes-com-multimetro)).
+
+:::
+
+Procedimento geral para um thermistor:
+
+1. Com a chave desligada, solte o connector do sensor.
+2. Meça a resistance entre os terminais do sensor.
+3. Meça a temperatura do líquido (ou do ar) naquele momento, com um
+   termômetro.
+4. Compare o par “temperatura e resistance” com a tabela do manual do veículo.
+   A tabela é do sensor daquele veículo; não existe um número único que sirva
+   para todos.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o dimmer no meio do curso
+
+O dimmer do controle acima tem uma bulb de 6 Ω e o rheostat em 6 Ω (valores
+ilustrativos). Quanta current passa, e qual é a power da bulb?
+
+<details>
+<summary>Solução</summary>
+
+O rheostat e a bulb estão em série: as resistances se somam.
+
+$$
+R_T = 6 + 6 = 12\,\Omega \qquad I = \frac{12}{12} = 1\,\text{A}
+$$
+
+A bulb fica com $V = I \times R = 1 \times 6 = 6\,\text{V}$, metade da
+battery. A power dela:
+
+$$
+P = V \times I = 6 \times 1 = 6\,\text{W}
+$$
+
+Com o rheostat em 0 Ω, eram 2 A e 24 W. A current caiu à metade, e a power
+caiu a um quarto, porque a voltage na bulb também caiu à metade.
+
+</details>
+
+### Exemplo 2: o sinal do TPS
+
+**Pause e tente:** o PCM manda 5 V para as pontas do potentiometer do TPS
+(valor típico). Com a borboleta aberta 20 % do curso, o wiper está a 20 % do
+caminho entre a ponta do ground e a ponta dos 5 V. Que voltage o PCM lê? E com
+80 %? (Neste exemplo, o sinal sobe quando a borboleta abre; há sensores que
+fazem o contrário.)
+
+<details>
+<summary>Solução</summary>
+
+O wiper divide o resistor em duas partes em série, e a voltage se divide em
+proporção a elas. A 20 % do caminho a partir do ground, o wiper fica com 20 %
+da voltage:
+
+$$
+V = 5 \times 0.20 = 1\,\text{V}
+$$
+
+A 80 %: $V = 5 \times 0.80 = 4\,\text{V}$.
+
+O que muda é a posição do wiper. O que não muda são os 5 V nas pontas. É por
+isso que um defeito na reference voltage muda o sinal mesmo com o sensor bom.
+
+</details>
+
+### Exemplo 3: o ECT sensor frio e quente
+
+**Pause e tente:** o PCM manda 5 V por um resistor interno de 2000 Ω até o ECT
+sensor, que vai ao ground. Com o motor frio, o sensor tem 6000 Ω; quente,
+300 Ω. Todos os valores são ilustrativos — os do carro estão no manual. Que
+voltage fica no sensor em cada caso?
+
+<details>
+<summary>Solução</summary>
+
+Os dois resistors estão em série. Motor frio:
+
+$$
+I = \frac{5}{2000 + 6000} = 0.000625\,\text{A} \qquad
+V_{\text{sensor}} = 6000 \times 0.000625 = 3.75\,\text{V}
+$$
+
+Motor quente:
+
+$$
+I = \frac{5}{2000 + 300} \approx 0.00217\,\text{A} \qquad
+V_{\text{sensor}} = 300 \times 0.00217 \approx 0.65\,\text{V}
+$$
+
+Frio, o sensor tem a maior resistance do circuit e fica com a maior parte dos
+5 V. Quente, a resistance dele cai abaixo da do resistor interno, e ele fica
+com pouco. O PCM transforma essa voltage numa temperatura, com uma tabela
+gravada nele.
+
+</details>
+
+### Exemplo 4: a voltage drop do diode
+
+**Pause e tente:** na primeira figura do diode, a battery tem 12 V, e o diode
+é de silício, com 0.7 V de voltage drop (valor típico). Que voltage fica na
+bulb? O que muda se o diode for virado?
+
+<details>
+<summary>Solução</summary>
+
+Diode e bulb estão em série: as voltage drops somam a voltage da battery.
+
+$$
+V_{\text{bulb}} = 12 - 0.7 = 11.3\,\text{V}
+$$
+
+Virado, o diode fica em reverse bias e bloqueia. A current para, e a bulb não
+tem voltage drop: 0 V. Os 12 V inteiros ficam sobre o diode, como sobre
+qualquer ponto aberto de um series circuit.
+
+</details>
+
+### Exemplo 5: o resistor do LED
+
+**Pause e tente:** um LED vermelho trabalha com 2 V e 20 mA (valores típicos).
+Que resistor em série ele precisa para funcionar em 12 V? Quanta power o
+resistor dissipa?
+
+<details>
+<summary>Solução</summary>
+
+O LED fica com 2 V. O resistor fica com o resto:
+
+$$
+V_R = 12 - 2 = 10\,\text{V}
+$$
+
+A current é a mesma nos dois, porque estão em série: 20 mA, ou 0.02 A.
+
+$$
+R = \frac{V_R}{I} = \frac{10}{0.02} = 500\,\Omega
+$$
+
+A power do resistor: $P = 10 \times 0.02 = 0.2\,\text{W}$. A do LED fica em
+$2 \times 0.02 = 0.04\,\text{W}$. O resistor esquenta mais que o LED, e é
+normal uma LED bulb ficar morna na base.
+
+Se você usou 12 V na conta e achou 600 Ω, esqueceu que o LED fica com uma parte
+da voltage.
+
+</details>
+
+## Perguntas de verificação
+
+1. Qual a diferença de ligação entre um rheostat e um potentiometer?
+2. Por que o PCM consegue “ler” uma temperatura com um NTC e um resistor fixo?
+3. Num NTC, o que acontece com a voltage no sensor quando o motor esquenta?
+4. O que a barra do símbolo do diode tem a ver com a faixa pintada no corpo
+   dele?
+5. Por que um LED precisa de um resistor em série, e uma bulb de filament não?
+6. Por que um relay com clamping diode passa a ter polarity?
+
+<details>
+<summary>Respostas</summary>
+
+1. O rheostat usa dois terminais (uma ponta e o wiper) e fica em série com a
+   load, para controlar a current. O potentiometer usa os três: as pontas
+   recebem uma voltage fixa, e o wiper tira uma parte dela, que serve de
+   sinal.
+2. Porque os dois formam um series circuit alimentado pela reference voltage.
+   A voltage se divide em proporção às resistances. Como a resistance do NTC
+   depende da temperatura, a voltage no sensor também depende. O PCM mede essa
+   voltage.
+3. Cai. Mais quente, menos resistance no NTC; com menos resistance, ele fica
+   com uma parte menor da reference voltage.
+4. Os dois marcam o cathode. A seta do símbolo aponta para a barra, que é o
+   lado por onde a current sai quando o diode conduz.
+5. Porque o LED não tem resistance fixa: acima da voltage drop dele, a current
+   sobe sem controle e o queima. O resistor segura a current. A bulb de
+   filament é ela mesma uma resistance, e a própria Ohm's law limita a current
+   dela.
+6. Porque o diode fica em paralelo com a coil, apontado para o 86. No sentido
+   certo, ele bloqueia. Ligado ao contrário, ele conduz direto do positivo ao
+   ground, sem a coil no caminho, e a current fica enorme.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Para cada peça, diga se é um variable resistor, um thermistor, um diode, um
+LED ou um photodiode:
+
+a) a peça que manda o sinal da posição da borboleta;
+b) o sensor que acende os headlamps sozinho ao anoitecer;
+c) o ECT sensor;
+d) a peça em paralelo com a coil de um relay, que absorve o voltage spike;
+e) a lanterna traseira de um carro novo, que acende sem filament.
+
+### 2. Explicação
+
+Explique por que a LED bulb da queixa acendeu de um lado e não do outro, sem
+estar com defeito. Use as palavras forward bias, reverse bias e polarity.
+
+### 3. Aplicação direta
+
+a) Um rheostat de 12 Ω está em série com uma bulb de 6 Ω, em 12 V (valores
+ilustrativos). Qual é a current, e qual é a power da bulb?
+
+b) Um potentiometer recebe 5 V nas pontas. O wiper está a 40 % do caminho a
+partir do ground. Que voltage ele manda?
+
+c) Um diode de silício (0.7 V, valor típico) está em série com um resistor de
+113 Ω, em 12 V. Qual é a current?
+
+### 4. Variação
+
+Refaça o exemplo 5 com um LED branco, que trabalha com 3 V e 20 mA (valores
+típicos). O resistor muda? Por quê?
+
+### 5. Caso de diagnóstico
+
+O ponteiro de temperatura de um carro fica sempre no frio, mesmo com o motor
+quente, e o scan tool mostra uma temperatura muito baixa. O sensor é um NTC,
+ligado ao PCM como no exemplo 3. Com a chave ligada e o connector do sensor
+solto, o PCM mostra a temperatura mais baixa da escala.
+
+a) Com o sensor desligado, que resistance o PCM “vê” no lugar do sensor? Que
+voltage ele lê?
+
+b) Se o sensor estivesse aberto por dentro, o que o PCM leria com ele ligado?
+
+c) Que teste separa “sensor aberto” de “wire aberto entre o sensor e o PCM”?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Um connector solto é um open circuit: uma resistance “infinita”. No divisor do
+exemplo 3, o que acontece com a voltage no ponto do sensor quando a resistance
+do sensor fica enorme? Pense no ponto aberto de um series circuit.
+
+</details>
+
+### 6. Justificativa
+
+Por que o diode test deve ser feito com o diode fora do circuit, ou com uma das
+pontas desligada?
+
+### 7. Formato ASE
+
+**Question 1.** As the temperature of an NTC thermistor increases, its
+resistance:
+
+- A. increases
+- B. decreases
+- C. stays the same
+- D. drops to zero
+
+**Question 2.** Technician A says that a diode allows current to flow in only
+one direction. Technician B says that an LED bulb may not light if it is
+installed with the wrong polarity. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A diode is tested with a digital multimeter set to diode test.
+The meter reads 0.6 V with the leads in one direction and OL with the leads
+reversed. The diode is:
+
+- A. open
+- B. shorted
+- C. good
+- D. leaking
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Variable resistor (o potentiometer do TPS). b) Photodiode (no ambient
+   light sensor). c) Thermistor (NTC). d) Diode (clamping diode). e) LED.
+
+2. O LED é um diode: só conduz e acende em forward bias, com o anode do lado
+   positivo. A LED bulb tem polarity, mas o encaixe dela entra nos dois
+   sentidos. Encaixada ao contrário, ela fica em reverse bias e bloqueia a
+   current. Girar meia volta a põe em forward bias. A bulb de filament acende
+   nos dois sentidos, e por isso o circuit parecia “não aceitar LED”.
+
+3. a) $R_T = 12 + 6 = 18\,\Omega$; $I = 12 \div 18 \approx 0.67\,\text{A}$. A
+   bulb fica com $V = 0.67 \times 6 = 4\,\text{V}$, e
+   $P = 4 \times 0.67 \approx 2.7\,\text{W}$ (a conta exata dá
+   $2.67\,\text{W}$).
+
+   b) $5 \times 0.40 = 2\,\text{V}$.
+
+   c) O resistor fica com $12 - 0.7 = 11.3\,\text{V}$.
+   $I = 11.3 \div 113 = 0.1\,\text{A}$.
+
+4. Muda. O resistor fica com $12 - 3 = 9\,\text{V}$, e
+   $R = 9 \div 0.02 = 450\,\Omega$. A voltage drop do LED depende da cor, e o
+   resistor precisa ficar com o que sobra. Com o resistor de 500 Ω do LED
+   vermelho, a current do LED branco seria $9 \div 500 = 18\,\text{mA}$: um
+   pouco menos de brilho, mas sem perigo.
+
+5. a) Um connector solto é um open circuit: resistance “infinita” no lugar do
+   sensor. No divisor, o ponto do sensor fica sem current, e o resistor
+   interno não tem voltage drop. Então o PCM lê a reference voltage inteira,
+   perto de 5 V. Voltage alta no sensor é o que um NTC muito frio daria: por
+   isso a temperatura mais baixa da escala.
+
+   b) A mesma coisa: perto de 5 V, temperatura mínima. Para o PCM, sensor
+   aberto e connector solto são iguais.
+
+   c) Medir a resistance do sensor, fora do circuit, e comparar com a tabela
+   do manual para a temperatura do motor naquele momento. Se o sensor estiver
+   bom, o defeito está no wire ou no connector: o próximo passo é medir a
+   continuidade de cada wire entre o connector do sensor e o do PCM.
+
+6. Porque outras peças ligadas aos terminais do diode criam caminhos em
+   paralelo com ele. O multimeter mede o conjunto, e um diode aberto pode
+   parecer bom (ou um bom parecer em curto) por causa de um caminho paralelo.
+   É a mesma razão de medir resistance com o componente isolado.
+
+7. **Question 1: B.** NTC quer dizer *negative temperature coefficient*: a
+   resistance cai quando a temperatura sobe. A alternativa A descreve o PTC. A
+   C descreve um resistor comum. A D descreve um short circuit, não um
+   thermistor.
+
+   **Question 2: C.** Os dois estão certos. O técnico A descreve o diode. O
+   técnico B descreve a consequência para o LED: em reverse bias, ele não
+   conduz e não acende.
+
+   **Question 3: C.** Uma voltage drop perto de 0.6 V num sentido e OL no outro
+   é o comportamento de um diode bom. Aberto (A), daria OL nos dois sentidos.
+   Em curto (B), perto de 0 V nos dois. Um diode com fuga (D) mostraria alguma
+   leitura também no sentido bloqueado, em vez de OL.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** uma resistance que muda com uma posição (variable
+  resistor) ou com a temperatura (thermistor), num series circuit com voltage
+  fixa, produz uma voltage que muda. É assim que os sensores mandam
+  informação ao PCM. O diode é diferente: ele não muda a resistance aos
+  poucos, ele deixa a current passar num sentido e bloqueia no outro.
+- **Quando usar:** para diagnosticar sensores (comparando resistance ou
+  voltage com a tabela do manual), para testar diodes com o diode test, e
+  sempre que uma peça “funciona de um jeito e não de outro”: polarity.
+- **Com o que se conecta:** a divisão de voltage vem da lição
+  [Series circuit](./circuito-em-serie); o clamping diode resolve o voltage
+  spike da lição [Electromagnetism e o relay](./eletromagnetismo-e-rele). A
+  lição seguinte, [Electrical symbols](./simbolos-eletricos), junta os
+  símbolos destas peças com os outros dos wiring diagrams.
+
+**Termos desta lição para revisar:** variable resistor, rheostat,
+potentiometer, wiper, fuel level sensor, float, fuel gauge, dimmer,
+thermistor, NTC thermistor, PTC thermistor, diode, anode, cathode, forward
+bias, reverse bias, LED, LED bulb, current-limiting resistor, photodiode,
+ambient light sensor, clamping diode, polarity, diode test.

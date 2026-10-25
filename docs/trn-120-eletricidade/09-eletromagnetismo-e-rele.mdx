@@ -1,0 +1,754 @@
+---
+title: Electromagnetism e o relay
+---
+
+import Eletroima from '@site/src/components/Eletroima';
+import Rele from '@site/src/components/Rele';
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Electromagnetism e o relay
+
+> **Pergunta central:** como uma current pequena, que passa por um botão no
+> volante, consegue ligar uma load que puxa uma current muitas vezes maior — e
+> o que acontece dentro do relay quando ele “clica”?
+
+## A queixa: o botão novo que não resolveu
+
+Um cliente chega com o carro e explica:
+
+> “A buzina parou de tocar. Eu achei que era o botão do volante e troquei, mas
+> continua igual. Gastei à toa?”
+
+O cliente trocou uma peça sem testar. Na lição
+[O electrical circuit](./o-circuito-eletrico), você classificou as peças do
+circuit da horn: battery, fuse, o botão no volante (o control) e a horn (a
+load). Faltou uma peça nessa lista, e é nela que esta lição vai se concentrar:
+o **relay**, que fica entre o botão e a horn.
+
+Na maioria dos carros com relay de horn, apertar o botão produz um “clique”
+baixinho no relay, antes do som da horn. O relay costuma ficar numa fuse box,
+e o manual mostra em qual. Esse clique vai ser a primeira pista do
+diagnóstico. Ao fim da lição, você vai saber o que ele
+quer dizer, o que a falta dele quer dizer, e onde medir em cada caso.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| magnet | ímã | peça que atrai o ferro; tem dois polos, norte e sul |
+| permanent magnet | ímã permanente | ímã que atrai sempre, sem precisar de current |
+| magnetic field | campo magnético | a região em volta de um ímã (ou de um wire com current) onde ele atrai o ferro |
+| electromagnetism | eletromagnetismo | o campo magnético que toda current cria em volta do wire |
+| electromagnet | eletroímã | coil com current, que vira ímã e deixa de ser quando a current para |
+| coil | bobina | wire enrolado em muitas voltas |
+| iron core | núcleo de ferro | barra de ferro dentro da coil, que deixa o campo magnético muito mais forte |
+| relay | relé | switch comandado por um eletroímã |
+| relay coil | bobina do relé | a coil do relay, que puxa a armature |
+| armature | armadura | lâmina de ferro que a coil puxa e que move o contato |
+| contacts | contatos | as duas pontas de metal que se tocam para fechar o caminho da current |
+| spring | mola | a mola que devolve a armature à posição de repouso |
+| control circuit | circuito de comando | o lado do relay com a coil: pouca current |
+| load circuit | circuito de potência | o lado do relay com os contacts: a current da load |
+| normally open (NO) | normalmente aberto | contato aberto enquanto a coil está sem current |
+| normally closed (NC) | normalmente fechado | contato fechado enquanto a coil está sem current |
+| horn switch | botão da buzina | o botão do volante que comanda a horn |
+| voltage spike | pico de tensão | voltage alta e curta que a coil gera quando a current é cortada |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+O eletroímã é uma das peças mais repetidas do carro. Ele aparece:
+
+- **em todo relay**: horn, headlamps, fuel pump, cooling fan, starter;
+- **no solenoid do starter motor**, que empurra a engrenagem e fecha o caminho
+  da current grande da partida;
+- **no fuel injector**, em que o eletroímã puxa a agulha e abre o bico — a
+  lição [Fuel, computer e emissions](../aut-116-motor/funcionamento-do-motor/combustivel-computador-e-emissoes)
+  da AUT-116 já mostrou essa peça;
+- **na A/C compressor clutch**, que prende a polia ao compressor do
+  ar-condicionado só quando o A/C está ligado.
+
+O mesmo fenômeno — current criando campo magnético — também faz girar o
+electric motor e produz a alta voltage da ignition coil. A lição
+[Ignition, starting e charging](../aut-116-motor/funcionamento-do-motor/ignicao-partida-e-carga)
+da AUT-116 usou essa ideia de passagem; aqui ela é construída do começo.
+
+Na Wake Tech, relays fazem parte do tópico de *control* da **TRN-120**, e o
+eletroímã volta em quase todas as disciplinas seguintes. Na prova ASE, área
+**A6**, aparecem questões sobre relay que clica e não liga a load, e sobre
+como testar um relay.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O que é eletricidade](./o-que-e-eletricidade), o que é a current
+   dentro de um wire de cobre?
+2. Na lição [Ohm's law](./lei-de-ohm), o exemplo 2 calculou a current de uma
+   relay coil de 80 Ω ligada a 12 V. Quanto deu, e por que o texto disse que
+   esse número explicava a existência do relay?
+3. Na lição [Medições com o multimeter](./medicoes-com-multimetro), por que a
+   resistance de uma coil se mede com o relay fora do socket?
+
+<details>
+<summary>Respostas</summary>
+
+1. É o movimento organizado dos elétrons livres do cobre, empurrados pela
+   voltage. Nesta lição, esse movimento ganha um efeito novo: ele cria um campo
+   magnético em volta do wire.
+2. $I = 12 \div 80 = 0.15\,\text{A}$, ou 150 mA. É uma current pequena. O
+   relay existe para que uma current pequena, que passa pelo switch, comande
+   uma load de current grande. Esta lição mostra como.
+3. Porque o ohmmeter mede a resistance mandando a própria current pela peça.
+   Com o relay no socket e o carro ligado, a voltage do carro entra na
+   medição. Além disso, outras peças ligadas ao mesmo circuit criam caminhos
+   em paralelo com a coil. Fora do socket, a coil fica isolada.
+
+</details>
+
+## Intuição: a current que vira ímã
+
+Você já viu um ímã de geladeira. Ele gruda no ferro da porta e fica ali, sem
+pilha, sem fio. Esse é um **ímã permanente**: o campo magnético dele está
+sempre lá.
+
+Agora imagine um ímã que você pudesse **ligar e desligar**. Ligado, ele puxa
+um pedaço de ferro. Desligado, solta. Com um ímã assim, um sinal elétrico
+pequeno consegue fazer uma coisa mecânica: puxar uma alavanca, abrir um bico,
+fechar um contato. É isso que a current faz.
+
+Em 1820, o físico Hans Christian Ørsted percebeu que a agulha de uma bússola
+se mexia quando ele ligava uma current num wire próximo. A agulha da bússola é
+um ímã pequeno, então só um campo magnético poderia movê-la. **Toda current
+cria um campo magnético em volta do wire por onde passa.** Quando a current
+para, o campo some. Por que a natureza funciona assim é uma pergunta da
+física que vai além da oficina. Para o trabalho no carro, valem três fatos que
+dá para observar e medir:
+
+1. sem current, não há campo; com current, há;
+2. mais current dá um campo mais forte;
+3. o campo de um wire reto é fraco. Para ficar útil, ele precisa ser
+   concentrado.
+
+A comparação com a lição anterior ajuda. Na lição [Electrical power](./potencia-eletrica),
+a current que passava pelo filament virava luz e calor. Aqui, a mesma current
+produz também um terceiro efeito: o magnetismo.
+
+## Modelo visual: do wire reto ao eletroímã
+
+O primeiro passo é um wire reto com current.
+
+<Eletroima
+  tipo="fio"
+  caption="Um wire reto com current. O campo magnético (verde, tracejado) forma anéis em volta do wire, por todo o comprimento dele. É um campo fraco: mal mexe a agulha de uma bússola encostada no wire."
+/>
+
+O segundo passo é enrolar o mesmo wire em várias voltas, formando uma
+**coil**. Agora, dentro da coil, os anéis de campo de cada volta apontam
+para o mesmo lado e se somam. O campo atravessa a coil de uma ponta à outra e
+volta por fora. Visto de fora, a coil se comporta como um ímã em forma de
+barra.
+
+<Eletroima
+  tipo="bobina"
+  caption="O mesmo wire enrolado numa coil. Cada elipse é uma volta. Os campos das voltas se somam: o campo magnético atravessa a coil por dentro, da esquerda para a direita, e volta por fora."
+/>
+
+O terceiro passo é pôr uma barra de ferro dentro da coil: o **iron core**. O
+ferro é feito de regiões minúsculas que se comportam como ímãs pequenos,
+apontando cada uma para um lado. Sozinhas, elas se anulam. O campo da coil
+alinha essas regiões, e elas passam a somar o próprio campo ao da coil. O
+resultado é um campo muitas vezes mais forte com a mesma current. Esse
+conjunto — coil, iron core e current — é o **eletroímã**.
+
+<Eletroima
+  tipo="nucleo"
+  caption="A coil com um iron core (o retângulo cinza). O campo fica muito mais forte e consegue puxar um pedaço de ferro (à direita, a seta mostra o puxão). Quando a current para, o campo some e o ferro é solto."
+/>
+
+Leia os três desenhos juntos:
+
+| O que muda | O que acontece com o campo |
+|---|---|
+| wire reto | campo fraco, espalhado em anéis |
+| o wire vira uma coil | os campos das voltas se somam; o campo fica concentrado dentro da coil |
+| a coil ganha um iron core | o ferro soma o próprio campo; o eletroímã consegue puxar uma peça de ferro |
+| a current para | o campo some nos três casos |
+
+## Do eletroímã ao relay
+
+Um **relay** é um switch movido por um eletroímã. Abra um relay e você
+encontra quatro peças principais:
+
+- a **relay coil**, enrolada num **iron core**;
+- a **armature**, uma lâmina de ferro presa num pivô, logo acima do core;
+- a **spring**, que segura a armature levantada;
+- os **contacts**: um na ponta da armature, que se move, e outro fixo embaixo
+  dele.
+
+<Rele
+  modo="corte"
+  caption="Relay em repouso, aberto para mostrar as peças. Sem current na relay coil, a spring segura a armature levantada, e os contacts ficam separados. Os pinos embaixo são os terminais do relay: 86 e 85 são as duas pontas da coil; 30 é ligado à armature pelo pivô; 87 é o contact fixo."
+/>
+
+Quando a current passa pela relay coil, o core vira ímã e puxa a armature.
+A armature gira no pivô, vence a spring e encosta o contact móvel no contact
+fixo. Esse movimento produz o “clique”. Agora existe um caminho de metal do
+pino 30 até o pino 87.
+
+<Rele
+  modo="corte"
+  acionado
+  caption="Relay acionado. Com current na coil (setas azuis em 86 e 85), o campo magnético (verde) puxa a armature para baixo, e os contacts se tocam. Uma segunda current, independente da primeira, passa agora de 30 para 87 (setas azuis em 30 e 87)."
+/>
+
+Quando a current da coil para, o campo some, a spring levanta a armature, e
+os contacts se separam. O caminho de 30 a 87 abre de novo.
+
+## Ponte para a formalização
+
+Repare que o relay tem **dois caminhos de current separados**, que não se
+tocam:
+
+- um passa pela coil, de 86 a 85;
+- o outro passa pelos contacts, de 30 a 87.
+
+O único elo entre os dois é o campo magnético, que move a armature. Então cada
+caminho pode ter a sua própria current, e elas podem ser muito diferentes. O
+primeiro caminho precisa só da current suficiente para o eletroímã puxar a
+armature. O segundo carrega a current que a load pedir.
+
+Por isso o circuit de uma load com relay tem duas partes, cada uma com nome
+próprio. É assim que os manuais e a prova ASE falam dele.
+
+## Formalização: relay, control circuit e load circuit
+
+> **Relay** é um switch cujos contacts são movidos por um eletroímã. Ele
+> separa o circuit em dois: o **control circuit**, que passa pela relay coil,
+> e o **load circuit**, que passa pelos contacts e pela load.
+
+- **Exemplo:** o relay da horn. O horn switch, no volante, liga a coil. A
+  current da coil é pequena. Os contacts ligam a horn, que puxa cerca de 5 A
+  (o valor ilustrativo usado na lição [Ohm's law](./lei-de-ohm)).
+- **Contraexemplo:** o switch da dome light, a luz de teto. A bulb puxa pouca
+  current, e o próprio switch liga a bulb, sem relay no meio. Um switch comum
+  tem um caminho só; o relay tem dois.
+
+<Rele
+  modo="buzina"
+  caption="O circuit da horn com relay, com o horn switch solto. Um fuse alimenta, por um splice, os dois lados do relay. À esquerda, o control circuit: horn switch, relay coil (86 → 85) e ground. À direita, o load circuit: contacts (30 → 87), horn e ground. Sem current na coil, o contact está aberto, e a horn fica muda."
+/>
+
+Neste desenho, o horn switch fica do lado positivo da coil. Em muitos
+carros, ele fica do lado do ground: o 86 recebe positivo o tempo todo, e o
+botão liga o 85 ao ground. O raciocínio é o mesmo, porque a coil só recebe
+current quando o botão fecha o caminho — de um lado ou do outro.
+
+<Rele
+  modo="buzina"
+  acionado
+  caption="O mesmo circuit com o horn switch apertado. Uma current pequena passa pelo control circuit e aciona a coil. O contact fecha, e a current maior da horn passa pelo load circuit. As duas currents saem do mesmo fuse e voltam pelo ground."
+/>
+
+### Os pinos do relay
+
+Muitos relays automotivos têm os terminais numerados no corpo, com uma
+numeração que vem de uma norma alemã (DIN 72552):
+
+| Pino | O que é |
+|---|---|
+| 86 | uma ponta da coil, normalmente a que recebe o positivo |
+| 85 | a outra ponta da coil, normalmente a que vai ao ground |
+| 30 | o terminal comum dos contacts, que recebe a current da load |
+| 87 | o contact **normally open**: liga ao 30 quando a coil é acionada |
+| 87a | só no relay de cinco pinos: o contact **normally closed**, ligado ao 30 em repouso |
+
+Essa numeração é comum, mas não é universal. Há relays com outros números e
+outras posições de pino. **O que vale é o wiring diagram do carro e a marcação
+do próprio relay.**
+
+### Normally open e normally closed
+
+> **Normally open (NO)** é o contact que fica aberto enquanto a coil está sem
+> current e fecha quando ela é acionada. **Normally closed (NC)** é o
+> contrário: fechado em repouso, aberto com a coil acionada.
+
+O “normally” descreve o relay **em repouso**, com a coil sem current — não o
+estado em que ele passa mais tempo.
+
+- **Exemplo de NO:** o contact 87 do relay da horn. A horn só toca enquanto a
+  coil está acionada.
+- **Exemplo de NC:** o 87a de um relay de cinco pinos. Em alguns carros, um
+  relay assim alterna entre duas loads: em repouso, o 30 alimenta o 87a; com a
+  coil acionada, passa a alimentar o 87. Um exemplo é a troca entre o farol
+  baixo e o farol alto — num carro em que o wiring diagram mostre esse relay.
+
+<TabelaSimbolos
+  itens={['rele', 'rele5']}
+  caption="Os símbolos do relay nos wiring diagrams. A coil e o contact ficam lado a lado, e o tracejado entre eles é a ligação magnética: ele lembra que a coil é quem move o contact. O contact aparece na posição de repouso."
+/>
+
+### Por que usar um relay
+
+Há duas razões, e as duas aparecem na prova.
+
+**1. Proteger o switch e economizar wire.** O horn switch fica no volante, e
+a ligação até ele é feita por wires finos e compridos. Se a current inteira da
+horn passasse por esse caminho, o wire e os contacts do switch esquentariam.
+Com o relay, só a current da coil passa pelo switch. A current grande faz um
+caminho curto e grosso: da fuse box ao relay, e do relay à horn.
+
+**2. Deixar um módulo comandar uma load grande.** Um módulo de controle, como
+o PCM, não consegue ligar sozinho uma fuel pump ou uma cooling fan: as saídas
+dele são feitas para currents pequenas. O módulo comanda a coil de um relay, e
+o relay liga a load.
+
+### O voltage spike da coil
+
+A coil guarda energia no campo magnético enquanto a current passa. Quando a
+current é cortada de repente, o campo some de uma vez. Essa mudança rápida
+empurra os elétrons da própria coil e produz, por um instante, uma voltage
+muito acima dos 12 V: o **voltage spike**. É o mesmo efeito que a ignition
+coil usa para fazer a faísca, na lição de ignition da AUT-116.
+
+Num relay comandado por um botão, o spike quase não faz estrago. Num relay
+comandado por um módulo eletrônico, ele pode danificar o circuit de saída do
+módulo. Por isso muitos relays trazem uma peça a mais em paralelo com a coil,
+que absorve o spike. Essa peça é um **diode**, e a lição seguinte,
+[Resistances que mudam e o diode](./resistencias-variaveis-e-diodo), explica
+como ele funciona.
+
+## Como falha e como diagnosticar
+
+O que o relay **deveria** fazer: com current na coil, fechar o caminho de 30 a
+87 com resistance quase zero; sem current, abrir esse caminho.
+
+O clique separa o problema em duas metades, e é por isso que ele vem primeiro.
+
+| O que você observa | Onde está o defeito | Por quê |
+|---|---|---|
+| aperta o botão: **sem clique** e sem horn | no control circuit (switch, coil, wires, ground da coil) ou no fuse que alimenta os dois lados | a armature não se moveu, então a coil não recebeu current suficiente |
+| aperta o botão: **clica**, mas sem horn | no load circuit (contacts, wire até a horn, horn, ground da horn) | a armature se moveu, então o control circuit funcionou |
+| a horn **não para** de tocar | contacts colados no relay, ou o control circuit recebendo current o tempo todo | o caminho de 30 a 87 ficou fechado |
+| a horn funciona **às vezes** | terminal frouxo no socket, contact gasto, wire com falha intermitente | o caminho abre e fecha sozinho |
+
+Os defeitos do próprio relay:
+
+- **coil aberta (open):** não clica. Fora do socket, o ohmmeter na coil, entre
+  86 e 85, mostra OL;
+- **coil em curto (short):** a resistance fica bem abaixo da especificação. A
+  current da coil sobe, e ela pode queimar o fuse ou danificar o switch ou o
+  módulo que a comanda;
+- **contacts queimados ou oxidados:** clica, mas a load não liga, ou liga
+  fraca. Com a load ligada, a voltage drop entre 30 e 87 fica alta. Num relay
+  bom, ela fica perto de zero — o limite vem do manual;
+- **contacts colados:** a load fica ligada mesmo sem comando. Num relay de
+  fuel pump ou de cooling fan, isso descarrega a battery com o carro
+  desligado.
+
+### A queixa resolvida
+
+Volte ao carro da horn. O cliente trocou o horn switch sem testar. Veja o
+diagnóstico na ordem.
+
+1. **Confirmar a queixa.** Você aperta o botão: a horn não toca. Mas, com o
+   ouvido perto da fuse box, você ouve o **clique** do relay.
+2. **O que o clique descarta.** O relay clicou, então a coil recebeu current.
+   O fuse, o horn switch (o novo e, provavelmente, o antigo também), a coil e o
+   ground da coil estão funcionando. O defeito está no load circuit.
+3. **Medir o load circuit.** Com um ajudante segurando o botão, você mede a
+   available voltage no connector da horn: 0 V. A voltage não chega à horn.
+   Então a horn ainda não está em julgamento: o defeito está antes dela.
+4. **Subir até o relay.** No socket do relay, com back-probing e o botão
+   apertado: o pino 30 tem 12 V; o pino 87 tem 0 V. A voltage entra no relay e
+   não sai. Com a coil acionada, o caminho de 30 a 87 deveria estar fechado.
+   Então os contacts não estão fechando o caminho: estão queimados.
+5. **Corrigir e verificar.** Um relay novo, com o mesmo part number, resolve. A
+   horn toca, e o clique continua lá.
+
+O botão que o cliente comprou não estava com defeito, e o antigo
+provavelmente também não. O clique teria dito isso antes da troca, de graça.
+
+## Na oficina: testar relays sem estragar nada
+
+:::warning Antes de ligar qualquer coisa num socket de relay
+
+- **Use um fused jumper wire, nunca um wire comum.** Ligar 30 a 87 no socket
+  alimenta a load direto, sem relay. Se o pino estiver errado e você ligar o
+  positivo a um ground, um jumper sem fuse vira um short circuit: o wire
+  esquenta e pode queimar o chicote.
+- **Confira os pinos no wiring diagram antes de ligar o jumper.** Pôr 12 V no
+  pino errado pode queimar um módulo de controle.
+- **Saiba o que a load vai fazer quando ligar.** Uma cooling fan começa a girar
+  de repente: mãos, ferramentas e roupas longe das pás. Uma fuel pump manda
+  combustível pressurizado: nenhuma linha de combustível aberta, nenhuma faísca
+  por perto. Uma horn é muito alta: proteja os ouvidos.
+- **Nunca faça jumper no relay do starter** sem o procedimento do fabricante e
+  a orientação do instrutor. O motor pode girar, e o carro pode se mover se
+  houver marcha engatada.
+
+:::
+
+Com os riscos acima controlados, o procedimento geral é este:
+
+1. **Ouvir ou sentir o clique** com a load comandada. Encoste o dedo no relay:
+   o clique se sente mesmo quando não se ouve.
+2. **Trocar por um relay idêntico**, do mesmo part number, de outro circuit que
+   esteja funcionando, como teste rápido. Relays parecidos por fora podem ter
+   pinos diferentes por dentro — por isso o part number tem que ser o mesmo. Se
+   o defeito passa para o outro circuit, o relay está condenado.
+3. **Medir a resistance da coil** com o relay fora do socket, entre 86 e 85, e
+   comparar com a especificação do manual ou da peça.
+4. **Medir a voltage drop dos contacts** com a load ligada: uma test lead no 30
+   e a outra no 87, por back-probing.
+5. **Não alargar os terminais do socket.** Uma ponta de prova grossa enfiada
+   no socket abre o terminal fêmea, e o relay passa a ter mau contato. Use o
+   back-probing ou os adaptadores de teste certos.
+
+## Exemplos resolvidos
+
+### Exemplo 1: quanto o horn switch deixa de carregar
+
+A relay coil tem 80 Ω, e a horn puxa 5 A (valores ilustrativos, os mesmos da
+lição [Ohm's law](./lei-de-ohm)). Quanta current passa pelo horn switch com
+relay, e quantas vezes ela é menor que a da horn?
+
+<details>
+<summary>Solução</summary>
+
+Com relay, pelo horn switch passa só a current da coil:
+
+$$
+I_{\text{coil}} = \frac{V}{R} = \frac{12}{80} = 0.15\,\text{A}
+$$
+
+A comparação com a horn:
+
+$$
+\frac{5}{0.15} \approx 33
+$$
+
+O horn switch carrega uma current cerca de 33 vezes menor. A power da coil é
+$P = V \times I = 12 \times 0.15 = 1.8\,\text{W}$, contra
+$12 \times 5 = 60\,\text{W}$ da horn.
+
+</details>
+
+### Exemplo 2: o calor no contact do switch
+
+**Pause e tente:** todo contact de switch tem uma resistance pequena. Imagine
+0.05 Ω (valor ilustrativo). Quanta power vira calor nesse contact se ele
+carregar os 5 A da horn? E se carregar só os 0.15 A da coil? Use
+$P = I \times I \times R$, que sai de juntar $P = V \times I$ com
+$V = I \times R$.
+
+<details>
+<summary>Solução</summary>
+
+Com a current da horn:
+
+$$
+P = 5 \times 5 \times 0.05 = 1.25\,\text{W}
+$$
+
+Com a current da coil:
+
+$$
+P = 0.15 \times 0.15 \times 0.05 = 0.001125\,\text{W}
+$$
+
+A diferença é de cerca de 1100 vezes, porque a current entra **duas vezes** na
+conta. Uma current 33 vezes menor produz um calor $33 \times 33 \approx 1100$
+vezes menor. Um contact pequeno, no volante, aguenta 0.001 W para sempre;
+1.25 W concentrados num ponto minúsculo o desgastam e o queimam com o tempo.
+
+</details>
+
+### Exemplo 3: com o engine funcionando
+
+**Pause e tente:** com o engine funcionando, a voltage do carro fica perto de
+14 V (valor típico, só para o exemplo). Que current passa pela relay coil de
+80 Ω? O relay funciona igual?
+
+<details>
+<summary>Solução</summary>
+
+$$
+I = \frac{14}{80} = 0.175\,\text{A}
+$$
+
+A current sobe um pouco, e o campo magnético fica um pouco mais forte. O relay
+funciona igual: ele foi feito para puxar a armature em toda a faixa de voltage
+do carro. O que muda é a current; o que não muda é o comportamento: contact
+fechado enquanto há current na coil.
+
+</details>
+
+### Exemplo 4: ler as medições na coil
+
+**Pause e tente:** o relay dos headlamps não clica. Com o switch dos
+headlamps ligado, você mede, em relação ao negative terminal da battery:
+
+- no pino 86 do socket: 12 V;
+- no pino 85 do socket: 12 V.
+
+Onde está o defeito?
+
+<details>
+<summary>Solução</summary>
+
+O pino 86 recebe 12 V: a alimentação da coil está chegando. O pino 85 também
+mostra 12 V. Num circuit funcionando, a coil teria current, e quase toda a
+voltage cairia nela: o 85, ligado ao ground, mostraria perto de 0 V.
+
+Mostrar 12 V no 85 quer dizer que não passa current, e que o 85 está “no
+nível” do 86 através da coil. Então a coil tem continuidade, e o caminho
+aberto está **depois** dela: no wire ou no ponto de ground do pino 85. É a
+mesma lógica do terminal de ground aberto da lição
+[Parallel circuit](./circuito-em-paralelo), exercício 5.
+
+Se a coil estivesse aberta, o 86 mostraria 12 V e o 85, 0 V: a voltage não
+atravessaria a coil.
+
+</details>
+
+### Exemplo 5: o relay que não desliga
+
+**Pause e tente:** um cliente reclama que a battery amanhece descarregada. Com
+o carro desligado e a chave fora, você ouve a fuel pump funcionando. Tirando
+o relay da fuel pump, ela para. Qual é a hipótese mais provável, e como
+confirmar?
+
+<details>
+<summary>Solução</summary>
+
+Tirar o relay parou a pump. Então a current da pump passava pelo relay. Duas
+hipóteses explicam a pump ligada sem comando: os contacts do relay colados, ou
+a coil recebendo current o tempo todo porque o módulo (ou um wire em short)
+continua comandando.
+
+Para separar as duas, olhe o wiring diagram: ele mostra por qual pino chega o
+comando da coil. Em alguns carros o módulo manda o positivo para o 86; em
+outros, o 86 tem positivo o tempo todo, e o módulo comanda pelo ground do 85.
+Com o relay fora do socket e o carro desligado, meça nesse pino de comando.
+Sem comando, a hipótese que sobra são os contacts colados. Com comando
+presente, o defeito está no control circuit.
+
+Na hipótese dos contacts colados, a confirmação é trocar por um relay do mesmo
+part number e ver a pump parar com o carro desligado.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que enrolar o wire numa coil deixa o campo magnético mais forte?
+2. O que o iron core acrescenta, se a current é a mesma?
+3. Por que o relay consegue ligar uma load de current alta com um switch
+   pequeno?
+4. Por que o clique é o primeiro teste num circuit com relay?
+5. “Normally open” quer dizer que o contact passa a maior parte do tempo
+   aberto?
+6. Por que um relay comandado por módulo costuma ter uma peça a mais em
+   paralelo com a coil?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o campo de cada volta se soma ao das outras. Dentro da coil, os
+   campos de todas as voltas apontam para o mesmo lado. Com muitas voltas, o
+   campo concentrado fica muito mais forte que o de um wire reto com a mesma
+   current.
+2. O ferro tem regiões que se comportam como ímãs pequenos. O campo da coil as
+   alinha, e elas passam a somar o próprio campo ao da coil. A current é a
+   mesma; o campo fica muitas vezes mais forte.
+3. Porque o relay tem dois caminhos separados. O switch fica no control
+   circuit, por onde passa só a current da coil. A current da load passa pelos
+   contacts do relay, num caminho curto e grosso.
+4. Porque ele divide o circuit em duas metades. Com clique, o control circuit
+   funcionou, e o defeito está no load circuit. Sem clique, o defeito está no
+   control circuit ou na alimentação comum.
+5. Não. “Normally” descreve o relay em repouso, com a coil sem current. Um
+   contact NO pode passar horas fechado, como o de uma headlamp ligada numa
+   viagem à noite.
+6. Porque, quando a current da coil é cortada, o campo magnético some de
+   repente e gera um voltage spike, uma voltage muito acima dos 12 V. Esse
+   spike pode danificar a saída do módulo. A peça em paralelo, um diode,
+   absorve o spike.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+No circuit da horn com relay, diga se cada item pertence ao control circuit
+ou ao load circuit:
+
+a) o horn switch; b) a relay coil; c) os contacts; d) a horn; e) o pino 85;
+f) o pino 87.
+
+### 2. Explicação
+
+Explique, com as suas palavras, o que acontece dentro do relay desde o
+momento em que alguém aperta o horn switch até a horn tocar. Use as palavras
+coil, iron core, armature, spring e contacts.
+
+### 3. Aplicação direta
+
+a) Uma relay coil de 75 Ω é ligada a 12 V. Qual é a current dela, em
+milliamps?
+
+b) Um relay liga uma cooling fan que puxa 20 A (valor ilustrativo). A coil é a
+do item a. Quantas vezes a current da fan é maior que a da coil?
+
+c) Qual é a power da coil do item a?
+
+### 4. Variação
+
+Uma relay coil tem 80 Ω quando nova. Com o tempo, parte das voltas entra em
+curto entre si, e a resistance cai para 20 Ω. Qual é a current da coil em
+12 V, antes e depois? Que peça do control circuit pode sofrer com isso?
+
+### 5. Caso de diagnóstico
+
+A cooling fan de um carro não liga, e o motor esquenta no trânsito. A fan é
+comandada pelo PCM, por um relay. Com o motor quente e a fan comandada (o
+scan tool mostra o comando ligado), você observa:
+
+- o relay clica;
+- no connector da fan, a available voltage é 12 V;
+- entre o terminal de ground do connector da fan e o negative terminal da
+  battery, você mede 0 V.
+
+a) O que o clique descarta?
+
+b) O que as duas medições dizem sobre o caminho até a fan e sobre o ground
+dela?
+
+c) Qual é a hipótese mais provável, e qual o próximo passo?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Some as duas medições: há 12 V chegando no positivo da fan, e o lado do ground
+está mesmo no ground. Então quanto de voltage fica sobre a fan? Uma load que
+recebe a voltage inteira e não funciona está com defeito nela mesma — ou num
+ponto que você ainda não mediu?
+
+</details>
+
+### 6. Justificativa
+
+Por que o teste de trocar o relay por outro “igual” exige o mesmo part number,
+e não só o mesmo formato?
+
+### 7. Formato ASE
+
+**Question 1.** A relay coil has a resistance of 60 ohms. How much current
+flows through the coil when 12 volts are applied?
+
+- A. 0.2 A
+- B. 5 A
+- C. 72 A
+- D. 720 A
+
+**Question 2.** Technician A says that a relay allows a small current to
+control a larger current. Technician B says that the relay contacts are part
+of the control circuit. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** The horn does not sound when the horn button is pressed, but
+the horn relay can be heard clicking. Which of these is the most likely cause?
+
+- A. an open horn switch
+- B. an open relay coil
+- C. burned relay contacts or an open in the horn circuit
+- D. a blown fuse that feeds both the relay coil and the horn
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Control circuit. b) Control circuit. c) Load circuit. d) Load circuit.
+   e) Control circuit: o 85 é uma ponta da coil. f) Load circuit: o 87 é o
+   contact que alimenta a load.
+
+2. O horn switch fecha o control circuit, e passa current pela relay coil. A
+   coil, enrolada no iron core, vira eletroímã. O campo magnético puxa a
+   armature, que gira no pivô e vence a spring. A armature encosta o contact
+   móvel no fixo, e o caminho de 30 a 87 fecha. A current da horn passa pelos
+   contacts, e a horn toca. Quando o botão é solto, o campo some, a spring
+   levanta a armature, e os contacts se abrem.
+
+3. a) $I = 12 \div 75 = 0.16\,\text{A}$, ou 160 mA.
+
+   b) $20 \div 0.16 = 125$ vezes.
+
+   c) $P = 12 \times 0.16 = 1.92\,\text{W}$.
+
+   Se você encontrou 900 A no item a, multiplicou a voltage pela resistance.
+   A current é a voltage **dividida** pela resistance.
+
+4. Nova: $12 \div 80 = 0.15\,\text{A}$. Com curto entre as voltas:
+   $12 \div 20 = 0.6\,\text{A}$, quatro vezes mais. Quem sofre é o que comanda a
+   coil: o switch, ou a saída do módulo, feita para a current pequena da coil
+   nova. O fuse do control circuit também pode queimar, dependendo do valor.
+
+5. a) O clique descarta o control circuit: o comando do PCM chegou à coil, e o
+   relay fechou. O defeito está no load circuit.
+
+   b) A available voltage de 12 V mostra que a current consegue chegar ao
+   positivo da fan: fuse, contacts do relay e wire até a fan estão bons. O 0 V
+   no terminal de ground mostra que o lado do ground está ligado ao ground.
+   Então a fan recebe a voltage inteira, 12 V, entre os dois terminais.
+
+   c) Uma load que recebe a voltage inteira e não funciona está aberta por
+   dentro: a hipótese mais provável é a própria fan (motor queimado,
+   escovas gastas) ou o connector dela, do lado de dentro. O próximo passo é
+   confirmar: desligar o connector e medir a resistance da fan (com o motor
+   desligado, mãos longe das pás), ou alimentá-la com um fused jumper wire
+   seguindo o procedimento do manual.
+
+6. Porque relays com o mesmo formato podem ter os pinos em posições
+   diferentes, contacts NO no lugar de NC, coils de resistance diferente ou um
+   diode interno. Um relay errado pode não funcionar e levar a um diagnóstico
+   falso — ou pode pôr 12 V onde não devia e danificar um módulo. O part number
+   garante a mesma peça por dentro.
+
+7. **Question 1: A.** $I = 12 \div 60 = 0.2\,\text{A}$. A alternativa D vem de
+   multiplicar $12 \times 60$. A B vem de dividir a resistance pela voltage,
+   $60 \div 12$. A C vem de somar $60 + 12$.
+
+   **Question 2: A.** O técnico A descreve a razão de existir do relay. O
+   técnico B está errado: os contacts ficam no load circuit. O control circuit
+   é o da coil.
+
+   **Question 3: C.** O clique mostra que a coil recebeu current, então o
+   control circuit funcionou. Isso descarta o horn switch aberto (A) e a coil
+   aberta (B). Um fuse queimado (D) que alimenta a coil impediria o clique. Sobra
+   o load circuit: contacts queimados, wire aberto ou a própria horn.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** toda current cria um campo magnético. Enrolada numa
+  coil com iron core, ela vira um eletroímã, que puxa ferro só enquanto há
+  current. O relay usa esse eletroímã para mover contacts: uma current pequena
+  no control circuit liga uma current grande no load circuit.
+- **Quando usar:** no diagnóstico de qualquer load com relay. O clique divide
+  o circuit em duas metades: com clique, procure no load circuit; sem clique,
+  no control circuit ou na alimentação comum.
+- **Com o que se conecta:** a current da coil sai da [Ohm's law](./lei-de-ohm);
+  as medições nos pinos são as da lição
+  [Medições com o multimeter](./medicoes-com-multimetro). O voltage spike da
+  coil leva à lição seguinte, [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo).
+  O eletroímã volta no starter, no alternator, na ignition coil e no fuel
+  injector.
+
+**Termos desta lição para revisar:** magnet, permanent magnet, magnetic field,
+electromagnetism, electromagnet, coil, iron core, relay, relay coil, armature,
+contacts, spring, control circuit, load circuit, normally open, normally
+closed, horn switch, voltage spike, part number.

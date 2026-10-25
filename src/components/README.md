@@ -103,6 +103,14 @@ import Circuito from '@site/src/components/Circuito';
 | starting system (por trás) e charging system (pela frente, com a drive belt) | `PartidaCarga` |
 | elétrons livres dentro do fio, sem e com corrente | `FioEletrons` |
 | bancada para o aluno montar circuits com a mão: battery, wire, bulb, switch, fuse (interativo) | `LabCircuito` |
+| circuit de um laço com qualquer símbolo: diode, LED, resistor, thermistor, fuse europeu | `Esquema` |
+| cartões com os símbolos dos wiring diagrams, nome em inglês e nota | `TabelaSimbolos` (`Simbolos`) |
+| flash cards dos símbolos, para praticar (interativo) | `FlashSimbolos` |
+| wiring diagram completo no jeito dos manuais (fog lamps) | `DiagramaNeblina` |
+| campo magnético de um wire, de uma coil e de um eletroímã | `Eletroima` |
+| relay em corte (repouso e acionado) e o circuit da horn com relay | `Rele` |
+| dimmer com rheostat: mover o wiper e ver current e power mudarem (interativo) | `Reostato` |
+| resistance do NTC e do PTC com a temperatura | `CurvaTermistor` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -621,3 +629,134 @@ O `Motor` também desenha o fuel injector: `injetor="indireto"` (antes do
 intake port, injeção indireta) ou `injetor="direto"` (com a ponta dentro da
 combustion chamber, GDI), com o rótulo clicável. Use com `rotulos="nenhum"`.
 
+
+---
+
+# Símbolos dos wiring diagrams e componentes (TRN-120, lições 9 a 11)
+
+## Simbolos: a biblioteca
+
+`src/components/Simbolos/desenhos.jsx` desenha cada símbolo **uma vez**, e
+três componentes usam os mesmos desenhos: `TabelaSimbolos`, `FlashSimbolos` e
+`Esquema` (e, por eles, `Rele` e `DiagramaNeblina`). Os desenhos seguem as
+convenções comuns dos manuais, sem copiar figura de livro ou apostila.
+
+- **Dois terminais** (`SIMBOLOS`): `bateria`, `lampada`, `filamento`,
+  `motor`, `buzina`, `fusivel` (o S na caixinha, o das figuras do site),
+  `fusivelS` (o S solto dos manuais americanos), `fusivelEuro`,
+  `interruptor`, `resistor`, `resistorEuro`, `variavel`, `ntc`, `ptc`,
+  `bobina`, `bobinaNucleo`, `diodo`, `led`, `fotodiodo`. Cada um é desenhado
+  deitado, com os terminais em x = ±30. `Peca` põe o símbolo no lugar e gira;
+  os textos do símbolo (o M do motor, o −T do NTC) mudam de lugar com a
+  rotação, mas não giram.
+- **Especiais** (`ESPECIAIS`), cada um com o seu quadro: `massa`,
+  `filamentoDuplo`, `rele`, `rele5`, `releDiodo`, `splice`, `cruzamento`,
+  `conector`, `pinos`, `corDoFio`, `completo`, `incompleto`, `versoes`,
+  `fusivelNumero`, `interruptorPosicoes`, `potenciometro`.
+- `Rele` (o símbolo, exportado de `desenhos.jsx`) aceita `dx` (distância do
+  meio até a coil e até o contact, para alinhar com os wires de um circuit),
+  `acionado`, `cinco` (contact 87a) e `diodo`. A caixa é contínua: tracejada,
+  no diagram, quer dizer componente incompleto.
+
+Tons: azul (`1`) é a current, laranja (`2`) é a load — os papéis do
+`Circuito`. Verde (`3`) é o campo magnético, só no `Eletroima` e no `Rele`.
+
+## TabelaSimbolos
+
+```mdx
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+<TabelaSimbolos itens={['bateria', 'fusivelS', 'fusivelEuro']} caption="..." />
+```
+
+Um cartão por símbolo: o desenho, o nome em inglês (botão `Termo`, com o
+balão do português) e uma nota curta. Nomes e notas ficam em
+`Simbolos/catalogo.js`; um símbolo novo precisa entrar no catálogo e no
+`desenhos.jsx`. A grade quebra sozinha: três ou quatro por linha no
+computador, dois no celular.
+
+## FlashSimbolos
+
+```mdx
+<FlashSimbolos />                          {/* o catálogo inteiro */}
+<FlashSimbolos itens={['diodo', 'led']} />  {/* só esses */}
+```
+
+Interativo: mostra o desenho, o aluno diz o nome, vira o cartão e marca
+“Acertei” ou “Errei”. No fim, pode repetir só os errados. A primeira ordem é a
+do catálogo (igual no build e no navegador); o embaralhamento acontece depois
+que a página abre. O `fusivel` do site fica fora do padrão, porque seria o
+mesmo cartão do `fusivelS`.
+
+## Esquema
+
+Circuit de um laço com qualquer símbolo de dois terminais: battery à
+esquerda, `pecas` deitadas no wire de cima, `carga` em pé à direita, retorno
+por wire ou pelo ground.
+
+```mdx
+<Esquema
+  pecas={[{tipo: 'diodo', rotulo: '\\text{diode}', nota: '0.7\\,\\text{V}'}]}
+  carga={{tipo: 'lampada', rotulo: '\\text{bulb}'}}
+  corrente
+  caption="..."
+/>
+```
+
+| Prop | O que faz |
+|---|---|
+| `pecas` | lista de `{tipo, rotulo, nota, aberto, invertido}`; `aberto` é para o switch, `invertido` gira meia volta (diode ao contrário) |
+| `carga` | `{tipo, rotulo, nota, invertido, brilho}`; `brilho` de 0 a 1 desenha os raios da bulb |
+| `fonte` | LaTeX ao lado da battery (padrão `12\,\text{V}`) |
+| `retorno` | `'fio'` (padrão) ou `'massa'` |
+| `corrente`, `rotuloCorrente` | setas e rótulo; as setas não aparecem se um switch estiver aberto ou um diode/LED invertido |
+| `caption` | texto simples |
+
+A fonte dos rótulos cresce com a largura do desenho (a conta da
+`Associacao`), para continuar legível no celular. Com três peças, os rótulos
+de cima ficam a 112 de distância: rótulo mais longo que “resistor” encosta no
+vizinho.
+
+## Reostato
+
+`<Reostato caption="..." />` — o `Esquema` de um rheostat em série com uma
+bulb de 6 Ω, com um controle deslizante de 0 a 18 Ω (passos de 3 Ω). Mostra a
+resistance, a current e a power da bulb; os raios da bulb crescem com a power.
+Valores ilustrativos, escritos no próprio componente.
+
+## CurvaTermistor
+
+`<CurvaTermistor caption="..." />` — resistance contra temperatura, sem
+números: o NTC (azul) cai, o PTC (laranja) sobe. `mostrar="ntc"` ou
+`mostrar="ptc"` desenha uma curva só.
+
+## Eletroima
+
+`<Eletroima tipo="fio" | "bobina" | "nucleo" caption="..." />` — o campo
+magnético de um wire reto (anéis), de uma coil (linhas que atravessam a coil e
+voltam por fora) e da coil com iron core (mais linhas, puxando um pedaço de
+ferro). Os wires que levam a current passam por cima das linhas do campo com
+uma borda da cor do papel, para não parecerem ligados a elas.
+
+## Rele
+
+```mdx
+<Rele modo="corte" caption="..." />            {/* relay aberto, em repouso */}
+<Rele modo="corte" acionado caption="..." />   {/* coil com current, contact fechado */}
+<Rele modo="buzina" caption="..." />           {/* circuit da horn, botão solto */}
+<Rele modo="buzina" acionado caption="..." />  {/* botão apertado: as duas currents */}
+```
+
+No corte, os pinos 30, 86, 85 e 87 ficam embaixo, e os nomes (spring,
+armature, contacts, relay coil) à direita, com linha de chamada. No circuit da
+horn, um fuse alimenta, por um splice, o control circuit (horn switch e coil)
+e o load circuit (contact e horn). O nome “horn switch” fica à direita do
+switch: à esquerda, encostava no + da battery.
+
+## DiagramaNeblina
+
+`<DiagramaNeblina caption="..." />` — o wiring diagram das fog lamps da lição
+Electrical symbols, com fuse block tracejada, F12 15 A, splices S100 e S101,
+fog lamp switch, relay, connectors C101 e C102, grounds G100, G101 e G102 e as
+cores dos wires. Os códigos e as cores são ilustrativos, e a lição se apoia
+neles: mudar um código aqui exige mudar o texto da lição.

@@ -1,0 +1,680 @@
+---
+title: Electrical symbols
+---
+
+import TabelaSimbolos from '@site/src/components/Simbolos';
+import FlashSimbolos from '@site/src/components/FlashSimbolos';
+import DiagramaNeblina from '@site/src/components/DiagramaNeblina';
+import Esquema from '@site/src/components/Esquema';
+
+# Electrical symbols
+
+> **Pergunta central:** como ler o desenho que o fabricante faz de um
+> circuit — o que cada símbolo representa, onde ele entra no circuit e como
+> esse desenho diz onde medir?
+
+## A queixa: a fog lamp depois do conserto
+
+Um carro volta da funilaria com o para-choque dianteiro consertado. O cliente
+reclama:
+
+> “Depois que trocaram o para-choque, o farol de neblina esquerdo não acende
+> mais. O direito funciona.”
+
+Você abre o service manual do carro e encontra o wiring diagram das fog lamps.
+É uma página cheia de linhas, códigos e desenhos pequenos. Cada desenho é um
+**electrical symbol**, e cada código diz alguma coisa: qual fuse, que cor de
+wire, qual connector, onde fica o ground. Quem sabe ler essa página sabe onde
+medir antes de desmontar qualquer coisa. Quem não sabe começa a trocar peças.
+
+Esta lição ensina a ler a página. Ao fim, você vai voltar a este carro e
+decidir, só pelo diagram, em que pontos o defeito pode estar e qual é a
+primeira medição.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| wiring diagram | esquema elétrico | desenho do fabricante com os circuits, as cores dos wires e os connectors |
+| electrical symbol | símbolo elétrico | desenho que representa uma peça no wiring diagram |
+| splice | emenda | ponto onde dois ou mais wires são emendados; no diagram, o ponto preto |
+| pin | pino | cada terminal numerado de um connector |
+| pinout | pinagem | a lista do que se liga em cada pin de um connector |
+| inline connector | conector em linha | connector no meio do chicote, que junta dois pedaços de wiring harness |
+| wire color code | código de cores dos fios | as abreviações da cor de cada wire, como GRN/RED |
+| base color | cor de base | a cor principal do isolamento do wire |
+| tracer | listra | a faixa fina de outra cor ao longo do wire |
+| fuse rating | amperagem do fusível | a current máxima do fuse, como 15 A |
+| ground point | ponto de massa | lugar da carroceria onde o wire de ground é parafusado, com um código como G101 |
+| component locator | localizador de componentes | a parte do manual que mostra onde fica cada peça, connector e ground no carro |
+| single filament bulb | lâmpada de um filamento | bulb com um filament e dois terminais |
+| double filament bulb | lâmpada de dois filamentos | bulb com dois filaments e um terminal comum |
+| LH / RH | esquerdo / direito | *left hand* e *right hand*: os lados do carro, vistos do banco do motorista |
+
+Lembre: toque em qualquer termo sublinhado para ver o português. Nas tabelas
+de símbolos abaixo, o nome de cada símbolo também é clicável.
+
+## Onde isso aparece
+
+Todo circuit do carro tem um wiring diagram no service manual (ou no sistema
+de informação do fabricante que a oficina assina). Na oficina, ninguém
+diagnostica um defeito elétrico sem ele: o diagram diz que peças fazem parte
+do circuit, como elas se ligam e onde ficam os pontos de medição.
+
+Na Wake Tech, ler wiring diagrams faz parte da descrição oficial da
+**TRN-120** (“*properly use wiring diagrams*”), e os flash cards de símbolos
+da aula servem para isso. Os diagrams voltam em todas as disciplinas
+seguintes. Na prova ASE, a área **A6** traz questões com um trecho de diagram
+para interpretar, e as outras áreas usam diagrams nos casos de diagnóstico.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O electrical circuit](./o-circuito-eletrico), em que ordem as
+   partes de um circuit aparecem, da battery até o ground?
+2. Na lição [Parallel circuit](./circuito-em-paralelo), qual pergunta separa o
+   defeito quando uma load apaga e as outras continuam funcionando?
+3. Nas duas últimas lições, o que quer dizer o tracejado entre a coil e o
+   contact no símbolo do relay? E para que lado aponta a seta de um diode?
+
+<details>
+<summary>Respostas</summary>
+
+1. Power source, circuit protection, control, load e ground. Os wiring
+   diagrams seguem quase sempre essa ordem, de cima para baixo: power em cima,
+   ground embaixo.
+2. “O que é compartilhado e o que é exclusivo?” Se uma load funciona, as
+   partes que ela divide com a load apagada estão boas, e o defeito está na
+   parte exclusiva da load apagada. Esta lição usa essa pergunta no diagram.
+3. O tracejado é a ligação magnética: a coil move o contact. A seta do diode
+   aponta o sentido em que a current convencional passa, do anode para o
+   cathode.
+
+</details>
+
+## Intuição: o mapa do metrô
+
+Pense no mapa do metrô de uma cidade grande. Ele mostra cada estação, as
+linhas e onde dá para trocar de linha. Ele **não** mostra a distância real
+entre as estações nem as curvas do trilho. Duas estações que parecem vizinhas
+no mapa podem estar longe uma da outra na rua. O mapa troca a geografia pela
+coisa que interessa a quem viaja: o que se liga a quê.
+
+O wiring diagram faz a mesma troca. Ele mostra cada peça, cada wire e cada
+ligação, mas não mostra onde as peças estão no carro. O relay pode estar
+desenhado ao lado do switch e ficar, no carro, a dois metros dele. Na
+comparação:
+
+| No mapa do metrô | No wiring diagram |
+|---|---|
+| estação | peça (o electrical symbol) |
+| linha | wire, com a cor dele |
+| estação de baldeação | splice ou connector |
+| o mapa do bairro, para achar a entrada | o component locator, para achar a peça no carro |
+
+A comparação para de valer num ponto: no metrô, o passageiro escolhe a linha;
+no circuit, a current segue todos os caminhos fechados ao mesmo tempo, como no
+parallel circuit.
+
+## Modelo visual: o wiring diagram das fog lamps
+
+Este é o diagram das fog lamps do carro da queixa, desenhado no jeito dos
+manuais. Os códigos, as cores e a amperagem são ilustrativos.
+
+<DiagramaNeblina caption="Wiring diagram das fog lamps. Em cima, a power: o fuse F12, de 15 A, dentro da fuse block. No meio, o control: o fog lamp switch comanda a coil do relay. Embaixo, as loads: as duas fog lamps, em paralelo depois do splice S101, cada uma com o seu connector e o seu ground. Ao lado de cada wire, a cor dele. Valores e códigos ilustrativos." />
+
+Leia de cima para baixo, como a current anda:
+
+| Onde | O que o símbolo e o código dizem |
+|---|---|
+| B+ e fuse block | o fuse recebe power direto da battery (B+); a caixa tracejada diz que a fuse block tem mais coisas, que não aparecem nesta página |
+| F12, 15 A | o fuse número 12 da fuse block, com fuse rating de 15 A |
+| RED | o wire que sai do fuse é vermelho |
+| S100 | um splice: o wire vermelho se divide em dois — um vai ao switch, outro ao pino 30 do relay |
+| fog lamp switch | caixa contínua: o switch está todo nesta página; ele leva power ao 86 da coil por um wire verde (GRN) |
+| relay | coil entre 86 e 85, com o 85 no ground G100 por um wire preto (BLK); contact entre 30 e 87 |
+| GRN/RED | do 87 sai um wire verde com listra vermelha até o splice S101 |
+| S101 | o wire se divide nos dois branches, um para cada fog lamp |
+| C101 e C102, pino 1 | o connector de cada fog lamp; o wire entra pelo pino 1 |
+| fog lamp LH e RH | as duas loads, em paralelo |
+| G101 e G102 | o ponto de ground de cada lado |
+
+## Ponte para a formalização
+
+Repare no que você fez para ler o diagram: para cada desenho, respondeu a duas
+perguntas.
+
+1. **Que peça é esta, e o que ela faz no circuit?** É power, proteção,
+   control, load ou ligação?
+2. **Como ela se liga?** Em série (toda a current passa por ela) ou em
+   paralelo (ela é um caminho a mais)? Por quais terminais?
+
+Essas duas perguntas organizam os símbolos desta lição. Eles estão em grupos,
+pelo papel que a peça tem no circuit — a mesma ordem da lição
+[O electrical circuit](./o-circuito-eletrico).
+
+## Formalização: os símbolos, grupo por grupo
+
+> **Electrical symbol** é o desenho padronizado que representa uma peça num
+> wiring diagram. Ele mostra **o que a peça faz** e **por quais terminais ela
+> se liga**, mas não mostra a forma nem o tamanho real da peça.
+
+- **Exemplo:** o círculo com um X é uma bulb. A bulb de um headlamp e a de
+  uma license plate light têm tamanhos e formatos muito diferentes, e as duas
+  são desenhadas com o mesmo símbolo.
+- **Contraexemplo:** a ilustração de uma peça no component locator, que mostra
+  o formato real do connector ou da peça para você reconhecê-la no carro. Ela
+  mostra a forma, e não a função: não é um electrical symbol.
+
+Um aviso antes dos grupos: **os símbolos não são iguais em todos os
+manuais.** Fabricantes americanos, europeus e asiáticos desenham algumas peças
+de jeitos diferentes. Por isso todo service manual traz uma página de legenda
+dos símbolos. Os desenhos abaixo são os mais comuns; quando um diagram mostrar
+algo diferente, a legenda daquele manual é que vale.
+
+### 1. Power e circuit protection
+
+<TabelaSimbolos
+  itens={['bateria', 'fusivelS', 'fusivel', 'fusivelEuro', 'fusivelNumero']}
+  caption="A battery e as três formas comuns de desenhar o fuse: o S solto dos manuais americanos, o S na caixinha (como nas figuras deste site) e o retângulo europeu. Ao lado do fuse, o número dele na fuse box e o fuse rating."
+/>
+
+- **Battery.** É a power source. A placa longa é o positivo, e a curta, o
+  negativo. Muitos manuais desenham várias células (pares de placas) e um
+  tracejado entre elas, que quer dizer “mais células iguais aqui”. **No
+  circuit:** começa ali o caminho da current, e o negativo vai ao ground.
+- **Fuse.** É a circuit protection. **No circuit:** fica sempre **em série**,
+  logo depois da power source, para que toda a current do circuit passe por
+  ele. O número (F12) diz onde ele está na fuse box; o fuse rating (15 A) diz
+  o fuse que vai no lugar. Nunca ponha um fuse de rating maior — a lição
+  [Ohm's law](./lei-de-ohm) mostrou por quê.
+
+### 2. Control
+
+<TabelaSimbolos
+  itens={['interruptor', 'interruptorPosicoes', 'rele', 'rele5', 'releDiodo']}
+  caption="O switch aparece aberto, na posição de repouso. O switch de posições tem um contato comum e uma saída para cada posição (LO, HI). Os relays mostram a coil e o contact lado a lado, ligados pelo tracejado."
+/>
+
+- **Switch.** Abre e fecha o caminho. O diagram desenha o switch **em
+  repouso**: aberto, se ele for normally open. **No circuit:** em série com a
+  load que ele comanda. Um switch de várias posições, como o do blower motor,
+  tem uma saída para cada posição.
+- **Relay.** Um switch comandado por uma coil, da lição
+  [Electromagnetism e o relay](./eletromagnetismo-e-rele). **No circuit:** a
+  coil fica no control circuit, e o contact fica em série com a load, no load
+  circuit. Os números 85, 86, 30, 87 e 87a ajudam a achar os pinos no
+  socket. O relay com o diode desenhado em paralelo com a coil tem polarity.
+
+### 3. Loads
+
+<TabelaSimbolos
+  itens={['lampada', 'filamento', 'filamentoDuplo', 'motor', 'buzina', 'led']}
+  caption="As loads. A bulb aparece como o círculo com um X ou com o filament desenhado. A double filament bulb tem três terminais: um para cada filament e um comum. O electric motor é o círculo com um M; a horn, a corneta; o LED, o diode com as setas saindo."
+/>
+
+- **Bulb.** A **single filament bulb** tem um filament e dois terminais. A
+  **double filament bulb** tem dois filaments, um mais fraco e um mais forte,
+  com um terminal comum que vai ao ground. É a bulb que, em muitos carros,
+  faz a taillight (filament fraco) e a brake light (filament forte) na mesma
+  peça. **No circuit:** cada filament é uma load; os dois ficam em paralelo,
+  cada um com o seu switch.
+- **Electric motor, horn, LED.** Também são loads. **No circuit:** ficam
+  depois do control e antes do ground, e cada uma, em geral, num branch
+  próprio. O LED tem polarity, como na lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo).
+
+### 4. Resistances, coils e semiconductors
+
+<TabelaSimbolos
+  itens={['resistor', 'resistorEuro', 'variavel', 'potenciometro', 'ntc', 'ptc', 'bobina', 'bobinaNucleo', 'diodo', 'fotodiodo']}
+  caption="O resistor americano (zigue-zague) e o europeu (retângulo); o variable resistor e o potentiometer; o NTC e o PTC; a coil sem e com iron core; o diode e o photodiode."
+/>
+
+- **Resistor.** Uma resistance fixa: o zigue-zague nos manuais americanos, o
+  retângulo nos europeus. **No circuit:** em série, para limitar a current
+  (como o resistor do LED) ou para dividir a voltage.
+- **Variable resistor e potentiometer.** A seta atravessada quer dizer
+  “ajustável”. O potentiometer tem o terceiro terminal, o wiper. **No
+  circuit:** o rheostat em série com a load; o potentiometer com as pontas na
+  reference voltage e o wiper mandando o sinal ao módulo.
+- **NTC e PTC.** Resistors que mudam com a temperatura; o −T e o +T dizem o
+  sentido. **No circuit:** quase sempre como sensor, em série com um resistor
+  dentro do módulo.
+- **Coil.** As voltas desenhadas como arcos; as linhas retas ao lado são o iron
+  core. **No circuit:** dentro de relays, solenoids e fuel injectors.
+- **Diode e photodiode.** A seta aponta o sentido da current. **No circuit:**
+  o diode em série, para deixar a current passar num sentido só, ou em
+  paralelo com uma coil, para absorver o voltage spike. O photodiode, como
+  sensor de luz.
+
+### 5. As ligações: wires, splices, connectors e grounds
+
+<TabelaSimbolos
+  itens={['massa', 'splice', 'cruzamento', 'conector', 'pinos', 'corDoFio', 'completo', 'incompleto', 'versoes']}
+  caption="Os símbolos das ligações. Ground com o código do ground point; splice (ponto preto); wires que se cruzam sem ligação (sem ponto); inline connector com o código e o pin; os pins numerados na borda de um componente; a cor do wire; a caixa contínua e a tracejada; e as versões do carro."
+/>
+
+- **Ground.** O fim do caminho. O código ao lado (G101) é o ground point: o
+  component locator diz em que lugar da carroceria ele fica.
+- **Splice.** O ponto preto onde wires se juntam. O código (S101) também está
+  no component locator. **Erro comum:** dois wires que se cruzam **sem**
+  ponto não estão ligados — um passa por cima do outro, só no desenho.
+- **Connector e pin.** O arco desenhado no wire é o ponto em que o chicote se
+  separa. O código (C201) identifica o connector; o número (3) é o pin. A
+  **pinout** do connector, no manual, diz o que se liga em cada pin. É nos
+  connectors que se mede, por back-probing.
+- **Wire color.** A cor vem abreviada: GRN/RED é um wire de **base color**
+  verde com um **tracer** vermelho, uma listra fina ao longo dele. As
+  abreviações mudam entre fabricantes (GRN, GN ou G para verde, por exemplo);
+  a legenda do manual traz as de cada um.
+- **Caixa contínua ou tracejada.** A caixa contínua em volta de uma peça diz
+  que ela está desenhada **completa** nesta página. A tracejada diz que ela
+  está **incompleta**: só a parte que interessa a este circuit aparece. O
+  resto está em outras páginas — como a fuse block do diagram das fog lamps.
+- **Versões.** O mesmo diagram serve para versões diferentes do carro: com ou
+  sem um opcional, motor A ou B. Um trecho tracejado com um número dentro de um
+  círculo vale só para a versão daquele número; a legenda da página diz qual é
+  qual.
+
+**Erro comum: o tracejado tem três sentidos.** Ele aparece em três lugares, e
+cada um quer dizer uma coisa:
+
+| Onde está o tracejado | O que quer dizer |
+|---|---|
+| em volta de uma peça | componente incompleto: o resto está em outra página |
+| entre a coil e o contact de um relay | ligação mecânica: a coil move o contact |
+| num trecho de wire, com um número num círculo | o wire só existe numa versão do carro |
+
+Confundir o primeiro com o segundo é o erro mais comum de quem começa: um
+relay desenhado com caixa contínua e tracejado interno está completo.
+
+**Se o seu flash card não bater com esta lição.** Se no material da aula algum
+desenho aparecer com um nome que não corresponde aos símbolos acima — por
+exemplo, um desenho de vários wires dentro de um contorno tracejado com o nome
+*circuit protection* —, confirme com o instrutor o que ele quer dizer antes de
+decorar. Os símbolos de circuit protection nos manuais são os do fuse e do
+circuit breaker.
+
+### O mesmo circuit em dois dialetos
+
+Para ver que os símbolos mudam e o circuit não, compare o mesmo circuit
+desenhado com os símbolos europeus: fuse em retângulo, resistor em retângulo.
+
+<Esquema
+  pecas={[
+    {tipo: 'fusivelEuro', rotulo: '\\text{fuse}'},
+    {tipo: 'resistorEuro', rotulo: '\\text{resistor}'},
+  ]}
+  carga={{tipo: 'motor', rotulo: '\\text{blower motor}'}}
+  retorno="massa"
+  caption="Um blower motor com um resistor em série, no jeito europeu. Battery, fuse, resistor e motor, com retorno pelo ground (o switch de velocidades ficou fora do desenho). Num manual americano, o fuse seria o S e o resistor o zigue-zague — e o circuit seria exatamente o mesmo."
+/>
+
+É o circuit do blower motor na velocidade 1, da lição
+[Series circuit](./circuito-em-serie): o resistor em série divide a voltage
+com o motor, e o motor gira devagar.
+
+## Como falha e como diagnosticar: o diagram decide onde medir
+
+O diagram não mostra o defeito. Ele mostra **o que o circuit deveria fazer**
+e **quais partes cada load usa**. Com ele, o diagnóstico segue três passos:
+
+1. **Marcar o caminho da load que não funciona**, da power ao ground, peça por
+   peça.
+2. **Separar o compartilhado do exclusivo.** Se outra load que divide parte do
+   caminho funciona, a parte dividida está boa.
+3. **Escolher o ponto de medição no meio da parte suspeita**, num connector ou
+   num pin que dê para alcançar. A medição divide o trecho suspeito em dois, e
+   a próxima medição divide de novo.
+
+| O que o diagram mostra | O que você decide |
+|---|---|
+| duas loads depois do mesmo splice | se uma funciona, tudo antes do splice está bom |
+| um connector no meio do branch | é ali a primeira medição de available voltage |
+| um ground point com código | procure no component locator onde ele fica, e se alguém mexeu ali |
+| uma caixa tracejada | o resto da peça está em outra página: vá até lá antes de concluir |
+
+### A queixa resolvida
+
+Volte ao carro da funilaria. A fog lamp LH não acende; a RH funciona.
+
+1. **Compartilhado:** F12, o wire RED, S100, o fog lamp switch, o relay e o
+   wire GRN/RED até S101. A fog lamp RH usa tudo isso e funciona: essas partes
+   estão boas, sem precisar medir nenhuma delas.
+2. **Exclusivo da LH:** o wire de S101 até C101, o connector C101 (pin 1), a
+   bulb LH e o ground G101.
+3. **A pista da queixa:** o para-choque foi trocado. O component locator mostra
+   C101 e G101 na região do para-choque dianteiro (neste carro ilustrativo).
+   São os dois suspeitos naturais.
+4. **Primeira medição:** com as fog lamps ligadas, a available voltage no pin
+   1 de C101, do lado da fog lamp: 12 V. A power chega à fog lamp.
+5. **Segunda medição:** no terminal de ground da fog lamp LH, em relação ao
+   negative terminal da battery: 12 V. Num branch funcionando, seria perto de
+   0 V. Então o lado do ground está aberto, como no exercício 5 da lição
+   [Parallel circuit](./circuito-em-paralelo).
+6. **Correção:** no lugar que o component locator indica para G101, o wire de
+   ground está solto: o parafuso não foi recolocado depois do conserto.
+   Limpar o ponto, fixar o terminal e apertar o parafuso resolve.
+7. **Verificar:** a fog lamp LH acende, a RH continua acesa.
+
+O diagram transformou “o farol esquerdo não acende” em dois pontos de medição,
+antes de qualquer desmontagem.
+
+## Na oficina: achar e usar o diagram certo
+
+:::warning Antes de mexer em connectors e grounds
+
+- **Cuidado com os circuits do airbag.** Em muitos carros, os connectors e o
+  chicote do airbag (SRS) são amarelos, e há sensores de impacto na frente do
+  carro. Não meça nem desligue nada desses circuits sem o procedimento do
+  fabricante: um airbag pode disparar e ferir quem está perto.
+- **Não perfure o isolamento dos wires** para medir. O furo deixa entrar
+  umidade, e o wire oxida por dentro, criando uma high resistance futura. Meça
+  por back-probing nos connectors.
+- **Desligue o que o manual mandar desligar** antes de soltar connectors e
+  grounds, e nunca solte um ground com o circuit em funcionamento.
+
+:::
+
+Para encontrar e usar o diagram:
+
+1. **Identifique o carro exato:** ano, modelo, motor e opcionais — o VIN
+   resolve. Os diagrams mudam entre versões, e um diagram de outra versão
+   leva a medir no pin errado.
+2. **Ache o circuit pelo sistema** (iluminação, partida, arrefecimento) e veja
+   se a peça aparece em caixa tracejada: se aparecer, abra também a outra
+   página.
+3. **Leia a legenda dos símbolos e das cores** daquele manual antes de
+   concluir alguma coisa.
+4. **Use o component locator** para achar no carro cada connector, splice e
+   ground point do caminho suspeito.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o caminho da current
+
+No diagram das fog lamps, liste em ordem tudo por onde passa a current da fog
+lamp RH, da B+ até o ground.
+
+<details>
+<summary>Solução</summary>
+
+B+ → fuse F12 (15 A) → wire RED → splice S100 → wire RED → pino 30 do relay →
+contact → pino 87 → wire GRN/RED → splice S101 → connector C102, pin 1 → fog
+lamp RH → ground G102.
+
+Repare que o fog lamp switch **não** está nessa lista. Ele fica no control
+circuit: passa a current da coil, não a da fog lamp.
+
+</details>
+
+### Exemplo 2: o que o switch comanda
+
+**Pause e tente:** no mesmo diagram, liste o caminho da current que passa pelo
+fog lamp switch. Que peça ela aciona, e por que ela é pequena?
+
+<details>
+<summary>Solução</summary>
+
+B+ → F12 → RED → S100 → RED → fog lamp switch → wire GRN → pino 86 → relay
+coil → pino 85 → wire BLK → ground G100.
+
+Ela aciona a coil do relay. É uma current pequena, porque a coil tem uma
+resistance bem maior que a das fog lamps: na lição
+[Electromagnetism e o relay](./eletromagnetismo-e-rele), uma coil de 80 Ω
+puxava 0.15 A em 12 V.
+
+</details>
+
+### Exemplo 3: ler a cor e o código
+
+**Pause e tente:** um diagram mostra, ao lado de um wire, “BLU/WHT” e, no fim
+dele, um connector “C210” com o número “7”. O que cada código diz?
+
+<details>
+<summary>Solução</summary>
+
+BLU/WHT: wire de base color azul (*blue*) com tracer branco (*white*). C210:
+o connector número 210 do carro, que o component locator mostra onde fica. 7:
+o pin 7 desse connector. A pinout de C210 confirma que o pin 7 é esse wire.
+
+</details>
+
+### Exemplo 4: a double filament bulb
+
+**Pause e tente:** uma double filament bulb de lanterna traseira tem um
+terminal para o filament fraco, um para o forte e um comum. O cliente reclama
+que a brake light daquele lado não acende, mas a taillight sim. Qual parte da
+bulb você já sabe que está boa?
+
+<details>
+<summary>Solução</summary>
+
+O terminal comum, que vai ao ground, é compartilhado pelos dois filaments. A
+taillight (filament fraco) acende, então o terminal comum e o ground dele estão
+bons. O defeito está na parte exclusiva da brake light: o filament forte, o
+terminal dele no socket, ou o wire e o switch do circuit da brake light.
+
+</details>
+
+### Exemplo 5: completo ou incompleto
+
+**Pause e tente:** num diagram, o PCM aparece numa caixa tracejada com só
+três pins desenhados. Um colega diz que o PCM daquele carro só tem três pins.
+Ele está certo?
+
+<details>
+<summary>Solução</summary>
+
+Não. A caixa tracejada quer dizer componente incompleto: só os pins que
+interessam àquele circuit aparecem naquela página. O PCM tem muitos outros
+pins, desenhados nas páginas dos outros circuits.
+
+</details>
+
+## Pratique: flash cards dos símbolos
+
+Os cartões abaixo misturam todos os símbolos desta lição. Olhe o desenho, diga
+o nome **em inglês** em voz alta e só depois vire o cartão. Marque com
+honestidade se acertou: no fim, dá para repetir só os que você errou. Faça
+várias rodadas, em dias diferentes — é a repetição espaçada que fixa os
+símbolos.
+
+<FlashSimbolos caption="Flash cards: os cartões saem embaralhados. Diga o nome em inglês antes de virar." />
+
+## Perguntas de verificação
+
+1. Por que dois símbolos tão diferentes — o S e o retângulo — podem
+   representar o mesmo fuse?
+2. O que diferencia, no desenho, dois wires que se ligam de dois wires que só
+   se cruzam?
+3. Por que o wiring diagram não serve, sozinho, para achar uma peça no carro?
+4. Uma caixa tracejada em volta de uma peça quer dizer que ela é opcional?
+5. Por que o diagram desenha o switch e o relay na posição de repouso?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o símbolo é uma convenção, e cada região adotou a sua: o S nos
+   manuais americanos, o retângulo nos europeus. O que o símbolo informa é o
+   mesmo: uma circuit protection em série. A legenda do manual diz qual
+   convenção ele usa.
+2. O ponto preto do splice. Com o ponto, os wires estão emendados. Sem o
+   ponto, um wire só passa por cima do outro no desenho.
+3. Porque o diagram mostra as ligações, não a posição física. Duas peças
+   vizinhas no desenho podem estar longe uma da outra no carro. Para achar a
+   peça, usa-se o component locator.
+4. Não. Quer dizer que a peça está incompleta naquela página: o resto dela
+   aparece em outras páginas. Trecho opcional, de uma versão do carro, é
+   marcado com um número num círculo.
+5. Porque é o estado que não depende de ninguém. O switch “normally open”
+   desenhado aberto diz como o circuit fica sem comando. Quem lê sabe que,
+   ao acionar a peça, o contact muda.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Use as tabelas de símbolos desta lição. Escreva o nome em inglês de cada
+símbolo descrito:
+
+a) círculo com um M; b) três linhas horizontais, cada uma menor que a de
+cima; c) ponto preto onde três wires se encontram; d) retângulo com o wire
+passando por dentro; e) diode com duas setas entrando; f) resistor com −T ao
+lado.
+
+### 2. Explicação
+
+Explique, com as suas palavras, os três sentidos do tracejado num wiring
+diagram.
+
+### 3. Aplicação direta
+
+No diagram das fog lamps:
+
+a) Qual é o fuse rating do fuse do circuit?
+
+b) Qual é a cor do wire que liga o fog lamp switch ao relay?
+
+c) Em que ground point termina a coil do relay?
+
+d) Quais connectors a current das fog lamps atravessa?
+
+### 4. Variação
+
+No diagram das fog lamps, as duas fog lamps não acendem, e o relay **não**
+clica quando o switch é ligado. Que partes ficam suspeitas agora? Quais você
+já pode descartar?
+
+### 5. Caso de diagnóstico
+
+Um carro tem a double filament bulb da lanterna traseira esquerda ligada a
+três wires: um para a taillight, um para a brake light e um comum, ao ground
+G300 (diagram ilustrativo). As duas luzes daquele lado não acendem; as do
+lado direito funcionam.
+
+a) Que parte do circuit é comum às duas luzes da esquerda e não é usada pelas
+da direita?
+
+b) Qual é a primeira medição, e onde?
+
+c) O que a medição diria se o problema estivesse no ground G300?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+As duas luzes da esquerda são dois filaments diferentes, com wires de
+alimentação diferentes. O que eles dividem? Se os dois apagaram ao mesmo
+tempo, é mais provável que dois defeitos tenham acontecido juntos, ou um só
+defeito na parte que eles dividem?
+
+</details>
+
+### 6. Justificativa
+
+Por que, num diagnóstico, se escolhe o primeiro ponto de medição no **meio**
+do trecho suspeito, e não numa das pontas?
+
+### 7. Formato ASE
+
+**Question 1.** On a wiring diagram, a wire labeled GRN/RED is:
+
+- A. a red wire with a green stripe
+- B. a green wire with a red stripe
+- C. a green wire spliced to a red wire
+- D. a green wire on some versions and a red wire on others
+
+**Question 2.** Technician A says that two wires that cross on a wiring
+diagram without a dot are not connected. Technician B says that a component
+drawn inside a dashed box is shown only partially on that page. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** Two lamps are fed from the same splice. The left lamp is
+inoperative and the right lamp works normally. Which part of the circuit can
+be considered good without further testing?
+
+- A. the left lamp ground
+- B. the left lamp connector
+- C. the circuit from the fuse to the splice
+- D. the left lamp bulb
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) electric motor; b) ground; c) splice; d) fuse (símbolo europeu); e)
+   photodiode (light sensitive diode); f) NTC thermistor.
+
+2. Em volta de uma peça, o tracejado diz que ela está incompleta naquela
+   página. Entre a coil e o contact de um relay, é a ligação mecânica: a coil
+   move o contact. Num trecho de wire com um número num círculo, diz que
+   aquele trecho só existe numa versão do carro.
+
+3. a) 15 A (fuse F12). b) Verde, GRN. c) G100. d) C101 (fog lamp LH) e C102
+   (fog lamp RH), cada uma pelo pin 1.
+
+4. Sem clique, a coil não está sendo acionada: o defeito está no control
+   circuit ou na alimentação comum. Ficam suspeitos: o fuse F12, o wire RED até
+   S100, o fog lamp switch, o wire GRN até o 86, a coil do relay e o ground
+   G100 (pelo wire BLK). As fog lamps, os connectors C101 e C102 e os grounds
+   G101 e G102 ficam fora, por enquanto: nenhuma delas recebe comando, e o
+   problema começa antes. Um bom primeiro passo é ver o fuse F12, porque ele
+   alimenta os dois lados do relay.
+
+5. a) O terminal comum da bulb, o wire comum até o ground e o ground point
+   G300 — e o próprio socket. Os dois filaments usam esse caminho de volta.
+   As luzes da direita usam outro ground.
+
+   b) Com a taillight ligada, medir a voltage entre o terminal comum do socket
+   (ou o wire que vai a G300) e o negative terminal da battery. Num ground bom,
+   perto de 0 V.
+
+   c) Mostraria a voltage perto de 12 V: sem caminho de volta, não passa
+   current, e o terminal comum fica no nível do positivo, através do filament.
+   É o mesmo raciocínio do ground aberto da queixa das fog lamps.
+
+6. Porque cada medição no meio divide o trecho suspeito em duas metades e
+   descarta uma delas. Medir numa ponta descarta só o pedaço até ali. Com
+   medições sempre no meio, o número de medições cresce devagar, mesmo num
+   circuit comprido.
+
+7. **Question 1: B.** A primeira cor é a base color (verde), e a segunda é o
+   tracer (vermelho). A alternativa A inverte a ordem. A C descreve um splice,
+   que seria desenhado com um ponto e duas cores em wires diferentes. A D
+   descreve versões, marcadas com números em círculos.
+
+   **Question 2: C.** Os dois estão certos. Sem o ponto do splice, os wires só
+   se cruzam no desenho (A). A caixa tracejada indica componente incompleto
+   na página (B).
+
+   **Question 3: C.** A lâmpada da direita usa o trecho do fuse até o splice e
+   funciona: esse trecho está bom. O ground (A), o connector (B) e a bulb (D)
+   da esquerda são exclusivos dela e continuam suspeitos.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o wiring diagram é o mapa das ligações do circuit.
+  Cada electrical symbol diz o que a peça faz e por quais terminais ela se
+  liga; cada código (fuse, cor, splice, connector, pin, ground point) diz onde
+  procurar no carro. O diagram não mostra a posição física: para isso existe o
+  component locator.
+- **Quando usar:** antes de medir qualquer circuit. O diagram mostra o que é
+  compartilhado e o que é exclusivo, e onde ficam os connectors para medir.
+- **Com o que se conecta:** a ordem power → protection → control → load →
+  ground vem da lição [O electrical circuit](./o-circuito-eletrico); os
+  símbolos do relay, do diode e dos sensores, das duas lições anteriores; o
+  raciocínio do compartilhado e do exclusivo, da lição
+  [Parallel circuit](./circuito-em-paralelo). As medições em cada ponto são as
+  da lição [Medições com o multimeter](./medicoes-com-multimetro).
+
+**Termos desta lição para revisar:** wiring diagram, electrical symbol,
+splice, pin, pinout, inline connector, wire color code, base color, tracer,
+fuse rating, ground point, component locator, single filament bulb, double
+filament bulb, LH, RH, fog lamp switch.
