@@ -19,8 +19,9 @@ programa e o funcionamento técnico do repositório.
 O site foi montado a partir do projeto anterior de curso de matemática
 (`../math_study`), do qual vieram a configuração do Docusaurus, a paleta de
 cores dos diagramas, o `SvgMath` e o quadro branco. Conteúdo pronto: os tópicos
-1 a 3 da TRN-120 (oito lições) e o capítulo 1 do livro da AUT-116, *Review of
-Engine Operation* (oito lições).
+1 a 3 da TRN-120 (oito lições), o laboratório de circuits da TRN-120 (bancada
+interativa `LabCircuito`, primeira versão: battery, bulb, switch, fuse e wire)
+e o capítulo 1 do livro da AUT-116, *Review of Engine Operation* (oito lições).
 
 Repositório público: `https://github.com/bobboyms/automotive-study`. Todo push
 na `main` publica o site no GitHub Pages pelo workflow

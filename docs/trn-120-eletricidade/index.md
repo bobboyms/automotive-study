@@ -86,6 +86,14 @@ conhecimento anterior.
    resistance. Onde vão as test leads, em que estado fica o circuit e por que
    uma voltage medida sem current pode enganar.
 
+### Laboratório
+
+- [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
+  montar circuits com a mão: battery, wire, bulb, switch e fuse. Você arrasta
+  as peças, liga com wires e vê a current circular. Os experimentos retomam as
+  lições 2, 6 e 7: o complete circuit, as bulbs em série e em paralelo, e o
+  short circuit que queima o fuse.
+
 ### Próximos tópicos (em preparação)
 
 9. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o

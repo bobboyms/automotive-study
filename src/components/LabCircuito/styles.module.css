@@ -1,0 +1,340 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.7rem;
+  justify-items: center;
+}
+
+/* --- paleta ---------------------------------------------------------------- */
+
+.paleta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.peca {
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  min-width: 4.6rem;
+  padding: 0.35rem 0.5rem 0.4rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-base);
+  background: var(--mv-paper);
+  border: 1.5px solid var(--ifm-color-emphasis-400);
+  border-radius: 10px;
+  cursor: grab;
+  /* sem isso, no celular o arrasto vira rolagem da página */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.peca:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.icone {
+  display: block;
+  width: 3.2rem;
+  height: auto;
+  pointer-events: none;
+}
+
+/* --- bancada --------------------------------------------------------------- */
+
+.bancada {
+  display: block;
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  background: var(--mv-paper);
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  outline-offset: 3px;
+}
+
+/* o contorno de foco fica para quem chega pelo teclado; no toque e no clique
+   ele cercava a bancada inteira de azul */
+.bancada:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.ponto {
+  fill: var(--ifm-color-emphasis-400);
+}
+
+.no {
+  fill: var(--ifm-font-color-base);
+}
+
+.fio {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.fioFino {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.placa {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 2.4;
+}
+
+.placaCurta {
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 5;
+}
+
+.polo {
+  fill: var(--ifm-font-color-base);
+  font-family: var(--ifm-font-family-base);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.parte,
+.contato {
+  fill: var(--mv-paper);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.8;
+}
+
+.carga line {
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.cargaAcesa line {
+  stroke: var(--mv-paper);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.lampada {
+  fill: var(--mv-tone-2);
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+}
+
+.raio {
+  stroke: var(--mv-tone-2);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.defeito line,
+.defeito path {
+  fill: none;
+  stroke: var(--mv-tone-3);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+/* pontos que andam pelo wire: a current */
+.corrente {
+  fill: none;
+  stroke: var(--mv-tone-1);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0 15;
+  animation: andar linear infinite;
+  pointer-events: none;
+}
+
+@keyframes andar {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corrente {
+    animation: none;
+  }
+}
+
+.selecao {
+  fill: none;
+  stroke: var(--ifm-color-primary);
+  stroke-width: 1.8;
+  stroke-dasharray: 5 4;
+  pointer-events: none;
+}
+
+.fantasma {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.invalido {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.rascunho {
+  fill: none;
+  stroke: var(--ifm-color-primary);
+  stroke-width: 2.4;
+  stroke-dasharray: 6 5;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.alvoPeca {
+  stroke: transparent;
+  stroke-width: 30;
+  pointer-events: stroke;
+  cursor: grab;
+}
+
+.alvoPonto {
+  fill: transparent;
+  pointer-events: all;
+  cursor: crosshair;
+}
+
+/* --- painel ---------------------------------------------------------------- */
+
+.painel {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 40rem;
+  font-size: 0.95rem;
+}
+
+.painel p {
+  margin: 0;
+}
+
+.situacao {
+  font-weight: 600;
+}
+
+.alerta {
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border-left: 4px solid var(--mv-tone-3);
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 4px;
+}
+
+.aviso {
+  color: var(--ifm-color-emphasis-800);
+  font-style: italic;
+}
+
+.dica {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.leitura {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  border-radius: 10px;
+}
+
+.nome {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.termo {
+  all: unset;
+  cursor: pointer;
+  border-bottom: 2px dotted var(--ifm-color-primary);
+}
+
+.dados {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.9rem;
+  margin: 0;
+}
+
+.dados dt {
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 400;
+}
+
+.dados dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.acoes,
+.acoesBancada {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.botao,
+.botaoLeve {
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ifm-color-primary);
+  background: var(--mv-paper);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+}
+
+.botaoLeve {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.nota {
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .peca {
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 0.3rem 0.2rem;
+    font-size: 0.78rem;
+  }
+
+  .icone {
+    width: 2.6rem;
+  }
+
+  .dados {
+    grid-template-columns: 1fr auto;
+  }
+}

@@ -7,7 +7,8 @@ desenho sai na mesma fonte das fórmulas ao redor.
 
 Componente interativo (com controle deslizante) só quando **mexer no parâmetro
 é a ideia** sendo ensinada — veja o critério em
-`.claude/skills/tutor-automotivo/escrever-licao.md`. Ainda não há nenhum.
+`.claude/skills/tutor-automotivo/escrever-licao.md`. Os interativos são
+`CicloQuatroTempos` e `LabCircuito`.
 
 ## Conferência obrigatória
 
@@ -101,6 +102,7 @@ import Circuito from '@site/src/components/Circuito';
 | lubrication system com as peças: oil pan, pickup, pump, filter, galleries | `Lubrificacao` |
 | starting system (por trás) e charging system (pela frente, com a drive belt) | `PartidaCarga` |
 | elétrons livres dentro do fio, sem e com corrente | `FioEletrons` |
+| bancada para o aluno montar circuits com a mão: battery, wire, bulb, switch, fuse (interativo) | `LabCircuito` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -167,6 +169,70 @@ A bateria segue o símbolo dos esquemas: placa longa é o positivo, placa curta 
 grossa é o negativo. As setas seguem o sentido convencional, porque é o dos
 esquemas do fabricante; o sentido dos elétrons existe para a comparação na lição
 [O circuito elétrico](../../docs/trn-120-eletricidade/02-o-circuito-eletrico.mdx).
+
+---
+
+## LabCircuito
+
+Bancada interativa: o aluno arrasta battery, bulb, switch, fuse e wire de uma
+barra para uma grade, liga as peças e vê o circuit funcionar. Usada na página
+[Laboratório de circuits](../../docs/trn-120-eletricidade/90-laboratorio-de-circuitos.mdx).
+
+```mdx
+{/* bancada vazia */}
+<LabCircuito id="livre" />
+
+{/* começa com o circuit da lição 2: battery, fuse, switch e bulb num laço */}
+<LabCircuito id="experimento-2" inicial="simples" />
+```
+
+| Prop | O que faz |
+|---|---|
+| `id` | nome da montagem salva no navegador (`localStorage`). **Duas bancadas na mesma página precisam de ids diferentes**, senão uma apaga a outra |
+| `inicial` | `'vazio'` (padrão) ou `'simples'`. O botão “Recomeçar a montagem” volta a ela |
+| `caption` | texto simples, legenda abaixo da bancada |
+
+Como funciona:
+
+- **Grade.** 8 × 6 pontos. Cada peça ocupa um trecho entre dois pontos
+  vizinhos, na horizontal ou na vertical; peças que tocam o mesmo ponto estão
+  ligadas. Um wire puxado de um ponto a outro vira um trecho por espaço da
+  grade (primeiro na horizontal, depois na vertical), e não pode passar por
+  cima de outra peça. Onde três ou mais pontas se encontram, aparece o ponto
+  preto de junction.
+- **Gestos.** Arrastar da barra põe a peça; tocar na barra põe num lugar
+  livre. Arrastar o meio de uma peça move; arrastar a partir de um ponto da
+  grade puxa um wire (os pontos ficam por cima das peças, então puxar perto da
+  ponta de uma peça começa um wire). Tocar seleciona; no switch, também abre e
+  fecha. Com a peça selecionada, o painel mostra voltage, current e power e os
+  botões girar, apagar, queimar ou trocar a bulb, trocar o fuse. No teclado,
+  Delete apaga e R gira.
+- **Girar** é um quarto de volta em torno do terminal `a`. Na battery, `a` é
+  o positivo, e duas voltas trocam o + de lado.
+- **Simulação** em `simular.js`: análise nodal, com cada peça como uma
+  condutância e a battery como fonte de current em paralelo com a resistance
+  interna. Resolve qualquer montagem. Depois de resolver, queima a peça mais
+  sobrecarregada — fuse acima de 10 A, bulb acima do dobro da power normal — e
+  resolve de novo, até nada passar do limite. A peça queimada fica queimada até
+  o aluno trocar.
+- **Valores** (ilustrativos, em `VALORES`): battery de 12 V com 0.01 Ω
+  internos, bulb de 24 Ω (6 W em 12 V, a taillight da lição de parallel
+  circuit), fuse de 10 A, wire, switch fechado e fuse inteiro com 0.001 Ω. A
+  resistance interna existe para o short circuit dar uma current finita, e os
+  0.001 Ω dos wires para cada trecho ter a sua current. Por causa deles, a
+  bancada às vezes mostra 11.9 V onde a conta da lição dá 12 V — a página do
+  laboratório avisa isso.
+- **Cores.** Os papéis do `Circuito`: azul (`1`) é a current — os pontos que
+  andam nos wires, no sentido convencional, mais depressa quanto maior a
+  current —, laranja (`2`) é a load, verde (`3`) é o defeito (filamento
+  partido, fuse queimado, alerta de short circuit). A seleção e o wire sendo
+  puxado usam a cor primária do site, que é da interface, não do desenho.
+- **Celular.** A bancada e a barra têm `touch-action: none`, porque senão
+  arrastar uma peça rolaria a página. A página do laboratório diz ao aluno que,
+  para rolar, ele toca fora da bancada.
+- **Montagem salva** no `localStorage`, lida só depois que a página abre (no
+  build não existe `localStorage`). Toda leitura e escrita fica em
+  `try/catch`: com o armazenamento bloqueado, a bancada funciona sem salvar.
 
 ---
 

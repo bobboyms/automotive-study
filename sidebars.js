@@ -74,6 +74,11 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'doc',
+          id: 'trn-120-eletricidade/laboratorio-de-circuitos',
+          label: 'Laboratório de circuits',
+        },
       ],
     },
     {

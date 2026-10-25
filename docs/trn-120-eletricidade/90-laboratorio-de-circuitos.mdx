@@ -1,0 +1,337 @@
+---
+title: Laboratório de circuits
+description: Bancada interativa para montar circuits com battery, wire, bulb, switch e fuse e ver a current circular.
+---
+
+import LabCircuito from '@site/src/components/LabCircuito';
+
+# Laboratório de circuits
+
+> **Para que serve:** montar com a mão os circuits das lições e testar as
+> previsões. Você arrasta as peças para a bancada, liga com wires e vê o que
+> acontece: a bulb acende ou não, com que brilho, quanta current passa por
+> cada peça.
+
+Nas lições, você calculou o que um circuit faz. Aqui você monta o circuit e
+confere a conta. O laboratório resolve o circuit inteiro a cada peça que você
+põe ou tira. Por isso ele funciona com qualquer montagem, não só com as dos
+exemplos.
+
+Os experimentos desta página retomam três lições:
+[O electrical circuit](./o-circuito-eletrico),
+[Series circuit](./circuito-em-serie) e
+[Parallel circuit](./circuito-em-paralelo). Em cada experimento, **preveja o
+resultado antes de testar**. Escreva a previsão no papel ou no quadro
+(`npm run quadro`). Depois teste e compare. Quando a bancada mostrar uma coisa
+diferente da sua previsão, é aí que está o aprendizado: volte à lição e procure
+o que faltou.
+
+## Como usar a bancada
+
+- **Pôr uma peça:** arraste a peça da barra de cima e solte na bancada. Se você
+  só tocar na peça da barra, ela entra num lugar livre, e você arrasta depois.
+- **Ligar com wire:** encoste o dedo (ou o mouse) num ponto da grade e arraste
+  até outro ponto. O wire segue a grade: primeiro na horizontal, depois na
+  vertical. Duas peças estão ligadas quando tocam o mesmo ponto.
+- **Mover:** arraste a peça pelo meio. Ela encaixa no trecho da grade mais
+  perto.
+- **Ver os números:** toque na peça. Embaixo da bancada aparecem a voltage e a
+  current nela. Na bulb, também a power e o brilho.
+- **Abrir e fechar o switch:** toque no switch.
+- **Girar ou apagar:** toque na peça e use os botões que aparecem embaixo.
+  Girar a battery duas vezes troca o + de lado.
+- **Simular um defeito:** toque numa bulb e use “Queimar a bulb”. O filamento
+  parte, como numa bulb queimada de verdade.
+
+No celular, a bancada não rola a página. Para rolar, toque fora dela. A
+montagem fica salva neste navegador: se você sair da página e voltar, ela
+continua lá.
+
+## O que a bancada mostra
+
+- **Os pontos azuis que andam nos wires são a current.** Eles andam no sentido
+  convencional, do + da battery para o −, que é o sentido dos esquemas dos
+  fabricantes (lição 2). Quanto maior a current, mais depressa eles andam.
+  Wire sem pontos é wire sem current.
+- **O brilho da bulb acompanha a power que ela recebe.** Com 12 V, a bulb do
+  laboratório gasta 6 W: esse é o brilho “100% do normal”. Com menos voltage,
+  ela gasta menos power e brilha menos.
+- **A frase logo abaixo da bancada resume o circuit:** quanta current sai da
+  battery, quantas bulbs estão acesas, e os avisos de short circuit e de fuse
+  queimado.
+
+Os valores das peças são ilustrativos, escolhidos para as contas ficarem
+redondas:
+
+| Peça | No laboratório |
+|---|---|
+| battery | 12 V |
+| bulb | 24 Ω acesa, 6 W em 12 V — a mesma taillight da lição de parallel circuit |
+| fuse | queima acima de 10 A |
+| wire, switch fechado, fuse inteiro | resistance quase zero |
+
+A bulb também queima se receber voltage demais: o laboratório queima a bulb
+quando a power passa do dobro da normal.
+
+Os números do laboratório são arredondados como num multimeter: 0.50 A, 12.0 V.
+Às vezes a última casa sai um pouco diferente da conta — 11.9 V em vez de
+12.0 V, por exemplo. Isso acontece porque o laboratório inclui a pequena
+resistance dos wires e da própria battery, que a conta das lições despreza.
+
+## Bancada livre
+
+Uma bancada vazia, para montar o que quiser.
+
+<LabCircuito id="livre" />
+
+## Experimento 1: montar o circuit do zero
+
+**A ideia que volta:** na lição [O electrical circuit](./o-circuito-eletrico),
+a current só circula quando existe um complete circuit: um caminho que sai do
+\+ da battery, passa pela load e volta ao −.
+
+**Monte:** uma battery, um fuse, um switch e uma bulb, ligados num laço com
+wires. Siga a ordem dos esquemas: battery, depois fuse (proteção), depois
+switch (controle), depois bulb (load), e o wire de volta até o − da battery.
+
+**Antes de testar, preveja:**
+
+1. Com o switch fechado, quanta current passa pela bulb? Use a lei de Ohm, com
+   a bulb de 24 Ω em 12 V.
+2. Você abre o switch. Quanta current passa agora? E qual voltage aparece
+   entre os dois lados do switch aberto?
+
+<LabCircuito id="experimento-1" />
+
+<details>
+<summary>O que a bancada deve mostrar</summary>
+
+1. Pela lei de Ohm, $I = V \div R = 12 \div 24 = 0.5\,\text{A}$. A bancada
+   mostra 0.50 A na bulb, no fuse, no switch e em cada wire. A current é a mesma
+   em todo o laço, porque só existe um caminho.
+
+   Se a bulb não acendeu, procure o ponto em que o laço não fecha: um wire que
+   termina num ponto onde não há outra peça, ou duas peças que parecem ligadas
+   mas param em pontos vizinhos. Toque nas peças, uma de cada vez. Onde a
+   current marca 0.00 A, o caminho está interrompido.
+
+2. Com o switch aberto, a current cai para 0.00 A, e os pontos azuis param. Toque
+   no switch: entre os dois lados dele aparecem 12.0 V, a voltage inteira da
+   battery. É a regra da lição [Series circuit](./circuito-em-serie): o ponto
+   aberto de um circuit fica com a voltage inteira, porque sem current nenhuma
+   outra peça gasta voltage. Toque na bulb: ela tem 0.00 V.
+
+</details>
+
+## Experimento 2: duas bulbs em série
+
+**A ideia que volta:** num series circuit, a current é a mesma em todas as
+peças, as resistances se somam e as voltage drops somam a source voltage.
+
+**Monte:** a bancada já começa com o circuit do experimento 1. Toque no trecho
+de wire logo abaixo da bulb e apague esse trecho. Ponha uma segunda bulb no
+lugar dele: gire a bulb para ficar em pé e arraste até que as pontas dela
+toquem a primeira bulb e o wire de baixo.
+
+**Antes de testar, preveja:**
+
+1. A total resistance, a current e a voltage drop em cada bulb.
+2. As duas bulbs brilham mais, menos ou igual à bulb sozinha do experimento 1?
+   Calcule a power de cada uma.
+3. Você queima uma das bulbs. O que acontece com a outra?
+
+<LabCircuito id="experimento-2" inicial="simples" />
+
+<details>
+<summary>O que a bancada deve mostrar</summary>
+
+1. A total resistance é $24 + 24 = 48\,\Omega$. A current é
+   $I = 12 \div 48 = 0.25\,\text{A}$, a mesma nas duas bulbs. A voltage drop
+   em cada uma é $V = 0.25 \times 24 = 6\,\text{V}$, e as duas somam os 12 V
+   da battery.
+2. As duas brilham menos. A power de cada uma é
+   $P = 6 \times 0.25 = 1.5\,\text{W}$, contra 6 W da bulb sozinha. A bancada
+   mostra “25% do normal”, porque 1.5 W é um quarto de 6 W. Repare: a voltage
+   caiu para a metade, mas a power caiu para um quarto. Isso acontece porque a
+   voltage e a current caíram as duas pela metade, e a power é o produto das
+   duas.
+
+   **Erro comum:** prever que cada bulb fica com metade do brilho. Metade da
+   voltage não dá metade da power, porque a current também cai.
+
+3. A outra bulb apaga. A bulb queimada abriu o único caminho, então a current
+   para em todo o circuit. Toque na bulb queimada: ela fica com os 12.0 V
+   inteiros, como o switch aberto do experimento 1. É por isso que, num series
+   circuit, uma peça aberta desliga todas as outras.
+
+</details>
+
+## Experimento 3: duas bulbs em paralelo
+
+**A ideia que volta:** num parallel circuit, cada branch recebe a voltage
+inteira da power source, as currents dos branches se somam e a total
+resistance fica menor que a do menor branch.
+
+**Monte:** a bancada começa de novo com o circuit do experimento 1. Arraste uma
+segunda bulb para a bancada, gire para ficar em pé e coloque-a entre o wire de
+cima e o de baixo, numa coluna livre à esquerda da primeira bulb. Depois puxe
+um wire de um ponto do wire de cima até a ponta de cima da bulb nova, e outro
+da ponta de baixo até o wire de baixo. Os pontos pretos que aparecem nos
+encontros são os junctions.
+
+Ligue os dois wires da bulb nova **depois** do switch, entre o switch e a
+primeira bulb. Assim o switch controla as duas bulbs.
+
+**Antes de testar, preveja:**
+
+1. A voltage e a current em cada bulb, e a current que sai da battery.
+2. As duas brilham mais, menos ou igual à bulb sozinha?
+3. Você queima uma das bulbs. O que acontece com a outra? E com a current da
+   battery?
+
+<LabCircuito id="experimento-3" inicial="simples" />
+
+<details>
+<summary>O que a bancada deve mostrar</summary>
+
+1. Cada bulb recebe os 12 V da battery, porque cada uma tem o próprio branch
+   ligado direto aos dois lados da battery. A current de cada uma é
+   $I = 12 \div 24 = 0.5\,\text{A}$. Da battery saem as duas somadas:
+   $0.5 + 0.5 = 1\,\text{A}$. A bancada mostra 1.00 A na battery, no fuse e no
+   switch, e 0.50 A em cada bulb. A total resistance é
+   $12 \div 1 = 12\,\Omega$, menor que os 24 Ω de cada bulb.
+2. As duas brilham igual à bulb sozinha: “100% do normal”. Cada uma tem os
+   mesmos 12 V e os mesmos 0.5 A do experimento 1.
+3. A outra continua acesa, com o mesmo brilho. O branch dela não passa pela
+   bulb queimada. A current da battery cai de 1.00 A para 0.50 A, porque agora
+   só um branch puxa current. É assim que as taillights funcionam: uma queimada
+   não apaga a outra.
+
+   Se as duas bulbs apagaram quando você queimou uma, a bulb nova ficou em
+   série, e não em paralelo. Confira se as duas pontas dela estão ligadas aos
+   wires de cima e de baixo, e não à outra bulb.
+
+</details>
+
+## Experimento 4: short circuit e fuse
+
+:::danger Segurança: na bancada de verdade, um short circuit é perigoso
+
+Na tela, o short circuit não machuca ninguém. Numa battery de verdade, sim. Uma
+ferramenta de metal encostada ao mesmo tempo no terminal positivo e na massa do
+carro fecha um short circuit. Passam centenas de amps por ela. A ferramenta
+esquenta até ficar em brasa em poucos segundos, pode queimar a sua mão e soltar
+faíscas. A battery solta gás hidrogênio, que explode com uma faísca.
+
+Por isso, na oficina: tire anéis, relógio e pulseira de metal antes de mexer
+perto da battery. Ao desligar a battery, solte primeiro o cabo do terminal
+negativo. Nunca deixe ferramenta apoiada em cima da battery.
+
+:::
+
+**A ideia que volta:** um short circuit é um caminho que liga o lado
+positivo ao negativo sem passar pela load. Ele quase não tem resistance, então a
+lei de Ohm dá uma current enorme. O fuse existe para abrir o circuit quando a
+current passa do limite dele (lições [Ohm's law](./lei-de-ohm) e
+[Parallel circuit](./circuito-em-paralelo)).
+
+**Monte:** a bancada começa com o circuit do experimento 1. Faça um wire que
+contorna a bulb pela coluna da direita, em dois trechos. Primeiro arraste da
+ponta de cima da bulb até o ponto da coluna da direita que fica na altura da
+ponta de baixo: o wire vai para a direita e depois desce. Depois arraste desse
+ponto até a ponta de baixo da bulb. Esse wire é o short circuit: um segundo
+caminho, ao lado da bulb, quase sem resistance.
+
+**Antes de testar, preveja:**
+
+1. O que acontece com a current que sai da battery?
+2. O que acontece com o fuse? E com a bulb?
+
+<LabCircuito id="experimento-4" inicial="simples" />
+
+<details>
+<summary>O que a bancada deve mostrar</summary>
+
+1. A current sobe muito. O caminho do short circuit quase não tem resistance.
+   Pela lei de Ohm, com uma resistance perto de zero, a current fica muito
+   acima dos 10 A do fuse.
+2. O fuse queima na hora, e a bulb apaga. A bancada mostra o fuse com o
+   elemento partido, e o aviso diz que passaram mais de 10 A. Toque no fuse:
+   entre os dois lados dele aparecem 12.0 V, como em qualquer ponto aberto.
+
+Agora faça o que se faz na oficina, na ordem certa. Primeiro apague o wire do
+short circuit. Só depois toque no fuse e use “Trocar o fuse”. A bulb volta a
+acender. Se você trocar o fuse antes de desfazer o short circuit, o fuse novo
+queima na mesma hora. Na oficina é igual: um fuse que queima de novo é sinal
+de que a causa continua lá.
+
+**Para ver por que o fuse existe:** toque em “Recomeçar a montagem”, apague o
+fuse e ponha um wire no lugar dele. Depois refaça o short circuit. Agora nada
+interrompe a current: a frase embaixo da bancada mostra centenas de amps saindo
+da battery. Num carro, essa current esquentaria o wire até derreter o insulator,
+e o wire sem insulator pode encostar em outros e pegar fogo.
+
+</details>
+
+## Experimento 5: duas batteries em série
+
+**A ideia que volta:** as voltages de duas power sources em série se somam,
+assim como as voltage drops das loads em série.
+
+**Monte:** a bancada começa com o circuit do experimento 1. Apague o trecho de
+wire logo acima da battery e ponha uma segunda battery no lugar, em pé, com o
+\+ para cima. Para deixar o + em cima, gire a battery nova uma vez depois de
+colocá-la na bancada.
+
+**Antes de testar, preveja:**
+
+1. Qual voltage chega à bulb? Quanta current passa e quanta power ela gasta?
+2. O que acontece com a bulb?
+
+<LabCircuito id="experimento-5" inicial="simples" />
+
+<details>
+<summary>O que a bancada deve mostrar</summary>
+
+1. As duas batteries em série dão $12 + 12 = 24\,\text{V}$. A current na bulb
+   é $I = 24 \div 24 = 1\,\text{A}$, o dobro da normal. A power é
+   $P = 24 \times 1 = 24\,\text{W}$, quatro vezes os 6 W normais.
+2. A bulb queima. O laboratório queima a bulb quando a power passa do dobro da
+   normal, e 24 W é o quádruplo. Uma bulb de verdade também não aguenta: o
+   filamento esquenta demais e parte. Por isso uma fonte de 24 V ligada num
+   carro de 12 V danifica bulbs e outras peças.
+
+   Se a bulb não acendeu nem queimou, a battery nova ficou invertida, com o −
+   para cima. Aí as duas voltages se opõem: $12 - 12 = 0\,\text{V}$, e não
+   circula current. Toque na battery nova e gire duas vezes para trocar o + de
+   lado.
+
+**Para continuar:** troque a bulb queimada e acrescente uma segunda bulb em
+série com ela, como no experimento 2. Com 24 V divididos por duas bulbs, cada
+uma recebe 12 V e brilha normal. A conta: a total resistance é 48 Ω, a current
+é $24 \div 48 = 0.5\,\text{A}$ e cada bulb fica com
+$0.5 \times 24 = 12\,\text{V}$.
+
+</details>
+
+## O que o laboratório não mostra
+
+O laboratório simplifica algumas coisas que você vai encontrar na bancada da
+aula:
+
+- **A resistance da bulb muda com a temperatura.** O laboratório usa 24 Ω
+  fixos, que é a resistance da bulb acesa. Fria, o filamento tem uma resistance
+  bem menor. Por isso, se você medir a bulb apagada com o ohmmeter, vai ler um
+  número menor que o da conta com a bulb acesa.
+- **O wire de verdade tem resistance, e connectors oxidados têm mais.** No
+  laboratório, todo wire está em bom estado. A high resistance de um terminal
+  oxidado, da lição [Ohm's law](./lei-de-ohm), não aparece aqui.
+- **A voltage da battery de verdade cai com a load e com o state of charge.**
+  No laboratório, a battery fica sempre perto de 12 V.
+- **O fuse de verdade leva um tempo para queimar.** Uma current um pouco acima
+  do limite pode levar segundos ou minutos. No laboratório, o fuse queima na
+  hora em que passa de 10 A.
+
+Nenhum desses detalhes muda o que os experimentos ensinam: o caminho completo,
+a divisão da voltage em série, a soma das currents em paralelo e a função do
+fuse.
