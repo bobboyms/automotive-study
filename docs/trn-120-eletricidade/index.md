@@ -96,10 +96,29 @@ conhecimento anterior.
     variable resistor, potentiometer e thermistor (NTC e PTC): a base dos
     sensores. O diode, que deixa a current passar num sentido só; o LED, o
     photodiode e o clamping diode do relay.
+11. [O resistor fixo](./resistor-fixo) — ler o color code e a tolerance, e
+    escolher o watt rating: por que dois resistors com as mesmas faixas
+    coloridas não servem um no lugar do outro. O tapped resistor do blower.
+12. [Switches](./switches) — poles e throws, normally open e normally
+    closed, momentary e maintained; push-button, thermal switch, pressure
+    switch e mercury switch. O contactor dos híbridos. Por que o diagram
+    sempre desenha o switch em repouso.
+13. [Circuit protection](./protecao-do-circuito) — o fuse protege o **wire**,
+    não a load: blade fuse, cartridge, maxi, fusible link e circuit breaker.
+    Por que aumentar o fuse causa incêndio, e como testar um fuse sem tirá-lo
+    do lugar.
+14. [Loads: bulbs e motores](./cargas-bulbs-e-motores) — a current que uma
+    load puxa não é fixa. Inrush current da bulb, a bulb de dois filaments e
+    o feedback por ground ruim, o flasher que pisca rápido como aviso, e a
+    counter-voltage que explica o current draw de todo electric motor.
+15. [Capacitor e transformer](./capacitor-e-transformer) — as duas peças que
+    trabalham por campo: o capacitor guarda carga e tira ruído do rádio; o
+    transformer troca voltage por current, e a ignition coil é o exemplo do
+    carro.
 
 ### Tópico 5 — Wiring diagrams
 
-11. [Electrical symbols](./simbolos-eletricos) — os símbolos dos wiring
+16. [Electrical symbols](./simbolos-eletricos) — os símbolos dos wiring
     diagrams, grupo por grupo, e onde cada peça entra no circuit; cores de
     wire, splices, connectors, pins e ground points. Um diagram inteiro lido
     para decidir onde medir, e flash cards para praticar.
@@ -114,21 +133,19 @@ conhecimento anterior.
 
 ### Próximos tópicos (em preparação)
 
-12. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+17. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-13. **Control e circuit protection** — fuses, fusible links, circuit breakers,
-    tipos de switch e circuits de relay nos diagrams.
-14. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+18. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-15. **Outros instrumentos de teste** — test light, clamp meter e fused jumper
+19. **Outros instrumentos de teste** — test light, clamp meter e fused jumper
     wire.
-16. **Diagnóstico de circuits** — open circuit, short to ground, short to
+20. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-17. **Battery** — construção, state of charge, testes, recarga, jump start e
+21. **Battery** — construção, state of charge, testes, recarga, jump start e
     parasitic draw.
-18. **Starting system** — starter motor, solenoid e testes.
-19. **Charging system** — alternator, rectifier, voltage regulator e testes.
+22. **Starting system** — starter motor, solenoid e testes.
+23. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

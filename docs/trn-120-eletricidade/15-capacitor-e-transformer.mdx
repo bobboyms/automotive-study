@@ -1,0 +1,666 @@
+---
+title: "Capacitor e transformer: guardar e transformar"
+---
+
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Capacitor e transformer: guardar e transformar
+
+> **Pergunta central:** as loads das lições anteriores gastam a energia na
+> hora em que ela chega. Estas duas peças não: uma **guarda** energia para
+> devolver depois, e a outra **passa** energia de um circuit para outro sem
+> que os dois se toquem. Como isso é possível, e para que serve no carro?
+
+## A queixa: o chiado no rádio que acelera com o motor
+
+Um cliente reclama:
+
+> “Quando eu ligo o motor, o rádio no AM fica cheio de chiado. E o chiado
+> acompanha o motor: acelerou, ele fica mais rápido. Com a chave ligada e o
+> motor desligado, o rádio fica limpo. No FM quase não dá para notar.”
+
+Três detalhes dessa queixa já apontam o caminho, e vale separá-los antes de
+continuar:
+
+1. o ruído só aparece **com o motor funcionando**;
+2. o ritmo dele **acompanha a rotação**;
+3. ele aparece no AM e quase não aparece no FM.
+
+Alguma coisa que funciona no ritmo do motor está mandando energia elétrica
+para onde ela não deveria ir. Ao fim desta lição você vai saber que peça
+produz essa energia, por que ela chega ao rádio e qual é a peça que existe
+exatamente para impedir isso.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| capacitor | capacitor | peça que guarda carga elétrica entre duas placas |
+| plate | placa | cada uma das duas superfícies condutoras do capacitor |
+| dielectric | dielétrico | o isolante entre as placas |
+| capacitance | capacitância | quanta carga o capacitor guarda por volt |
+| farad | farad | a unidade de capacitance |
+| noise suppression | supressão de ruído | tirar do circuit as variações rápidas que atrapalham o rádio |
+| radio frequency interference | interferência de radiofrequência | o ruído elétrico que o rádio capta |
+| transformer | transformador | duas coils que trocam energia pelo campo magnético |
+| primary winding | enrolamento primário | a coil que recebe a current do circuit de entrada |
+| secondary winding | enrolamento secundário | a coil em que a voltage é induzida |
+| turns ratio | relação de espiras | quantas voltas tem uma coil em relação à outra |
+| step-up transformer | transformador elevador | aumenta a voltage e diminui a current |
+| step-down transformer | transformador abaixador | diminui a voltage e aumenta a current |
+| isolation transformer | transformador isolador | passa a energia sem ligação elétrica entre os dois lados |
+| mutual induction | indução mútua | a voltage que uma coil induz na outra |
+| ignition coil | bobina de ignição | o step-up transformer que gera a alta voltage da vela |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+- **capacitors:** na supressão de ruído do rádio, dentro de quase todo módulo
+  (para segurar a voltage estável), no circuit que mantém o airbag alimentado
+  por alguns instantes depois de a battery se soltar numa colisão, e nos
+  sistemas de híbridos;
+- **transformers:** a **ignition coil** de cada vela é o exemplo principal no
+  carro; os conversores de voltage dos híbridos e elétricos também usam o
+  princípio;
+- **os dois juntos:** no circuit de ignição dos carros com platinado, o
+  *condenser* era um capacitor ligado em paralelo com os contatos, e sem ele
+  o sistema não funcionava.
+
+Na Wake Tech, o capacitor volta em AUT-181 e AUT-183 (*Engine Performance*) e
+nas disciplinas EVX. Na prova ASE, o assunto está na área **A6**, e a ignition
+coil aparece de novo na **A8**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O que é eletricidade](./o-que-e-eletricidade), o que é um
+   **insulator**, e o que acontece com os elétrons dele?
+2. Na lição [Electromagnetism e o relay](./eletromagnetismo-e-rele), o que a
+   coil faz quando a current dela é **cortada de repente**?
+3. Na lição [Loads: bulbs e motores](./cargas-bulbs-e-motores), o que um
+   condutor que se move dentro de um campo magnético produz?
+4. Na lição [Electrical power](./potencia-eletrica), como se calcula a power
+   a partir da voltage e da current?
+
+<details>
+<summary>Respostas</summary>
+
+1. É um material cujos elétrons estão presos aos átomos e não se soltam para
+   circular. Nesta lição, um insulator entre duas placas é o que permite
+   guardar carga: o **dielectric**.
+2. Ela gera o **voltage spike**: o campo magnético some de uma vez e empurra
+   os elétrons da própria coil, produzindo uma voltage muito alta e curta.
+   Esse spike é o motor desta lição inteira.
+3. Uma **voltage**. Foi assim que o motor gerou a counter-voltage. Aqui o
+   condutor fica parado e quem se move é o campo — e o efeito é o mesmo.
+4. $P = V \times I$. Esse produto é o que se conserva num transformer, e é a
+   chave para entender por que a current sobe quando a voltage desce.
+
+</details>
+
+## Intuição: o balde e as duas rodas d'água
+
+Duas comparações, uma para cada peça, com o ponto em que cada uma para de
+valer.
+
+**O capacitor é um balde no meio do cano.** A água que chega enche o balde; se
+a pressão do cano cair de repente, o balde devolve a água que tinha. Um
+capacitor guarda carga elétrica e a devolve quando a voltage do circuit cai.
+
+Onde a comparação para: o balde deixa a água passar para o outro lado quando
+transborda. O capacitor **não deixa a current contínua passar de um lado para
+o outro**, nunca: entre as placas há um isolante. A energia atravessa como
+campo elétrico, não como elétrons.
+
+**O transformer são duas rodas d'água na mesma correnteza.** A primeira roda é
+girada pela água e faz a correnteza mexer; a segunda roda, mais adiante,
+também gira — sem tocar na primeira.
+
+Onde a comparação para: o transformer só funciona com a **current mudando**.
+Se a correnteza ficar parada, nenhuma das rodas gira. Uma current contínua e
+constante não induz nada na secondary. É por isso que a ignition coil só
+produz a faísca no instante em que a current do primary é **cortada**.
+
+## Modelo visual: os dois símbolos
+
+<TabelaSimbolos
+  itens={['capacitor', 'transformador']}
+  caption="O capacitor: duas plates paralelas, com uma folga entre elas — o símbolo mostra que o caminho não se fecha. O transformer: a primary de um lado, a secondary do outro, e as duas linhas entre elas são o iron core que concentra o campo magnético. No transformer não há nenhum wire ligando os dois lados."
+/>
+
+Repare no que os dois símbolos têm em comum: **nenhum dos dois fecha o
+caminho da current**. No capacitor, há a folga entre as plates. No
+transformer, há o espaço entre as duas coils. Nos dois casos, a energia passa
+por um campo, não por um fio — e é isso que os torna diferentes de tudo o que
+você viu até aqui.
+
+## Formalização, parte 1: o capacitor
+
+> **Capacitor** é uma peça formada por duas **plates** condutoras separadas
+> por um isolante, o **dielectric**. Ligado a uma voltage, ele acumula
+> elétrons a mais numa plate e de menos na outra. Essa separação de cargas é
+> a energia guardada.
+
+### Carregar e descarregar
+
+Ligue um capacitor descarregado a uma battery, com um resistor em série:
+
+1. **No primeiro instante**, as plates estão neutras e nada se opõe à
+   chegada dos elétrons. A current é alta.
+2. **Conforme a carga se acumula**, a voltage entre as plates cresce e passa
+   a empurrar contra a battery. A current vai caindo.
+3. **Quando a voltage do capacitor iguala a da battery**, a current **para**.
+   O capacitor está carregado.
+
+Desligue a battery e ligue uma load no lugar: o capacitor descarrega por ela,
+devolvendo a energia que guardou.
+
+Daí sai o comportamento que resume a peça:
+
+> O capacitor **bloqueia a current contínua e constante**, e **deixa passar
+> as variações**. Quanto mais rápida a variação, mais facilmente ela
+> atravessa.
+
+- **Exemplo:** um capacitor ligado entre o wire de alimentação de uma peça e
+  o ground. A voltage contínua de 12 V não passa por ele: o circuit normal nem
+  percebe que ele está ali. Mas um pico rápido de voltage encontra um caminho
+  de baixa resistance para o ground através do capacitor, e é desviado para lá em vez de
+  seguir pelo wire.
+- **Contraexemplo:** um resistor ligado no mesmo lugar. Ele deixaria passar
+  tanto os 12 V contínuos quanto o pico, e drenaria current o tempo todo.
+
+Esse exemplo é a **noise suppression**, e é a peça-chave da queixa desta
+lição.
+
+### A capacitance e o farad
+
+> **Capacitance** é quanta carga o capacitor guarda para cada volt aplicado.
+> A unidade é o **farad** (F).
+
+O farad é uma unidade enorme para o que se usa num circuit de sinal. Os
+capacitors de supressão de ruído do carro ficam na casa dos **microfarads**
+(µF), que são milionésimos de farad — o mesmo prefixo *micro* que a lição
+[Voltage, current e resistance](./tensao-corrente-e-resistencia) usou para os
+microamps.
+
+A capacitance depende de três coisas da construção: o tamanho das plates, a
+distância entre elas e o material do dielectric. Um **variable capacitor**
+muda a capacitance mexendo em uma dessas coisas — em geral deslizando as
+plates para que a área sobreposta mude. Ele aparecia nos rádios antigos, na
+sintonia.
+
+:::warning Capacitor guarda carga depois de desligado
+
+Um capacitor carregado continua carregado depois de o circuit ser desligado.
+Nos capacitors pequenos dos circuits de 12 V, a energia é baixa. Nos
+capacitors grandes dos sistemas de alta tensão de híbridos e elétricos, ela é
+**perigosa**, e é por isso que o procedimento de desativação desses sistemas
+inclui um tempo de espera obrigatório depois de desligar: é o tempo de os
+capacitors descarregarem. Nunca encurte esse tempo, e não abra esses sistemas
+fora das disciplinas EVX.
+
+:::
+
+## Formalização, parte 2: o transformer
+
+> **Transformer** são duas coils enroladas no mesmo núcleo de ferro. A
+> **primary winding** recebe uma current que muda; essa mudança faz o campo
+> magnético mudar; e o campo que muda induz uma voltage na **secondary
+> winding**. Esse efeito de uma coil sobre a outra é a **mutual induction**.
+
+A condição é a que a analogia das rodas d'água já antecipou: **a current do
+primary precisa estar mudando**. Current contínua e constante produz campo
+constante, e campo constante não induz nada.
+
+### A turns ratio
+
+> **Turns ratio** é a relação entre o número de voltas da secondary e o da
+> primary. A voltage induzida na secondary é a voltage da primary
+> multiplicada por essa relação.
+
+$$
+\frac{V_{\text{secondary}}}{V_{\text{primary}}} =
+\frac{\text{voltas da secondary}}{\text{voltas da primary}}
+$$
+
+Daí vêm os três tipos:
+
+| Tipo | Turns ratio | Voltage | Current |
+|---|---|---|---|
+| **step-up transformer** | secondary com mais voltas | sobe | desce |
+| **step-down transformer** | secondary com menos voltas | desce | sobe |
+| **isolation transformer** | mesmo número de voltas | igual | igual |
+
+A coluna da current é a que costuma surpreender, e ela não é uma regra
+decorada: ela vem da conservação da energia. O transformer não cria energia.
+Pela fórmula da power da lição [Electrical power](./potencia-eletrica), a
+power que sai não pode ser maior que a power que entra:
+
+$$
+V_{\text{primary}} \times I_{\text{primary}} \approx
+V_{\text{secondary}} \times I_{\text{secondary}}
+$$
+
+Se a voltage dobra de um lado para o outro, a current precisa cair pela
+metade para o produto continuar o mesmo. Um transformer real perde um pouco
+de energia em calor, e por isso o sinal é “aproximadamente igual”, não
+“igual”.
+
+- **Exemplo:** um step-down transformer que recebe 120 V e entrega 12 V, com
+  120 W passando. A current da primary é $120 \div 120 = 1\,\text{A}$; a da
+  secondary é $120 \div 12 = 10\,\text{A}$. A voltage caiu dez vezes e a
+  current subiu dez vezes.
+- **Contraexemplo:** um isolation transformer, com o mesmo número de voltas
+  dos dois lados. A voltage e a current saem iguais às que entraram. Ele não
+  existe para mudar número nenhum: existe para **separar eletricamente** os
+  dois circuits, de forma que um defeito de um lado não chegue ao outro.
+
+### A ignition coil: o transformer do carro
+
+A **ignition coil** é um step-up transformer com uma turns ratio alta. Com
+uma primary de 150 voltas e uma secondary de 15 000 voltas (valores
+ilustrativos), a relação é de 1 para 100.
+
+Siga o que acontece, e repare como cada passo usa uma lição anterior:
+
+1. **O módulo liga a current da primary.** A current cresce e o campo
+   magnético se forma no iron core. Ainda não há faísca nenhuma, porque o
+   campo está só crescendo devagar.
+2. **O módulo corta a current da primary.** O campo some de uma vez — é o
+   voltage spike da lição
+   [Electromagnetism e o relay](./eletromagnetismo-e-rele). Esse colapso
+   rápido produz, na própria primary, algumas centenas de volts: digamos
+   250 V (valor ilustrativo).
+3. **A secondary multiplica.** Com a relação de 1 para 100:
+
+$$
+V_{\text{secondary}} = 250 \times 100 = 25\,000\,\text{V}
+$$
+
+4. **A faísca.** Vinte e cinco mil volts são suficientes para a corrente
+   atravessar a folga da vela, e é isso que inflama a mistura.
+
+Repare no que ficou explicado: a ignition coil não gera a faísca enquanto a
+current passa. Ela gera no instante em que a current é **cortada**. Esse é o
+mesmo princípio do voltage spike que, no relay, era um problema a ser
+absorvido pelo clamping diode — e que aqui é o efeito desejado.
+
+:::danger Alta tensão na ignição
+
+A secondary de uma ignition coil produz dezenas de milhares de volts. Um
+choque desses não costuma matar, mas provoca uma contração muscular violenta
+e involuntária — e o perigo real é a reação: bater a mão no capô, no fan ou
+numa peça quente. Com o motor funcionando, **não segure cabo de vela nem
+bobina**, e não puxe cabo de vela com o motor ligado. O procedimento de teste
+de ignição é da AUT-181, com o equipamento próprio.
+
+:::
+
+## Como falha e como diagnosticar
+
+| Peça | Defeito | Sintoma | Teste |
+|---|---|---|---|
+| capacitor de supressão | aberto ou com o ground solto | ruído no rádio acompanhando o motor | inspeção do ground e substituição do capacitor |
+| capacitor | em curto | o fuse do circuit abre | ohmmeter fora do circuit: um capacitor em curto mede perto de 0 Ω e fica lá |
+| ignition coil | secondary aberta | o cilindro falha, não há faísca | resistance da primary e da secondary, comparadas com o manual |
+| ignition coil | isolamento furado | falha sob carga, melhora em marcha lenta | teste de ignição com o equipamento próprio |
+
+Um detalhe sobre medir capacitor com ohmmeter: num capacitor bom e grande, a
+leitura **se move**. O ohmmeter manda a current dele, o capacitor começa a
+carregar, e a resistance aparente sobe até OL. Leitura parada perto de zero é
+curto; leitura parada em OL num capacitor grande pode ser peça aberta. Em
+capacitors pequenos, o movimento é rápido demais para ver, e o teste que vale
+é com um instrumento que meça capacitance.
+
+### A queixa resolvida
+
+Volte ao chiado no rádio.
+
+**1. Que peça funciona no ritmo do motor?** A ignição. Cada faísca acontece
+numa posição do virabrequim, então a frequência das faíscas sobe com a
+rotação — exatamente o que o cliente descreveu.
+
+**2. Por que a ignição produz ruído elétrico?** Pelo passo 2 do colapso: um
+campo magnético que some em microssegundos e uma voltage que salta para
+dezenas de milhares de volts. Toda variação elétrica rápida irradia ondas de
+rádio, e essa é das mais violentas do carro. Esse ruído tem nome:
+**radio frequency interference**.
+
+**3. Por que no AM e não no FM?** Porque o ruído de ignição se soma à
+**amplitude** do sinal, e é a amplitude que o AM usa para carregar o som. O
+FM carrega o som na frequência, e por isso ignora quase toda variação de
+amplitude. O detalhe que parecia irrelevante é, na verdade, a confirmação de
+que o ruído é de ignição.
+
+**4. O que deveria impedir o ruído de chegar ao rádio?** Um conjunto de
+defesas: cabos de vela com resistance, a carcaça metálica aterrada de várias
+peças, e **capacitors de supressão** ligados entre o wire de alimentação e o
+ground, que desviam as variações rápidas para a carroceria antes que elas
+alcancem o rádio.
+
+**5. O teste:** confira primeiro os **grounds** — o do rádio, o da antena e o
+do capacitor de supressão, se o veículo tiver um. Um ground solto ou
+oxidado tira a eficácia do capacitor, porque o caminho para onde ele desvia o
+ruído deixa de existir. Depois, confira se os cabos de vela são do tipo com
+resistance especificado para o veículo.
+
+Nesse carro, o parafuso de ground do capacitor de supressão estava frouxo e
+com tinta por baixo. Limpar o contato até o metal e apertar resolveu.
+
+**Verificar o reparo:** ligue o motor, sintonize uma estação fraca de AM e
+acelere. O chiado não deve voltar.
+
+## Exemplos resolvidos
+
+### Exemplo 1: a voltage da secondary
+
+Uma ignition coil tem 150 voltas na primary e 15 000 na secondary (valores
+ilustrativos). No instante do corte, a primary produz 250 V. Que voltage
+aparece na secondary?
+
+<details>
+<summary>Solução</summary>
+
+Primeiro a turns ratio:
+
+$$
+\frac{15\,000}{150} = 100
+$$
+
+A secondary tem cem vezes mais voltas, então a voltage é multiplicada por
+cem:
+
+$$
+V_{\text{secondary}} = 250 \times 100 = 25\,000\,\text{V}
+$$
+
+Repare de onde vêm os 250 V: **não** são os 12 V da battery. São a voltage
+que o colapso do campo produz na própria primary, e é por isso que a conta
+não dá $12 \times 100 = 1200\,\text{V}$, que seria pouco para a faísca.
+
+</details>
+
+### Exemplo 2: a current do outro lado
+
+**Pause e tente:** um step-down transformer recebe 120 V e entrega 12 V, com
+120 W atravessando. Que current passa em cada lado? E o que esse resultado
+diz sobre a bitola dos wires de cada lado?
+
+<details>
+<summary>Solução</summary>
+
+Pela fórmula da power, de cada lado:
+
+$$
+I_{\text{primary}} = \frac{120}{120} = 1\,\text{A}
+\qquad
+I_{\text{secondary}} = \frac{120}{12} = 10\,\text{A}
+$$
+
+A voltage caiu dez vezes e a current subiu dez vezes, porque o produto dos
+dois — a power — é o mesmo dos dois lados.
+
+Sobre a bitola: o lado de baixa voltage conduz dez vezes mais current, e por
+isso precisa de wire **bem mais grosso**, pela razão da lição
+[Voltage, current e resistance](./tensao-corrente-e-resistencia). É a mesma
+razão de os cabos da battery do carro serem grossos: 12 V obrigam a currents
+altas para entregar qualquer power respeitável.
+
+</details>
+
+### Exemplo 3: por que o capacitor não descarrega a battery
+
+**Pause e tente:** um capacitor de supressão está ligado entre o wire de 12 V
+de uma peça e o ground, o tempo todo, inclusive com o carro desligado. Por que
+ele não descarrega a battery, se está ligado direto entre o positivo e o
+ground?
+
+<details>
+<summary>Solução</summary>
+
+Porque entre as plates há o dielectric, que é um isolante. A current contínua
+não atravessa o capacitor.
+
+O que acontece é isto: no instante em que os 12 V aparecem, uma current curta
+circula enquanto o capacitor carrega. Quando a voltage dele iguala os 12 V, a
+current **para** — e fica parada. A partir daí ele não consome nada.
+
+É por isso que ele pode ficar permanentemente ligado sem virar um parasitic
+draw, ao contrário de um resistor no mesmo lugar, que puxaria current o tempo
+todo.
+
+Se você respondeu que ele descarregaria a battery, provavelmente pensou no
+capacitor como um fio. O símbolo ajuda a lembrar: as duas plates não se
+tocam.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o capacitor bloqueia a current contínua e deixa passar as
+   variações rápidas?
+2. Por que um transformer não funciona com current contínua e constante?
+3. Num step-down transformer, por que a current sobe quando a voltage desce?
+4. Por que a ignition coil só produz a faísca no instante em que a current do
+   primary é cortada?
+5. Por que o ruído de ignição atrapalha o AM muito mais que o FM?
+6. Por que o ground do capacitor de supressão é tão importante quanto o
+   próprio capacitor?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque entre as plates há um dielectric, que é isolante: elétrons não
+   atravessam. O que atravessa é o efeito do campo elétrico, e esse efeito só
+   aparece quando a carga das plates **muda**. Voltage parada, campo parado,
+   nada acontece; voltage variando depressa, o capacitor responde e o circuit
+   se comporta como se houvesse caminho.
+2. Porque a voltage na secondary é induzida pelo campo magnético **mudando**.
+   Current constante gera campo constante, e campo constante não induz
+   voltage nenhuma.
+3. Porque o transformer não cria energia. A power que entra é praticamente a
+   que sai, e a power é $V \times I$. Se a voltage cai dez vezes, a current
+   precisa subir dez vezes para o produto se manter.
+4. Porque a voltage induzida depende da **velocidade** com que o campo muda.
+   Com a current ligada e estável, o campo está parado. No corte, ele some em
+   microssegundos, e essa mudança brusca é o que produz a voltage alta.
+5. Porque o ruído se soma à amplitude do sinal, e é na amplitude que o AM
+   carrega o som. O FM carrega o som na frequência e descarta variações de
+   amplitude.
+6. Porque o capacitor funciona **desviando** o ruído para o ground. Sem um
+   caminho de volta de baixa resistance, o ruído não tem para onde ir, e o
+   capacitor fica no circuit sem exercer efeito nenhum.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga se a peça descrita é um capacitor, um step-up transformer, um step-down
+transformer ou um isolation transformer:
+
+a) a ignition coil;
+b) duas coils com o mesmo número de voltas, usadas para separar dois
+circuits;
+c) a peça ligada entre o wire de alimentação e o ground para tirar chiado do
+rádio;
+d) a peça que recebe 120 V e entrega 12 V.
+
+### 2. Explicação
+
+Explique, com as próprias palavras, por que o símbolo do capacitor mostra duas
+plates que não se tocam, e o que isso informa sobre o comportamento da peça.
+
+### 3. Aplicação direta
+
+a) Um transformer tem 200 voltas na primary e 1000 na secondary. Qual é a
+turns ratio? Com 10 V na primary, que voltage aparece na secondary?
+
+b) Um step-down transformer recebe 240 V e entrega 24 V, com 240 W passando.
+Que current passa em cada lado?
+
+c) Uma ignition coil tem turns ratio de 1 para 80 e recebe 300 V de colapso na
+primary (valores ilustrativos). Que voltage aparece na secondary?
+
+### 4. Variação
+
+Refaça o exemplo 1 com uma coil de turns ratio 1 para 60 e 200 V de colapso.
+A voltage da secondary ainda é suficiente para a faísca, sabendo que velas
+comuns precisam de algo entre 8000 e 20 000 V conforme a condição (faixa
+ilustrativa)? O que isso sugere sobre coils de reposição genéricas?
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que ouve um estalo no rádio **toda vez** que o ventilador do
+ar é ligado ou desligado, e também quando o pisca está funcionando. Com tudo
+parado, o rádio fica limpo.
+
+a) O que o estalo acontecer no **momento da troca de estado** sugere sobre a
+origem?
+
+b) Que lição anterior explica a origem desse ruído?
+
+c) Que peça o fabricante usa para resolver isso, e onde ela fica?
+
+d) Por que esse defeito aparece com o tempo, num carro que saiu de fábrica
+sem ele?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Pense no que o blower motor e o flasher têm em comum: os dois têm coils, e
+nos dois a current é interrompida. O que acontece com uma coil no instante em
+que a current dela é cortada?
+
+</details>
+
+### 6. Justificativa
+
+Por que não se pode dizer que um step-up transformer “cria energia”, mesmo
+entregando uma voltage muito maior do que recebe?
+
+### 7. Formato ASE
+
+**Question 1.** Which type of transformer decreases voltage but increases
+current?
+
+- A. Step-up transformer
+- B. Step-down transformer
+- C. Isolation transformer
+- D. All transformers do this
+
+**Question 2.** Technician A says a capacitor blocks direct current and is
+commonly used as a noise suppressor for automotive radios. Technician B says a
+capacitor is able to store electrical energy. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** An ignition coil produces its highest secondary voltage:
+
+- A. while primary current is flowing steadily
+- B. at the moment primary current is switched off
+- C. only when the engine is cranking
+- D. when the primary winding is grounded
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Step-up transformer. b) Isolation transformer. c) Capacitor.
+   d) Step-down transformer.
+
+2. Porque entre as plates há o dielectric, que é um isolante: os elétrons não
+   passam de uma plate para a outra. O símbolo informa que a peça **não fecha
+   o caminho** da current contínua. O que ela faz é acumular carga de um lado
+   e falta de carga do outro, e responder às variações de voltage — por isso
+   bloqueia o contínuo e deixa passar o que muda depressa.
+
+3. a) A turns ratio é $1000 \div 200 = 5$, ou 1 para 5. A voltage da
+   secondary é $10 \times 5 = 50\,\text{V}$.
+
+   b) $I_{\text{primary}} = 240 \div 240 = 1\,\text{A}$;
+   $I_{\text{secondary}} = 240 \div 24 = 10\,\text{A}$.
+
+   c) $300 \times 80 = 24\,000\,\text{V}$.
+
+4. $200 \times 60 = 12\,000\,\text{V}$. Ainda cai dentro da faixa de 8000 a
+   20 000 V, então há faísca — mas com pouca folga. Numa condição que exija
+   mais, como vela gasta com a folga aberta, mistura pobre ou carga alta no
+   motor, a voltage necessária sobe e essa coil pode não dar conta.
+
+   O que isso sugere: uma coil de reposição precisa atender à especificação
+   do fabricante, e não só “produzir faísca na bancada”. Uma coil fraca
+   funciona em marcha lenta e falha sob carga — que é exatamente o sintoma
+   mais difícil de diagnosticar.
+
+5. a) Que o ruído nasce no **instante da variação**, e não enquanto a peça
+   trabalha. Alguma coisa está gerando um pulso elétrico rápido no momento em
+   que a current liga ou corta.
+
+   b) A lição [Electromagnetism e o relay](./eletromagnetismo-e-rele): o
+   voltage spike. O blower motor e o flasher têm coils, e cortar a current de
+   uma coil faz o campo colapsar e produzir uma voltage alta e curta, que se
+   espalha pela fiação.
+
+   c) Um capacitor de supressão, ligado entre o wire de alimentação da peça e
+   o ground, o mais perto possível da peça que gera o pulso. Em muitos
+   circuits o papel é do clamping diode em paralelo com a coil, que a lição
+   [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo)
+   apresentou.
+
+   d) Porque a defesa depende do caminho para o ground, e esse caminho se
+   degrada: parafuso frouxo com a vibração, oxidação no contato, tinta de um
+   reparo de funilaria por baixo do terminal. O capacitor continua lá e
+   continua bom; o que se perdeu foi o ground dele.
+
+6. Porque a power que sai é praticamente a mesma que entra: o que o
+   transformer faz é **trocar** voltage por current, não criar energia. Com a
+   voltage multiplicada por cem, a current fica dividida por cem, e o produto
+   $V \times I$ continua o mesmo, descontada a pequena perda em calor. Dizer
+   que ele cria energia seria violar a conservação da energia.
+
+7. **Question 1: B.** No step-down, a secondary tem menos voltas, então a
+   voltage cai — e a current sobe, porque a power dos dois lados é
+   praticamente a mesma. O step-up (A) faz o contrário. O isolation (C)
+   mantém os dois valores. A alternativa D está errada porque cada tipo faz
+   uma coisa diferente.
+
+   **Question 2: C.** Os dois estão certos. O capacitor bloqueia a current
+   contínua, e é por isso que serve como supressor de ruído: ele desvia para
+   o ground só as variações rápidas. E ele guarda energia na separação de
+   cargas entre as plates — é o que ele devolve ao descarregar.
+
+   **Question 3: B.** A voltage induzida depende da velocidade com que o campo
+   magnético muda, e a mudança mais brusca é o colapso no instante em que a
+   current da primary é cortada. Com a current estável (A), o campo está
+   parado e nada é induzido. A alternativa C descreve uma condição de
+   operação, não o momento da indução. A D descreve um defeito.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** estas duas peças trabalham com **campos**, não com
+  caminhos fechados. O capacitor guarda energia num campo elétrico entre duas
+  plates, bloqueia a current contínua e deixa passar as variações rápidas —
+  por isso serve para tirar ruído. O transformer passa energia de uma coil
+  para outra por um campo magnético que **muda**, e troca voltage por current
+  mantendo a power.
+- **Quando usar:** ao diagnosticar ruído elétrico, ao entender a ignição e ao
+  trabalhar perto de qualquer sistema de alta tensão — onde o tempo de espera
+  existe por causa dos capacitors.
+- **Com o que se conecta:** o voltage spike vem da lição
+  [Electromagnetism e o relay](./eletromagnetismo-e-rele); a conservação da
+  power, da lição [Electrical power](./potencia-eletrica); o clamping diode,
+  da lição [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo).
+  A lição seguinte, [Electrical symbols](./simbolos-eletricos), junta os
+  símbolos de todas estas peças e ensina a ler um wiring diagram inteiro.
+
+**Termos desta lição para revisar:** capacitor, plate, dielectric,
+capacitance, farad, noise suppression, radio frequency
+interference, transformer, primary winding, secondary winding, turns ratio,
+step-up transformer, step-down transformer, isolation transformer, mutual
+induction, ignition coil.

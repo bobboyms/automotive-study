@@ -88,6 +88,31 @@ const sidebars = {
               id: 'trn-120-eletricidade/resistencias-variaveis-e-diodo',
               label: '10. Resistances que mudam e o diode',
             },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/resistor-fixo',
+              label: '11. O resistor fixo',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/switches',
+              label: '12. Switches',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/protecao-do-circuito',
+              label: '13. Circuit protection',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/cargas-bulbs-e-motores',
+              label: '14. Loads: bulbs e motores',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/capacitor-e-transformer',
+              label: '15. Capacitor e transformer',
+            },
           ],
         },
         {
@@ -97,7 +122,7 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/simbolos-eletricos',
-              label: '11. Electrical symbols',
+              label: '16. Electrical symbols',
             },
           ],
         },

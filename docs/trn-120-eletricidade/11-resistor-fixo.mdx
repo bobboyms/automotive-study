@@ -1,0 +1,768 @@
+---
+title: "O resistor fixo: ler o valor e escolher o watt rating"
+---
+
+import Esquema from '@site/src/components/Esquema';
+import CodigoCores from '@site/src/components/CodigoCores';
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# O resistor fixo: ler o valor e escolher o watt rating
+
+> **Pergunta central:** dois resistors podem ter exatamente a mesma
+> resistance e mesmo assim não servir um no lugar do outro. O que mais um
+> resistor tem, além do valor em ohms — e como esse outro dado se lê na peça?
+
+## A queixa: os dois resistors da bancada
+
+No laboratório, o instrutor põe dois resistors na bancada, lado a lado. Os
+dois têm as mesmas faixas coloridas, na mesma ordem. Um é do tamanho de um
+grão de arroz. O outro é mais grosso que um lápis.
+
+Ele pergunta:
+
+> “Os dois valem a mesma coisa em ohms. Um custa dez centavos e o outro custa
+> dez vezes mais. Posso usar o pequeno no lugar do grande?”
+
+A resposta não está nas faixas coloridas, porque elas são iguais nos dois. Ao
+fim desta lição, você vai saber ler o valor dessas faixas, vai saber o que o
+tamanho da peça informa — e vai conseguir responder ao instrutor com uma conta
+de duas linhas, antes de ligar o circuit.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| fixed resistor | resistor fixo | resistor cujo valor não muda de propósito |
+| resistor color code | código de cores do resistor | as faixas pintadas que dizem o valor da peça |
+| color band | faixa colorida | cada anel pintado no corpo do resistor |
+| multiplier | multiplicador | a faixa que diz por quanto multiplicar os dígitos |
+| tolerance | tolerância | quanto o valor real pode ficar acima ou abaixo do valor de fábrica |
+| nominal value | valor nominal | o valor escrito na peça, antes da tolerance |
+| watt rating | potência nominal | quanta power o resistor aguenta sem se estragar |
+| wirewound resistor | resistor de fio | resistor feito de fio enrolado; aguenta bastante power |
+| film resistor | resistor de película | resistor pequeno, de película; aguenta pouca power |
+| tapped resistor | resistor com derivações | resistor com tomadas no meio, que entrega vários valores |
+| open resistor | resistor aberto | resistor que queimou por dentro e não deixa mais a current passar |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+O resistor fixo é a peça mais comum do carro depois do wire:
+
+- o **blower motor resistor**, que a lição [Series circuit](./circuito-em-serie)
+  usou para explicar as velocidades do ventilador, é um tapped resistor;
+- o **current-limiting resistor** de cada LED, da lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo);
+- os resistors **dentro dos módulos**: o PCM usa um resistor fixo em série
+  com cada sensor para transformar a resistance do sensor numa voltage, como
+  no exemplo do ECT sensor daquela mesma lição;
+- os **A-Tech boards** do laboratório da TRN-120, em que você monta circuits
+  com resistors de faixas coloridas.
+
+Na prova ASE, o assunto cai na área **A6** (*Electrical/Electronic Systems*):
+ler o valor de um resistor, entender tolerance e escolher a peça de reposição.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   o que querem dizer os prefixos **k** e **M** antes de um ohm?
+2. Pela [Ohm's law](./lei-de-ohm), quanta current passa por um resistor de
+   100 Ω ligado a 12 V?
+3. Na lição [Electrical power](./potencia-eletrica), para onde vai a energia
+   que um resistor “consome”?
+4. Na lição [Medições com o multimeter](./medicoes-com-multimetro), por que a
+   resistance se mede com o componente fora do circuit?
+
+<details>
+<summary>Respostas</summary>
+
+1. **k** (kilo) quer dizer mil, e **M** (mega) quer dizer um milhão. Então
+   1 kΩ são 1000 Ω, e 1 MΩ são 1 000 000 Ω. Esta lição usa os dois o tempo
+   todo, porque o color code entrega números grandes.
+2. $I = V \div R = 12 \div 100 = 0.12\,\text{A}$. Guarde esse número: ele
+   volta no exemplo 3.
+3. Vira **calor**. O resistor não guarda energia nem a faz sumir: ele a
+   transforma em calor e joga esse calor no ar em volta. É esse calor que
+   decide o tamanho da peça, e é por isso que o watt rating existe.
+4. Porque outras peças ligadas ao mesmo ponto criam caminhos em paralelo. O
+   ohmmeter mede o conjunto, não a peça. Além disso, o circuit precisa estar
+   desligado: o ohmmeter manda a própria current dele para medir.
+
+</details>
+
+## Intuição: o valor está escrito, o tamanho é outra coisa
+
+Um resistor pequeno não tem espaço para um número impresso legível. Por isso
+o fabricante escreve o valor em **cor**: cada cor vale um dígito, e as faixas
+ficam no corpo da peça, visíveis de qualquer lado em que ela for soldada.
+
+O tamanho da peça não tem relação com o valor em ohms. O tamanho diz outra
+coisa: **quanto calor aquela peça consegue jogar fora sem se estragar.**
+
+Pense em duas panelas no fogo, uma pequena e uma grande. As duas podem conter
+a mesma água. Mas a panela grande tem mais superfície em contato com o ar, e
+por isso perde calor mais depressa. Um resistor grande perde o calor do mesmo
+jeito: mais corpo, mais superfície, mais calor jogado no ar por segundo.
+
+A comparação para aqui num ponto importante: a panela recebe calor de fora, e
+o resistor **fabrica** o próprio calor, por dentro, a partir da current que
+passa. Quanto calor ele fabrica é a power da lição
+[Electrical power](./potencia-eletrica): $P = V \times I$. Se a power que ele
+fabrica for maior que a power que ele consegue jogar fora, a temperatura sobe
+até a peça queimar.
+
+Duas perguntas diferentes, então, e cada uma tem a sua resposta na peça:
+
+- **“Quantos ohms?”** — está nas faixas coloridas.
+- **“Aguenta quanto?”** — está no tamanho, e vem escrito no catálogo como
+  watt rating.
+
+## Modelo visual: as quatro bands
+
+<CodigoCores caption="Um resistor de quatro bands. As três primeiras ficam juntas numa ponta; a quarta, a da tolerance, fica separada na outra. A leitura começa pela ponta em que as faixas estão mais juntas. O desenho mostra as bands sem cor de propósito: a cor de cada faixa está na tabela abaixo, e quem não distingue vermelho de marrom confirma o valor com o ohmmeter." />
+
+A ordem importa, e a peça não tem “este lado para cima”. Quem decide por onde
+começar é o **espaço entre as faixas**: as três primeiras ficam agrupadas numa
+ponta, e a quarta fica sozinha, mais perto da outra ponta. Começar pelo lado
+errado dá um valor completamente diferente — esse é o erro mais comum da
+lição, e o exemplo 2 mostra o tamanho do estrago.
+
+## Ponte para a formalização
+
+Cada faixa é um pedaço de um número escrito em notação científica, só que
+pintado. As duas primeiras são os dois **dígitos**. A terceira é o
+**multiplicador**: quantos zeros vêm depois. A quarta não entra no valor —
+ela diz a **tolerance**, que é o quanto o valor real pode ficar longe do
+número que as três primeiras escreveram.
+
+O multiplicador existe porque resistores cobrem uma faixa enorme de valores,
+de poucos ohms a milhões de ohms. Escrever “dois dígitos e um multiplicador” é
+mais curto que escrever o número inteiro em cores.
+
+## Formalização
+
+> **Fixed resistor** é um resistor feito para ter um valor de resistance que
+> não muda. Esse valor é o **nominal value**, e vem escrito na peça — em
+> faixas coloridas, nos pequenos, ou em números impressos, nos grandes.
+
+- **Exemplo:** o current-limiting resistor de 500 Ω em série com um LED. Ele
+  tem o mesmo valor com o circuit frio ou quente, de dia ou de noite.
+- **Contraexemplo:** o thermistor da lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo). Ele
+  também é um resistor, mas foi feito de propósito para mudar de valor com a
+  temperatura, e por isso não é um fixed resistor.
+
+### O color code
+
+Cada cor vale um dígito, e a mesma cor, na terceira faixa, vale um
+multiplicador:
+
+| Cor | Dígito (faixas 1 e 2) | Multiplicador (faixa 3) |
+|---|---|---|
+| preto (*black*) | 0 | ×1 |
+| marrom (*brown*) | 1 | ×10 |
+| vermelho (*red*) | 2 | ×100 |
+| laranja (*orange*) | 3 | ×1000 |
+| amarelo (*yellow*) | 4 | ×10 000 |
+| verde (*green*) | 5 | ×100 000 |
+| azul (*blue*) | 6 | ×1 000 000 |
+| violeta (*violet*) | 7 | ×10 000 000 |
+| cinza (*gray*) | 8 | — |
+| branco (*white*) | 9 | — |
+| dourado (*gold*) | — | ×0.1 |
+| prateado (*silver*) | — | ×0.01 |
+
+A quarta faixa é a tolerance, e ela usa poucas cores:
+
+| Cor da faixa 4 | Tolerance |
+|---|---|
+| dourado (*gold*) | ±5 \% |
+| prateado (*silver*) | ±10 \% |
+| sem faixa | ±20 \% |
+
+Resistores de precisão, usados em instrumentos, trazem tolerances menores em
+outras cores e podem ter cinco faixas, com três dígitos em vez de dois. No
+carro, o que você vai encontrar é o de quatro faixas da tabela acima.
+
+A conta é sempre a mesma:
+
+$$
+R = (\text{dígito}_1 \times 10 + \text{dígito}_2) \times \text{multiplicador}
+$$
+
+**Exemplo completo.** Um resistor com as faixas marrom, preto, marrom e
+dourado:
+
+$$
+R = (1 \times 10 + 0) \times 10 = 10 \times 10 = 100\,\Omega
+$$
+
+e a faixa dourada diz tolerance de ±5 \%.
+
+### A tolerance
+
+> **Tolerance** é o quanto o valor real da peça pode ficar acima ou abaixo do
+> nominal value, por causa da variação de fabricação. Ela vem em
+> porcentagem.
+
+O resistor de 100 Ω com ±5 \% de tolerance pode sair de fábrica com qualquer
+valor entre:
+
+$$
+100 - 5 = 95\,\Omega \qquad \text{e} \qquad 100 + 5 = 105\,\Omega
+$$
+
+Os 5 Ω são 5 \% de 100 Ω. Um resistor que meça 97 Ω **não está com defeito**:
+ele está dentro da tolerance, e vai fazer o trabalho dele.
+
+- **Exemplo:** você mede 103 Ω num resistor de 100 Ω ±5 \%. Está bom: 103 fica
+  entre 95 e 105.
+- **Contraexemplo:** você mede 118 Ω no mesmo resistor. Está fora: a peça
+  mudou de valor, o que costuma ser sinal de que ela esquentou demais em algum
+  momento.
+
+:::note Erro comum: confundir tolerance com desgaste
+
+Tolerance **não** quer dizer que o resistor muda de valor com o tempo. Ela
+descreve a variação **de fábrica**, de uma peça para outra, dentro do mesmo
+lote. Um resistor que estava em 100 Ω e hoje mede 118 Ω não “gastou a
+tolerance”: ele se danificou.
+
+:::
+
+### O watt rating
+
+> **Watt rating** é a power que o resistor consegue transformar em calor e
+> jogar no ar continuamente, sem se danificar. É a resposta para “aguenta
+> quanto?”, e ela não aparece nas faixas coloridas.
+
+Valores comuns nos resistors pequenos: 1/8 W, 1/4 W, 1/2 W, 1 W, 2 W. Nos
+grandes, de fio, vão a dezenas de watts. O número vem do catálogo ou está
+impresso no corpo, quando há espaço.
+
+Como escolher: calcule a power que o resistor vai fabricar no seu circuit,
+com a fórmula da lição [Electrical power](./potencia-eletrica), e escolha uma
+peça com watt rating **acima** desse número. A prática de oficina e de
+projeto é deixar uma folga de pelo menos o dobro, porque o resistor vive
+dentro de uma caixa quente, sem vento, e nem sempre na temperatura do
+laboratório.
+
+Há duas formas de calcular a power do resistor, e as duas dão o mesmo
+resultado:
+
+$$
+P = V \times I \qquad \text{ou} \qquad P = I \times I \times R
+$$
+
+A segunda é útil quando você sabe a current e a resistance, mas ainda não
+calculou a voltage drop do resistor.
+
+- **Exemplo:** o resistor de 500 Ω do LED, com 20 mA. A power é
+  $0.02 \times 0.02 \times 500 = 0.2\,\text{W}$. Um resistor de 1/4 W
+  (0.25 W) dá conta, e um de 1/2 W dá conta com folga.
+- **Contraexemplo:** o mesmo resistor de 1/4 W ligado onde passam 0.12 A. A
+  power vira $0.12 \times 0.12 \times 500 = 7.2\,\text{W}$, quase trinta
+  vezes o que ele aguenta. Ele esquenta, muda de valor e abre.
+
+### Por que o grande é de fio
+
+Os dois tipos que você vai encontrar:
+
+- **film resistor** — uma película fina de carbono ou metal sobre um
+  cilindro de cerâmica. É o pequeno, de faixas coloridas, de 1/8 W a 2 W.
+- **wirewound resistor** — fio de liga resistiva enrolado num corpo de
+  cerâmica. É o grande. Aguenta dezenas de watts, porque tem muito mais corpo
+  para espalhar o calor, e costuma trazer o valor impresso em números em vez
+  de faixas.
+
+O blower motor resistor do carro é wirewound, e fica montado **dentro do duto
+do ar**, na frente do ventilador. O motivo é o calor: ali o ar que passa leva
+o calor embora. Guarde esse detalhe — ele é a chave do diagnóstico adiante.
+
+### O tapped resistor
+
+> **Tapped resistor** (ou *stepped resistor*) é um resistor com tomadas
+> intermediárias. Cada tomada entrega uma parte do resistor, e com uma peça só
+> o circuit consegue vários valores de resistance.
+
+<Esquema
+  pecas={[
+    {tipo: 'interruptor', rotulo: '\\text{switch}'},
+    {tipo: 'resistor', rotulo: '\\text{resistor}', nota: '1.6\\,\\Omega'},
+  ]}
+  carga={{tipo: 'motor', rotulo: '\\text{blower motor}', nota: '0.8\\,\\Omega'}}
+  corrente
+  rotuloCorrente="I = 5\,\text{A}"
+  caption="A velocidade 1 do blower: o switch escolhe a tomada que põe todo o resistor em série com o blower motor. Na velocidade máxima, o switch pula o resistor e liga o motor direto na voltage. Valores ilustrativos, os mesmos da lição Series circuit."
+/>
+
+É assim que o blower funciona com quatro velocidades e um motor só. O switch
+escolhe quanta resistance entra em série: muita resistance, pouca current,
+motor devagar; nenhuma resistance, current inteira, motor no máximo. A lição
+[Series circuit](./circuito-em-serie) fez essa conta.
+
+## Como falha e como diagnosticar
+
+Um resistor tem poucos modos de falha, e quase todos vêm do calor:
+
+| Defeito | O que acontece | Sintoma no carro | Teste |
+|---|---|---|---|
+| **open resistor** | o elemento queimou e abriu | a load que dependia dele para de funcionar | ohmmeter fora do circuit: OL |
+| valor subiu | a peça esquentou e mudou | a load funciona fraca | ohmmeter: valor acima da tolerance |
+| thermal limiter aberto | a proteção do bloco abriu | as velocidades baixas do blower param | ohmmeter entre os terminais do bloco |
+| solda trincada na placa | contato que abre e fecha | defeito intermitente, com vibração | ohmmeter mexendo na peça, ou inspeção com lupa |
+
+O caminho de diagnóstico é o de sempre, do `SKILL.md`: o que o circuit
+**deveria** fazer, o que o teste mostrou, e qual princípio liga as duas
+coisas.
+
+### O resistor aberto do blower
+
+**O que o circuit deveria fazer:** nas velocidades 1, 2 e 3, levar a current
+pelo tapped resistor até o blower motor. Na velocidade 4, pular o resistor.
+
+**Sintoma:** o blower só funciona na máxima — a queixa da lição
+[Series circuit](./circuito-em-serie).
+
+**O teste:** com a chave desligada, solte o connector do bloco e meça a
+resistance entre o terminal de entrada e cada tomada. Compare com o valor do
+manual do veículo.
+
+**O que cada resultado significa:**
+
+- resistance perto do valor do manual em todas as tomadas: o bloco está bom, e
+  o defeito está no switch ou na fiação;
+- OL numa tomada, valores normais nas outras: aquele trecho do resistor
+  abriu;
+- OL em todas as tomadas: o thermal limiter do bloco abriu.
+
+**E aqui vem a parte que separa o técnico do trocador de peças.** Um blower
+motor resistor não abre sozinho, porque foi mal feito. Ele abre porque
+esquentou demais, e há duas causas comuns para isso:
+
+1. **O blower motor está com os bearings gastos** e puxa mais current que o
+   normal. Mais current pelo resistor é mais power transformada em calor, pela
+   fórmula $P = I \times I \times R$.
+2. **O ar parou de passar pelo bloco**, por causa de um cabin air filter
+   entupido. Sem o ar levando o calor embora, a peça cozinha.
+
+Trocar só o resistor, nos dois casos, resolve por algumas semanas. Antes de
+fechar o serviço, meça a current do blower motor na velocidade máxima e
+compare com a especificação do manual, e olhe o estado do cabin air filter.
+
+### A queixa resolvida
+
+Volte aos dois resistors da bancada.
+
+1. **O que se sabe:** as faixas são iguais nos dois, então o nominal value e a
+   tolerance são iguais. O ohmmeter confirma: os dois medem o mesmo.
+2. **O que é diferente:** o tamanho. E o tamanho é a superfície que joga o
+   calor fora, ou seja, o watt rating.
+3. **O princípio:** o resistor fabrica calor na proporção
+   $P = I \times I \times R$. Se a power do circuit passar do watt rating da
+   peça, ela esquenta até mudar de valor ou abrir.
+4. **A resposta ao instrutor:** depende do circuit, e a conta decide. Se a
+   current for a de um LED, 20 mA, a power é 0.04 W num resistor de 100 Ω, e
+   o pequeno serve. Se a current for 0.12 A, a power é 1.44 W, e o pequeno de
+   1/4 W queima — ali é o grande.
+
+Nenhum dos dois resistors é “melhor”. Eles são peças diferentes para
+circuits diferentes, e as faixas coloridas não contam essa parte da história.
+
+## Na oficina: medir e trocar um resistor
+
+:::warning Antes de medir
+
+- **Chave desligada e connector solto.** A medição de resistance com o
+  circuit energizado dá leitura errada e pode danificar o multimeter, como a
+  lição [Medições com o multimeter](./medicoes-com-multimetro) mostrou.
+- **Resistor de power queima a mão.** Um blower motor resistor que acabou de
+  trabalhar fica quente o bastante para causar queimadura. Espere esfriar ou
+  use luva.
+- **Nem todo bloco traz resistors sozinhos.** Muitos trazem um thermal limiter, e
+  alguns, nos carros com ar-condicionado automático, trazem um módulo
+  eletrônico no lugar do resistor. Esse módulo não se testa com ohmmeter. O
+  manual do veículo diz qual é o caso.
+
+:::
+
+Procedimento geral:
+
+1. Com a chave desligada, solte o connector da peça.
+2. Ponha o multimeter na escala de resistance (Ω).
+3. Encoste as test leads nos dois terminais do resistor. Em bloco com várias
+   tomadas, meça do terminal comum para cada tomada, uma de cada vez.
+4. Compare cada leitura com o valor do manual do veículo, lembrando da
+   tolerance. Não existe um número único que sirva para todos os carros.
+5. Se a peça estiver aberta, **procure a causa do calor** antes de montar a
+   nova.
+
+Para ler um resistor de faixas coloridas na bancada, o procedimento é outro:
+
+1. Gire a peça até encontrar a ponta em que três faixas ficam juntas.
+2. Leia da ponta agrupada para a separada.
+3. Confirme no ohmmeter. Luz amarela de oficina, poeira e peça queimada mudam
+   a aparência das cores, e marrom e vermelho se parecem bastante.
+
+## Exemplos resolvidos
+
+### Exemplo 1: ler um resistor
+
+Um resistor tem as faixas amarela, violeta, laranja e dourada. Qual é o
+nominal value, e entre que valores ele pode medir?
+
+<details>
+<summary>Solução</summary>
+
+Pela tabela: amarelo é 4, violeta é 7, laranja é o multiplicador ×1000.
+
+$$
+R = (4 \times 10 + 7) \times 1000 = 47 \times 1000 = 47\,000\,\Omega
+$$
+
+São 47 kΩ. A faixa dourada diz ±5 \% de tolerance:
+
+$$
+47\,000 \times 0.05 = 2350\,\Omega
+$$
+
+Então o valor real pode estar entre $47\,000 - 2350 = 44\,650\,\Omega$ e
+$47\,000 + 2350 = 49\,350\,\Omega$. No multimeter, qualquer leitura nessa
+faixa é de um resistor bom.
+
+</details>
+
+### Exemplo 2: ler pelo lado errado
+
+**Pause e tente:** o resistor do exemplo 1 foi lido de trás para a frente, com
+a faixa dourada primeiro. Qual valor a pessoa encontraria, e por que isso
+importa?
+
+<details>
+<summary>Solução</summary>
+
+Lendo ao contrário, as faixas viram dourada, laranja, violeta e amarela. A
+dourada não é dígito, então quem está com pressa costuma ignorá-la e ler
+laranja, violeta, amarelo: 3, 7, ×10 000.
+
+$$
+R = (3 \times 10 + 7) \times 10\,000 = 370\,000\,\Omega
+$$
+
+São 370 kΩ, quase oito vezes o valor certo de 47 kΩ. Num circuit de sinal,
+essa troca deixa a voltage no ponto errado e o módulo lê uma informação
+falsa.
+
+É por isso que a regra é olhar o **espaço** entre as faixas antes de ler a
+cor, e confirmar no ohmmeter.
+
+</details>
+
+### Exemplo 3: escolher o watt rating
+
+**Pause e tente:** você precisa de um resistor de 100 Ω ligado direto nos
+12 V de um circuit de teste na bancada. Que power ele vai transformar em
+calor? Um resistor de 1/4 W serve?
+
+<details>
+<summary>Solução</summary>
+
+Primeiro a current, pela Ohm's law:
+
+$$
+I = \frac{12}{100} = 0.12\,\text{A}
+$$
+
+Agora a power:
+
+$$
+P = V \times I = 12 \times 0.12 = 1.44\,\text{W}
+$$
+
+Um resistor de 1/4 W aguenta 0.25 W. A conta deu 1.44 W, quase seis vezes
+mais: ele esquenta, muda de valor e abre. Com a folga do dobro, a escolha é um
+resistor de 3 W ou mais — na prática, o de 5 W, que é o tamanho comum na
+prateleira.
+
+Se você multiplicou 12 por 100 e achou 1200, trocou a divisão por
+multiplicação na Ohm's law: a current é a voltage **dividida** pela
+resistance.
+
+</details>
+
+### Exemplo 4: a power no bloco do blower
+
+**Pause e tente:** na velocidade 1 da figura, o resistor tem 1.6 Ω e o blower
+motor tem 0.8 Ω, em 12 V (valores ilustrativos). Quanta power o resistor
+transforma em calor?
+
+<details>
+<summary>Solução</summary>
+
+Eles estão em série, então as resistances se somam e a current é a mesma nos
+dois:
+
+$$
+R_T = 1.6 + 0.8 = 2.4\,\Omega \qquad I = \frac{12}{2.4} = 5\,\text{A}
+$$
+
+A voltage drop do resistor:
+
+$$
+V_R = I \times R = 5 \times 1.6 = 8\,\text{V}
+$$
+
+E a power dele:
+
+$$
+P = V_R \times I = 8 \times 5 = 40\,\text{W}
+$$
+
+Quarenta watts é o calor de uma lâmpada antiga de cabeceira, dentro de uma
+peça do tamanho de um pente. Agora você entende por que esse bloco fica
+dentro do duto do ar: sem o vento levando o calor, ele não duraria.
+
+Confira pelo outro caminho: $P = I \times I \times R = 5 \times 5 \times 1.6 = 40\,\text{W}$.
+Os dois caminhos dão o mesmo número, como esperado.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o valor de um resistor pequeno vem em cores, e não em números?
+2. O que decide por qual ponta se começa a ler as faixas?
+3. Um resistor de 1 kΩ ±10 \% mede 1080 Ω. Ele está bom?
+4. Dois resistors têm as mesmas faixas, mas um é muito maior. O que é
+   diferente entre eles?
+5. Por que o blower motor resistor fica dentro do duto do ar?
+6. Por que trocar um blower motor resistor aberto pode não resolver a queixa
+   por muito tempo?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque não há espaço para um número impresso legível no corpo da peça, e as
+   faixas podem ser lidas de qualquer lado em que ela for montada.
+2. O espaço entre elas: as três primeiras ficam agrupadas numa ponta, e a
+   faixa da tolerance fica separada, mais perto da outra ponta. A leitura
+   começa pelo lado das três agrupadas.
+3. Está bom. 10 \% de 1000 Ω são 100 Ω, então a faixa aceita vai de 900 Ω a
+   1100 Ω, e 1080 Ω cai dentro dela.
+4. O watt rating. O valor em ohms é o mesmo, porque as faixas são as mesmas. O
+   tamanho maior dá mais superfície para jogar o calor no ar, e por isso o
+   resistor grande aguenta mais power.
+5. Porque ele transforma dezenas de watts em calor nas velocidades baixas, e o
+   ar que passa leva esse calor embora. Fora do duto, a peça cozinharia.
+6. Porque o resistor costuma abrir por excesso de calor, não por defeito
+   próprio. Se a causa do calor continuar — blower motor puxando current
+   demais, ou cabin air filter entupido cortando o ar —, a peça nova vai
+   abrir também.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nominal value e a tolerance de cada resistor:
+
+a) marrom, preto, vermelho, dourado;
+b) vermelho, vermelho, marrom, prateado;
+c) laranja, branco, amarelo, dourado;
+d) marrom, verde, preto, dourado.
+
+### 2. Explicação
+
+Com as próprias palavras, explique a diferença entre o nominal value e o watt
+rating de um resistor, e diga qual dos dois está escrito nas faixas
+coloridas.
+
+### 3. Aplicação direta
+
+a) Um resistor de 220 Ω tem 0.05 A passando por ele. Qual é a power que ele
+transforma em calor?
+
+b) Qual é a faixa de valores aceitável para um resistor de 2.2 kΩ com
+tolerance de ±5 \%?
+
+c) Um resistor de 1/2 W é ligado num circuit em que ele vai dissipar 0.8 W.
+Ele serve?
+
+### 4. Variação
+
+Refaça o exemplo 4 com o switch na velocidade 2, em que só metade do tapped
+resistor entra no circuit: 0.8 Ω em série com o blower motor de 0.8 Ω, em
+12 V (valores ilustrativos). Qual é a current, e qual é a power do resistor?
+Compare com a velocidade 1 e diga se o motor gira mais rápido ou mais devagar.
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que o ventilador do ar “parou nas velocidades baixas” pela
+segunda vez em seis meses. Na primeira vez, outra oficina trocou o blower
+motor resistor.
+
+a) Que medição você faria primeiro, e com o circuit em que estado?
+
+b) A current do blower motor na velocidade máxima mede 22 A. O manual do
+veículo especifica 15 A (valor ilustrativo). O que isso sugere?
+
+c) Que princípio liga essa current alta ao resistor aberto?
+
+d) Qual é a correção, e como você verifica o reparo?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+A power que o resistor transforma em calor depende da current ao quadrado.
+Pense no que acontece com $I \times I \times R$ quando a current passa de 15 A
+para 22 A, com o mesmo resistor.
+
+</details>
+
+### 6. Justificativa
+
+Por que a prática de escolher um resistor com o dobro do watt rating
+calculado não é exagero, mesmo sabendo que a conta estava certa?
+
+### 7. Formato ASE
+
+**Question 1.** A resistor is marked with the color bands brown, black, red,
+and gold. Its value is:
+
+- A. 100 Ω, ±5 \%
+- B. 1000 Ω, ±5 \%
+- C. 10 000 Ω, ±10 \%
+- D. 102 Ω, ±5 \%
+
+**Question 2.** Technician A says that the physical size of a resistor
+indicates how much resistance it has. Technician B says that the physical size
+of a resistor indicates how much power it can dissipate. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A blower motor works only on high speed. The blower motor
+resistor measures OL on all taps. Technician A says the resistor assembly must
+be replaced. Technician B says the current draw of the blower motor should be
+measured before closing the repair. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Marrom 1, preto 0, vermelho ×100:
+   $(1 \times 10 + 0) \times 100 = 1000\,\Omega$, ou 1 kΩ, com ±5 \%.
+
+   b) Vermelho 2, vermelho 2, marrom ×10:
+   $(2 \times 10 + 2) \times 10 = 220\,\Omega$, com ±10 \% (prateado).
+
+   c) Laranja 3, branco 9, amarelo ×10 000:
+   $(3 \times 10 + 9) \times 10\,000 = 390\,000\,\Omega$, ou 390 kΩ, com
+   ±5 \%.
+
+   d) Marrom 1, verde 5, preto ×1:
+   $(1 \times 10 + 5) \times 1 = 15\,\Omega$, com ±5 \%. Repare que a faixa
+   preta de multiplicador quer dizer “multiplique por 1”, ou seja, nenhum
+   zero a mais.
+
+2. O nominal value é a resistance da peça, em ohms, e é ele que está escrito
+   nas faixas coloridas. O watt rating é quanta power a peça consegue
+   transformar em calor e jogar no ar sem se danificar; ele não está nas
+   faixas, e se descobre pelo tamanho da peça ou pelo catálogo. Um responde
+   “quantos ohms?”; o outro responde “aguenta quanto?”.
+
+3. a) $P = I \times I \times R = 0.05 \times 0.05 \times 220 = 0.55\,\text{W}$.
+   Um resistor de 1/2 W (0.5 W) já ficaria no limite; a escolha é de 1 W ou
+   mais.
+
+   b) 5 \% de 2200 Ω são 110 Ω. A faixa vai de
+   $2200 - 110 = 2090\,\Omega$ a $2200 + 110 = 2310\,\Omega$.
+
+   c) Não serve. Ele aguenta 0.5 W e o circuit pede 0.8 W, acima do limite. A
+   peça vai esquentar, mudar de valor e abrir. Com a folga do dobro, escolha
+   um de 2 W.
+
+4. $R_T = 0.8 + 0.8 = 1.6\,\Omega$, então
+   $I = 12 \div 1.6 = 7.5\,\text{A}$. A voltage drop do resistor é
+   $7.5 \times 0.8 = 6\,\text{V}$, e a power dele é
+   $6 \times 7.5 = 45\,\text{W}$.
+
+   O motor gira **mais rápido** que na velocidade 1: a resistance em série
+   caiu de 1.6 Ω para 0.8 Ω, a current subiu de 5 A para 7.5 A, e o motor
+   agora fica com 6 V em vez de 4 V.
+
+   Um detalhe que surpreende: a power do resistor subiu de 40 W para 45 W,
+   mesmo com menos resistance. A current entra ao quadrado na conta, e ela
+   subiu bastante.
+
+5. a) Com a chave desligada e o connector do bloco solto, medir a resistance
+   de cada tomada do blower motor resistor com o ohmmeter. É a medição que
+   confirma se a peça está aberta de novo, e ela precisa ser feita sem
+   energia e fora do circuit.
+
+   b) Que o blower motor está puxando bem mais current que o especificado —
+   sinal de bearings gastos ou do rotor arrastando. O motor é a causa, e o
+   resistor é a vítima.
+
+   c) A power que o resistor transforma em calor é $I \times I \times R$. A
+   current entra ao quadrado: passando de 15 A para 22 A, a power do resistor
+   fica $(22 \div 15)^2 \approx 2.15$ vezes maior, mais que o dobro. O bloco
+   não foi feito para jogar fora esse tanto de calor, e abre.
+
+   d) A correção é trocar o blower motor, além do resistor. Para verificar:
+   depois do reparo, meça de novo a current na velocidade máxima e confirme
+   que ela está dentro da especificação do manual, e teste as quatro
+   velocidades.
+
+6. Porque o watt rating é medido pelo fabricante com a peça ao ar livre, em
+   temperatura ambiente. No carro, o resistor costuma ficar dentro de uma
+   caixa fechada, perto do motor ou atrás do painel, onde o ar já está quente
+   e quase não se move. Nessas condições, a peça joga menos calor fora do que
+   joga no teste. A folga cobre essa diferença, e também cobre uma voltage de
+   sistema que às vezes passa de 14 V com o motor funcionando, em vez dos 12 V
+   da conta.
+
+7. **Question 1: B.** Marrom 1, preto 0, vermelho é o multiplicador ×100:
+   $10 \times 100 = 1000\,\Omega$. A alternativa A seria marrom, preto,
+   marrom. A C erra o valor e a tolerance (dourado é ±5 \%, não ±10 \%). A D
+   soma a terceira faixa como se fosse um dígito, em vez de multiplicador.
+
+   **Question 2: B.** Só o técnico B está certo. O tamanho não tem relação com
+   a resistance em ohms, que vem nas faixas coloridas; ele indica a superfície
+   disponível para jogar o calor fora, ou seja, o watt rating.
+
+   **Question 3: C.** Os dois estão certos. O bloco com OL em todas as tomadas
+   está aberto e precisa ser trocado (A). Mas um bloco não abre sozinho: medir
+   a current do blower motor procura a causa do calor que abriu a peça (B).
+   Trocar só o resistor sem essa medição é o *parts cannon*.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** um resistor tem **dois** dados, e eles respondem a
+  perguntas diferentes. O nominal value, em ohms, está nas faixas coloridas e
+  diz quanto ele limita a current. O watt rating está no tamanho da peça e diz
+  quanto calor ele consegue jogar fora. Escolher a peça errada em qualquer um
+  dos dois dá defeito.
+- **Quando usar:** ao ler um resistor na bancada, ao escolher a peça de
+  reposição, e sempre que um resistor abrir — porque aí a pergunta não para
+  em “qual peça”, e vai até “o que a fez esquentar”.
+- **Com o que se conecta:** a power vem da lição
+  [Electrical power](./potencia-eletrica); a soma de resistances e a divisão
+  da voltage, da lição [Series circuit](./circuito-em-serie); a medição com o
+  ohmmeter, da lição [Medições com o multimeter](./medicoes-com-multimetro).
+  A lição seguinte, [Switches](./switches), trata da peça que decide **quando**
+  a current passa.
+
+**Termos desta lição para revisar:** fixed resistor, resistor color code,
+color band, multiplier, tolerance, nominal value, watt rating, wirewound
+resistor, film resistor, tapped resistor, open resistor, blower motor
+resistor, cabin air filter.

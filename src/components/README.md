@@ -111,6 +111,7 @@ import Circuito from '@site/src/components/Circuito';
 | relay em corte (repouso e acionado) e o circuit da horn com relay | `Rele` |
 | dimmer com rheostat: mover o wiper e ver current e power mudarem (interativo) | `Reostato` |
 | resistance do NTC e do PTC com a temperatura | `CurvaTermistor` |
+| as quatro bands de um resistor: por onde começar a ler e a band separada da tolerance | `CodigoCores` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -644,15 +645,15 @@ convenções comuns dos manuais, sem copiar figura de livro ou apostila.
 - **Dois terminais** (`SIMBOLOS`): `bateria`, `lampada`, `filamento`,
   `motor`, `buzina`, `fusivel` (o S na caixinha, o das figuras do site),
   `fusivelS` (o S solto dos manuais americanos), `fusivelEuro`,
-  `interruptor`, `resistor`, `resistorEuro`, `variavel`, `ntc`, `ptc`,
-  `bobina`, `bobinaNucleo`, `diodo`, `led`, `fotodiodo`. Cada um é desenhado
+  `interruptor`, `disjuntor`, `resistor`, `resistorEuro`, `variavel`, `ntc`,
+  `ptc`, `bobina`, `bobinaNucleo`, `capacitor`, `diodo`, `led`, `fotodiodo`. Cada um é desenhado
   deitado, com os terminais em x = ±30. `Peca` põe o símbolo no lugar e gira;
   os textos do símbolo (o M do motor, o −T do NTC) mudam de lugar com a
   rotação, mas não giram.
 - **Especiais** (`ESPECIAIS`), cada um com o seu quadro: `massa`,
   `filamentoDuplo`, `rele`, `rele5`, `releDiodo`, `splice`, `cruzamento`,
   `conector`, `pinos`, `corDoFio`, `completo`, `incompleto`, `versoes`,
-  `fusivelNumero`, `interruptorPosicoes`, `potenciometro`.
+  `fusivelNumero`, `interruptorPosicoes`, `potenciometro`, `transformador`.
 - `Rele` (o símbolo, exportado de `desenhos.jsx`) aceita `dx` (distância do
   meio até a coil e até o contact, para alinhar com os wires de um circuit),
   `acionado`, `cinco` (contact 87a) e `diodo`. A caixa é contínua: tracejada,
@@ -729,6 +730,18 @@ Valores ilustrativos, escritos no próprio componente.
 `<CurvaTermistor caption="..." />` — resistance contra temperatura, sem
 números: o NTC (azul) cai, o PTC (laranja) sobe. `mostrar="ntc"` ou
 `mostrar="ptc"` desenha uma curva só.
+
+## CodigoCores
+
+`<CodigoCores caption="..." />` — o resistor de quatro bands visto de perto:
+as três primeiras agrupadas numa ponta, a da tolerance separada na outra, com
+um número em cada band e a seta de “comece por aqui”.
+
+As bands são desenhadas **sem cor**, de propósito. A cor de cada faixa é
+conteúdo da tabela da lição, três tons são o limite dos diagramas da casa, e
+um desenho que dependesse de distinguir vermelho de marrom deixaria de fora
+justamente quem mais precisa confirmar o valor no ohmmeter. A figura ensina a
+posição; a tabela ensina o valor.
 
 ## Eletroima
 

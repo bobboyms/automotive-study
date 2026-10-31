@@ -1,0 +1,731 @@
+---
+title: "Loads: bulbs, flashers e electric motors"
+---
+
+import Esquema from '@site/src/components/Esquema';
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Loads: bulbs, flashers e electric motors
+
+> **Pergunta central:** a load é o fim do circuit, onde a energia elétrica
+> vira luz, calor ou movimento. Por que a current que ela puxa não é um número
+> fixo — e como essa variação, que parece um detalhe, denuncia defeito em
+> quase todo sistema do carro?
+
+## A queixa: o pisca que ficou acelerado
+
+Uma cliente chega dizendo:
+
+> “Ontem o pisca do lado direito começou a piscar o dobro de rápido que o
+> esquerdo. Eu não mexi em nada. O da esquerda está normal.”
+
+Você liga o pisca para a esquerda: ritmo normal. Para a direita: bem mais
+rápido, quase o dobro.
+
+Repare no que **não** faz sentido à primeira vista. Os dois lados usam o mesmo
+flasher, o mesmo fuse e o mesmo switch. Se a peça que comanda o ritmo é a
+mesma para os dois lados, como ela pode trabalhar em dois ritmos diferentes
+conforme o lado escolhido?
+
+Ao fim desta lição você vai saber a resposta, vai saber por que esse
+comportamento é **de propósito**, e vai conseguir achar a peça defeituosa sem
+abrir nada.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| incandescent bulb | lâmpada incandescente | bulb em que um filament esquenta até brilhar |
+| trade number | número da lâmpada | o código da bulb (1157, 194), que define encaixe e potência |
+| inrush current | corrente de partida | o pico de current no instante em que a load liga |
+| current draw | consumo de corrente | quanta current uma load puxa trabalhando |
+| flasher | relé pisca-pisca | a peça que liga e desliga o pisca num ritmo |
+| thermal flasher | pisca térmico | flasher em que a current aquece uma bimetal strip |
+| electronic flasher | pisca eletrônico | flasher comandado por eletrônica, não por calor |
+| flash rate | ritmo do pisca | quantas piscadas por minuto |
+| armature | armadura (induzido) | a parte que gira dentro do motor, com as coils |
+| commutator | coletor | os segmentos de cobre que trocam o sentido da current no armature |
+| brush | escova | o carvão que encosta no commutator e leva a current até ele |
+| field coil | bobina de campo | a coil que cria o campo magnético fixo do motor |
+| counter-voltage | contratensão | a voltage que o motor girando gera contra a que o alimenta |
+| stall current | corrente de rotor travado | a current que o motor puxa quando está travado |
+| feedback | retorno indevido | current que volta por um caminho que não era o previsto |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+A load é o motivo de o circuit existir, e os três tipos desta lição cobrem
+quase tudo:
+
+- **bulbs:** headlamps, brake lights, turn signals, luzes do painel;
+- **flashers:** turn signals e pisca-alerta;
+- **electric motors:** starter motor, blower motor, limpador, vidros, fuel
+  pump, cooling fan, bomba do ABS.
+
+Na Wake Tech, estes assuntos voltam no módulo 5 da TRN-120 (wiper e horn), em
+AUT-151 (motor da bomba do ABS) e em TRN-140 (blower). O starter motor, que é
+o maior electric motor do carro, tem lição própria mais adiante nesta
+disciplina. Na prova ASE, o conteúdo está na área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O electrical circuit](./o-circuito-eletrico), o que é uma
+   **load** e o que ela faz com a energia elétrica?
+2. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   o que acontece com a resistance do filament de uma bulb quando ele
+   esquenta?
+3. Na lição [Electromagnetism e o relay](./eletromagnetismo-e-rele), o que
+   acontece quando uma current passa por uma coil perto de um ímã?
+4. Na lição [Circuit protection](./protecao-do-circuito), por que o fuse não
+   abre no instante exato em que a current passa do valor dele?
+
+<details>
+<summary>Respostas</summary>
+
+1. É a peça que transforma a energia elétrica em outra coisa — luz e calor,
+   na bulb; movimento, no motor. Ela é também a maior resistance do circuit,
+   e por isso fica com quase toda a voltage.
+2. **Sobe.** Nos metais, quente tem mais resistance que frio. Esta lição
+   mostra o tamanho dessa diferença, e o que ela causa no instante em que a
+   luz acende.
+3. A coil vira um eletroímã e é atraída ou repelida pelo ímã. Essa força é o
+   princípio do relay — e é também o princípio do electric motor desta lição.
+4. Porque ele tem uma curva de tempo: current pouco acima do valor demora
+   para abrir; muito acima abre quase na hora. Esta lição mostra a razão de
+   essa curva existir.
+
+</details>
+
+## Intuição: a load não é um buraco de tamanho fixo
+
+Até aqui, quase todas as contas trataram a load como uma resistance fixa. Foi
+uma simplificação útil, e ela funcionou: a lição
+[Series circuit](./circuito-em-serie) previu certo as velocidades do blower
+tratando o motor como 0.8 Ω.
+
+Agora vamos olhar mais de perto, porque **a current que uma load puxa depende
+do que está acontecendo com ela naquele instante**:
+
+- uma **bulb** fria tem bem menos resistance que quente, e puxa um pico de
+  current no primeiro instante;
+- um **motor** livre puxa pouca current; o mesmo motor travado puxa muito
+  mais.
+
+Essas duas variações não são defeitos. São o comportamento normal da peça, e
+conhecê-las é o que permite usar a current como **instrumento de
+diagnóstico**: medir quanta current uma load puxa diz se ela está trabalhando
+bem, sem desmontar nada.
+
+A analogia de sempre, a da água, dá conta da bulb: o cano frio é mais largo
+que o cano quente, então entra mais água no primeiro instante. Mas ela **não
+dá conta do motor**, e é importante saber onde ela para. O motor não é um
+cano: enquanto gira, ele empurra a água de volta. Essa parte não tem
+equivalente num encanamento, e é o assunto da seção do motor.
+
+## Modelo visual: as loads nos diagrams
+
+<TabelaSimbolos
+  itens={['lampada', 'filamentoDuplo', 'motor', 'buzina']}
+  caption="As loads mais comuns nos wiring diagrams: a bulb de um filament, a bulb de dois filaments (um terminal comum e dois caminhos separados), o electric motor com o M dentro do círculo e a horn. Em todas, o símbolo não diz quanta current a peça puxa — esse número vem do manual, ou da sua medição."
+/>
+
+## Formalização, parte 1: a incandescent bulb
+
+> **Incandescent bulb** é uma bulb em que a current passa por um fio fino de
+> tungstênio, o **filament**, e o aquece até ele brilhar. A luz é um efeito
+> do calor: a maior parte da energia vira calor, e só uma parte vira luz.
+
+Cada bulb tem um **trade number** — 1157, 194, 9006 — que identifica o
+encaixe, a voltage e a power. É esse número, e não a aparência, que se usa
+para comprar a peça certa. Duas bulbs de encaixe igual podem ter potências
+diferentes.
+
+### O pico do primeiro instante
+
+A resistance do filament frio é muito menor que a dele quente. Uma bulb de
+21 W em 12 V tem, trabalhando:
+
+$$
+R = \frac{V \times V}{P} = \frac{12 \times 12}{21} \approx 6.9\,\Omega
+$$
+
+Fria, essa mesma bulb pode ter perto de um décimo desse valor (proporção
+ilustrativa; ela varia com a bulb). Com cerca de 0.69 Ω, a current do primeiro
+instante seria:
+
+$$
+I = \frac{12}{0.69} \approx 17.5\,\text{A}
+$$
+
+Dez vezes a current normal de 1.75 A, por alguns milésimos de segundo, até o
+filament esquentar. Esse pico tem nome: **inrush current**.
+
+Duas consequências práticas saem daí:
+
+1. **É por isso que o fuse tem curva de tempo** (lição
+   [Circuit protection](./protecao-do-circuito)). Se o fuse abrisse no
+   instante em que a current passa do valor, nenhuma bulb poderia ser ligada.
+2. **É por isso que as bulbs queimam quase sempre no momento em que se
+   acende a luz**, e não no meio do caminho: é nesse instante que o filament
+   sofre o maior choque de current e de temperatura.
+
+### A bulb de dois filaments
+
+> **Double filament bulb** tem dois filaments de potências diferentes dentro
+> do mesmo bulbo, com um terminal comum. Um filament fraco faz a lanterna
+> traseira; o forte faz a brake light ou o pisca.
+
+- **Exemplo:** a lâmpada 1157 da lanterna traseira. Com os faróis ligados,
+  acende o filament fraco. Pisando no freio, acende o forte.
+- **Contraexemplo:** a lâmpada 194 do painel, de um filament só. Ela tem uma
+  função só e um caminho só.
+
+Essa bulb tem um defeito característico que vale guardar, porque ele confunde
+muita gente. Os dois filaments dividem o **mesmo ground**, pelo terminal
+comum. Se esse ground abrir, a current do filament forte procura outro
+caminho de volta — e encontra um pelo filament fraco e pela fiação da
+lanterna. O resultado é uma luz acendendo quando outra é acionada: pisa no
+freio e acende a luz de ré, ou liga o pisca e a lanterna pulsa. Esse retorno
+por um caminho não previsto chama-se **feedback**, e a causa quase sempre é
+ground ruim, não bulb ruim.
+
+## Formalização, parte 2: o flasher
+
+> **Flasher** é a peça que liga e desliga o circuit do pisca num ritmo
+> regular, o **flash rate**.
+
+Há dois tipos, e a diferença explica a queixa desta lição.
+
+**Thermal flasher.** É o tipo antigo. Por dentro há uma **bimetal strip**, a
+mesma peça do thermal switch da lição [Switches](./switches). A current das
+bulbs passa pela lâmina e a aquece; aquecida, a lâmina entorta e **abre** o
+contato; sem current, ela esfria, volta e fecha. O ritmo depende de quão
+depressa a lâmina esquenta — ou seja, **depende da current**.
+
+Num thermal flasher, uma bulb queimada deixa passar menos current. A lâmina
+esquenta mais devagar, e o pisca fica **mais lento**, ou nem chega a piscar: a
+luz fica acesa parada.
+
+**Electronic flasher.** É o tipo atual, e em muitos carros a função está
+dentro de um módulo. Ele não depende do calor para marcar o tempo: tem um
+circuit eletrônico que conta. Mas ele **mede** a current do lado acionado, e
+foi programado para avisar o motorista quando essa current cair abaixo do
+esperado — sinal de bulb queimada.
+
+O aviso escolhido pelos fabricantes é dobrar o ritmo. A lei americana exige
+que o motorista perceba uma bulb de sinalização queimada, e piscar rápido é a
+forma de dizer isso sem nenhuma luz nova no painel.
+
+:::note Erro comum: trocar o flasher porque o pisca está rápido
+
+O flasher rápido é o **mensageiro**. Em carro com electronic flasher, ele está
+informando que a current caiu de um lado. Trocar o flasher não devolve a
+current que falta: ou a bulb está queimada, ou o circuit dela está com mau
+contato, ou alguém trocou as bulbs por LED.
+
+:::
+
+Esse último caso liga esta lição com a dos diodes. Uma LED bulb da lição
+[Resistances que mudam e o diode](./resistencias-variaveis-e-diodo) dá a mesma
+luz puxando uma fração da current de uma incandescent. Para o electronic
+flasher, essa current baixa é exatamente o que uma bulb queimada produz — e
+ele avisa, piscando rápido. A solução é um flasher próprio para LED ou um
+resistor de carga, e não “consertar” o flasher.
+
+## Formalização, parte 3: o electric motor
+
+> **Electric motor** transforma energia elétrica em movimento usando a força
+> entre dois campos magnéticos: o campo fixo, criado por ímãs permanentes ou por
+> **field coils**, e o campo do **armature**, que gira.
+
+As partes que você precisa nomear:
+
+- **armature:** o conjunto que gira, com as coils enroladas nele;
+- **commutator:** os segmentos de cobre na ponta do armature;
+- **brush:** o bloco de carvão, empurrado por mola, que encosta no commutator
+  e conduz a current para as coils que giram.
+
+O commutator resolve um problema que não é óbvio. Para o armature continuar
+girando no mesmo sentido, a current dentro das coils dele precisa **inverter**
+a cada meia volta. Se não invertesse, a força empurraria para um lado e depois
+para o outro, e o armature pararia alinhado com o campo. Os segmentos do
+commutator passam por baixo das brushes e fazem essa inversão sozinhos, pela
+própria rotação.
+
+### A counter-voltage: por que um motor livre puxa pouca current
+
+Esta é a parte mais importante da lição, e também a que mais confunde na
+primeira leitura. Se não fechar agora, volte depois do exemplo 3.
+
+A lição [Electromagnetism e o relay](./eletromagnetismo-e-rele) mostrou que
+uma current cria um campo magnético. O caminho inverso também vale: um
+condutor que se move dentro de um campo magnético **gera voltage**.
+
+Num motor funcionando, as duas coisas acontecem ao mesmo tempo. A current
+faz o armature girar; e o armature, girando dentro do campo, gera uma voltage
+própria. Essa voltage gerada tem sentido **contrário** ao da voltage que
+alimenta o motor, e por isso se chama **counter-voltage**.
+
+A current que entra no motor é o que sobra da conta:
+
+$$
+I = \frac{V_{\text{battery}} - V_{\text{counter}}}{R_{\text{armature}}}
+$$
+
+Três situações, com o blower motor da lição
+[Series circuit](./circuito-em-serie) e valores ilustrativos — armature de
+0.3 Ω:
+
+| Situação | Counter-voltage | Current |
+|---|---|---|
+| travado, sem girar | 0 V | $12 \div 0.3 = 40\,\text{A}$ |
+| girando livre, no máximo | 7.5 V | $(12 - 7.5) \div 0.3 = 15\,\text{A}$ |
+| girando duro, bearings gastos | 5.4 V | $(12 - 5.4) \div 0.3 = 22\,\text{A}$ |
+
+Agora o comportamento do motor deixa de ser mágica:
+
+- **Motor travado puxa muito mais current**, porque não gera
+  counter-voltage nenhuma para se opor à battery. É a **stall current**.
+- **Motor com resistência mecânica gira mais devagar**, gera menos
+  counter-voltage e por isso puxa mais current. Foi exatamente o caso do
+  exercício 5 da lição [O resistor fixo](./resistor-fixo): o blower medindo
+  22 A em vez de 15 A, e cozinhando o resistor.
+- **A resistance que o ohmmeter mede no motor parado não é a resistance que
+  ele “mostra” ao circuit girando.** Aquele 0.8 Ω da lição de series circuit
+  era a resistance **equivalente** do motor em funcionamento
+  ($12 \div 15$), não a resistance do fio do armature.
+
+É por isso que medir **current draw** é o teste padrão de motor elétrico, e
+não medir resistance. A current conta o que está acontecendo mecanicamente
+dentro da peça.
+
+- **Exemplo:** um fuel pump que puxa current acima da especificação do
+  manual, sinal de bomba gasta ou filtro entupido.
+- **Contraexemplo:** um motor que puxa current **abaixo** do normal e gira
+  devagar. Aí o problema não é mecânico: é falta de voltage chegando, por
+  resistance alta no caminho — o que se confirma com voltage drop, não com
+  current.
+
+## Como falha e como diagnosticar
+
+| Peça | Defeito | Sintoma | Teste |
+|---|---|---|---|
+| bulb | filament aberto | não acende | olhar o filament; melhor, available voltage no socket e continuidade da bulb |
+| bulb de dois filaments | ground comum aberto | uma luz acende quando outra é acionada | voltage drop no lado do ground, com a load ligada |
+| socket | terminal oxidado, resistance alta | luz fraca, intermitente | voltage drop entre o wire e o terminal da bulb |
+| flasher (eletrônico) | nada: está avisando | pisca rápido de um lado | comparar a current dos dois lados; procurar bulb queimada |
+| motor | bearing gasto, mecanismo duro | lento, esquenta, queima fuse ou resistor | current draw comparada com a especificação |
+| motor | brushes gastas | para e volta, não liga em certas posições | current draw e inspeção das brushes |
+
+### A queixa resolvida
+
+Volte ao pisca acelerado do lado direito.
+
+1. **O que o sistema deveria fazer:** piscar nos dois lados no mesmo ritmo,
+   porque o flasher é o mesmo.
+2. **O que foi observado:** ritmo normal à esquerda, quase o dobro à direita.
+3. **O princípio que liga as duas coisas:** o electronic flasher mede a
+   current do lado acionado. Como cada lado é um conjunto de bulbs separado,
+   a current é diferente em cada lado — e é por isso que a mesma peça pode
+   trabalhar em dois ritmos. Current abaixo do esperado quer dizer uma bulb a
+   menos acendendo.
+4. **O que isso descarta:** o flasher, o fuse e o switch, porque os três são
+   comuns aos dois lados e o lado esquerdo está normal.
+5. **O teste:** acione o pisca para a direita e olhe as bulbs daquele lado,
+   uma por uma, inclusive a lateral e a do painel. A que não acender é a
+   candidata.
+
+Nesse carro, a bulb traseira direita estava queimada. Trocando a bulb, o ritmo
+voltou ao normal nos dois lados.
+
+**Verificar o reparo:** acione os dois lados e compare o ritmo; acione o
+pisca-alerta e confira todas as bulbs de uma vez.
+
+E se **todas** as bulbs daquele lado acenderem? Então a current está baixa por
+outro motivo: um socket oxidado acrescentando resistance, um ground ruim, ou
+bulbs de LED instaladas. O teste seguinte é a voltage drop no socket e no
+ground daquele lado, com a bulb acesa.
+
+## Na oficina: medir current draw de um motor
+
+:::warning Antes de começar
+
+- **Peças que giram.** Um blower, um cooling fan ou um limpador podem ligar
+  sozinhos quando você energiza o circuit. Mãos, mangas, cabelo e ferramentas
+  longe das pás e dos braços.
+- **Nunca ligue o multimeter em série para medir uma current alta.** A
+  entrada de current do multimeter costuma aguardar no máximo 10 A, e um
+  starter motor puxa centenas. Para currents altas, o instrumento é o
+  **clamp meter**, que mede sem abrir o circuit, e ele vem mais adiante na
+  disciplina.
+- **Bulb quente queima o dedo.** Uma halogen bulb recém-apagada está a
+  centenas de graus. Além disso, não encoste o dedo no vidro de uma halogen
+  nova: a gordura da pele cria um ponto quente que reduz a vida dela.
+- **Nunca meça resistance com o circuit energizado** (lição
+  [Medições com o multimeter](./medicoes-com-multimetro)).
+
+:::
+
+Procedimento geral, com clamp meter:
+
+1. Identifique o wire que alimenta o motor, pelo wiring diagram.
+2. Abrace **um wire só** com a garra do clamp meter. Abraçar os dois
+   (alimentação e retorno) dá leitura zero, porque as currents vão em sentidos
+   opostos e se cancelam.
+3. Acione a load e leia a current com o motor trabalhando.
+4. Compare com a especificação do manual do veículo. Não existe um valor
+   único que sirva para todos os motores.
+
+O que cada resultado sugere:
+
+- **current acima da especificação:** resistência mecânica — bearings,
+  mecanismo emperrado, ou o próprio armature em curto;
+- **current abaixo da especificação, com o motor lento:** falta de voltage
+  chegando. Procure resistance alta no caminho, com voltage drop;
+- **nenhuma current:** circuit aberto. Volte ao fuse e ao switch.
+
+## Exemplos resolvidos
+
+### Exemplo 1: a current de um lado do pisca
+
+Cada lado do pisca tem duas bulbs de 21 W, em 12 V (valores ilustrativos).
+Que current o flasher vê com o lado inteiro funcionando, e que current ele vê
+com uma bulb queimada?
+
+<details>
+<summary>Solução</summary>
+
+Cada bulb puxa:
+
+$$
+I = \frac{P}{V} = \frac{21}{12} = 1.75\,\text{A}
+$$
+
+As duas estão em paralelo, então as currents se somam:
+
+$$
+I_T = 1.75 + 1.75 = 3.5\,\text{A}
+$$
+
+Com uma queimada, sobra só a outra: **1.75 A**, metade do esperado. É essa
+queda que o electronic flasher percebe, e é por isso que ele dobra o ritmo.
+
+Repare que a bulb queimada **não** afeta a outra. Elas estão em paralelo, e
+cada branch recebe a voltage inteira — a regra da lição
+[Parallel circuit](./circuito-em-paralelo).
+
+</details>
+
+### Exemplo 2: o pico do primeiro instante
+
+**Pause e tente:** uma bulb de 21 W tem cerca de 6.9 Ω trabalhando. Fria, a
+resistance é cerca de um décimo disso (proporção ilustrativa). Qual é a
+current no instante em que a luz acende, e quantas vezes maior que a normal?
+
+<details>
+<summary>Solução</summary>
+
+Fria, a resistance fica em torno de:
+
+$$
+R_{\text{frio}} \approx 6.9 \div 10 = 0.69\,\Omega
+$$
+
+E a current do primeiro instante:
+
+$$
+I = \frac{12}{0.69} \approx 17.5\,\text{A}
+$$
+
+A current normal é 1.75 A, então o pico é cerca de **dez vezes** maior. Ele
+dura só o tempo de o filament esquentar, alguns milésimos de segundo.
+
+Agora junte com a lição anterior: um fuse de 15 A nesse circuit não abre, mesmo
+o pico passando de 17 A, porque o fuse precisa de tempo para aquecer. Se ele
+abrisse por current instantânea, nenhuma luz do carro poderia ser ligada.
+
+</details>
+
+### Exemplo 3: a counter-voltage do blower
+
+**Pause e tente:** o blower motor da lição de series circuit puxa 15 A na
+velocidade máxima, em 12 V. O armature dele tem 0.3 Ω (valor ilustrativo).
+Que counter-voltage ele está gerando? E quanta current ele puxaria se o rotor
+travasse?
+
+<details>
+<summary>Solução</summary>
+
+Partindo da fórmula da counter-voltage:
+
+$$
+I = \frac{V_{\text{battery}} - V_{\text{counter}}}{R_{\text{armature}}}
+\qquad\Rightarrow\qquad
+V_{\text{counter}} = V_{\text{battery}} - I \times R_{\text{armature}}
+$$
+
+$$
+V_{\text{counter}} = 12 - 15 \times 0.3 = 12 - 4.5 = 7.5\,\text{V}
+$$
+
+O motor girando gera 7.5 V contra os 12 V da battery. Sobram 4.5 V para
+empurrar a current pelo armature, e é isso que dá os 15 A.
+
+Travado, ele não gera counter-voltage nenhuma:
+
+$$
+I = \frac{12 - 0}{0.3} = 40\,\text{A}
+$$
+
+Quarenta amps, quase três vezes a current normal. É por isso que um motor
+travado queima o fuse em segundos, e é por isso que a **stall current** é um
+número que o manual informa.
+
+</details>
+
+### Exemplo 4: o motor que ficou duro
+
+**Pause e tente:** o mesmo blower, com os bearings gastos, mede 22 A na
+velocidade máxima. Que counter-voltage ele está gerando agora, e o que esse
+número diz sobre a rotação dele?
+
+<details>
+<summary>Solução</summary>
+
+$$
+V_{\text{counter}} = 12 - 22 \times 0.3 = 12 - 6.6 = 5.4\,\text{V}
+$$
+
+Caiu de 7.5 V para 5.4 V. A counter-voltage é gerada pela rotação, então
+menos counter-voltage quer dizer **rotação mais baixa**: o motor está girando
+mais devagar do que deveria, mesmo recebendo os mesmos 12 V.
+
+E aí se fecha o ciclo com a lição [O resistor fixo](./resistor-fixo): esses
+22 A passando pelo blower motor resistor nas velocidades baixas produzem
+muito mais calor do que o bloco foi feito para jogar fora, e é por isso que o
+resistor abre. O motor é a causa; o resistor é a vítima.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que uma bulb puxa mais current no instante em que acende?
+2. Por que as bulbs costumam queimar na hora em que se liga a luz?
+3. Num thermal flasher, uma bulb queimada deixa o pisca mais rápido ou mais
+   lento? E num electronic flasher?
+4. O que o commutator faz, e por que o motor não giraria sem ele?
+5. Por que um motor travado puxa muito mais current que um motor livre?
+6. Por que medir current draw diz mais sobre um motor do que medir a
+   resistance dele?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o filament frio tem bem menos resistance que quente, e a current é
+   a voltage dividida pela resistance. Com menos resistance no primeiro
+   instante, a current é maior: é a inrush current.
+2. Porque é nesse instante que o filament sofre o maior pico de current e a
+   maior variação de temperatura. Um filament já fino pela idade se rompe
+   nesse choque.
+3. No thermal flasher, **mais lento** — ou ele nem pisca, porque a current
+   menor demora mais para aquecer a bimetal strip. No electronic flasher,
+   **mais rápido**, porque ele mede a current e foi programado para dobrar o
+   ritmo como aviso de bulb queimada.
+4. Ele inverte o sentido da current nas coils do armature a cada meia volta.
+   Sem essa inversão, a força magnética pararia de empurrar no mesmo sentido,
+   e o armature travaria alinhado com o campo, em vez de continuar girando.
+5. Porque ele não gera counter-voltage. A counter-voltage vem da rotação:
+   parado, ela é zero, e a battery inteira fica empurrando a current contra a
+   resistance pequena do armature.
+6. Porque a current draw mostra a peça **trabalhando**, e revela o estado
+   mecânico: um motor duro gira menos, gera menos counter-voltage e puxa mais
+   current. A resistance medida com o motor parado não enxerga nada disso.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga que tipo de load é cada peça e o que ela produz a partir da energia
+elétrica:
+
+a) o filament de uma brake light;
+b) o blower motor;
+c) a horn;
+d) a LED bulb de uma lanterna.
+
+### 2. Explicação
+
+Explique por que o mesmo flasher pode piscar em dois ritmos diferentes
+conforme o lado que o motorista aciona.
+
+### 3. Aplicação direta
+
+a) Uma bulb de headlamp tem 55 W em 12 V (valor ilustrativo). Que current ela
+puxa, e qual é a resistance dela trabalhando?
+
+b) Um motor com armature de 0.2 Ω gera 9 V de counter-voltage girando livre,
+em 12 V. Que current ele puxa?
+
+c) O mesmo motor, travado. Que current ele puxa?
+
+### 4. Variação
+
+Refaça o exemplo 3 para um motor de armature 0.5 Ω que puxa 10 A em 12 V.
+Qual é a counter-voltage? E a stall current? Compare a razão entre a stall
+current e a current normal com a do blower do exemplo 3.
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que a lanterna traseira esquerda “acende sozinha” quando ele
+pisa no freio, e que a luz de ré daquele lado fica fraca quando o pisca está
+ligado. Todas as bulbs são novas.
+
+a) O que várias luzes do mesmo lado se influenciando sugere?
+
+b) Que teste confirma essa hipótese, e com o circuit em que estado?
+
+c) Por que trocar as bulbs não resolveu?
+
+d) Qual é a correção?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Pense no caminho de volta. As bulbs daquele canto do carro costumam dividir
+um único ponto de ground. O que acontece com a current de uma delas se esse
+caminho de volta deixa de funcionar?
+
+</details>
+
+### 6. Justificativa
+
+Por que abraçar os dois wires de um motor com a garra do clamp meter dá
+leitura zero?
+
+### 7. Formato ASE
+
+**Question 1.** The right turn signal flashes about twice as fast as the left
+turn signal. Technician A says the flasher unit should be replaced.
+Technician B says a turn signal bulb on the right side is probably burned
+out. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** A DC motor draws much more current when its shaft is locked
+than when it runs free. This is because a locked motor:
+
+- A. has lower winding resistance
+- B. produces no counter-voltage
+- C. receives higher system voltage
+- D. has open brushes
+
+**Question 3.** Technician A says that a bad ground at a taillight assembly
+can make one light come on when a different light is switched on. Technician
+B says that this condition is normally caused by all the bulbs being burned
+out. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Incandescent bulb: transforma a energia em calor, e o calor do filament
+   produz a luz. b) Electric motor: transforma em movimento (e em calor, no
+   que se perde). c) Horn: transforma em movimento de uma membrana, e o
+   movimento vira som. d) LED: transforma em luz, pelo diode, com muito pouco
+   calor.
+
+2. Porque o electronic flasher mede a current do lado que está acionado, e
+   cada lado tem o seu próprio conjunto de bulbs. Se um lado tem uma bulb a
+   menos acendendo, a current daquele lado é menor, e o flasher dobra o ritmo
+   para avisar. A peça é a mesma; o que muda é o que ela está medindo.
+
+3. a) $I = 55 \div 12 \approx 4.58\,\text{A}$;
+   $R = 12 \div 4.58 \approx 2.6\,\Omega$ (ou, direto,
+   $R = 12 \times 12 \div 55 \approx 2.6\,\Omega$).
+
+   b) $I = (12 - 9) \div 0.2 = 3 \div 0.2 = 15\,\text{A}$.
+
+   c) Travado, a counter-voltage é zero:
+   $I = 12 \div 0.2 = 60\,\text{A}$.
+
+4. $V_{\text{counter}} = 12 - 10 \times 0.5 = 12 - 5 = 7\,\text{V}$.
+   A stall current é $12 \div 0.5 = 24\,\text{A}$.
+
+   A razão entre stall e normal é $24 \div 10 = 2.4$. No blower do exemplo 3
+   era $40 \div 15 \approx 2.7$. As duas razões são parecidas, e isso não é
+   coincidência: nos dois casos a counter-voltage normal fica em torno de 60 \%
+   da voltage da battery, e é ela que determina a razão.
+
+5. a) Sugere um **ground** compartilhado em mau estado. Luzes que se
+   influenciam estão achando caminho de volta uma pela outra — é o feedback.
+   Um defeito dentro de uma bulb não afeta as vizinhas.
+
+   b) Voltage drop no lado do ground: uma test lead no terminal de ground da
+   lanterna e a outra num ponto de metal limpo da carroceria, **com as luzes
+   daquele lado acesas**, para haver current passando. Num ground bom, a
+   leitura fica perto de zero; uma voltage considerável ali confirma a
+   hipótese.
+
+   c) Porque as bulbs não eram a causa. Elas acendiam — o problema era o
+   caminho de volta comum a elas, e peça nova não repara ground.
+
+   d) Limpar e refazer o ponto de ground daquele conjunto: soltar o parafuso,
+   tirar a tinta e a oxidação do contato até o metal limpo, montar de novo
+   com o terminal bem apertado e refazer a medição de voltage drop para
+   confirmar.
+
+6. Porque o clamp meter mede o campo magnético em volta do wire, e a current
+   vai num sentido no wire de alimentação e no sentido contrário no de
+   retorno. Os dois campos são iguais e opostos, e se cancelam dentro da
+   garra. Por isso a garra abraça **um wire só**.
+
+7. **Question 1: B.** Só o técnico B está certo. Um electronic flasher pisca
+   rápido de propósito quando a current do lado acionado cai, e o motivo mais
+   comum é bulb queimada. Trocar o flasher (A) não devolve a current que
+   falta, e o lado esquerdo normal já mostra que o flasher funciona.
+
+   **Question 2: B.** Travado, o armature não gira, e sem rotação não há
+   counter-voltage para se opor à battery. A resistance do enrolamento (A)
+   não muda por estar travado; a voltage do sistema (C) é a mesma; brushes
+   abertas (D) dariam current zero, não current alta.
+
+   **Question 3: A.** Só o técnico A está certo. Com o ground comum aberto, a
+   current de uma bulb procura o caminho de volta pelo filament de outra, e
+   acende a luz errada: é o feedback. Bulbs todas queimadas (B) não acenderiam
+   luz nenhuma, o que é o oposto do sintoma descrito.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a current que uma load puxa **não é fixa**. Na bulb,
+  ela começa com um pico e cai quando o filament esquenta. No motor, ela
+  depende da counter-voltage, que depende da rotação — e por isso a current
+  conta o estado mecânico da peça. Essa variação é a razão de medir current
+  draw ser um teste de diagnóstico, e não só uma curiosidade.
+- **Quando usar:** ao diagnosticar luz que não acende, luz que acende na hora
+  errada, pisca fora de ritmo e qualquer motor lento, quente ou que queima
+  proteção.
+- **Com o que se conecta:** a resistance do filament vem da lição
+  [Voltage, current e resistance](./tensao-corrente-e-resistencia); a bimetal
+  strip, da lição [Switches](./switches); a curva de tempo do fuse, da lição
+  [Circuit protection](./protecao-do-circuito); a LED bulb, da lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo). A
+  lição seguinte, [Capacitor e transformer](./capacitor-e-transformer),
+  fecha o conjunto de componentes com as duas peças que guardam energia num
+  campo.
+
+**Termos desta lição para revisar:** incandescent bulb, trade number, inrush
+current, current draw, double filament bulb, flasher, thermal flasher,
+electronic flasher, flash rate, armature, commutator, brush, field coil,
+counter-voltage, stall current, feedback, field coil, clamp meter.

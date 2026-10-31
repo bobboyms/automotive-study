@@ -167,6 +167,22 @@ export const SIMBOLOS = {
     ),
   },
 
+  disjuntor: {
+    // circuit breaker: o contato dentro de uma caixa, com a bimetal strip
+    // desenhada por cima dele. Como no fuse, os manuais têm mais de uma
+    // forma de desenhar; esta é a comum nos diagramas americanos.
+    desenho: () => (
+      <g>
+        <Pontas a={19} />
+        <rect className={styles.parte} x={-19} y={-13} width={38} height={26} rx={3} />
+        <circle className={styles.contato} cx={-12} r={2.6} />
+        <circle className={styles.contato} cx={12} r={2.6} />
+        <line className={styles.fio} x1={-12} y1={0} x2={12} y2={0} />
+        <path className={styles.fino} d="M -12 -7 C -4 -11, 4 -11, 12 -7" />
+      </g>
+    ),
+  },
+
   interruptor: {
     desenho: ({fechado}) => (
       <g>
@@ -253,6 +269,18 @@ export const SIMBOLOS = {
         {/* as duas linhas são o iron core */}
         <line className={styles.fino} x1={-20} y1={5} x2={20} y2={5} />
         <line className={styles.fino} x1={-20} y1={9} x2={20} y2={9} />
+      </g>
+    ),
+  },
+
+  capacitor: {
+    // as duas plates separadas pelo dielectric: o símbolo não fecha o
+    // caminho, e é isso que ele quer dizer — a current contínua não passa
+    desenho: () => (
+      <g>
+        <Pontas a={5} />
+        <line className={styles.placa} x1={-5} y1={-13} x2={-5} y2={13} />
+        <line className={styles.placa} x1={5} y1={-13} x2={5} y2={13} />
       </g>
     ),
   },
@@ -617,7 +645,43 @@ function Potenciometro() {
   );
 }
 
+// Transformer: as duas coils de frente uma para a outra, e o iron core
+// entre elas. Quatro terminais, por isso ele não é um símbolo de dois
+// terminais: a primary fica à esquerda e a secondary à direita.
+function Transformador({fontSize = 13}) {
+  const arcosVerticais = (y0, y1, n, x, lado) => {
+    const r = (y1 - y0) / (2 * n);
+    let d = `M ${x} ${y0}`;
+    for (let i = 0; i < n; i++) d += ` a ${r} ${r} 0 0 ${lado} 0 ${2 * r}`;
+    return d;
+  };
+  return (
+    <g>
+      <g className={styles.fio}>
+        {/* terminais da primary, à esquerda */}
+        <line x1={-52} y1={-28} x2={-14} y2={-28} />
+        <line x1={-52} y1={28} x2={-14} y2={28} />
+        <path d={arcosVerticais(-28, 28, 4, -14, 0)} />
+        {/* terminais da secondary, à direita */}
+        <line x1={52} y1={-28} x2={14} y2={-28} />
+        <line x1={52} y1={28} x2={14} y2={28} />
+        <path d={arcosVerticais(-28, 28, 4, 14, 1)} />
+      </g>
+      {/* o iron core, entre as duas coils */}
+      <g className={styles.fino}>
+        <line x1={-3} y1={-30} x2={-3} y2={30} />
+        <line x1={3} y1={-30} x2={3} y2={30} />
+      </g>
+      {/* os rótulos ficam afastados do meio: centrados sobre cada coil, as
+          duas palavras se encostavam e “secondary” saía cortada no cartão */}
+      <SvgMath x={-46} y={-38} math="\text{primary}" fontSize={fontSize} />
+      <SvgMath x={46} y={-38} math="\text{secondary}" fontSize={fontSize} />
+    </g>
+  );
+}
+
 export const ESPECIAIS = {
+  transformador: {quadro: [-88, -58, 176, 112], desenho: (p) => <Transformador {...p} />},
   massa: {quadro: [-50, -42, 100, 84], desenho: (p) => <Massa1 {...p} />},
   filamentoDuplo: {quadro: [-50, -46, 100, 92], desenho: () => <FilamentoDuplo />},
   rele: {quadro: [-64, -58, 128, 116], desenho: (p) => <Rele {...p} />},

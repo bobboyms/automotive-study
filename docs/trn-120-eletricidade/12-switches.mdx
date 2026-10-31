@@ -1,0 +1,685 @@
+---
+title: "Switches: o que cada tipo fecha"
+---
+
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Switches: o que cada tipo fecha
+
+> **Pergunta central:** todo switch abre e fecha um caminho. Então por que
+> existem tantos tipos — de botão, de temperatura, de pressão — e como saber,
+> olhando o diagram, em que estado cada um está quando ninguém mexe nele?
+
+## A queixa: as brake lights que não apagam
+
+Um cliente volta à oficina preocupado:
+
+> “De manhã o carro não pegou. Dei chupeta e funcionou. À noite, minha mulher
+> viu que as luzes de freio estavam acesas com o carro desligado e trancado.
+> Elas ficam acesas direto.”
+
+Na lição [O electrical circuit](./o-circuito-eletrico), a queixa foi o
+contrário: uma brake light que **não acendia**. Agora é o oposto. As brake
+lights acendem sem ninguém pisar no pedal, e ficam acesas com a chave fora. Por
+isso a battery amanheceu descarregada.
+
+O circuit é curto: battery, fuse, brake light switch e as bulbs. O fuse está
+bom, senão nada acenderia. As bulbs estão boas, porque acendem. Sobra o
+switch — e entender o que aconteceu com ele depende de saber **em que posição
+um switch fica quando ninguém o aciona**. Ao fim desta lição você vai saber
+isso, e vai saber fazer a medição que confirma a causa em dois minutos.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| pole | polo | cada caminho independente que o switch controla |
+| throw | posição | cada destino a que um polo pode se ligar |
+| single-pole single-throw | um polo, uma posição | o switch mais simples: liga e desliga um caminho |
+| single-pole double-throw | um polo, duas posições | manda um caminho para um destino ou para outro |
+| double-pole double-throw | dois polos, duas posições | dois caminhos trocados ao mesmo tempo |
+| ganged switch | interruptores geminados | polos que se movem juntos, no mesmo botão |
+| momentary switch | interruptor momentâneo | volta sozinho à posição de repouso quando se solta |
+| maintained switch | interruptor de posição fixa | fica na posição em que foi deixado |
+| push-button switch | interruptor de botão | acionado por um botão com mola |
+| plunger | haste | a peça que o pedal ou a porta empurra para acionar o switch |
+| thermal switch | interruptor térmico | abre ou fecha conforme a temperatura |
+| bimetal strip | lâmina bimetálica | duas ligas num só pedaço, que entorta ao esquentar |
+| pressure switch | pressostato | abre ou fecha conforme a pressão de um fluido |
+| mercury switch | interruptor de mercúrio | usa mercúrio líquido para fechar o contato conforme a inclinação |
+| contactor | contator | o relay grande que liga e desliga a alta tensão de um híbrido ou elétrico |
+| parasitic draw | consumo parasita | current que o carro continua puxando com tudo desligado |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Um carro comum tem dezenas de switches:
+
+- **de botão:** o brake light switch no pedal, o switch da luz de cortesia na
+  porta, o horn switch do volante que a lição
+  [Electromagnetism e o relay](./eletromagnetismo-e-rele) usou;
+- **de posição fixa:** o headlight switch, o fog lamp switch da lição
+  [Electrical symbols](./simbolos-eletricos), o switch de velocidades do
+  blower;
+- **de temperatura:** o thermal switch que liga o cooling fan do radiator;
+- **de pressão:** o oil pressure switch, que acende a luz de óleo do painel, e
+  os switches de pressão do ar-condicionado;
+- **de alta tensão:** os contactors do híbrido, que ligam a high-voltage
+  battery ao resto do carro.
+
+Na Wake Tech, os switches aparecem na TRN-120 ao ler wiring diagrams e ao
+montar circuits nos A-Tech boards, e voltam em AUT-141, AUT-151 e TRN-140. Na
+prova ASE, estão na área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O electrical circuit](./o-circuito-eletrico), o que é um **open
+   circuit**, e o que acontece com a current nele?
+2. Na lição [Electromagnetism e o relay](./eletromagnetismo-e-rele), o que
+   querem dizer **normally open** e **normally closed** num relay?
+3. Na lição [Medições com o multimeter](./medicoes-com-multimetro), que
+   leitura de voltage drop se espera num switch bom, e com o circuit em que
+   estado?
+4. Na lição [Electrical power](./potencia-eletrica), quanta current puxa uma
+   bulb de 21 W em 12 V?
+
+<details>
+<summary>Respostas</summary>
+
+1. É um caminho interrompido. A current **para**: ela não circula em caminho
+   aberto, em nenhum ponto do laço. Um switch desligado é um open circuit
+   feito de propósito.
+2. **Normally open** é o contato que fica aberto enquanto ninguém aciona a
+   peça. **Normally closed** é o que fica fechado em repouso. Nesta lição a
+   mesma ideia vale para o switch mecânico, e ela é a chave da queixa.
+3. Perto de zero, **com a current passando**. Sem current, qualquer switch
+   mede zero, mesmo o ruim — foi o contraexemplo daquela lição.
+4. $I = P \div V = 21 \div 12 = 1.75\,\text{A}$. Esse número volta no
+   exemplo 1.
+
+</details>
+
+## Intuição: duas perguntas antes de olhar o tipo
+
+Todo switch faz a mesma coisa física: encosta dois contatos ou os separa. O
+que muda de um tipo para outro são as respostas a duas perguntas.
+
+**Primeira: quem empurra?** Pode ser o dedo do motorista, o pedal, a porta ao
+fechar, o calor do líquido de arrefecimento ou a pressão do óleo. Um switch de
+temperatura não é “mais complicado” que um de botão: ele só troca o dedo por
+um pedaço de metal que entorta quando esquenta.
+
+**Segunda: como ele fica quando ninguém empurra?** Essa é a pergunta que o
+diagram responde, e é a que resolve a queixa desta lição. O desenho de um
+switch no wiring diagram mostra sempre a **posição de repouso** — a peça sem
+ninguém mexendo nela.
+
+Uma analogia ajuda na primeira pergunta, e é preciso dizer onde ela para. Um
+switch é como uma porta no caminho da água de um cano: aberta, a água passa;
+fechada, não passa. O cuidado é com as palavras, porque em elétrica elas se
+invertem: **switch aberto é o que não deixa a current passar**, porque o
+caminho está interrompido. Em elétrica, "aberto" descreve o caminho, não a
+passagem.
+
+## Modelo visual: polos, posições e o estado de repouso
+
+<TabelaSimbolos
+  itens={['interruptor', 'interruptorPosicoes', 'rele', 'rele5']}
+  caption="Da esquerda para a direita: o switch simples, desenhado aberto; o switch de posições, com um contato comum e uma saída por posição; o relay, cujo contato é normally open; e o relay de cinco pinos, que tem também um contato normally closed, o 87a. Em todos, o desenho mostra a peça em repouso."
+/>
+
+Duas palavras organizam os tipos, e elas vêm do inglês dos manuais:
+
+> **Pole** é cada caminho independente que o switch controla. **Throw** é cada
+> destino a que um polo pode se ligar.
+
+Com essas duas palavras, os três tipos comuns:
+
+| Nome | Sigla | O que faz | Exemplo no carro |
+|---|---|---|---|
+| single-pole single-throw | SPST | um caminho, liga ou desliga | o switch de uma luz auxiliar |
+| single-pole double-throw | SPDT | um caminho que vai para um destino **ou** para outro | o switch de farol baixo/alto |
+| double-pole double-throw | DPDT | dois caminhos trocados ao mesmo tempo | o switch de vidro elétrico, que inverte o motor |
+
+O switch de vidro elétrico é o exemplo que faz o DPDT fazer sentido. Para o
+vidro subir, a current entra no motor por um terminal e sai pelo outro. Para
+descer, ela precisa entrar pelo outro e sair pelo primeiro — a current inverte
+o sentido no motor. Inverter o sentido obriga a trocar **os dois** wires ao
+mesmo tempo, e é exatamente isso que dois polos fazem num movimento só.
+
+Quando vários polos se movem juntos no mesmo botão, o manual chama o conjunto
+de **ganged switch**, e o diagram liga os polos por uma linha tracejada. Essa
+linha tracejada não é um wire: ela quer dizer “estes contatos se movem
+juntos”. Confundir essa linha com um wire é um erro comum de leitura de
+diagram.
+
+## Ponte para a formalização
+
+Saber quantos polos e quantas posições um switch tem diz o que ele consegue
+fazer. Mas, para diagnosticar, falta a outra metade: **em que estado ele está
+agora**. Essa metade tem nome próprio, e é a mesma dupla de palavras que a
+lição do relay usou para os contatos do relay.
+
+## Formalização
+
+### Normally open e normally closed
+
+> **Normally open (NO)** é o switch que fica **aberto** em repouso, e fecha
+> quando alguém o aciona. **Normally closed (NC)** é o que fica **fechado** em
+> repouso, e abre quando alguém o aciona.
+
+A palavra *normally* aqui quer dizer “sem ninguém acionando”, e não “na maior
+parte do tempo”.
+
+- **Exemplo:** o horn switch do volante é normally open. Em repouso não passa
+  current, e a horn só toca enquanto o dedo aperta.
+- **Contraexemplo:** o switch da luz de cortesia da porta é normally closed
+  pelo lado do carro: com a porta aberta, o switch está solto e a luz acende.
+  Fechar a porta empurra o plunger e **abre** o switch, apagando a luz. Quem
+  espera que “fechar a porta fecha o switch” inverte o diagnóstico inteiro.
+
+### Momentary e maintained
+
+> **Momentary switch** volta sozinho à posição de repouso quando a mão sai de
+> cima. **Maintained switch** fica onde foi deixado.
+
+- **Exemplo de momentary:** o horn switch e o botão do vidro elétrico.
+- **Exemplo de maintained:** o headlight switch. Você gira e ele fica, mesmo
+  com o carro desligado — e é por isso que dá para esquecer a luz acesa.
+- **Contraexemplo da confusão:** um switch pode ser momentary e normally
+  closed ao mesmo tempo. As duas palavras respondem a perguntas diferentes:
+  *momentary* diz se ele volta sozinho; *normally closed* diz em que estado
+  ele volta.
+
+### Push-button switch
+
+> **Push-button switch** é acionado por um botão com mola, que empurra ou
+> solta os contatos. No carro, o botão costuma ser uma haste, o **plunger**,
+> empurrada por uma peça móvel: o pedal, a porta, o capô.
+
+É o tipo da queixa desta lição. O brake light switch fica preso num suporte
+atrás do pedal de freio. Com o pedal solto, o braço do pedal **encosta no
+plunger e o mantém empurrado**; nessa posição, o contato das brake lights fica
+aberto. Quando o motorista pisa, o pedal se afasta, o plunger sai para fora
+pela mola, e o contato fecha: as brake lights acendem.
+
+Guarde o detalhe: **é o pedal em repouso que segura o plunger**. Se alguma
+coisa afastar o pedal do switch, o plunger sai e as luzes acendem sozinhas.
+
+### Thermal switch
+
+> **Thermal switch** abre ou fecha conforme a temperatura. Dentro dele há uma
+> **bimetal strip**: duas ligas diferentes coladas uma na outra, que se
+> esticam de formas diferentes quando esquentam. A lâmina entorta, e o
+> movimento dela move o contato.
+
+- **Exemplo:** o switch que liga o cooling fan. Com o líquido frio, ele está
+  aberto e o fan fica parado. Passando da temperatura de acionamento, a lâmina
+  entorta, o contato fecha e o fan liga.
+- **Contraexemplo:** o ECT sensor, da lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo). Ele
+  também reage à temperatura, mas não abre nem fecha nada: ele muda a
+  resistance aos poucos, de forma contínua. Um é switch, o outro é sensor.
+
+### Pressure switch
+
+> **Pressure switch** abre ou fecha conforme a pressão de um fluido. A pressão
+> empurra um diafragma, e o diafragma move o contato.
+
+- **Exemplo:** o oil pressure switch. Com o motor parado não há pressão, o
+  switch está fechado e a luz de óleo do painel acende quando a chave é
+  ligada. Com o motor funcionando, a pressão do óleo empurra o diafragma, o
+  switch abre e a luz apaga. É um switch normally closed.
+- **Contraexemplo:** um sensor de pressão do ar-condicionado que manda um
+  sinal de voltage que varia com a pressão. Ele informa quanta pressão há; o
+  pressure switch só informa se passou do ponto.
+
+A luz de óleo é um bom lembrete de como o estado de repouso importa. Se o wire
+do oil pressure switch encostar no ground, a luz acende o tempo todo e o
+motorista pensa que perdeu pressão. Se o wire se romper, a luz **nunca**
+acende — inclusive quando a pressão acabar de verdade. Por isso a luz de óleo
+tem que acender ao ligar a chave: esse é o teste de que a lâmpada e o circuit
+estão funcionando.
+
+### Mercury switch
+
+> **Mercury switch** tem uma gota de mercúrio dentro de uma ampola. Inclinando
+> a ampola, o mercúrio escorre e cobre os dois contatos, fechando o circuit.
+
+Ele aparece em carros mais antigos, na luz do porta-malas e na luz do capô:
+levantar a tampa inclina a ampola e acende a luz.
+
+:::warning Mercúrio é tóxico
+
+O mercúrio é um metal pesado tóxico, e por isso esse switch saiu de linha nos
+carros novos. Se você encontrar um, **não quebre a ampola** e não jogue a peça
+no lixo comum: ela vai para o descarte de resíduo perigoso da oficina. A
+regra, como sempre, é o procedimento da oficina e a legislação local.
+
+:::
+
+### O contactor dos híbridos
+
+> **Contactor** é um relay feito para ligar e desligar correntes e voltages
+> muito altas. Nos híbridos e elétricos, os contactors ficam dentro da
+> high-voltage battery e são eles que conectam essa battery ao resto do carro.
+
+Funciona pelo mesmo princípio do relay da lição
+[Electromagnetism e o relay](./eletromagnetismo-e-rele): uma current pequena,
+de 12 V, energiza uma coil, e a coil fecha um contato grande. O que muda é a
+escala do contato, que precisa cortar centenas de volts sem abrir um arco.
+
+Esse arranjo é uma escolha de segurança. Com o carro desligado, ou quando o
+sistema detecta uma falha ou uma colisão, os contactors abrem e a alta tensão
+fica **presa dentro da caixa da battery**. Os cabos laranja do resto do carro
+ficam sem tensão.
+
+:::danger Alta tensão: só com o treinamento específico
+
+Um sistema de alta tensão de híbrido ou elétrico trabalha com centenas de
+volts em corrente contínua, o suficiente para matar. Nada do que você vai
+fazer na TRN-120 envolve abrir esse sistema.
+
+- **Não desconecte, não corte e não teste nada ligado aos cabos laranja.**
+- O procedimento de desativação, o equipamento de proteção (luvas isolantes
+  com teste em dia) e o tempo de espera depois de desligar são conteúdo das
+  disciplinas **EVX** e do manual do fabricante.
+- Até lá, o contactor é assunto de leitura de diagram e de entender o
+  princípio, não de bancada.
+
+:::
+
+## Como falha e como diagnosticar
+
+Um switch tem três modos de falha, e cada um dá um sintoma diferente:
+
+| Defeito | O que acontece | Sintoma | Teste |
+|---|---|---|---|
+| preso aberto | nunca fecha | a load nunca funciona | voltage drop com o switch acionado, ou continuidade fora do circuit |
+| preso fechado | nunca abre | a load fica ligada direto | tirar o connector do switch: a load tem que apagar |
+| resistance alta | fecha, mas com contatos sujos ou queimados | a load funciona fraca, ou às vezes | voltage drop sobre o switch, com a load ligada |
+| desajustado | o plunger não está no ponto certo | aciona cedo, tarde ou nunca | medir o curso conforme o manual do veículo |
+
+A resistance alta é a mais traiçoeira. O switch parece bom, porque a load
+funciona — mas parte da voltage fica nos contatos em vez de ir para a load.
+É o caso que a lição [Medições com o multimeter](./medicoes-com-multimetro)
+resolve: uma test lead de cada lado do switch, **com a load ligada e a current
+passando**, e a leitura perto de zero num switch bom. O limite aceitável vem
+do manual do veículo ou do instrutor.
+
+### A queixa resolvida
+
+Volte às brake lights acesas.
+
+1. **O que o circuit deveria fazer:** com o pedal solto, o braço do pedal
+   empurra o plunger e o contato fica **aberto**. Nenhuma current, luzes
+   apagadas.
+2. **O que foi observado:** as luzes acendem com o pedal solto e com a chave
+   fora. Então o contato está fechado o tempo todo.
+3. **As hipóteses:** o switch pode estar preso fechado por dentro; o switch
+   pode estar fora de posição no suporte; ou alguma coisa parou de empurrar o
+   plunger.
+4. **O teste que separa as hipóteses:** desligue o connector do switch. Se as
+   luzes apagarem, o problema está no switch ou na posição dele — não é um
+   wire em curto depois do switch. Depois olhe o pedal: com ele solto, o
+   plunger está empurrado até o fim?
+
+A causa mais comum, e a que estava nesse carro: o **batente de borracha** do
+suporte do pedal esfarelou. Esse batente é uma peça pequena, de poucos
+centavos, que fica entre o braço do pedal e o plunger. Sem ele, o pedal
+descansa alguns milímetros mais longe, o plunger sai para fora e o contato
+fecha, como se alguém estivesse pisando no freio o tempo todo.
+
+**Correção:** trocar o batente e conferir o ajuste do switch conforme o manual
+do veículo.
+
+**Verificar o reparo:** com o pedal solto, as luzes apagam; pisando, acendem; e
+o **parasitic draw** volta ao normal — a current que o carro puxa com tudo
+desligado. Era essa current, de duas bulbs acesas a noite inteira, que
+descarregava a battery. O exemplo 2 faz a conta.
+
+## Na oficina: testar um switch
+
+:::warning Antes de começar
+
+- **Brake lights e luzes de ré acendem quando você mexe no pedal e na
+  alavanca.** Se alguém estiver atrás do carro, avise antes.
+- **Nunca meça resistance com o circuit energizado** (lição
+  [Medições com o multimeter](./medicoes-com-multimetro)): para medir
+  continuidade, a chave fica desligada e o connector do switch, solto.
+- **Switches de airbag e de cinto fazem parte do SRS.** Não teste nem
+  desconecte nada do sistema de airbag sem o procedimento do manual: há risco
+  de disparo. Esse assunto é do módulo 4 da disciplina.
+- **Cuidado com o fan do radiator.** Um cooling fan comandado por thermal
+  switch pode ligar sozinho com o motor quente, mesmo com a chave desligada.
+  Mantenha as mãos fora do fan.
+
+:::
+
+Dois testes, e quando usar cada um:
+
+**Teste 1 — voltage drop, com o circuit funcionando.** É o melhor teste,
+porque mede o switch **trabalhando**, com a current real passando por ele.
+Ponha uma test lead de cada lado do switch, acione a load e leia. Perto de
+zero: contatos bons. Uma voltage considerável ali: resistance alta nos
+contatos.
+
+**Teste 2 — continuidade, com o switch fora do circuit.** Serve quando você
+quer confirmar o comportamento mecânico: em que posição ele abre e em que
+posição ele fecha. Chave desligada, connector solto, multimeter na escala de
+resistance. Acione a peça com a mão e veja a leitura mudar entre perto de zero
+(fechado) e OL (aberto).
+
+Para um switch de posições, a sequência é a mesma, só que repetida: meça do
+contato comum para cada saída, uma posição de cada vez, e confira contra a
+tabela de continuidade do manual do veículo. Essa tabela diz quais terminais
+devem estar ligados em cada posição do botão.
+
+## Exemplos resolvidos
+
+### Exemplo 1: a current das brake lights
+
+As duas brake lights traseiras têm 21 W cada, em 12 V (valores ilustrativos).
+Que current o circuit do brake light switch precisa conduzir?
+
+<details>
+<summary>Solução</summary>
+
+Cada bulb puxa, pela fórmula da power:
+
+$$
+I = \frac{P}{V} = \frac{21}{12} = 1.75\,\text{A}
+$$
+
+As duas estão em paralelo, então as currents se somam:
+
+$$
+I_T = 1.75 + 1.75 = 3.5\,\text{A}
+$$
+
+Esses 3.5 A passam todos pelo switch, porque ele está em série com o conjunto.
+É por isso que um brake light switch tem contatos maiores que um switch de
+sinal: ele conduz a current das duas bulbs.
+
+</details>
+
+### Exemplo 2: por que a battery amanheceu descarregada
+
+**Pause e tente:** com o defeito da queixa, as duas brake lights ficaram
+acesas das 19 h às 5 h — dez horas. A battery do carro é de 60 Ah (valor
+ilustrativo). Quanta carga as luzes consumiram?
+
+<details>
+<summary>Solução</summary>
+
+A current é a do exemplo 1: 3.5 A. A carga consumida é a current multiplicada
+pelo tempo:
+
+$$
+3.5\,\text{A} \times 10\,\text{h} = 35\,\text{Ah}
+$$
+
+São 35 Ah de uma battery de 60 Ah, mais da metade. E uma battery não entrega
+toda a carga dela para dar partida: abaixo de certo ponto, a voltage cai e o
+starter motor não gira. Por isso o carro não pegou de manhã.
+
+Repare que o defeito “luz acesa” não para no incômodo: ele vira **parasitic
+draw**, e a queixa que chega à oficina costuma ser “a battery não segura
+carga”. Trocar a battery não resolveria nada.
+
+</details>
+
+### Exemplo 3: ler o estado de repouso no diagram
+
+**Pause e tente:** num wiring diagram, o oil pressure switch aparece desenhado
+**fechado**, com um lado no ground e o outro indo para a luz do painel. Com o
+motor funcionando normalmente, a luz deve estar acesa ou apagada? E o que o
+desenho está dizendo?
+
+<details>
+<summary>Solução</summary>
+
+O desenho mostra sempre a posição de **repouso**: a peça sem nada agindo sobre
+ela. Para um oil pressure switch, repouso quer dizer motor parado, sem pressão
+de óleo.
+
+Então o desenho fechado diz: **sem pressão, o switch fecha**. Com o switch
+fechado, a luz do painel encontra o caminho para o ground e acende. É o que
+acontece quando você liga a chave antes de dar partida.
+
+Com o motor funcionando, a pressão do óleo empurra o diafragma e **abre** o
+switch. Sem caminho para o ground, a luz apaga. Então, com o motor
+funcionando normalmente, a luz está apagada.
+
+Se você respondeu “acesa”, provavelmente leu o desenho como o estado com o
+motor funcionando. O diagram nunca mostra isso: ele mostra o repouso, e cabe a
+você imaginar o que acontece quando a peça é acionada.
+
+</details>
+
+## Perguntas de verificação
+
+1. Qual é a diferença entre *pole* e *throw*?
+2. O que o diagram mostra: o switch em repouso ou o switch acionado?
+3. Por que um switch pode ser momentary e normally closed ao mesmo tempo?
+4. O switch da luz de cortesia da porta abre ou fecha quando a porta é
+   fechada? Por quê?
+5. Por que a luz de óleo precisa acender quando você liga a chave, antes da
+   partida?
+6. Um switch com contatos sujos deixa a load funcionar fraca. Que medição
+   mostra isso, e com o circuit em que estado?
+
+<details>
+<summary>Respostas</summary>
+
+1. *Pole* é quantos caminhos independentes o switch controla; *throw* é
+   quantos destinos cada caminho pode alcançar. Um SPDT tem um caminho e dois
+   destinos possíveis.
+2. Em repouso, sempre: a peça sem ninguém acionando. Quem imagina o estado
+   acionado é quem lê.
+3. Porque as duas palavras respondem a perguntas diferentes. *Momentary* diz
+   que ele volta sozinho quando se solta. *Normally closed* diz que o estado
+   para o qual ele volta é o fechado.
+4. **Abre.** Fechar a porta empurra o plunger, e empurrar o plunger separa os
+   contatos. Por isso a luz apaga com a porta fechada.
+5. Porque é o único momento em que o switch está fechado de propósito, com o
+   motor parado e sem pressão. Se a luz não acender aí, a lâmpada pode estar
+   queimada ou o circuit aberto — e aí ela também não acenderia numa perda de
+   pressão de verdade.
+6. A voltage drop sobre o switch, com a load ligada e a current passando. Sem
+   current, a leitura dá perto de zero mesmo num switch ruim, e não prova
+   nada.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Para cada switch, diga se ele é normally open ou normally closed em repouso, e
+quem o aciona:
+
+a) o horn switch do volante;
+b) o switch da luz de cortesia, visto com a porta fechada;
+c) o oil pressure switch, com o motor parado;
+d) o thermal switch do cooling fan, com o motor frio.
+
+### 2. Explicação
+
+Explique, com as próprias palavras, por que o brake light switch da queixa
+acendeu as luzes sem ninguém pisar no pedal. Use as palavras plunger, normally
+open e repouso.
+
+### 3. Aplicação direta
+
+a) Três bulbs de brake light (as duas traseiras e a central) têm 21 W cada, em
+12 V (valores ilustrativos). Que current passa pelo switch?
+
+b) Um switch bom, conduzindo 3.5 A, apresenta uma voltage drop de 0.1 V. Que
+resistance têm os contatos dele?
+
+c) Outro switch, com a mesma current, apresenta 1.4 V de voltage drop. Que
+power está sendo transformada em calor dentro dele?
+
+### 4. Variação
+
+O switch do vidro elétrico é um DPDT. Explique por que um SPDT não daria
+conta, lembrando do que precisa acontecer para o vidro descer depois de ter
+subido.
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que o cooling fan do radiator “não liga nunca”, e o motor
+esquenta parado no trânsito. O fan é comandado por um thermal switch roscado
+no radiator: com o líquido quente, o switch fecha e o fan liga.
+
+a) Qual é o teste mais simples e barato que separa “switch com defeito” de
+“fan com defeito”?
+
+b) Se você desligar o connector do switch e ligar os dois wires um no outro
+com um fused jumper wire, e o fan funcionar, o que isso prova e o que ainda
+não prova?
+
+c) Que cuidado de segurança essa manobra exige?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Fechar o switch com a mão é a forma de perguntar ao circuit: “se o switch
+estivesse bom, o resto funcionaria?”. Pense no que o resultado descarta em
+cada caso.
+
+</details>
+
+### 6. Justificativa
+
+Por que o teste de voltage drop num switch precisa ser feito com a load ligada,
+e não com o circuit desligado?
+
+### 7. Formato ASE
+
+**Question 1.** The brake lights on a vehicle stay on at all times, even with
+the key removed. Technician A says the brake light switch may be out of
+adjustment or stuck closed. Technician B says the brake light bulbs should be
+replaced. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** In a wiring diagram, a switch is shown in its:
+
+- A. energized position
+- B. at-rest position
+- C. most common position
+- D. failed position
+
+**Question 3.** A switch carrying 4 A measures 0.9 V across its terminals with
+the load operating. This indicates:
+
+- A. the switch is good
+- B. the switch has high resistance
+- C. the load is shorted
+- D. the circuit is open
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Normally open; o dedo do motorista. b) Com a porta fechada, o switch
+   está **aberto**, porque o plunger está empurrado; ele é normally closed em
+   repouso, e a porta é quem o aciona. c) Normally closed; a pressão do óleo
+   é quem o aciona (e com o motor parado não há pressão, então ele está no
+   estado de repouso, fechado). d) Normally open; a temperatura do líquido é
+   quem o aciona, e com o motor frio ele está em repouso, aberto.
+
+2. O brake light switch é normally open: em repouso, com o pedal solto, o
+   braço do pedal empurra o plunger e os contatos ficam separados. O batente
+   de borracha que fica entre o pedal e o plunger esfarelou, e o pedal passou
+   a descansar mais longe do switch. Sem nada empurrando, a mola do plunger o
+   jogou para fora, e os contatos se fecharam — a mesma posição de quando
+   alguém pisa no freio. Por isso as luzes ficaram acesas em repouso.
+
+3. a) Cada bulb puxa $21 \div 12 = 1.75\,\text{A}$; três bulbs em paralelo dão
+   $3 \times 1.75 = 5.25\,\text{A}$.
+
+   b) $R = V \div I = 0.1 \div 3.5 \approx 0.029\,\Omega$, perto de três
+   centésimos de ohm.
+
+   c) $P = V \times I = 1.4 \times 3.5 = 4.9\,\text{W}$. Quase cinco watts
+   dentro de uma peça pequena de plástico: é assim que um switch com contatos
+   ruins derrete o próprio connector.
+
+4. Para o vidro subir, a current entra no motor por um terminal e sai pelo
+   outro. Para descer, ela tem que entrar pelo terminal oposto, ou seja, o
+   sentido da current no motor inverte. Um SPDT controla um wire só: ele
+   escolheria o destino de uma ponta do motor, mas a outra ponta ficaria
+   presa no mesmo lugar, e a current não teria como inverter. O DPDT troca os
+   dois wires ao mesmo tempo, num movimento só, e é isso que inverte o
+   sentido.
+
+5. a) Fechar o circuit do fan no lugar do switch. Com a chave desligada,
+   solte o connector do thermal switch e una os dois wires com um fused
+   jumper wire. O teste é rápido, não exige desmontar nada e separa as duas
+   hipóteses.
+
+   b) Prova que o fan, a fiação, o fuse e o relay do fan estão bons, porque
+   tudo isso funcionou com o switch fora do caminho. Então o defeito está no
+   switch. O que **não** prova é que o switch está com defeito por si só: ele
+   pode estar bom e o líquido nunca chegar à temperatura de acionamento dele,
+   por falta de líquido ou por um thermostat travado aberto. Confirme a
+   temperatura real antes de fechar o diagnóstico.
+
+   c) O fan vai ligar na hora, sem aviso, e pode continuar ligado. Mantenha as
+   mãos, as mangas e as ferramentas longe das pás antes de unir os wires. Além
+   disso, o motor quente e o sistema de arrefecimento pressurizado não devem
+   ser abertos: não solte a tampa do radiator para conferir a temperatura.
+
+6. Porque a voltage drop só aparece quando há current passando. Uma resistance
+   alta nos contatos se manifesta como voltage perdida, e
+   $V = I \times R$: com $I$ igual a zero, a voltage drop é zero, qualquer que
+   seja a resistance. Com o circuit desligado, o switch ruim e o switch bom dão
+   a mesma leitura.
+
+7. **Question 1: A.** Só o técnico A está certo. Luzes acesas o tempo todo
+   indicam o caminho fechado quando deveria estar aberto, e o switch é a peça
+   que faz esse papel. Trocar as bulbs (B) não tem sentido: elas estão
+   funcionando — o problema é que estão funcionando na hora errada.
+
+   **Question 2: B.** O diagram mostra a posição de repouso, com a peça sem
+   ninguém acionando. A alternativa A é o estado acionado, que o leitor
+   imagina a partir do desenho. As alternativas C e D não correspondem a
+   nenhuma convenção de diagram.
+
+   **Question 3: B.** Com a load funcionando, a voltage drop num switch bom
+   fica perto de zero; 0.9 V é voltage que está ficando nos contatos em vez
+   de ir para a load, o que indica resistance alta. A alternativa A está
+   errada pelo mesmo motivo. Num short (C), a current subiria e o fuse
+   abriria. Num circuit aberto (D), não haveria current, e a load não estaria
+   funcionando.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** um switch se descreve por **quantos caminhos** ele
+  controla (poles), **quantos destinos** cada caminho tem (throws) e **em que
+  estado ele fica em repouso** (normally open ou normally closed). O wiring
+  diagram sempre desenha o estado de repouso; o resto é você quem imagina.
+- **Quando usar:** ao ler qualquer diagram, ao decidir se uma load deveria
+  estar ligada ou desligada naquele momento, e ao diagnosticar uma load que
+  não liga, que não desliga ou que funciona fraca.
+- **Com o que se conecta:** o open circuit vem da lição
+  [O electrical circuit](./o-circuito-eletrico); normally open e normally
+  closed, da lição [Electromagnetism e o relay](./eletromagnetismo-e-rele); o
+  teste de voltage drop, da lição
+  [Medições com o multimeter](./medicoes-com-multimetro). A lição seguinte,
+  [Circuit protection](./protecao-do-circuito), trata das peças que abrem o
+  caminho sozinhas quando a current passa do limite.
+
+**Termos desta lição para revisar:** pole, throw, single-pole single-throw,
+single-pole double-throw, double-pole double-throw, ganged switch, momentary
+switch, maintained switch, push-button switch, plunger, thermal switch,
+bimetal strip, pressure switch, oil pressure switch, mercury switch,
+contactor, high-voltage battery, parasitic draw.

@@ -1,0 +1,702 @@
+---
+title: "Circuit protection: fuse, fusible link e circuit breaker"
+---
+
+import Esquema from '@site/src/components/Esquema';
+import TabelaSimbolos from '@site/src/components/Simbolos';
+
+# Circuit protection: fuse, fusible link e circuit breaker
+
+> **Pergunta central:** um fuse queima e interrompe o circuit. Mas o que
+> exatamente ele está protegendo — a load, a battery ou outra coisa? A
+> resposta decide qual peça você pode pôr no lugar, e é a diferença entre um
+> reparo e um incêndio.
+
+## A queixa: o fuse maior que resolveu o problema errado
+
+Um carro chega rebocado, com cheiro de plástico queimado. O cliente conta:
+
+> “O fuse do acendedor queimava toda semana. Um amigo meu disse que era fuse
+> fraco e pôs um de 30 A no lugar do de 15 A. Aí parou de queimar. Só que hoje
+> saiu fumaça de trás do painel e agora nada funciona.”
+
+Atrás do painel, um trecho do chicote está derretido, com vários wires
+colados uns nos outros.
+
+O fuse “parou de queimar”, e o cliente achou que o problema tinha sido
+resolvido. Ao fim desta lição você vai saber por que a troca do fuse de 15 A
+pelo de 30 A **causou** o incêndio, e por que o fuse que queima toda semana é
+uma informação valiosa, não um defeito do fuse.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| circuit protection | proteção do circuito | as peças que abrem o caminho quando a current passa do limite |
+| overload | sobrecarga | current acima do normal, mas sem curto: a load pede demais |
+| blade fuse | fusível de lâmina | o fuse de plástico colorido com duas lâminas, o mais comum hoje |
+| cartridge fuse | fusível cartucho | fuse em corpo fechado, usado em amperagens altas |
+| maxi fuse | fusível maxi | blade fuse grande, para circuits de muita current |
+| fusible link | elo fusível | pedaço de wire feito para derreter, montado perto da battery |
+| circuit breaker | disjuntor | proteção que abre e volta a fechar, sem precisar ser trocada |
+| cycling circuit breaker | disjuntor de rearme automático | abre, esfria e fecha sozinho, repetidamente |
+| fuse panel | painel de fusíveis | a caixa onde ficam os fuses, com a tampa que identifica cada um |
+| fuse puller | saca-fusível | a pinça plástica que tira o blade fuse sem danificar o terminal |
+| ampacity | capacidade de corrente | a current que um wire conduz sem esquentar demais |
+| wire gauge | bitola do fio | a medida da espessura do wire |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Todo circuit do carro passa por alguma proteção:
+
+- o **fuse panel** da cabine e o da engine compartment, que a lição
+  [Electrical symbols](./simbolos-eletricos) mostra nos diagrams como uma
+  caixa tracejada;
+- o **fusible link** ou o **maxi fuse** logo na saída da battery, protegendo
+  os cabos grossos que alimentam tudo;
+- o **circuit breaker** dos power windows, do teto solar e do limpador —
+  circuits de motor, que podem travar sem estar com defeito;
+- os fuses da **high-voltage battery** de um híbrido, que são de outro tipo e
+  só se trocam com o procedimento do fabricante.
+
+Na prova ASE, o assunto está na área **A6**, e também na **A1** e na **A8**,
+quando o fuse que abre derruba um sistema do motor. Na Wake Tech, é conteúdo
+do módulo de wiring diagrams da TRN-120.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Parallel circuit](./circuito-em-paralelo), o que é um **short
+   circuit**, e o que acontece com a current quando um aparece?
+2. Na lição [Electrical power](./potencia-eletrica), o que acontece com o
+   calor produzido num wire quando a current que passa por ele **dobra**?
+3. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   o que a espessura de um wire tem a ver com a resistance dele?
+4. Na lição [O resistor fixo](./resistor-fixo), por que um resistor abre
+   quando a power passa do watt rating?
+
+<details>
+<summary>Respostas</summary>
+
+1. É um caminho de baixa resistance que a current encontra antes de chegar à
+   load, ou no lugar dela. Com pouca resistance no caminho, a current fica
+   enorme: é a Ohm's law com o $R$ lá embaixo.
+2. Ele fica **quatro vezes maior**, não duas. O calor é
+   $P = I \times I \times R$, e a current entra ao quadrado. Essa é a ideia
+   mais importante desta lição.
+3. Wire mais grosso, menos resistance; wire mais fino, mais resistance. Por
+   isso os cabos da battery e do starter motor são grossos.
+4. Porque ele transforma mais calor do que consegue jogar no ar. A temperatura
+   sobe até o material se danificar. Um wire sobrecarregado faz exatamente a
+   mesma coisa — só que o que derrete é o isolamento dele.
+
+</details>
+
+## Intuição: a proteção cuida do wire
+
+A pergunta de abertura tem uma resposta que surpreende quase todo mundo:
+
+> **O fuse protege o wire.** Não a load, não a battery, não o módulo.
+
+Pense no que pode dar errado num circuit. A load pode queimar — e, quando
+queima, ela em geral **para** de puxar current, porque abre por dentro. Já o
+wire é outra história. O wire não liga nem desliga: ele só conduz o que
+mandarem por ele. Se a current subir muito, o wire esquenta, o isolamento
+derrete, e os wires nus encostam uns nos outros e no metal da carroceria.
+Daí vem o fogo.
+
+O fuse é, de propósito, **o ponto mais fraco do circuit**. Ele é escolhido
+para abrir antes que o wire chegue perto da temperatura de derreter o
+isolamento. Por isso o valor do fuse não é escolhido pela load: ele é
+escolhido pela **espessura do wire** que ele protege.
+
+Essa é a lógica inteira da queixa desta lição. Trocar um fuse de 15 A por um
+de 30 A não torna o circuit “mais forte”. Torna o **wire** o novo ponto mais
+fraco. O fuse para de queimar porque agora quem queima é o chicote.
+
+A comparação com um elo fraco de corrente ajuda, e tem um limite: numa
+corrente, o elo fraco é um defeito que se quer evitar. No circuit, o elo fraco
+é uma peça projetada, barata e feita para ser trocada, posta ali exatamente
+para quebrar primeiro.
+
+## Modelo visual: as peças de proteção
+
+<TabelaSimbolos
+  itens={['fusivel', 'fusivelS', 'fusivelEuro', 'disjuntor']}
+  caption="As três formas comuns de desenhar o fuse nos diagrams — o S na caixinha (como nas figuras deste site), o S solto dos manuais americanos e o retângulo europeu — e, à direita, o circuit breaker: o contato com a bimetal strip desenhada por cima. O fuse é trocado depois de abrir; o circuit breaker fecha de novo sozinho."
+/>
+
+A proteção fica sempre **em série**, no lado da power, antes da load. O
+motivo vem da lição [Series circuit](./circuito-em-serie): num caminho único, a
+current é a mesma em todos os pontos. Só assim a peça de proteção “sente” a
+mesma current que passa pela load, e só assim abrir a peça corta a current de
+todo o circuit.
+
+<Esquema
+  pecas={[
+    {tipo: 'fusivel', rotulo: '\\text{fuse}', nota: '15\\,\\text{A}'},
+    {tipo: 'interruptor', rotulo: '\\text{switch}'},
+  ]}
+  carga={{tipo: 'lampada', rotulo: '\\text{load}'}}
+  corrente
+  caption="A ordem que os circuits do carro seguem: a power sai da battery, passa primeiro pela proteção, depois pelo switch e só então chega à load. Com o fuse antes do switch, um short em qualquer ponto depois dele é interrompido."
+/>
+
+## Ponte para a formalização
+
+Duas coisas diferentes fazem a current subir, e a proteção reage às duas:
+
+- o **short circuit**, em que a current acha um atalho e dispara para
+  centenas de amps em milésimos de segundo;
+- o **overload**, em que não há atalho nenhum, mas a load passou a pedir mais
+  do que devia — um motor com os bearings travando, por exemplo.
+
+A diferença importa no diagnóstico. Um fuse que abre **no instante** em que o
+circuit é ligado aponta para short. Um fuse que abre **depois de um tempo
+funcionando** aponta para overload.
+
+## Formalização
+
+### O fuse
+
+> **Fuse** é uma peça com um elemento metálico calibrado que derrete quando a
+> current passa do valor dele por tempo suficiente. Depois de abrir, ele não
+> volta: é trocado por outro igual.
+
+O valor escrito nele é o **fuse rating**, em amps — o termo que a lição
+[Electrical symbols](./simbolos-eletricos) apresenta junto com o número do
+fuse na fuse panel.
+
+Um detalhe que confunde: o fuse **não** abre no instante em que a current
+passa um centésimo acima do rating. Ele tem uma curva de tempo. Uma current
+pouco acima do valor demora; uma current muito acima abre quase na hora. Isso
+é de propósito, porque muitas loads puxam uma current alta no instante em que
+ligam — um motor parado, uma bulb fria — e o fuse não pode abrir por causa
+disso.
+
+Os tipos que você vai encontrar:
+
+| Tipo | Onde fica | Observação |
+|---|---|---|
+| **blade fuse** | fuse panel da cabine e do motor | o mais comum; vem em tamanhos mini, padrão e maxi |
+| **maxi fuse** | engine compartment | blade fuse grande, para circuits de muita current |
+| **cartridge fuse** | caixas de distribuição | corpo fechado, costuma ser aparafusado |
+| **fusible link** | perto da battery | um trecho de wire feito para derreter |
+
+A cor do blade fuse indica o rating, e a correspondência é padronizada entre
+fabricantes. Mas **a cor não é o dado que vale**: o número vem impresso no
+corpo da peça, e é ele que você confere. Fuse exposto ao calor desbota, e há
+mais de um padrão de cor em circulação.
+
+- **Exemplo:** um blade fuse de 15 A no circuit do acendedor, escolhido para
+  o wire daquele circuit.
+- **Contraexemplo:** um pedaço de arame, ou papel-alumínio, enrolado no lugar
+  do fuse. Ele conduz, e o circuit “funciona” — mas não abre nunca, e o
+  primeiro short derrete o chicote. Isso não é reparo: é a causa da queixa
+  desta lição, numa versão pior.
+
+### O fusible link
+
+> **Fusible link** é um pedaço curto de wire, de bitola mais fina que a do
+> circuit que ele protege, com um isolamento especial que não propaga chama.
+> Ele derrete e abre quando a current fica muito acima do normal.
+
+Ele fica onde um blade fuse não daria conta: nos cabos grossos que saem da
+battery. Um detalhe prático: um fusible link queimado nem sempre parece
+queimado por fora. O isolamento costuma ficar inteiro, às vezes só inchado ou
+com bolhas, enquanto o metal por dentro já se partiu. O teste é elétrico, não
+visual.
+
+Quando se troca um fusible link, ele é substituído por outro **do mesmo tipo e
+da mesma bitola**, e nunca por um wire comum. O wire comum não tem o
+isolamento que resiste à chama, e não derrete na current certa.
+
+### O circuit breaker
+
+> **Circuit breaker** é uma proteção que abre com a current alta e depois
+> **fecha de novo**, sem precisar ser trocada. Por dentro há uma bimetal
+> strip, a mesma peça do thermal switch da lição
+> [Switches](./switches): a current que passa aquece a lâmina, a lâmina
+> entorta e separa os contatos.
+
+Há dois tipos, e a diferença muda o sintoma:
+
+- **cycling circuit breaker** (rearme automático): aberto, ele para de
+  conduzir, esfria em segundos, entorta de volta e fecha. Se a causa continuar,
+  ele abre outra vez. O sintoma clássico é a load que **funciona aos
+  solavancos**: liga, para, liga de novo.
+- **de rearme manual**: fica aberto até alguém apertar um botão.
+
+Por que usar breaker em vez de fuse em alguns circuits? Porque há loads que
+passam do limite **sem estar com defeito**. O motor do vidro elétrico é o
+exemplo: quando o vidro chega ao fim do curso, o motor trava e a current
+sobe. Um fuse abriria toda vez, e o motorista ficaria trocando fuse. O
+breaker abre, esfria e fecha, e o sistema continua protegido.
+
+- **Exemplo:** o circuit breaker dos power windows.
+- **Contraexemplo:** o circuit de uma lâmpada. A current dela é estável e
+  previsível, não há pico normal nenhum, e um fuse barato resolve. Pôr um
+  breaker ali seria gastar mais sem ganhar nada.
+
+:::note Erro comum: achar que um breaker que “cicla” está com defeito
+
+Um cycling circuit breaker abrindo e fechando está **fazendo o trabalho
+dele**. Ele é o mensageiro, não a causa. Trocar o breaker não resolve nada:
+procure a razão da current alta — o motor travando, o mecanismo emperrado, um
+wire em curto.
+
+:::
+
+### O PTC: a proteção que não tem contato
+
+A lição [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo)
+apresentou o **PTC thermistor**: a resistance dele **sobe** quando ele
+esquenta. Essa propriedade é usada como proteção dentro de módulos. Com
+current demais, a peça esquenta, a resistance dispara e a current cai quase a
+zero sozinha — sem contato mecânico para desgastar. Quando o circuit esfria, a
+resistance volta ao normal.
+
+## Como falha e como diagnosticar
+
+### Como testar um fuse de verdade
+
+Olhar o fuse contra a luz é o teste mais usado e o menos confiável. Um
+elemento pode estar trincado sem separação visível, e um fuse pode parecer
+bom e estar aberto.
+
+O teste bom é elétrico, e tem uma vantagem: ele é feito **com o fuse no
+lugar**. Todo blade fuse tem dois pontos de teste expostos no topo, um de
+cada lado.
+
+:::warning Antes de testar
+
+Esta medição é feita com o circuit **energizado**. Então:
+
+- tire anéis, relógio e pulseira antes de trabalhar perto da fuse panel;
+- não deixe a ponta do multimeter encostar em dois terminais ao mesmo tempo:
+  é assim que se cria um short e se queima outra coisa;
+- para **tirar** um fuse, use o fuse puller, e com a chave desligada.
+
+:::
+
+Com a chave na posição em que aquele circuit deveria funcionar, ponha a test
+lead preta num ground bom e toque a vermelha nos dois pontos de teste do
+fuse, um de cada vez:
+
+| Leitura nos dois lados | O que quer dizer |
+|---|---|
+| voltage nos dois | o fuse está bom e há power chegando |
+| voltage só no lado de entrada | o fuse está **aberto** |
+| nenhuma voltage nos dois | o problema está **antes** do fuse |
+
+Repare como esse teste separa três situações diferentes com dois toques. É
+mais rápido que tirar o fuse, e evita o erro de olhar e achar que está bom.
+
+### Fuse aberto: a pergunta que vem depois
+
+Um fuse não abre por capricho. Ele abre porque a current passou do valor, e
+isso tem três explicações possíveis:
+
+| Situação | Como o fuse abre | Causa provável |
+|---|---|---|
+| **short to ground** | na hora, toda vez que liga | wire com isolamento ferido encostando na carroceria |
+| **overload** | depois de alguns segundos ou minutos | motor travando, bearing gasto, load errada instalada |
+| **fuse cansado** | sem motivo aparente, muito de vez em quando | vibração e ciclos térmicos; é a última hipótese, não a primeira |
+
+A regra de oficina: **trocar o fuse uma vez para ver o que acontece é
+aceitável; trocar duas vezes sem procurar a causa não é.** Se o segundo fuse
+abrir, pare de trocar e vá atrás do short ou do overload.
+
+### A queixa resolvida
+
+Volte ao chicote derretido.
+
+**1. O que o circuit deveria fazer.** O wire do acendedor tem uma bitola
+escolhida para conduzir com folga a current daquela load. O fuse de 15 A foi
+dimensionado para abrir antes de esse wire esquentar demais.
+
+**2. O que o fuse semanal estava dizendo.** Que havia um short ou um overload
+naquele circuit. O fuse estava funcionando perfeitamente: ele abria, cortava a
+current e evitava o estrago. Cada fuse queimado era um aviso.
+
+**3. O que a troca por 30 A mudou.** Nada no defeito. O short continuou lá. O
+que mudou foi o limite: agora a current podia chegar ao dobro antes de
+alguma coisa abrir. E o calor no wire não dobra quando a current dobra — ele
+**quadruplica**, porque $P = I \times I \times R$.
+
+Com um wire de 0.05 Ω (valor ilustrativo, só para a conta):
+
+$$
+\text{com 15 A:} \quad P = 15 \times 15 \times 0.05 = 11.25\,\text{W}
+$$
+
+$$
+\text{com 30 A:} \quad P = 30 \times 30 \times 0.05 = 45\,\text{W}
+$$
+
+Quarenta e cinco watts dentro de um chicote apertado, enrolado em fita, atrás
+do painel, sem ar circulando. O isolamento amoleceu, os wires se encostaram, e
+o que era um short num ponto virou vários.
+
+**4. O que faltou fazer.** Com o primeiro fuse queimado, o caminho era
+procurar o short: desligar a load, pôr um fuse novo e ver se ele abre; se
+abrir com a load desligada, o defeito está no wire entre o fuse e a load.
+
+**Correção:** reparar ou substituir o trecho do chicote danificado, achar e
+corrigir o short original, e pôr o fuse **do valor especificado pelo
+fabricante** — que está na tampa da fuse panel e no manual do veículo.
+
+:::danger Nunca aumente o valor de um fuse
+
+Um fuse que queima é um sintoma, não um defeito. Pôr um fuse maior, um arame,
+um parafuso ou papel-alumínio no lugar transfere o ponto de ruptura para o
+chicote do carro, que é caro, difícil de trocar e fica dentro do painel —
+perto do motorista. O valor do fuse vem do fabricante, e não existe razão de
+oficina para aumentá-lo.
+
+:::
+
+## Na oficina: achar o short que queima o fuse
+
+:::warning Antes de começar
+
+- **Chave desligada** ao tirar e pôr fuses, e fuse puller na mão, não alicate
+  de bico: o alicate abre o terminal da caixa e cria mau contato.
+- **Tire as joias.** Um anel que faça ponte entre um terminal e a carroceria
+  esquenta em segundos e queima a pele.
+- Se houver cheiro de queimado ou fumaça, **desconecte o cabo negativo da
+  battery** antes de qualquer outra coisa, seguindo a ordem que o manual
+  indica.
+- Trabalho em fuses do sistema de alta tensão de híbrido ou elétrico **não**
+  faz parte desta disciplina.
+
+:::
+
+O roteiro, do mais simples para o mais caro:
+
+1. **Confirme a queixa.** Qual fuse abre, e em que momento: ao ligar a chave,
+   ao acionar a load, ou depois de um tempo funcionando?
+2. **Leia o diagram** daquele fuse e liste tudo o que ele alimenta. Um fuse
+   costuma alimentar várias loads, e isso muda a conta de suspeitos.
+3. **Separe short de overload.** Desligue a load (tire o connector dela) e
+   ponha um fuse novo. Abriu mesmo assim: o problema está na fiação.
+   Não abriu: o problema está na load.
+4. **Siga o wire** pelos pontos em que ele passa por metal: passa-fios,
+   dobradiças de porta, atrás do painel, perto do escapamento. Short quase
+   sempre está onde o chicote encosta ou se move.
+5. **Repare o isolamento** e refaça o teste com o fuse correto.
+
+Existe um instrumento que poupa trabalho nesse roteiro, e você vai usá-lo mais
+adiante no curso: um **short finder**, que põe um breaker no lugar do fuse e
+acompanha o campo magnético do wire para achar onde a current desaparece.
+
+## Exemplos resolvidos
+
+### Exemplo 1: por que a current do short é tão alta
+
+Um wire sai do fuse e, num ponto, o isolamento ferido encosta na carroceria.
+Desse ponto até a battery, a resistance total do caminho é 0.05 Ω (valor
+ilustrativo). Com a battery em 12.6 V, que current esse short puxa?
+
+<details>
+<summary>Solução</summary>
+
+Pela Ohm's law:
+
+$$
+I = \frac{V}{R} = \frac{12.6}{0.05} = 252\,\text{A}
+$$
+
+Duzentos e cinquenta e dois amps, num circuit protegido por um fuse de 15 A.
+É por isso que o fuse abre instantaneamente num short: a current não fica
+pouco acima do limite, ela fica dezenas de vezes acima.
+
+Compare com o overload, em que a current sobe para talvez 18 ou 20 A num
+circuit de 15 A. Aí o fuse demora, porque a curva dele é feita assim.
+
+</details>
+
+### Exemplo 2: o calor no wire com o fuse errado
+
+**Pause e tente:** o mesmo wire de 0.05 Ω (valor ilustrativo) conduzindo 10 A
+normais. Quanto calor ele produz? E se um short fizer a current subir para
+25 A, com um fuse de 30 A que não abre?
+
+<details>
+<summary>Solução</summary>
+
+Com 10 A:
+
+$$
+P = I \times I \times R = 10 \times 10 \times 0.05 = 5\,\text{W}
+$$
+
+Com 25 A:
+
+$$
+P = 25 \times 25 \times 0.05 = 31.25\,\text{W}
+$$
+
+A current subiu duas vezes e meia, e o calor subiu **mais de seis vezes**.
+Cinco watts num wire o deixam morno; trinta watts no mesmo wire, embrulhado
+no chicote, derretem o isolamento.
+
+Se você achou 12.5 W, multiplicou a current por 2.5 e esqueceu que ela entra
+ao quadrado na fórmula da power.
+
+</details>
+
+### Exemplo 3: ler o teste do fuse
+
+**Pause e tente:** com a chave ligada, você encosta a test lead vermelha nos
+dois pontos de teste do fuse do rádio, com a preta num ground bom. O
+multimeter mostra 12.4 V num lado e 0 V no outro. O que isso diz? E se
+mostrasse 12.4 V nos dois?
+
+<details>
+<summary>Solução</summary>
+
+**12.4 V de um lado e 0 V do outro:** há power chegando ao fuse, mas ela não
+passa para o outro lado. O elemento do fuse está aberto. Troque o fuse — e
+depois pergunte por que ele abriu.
+
+**12.4 V nos dois lados:** o fuse está bom e está conduzindo. O rádio não
+funcionar, nesse caso, aponta para depois do fuse: o próprio rádio, o ground
+dele ou a fiação entre os dois.
+
+Repare no que o teste economiza. Sem tirar o fuse e sem desmontar nada, você
+já sabe de que lado do fuse está o defeito. Esse é o valor de medir em vez de
+olhar.
+
+</details>
+
+## Perguntas de verificação
+
+1. O fuse protege o quê, exatamente?
+2. Por que o valor do fuse é escolhido pela bitola do wire, e não pela load?
+3. Qual é a diferença, no sintoma, entre um fuse que abre no instante em que
+   o circuit liga e um que abre depois de alguns minutos?
+4. Por que o circuit do vidro elétrico costuma usar circuit breaker em vez de
+   fuse?
+5. Por que um fusible link queimado pode parecer bom por fora?
+6. Por que olhar o fuse contra a luz não é um teste confiável?
+
+<details>
+<summary>Respostas</summary>
+
+1. O **wire**. A load, se falhar, em geral abre e para de puxar current; o
+   wire só conduz o que mandarem, esquenta e derrete o isolamento. O fuse é
+   posto para ser o ponto fraco e abrir antes disso.
+2. Porque é o wire que vai esquentar se a current subir, e quanto ele aguenta
+   depende da espessura dele. Dimensionar o fuse pela load deixaria o wire
+   desprotegido sempre que a load falhasse puxando mais.
+3. Abrir na hora aponta para **short circuit**, em que a current salta para
+   centenas de amps. Abrir depois de um tempo aponta para **overload**: a
+   current ficou pouco acima do limite, e o fuse levou um tempo para aquecer
+   o suficiente.
+4. Porque o motor do vidro trava no fim do curso, e a current sobe sem que
+   nada esteja com defeito. Um fuse abriria toda vez. O cycling circuit
+   breaker abre, esfria e fecha sozinho, mantendo a proteção sem deixar o
+   motorista na mão.
+5. Porque o isolamento dele é feito para não propagar chama e costuma ficar
+   inteiro, às vezes só inchado, enquanto o metal de dentro já se partiu. Por
+   isso o teste é elétrico.
+6. Porque o elemento pode estar trincado sem separação visível, e porque o
+   plástico fica embaçado com o uso. O teste elétrico nos dois pontos de teste
+   responde com certeza, e ainda diz de que lado está a falta de power.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Para cada peça, diga se ela é trocada depois de abrir ou se fecha de novo
+sozinha:
+
+a) blade fuse;
+b) cycling circuit breaker;
+c) fusible link;
+d) PTC usado como proteção.
+
+### 2. Explicação
+
+Explique, com as próprias palavras, por que trocar um fuse de 15 A por um de
+30 A é perigoso, mesmo quando “resolve” o problema de o fuse queimar.
+
+### 3. Aplicação direta
+
+a) Um wire tem 0.04 Ω e conduz 12 A (valores ilustrativos). Quanta power ele
+transforma em calor?
+
+b) O mesmo wire passa a conduzir 24 A. Quanta power agora? Quantas vezes
+maior?
+
+c) Um short faz a current encontrar um caminho de 0.08 Ω até a battery de
+12.6 V. Que current circula?
+
+### 4. Variação
+
+O circuit do exemplo 1 tinha 0.05 Ω e puxava 252 A no short. Refaça a conta
+para um short mais distante da battery, com 0.3 Ω de caminho. A current ainda
+abre um fuse de 15 A? E o que esse resultado sugere sobre shorts no fim de um
+chicote longo?
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que o fuse dos faróis de neblina queima “de vez em quando, mais
+em dia de chuva”. O fuse é de 15 A. Você põe um fuse novo e as luzes acendem
+normalmente; o fuse não abre na oficina.
+
+a) O que o detalhe “mais em dia de chuva” sugere?
+
+b) Que teste você faria para reproduzir a queixa, sem esperar chover?
+
+c) Se o fuse abre só quando você mexe no chicote perto do para-choque, o que
+isso indica e qual é a correção?
+
+d) Por que seria errado fechar o serviço dizendo “troquei o fuse, está
+funcionando”?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Um short que só aparece às vezes costuma depender de alguma coisa que se
+move, se molha ou se aquece. Pense no que a chuva muda num isolamento já
+ferido, e em como você provocaria a mesma condição na oficina.
+
+</details>
+
+### 6. Justificativa
+
+Por que a proteção fica em série com a load, e sempre do lado da power, antes
+do switch?
+
+### 7. Formato ASE
+
+**Question 1.** A fuse in an automotive circuit is sized to protect:
+
+- A. the load
+- B. the battery
+- C. the wiring
+- D. the switch
+
+**Question 2.** Technician A says that a blown fuse should be replaced with
+one of the next higher rating if it blows more than once. Technician B says
+that a fuse that blows repeatedly indicates a short circuit or an overload
+that must be found. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A power window motor stops partway up, then works again after
+a few seconds, repeatedly. The most likely cause is:
+
+- A. a blown fuse
+- B. a cycling circuit breaker opening on high current
+- C. an open ground
+- D. a bad window switch
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Trocado. b) Fecha de novo sozinho. c) Trocado, por outro do mesmo tipo
+   e bitola. d) Volta sozinho quando esfria, sem contato mecânico.
+
+2. Porque o fuse não existe para proteger a load, e sim o wire. O valor dele
+   foi escolhido para abrir antes de o wire daquele circuit esquentar o
+   bastante para derreter o isolamento. Com um fuse de 30 A, a current pode
+   chegar ao dobro antes de alguma coisa abrir — e o calor no wire não dobra,
+   ele quadruplica, porque a current entra ao quadrado em
+   $P = I \times I \times R$. O fuse deixa de ser o ponto fraco, e o chicote
+   assume esse papel. Além disso, o defeito que fazia o fuse queimar continua
+   lá: o que se apagou foi o aviso.
+
+3. a) $P = 12 \times 12 \times 0.04 = 5.76\,\text{W}$.
+
+   b) $P = 24 \times 24 \times 0.04 = 23.04\,\text{W}$. É **quatro vezes**
+   maior, porque a current dobrou e ela entra ao quadrado.
+
+   c) $I = 12.6 \div 0.08 = 157.5\,\text{A}$.
+
+4. $I = 12.6 \div 0.3 = 42\,\text{A}$. Ainda é quase três vezes o fuse de
+   15 A, então ele abre — mas demora mais que no short de 252 A, porque a
+   curva do fuse depende de quanto a current passa do valor.
+
+   O que isso sugere: um short no fim de um chicote longo tem mais resistance
+   no caminho e gera uma current menor. Ele continua abrindo o fuse, mas pode
+   demorar, e pode esquentar bastante o wire antes de abrir. Shorts assim são
+   os que mais danificam chicote.
+
+5. a) Que há entrada de água em algum ponto do circuit. Água com sal e sujeira
+   conduz, e um isolamento já ferido perto do para-choque é o lugar típico:
+   com o wire molhado, aparece o caminho para o ground que não existe no
+   tempo seco.
+
+   b) Molhar de propósito a região suspeita, com o circuit ligado e um fuse
+   novo, com um borrifador de água. Mexer no chicote enquanto o circuit está
+   ligado também reproduz short intermitente por movimento.
+
+   c) Indica um short intermitente naquele trecho: o isolamento está ferido e
+   só encosta na carroceria em certas posições. A correção é expor o trecho,
+   achar o ponto gasto, reparar o isolamento conforme o procedimento de
+   emenda do manual e prender o chicote de novo nos suportes, longe da aresta
+   que o feriu.
+
+   d) Porque o fuse novo não corrigiu nada: ele só restabeleceu a proteção. O
+   defeito que abria o fuse continua no carro, e ele vai voltar — provavelmente
+   à noite, na chuva, com o cliente longe da oficina. Fechar assim é tratar o
+   sintoma e deixar a causa.
+
+6. Em série porque, num caminho único, a current é a mesma em todos os
+   pontos: só assim a proteção sente exatamente a current que vai para a load,
+   e só assim abri-la corta a current do circuit inteiro. Do lado da power e
+   antes do switch porque, assim, qualquer short em qualquer ponto depois da
+   proteção — inclusive no wire que vai até o switch — fica dentro da parte
+   protegida. Se a proteção ficasse depois do switch, o trecho entre a
+   battery e o switch ficaria desprotegido.
+
+7. **Question 1: C.** O fuse é dimensionado pela bitola do wire que ele
+   protege. A load (A), quando falha, costuma abrir e parar de puxar current;
+   a battery (B) não é protegida pelo fuse do circuit; o switch (D) é
+   escolhido para a current do circuit, não protegido por ele.
+
+   **Question 2: B.** Só o técnico B está certo. Aumentar o rating (A) tira a
+   proteção do wire e transforma o chicote no ponto fraco. Um fuse que abre
+   repetidamente é um sintoma de short ou overload, e o reparo é achar a
+   causa.
+
+   **Question 3: B.** Parar e voltar sozinho, repetidamente, é o comportamento
+   de um cycling circuit breaker abrindo com current alta e fechando depois de
+   esfriar. Um fuse queimado (A) deixaria o vidro parado de vez. Um ground
+   aberto (C) também pararia o motor de vez. Um switch ruim (D) não produziria
+   esse ciclo regular — e, nesse caso, a causa provável da current alta é o
+   mecanismo do vidro emperrando.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a proteção do circuit existe para salvar o **wire**, e
+  é dimensionada pela bitola dele. O fuse abre e é trocado; o circuit breaker
+  abre e fecha sozinho, para loads que passam do limite sem estar com defeito;
+  o fusible link protege os cabos grossos da battery. Em todos, a peça que
+  abre é a mensageira: a causa continua no carro até ser encontrada.
+- **Quando usar:** sempre que uma load parar de funcionar — o fuse é o
+  primeiro teste, e o mais rápido —, e sempre que um fuse abrir mais de uma
+  vez.
+- **Com o que se conecta:** o short circuit vem da lição
+  [Parallel circuit](./circuito-em-paralelo); o calor pela current ao
+  quadrado, da lição [Electrical power](./potencia-eletrica) e da lição
+  [O resistor fixo](./resistor-fixo); a bimetal strip, da lição
+  [Switches](./switches). A lição seguinte,
+  [Loads: bulbs, flashers e motors](./cargas-bulbs-e-motores), trata das peças
+  que ficam na outra ponta do circuit e gastam a current que a proteção
+  vigia.
+
+**Termos desta lição para revisar:** circuit protection, overload, blade
+fuse, cartridge fuse, maxi fuse, fusible link, circuit breaker, cycling
+circuit breaker, fuse panel, fuse puller, ampacity, wire gauge, short finder.
