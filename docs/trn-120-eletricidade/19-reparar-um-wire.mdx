@@ -1,0 +1,664 @@
+---
+title: "Reparar um wire: crimp, solda e proteção"
+---
+
+import Strands from '@site/src/components/Strands';
+
+# Reparar um wire: crimp, solda e proteção
+
+> **Pergunta central:** achar o defeito foi a parte difícil. Agora é só
+> emendar o wire — e é aqui que muito reparo volta à oficina em seis meses.
+> O que separa uma emenda que dura de uma que vira o próximo defeito
+> intermitente?
+
+## A queixa: o farol que volta a falhar no buraco
+
+Um cliente volta meio ano depois de um serviço:
+
+> “Vocês consertaram o farol direito em março. Agora ele está piscando de
+> novo, e some quando pego o trecho de paralelepípedo perto de casa.”
+
+No histórico: o wire do headlamp direito tinha um ponto rompido perto do
+para-choque. O técnico cortou o pedaço ruim, torceu as duas pontas de cobre
+uma na outra e enrolou fita isolante.
+
+Na inspeção de hoje, a fita está solta e preta por dentro, e o cobre embaixo
+dela está esverdeado. O farol acende, mas mais fraco que o esquerdo.
+
+O reparo funcionou no dia em que foi feito. Ao fim desta lição você vai saber
+por que ele tinha prazo de validade desde o começo, o que uma emenda precisa
+ter para durar, e como **medir** se o seu reparo ficou bom — em vez de olhar
+e achar que ficou.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| splice | emenda | a junção de dois wires |
+| wire stripper | descascador de fio | alicate com entalhes por bitola, que tira o isolamento sem cortar o cobre |
+| strand | fio do cabo | cada fio fino de cobre que forma o wire |
+| crimp | prensagem | união feita apertando um terminal metálico sobre o cobre |
+| crimping tool | alicate de prensar | a ferramenta própria para fazer o crimp |
+| butt connector | emenda tubular | terminal em forma de tubo, para emendar dois wires em linha |
+| solder | solda | liga de estanho que derrete e une o cobre |
+| rosin core solder | solda com fluxo de resina | a solda usada em eletrônica e em elétrica automotiva |
+| acid core solder | solda com fluxo ácido | solda de encanamento; corrói o wire e não se usa no carro |
+| flux | fluxo | o produto que limpa o metal para a solda aderir |
+| cold solder joint | solda fria | solda que não molhou o cobre: parece boa e tem resistance alta |
+| heat sink | dissipador | peça que absorve calor e protege o componente ao lado |
+| heat shrink tubing | tubo termorretrátil | tubo que encolhe com o calor e veda a emenda |
+| soldering iron | ferro de soldar | ponta pequena, para trabalho fino |
+| soldering gun | ferro tipo pistola | mais potente, aquece depressa |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Reparo de wire aparece no fim de quase todo diagnóstico elétrico que termina
+em chicote: wire rompido por vibração, isolamento ferido numa aresta,
+terminal corroído por entrada de água, dano de colisão ou de roedor.
+
+Na Wake Tech, isso é conteúdo do **módulo 4** da TRN-120 (*wire repair*) e
+volta em toda disciplina que mexe em chicote. Na prova ASE, está na área
+**A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   o que a espessura de um wire tem a ver com a resistance dele?
+2. Na lição [Medições com o multimeter](./medicoes-com-multimetro), qual é a
+   medição que mostra resistance escondida num trecho do caminho?
+3. Na lição [O resistor fixo](./resistor-fixo), o que acontece com o calor
+   produzido num ponto quando a current dobra?
+4. Na lição [Loads: bulbs e motores](./cargas-bulbs-e-motores), quanta
+   current puxa um headlamp de 55 W em 12 V?
+
+<details>
+<summary>Respostas</summary>
+
+1. Wire mais grosso tem menos resistance; mais fino, mais resistance. Nesta
+   lição isso aparece de um jeito novo: um wire que perdeu metade dos
+   **strands** ficou, na prática, mais fino.
+2. A **voltage drop**, medida com a load ligada e a current passando. É a
+   medição que verifica um reparo, e é o fecho desta lição.
+3. Fica **quatro vezes maior**, porque a current entra ao quadrado em
+   $P = I \times I \times R$.
+4. $I = 55 \div 12 \approx 4.6\,\text{A}$. Esse número volta no exemplo 1.
+
+</details>
+
+## Intuição: o que uma emenda tem que fazer
+
+Uma emenda não tem uma função, tem quatro. Um reparo que atende três e falha
+numa volta à oficina.
+
+1. **Conduzir sem acrescentar resistance.** O cobre das duas pontas precisa
+   se tocar com pressão, numa área grande.
+2. **Aguentar esforço mecânico.** O chicote balança, esquenta, esfria e
+   vibra, a vida inteira do carro.
+3. **Ficar vedado contra umidade.** Água e sal entram por qualquer fresta e
+   corroem o cobre por dentro.
+4. **Ficar isolado.** O cobre exposto não pode encostar na carroceria — isso
+   é o short da lição
+   [Circuit protection](./protecao-do-circuito).
+
+O reparo da queixa atendeu só a primeira, e só no primeiro dia. A torção
+conduzia; mas não tinha pressão duradoura, a fita não veda, e a vibração do
+paralelepípedo fez o resto.
+
+A analogia que ajuda aqui é a de um aperto de mão: dois fios torcidos se
+tocam em poucos pontos, com a força que a mão deu naquele momento. Um crimp
+ou uma solda transformam os dois em **uma peça só**. O limite da analogia é
+que um aperto de mão se desfaz de propósito, e uma emenda ruim se desfaz
+sozinha, devagar, enquanto ninguém olha.
+
+## Modelo visual: por que a corrosão mata o circuit
+
+A corrosão não é sujeira: é cobre virando óxido, e **óxido de cobre conduz
+mal**. A cada mês, uma fração a mais do contato deixa de conduzir, e a
+resistance da emenda sobe aos poucos.
+
+Isso explica o que o cliente descreveu. No começo, nada. Depois, o farol um
+pouco mais fraco — ninguém nota, porque não há o outro lado para comparar na
+hora. Por fim, o contato chega a abrir com vibração, e a luz pisca.
+
+Acompanhe o que uma resistance pequena faz num circuit de farol, com os
+números da lição [Loads: bulbs e motores](./cargas-bulbs-e-motores):
+
+| Emenda | Current | Voltage no headlamp | Power do headlamp |
+|---|---|---|---|
+| boa, perto de 0 Ω | 4.6 A | 12 V | 55 W |
+| corroída, 0.3 Ω | 4.1 A | 10.8 V | 44 W |
+
+Três décimos de ohm — uma resistance que o ohmmeter quase não distingue de
+zero — tiram **onze watts** do farol. E a emenda, que deveria ser só um
+pedaço de wire, passa a transformar 5 W em calor dentro da fita isolante. O
+exemplo 1 faz essa conta.
+
+## Formalização: as três partes do reparo
+
+### Parte 1: descascar sem ferir o cobre
+
+> **Wire stripper** é o alicate com um entalhe para cada **wire gauge**. O
+> entalhe certo corta só o isolamento; o errado corta também os **strands**.
+
+Um wire automotivo não é um fio único: é um feixe de fios finos, para
+aguentar vibração. Cortar parte deles com o alicate errado tem duas
+consequências, e as duas demoram a aparecer:
+
+- **a resistance sobe**, porque sobrou menos cobre para conduzir — é a mesma
+  lição da espessura do wire;
+- **nasce um ponto de quebra**, porque o esforço que era dividido entre todos
+  os strands passa a se concentrar nos que sobraram.
+
+<Strands caption="O wire em corte. À esquerda, o feixe inteiro de strands. À direita, o mesmo wire depois de um descasque que cortou metade deles: sobrou metade do cobre para conduzir, então a resistance daquele trecho dobra — e sobrou metade do fio para aguentar a vibração. Valores ilustrativos." />
+
+- **Exemplo:** usar o entalhe de 16 gauge num wire 16 gauge, puxar o
+  isolamento e ver o feixe de cobre inteiro, sem nenhum fio solto.
+- **Contraexemplo:** descascar com estilete, raspando em volta. É o jeito
+  mais rápido de ferir metade dos strands e de deixar um corte em anel no
+  isolamento que serve de entrada para a água.
+
+### Parte 2: unir — crimp ou solda
+
+As duas formas corretas. Cada uma tem lugar.
+
+**O crimp.**
+
+> **Crimp** é a união feita apertando um terminal metálico sobre o cobre, com
+> força suficiente para que os dois virem um metal só, sem ar entre eles.
+
+Para uma emenda em linha, o terminal é um **butt connector**: um tubo que
+recebe um wire de cada lado.
+
+O ponto que separa o crimp bom do ruim é a **ferramenta**. O alicate de
+prensar tem a matriz com a forma certa e dá a pressão certa. Apertar com
+alicate universal ou com alicate de bico deforma o tubo sem gerar pressão, e
+o resultado parece pronto e não é.
+
+**A solda.**
+
+> **Solder** é uma liga que derrete em temperatura baixa e se liga ao cobre
+> por cima dele. O **flux** limpa o metal para que a solda adira; sem ele, a
+> solda escorrega sobre o óxido e não une nada.
+
+Para o carro, a solda é a de **rosin core**: o fluxo de resina vem dentro do
+fio de solda.
+
+:::danger Nunca acid core no carro
+
+A solda de fluxo ácido é de encanamento. O ácido que sobra continua
+trabalhando depois do reparo e **corrói o cobre por dentro**, criando
+exatamente o defeito que você foi consertar. Dentro de um chicote, ela
+também corrói os wires vizinhos. Confira o rótulo antes de usar.
+
+:::
+
+**A regra de ouro da solda:**
+
+> **Aqueça o wire e encoste a solda no wire — nunca na ponta do ferro.** A
+> solda tem que derreter no cobre quente e correr para dentro do feixe.
+
+Pingar solda derretida sobre cobre frio produz uma **cold solder joint**: a
+solda fica em cima, parecendo uma junta pronta, mas não molhou o metal. Por
+baixo há óxido e ar, e a resistance é alta. É um defeito que o olho aprova e
+o voltage drop reprova.
+
+**Quando usar cada uma:**
+
+| Situação | Melhor escolha | Por quê |
+|---|---|---|
+| reparo rápido num chicote de potência | crimp com butt connector selado | rápido, tolera vibração, veda bem |
+| emenda em lugar apertado, sem espaço para a ferramenta | solda | só precisa do ferro |
+| circuit de sinal fino | solda, com cuidado | o terminal de crimp pode ser grande demais |
+| **airbag e pré-tensionador** | **nenhuma das duas sem o manual** | muitos fabricantes proíbem emendar; alguns exigem trocar o chicote inteiro |
+
+:::warning Solda deixa um ponto rígido
+
+A solda sobe por capilaridade por dentro do feixe e transforma um trecho
+flexível em um trecho duro. Na fronteira entre o duro e o flexível, a
+vibração concentra esforço, e é ali que o wire parte com o tempo. Por isso a
+emenda soldada precisa ficar **apoiada e presa**, e por isso muitos
+fabricantes preferem o crimp em pontos de muita vibração. O procedimento do
+fabricante manda.
+
+:::
+
+### Parte 3: vedar e proteger
+
+> **Heat shrink tubing** é um tubo plástico que encolhe com o calor e aperta
+> a emenda. A versão com cola por dentro derrete e sela as duas pontas: é a
+> que se usa em local exposto a água.
+
+A fita isolante **não** faz esse papel. Ela resseca com o calor do
+compartimento do motor, a cola escorre, a ponta solta e a água entra — é o
+que a inspeção da queixa encontrou.
+
+Ordem de montagem, e o erro clássico:
+
+1. **Enfie o heat shrink num dos wires antes de unir as pontas.** Depois de
+   crimpado ou soldado, não há como enfiá-lo.
+2. Faça a união.
+3. Deslize o tubo por cima e aqueça por igual com soprador térmico, até ele
+   encolher e a cola aparecer nas bordas.
+4. Prenda o wire de volta nos suportes do chicote, para o trecho reparado não
+   ficar pendurado.
+
+## Como falha e como diagnosticar
+
+| Defeito do reparo | O que acontece | Sintoma | Como achar |
+|---|---|---|---|
+| strands cortados no descasque | menos cobre conduzindo | load fraca; depois, rompe | voltage drop no trecho |
+| crimp com alicate errado | pressão insuficiente | intermitente com vibração | puxar o wire; voltage drop |
+| cold solder joint | solda sem aderência | resistance alta, intermitente | voltage drop; inspeção com lupa |
+| acid core | corrosão progressiva | piora com o tempo | inspeção; cobre esverdeado |
+| fita no lugar do heat shrink | entra água | corrosão e intermitente | inspeção; voltage drop |
+| wire de bitola menor | resistance alta e aquecimento | load fraca, wire quente | comparar a bitola com o original |
+
+### O teste que verifica um reparo
+
+Olhar não basta: uma emenda ruim pode ficar impecável por fora. O teste é o
+**voltage drop**, da lição
+[Medições com o multimeter](./medicoes-com-multimetro):
+
+1. Monte tudo e ligue a load.
+2. Com a current passando, ponha uma test lead de cada lado da emenda.
+3. Leia. Numa emenda boa, a leitura fica perto de zero.
+
+E há um teste mecânico que não custa nada: **puxe o wire dos dois lados da
+emenda, com firmeza.** Um crimp bem feito não solta. Se soltar na sua mão,
+ele teria soltado na estrada.
+
+### A queixa resolvida
+
+Volte ao farol que pisca.
+
+1. **O que o reparo deveria ter:** condução sem resistance, resistência
+   mecânica, vedação e isolamento.
+2. **O que ele tinha:** só condução, e por pressão de torção, que afrouxa.
+3. **O que aconteceu:** a fita ressecou e soltou; a água entrou; o cobre
+   oxidou. O óxido conduz mal, e a resistance da emenda subiu aos poucos.
+4. **Por que piora no paralelepípedo:** a vibração mexe num contato que já
+   está frouxo e oxidado, e ele chega a abrir por instantes.
+5. **Por que o farol está mais fraco:** parte da voltage fica na emenda em
+   vez de ir para a bulb — a conta do exemplo 1.
+
+**A correção:** cortar fora o trecho corroído inteiro (o cobre esverdeado não
+se recupera com limpeza), emendar com butt connector selado e o alicate
+próprio, ou soldar com rosin core, vedar com heat shrink com cola e prender o
+chicote nos suportes.
+
+**Verificar o reparo:** com os faróis acesos, meça a voltage drop sobre a
+emenda nova — perto de zero. Depois compare o brilho dos dois faróis.
+
+## Na oficina: fazer a emenda
+
+:::warning Antes de começar
+
+- **Desconecte o cabo negativo da battery** antes de cortar ou emendar
+  qualquer wire, na ordem que o manual indica. Um wire de power encostando na
+  carroceria com a battery ligada é um short, e o chicote derrete antes de
+  qualquer proteção agir se o trecho for antes do fuse.
+- **O ferro de soldar fica a centenas de graus** e não parece quente. Apoie
+  sempre no suporte, nunca na bancada, e não teste a ponta com o dedo.
+- **Não solde perto de linha de combustível, do tanque ou de respiro.**
+  Fumaça de combustível pega fogo com uma faísca.
+- **A fumaça da solda irrita as vias respiratórias.** Trabalhe com ventilação
+  e não respire sobre a junta.
+- **Airbag e pré-tensionador:** não corte, não emende e não teste sem o
+  procedimento do manual. É assunto do módulo 4 da disciplina.
+- **Use óculos de proteção.** Solda derretida respinga e o wire tensionado
+  salta quando é cortado.
+
+:::
+
+Procedimento geral de uma emenda soldada:
+
+1. Desconecte a battery.
+2. Corte fora todo o trecho danificado, até o cobre limpo e brilhante.
+3. Enfie o heat shrink num dos lados, longe do calor que vem.
+4. Descasque cerca de um centímetro de cada ponta com o entalhe certo do wire
+   stripper.
+5. Entrelace os dois feixes de cobre um no outro.
+6. Aqueça o cobre com o ferro **por baixo** e encoste a solda **no cobre**,
+   do lado oposto ao ferro. A solda deve correr e brilhar.
+7. Deixe esfriar sem mexer. Mexer durante o resfriamento produz uma junta
+   fosca e quebradiça.
+8. Deslize o heat shrink e aqueça até encolher.
+9. Prenda o chicote e reconecte a battery.
+10. Meça a voltage drop com a load ligada.
+
+A medida de um centímetro no passo 4 é uma orientação geral; o comprimento
+que vale, como sempre, é o do procedimento do fabricante para aquele chicote.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o que a emenda corroída custa
+
+Um headlamp de 55 W em 12 V tem 2.6 Ω trabalhando. A emenda corroída
+acrescentou 0.3 Ω em série (valores ilustrativos). Que current passa, que
+voltage sobra para a bulb, e quanta power a emenda transforma em calor?
+
+<details>
+<summary>Solução</summary>
+
+Emenda e bulb estão em série: as resistances se somam.
+
+$$
+R_T = 2.6 + 0.3 = 2.9\,\Omega
+\qquad
+I = \frac{12}{2.9} \approx 4.1\,\text{A}
+$$
+
+A voltage da bulb:
+
+$$
+V = I \times R = 4.1 \times 2.6 \approx 10.8\,\text{V}
+$$
+
+A power da bulb cai de 55 W para:
+
+$$
+P = 10.8 \times 4.1 \approx 44\,\text{W}
+$$
+
+E a emenda, que deveria ser invisível para o circuit, fica com
+$12 - 10.8 = 1.2\,\text{V}$ e transforma em calor:
+
+$$
+P = 1.2 \times 4.1 \approx 5\,\text{W}
+$$
+
+Cinco watts dentro de uma fita isolante. É esse calor que resseca a fita e
+acelera a corrosão — o defeito piora a si mesmo.
+
+</details>
+
+### Exemplo 2: os strands cortados
+
+**Pause e tente:** um wire foi descascado com estilete e perdeu metade dos
+strands no corte. Se o wire inteiro tinha 0.02 Ω naquele trecho, qual passa a
+ser a resistance do trecho? E se esse wire alimenta a mesma bulb do exemplo
+1, quanta voltage se perde ali?
+
+<details>
+<summary>Solução</summary>
+
+Os strands conduzem em paralelo. Perder metade deles é como usar um wire com
+metade da área — e, pela lição
+[Voltage, current e resistance](./tensao-corrente-e-resistencia), metade da
+área dá o dobro da resistance:
+
+$$
+R = 2 \times 0.02 = 0.04\,\Omega
+$$
+
+Com a current de 4.6 A do headlamp:
+
+$$
+V = I \times R = 4.6 \times 0.04 \approx 0.18\,\text{V}
+$$
+
+Menos de dois décimos de volt. O farol não muda de brilho de forma
+perceptível, e nenhuma medição de rotina acusa nada.
+
+E é exatamente por isso que esse defeito é perigoso: ele não dá sintoma. O
+problema não é a resistance de hoje — é que o trecho ficou **mecanicamente
+fraco**, e vai romper com a vibração daqui a algum tempo, longe da oficina.
+
+</details>
+
+### Exemplo 3: escolher o método
+
+**Pause e tente:** para cada caso, diga se você faria crimp, solda, ou
+nenhum dos dois sem consultar o manual.
+
+a) emenda num wire de 12 gauge que alimenta o motor do vidro, atrás do
+forro da porta;
+
+b) emenda num wire fino de sinal de um sensor, num ponto apertado atrás do
+painel;
+
+c) wire cortado do connector amarelo de um airbag.
+
+<details>
+<summary>Solução</summary>
+
+a) **Crimp** com butt connector selado. A porta vibra e abre e fecha mil
+vezes; o crimp tolera isso melhor que a solda, que cria um ponto rígido. E há
+espaço para o alicate.
+
+b) **Solda.** O terminal de crimp costuma ser grande demais para um wire de
+sinal fino, e no aperto atrás do painel não cabe o alicate de prensar. Depois
+de soldar, prenda o trecho para ele não ficar balançando.
+
+c) **Nenhum dos dois sem o manual.** Connector amarelo é sistema de airbag.
+Muitos fabricantes proíbem emenda nesses circuits e exigem a troca do chicote
+ou do connector completo, e há risco de disparo ao mexer.
+
+</details>
+
+## Perguntas de verificação
+
+1. Quais são as quatro coisas que uma emenda precisa fazer?
+2. Por que torcer os fios e enrolar fita falha com o tempo, mesmo
+   funcionando no primeiro dia?
+3. Por que não se usa acid core solder no carro?
+4. O que é uma cold solder joint, e por que ela engana quem olha?
+5. Por que o heat shrink entra no wire **antes** de a emenda ser feita?
+6. Qual é a medição que verifica um reparo, e com o circuit em que estado?
+
+<details>
+<summary>Respostas</summary>
+
+1. Conduzir sem acrescentar resistance; aguentar esforço mecânico; ficar
+   vedada contra umidade; e ficar isolada do metal da carroceria.
+2. Porque a torção depende da pressão que a mão deu, e essa pressão afrouxa
+   com o calor, o frio e a vibração. A fita resseca e solta, entra água, o
+   cobre oxida, e o óxido conduz mal. A resistance sobe aos poucos até o
+   contato abrir.
+3. Porque o ácido do fluxo continua trabalhando depois do reparo e corrói o
+   cobre por dentro, inclusive dos wires vizinhos. Ela foi feita para
+   encanamento, não para eletrônica.
+4. É a solda que não molhou o cobre: ela fica por cima, com óxido e ar por
+   baixo. Engana porque a aparência é de junta pronta — brilhante e cobrindo
+   tudo —, mas a resistance é alta. Quem reprova é o voltage drop, não o
+   olho.
+5. Porque depois da união as pontas estão ligadas, e não há mais como passar
+   o tubo por cima de nenhuma delas. Esquecer isso obriga a desfazer a emenda.
+6. A **voltage drop** sobre a emenda, com a load ligada e a current passando.
+   Numa emenda boa, a leitura fica perto de zero. Sem current, qualquer
+   emenda mede zero, inclusive a ruim.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome da ferramenta ou do material descrito:
+
+a) alicate com um entalhe para cada bitola de wire;
+b) tubo que encolhe com o calor e veda a emenda;
+c) terminal tubular para unir dois wires em linha;
+d) solda cujo fluxo não pode ser usado no carro;
+e) peça que absorve calor para proteger o componente ao lado.
+
+### 2. Explicação
+
+Explique por que um wire que perdeu metade dos strands pode passar em todas
+as medições e mesmo assim ser um reparo ruim.
+
+### 3. Aplicação direta
+
+a) Uma emenda acrescenta 0.15 Ω num circuit que puxa 8 A. Quanta voltage se
+perde na emenda, e quanta power ela transforma em calor?
+
+b) O mesmo circuit, com a emenda bem feita, tem 0.002 Ω. Quanta voltage se
+perde agora?
+
+c) Um wire de 0.03 Ω perde dois terços dos strands. Qual passa a ser a
+resistance do trecho?
+
+### 4. Variação
+
+Refaça o exemplo 1 com uma emenda de 0.6 Ω, o dobro da corrosão. Qual é a
+power da bulb, e quanta power fica na emenda? Compare com o resultado de
+0.3 Ω e diga se a piora é proporcional.
+
+### 5. Caso de diagnóstico
+
+Um cliente diz que o vidro elétrico do motorista “às vezes não desce, e aí
+funciona de novo se bater a porta”. O circuit foi reparado há um ano, com uma
+emenda dentro da coluna da porta.
+
+a) O que o detalhe “funciona se bater a porta” sugere?
+
+b) Com o vidro funcionando, que medição você faria, e em que ponto?
+
+c) Como você reproduz o defeito na oficina, sem esperar que ele apareça
+sozinho?
+
+d) Se a emenda estiver com crimp frouxo, por que o ohmmeter pode mostrar
+valor normal?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Bater a porta é vibração. Pense no que a vibração faz com um contato que está
+quase abrindo — e em qual das medições só revela o defeito enquanto a current
+está passando.
+
+</details>
+
+### 6. Justificativa
+
+Por que a verificação final de um reparo é o voltage drop e não a inspeção
+visual, mesmo quando a emenda ficou com ótima aparência?
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says that acid core solder should be used for
+automotive wiring repairs. Technician B says that rosin core solder should be
+used. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** When soldering a wire splice, the solder should be applied:
+
+- A. to the tip of the soldering iron
+- B. to the heated wire, opposite the iron
+- C. to the insulation before stripping
+- D. only after the wire has cooled
+
+**Question 3.** A wire repair was made six months ago and the circuit now
+works intermittently. The splice was twisted and wrapped with electrical
+tape. The most likely cause is:
+
+- A. the wire gauge is too large
+- B. corrosion and loss of contact pressure at the splice
+- C. the fuse rating is too high
+- D. the load has failed
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Wire stripper. b) Heat shrink tubing. c) Butt connector. d) Acid core
+   solder. e) Heat sink.
+
+2. Porque a resistance que ele acrescenta é pequena demais para mudar
+   qualquer leitura de rotina: alguns centésimos de ohm, que viram décimos de
+   volt de queda e nenhuma diferença visível no funcionamento da load. O
+   problema não é elétrico, é **mecânico**: o esforço de vibração que antes
+   se dividia entre todos os strands agora se concentra nos que sobraram, e
+   esse trecho vai romper com o tempo. O reparo passa no teste de hoje e
+   falha na estrada.
+
+3. a) $V = I \times R = 8 \times 0.15 = 1.2\,\text{V}$;
+   $P = V \times I = 1.2 \times 8 = 9.6\,\text{W}$.
+
+   b) $V = 8 \times 0.002 = 0.016\,\text{V}$, perto de zero — o que se espera
+   de uma emenda bem feita.
+
+   c) Sobrou um terço dos strands, ou seja, um terço da área. A resistance
+   fica três vezes maior: $3 \times 0.03 = 0.09\,\Omega$.
+
+4. $R_T = 2.6 + 0.6 = 3.2\,\Omega$;
+   $I = 12 \div 3.2 = 3.75\,\text{A}$.
+   A bulb fica com $3.75 \times 2.6 = 9.75\,\text{V}$ e
+   $P = 9.75 \times 3.75 \approx 36.6\,\text{W}$.
+   A emenda fica com $12 - 9.75 = 2.25\,\text{V}$ e
+   $P = 2.25 \times 3.75 \approx 8.4\,\text{W}$.
+
+   Comparando: com 0.3 Ω a bulb tinha 44 W; com 0.6 Ω tem 36.6 W. A
+   resistance dobrou, mas a perda **não** dobrou exatamente — a current
+   também caiu, e isso segura um pouco a queda. A piora é forte, mas não é
+   proporcional, porque todas as grandezas mudam juntas.
+
+5. a) Que o defeito depende de **vibração**: um contato que está quase
+   aberto e que o tranco da porta fecha de novo. Aponta para a emenda, o
+   crimp ou um terminal frouxo, e não para o motor do vidro.
+
+   b) **Voltage drop sobre a emenda**, com o vidro funcionando e a current
+   passando: uma test lead de cada lado da emenda. Numa emenda boa, perto de
+   zero.
+
+   c) Mexendo no chicote dentro da coluna da porta com o circuit ligado e o
+   multimeter conectado na emenda: se a leitura de voltage drop saltar quando
+   a sua mão mexe, o defeito está ali. Abrir e fechar a porta com o
+   instrumento ligado faz o mesmo papel.
+
+   d) Porque o ohmmeter mede com o circuit desligado e manda uma current
+   minúscula. Um contato frouxo mas encostado conduz essa current sem
+   problema e mostra resistance baixa. Só com a current de trabalho passando
+   é que a resistance do contato ruim produz queda mensurável — e só com
+   vibração é que ele chega a abrir.
+
+6. Porque uma emenda pode ficar perfeita por fora e ruim por dentro: uma cold
+   solder joint cobre tudo e brilha, e um crimp feito com alicate errado tem
+   a forma certa sem a pressão certa. A aparência não informa a resistance de
+   contato. O voltage drop, feito com a load ligada, mede justamente o que
+   importa — quanta voltage a emenda está roubando do circuit — e é a única
+   verificação que separa as duas.
+
+7. **Question 1: B.** A solda de uso automotivo e eletrônico é a de rosin
+   core. A de acid core (A) é de encanamento: o ácido residual corrói o cobre
+   por dentro e cria o defeito que o reparo deveria eliminar.
+
+   **Question 2: B.** O calor vai no wire, e a solda encosta no cobre quente,
+   do lado oposto ao ferro, para que ela derreta no metal e corra para dentro
+   do feixe. Derreter na ponta do ferro (A) e pingar produz uma cold solder
+   joint. As alternativas C e D descrevem sequências que não aderem.
+
+   **Question 3: B.** Uma emenda torcida e enfitada perde pressão de contato
+   com o tempo e deixa entrar umidade; o cobre oxida e o óxido conduz mal.
+   Bitola maior (A) não causa intermitência. Um fuse de rating alto (C) é
+   perigoso, mas não produz este sintoma. A load (D) não explica o defeito
+   aparecer com vibração.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** uma emenda tem quatro trabalhos — conduzir sem
+  resistance, aguentar vibração, vedar contra água e isolar. Crimp com a
+  ferramenta certa ou solda rosin core, mais heat shrink, atendem os quatro.
+  Torção com fita atende um, e só no primeiro dia.
+- **Quando usar:** no fim de todo diagnóstico que termina em chicote — e na
+  hora de avaliar um reparo que outra pessoa fez, que é metade das
+  intermitências que chegam à oficina.
+- **Com o que se conecta:** a espessura do wire e a resistance vêm da lição
+  [Voltage, current e resistance](./tensao-corrente-e-resistencia); o short
+  por isolamento ferido, da lição
+  [Circuit protection](./protecao-do-circuito); a verificação por voltage
+  drop, da lição [Medições com o multimeter](./medicoes-com-multimetro); e o
+  defeito intermitente achado mexendo no chicote, da lição
+  [Scan tool e oscilloscope](./scan-tool-e-osciloscopio).
+
+**Termos desta lição para revisar:** splice, wire stripper, strand, crimp,
+crimping tool, butt connector, solder, rosin core solder, acid core solder,
+flux, cold solder joint, heat sink, heat shrink tubing, soldering iron,
+soldering gun.

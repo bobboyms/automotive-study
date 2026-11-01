@@ -1,0 +1,617 @@
+---
+title: "Scan tool e oscilloscope: o que o módulo diz e o que o wire faz"
+---
+
+import Oscilograma from '@site/src/components/Oscilograma';
+
+# Scan tool e oscilloscope: o que o módulo diz e o que o wire faz
+
+> **Pergunta central:** o scan tool mostra um número bonito e um código de
+> falha. Por que isso não é o mesmo que saber o que o sensor realmente
+> mandou — e que instrumento mostra a diferença?
+
+## A queixa: o engasgo que o scan tool não vê
+
+Um cliente reclama:
+
+> “Quando eu piso bem devagar no acelerador, o carro dá um tranco. Se eu piso
+> rápido, não acontece. Já trocaram o sensor do acelerador e continua igual.”
+
+No histórico: o scan tool mostrou um código ligado ao **throttle position
+sensor**. O técnico anterior abriu a tela de dados ao vivo, pisou devagar no
+acelerador e viu o valor do TPS subir liso, de 0.5 V a 4.5 V, sem nenhum
+salto. Mesmo assim trocou o sensor, porque o código apontava para ele. O
+tranco continuou.
+
+Duas coisas nessa história não fecham. O código apontou um sensor que a tela
+mostrava funcionando bem. E a peça nova não resolveu.
+
+Ao fim desta lição você vai saber por que a tela do scan tool pode mostrar um
+sinal perfeito que **não existiu**, e qual instrumento mostra o que o wire
+realmente fez.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| scan tool | scanner | instrumento que conversa com os módulos do carro |
+| data link connector | conector de diagnóstico | a tomada embaixo do painel onde o scan tool é ligado |
+| diagnostic trouble code | código de falha | o código que o módulo grava quando vê um valor fora do esperado |
+| live data | dados ao vivo | os valores que o módulo está lendo e informando agora |
+| parameter identification | parâmetro (PID) | o nome de cada valor da lista de live data |
+| freeze frame | quadro congelado | a foto dos valores no instante em que o código foi gravado |
+| bidirectional control | comando bidirecional | o scan tool mandando o módulo acionar uma peça |
+| sample rate | taxa de amostragem | quantas leituras por segundo o instrumento faz |
+| oscilloscope | osciloscópio | instrumento que desenha a voltage ao longo do tempo |
+| waveform | forma de onda | o desenho do sinal na tela do oscilloscope |
+| glitch | falha momentânea | uma alteração muito curta no sinal |
+| time base | base de tempo | quanto tempo cabe na largura da tela do oscilloscope |
+| lab scope | osciloscópio de oficina | o oscilloscope portátil usado no carro |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+- **scan tool:** em qualquer diagnóstico de carro com módulo, que hoje é
+  qualquer carro. É por ele que se começa;
+- **oscilloscope:** nos sinais que mudam depressa — sensores de rotação,
+  injetores, comunicação entre módulos;
+- as duas disciplinas que vivem disso são **AUT-181** e **AUT-183**
+  (*Engine Performance*), e a **AUT-281** no nível avançado.
+
+Na prova ASE, o assunto aparece na área **A6** e, em peso, na **A8** e na
+**L1**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo),
+   como o TPS manda a informação da posição da borboleta ao PCM?
+2. Naquela mesma lição, qual era o defeito típico de um potentiometer, e que
+   sintoma ele dava?
+3. Na lição [Medições com o multimeter](./medicoes-com-multimetro), o
+   multimeter mostra um valor por vez ou a história do sinal?
+4. Na lição [Outros instrumentos de teste](./instrumentos-de-teste), qual é a
+   pergunta que se faz antes de encostar um instrumento num circuit de
+   módulo?
+
+<details>
+<summary>Respostas</summary>
+
+1. Ele é um potentiometer. O PCM manda uma reference voltage de 5 V para as
+   pontas, e o wiper, ligado à borboleta, devolve uma parte dessa voltage. A
+   voltage do sinal diz a posição.
+2. Um **ponto morto na trilha**: um trecho gasto em que o wiper perde
+   contato. O sintoma era o motor engasgando numa posição do pedal — a queixa
+   desta lição.
+3. Um valor por vez. Ele mostra o que está acontecendo **agora**, e um
+   número que muda depressa demais vira um borrão no visor.
+4. Quanta current esse instrumento vai puxar. O scan tool e o oscilloscope
+   são seguros nesse sentido: o scan tool só conversa, e o oscilloscope tem
+   impedância alta como o multimeter.
+
+</details>
+
+## Intuição: a testemunha e a câmera
+
+Os dois instrumentos desta lição respondem a perguntas diferentes, e a
+diferença fica clara numa comparação.
+
+**O scan tool é uma testemunha.** Você pergunta ao módulo o que ele está
+vendo, e ele conta. A resposta é útil e rápida — mas é a versão **do
+módulo**: já filtrada, já interpretada, e contada de vez em quando, não
+continuamente.
+
+**O oscilloscope é uma câmera apontada para o wire.** Ele não pergunta nada a
+ninguém: desenha a voltage que existe no fio, instante por instante.
+
+Onde a comparação ajuda: se a testemunha e a câmera discordam, a câmera
+ganha. Onde ela para: a câmera só vê o pedaço do carro para onde foi
+apontada, enquanto a testemunha conta o que se passa no sistema inteiro. Por
+isso o diagnóstico quase sempre começa no scan tool e **termina** no
+oscilloscope, e não o contrário.
+
+## Formalização, parte 1: o scan tool
+
+> **Scan tool** é o instrumento que se liga ao **data link connector** do
+> carro e conversa com os módulos. Ele lê códigos, mostra os valores que cada
+> módulo está usando e, em muitos casos, manda o módulo acionar uma peça.
+
+### O que ele entrega
+
+**Diagnostic trouble code (DTC).** O código de falha. E aqui está a ideia que
+mais muda o diagnóstico de quem está começando:
+
+> Um DTC aponta um **circuit** e uma **condição**, não uma peça.
+
+Um código ligado ao TPS quer dizer “o módulo viu, no circuit do TPS, um valor
+fora da faixa que ele esperava”. As causas possíveis incluem o sensor, o wire
+de sinal, o wire de reference voltage, o ground do sensor, o connector e o
+próprio módulo. Trocar a peça que dá nome ao código é o erro mais comum e
+mais caro da profissão — foi o que aconteceu na queixa desta lição.
+
+- **Exemplo:** o código aponta o circuit do TPS, e o defeito está num
+  connector com o terminal frouxo.
+- **Contraexemplo:** achar que o código é o nome da peça defeituosa. Se fosse
+  assim, não haveria diagnóstico: haveria só leitura de código.
+
+**Live data.** A lista de valores que o módulo está usando agora, cada um com
+o seu nome, o **PID**. É o que o técnico anterior olhou.
+
+**Freeze frame.** A foto dos valores no instante exato em que o código foi
+gravado: rotação, temperatura, carga, velocidade. Serve para reproduzir a
+condição em que o defeito aparece — e, num defeito intermitente, às vezes é a
+única pista que sobra.
+
+**Bidirectional control.** O scan tool mandando o módulo acionar alguma coisa:
+ligar o cooling fan, pulsar um injector, mover a borboleta. É o teste que
+separa “o módulo não mandou” de “a peça não obedeceu”.
+
+### O limite do scan tool
+
+O scan tool não mede nada. Ele **pergunta**, e o módulo responde. Entre o
+sinal real no wire e o número na tela há três filtros:
+
+1. **O módulo lê o sinal de vez em quando**, não continuamente.
+2. **O módulo trata o número** antes de informar — em muitos valores ele faz
+   uma média, justamente para não reagir a ruído.
+3. **O scan tool pede os dados de vez em quando**, e a lista inteira leva
+   tempo para ser atualizada. Quanto mais PIDs na tela, mais devagar cada um
+   se atualiza.
+
+Esse é o **sample rate**, e é o motivo pelo qual a tela mostrou um sinal
+liso que não existiu.
+
+## Formalização, parte 2: o oscilloscope
+
+> **Oscilloscope** desenha a voltage de um ponto do circuit **ao longo do
+> tempo**. O eixo vertical é a voltage; o horizontal é o tempo. O desenho
+> resultante é a **waveform**.
+
+O multimeter responde “quanto é agora?”. O oscilloscope responde “o que
+aconteceu durante este intervalo?”. São perguntas diferentes, e a segunda é a
+única que enxerga um defeito que dura milésimos de segundo.
+
+<Oscilograma caption="O sinal do TPS subindo enquanto a borboleta abre, visto no oscilloscope. A linha sobe lisa, menos num ponto: ali a voltage cai quase a zero por um instante e volta. Essa queda curta é o ponto morto da trilha do potentiometer — o defeito que o motor sente como um tranco." />
+
+A queda da figura dura poucos milésimos de segundo. Para o motorista, é um
+tranco. Para o módulo, é um salto brusco no sinal, e é isso que faz ele
+gravar o código.
+
+### Por que o scan tool não mostra a mesma coisa
+
+Agora a mesma tela, com as leituras do scan tool marcadas por cima:
+
+<Oscilograma pontos caption="O mesmo sinal, com os pontos que o scan tool leu. Entre uma leitura e a outra passa tempo suficiente para a queda inteira acontecer e terminar. Nenhuma leitura caiu dentro dela, então a tela do scan tool mostrou uma subida perfeitamente lisa — e o sinal real tinha o defeito." />
+
+A conta explica o desenho. Com o scan tool atualizando aquele PID cerca de
+três vezes por segundo (valor ilustrativo; depende do scan tool, do módulo e
+de quantos PIDs estão na tela), há uma leitura a cada:
+
+$$
+\frac{1\,\text{s}}{3} \approx 333\,\text{ms}
+$$
+
+A queda dura cerca de 5 ms. Ela cabe mais de sessenta vezes dentro do
+intervalo entre duas leituras. A chance de uma leitura cair exatamente em
+cima dela é pequena — e, mesmo que caísse, apareceria como um único valor
+estranho — e uma leitura estranha sozinha passa por ruído.
+
+> **O que o scan tool mostrou não era mentira: era um retrato tirado nos
+> instantes errados.**
+
+### O que a waveform entrega
+
+| O que você quer saber | O que olhar na tela |
+|---|---|
+| o sinal chega ao valor certo? | a altura da linha |
+| ele sobe e desce no tempo certo? | a largura dos trechos |
+| há uma falha momentânea? | um **glitch**: um pico ou uma queda estreita |
+| há ruído elétrico entrando? | a linha “peluda” em vez de limpa |
+| o sinal cai sob vibração? | mexer no chicote e olhar a linha |
+
+O último caso é o teste que resolve intermitente: com o oscilloscope ligado e
+a tela rodando, você mexe no chicote, no connector e no sensor. Se a linha
+salta no momento em que a sua mão mexe num ponto, o defeito está ali.
+
+## Como falha e como diagnosticar
+
+### A ordem que funciona
+
+Os dois instrumentos não competem; eles entram em momentos diferentes do
+raciocínio dos 3 Cs:
+
+1. **Confirmar a queixa.** Reproduza o sintoma com o cliente, se possível.
+2. **Scan tool:** leia **todos** os códigos, de todos os módulos, e anote o
+   **freeze frame** antes de apagar qualquer coisa.
+3. **Live data:** veja se os valores fazem sentido entre si. Um sensor de
+   temperatura marcando 20 °C com o motor quente se denuncia aqui.
+4. **Wiring diagram:** liste o que aquele circuit tem — sensor, sinal,
+   reference, ground, connectors.
+5. **Multimeter:** meça voltage drop e reference voltage nos pontos do
+   diagram.
+6. **Oscilloscope:** quando o defeito for intermitente, rápido, ou quando as
+   medições estáticas derem tudo normal.
+
+Repare que o oscilloscope é o **último**, não o primeiro. Ele é o instrumento
+mais poderoso e o mais lento de montar; usá-lo antes de ler o código é como
+abrir o motor antes de medir a compressão.
+
+### A queixa resolvida
+
+Volte ao engasgo ao pisar devagar.
+
+1. **O que o sistema deveria fazer:** o TPS deveria mandar uma voltage que
+   sobe lisa, sem saltos, enquanto a borboleta abre — exatamente o teste que
+   a lição [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo)
+   descreveu.
+2. **O que o scan tool mostrou:** uma subida lisa. Isso **não** descartou o
+   defeito, porque o scan tool lê de vez em quando.
+3. **O que o oscilloscope mostrou:** a queda curta da figura, sempre na mesma
+   posição do pedal.
+4. **O princípio:** o wiper perdeu contato num trecho gasto da trilha. Sem
+   contato, o sinal despenca; passando do trecho, volta. Dura milésimos de
+   segundo.
+5. **Por que pisar rápido não dá tranco:** o módulo também lê de vez em
+   quando. Passando depressa pelo ponto morto, a chance de uma leitura cair
+   dentro dele é menor, e o módulo nem percebe.
+
+**E por que a peça nova não resolveu?** Aqui vale a honestidade do
+diagnóstico. Se o sensor novo tem o mesmo defeito, ou ele é de má qualidade,
+ou — o mais provável — **o defeito nunca esteve no sensor**. Um ponto morto
+no sinal também aparece quando o terminal do connector está frouxo ou o
+ground do sensor tem resistance alta: em qualquer um desses casos, o sinal
+cai do mesmo jeito.
+
+**O teste que separa:** com o oscilloscope ligado no wire de sinal, mexa no
+connector e no chicote com o motor em marcha lenta. Se a linha salta quando a
+sua mão mexe, o defeito está no connector, não no sensor.
+
+**Verificar o reparo:** depois de corrigir, pise devagar no acelerador com o
+oscilloscope ligado e confirme a subida lisa, do começo ao fim do curso. E
+apague os códigos só **depois** de anotar tudo.
+
+## Na oficina: ligar os dois instrumentos
+
+:::warning Antes de começar
+
+- **Anote os códigos e o freeze frame antes de apagar.** Apagar é destruir a
+  única pista de um defeito intermitente, e não conserta nada.
+- **Carro ligado é carro que se move.** Para rodar live data com o motor
+  funcionando, o freio de estacionamento fica puxado, a transmissão em
+  estacionamento e as rodas calçadas. Nunca fique na frente do veículo.
+- **Peças que giram.** Com o motor em marcha lenta, mantenha cabos, mangas e
+  as pontas do oscilloscope longe do fan, das correias e do escapamento
+  quente.
+- **Bidirectional control aciona peças de verdade.** Antes de mandar o módulo
+  ligar o cooling fan ou mover a borboleta, confira se não há mão nem
+  ferramenta no caminho, e avise quem estiver por perto.
+- **Não fure o isolamento do wire** para ligar a ponta do oscilloscope: use
+  backprobe por trás do connector, como a lição
+  [Medições com o multimeter](./medicoes-com-multimetro) ensinou.
+
+:::
+
+Procedimento geral com o oscilloscope:
+
+1. No wiring diagram, identifique o wire de sinal e o ground daquele sensor.
+2. Ligue a ponta preta num ground bom do próprio circuit, e a vermelha no
+   wire de sinal, por backprobe.
+3. Ajuste a escala vertical para a faixa esperada do sinal (num sensor de
+   5 V, uma escala de 0 a 5 V) e a **time base** para o fenômeno que você
+   procura: tempo longo para ver a subida inteira, tempo curto para ver um
+   glitch.
+4. Acione a peça devagar e depois rápido, e observe a linha.
+5. Mexa no chicote e no connector enquanto olha a tela.
+
+O ajuste da time base é o que mais confunde no começo: **tela muito larga
+esconde o glitch, e tela muito estreita não mostra o movimento inteiro**. Se
+a linha parecer perfeita, reduza a time base antes de concluir que está tudo
+bem.
+
+## Exemplos resolvidos
+
+### Exemplo 1: por que a leitura escapou
+
+O scan tool atualiza aquele PID três vezes por segundo (valor ilustrativo). O
+ponto morto do TPS dura 5 ms. Quantas vezes a falha cabe no intervalo entre
+duas leituras?
+
+<details>
+<summary>Solução</summary>
+
+O intervalo entre leituras:
+
+$$
+\frac{1}{3}\,\text{s} \approx 333\,\text{ms}
+$$
+
+E quantas falhas cabem nele:
+
+$$
+\frac{333}{5} \approx 67
+$$
+
+A falha cabe cerca de 67 vezes dentro de um intervalo. Dito em termos de
+chance: para uma leitura cair dentro da queda, ela teria que acontecer
+naqueles 5 ms de 333 — cerca de **1.5 %** das vezes. Em 98 vezes de cada 100,
+a leitura cai fora e o valor que aparece na tela é o do sinal já recuperado.
+
+Não é defeito do scan tool. É o que ele foi feito para fazer: dar um retrato
+periódico de muitos valores ao mesmo tempo.
+
+</details>
+
+### Exemplo 2: o que o código quer dizer
+
+**Pause e tente:** um carro chega com um código ligado ao circuit do ECT
+sensor, indicando voltage alta demais no sinal. Liste pelo menos quatro
+causas possíveis, usando o que a lição
+[Resistances que mudam e o diode](./resistencias-variaveis-e-diodo) mostrou
+sobre como o PCM lê um NTC.
+
+<details>
+<summary>Solução</summary>
+
+Voltage alta no sinal, naquele divisor, quer dizer resistance alta no lado do
+sensor. As causas:
+
+1. **O sensor está com a resistance acima do normal** ou aberto por dentro.
+2. **O connector do sensor está solto ou com o terminal frouxo** — para o
+   PCM, igual a sensor aberto.
+3. **O wire de sinal está rompido** entre o sensor e o PCM.
+4. **O ground do sensor está aberto ou com resistance alta** — sem caminho de
+   volta, a voltage no ponto do sensor sobe do mesmo jeito.
+5. **O próprio PCM** pode estar com defeito, e esta é a última hipótese, não
+   a primeira.
+
+Repare que o código citou o sensor e quatro das cinco causas **não são o
+sensor**. É por isso que o DTC aponta um circuit, e não uma peça.
+
+</details>
+
+### Exemplo 3: escolher o instrumento
+
+**Pause e tente:** para cada situação, diga se você usa o scan tool, o
+oscilloscope ou o multimeter, e por quê.
+
+a) Descobrir quais módulos gravaram código.
+
+b) Confirmar se a reference voltage de 5 V está chegando ao sensor.
+
+c) Procurar uma falha de milésimos de segundo num sinal de sensor.
+
+d) Verificar se o módulo consegue ligar o cooling fan.
+
+<details>
+<summary>Solução</summary>
+
+a) **Scan tool.** É o único que conversa com os módulos, e é o primeiro passo
+do diagnóstico.
+
+b) **Multimeter.** É uma voltage estável, e a pergunta pede um número exato.
+
+c) **Oscilloscope.** É o único que mostra o sinal continuamente ao longo do
+tempo; o multimeter e o scan tool olham de vez em quando.
+
+d) **Scan tool**, com bidirectional control. Ele separa “o módulo não mandou”
+de “a peça não obedeceu” sem desmontar nada.
+
+</details>
+
+## Perguntas de verificação
+
+1. Um DTC aponta uma peça ou um circuit? Por que a diferença importa?
+2. Por que o freeze frame deve ser anotado antes de apagar os códigos?
+3. Por que a tela do scan tool pode mostrar um sinal liso que não existiu?
+4. O que o oscilloscope mostra que o multimeter não mostra?
+5. Por que o oscilloscope é o último instrumento do roteiro, e não o
+   primeiro?
+6. Por que uma time base muito larga pode esconder um defeito?
+
+<details>
+<summary>Respostas</summary>
+
+1. Um **circuit**, e a condição que o módulo viu nele. A diferença importa
+   porque o circuit inclui o sensor, os wires, o connector, o ground e o
+   próprio módulo. Ler o código como nome de peça leva a trocar peça boa — o
+   erro da queixa desta lição.
+2. Porque ele guarda a condição em que o defeito apareceu: rotação,
+   temperatura, carga, velocidade. Num defeito intermitente, é a pista que
+   permite reproduzir o problema. Apagado, não volta.
+3. Porque ele lê o valor de vez em quando, não continuamente. Uma falha que
+   dura poucos milésimos de segundo acontece entre duas leituras, e nenhuma
+   delas a registra.
+4. O comportamento do sinal **ao longo do tempo**: glitches, ruído, o formato
+   da subida e da descida. O multimeter mostra um valor por vez, e um valor
+   que muda depressa vira um borrão.
+5. Porque ele é o mais demorado de montar e ajustar, e os instrumentos
+   anteriores já resolvem a maioria dos casos por um caminho mais curto. O
+   oscilloscope entra quando o defeito é rápido ou intermitente, ou quando as
+   medições estáticas deram tudo normal.
+6. Porque com muito tempo na largura da tela cada milissegundo ocupa poucos
+   pixels, e um glitch de poucos milésimos de segundo some dentro da
+   espessura da linha. Reduzir a time base é o que o traz à tona.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga qual recurso do scan tool é descrito:
+
+a) a foto dos valores no instante em que o código foi gravado;
+b) a lista de valores que o módulo está usando agora;
+c) o comando do scan tool para o módulo acionar uma peça;
+d) o código que o módulo gravou.
+
+### 2. Explicação
+
+Explique, com as próprias palavras, por que trocar a peça que dá nome ao
+código é um erro, mesmo quando o código está certo.
+
+### 3. Aplicação direta
+
+a) Um scan tool atualiza um PID 5 vezes por segundo. Qual é o intervalo entre
+duas leituras, em milissegundos?
+
+b) Uma falha dura 8 ms. Quantas vezes ela cabe nesse intervalo?
+
+c) Outro scan tool, mais rápido, atualiza o mesmo PID 20 vezes por segundo.
+Qual é o intervalo agora, e a falha de 8 ms teria mais chance de ser vista?
+
+### 4. Variação
+
+Suponha que o ponto morto do TPS dure 200 ms, em vez de 5 ms. O scan tool de
+3 leituras por segundo mostraria o defeito? E o motorista sentiria a mesma
+coisa?
+
+### 5. Caso de diagnóstico
+
+Um carro grava um código do circuit de um sensor. No scan tool, o live data
+daquele sensor parece normal em marcha lenta. O cliente diz que o problema
+aparece “só em estrada de terra”.
+
+a) O que a condição “só em estrada de terra” sugere sobre a natureza do
+defeito?
+
+b) Que informação do scan tool ajuda a reproduzir a condição?
+
+c) Que instrumento e que manobra você usa para achar o ponto?
+
+d) Por que medir a resistance do sensor na bancada pode dar “bom” mesmo com o
+defeito presente?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Estrada de terra quer dizer vibração. Pense no que a vibração faz com um
+terminal frouxo ou um wire com um fio partido por dentro — e em quanto tempo
+dura esse contato que abre e fecha.
+
+</details>
+
+### 6. Justificativa
+
+Por que o oscilloscope e o scan tool não danificam um circuit de módulo, ao
+contrário da test light da lição anterior?
+
+### 7. Formato ASE
+
+**Question 1.** A diagnostic trouble code (DTC) indicates:
+
+- A. which part must be replaced
+- B. a circuit and the condition the module detected
+- C. that the module itself has failed
+- D. that the vehicle will not start
+
+**Question 2.** Technician A says scan tool live data can miss a fault that
+lasts only a few milliseconds. Technician B says an oscilloscope displays
+voltage over time and can show such a fault. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** Before clearing diagnostic trouble codes, a technician
+should:
+
+- A. replace the indicated sensor
+- B. record the codes and freeze frame data
+- C. disconnect the battery
+- D. road test the vehicle for 20 minutes
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Freeze frame. b) Live data (os PIDs). c) Bidirectional control.
+   d) Diagnostic trouble code (DTC).
+
+2. Porque o código nomeia o **circuit** em que o módulo viu algo fora do
+   esperado, e esse circuit tem muito mais que a peça: o wire de sinal, o de
+   reference, o ground, os connectors e o próprio módulo. Um terminal frouxo
+   produz exatamente a mesma leitura que um sensor com defeito, e o módulo
+   não tem como distinguir os dois. Trocar a peça resolve só quando ela era a
+   causa — nos outros casos, gasta dinheiro e deixa o defeito no carro.
+
+3. a) $1 \div 5 = 0.2\,\text{s} = 200\,\text{ms}$.
+
+   b) $200 \div 8 = 25$ vezes.
+
+   c) $1 \div 20 = 0.05\,\text{s} = 50\,\text{ms}$. A falha de 8 ms agora
+   ocupa $8 \div 50 = 16\,\%$ do intervalo, contra 4 % antes. A chance de ser
+   vista é maior, mas ainda está longe de ser garantida — e uma única leitura
+   estranha sozinha passa por ruído.
+
+4. **Sim, mostraria.** Com leituras a cada 333 ms e uma falha de 200 ms, é
+   provável que alguma leitura caia dentro dela, e o valor estranho
+   apareceria na tela.
+
+   O motorista sentiria algo diferente: 200 ms é um quinto de segundo, tempo
+   suficiente para o motor cortar de forma perceptível, não um tranco seco. O
+   tamanho da falha muda tanto o sintoma quanto o instrumento capaz de
+   enxergá-la.
+
+5. a) Que o defeito depende de **vibração**: um contato que abre e fecha com
+   o movimento. Isso aponta para connector frouxo, terminal mal crimpado ou
+   wire com fios partidos por dentro, e não para o sensor em si.
+
+   b) O **freeze frame**, que guarda a condição do momento em que o código
+   foi gravado — velocidade, rotação, carga — e indica em que situação tentar
+   reproduzir.
+
+   c) O **oscilloscope** ligado no wire de sinal, com a tela rodando,
+   enquanto você mexe no chicote, no connector e no sensor com a mão. Se a
+   linha salta no instante em que a sua mão mexe num ponto, o defeito está
+   ali.
+
+   d) Porque na bancada a peça está parada e sem vibração. O contato que
+   abre e fecha só abre quando alguma coisa se mexe; medido em repouso, ele
+   está fechado, e o ohmmeter mostra o valor correto. Defeito intermitente
+   quase nunca aparece numa medição estática.
+
+6. Porque os dois têm impedância alta ou não se ligam ao circuit de potência.
+   O oscilloscope, como o multimeter, apresenta uma resistance interna enorme
+   e puxa uma current desprezível do ponto medido. O scan tool nem mede o
+   circuit: ele conversa com o módulo pela rede de comunicação do carro, pelo
+   data link connector. A test light, ao contrário, é uma lâmpada, e a
+   current que ela puxa é a do próprio funcionamento dela.
+
+7. **Question 1: B.** O código nomeia o circuit e a condição observada pelo
+   módulo. Ele não nomeia a peça a trocar (A), não indica necessariamente
+   falha do módulo (C) e não diz nada sobre o carro pegar ou não (D).
+
+   **Question 2: C.** Os dois estão certos. O live data é lido de vez em
+   quando e pode passar por cima de uma falha de milissegundos; o
+   oscilloscope desenha a voltage continuamente e mostra o glitch.
+
+   **Question 3: B.** Anotar códigos e freeze frame antes de apagar preserva
+   a única pista de um defeito intermitente. Trocar o sensor (A) é trocar
+   peça sem diagnóstico. Desconectar a battery (C) apaga dados sem registrar
+   nada. Rodar o carro (D) pode fazer parte do diagnóstico, mas não antes de
+   anotar o que já está gravado.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o scan tool mostra o que o **módulo entendeu** — já
+  filtrado e lido de vez em quando. O oscilloscope mostra o que o **wire
+  realmente fez**, instante por instante. Quando os dois discordam, o
+  oscilloscope ganha. E um DTC aponta um **circuit**, nunca uma peça.
+- **Quando usar:** o scan tool abre todo diagnóstico de carro com módulo; o
+  oscilloscope entra quando o defeito é rápido, intermitente, ou quando tudo
+  mais deu normal.
+- **Com o que se conecta:** o potentiometer e o ponto morto vêm da lição
+  [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo); a
+  escolha de instrumento, da lição
+  [Outros instrumentos de teste](./instrumentos-de-teste); o raciocínio dos
+  3 Cs atravessa as duas. A lição seguinte,
+  [Reparar um wire](./reparar-um-wire), fecha o tópico com o que fazer depois
+  de achar o defeito.
+
+**Termos desta lição para revisar:** scan tool, data link connector,
+diagnostic trouble code, live data, parameter identification, freeze frame,
+bidirectional control, sample rate, oscilloscope, waveform, glitch, time
+base, lab scope.

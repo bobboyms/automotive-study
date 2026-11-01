@@ -123,6 +123,21 @@ conhecimento anterior.
     wire, splices, connectors, pins e ground points. Um diagram inteiro lido
     para decidir onde medir, e flash cards para praticar.
 
+### Tópico 6 — Ferramentas de teste e reparo
+
+17. [Outros instrumentos de teste](./instrumentos-de-teste) — todo
+    instrumento puxa alguma current do circuit, e **quanta** decide o que ele
+    revela e o que ele pode danificar. Test light, logic probe, fused jumper
+    wire, clamp meter, noid light, power probe, o gauss gauge que acha o
+    short e os instrumentos de alta tensão.
+18. [Scan tool e oscilloscope](./scan-tool-e-osciloscopio) — o scan tool
+    mostra o que o módulo entendeu; o oscilloscope mostra o que o wire
+    realmente fez. DTC, live data, freeze frame e por que um código aponta um
+    **circuit**, nunca uma peça.
+19. [Reparar um wire](./reparar-um-wire) — as quatro coisas que uma emenda
+    precisa fazer. Wire stripper, crimp, solda rosin core, heat shrink, e a
+    voltage drop que verifica o reparo.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -133,19 +148,17 @@ conhecimento anterior.
 
 ### Próximos tópicos (em preparação)
 
-17. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+20. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-18. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+21. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-19. **Outros instrumentos de teste** — test light, clamp meter e fused jumper
-    wire.
-20. **Diagnóstico de circuits** — open circuit, short to ground, short to
+22. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-21. **Battery** — construção, state of charge, testes, recarga, jump start e
+23. **Battery** — construção, state of charge, testes, recarga, jump start e
     parasitic draw.
-22. **Starting system** — starter motor, solenoid e testes.
-23. **Charging system** — alternator, rectifier, voltage regulator e testes.
+24. **Starting system** — starter motor, solenoid e testes.
+25. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

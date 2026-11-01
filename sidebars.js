@@ -127,6 +127,27 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 6 — Ferramentas e reparo',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/instrumentos-de-teste',
+              label: '17. Outros instrumentos de teste',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/scan-tool-e-osciloscopio',
+              label: '18. Scan tool e oscilloscope',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/reparar-um-wire',
+              label: '19. Reparar um wire',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

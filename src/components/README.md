@@ -773,3 +773,56 @@ Electrical symbols, com fuse block tracejada, F12 15 A, splices S100 e S101,
 fog lamp switch, relay, connectors C101 e C102, grounds G100, G101 e G102 e as
 cores dos wires. Os códigos e as cores são ilustrativos, e a lição se apoia
 neles: mudar um código aqui exige mudar o texto da lição.
+
+## Instrumentos
+
+`<Instrumentos caption="..." />` — o mesmo ponto de teste medido por dois
+instrumentos: o multimeter, que puxa 1.2 µA, e a test light, que puxa 0.25 A.
+É a figura central da lição **Outros instrumentos de teste**: o instrumento
+escolhido muda o que o circuit faz, e por isso muda a resposta.
+
+Tom 2 só na test light, que é a que carrega o circuit; o multimeter fica na
+cor do texto. Os dois valores são ilustrativos (multimeter de 10 MΩ, test
+light de 3 W) e aparecem calculados na lição — mudar um aqui exige mudar o
+exemplo resolvido de lá.
+
+Não recebe props além de `caption`.
+
+## Oscilograma
+
+`<Oscilograma falha pontos caption="..." />` — a tela do oscilloscope: a
+voltage de um sensor (vertical) ao longo do tempo (horizontal). A linha sobe
+como a do TPS abrindo e, no meio, cai quase a zero por um instante — o ponto
+morto da trilha do potentiometer.
+
+| Prop | Padrão | O que faz |
+|---|---|---|
+| `falha` | `true` | desenha a queda e o anel tracejado que a marca |
+| `pontos` | `false` | marca por cima as leituras do scan tool |
+| `caption` | — | a legenda |
+
+A lição **Scan tool e oscilloscope** usa as duas versões em sequência: sem
+`pontos`, para mostrar o defeito; com `pontos`, para mostrar que nenhuma
+leitura do scan tool caiu dentro dele. As leituras ficam na constante
+`amostras`, escolhidas de propósito para passar ao largo da queda: é esse o
+ponto da figura, e mexer nelas desfaz o argumento da lição.
+
+Tom 2 (laranja) é o sinal; tom 3 (verde) marca o defeito, como no `Circuito`.
+
+## Strands
+
+`<Strands caption="..." />` — o wire em corte, duas vezes: à esquerda o feixe
+inteiro de 18 strands, à direita o mesmo wire depois de um descasque que
+cortou metade deles. Os cortados ficam no tom 3, em contorno tracejado, para
+lerem como “não estão mais aqui”.
+
+A figura ensina duas coisas de uma vez, e as duas estão na lição **Reparar um
+wire**: sobrou metade do cobre para conduzir (a resistance daquele trecho
+dobra, de 0.02 Ω para 0.04 Ω, valores ilustrativos) e sobrou metade do fio
+para aguentar a vibração.
+
+O feixe é hexagonal, montado pela constante `LINHAS` (`[4, 5, 5, 4]`). O
+número de linhas tem que permitir um corte pela metade exata — `LINHAS` com
+soma ímpar quebra a correspondência com o texto da lição.
+
+Não recebe props além de `caption`.

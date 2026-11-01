@@ -97,6 +97,18 @@
       "titulo": "Electrical symbols",
       "url": "trn-120-eletricidade/simbolos-eletricos"
     },
+    "instrumentos-de-teste": {
+      "titulo": "Outros instrumentos de teste",
+      "url": "trn-120-eletricidade/instrumentos-de-teste"
+    },
+    "scan-tool-e-osciloscopio": {
+      "titulo": "Scan tool e oscilloscope",
+      "url": "trn-120-eletricidade/scan-tool-e-osciloscopio"
+    },
+    "reparar-um-wire": {
+      "titulo": "Reparar um wire",
+      "url": "trn-120-eletricidade/reparar-um-wire"
+    },
     "trn-120-roteiro": {
       "titulo": "Roteiro (próximos tópicos)",
       "url": "trn-120-eletricidade/"
@@ -3532,6 +3544,253 @@
       "pt": "indução mútua",
       "def": "a voltage que uma coil induz na outra pelo campo magnético",
       "licao": "capacitor-e-transformer"
+    },
+    {
+      "en": "self-powered test light",
+      "pt": "lâmpada de prova com bateria",
+      "def": "test light com bateria própria; testa continuidade, com o circuit desligado",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "continuity tester",
+      "pt": "testador de continuidade",
+      "def": "outro nome do self-powered test light",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "logic probe",
+      "pt": "ponta lógica",
+      "def": "instrumento de pouca current que mostra power, ground e pulso",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "input impedance",
+      "pt": "impedância de entrada",
+      "def": "a resistance que o instrumento apresenta ao circuit que ele mede",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "circuit loading",
+      "pt": "carregamento do circuito",
+      "def": "a current que o próprio instrumento puxa ao ser ligado ao circuit",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "driver",
+      "pt": "driver",
+      "def": "o circuito de saída do módulo que liga e desliga uma load",
+      "so": [
+        "/trn-120-"
+      ],
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "noid light",
+      "pt": "lâmpada noid",
+      "def": "lâmpada que entra no lugar do injector e mostra o pulso do módulo",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "power probe",
+      "pt": "ponta de força",
+      "def": "instrumento que testa e ainda fornece power ou ground pelo próprio cabo",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "gauss gauge",
+      "pt": "medidor de campo",
+      "def": "instrumento que acha a current pelo campo magnético, por fora do chicote",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "amp hound",
+      "pt": "rastreador de fio",
+      "def": "instrumento que injeta um sinal no wire e o segue por fora",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "megohmmeter",
+      "pt": "megôhmetro",
+      "def": "mede resistance muito alta; testa o isolamento de alta tensão",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "milliohmmeter",
+      "pt": "miliôhmetro",
+      "def": "mede resistance muito baixa; acha fios partidos dentro de um cabo",
+      "var": [
+        "micro-ohmmeter"
+      ],
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "CAT rating",
+      "pt": "categoria de segurança",
+      "def": "a classificação que diz em que tensão o instrumento pode ser usado",
+      "licao": "instrumentos-de-teste"
+    },
+    {
+      "en": "data link connector",
+      "pt": "conector de diagnóstico",
+      "def": "a tomada embaixo do painel onde o scan tool é ligado",
+      "var": [
+        "DLC"
+      ],
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "live data",
+      "pt": "dados ao vivo",
+      "def": "os valores que o módulo está lendo e informando agora",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "parameter identification",
+      "pt": "parâmetro de dados",
+      "def": "o nome de cada valor da lista de live data",
+      "var": [
+        "PID"
+      ],
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "freeze frame",
+      "pt": "quadro congelado",
+      "def": "a foto dos valores no instante em que o código foi gravado",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "bidirectional control",
+      "pt": "comando bidirecional",
+      "def": "o scan tool mandando o módulo acionar uma peça",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "sample rate",
+      "pt": "taxa de amostragem",
+      "def": "quantas leituras por segundo o instrumento faz",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "oscilloscope",
+      "pt": "osciloscópio",
+      "def": "instrumento que desenha a voltage ao longo do tempo",
+      "var": [
+        "lab scope",
+        "scope"
+      ],
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "waveform",
+      "pt": "forma de onda",
+      "def": "o desenho do sinal na tela do oscilloscope",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "glitch",
+      "pt": "falha momentânea",
+      "def": "uma alteração muito curta no sinal",
+      "so": [
+        "/trn-120-"
+      ],
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "time base",
+      "pt": "base de tempo",
+      "def": "quanto tempo cabe na largura da tela do oscilloscope",
+      "licao": "scan-tool-e-osciloscopio"
+    },
+    {
+      "en": "wire stripper",
+      "pt": "descascador de fio",
+      "def": "alicate com entalhes por bitola, que tira o isolamento sem cortar o cobre",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "strand",
+      "pt": "fio do cabo",
+      "def": "cada fio fino de cobre que forma o wire",
+      "so": [
+        "/trn-120-"
+      ],
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "crimp",
+      "pt": "prensagem",
+      "def": "união feita apertando um terminal metálico sobre o cobre",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "crimping tool",
+      "pt": "alicate de prensar",
+      "def": "a ferramenta própria para fazer o crimp, com a matriz da forma certa",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "butt connector",
+      "pt": "emenda tubular",
+      "def": "terminal em forma de tubo, para emendar dois wires em linha",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "solder",
+      "pt": "solda",
+      "def": "liga de estanho que derrete e une o cobre",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "rosin core solder",
+      "pt": "solda com fluxo de resina",
+      "def": "a solda usada em eletrônica e em elétrica automotiva",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "acid core solder",
+      "pt": "solda com fluxo ácido",
+      "def": "solda de encanamento; corrói o wire e não se usa no carro",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "flux",
+      "pt": "fluxo",
+      "def": "o produto que limpa o metal para a solda aderir",
+      "so": [
+        "/trn-120-"
+      ],
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "cold solder joint",
+      "pt": "solda fria",
+      "def": "solda que não aderiu ao cobre: parece boa e tem resistance alta",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "heat sink",
+      "pt": "dissipador",
+      "def": "peça que absorve calor e protege o componente ao lado durante a solda",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "heat shrink tubing",
+      "pt": "tubo termorretrátil",
+      "def": "tubo que encolhe com o calor e veda a emenda",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "soldering iron",
+      "pt": "ferro de soldar",
+      "def": "ferro de ponta pequena, para trabalho fino",
+      "licao": "reparar-um-wire"
+    },
+    {
+      "en": "soldering gun",
+      "pt": "ferro tipo pistola",
+      "def": "ferro de solda mais potente, que aquece depressa",
+      "licao": "reparar-um-wire"
     }
   ]
 }

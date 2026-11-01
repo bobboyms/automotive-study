@@ -1,0 +1,678 @@
+---
+title: "Outros instrumentos de teste: o que cada um consegue dizer"
+---
+
+import Instrumentos from '@site/src/components/Instrumentos';
+
+# Outros instrumentos de teste: o que cada um consegue dizer
+
+> **Pergunta central:** o multimeter mede quase tudo. Então por que a oficina
+> tem test light, clamp meter, jumper e mais meia dúzia de instrumentos — e
+> por que escolher o errado pode danificar um módulo de centenas de dólares?
+
+## A queixa: o injector que parou depois do teste
+
+Um carro volta à oficina no dia seguinte a um serviço. O cliente conta:
+
+> “Vocês mexeram no motor ontem. Hoje ele está falhando, e a luz de injeção
+> acendeu.”
+
+No histórico do serviço: o técnico estava procurando por que um cilindro
+falhava e foi testar se o módulo estava mandando o comando para o fuel
+injector. Para isso, encostou uma **test light comum** nos dois terminais do
+connector do injector, com o motor girando. A luz piscou — então havia
+comando. Ele concluiu que o módulo estava bom e trocou o injector.
+
+Hoje, o scan tool acusa falha do **driver** daquele injector dentro do módulo.
+O cilindro que falhava era um; agora o módulo está danificado.
+
+A test light respondeu à pergunta certa. O problema é que, para responder,
+ela fez uma coisa que ninguém viu. Ao fim desta lição você vai saber o que
+foi, e vai saber escolher o instrumento certo para cada pergunta — que é o
+assunto que a lição [Medições com o multimeter](./medicoes-com-multimetro)
+deixou marcado para esta página.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| test light | lâmpada de prova | lâmpada com ponta de prova, que acende onde há voltage |
+| self-powered test light | lâmpada de prova com bateria | tem bateria própria; serve para continuidade, com o circuit desligado |
+| continuity tester | testador de continuidade | outro nome do self-powered test light |
+| logic probe | ponta lógica | instrumento de pouca current que mostra power, ground e pulso |
+| input impedance | impedância de entrada | a resistance que o instrumento apresenta ao circuit |
+| circuit loading | carregamento do circuito | a current que o próprio instrumento puxa ao ser ligado |
+| driver | driver | o circuito de saída do módulo que liga e desliga uma load |
+| noid light | lâmpada noid | lâmpada que entra no lugar do injector e mostra o pulso do módulo |
+| power probe | ponta de força | instrumento que testa e ainda fornece power ou ground |
+| gauss gauge | medidor de campo | instrumento que acha a current pelo campo magnético, através do chicote |
+| megohmmeter | megôhmetro | mede resistance muito alta; testa isolamento de alta tensão |
+| milliohmmeter | miliôhmetro | mede resistance muito baixa; acha fios de cabo partidos por dentro |
+| CAT rating | categoria de segurança | a classificação que diz em que tensão o instrumento pode ser usado |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+- **test light e logic probe:** no dia a dia, para saber rápido se há power
+  num ponto;
+- **fused jumper wire:** para pular um switch ou um contato de relay e
+  dividir o circuit em dois, como a lição
+  [Switches](./switches) fez no caso do cooling fan;
+- **clamp meter:** para medir a current de um starter motor ou de um blower
+  sem abrir o circuit, como a lição
+  [Loads: bulbs e motores](./cargas-bulbs-e-motores) usou;
+- **short finder e gauss gauge:** para achar o short que a lição
+  [Circuit protection](./protecao-do-circuito) deixou pendente;
+- **instrumentos de alta tensão:** nas disciplinas EVX, em híbridos e
+  elétricos.
+
+Na prova ASE, o assunto está na área **A6**, e as perguntas costumam ser do
+tipo “qual instrumento o técnico deve usar”.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Medições com o multimeter](./medicoes-com-multimetro), por que
+   uma voltage medida **sem current passando** pode enganar?
+2. Pela [Ohm's law](./lei-de-ohm), quanta current passa por uma resistance de
+   10 MΩ ligada a 12 V?
+3. Na lição [Loads: bulbs e motores](./cargas-bulbs-e-motores), por que a
+   garra do clamp meter abraça **um wire só**?
+4. Na lição [Circuit protection](./protecao-do-circuito), o que diferencia um
+   short de um overload no momento em que o fuse abre?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque voltage só se perde onde há current passando por uma resistance.
+   Com o circuit parado, um ponto corroído não mostra queda nenhuma, e a
+   leitura parece boa. Esta lição mostra o instrumento que resolve isso ao
+   obrigar uma current a passar.
+2. $I = 12 \div 10\,000\,000 = 0.0000012\,\text{A}$, ou 1.2 µA — um milionésimo
+   de amp. Guarde esse número: ele é metade da explicação da queixa.
+3. Porque a current vai num sentido no wire de alimentação e no sentido
+   contrário no de retorno. Abraçando os dois, os campos se cancelam e a
+   leitura dá zero.
+4. O momento: o short abre o fuse **na hora**, porque a current salta para
+   centenas de amps; o overload demora, porque a current fica pouco acima do
+   valor do fuse.
+
+</details>
+
+## Intuição: todo instrumento mexe no circuit que ele mede
+
+Há uma ideia simples por trás desta lição inteira, e ela vale para qualquer
+medição:
+
+> **Para medir, o instrumento precisa se ligar ao circuit. E tudo o que se
+> liga a um circuit puxa alguma current.**
+
+Quanta current ele puxa é a diferença entre os instrumentos — e é o que
+decide tanto o que ele consegue revelar quanto o estrago que ele pode causar.
+
+<Instrumentos caption="O mesmo ponto de teste, com dois instrumentos. O multimeter tem uma resistance interna enorme e puxa cerca de 1.2 µA, um milionésimo de amp: o circuit quase não percebe que ele está ali. A test light é uma lâmpada de verdade e puxa cerca de 0.25 A, mais de duzentas mil vezes mais. Valores ilustrativos de um multimeter de 10 MΩ e de uma test light de 3 W." />
+
+Dessa diferença saem as duas faces da mesma moeda:
+
+- **A test light carrega o circuit, e isso é uma vantagem.** Ela obriga uma
+  current de verdade a passar. Num ponto com resistance alta, ela não acende
+  ou acende fraca — e denuncia o defeito que o multimeter não vê.
+- **A test light carrega o circuit, e isso é um perigo.** Num circuit que foi
+  feito para currents pequenas, 0.25 A é muito. É exatamente o que aconteceu
+  na queixa desta lição.
+
+A comparação com uma torneira ajuda, e tem limite. O multimeter é como um
+medidor de pressão que você encosta no cano: ele lê sem deixar a água sair. A
+test light é como abrir um registro pequeno: você vê a água jorrando, e isso
+prova que há pressão **e** vazão. O limite da comparação é que uma torneira
+aberta não quebra o cano, e a test light pode queimar a saída de um módulo.
+
+## Formalização, parte 1: as lâmpadas de prova
+
+### Test light comum
+
+> **Test light** é uma lâmpada com uma ponta de prova de um lado e um jacaré
+> de ground do outro. Encostada num ponto com voltage, ela acende.
+
+- **O que ela responde bem:** “há power aqui, e esse power aguenta puxar uma
+  current?” As duas coisas ao mesmo tempo, porque ela acende com a current
+  que ela própria puxa.
+- **O que ela não responde:** quanto. Ela não dá número. Uma luz mais fraca
+  sugere resistance, mas não diz quanta.
+- **Onde ela não deve ser usada:** em circuit comandado por módulo, em
+  circuit de sensor e em qualquer coisa do sistema de airbag.
+
+### Self-powered test light
+
+> **Self-powered test light**, ou **continuity tester**, tem uma bateria
+> dentro. Ela acende quando as duas pontas estão ligadas por um caminho
+> condutor. Serve para testar continuidade, não voltage.
+
+:::warning Nunca num circuit energizado
+
+A self-powered test light manda a current da bateria dela pelo circuit. Num
+circuit que já tem power, as duas fontes se encontram: o instrumento se
+danifica e o circuit pode ser danificado junto. A regra é a mesma do
+ohmmeter, da lição [Medições com o multimeter](./medicoes-com-multimetro):
+**chave desligada e o trecho isolado.**
+
+:::
+
+- **Exemplo:** verificar se um wire solto nas duas pontas tem continuidade de
+  ponta a ponta.
+- **Contraexemplo:** encostá-la no connector de uma load com a chave ligada,
+  achando que vai “ver se chega power”. Para isso serve a test light comum,
+  que não tem bateria.
+
+### Logic probe
+
+> **Logic probe** é uma ponta de prova eletrônica de **baixa current**. Em vez
+> de uma lâmpada, ela tem LEDs que indicam se o ponto está em power, em
+> ground ou pulsando.
+
+É o instrumento que substitui a test light nos circuits de módulo. Ela puxa
+uma current pequena, da ordem de miliamperes, e por isso não danifica um
+driver. Muitas test lights modernas são de LED e têm a mesma vantagem.
+
+## Formalização, parte 2: instrumentos que medem sem abrir o circuit
+
+### Clamp meter
+
+A lição [Loads: bulbs e motores](./cargas-bulbs-e-motores) já apresentou o
+clamp meter: a garra mede o campo magnético em volta de **um** wire e informa
+a current sem que nada seja desligado. É o único jeito prático de medir a
+current de um starter motor, que passa de centenas de amps.
+
+### Gauss gauge e short finder
+
+Aqui a lição [Circuit protection](./protecao-do-circuito) tem uma dívida: como
+achar um short dentro de um chicote de quatro metros sem queimar um fuse por
+tentativa.
+
+A solução usa duas peças:
+
+1. **Um circuit breaker no lugar do fuse.** Ele abre com a current do short,
+   esfria e fecha de novo, repetidamente. O circuit passa a ter uma current
+   que liga e desliga sozinha, sem queimar nada.
+2. **Um gauss gauge**, passado por cima do chicote. Enquanto houver current
+   passando por baixo dele, o ponteiro balança no ritmo do breaker. Quando
+   você passa do ponto do short, a current acaba — e **o ponteiro para**.
+
+O ponto em que o ponteiro para de balançar é o ponto do short. Repare na
+elegância: você acha o defeito **sem desmontar o painel e sem cortar
+nada**, porque o campo magnético atravessa o plástico e o tecido do chicote.
+
+### Amp hound
+
+O **amp hound** trabalha no mesmo princípio, com um transmissor que injeta um
+sinal no wire e um receptor que o segue por fora. Serve para achar fio
+partido por dentro do isolamento, terminal solto e parasitic draw — e não
+danifica eletrônica, porque o sinal é fraco.
+
+## Formalização, parte 3: instrumentos de função específica
+
+### Fused jumper wire
+
+> **Fused jumper wire** é um pedaço de wire com um fuse no meio e um jacaré em
+> cada ponta. Ele **fecha** um caminho de propósito, para você perguntar ao
+> circuit: “se esta peça estivesse boa, o resto funcionaria?”
+
+A lição [Switches](./switches) usou isso no cooling fan: unir os dois wires do
+thermal switch e ver se o fan liga.
+
+:::warning Onde o jumper não entra
+
+- **Nunca no lugar de um fuse.** O jumper com fuse serve para pular um
+  switch ou um contato, não a proteção do circuit.
+- **Nunca pulando uma load.** Ligar power direto ao ground sem load é um
+  short feito à mão.
+- **O fuse do jumper tem que ser igual ou menor** que o do circuit testado.
+
+:::
+
+### Noid light
+
+A **noid light** entra no lugar do connector do fuel injector e pisca quando o
+módulo manda o comando. Ela foi feita para isso: puxa pouca current e não
+danifica o driver. É o instrumento que o técnico da queixa deveria ter usado.
+
+### Power probe
+
+O **power probe** junta várias funções numa ponta só: ele mede voltage, mostra
+power e ground por LED e som, e ainda **fornece** power ou ground pelo próprio
+cabo, alimentado direto na battery.
+
+Essa última função é o que o torna poderoso e perigoso ao mesmo tempo.
+Aplicar power num wire que era de ground, ou energizar um circuit de sensor,
+danifica módulo na hora. Antes de apertar o gatilho, o wiring diagram diz o
+que aquele wire deveria ser.
+
+## Formalização, parte 4: instrumentos de alta tensão
+
+:::danger Alta tensão: conceito agora, prática nas EVX
+
+Nada desta seção se faz na TRN-120. Um sistema de híbrido ou elétrico trabalha
+com centenas de volts em corrente contínua, o suficiente para matar. O
+procedimento de desativação, as luvas isolantes com teste em dia e o tempo de
+espera obrigatório são conteúdo das disciplinas **EVX** e do manual do
+fabricante.
+
+:::
+
+Três instrumentos aparecem nesse trabalho, e vale saber para que servem:
+
+| Instrumento | Mede | Para que serve |
+|---|---|---|
+| multimeter com **CAT rating** adequado | voltage e resistance | o único que pode ser encostado num sistema de alta tensão; um multimeter comum pode arcar por dentro e explodir |
+| **megohmmeter** | resistance **muito alta** | testa o isolamento: confirma que a alta tensão não está vazando para a carcaça |
+| **milliohmmeter** | resistance **muito baixa** | acha fios partidos dentro de um cabo e conexões de alta current ruins |
+
+A ideia por trás dos dois últimos é a mesma do resto da lição: o ohmmeter
+comum tem uma faixa de medida no meio, e não enxerga nem o muito alto nem o
+muito baixo. Para medir fora dessa faixa, muda-se o instrumento.
+
+## Como falha e como diagnosticar
+
+### O quadro de escolha
+
+| A pergunta | O instrumento | Por quê |
+|---|---|---|
+| há power neste ponto? | test light ou logic probe | resposta imediata, sem ler número |
+| há power **e** o circuit aguenta current? | test light (circuit comum) | ela carrega o circuit |
+| quanta voltage, exatamente? | multimeter | é o único que dá número |
+| onde está se perdendo voltage? | multimeter, em voltage drop | com a load ligada |
+| este wire está inteiro? | ohmmeter ou self-powered test light | circuit desligado |
+| quanta current esta load puxa? | clamp meter | sem abrir o circuit |
+| se esta peça estivesse boa, funcionaria? | fused jumper wire | fecha o caminho de propósito |
+| o módulo está mandando o pulso? | noid light ou logic probe | pouca current |
+| onde está o short no chicote? | breaker + gauss gauge | acha sem desmontar |
+
+### A queixa resolvida
+
+Volte ao injector.
+
+1. **O que o técnico queria saber:** se o módulo estava mandando o comando
+   para o injector. A pergunta era boa.
+2. **O que o circuit do injector é:** o módulo liga o injector pelo lado do
+   ground, com um **driver** — um circuito de saída eletrônico, feito para
+   conduzir a current daquele injector e nada mais.
+3. **O que a test light fez:** ela entrou no lugar do injector e puxou a
+   current dela própria, cerca de 0.25 A (valor ilustrativo), por dentro do
+   driver. Muitos drivers de sinal são projetados para uma fração disso; o
+   limite real está no manual do fabricante.
+4. **O princípio:** mais current pelo driver é mais calor dentro dele, pela
+   mesma fórmula $P = I \times I \times R$ da lição
+   [O resistor fixo](./resistor-fixo). O driver esquentou além do que
+   aguentava e abriu.
+5. **O instrumento certo:** a **noid light**, feita para esse teste, ou um
+   logic probe. Os dois mostram o pulso puxando pouca current.
+
+**O que fazer agora:** o módulo precisa ser reparado ou trocado, e a causa
+original — o cilindro que falhava — continua sem diagnóstico. O serviço
+produziu um defeito novo e não resolveu o antigo.
+
+**A regra que fica:** antes de encostar qualquer coisa num circuit comandado
+por módulo, pergunte **quanta current esse instrumento vai puxar**. Na
+dúvida, use o multimeter, que puxa quase nada, ou um instrumento específico.
+
+## Na oficina: usar cada instrumento sem criar defeito
+
+:::warning Regras que valem para todos
+
+- **Airbag e pré-tensionador: não se testa com test light, jumper nem power
+  probe.** Há risco de disparo. O procedimento do SRS é do manual, e o
+  assunto é do módulo 4 da disciplina.
+- **Não fure o isolamento do wire para medir.** O furo entra água, a água
+  corrói o cobre por dentro, e meses depois aparece um defeito que ninguém
+  liga ao teste. Use pontas de backprobe por trás do connector.
+- **Não enfie a ponta na frente de um terminal fêmea:** ela alarga o terminal
+  e tira a pressão de contato.
+- **Confira o fuse do jumper antes de usá-lo**, e nunca o ligue sem saber o
+  que há na outra ponta.
+- **Antes de energizar com power probe, leia o diagram** e confirme se o wire
+  é de power, de ground ou de sinal.
+
+:::
+
+Um roteiro de bolso, do instrumento mais seguro para o mais invasivo:
+
+1. **Olhe o wiring diagram** e decida o que aquele ponto deveria ser.
+2. **Multimeter primeiro**, porque ele quase não interfere.
+3. **Test light ou logic probe** quando a pergunta for “aguenta current?”, e
+   só se o circuit não for de módulo.
+4. **Jumper e power probe por último**, porque eles mudam o circuit de
+   verdade.
+
+## Exemplos resolvidos
+
+### Exemplo 1: a current de cada instrumento
+
+Um multimeter tem 10 MΩ de input impedance e uma test light usa uma lâmpada
+de 3 W (valores ilustrativos). Ligados a 12 V, quanta current cada um puxa?
+
+<details>
+<summary>Solução</summary>
+
+Multimeter, pela Ohm's law:
+
+$$
+I = \frac{12}{10\,000\,000} = 0.0000012\,\text{A} = 1.2\,\mu\text{A}
+$$
+
+Test light, pela fórmula da power:
+
+$$
+I = \frac{P}{V} = \frac{3}{12} = 0.25\,\text{A}
+$$
+
+A razão entre as duas:
+
+$$
+\frac{0.25}{0.0000012} \approx 208\,000
+$$
+
+A test light puxa mais de duzentas mil vezes a current do multimeter. Essa é
+a diferença que faz dela um instrumento melhor para achar resistance alta — e
+um instrumento perigoso num circuit de módulo.
+
+</details>
+
+### Exemplo 2: o ponto corroído que o multimeter aprova
+
+**Pause e tente:** um connector corroído acrescentou 200 Ω no caminho (valor
+ilustrativo). Você mede esse ponto primeiro com o multimeter de 10 MΩ e
+depois com a test light de 48 Ω. O que cada um mostra?
+
+<details>
+<summary>Solução</summary>
+
+Os dois formam um series circuit com a corrosão, e a voltage se divide em
+proporção às resistances — a regra da lição
+[Series circuit](./circuito-em-serie).
+
+**Com o multimeter.** A resistance dele é 10 MΩ, e a corrosão é 200 Ω. O
+multimeter fica com praticamente toda a voltage:
+
+$$
+V = 12 \times \frac{10\,000\,000}{10\,000\,000 + 200} \approx 12\,\text{V}
+$$
+
+O visor mostra 12 V, e o técnico conclui que o ponto está bom.
+
+**Com a test light.** A resistance dela é 48 Ω, da mesma ordem que a
+corrosão:
+
+$$
+I = \frac{12}{48 + 200} \approx 0.048\,\text{A}
+\qquad
+V_{\text{lâmpada}} = 0.048 \times 48 \approx 2.3\,\text{V}
+$$
+
+Uma lâmpada de 12 V com 2.3 V não acende de forma visível. A test light
+denuncia o defeito que o multimeter aprovou.
+
+Então o multimeter é pior? Não: ele é **mais preciso e menos invasivo**. O que
+o exemplo mostra é que uma leitura de voltage sem current não prova nada — a
+lição [Medições com o multimeter](./medicoes-com-multimetro) chama isso de
+medir sem carga, e a solução com o multimeter é medir **voltage drop com a
+load ligada**, que dá o mesmo diagnóstico com número.
+
+</details>
+
+### Exemplo 3: escolher o instrumento
+
+**Pause e tente:** para cada situação, diga que instrumento você pega
+primeiro e por quê.
+
+a) Saber se chega power ao socket de uma brake light.
+
+b) Saber quanta current o blower motor puxa na velocidade máxima.
+
+c) Saber se o módulo está pulsando o fuel injector.
+
+d) Saber se um wire do chicote, com as duas pontas soltas, está inteiro.
+
+<details>
+<summary>Solução</summary>
+
+a) **Test light.** O circuit da brake light é um circuit de power comum, sem
+módulo no caminho do teste, e a pergunta é “tem power e aguenta current?”. O
+multimeter também serve, e dá número.
+
+b) **Clamp meter.** A current de um blower passa de dez amps, acima da
+entrada de current do multimeter, e o clamp mede sem abrir o circuit.
+
+c) **Noid light** (ou logic probe). Circuit comandado por módulo: o
+instrumento precisa puxar pouca current.
+
+d) **Ohmmeter ou self-powered test light**, com o wire desligado dos dois
+lados. É teste de continuidade, e ele exige o circuit sem energia.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que a test light consegue denunciar uma resistance alta que o
+   multimeter aprova?
+2. Por que essa mesma característica a torna perigosa num circuit de módulo?
+3. Qual é a diferença entre uma test light comum e uma self-powered?
+4. Por que não se usa uma self-powered test light num circuit energizado?
+5. Por que o gauss gauge precisa de um circuit breaker no lugar do fuse?
+6. Por que um megohmmeter e um milliohmmeter existem, se o multimeter já mede
+   resistance?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque ela puxa uma current de verdade. Com current passando, a resistance
+   alta produz voltage drop e sobra pouca voltage para a lâmpada. O
+   multimeter quase não puxa current, então quase não aparece queda, e ele lê
+   a voltage inteira.
+2. Porque num circuit de módulo a current que ela puxa pode passar do que o
+   driver do módulo aguenta. O driver esquenta e abre — o defeito da queixa
+   desta lição.
+3. A comum não tem fonte própria: ela acende com a voltage do circuit, e
+   serve para achar power. A self-powered tem bateria dentro e acende quando
+   há caminho condutor entre as pontas: serve para continuidade, com o
+   circuit desligado.
+4. Porque a bateria dela encontraria a voltage do circuit. O instrumento se
+   danifica, e o circuit pode se danificar junto.
+5. Porque o fuse abriria na primeira vez e o teste acabaria ali. O breaker
+   abre e fecha sozinho, mantendo uma current que liga e desliga, e é essa
+   current intermitente que o gauss gauge consegue seguir.
+6. Porque o multimeter mede bem uma faixa no meio, e não enxerga nem
+   resistance altíssima (isolamento) nem baixíssima (fios partidos dentro de
+   um cabo grosso). Fora da faixa, muda-se o instrumento.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome do instrumento descrito:
+
+a) tem bateria dentro e acende quando há caminho entre as pontas;
+b) mede current sem abrir o circuit;
+c) entra no lugar do injector e pisca com o comando do módulo;
+d) acha o ponto do short passando por cima do chicote;
+e) mede resistance muito alta, para testar isolamento.
+
+### 2. Explicação
+
+Explique, com as próprias palavras, por que o mesmo instrumento pode ser a
+melhor escolha num circuit de farol e a pior escolha num circuit de sensor.
+
+### 3. Aplicação direta
+
+a) Um multimeter tem 1 MΩ de input impedance. Quanta current ele puxa ligado
+a 12 V?
+
+b) Uma test light usa uma lâmpada de 5 W em 12 V. Quanta current ela puxa, e
+qual é a resistance dela trabalhando?
+
+c) Essa test light é encostada num ponto que tem 100 Ω de corrosão no
+caminho. Que voltage sobra para a lâmpada?
+
+### 4. Variação
+
+Refaça o exemplo 2 com uma corrosão de 20 Ω, em vez de 200 Ω. A test light
+ainda denuncia o defeito? O que isso diz sobre a sensibilidade desse teste?
+
+### 5. Caso de diagnóstico
+
+Uma luz de painel não acende. Você encosta a test light no terminal de power
+do socket, com o jacaré num ground bom: ela acende com força. A lâmpada é
+nova e boa.
+
+a) O que a test light acesa já descarta?
+
+b) Que teste você faz em seguida, e em que ponto?
+
+c) Se a test light também acender quando você a liga **entre o terminal de
+power e o terminal de ground do socket**, o que isso prova?
+
+d) E se ela não acender nessa segunda posição?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Um circuit precisa dos dois lados. A primeira medição testou o caminho de
+ida, usando um ground que você escolheu. O que ainda não foi testado?
+
+</details>
+
+### 6. Justificativa
+
+Por que o roteiro de bolso manda usar o multimeter antes da test light, e o
+jumper por último?
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says a conventional incandescent test light can
+be used to check any circuit on a modern vehicle. Technician B says that a
+test light may draw enough current to damage a computer-controlled circuit.
+Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** A self-powered test light (continuity tester) should be used:
+
+- A. on live circuits only
+- B. with the circuit de-energized
+- C. to measure voltage drop
+- D. to measure current draw
+
+**Question 3.** A technician needs to locate a short in a harness that runs
+behind the dash. The best approach is to:
+
+- A. replace the fuse repeatedly until the short is found
+- B. install a circuit breaker in place of the fuse and use a gauss gauge
+- C. cut the harness open at several points
+- D. measure resistance with the circuit energized
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Self-powered test light (continuity tester). b) Clamp meter. c) Noid
+   light. d) Gauss gauge (com um circuit breaker no lugar do fuse).
+   e) Megohmmeter.
+
+2. Porque o que muda é a current que o instrumento puxa. No circuit do farol,
+   essa current é desprezível perto da current da load, e ela ajuda: obriga o
+   circuit a trabalhar e revela resistance alta. No circuit de sensor, o
+   caminho inteiro foi feito para currents muito pequenas, e a mesma current
+   do instrumento passa a ser grande demais — ela danifica o driver do
+   módulo. O instrumento não mudou; o circuit é que mudou.
+
+3. a) $I = 12 \div 1\,000\,000 = 0.000012\,\text{A}$, ou 12 µA.
+
+   b) $I = 5 \div 12 \approx 0.417\,\text{A}$;
+   $R = 12 \div 0.417 \approx 28.8\,\Omega$ (ou, direto,
+   $R = 12 \times 12 \div 5 = 28.8\,\Omega$).
+
+   c) Em série com os 100 Ω:
+   $I = 12 \div (28.8 + 100) \approx 0.0932\,\text{A}$, e
+   $V = 0.0932 \times 28.8 \approx 2.68\,\text{V}$. A lâmpada não acende de
+   forma visível.
+
+4. Com 20 Ω: $I = 12 \div (48 + 20) \approx 0.176\,\text{A}$, e
+   $V = 0.176 \times 48 \approx 8.5\,\text{V}$. A lâmpada acende, um pouco
+   mais fraca que o normal — e “um pouco mais fraca” é difícil de perceber
+   sem ter uma lâmpada boa ao lado para comparar.
+
+   O que isso diz: a test light denuncia bem a resistance **alta**, mas passa
+   por cima da resistance moderada. Para resistance pequena, o teste que vale
+   é o voltage drop com o multimeter, que dá número.
+
+5. a) Descarta o caminho de ida: fuse, switch e o wire de power até o socket
+   estão conduzindo, e conduzem com current suficiente para acender a
+   lâmpada da test light.
+
+   b) O lado do ground. Com a lâmpada no lugar e o circuit ligado, meça a
+   voltage drop entre o terminal de ground do socket e um ponto de metal
+   limpo da carroceria.
+
+   c) Prova que o caminho de ida **e** o de volta estão bons, porque a test
+   light fechou o circuit pelos dois terminais do socket e funcionou. Nesse
+   caso, o defeito está no próprio socket — contato do terminal com a
+   lâmpada — ou na lâmpada, apesar de parecer boa.
+
+   d) Prova que o lado do **ground** está aberto ou com resistance alta: há
+   power chegando, mas não há caminho de volta. O próximo passo é seguir o
+   wire de ground até o ponto de ground e inspecioná-lo.
+
+6. Porque a ordem vai do instrumento que menos mexe no circuit para o que
+   mais mexe. O multimeter quase não puxa current e não pode danificar nada,
+   então ele nunca cria um defeito novo. A test light já carrega o circuit. O
+   jumper e o power probe **mudam** o circuit: fecham caminhos e aplicam
+   power onde o projeto não previa. Começar pelo mais invasivo é arriscar
+   produzir o defeito que você foi consertar — exatamente a queixa desta
+   lição.
+
+7. **Question 1: B.** Só o técnico B está certo. Uma test light
+   incandescente puxa uma current que pode passar do que o driver de um
+   módulo aguenta. Por isso ela **não** serve para qualquer circuit (A), e em
+   circuit de módulo o certo é um logic probe, uma noid light ou o
+   multimeter.
+
+   **Question 2: B.** A self-powered test light tem bateria própria e testa
+   continuidade, o que exige o circuit sem energia. Usá-la em circuit vivo
+   (A) danifica o instrumento. Ela não mede voltage drop (C) nem current (D),
+   porque não dá número.
+
+   **Question 3: B.** O circuit breaker substitui o fuse e fornece uma current
+   que liga e desliga sem queimar nada; o gauss gauge segue essa current por
+   fora do chicote e para de balançar depois do ponto do short. Trocar fuse
+   repetidamente (A) é caro e não localiza nada. Cortar o chicote (C) cria
+   defeito. Medir resistance com o circuit energizado (D) é proibido e dá
+   leitura errada.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** todo instrumento se liga ao circuit e puxa alguma
+  current. **Quanta** current ele puxa decide o que ele revela e o que ele
+  pode danificar. O multimeter quase não puxa: preciso e inofensivo, mas cego
+  para a resistance que só aparece sob carga. A test light puxa bastante:
+  enxerga o que o multimeter não vê, e por isso não entra em circuit de
+  módulo.
+- **Quando usar:** antes de encostar qualquer ponta num circuit, pergunte o
+  que você quer saber e quanta current o instrumento vai puxar para
+  responder.
+- **Com o que se conecta:** a medição sem carga vem da lição
+  [Medições com o multimeter](./medicoes-com-multimetro); o clamp meter, da
+  lição [Loads: bulbs e motores](./cargas-bulbs-e-motores); o short finder
+  paga a dívida da lição
+  [Circuit protection](./protecao-do-circuito). A lição seguinte,
+  [Scan tool e oscilloscope](./scan-tool-e-osciloscopio), trata dos dois
+  instrumentos que mostram o que acontece **ao longo do tempo**.
+
+**Termos desta lição para revisar:** test light, self-powered test light,
+continuity tester, logic probe, input impedance, circuit loading, driver,
+noid light, power probe, gauss gauge, megohmmeter, milliohmmeter, CAT rating,
+fused jumper wire, clamp meter, short finder, amp hound.
