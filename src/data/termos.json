@@ -112,6 +112,10 @@
     "trn-120-roteiro": {
       "titulo": "Roteiro (próximos tópicos)",
       "url": "trn-120-eletricidade/"
+    },
+    "prova-pratica": {
+      "titulo": "As seis medições na bancada",
+      "url": "trn-120-eletricidade/prova-pratica"
     }
   },
   "termos": [
@@ -3791,6 +3795,61 @@
       "pt": "ferro tipo pistola",
       "def": "ferro de solda mais potente, que aquece depressa",
       "licao": "reparar-um-wire"
+    },
+    {
+      "en": "power flow",
+      "pt": "caminho da power",
+      "def": "o percurso que a current faz da battery até o ground, peça por peça",
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "meter fuse",
+      "pt": "fusível do multimeter",
+      "def": "o fuse interno que protege as entradas de amps do próprio multimeter",
+      "var": [
+        "input fuse"
+      ],
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "input jack",
+      "pt": "entrada do multimeter",
+      "def": "o furo onde a test lead é plugada: A, COM ou VΩ",
+      "var": [
+        "amp port",
+        "input port"
+      ],
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "continuity",
+      "pt": "continuidade",
+      "def": "há caminho fechado para a current entre dois pontos",
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "function button",
+      "pt": "botão de função",
+      "def": "o botão que troca o que uma mesma posição do dial mede: ohms, continuity ou diode",
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "practical exam",
+      "pt": "prova prática",
+      "def": "prova feita na bancada, executando a medição que o instrutor pede",
+      "var": [
+        "midterm practical"
+      ],
+      "licao": "prova-pratica"
+    },
+    {
+      "en": "range",
+      "pt": "escala",
+      "def": "a faixa de valores que o multimeter mede; no autorange ele escolhe sozinho",
+      "var": [
+        "autorange"
+      ],
+      "licao": "prova-pratica"
     }
   ]
 }

@@ -85,56 +85,61 @@ conhecimento anterior.
    medições: source voltage, available voltage, voltage drop, current e
    resistance. Onde vão as test leads, em que estado fica o circuit e por que
    uma voltage medida sem current pode enganar.
+9. [As seis medições na bancada](./prova-pratica) — a lição 8 diz o que cada
+   medição significa; esta diz onde pôr as test leads quando o instrutor
+   aponta uma peça e dá o nome do ponto. Power flow e os nomes top e bottom,
+   a conferência dos fuses do próprio meter, e as armadilhas de cada uma das
+   seis medições do midterm practical.
 
 ### Tópico 4 — Componentes do circuit
 
-9. [Electromagnetism e o relay](./eletromagnetismo-e-rele) — a current cria
+10. [Electromagnetism e o relay](./eletromagnetismo-e-rele) — a current cria
    um campo magnético; a coil com iron core vira eletroímã. O relay usa esse
    eletroímã para que uma current pequena (control circuit) ligue uma current
    grande (load circuit). O clique que divide o diagnóstico em dois.
-10. [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo) —
+11. [Resistances que mudam e o diode](./resistencias-variaveis-e-diodo) —
     variable resistor, potentiometer e thermistor (NTC e PTC): a base dos
     sensores. O diode, que deixa a current passar num sentido só; o LED, o
     photodiode e o clamping diode do relay.
-11. [O resistor fixo](./resistor-fixo) — ler o color code e a tolerance, e
+12. [O resistor fixo](./resistor-fixo) — ler o color code e a tolerance, e
     escolher o watt rating: por que dois resistors com as mesmas faixas
     coloridas não servem um no lugar do outro. O tapped resistor do blower.
-12. [Switches](./switches) — poles e throws, normally open e normally
+13. [Switches](./switches) — poles e throws, normally open e normally
     closed, momentary e maintained; push-button, thermal switch, pressure
     switch e mercury switch. O contactor dos híbridos. Por que o diagram
     sempre desenha o switch em repouso.
-13. [Circuit protection](./protecao-do-circuito) — o fuse protege o **wire**,
+14. [Circuit protection](./protecao-do-circuito) — o fuse protege o **wire**,
     não a load: blade fuse, cartridge, maxi, fusible link e circuit breaker.
     Por que aumentar o fuse causa incêndio, e como testar um fuse sem tirá-lo
     do lugar.
-14. [Loads: bulbs e motores](./cargas-bulbs-e-motores) — a current que uma
+15. [Loads: bulbs e motores](./cargas-bulbs-e-motores) — a current que uma
     load puxa não é fixa. Inrush current da bulb, a bulb de dois filaments e
     o feedback por ground ruim, o flasher que pisca rápido como aviso, e a
     counter-voltage que explica o current draw de todo electric motor.
-15. [Capacitor e transformer](./capacitor-e-transformer) — as duas peças que
+16. [Capacitor e transformer](./capacitor-e-transformer) — as duas peças que
     trabalham por campo: o capacitor guarda carga e tira ruído do rádio; o
     transformer troca voltage por current, e a ignition coil é o exemplo do
     carro.
 
 ### Tópico 5 — Wiring diagrams
 
-16. [Electrical symbols](./simbolos-eletricos) — os símbolos dos wiring
+17. [Electrical symbols](./simbolos-eletricos) — os símbolos dos wiring
     diagrams, grupo por grupo, e onde cada peça entra no circuit; cores de
     wire, splices, connectors, pins e ground points. Um diagram inteiro lido
     para decidir onde medir, e flash cards para praticar.
 
 ### Tópico 6 — Ferramentas de teste e reparo
 
-17. [Outros instrumentos de teste](./instrumentos-de-teste) — todo
+18. [Outros instrumentos de teste](./instrumentos-de-teste) — todo
     instrumento puxa alguma current do circuit, e **quanta** decide o que ele
     revela e o que ele pode danificar. Test light, logic probe, fused jumper
     wire, clamp meter, noid light, power probe, o gauss gauge que acha o
     short e os instrumentos de alta tensão.
-18. [Scan tool e oscilloscope](./scan-tool-e-osciloscopio) — o scan tool
+19. [Scan tool e oscilloscope](./scan-tool-e-osciloscopio) — o scan tool
     mostra o que o módulo entendeu; o oscilloscope mostra o que o wire
     realmente fez. DTC, live data, freeze frame e por que um código aponta um
     **circuit**, nunca uma peça.
-19. [Reparar um wire](./reparar-um-wire) — as quatro coisas que uma emenda
+20. [Reparar um wire](./reparar-um-wire) — as quatro coisas que uma emenda
     precisa fazer. Wire stripper, crimp, solda rosin core, heat shrink, e a
     voltage drop que verifica o reparo.
 
@@ -148,17 +153,17 @@ conhecimento anterior.
 
 ### Próximos tópicos (em preparação)
 
-20. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+21. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-21. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+22. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-22. **Diagnóstico de circuits** — open circuit, short to ground, short to
+23. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-23. **Battery** — construção, state of charge, testes, recarga, jump start e
+24. **Battery** — construção, state of charge, testes, recarga, jump start e
     parasitic draw.
-24. **Starting system** — starter motor, solenoid e testes.
-25. **Charging system** — alternator, rectifier, voltage regulator e testes.
+25. **Starting system** — starter motor, solenoid e testes.
+26. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

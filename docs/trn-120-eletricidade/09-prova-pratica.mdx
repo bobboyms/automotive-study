@@ -1,0 +1,949 @@
+---
+title: As seis medições na bancada
+sidebar_label: 9. As seis medições na bancada
+---
+
+import BancadaPratica from '@site/src/components/BancadaPratica';
+
+# As seis medições na bancada
+
+> **Pergunta central:** o instrutor aponta uma peça e diz o nome de uma
+> medição. Onde vão as duas test leads, e em que estado tem que estar o
+> circuit?
+
+## A queixa: dois alunos, o mesmo circuit, respostas diferentes
+
+Na bancada do laboratório há um circuit montado: a battery da bancada, um
+fuse, um switch e duas bulbs, uma depois da outra, voltando pelo ground. O
+instrutor diz:
+
+> “Voltage drop of the first bulb.”
+
+Dois alunos medem. O primeiro lê **6 V**. O segundo lê **0 V**. Os dois estão
+com o mesmo multimeter, no mesmo circuit, com o selector na mesma posição, e
+nenhum dos dois encostou as test leads no lugar errado.
+
+Um dos dois vai perder o ponto. A diferença não está no instrumento nem no
+ponto de medição: está no **estado em que o circuit estava** na hora da
+medição. O segundo aluno mediu com o switch desligado.
+
+Esta lição é sobre isso. A [lição anterior](./medicoes-com-multimetro) explicou
+**o que cada medição significa**. Esta explica **como executá-la na bancada**:
+como se chama cada ponto do circuit, em que ordem mexer nas coisas, e qual é a
+armadilha de cada uma das seis medições que caem no midterm practical.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| power flow | caminho da power | o percurso da current, da battery até o ground, peça por peça |
+| top | lado de cima | o terminal por onde a power **entra** na peça |
+| bottom | lado de baixo | o terminal por onde a power **sai** da peça |
+| meter fuse | fusível do multimeter | o fuse interno que protege as entradas de amps do instrumento |
+| input jack | entrada do multimeter | os furos onde as test leads são plugadas: A, COM e VΩ |
+| amp port | entrada de amps | a entrada A (e a mA), a que mede current |
+| function button | botão de função | troca o que uma mesma posição do dial mede: ohms, continuity, diode |
+| continuity | continuidade | há caminho fechado para a current entre dois pontos |
+| practical exam | prova prática | prova feita na bancada, executando a medição que o instrutor pede |
+| range | escala | a faixa de valores que o multimeter mede naquela posição |
+
+## Onde isso aparece
+
+Na **TRN-120**, é o conteúdo do midterm practical e do trabalho de bancada. Na
+prova **ASE A6** (*Electrical/Electronic Systems*), as questões de teste de
+circuit supõem que você sabe onde pôr as test leads e em que estado deixar o
+circuit — elas descrevem a medição e perguntam o que a leitura significa.
+
+Na oficina, os nomes aparecem do mesmo jeito. O manual de serviço escreve
+“measure voltage drop across the connector” ou “check available voltage at the
+blower motor connector”, e espera que você entenda qual lado é qual. Um colega
+mais velho vai dizer “me dá a voltage no top do relay”.
+
+## Ideias anteriores que voltam aqui
+
+Três lições sustentam esta. Responda antes de abrir, mesmo que pareça fácil:
+
+1. Num [series circuit](./circuito-em-serie), o que é igual em todo o laço e o
+   que se divide entre as peças?
+2. Na [lição anterior](./medicoes-com-multimetro), por que a resistance só
+   pode ser medida com a peça isolada?
+3. Pela [Ohm's law](./lei-de-ohm), quanto vale a voltage drop de um wire bom,
+   e por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. A **current** é igual em todos os pontos do laço: há um caminho só, e tudo
+   que passa por uma peça passa por todas. O que se divide é a **voltage**:
+   cada peça fica com uma parte dela, e as partes somadas dão a source
+   voltage.
+2. Por dois motivos. O multimeter mede resistance mandando uma current
+   pequena da sua própria battery interna; se o circuit estiver energizado, a
+   voltage do circuit se mistura com essa medição. E, mesmo desligado, se a
+   peça continuar ligada aos wires, outras peças ficam em paralelo com ela e o
+   multimeter mede o conjunto, que tem resistance menor que a peça sozinha.
+3. Perto de zero. A voltage drop é $V = I \times R$, e a resistance de um wire
+   bom é quase zero. Multiplicando a current por quase zero, sobra quase zero
+   de voltage.
+
+</details>
+
+Se alguma das três não veio, releia a lição correspondente antes de seguir.
+Esta lição não reensina nenhuma delas: ela as usa.
+
+## Intuição: a power desce, e por isso há um top e um bottom
+
+Quando o instrutor diz “top of the first bulb”, ele **não** está falando do
+lado de cima da peça na bancada. A bulb pode estar deitada, de cabeça para
+baixo ou atrás do painel.
+
+Ele está falando do **caminho da power**. Siga a current com o dedo, saindo do
+positive terminal da battery. Ela chega numa peça por um terminal e sai pelo
+outro. O terminal por onde ela **entra** é o **top** daquela peça. O terminal
+por onde ela **sai** é o **bottom**.
+
+É a mesma ideia de rio acima e rio abaixo. O que está mais perto da battery,
+contando pelo caminho da current, é o top; o que está mais perto do ground é o
+bottom. “Top” quer dizer “antes”, e “bottom” quer dizer “depois”.
+
+Onde a comparação com o rio para de valer: num rio a água some no mar, e aqui
+a current volta inteira para a battery pelo ground. Nada se gasta no caminho —
+o que muda de um ponto para outro é só quanta voltage ainda sobra.
+
+**Cuidado com um atalho tentador:** seguir a cor dos wires em vez do caminho.
+Numa bancada de laboratório, os jumper wires são das cores que sobraram na
+gaveta, e a mesma cor aparece em três lugares diferentes. Seguir a cor leva ao
+ponto errado. Siga de onde a power vem.
+
+## Modelo visual: o circuit da bancada, com cada ponto nomeado
+
+<BancadaPratica
+  modo="fluxo"
+  caption="O circuit do practical. A power sai do positive terminal da battery, desce pelo fuse, pelo switch e pelas duas bulbs, e volta pelo ground. Em cada peça, o terminal por onde a power entra é o top e o por onde ela sai é o bottom. As setas azuis são o caminho da power."
+/>
+
+Leia a figura de cima para baixo, como o instrutor leu na aula: a power sai da
+battery, entra no **top do fuse**, sai pelo **bottom do fuse**, entra no
+**top do switch**, sai pelo **bottom do switch**, entra no **top da first
+bulb**, sai pelo **bottom da first bulb**, entra no **top da second bulb**,
+sai pelo **bottom da second bulb**, e dali volta pelo ground. O circuit está
+completo.
+
+Repare numa coisa que vai importar daqui a pouco: **o bottom da first bulb e o
+top da second bulb são o mesmo ponto elétrico**. Há um wire ligando os dois, e
+um wire bom não separa voltage nenhuma. Quando o instrutor nomeia um desses
+dois, ele está apontando o mesmo lugar.
+
+## Ponte para a formalização
+
+Com os nomes dos pontos definidos, cada medição vira uma instrução de três
+partes, e só três:
+
+1. **o dial** — em que posição fica o selector;
+2. **as test leads** — em que input jack cada uma está plugada, e em que dois
+   pontos do circuit as pontas encostam;
+3. **o estado do circuit** — switch ligado ou desligado, peça no lugar ou
+   isolada.
+
+É a terceira parte que separou os dois alunos da abertura. O dial estava
+igual, as pontas estavam no lugar certo, e mesmo assim as leituras foram
+diferentes. **Nenhuma medição está definida sem as três partes.**
+
+A seguir, as seis medições na ordem em que o instrutor as apresentou — que não
+é por acaso: a primeira confere o próprio instrumento, e as outras cinco vão da
+que mexe menos no circuit para a que mexe mais.
+
+## Formalização: as seis medições
+
+### 1. Conferir os meter fuses
+
+Esta medição não é no circuit: é **no próprio multimeter**, antes de começar.
+
+As entradas de amps do instrumento são protegidas por um fuse interno, o
+**meter fuse**. Se ele estiver queimado, o multimeter continua medindo voltage
+e resistance normalmente — o visor acende, os números aparecem, nada denuncia o
+problema. Só a medição de current falha, e ela falha mostrando **zero**. Zero é
+um número plausível: parece um circuit aberto. Você pode passar meia hora
+procurando um defeito que não existe no circuit, e sim no instrumento que está
+na sua mão.
+
+- **Dial:** na posição de ohms, e o **function button** apertado **duas
+  vezes**, até chegar em **diode**.
+- **Test leads:** a vermelha plugada no VΩ. **Só a vermelha** — a preta não
+  entra nesta conferência.
+- **O que fazer:** encoste a ponta da test lead vermelha em **cada entrada de
+  amps**, uma de cada vez.
+- **Critério do instrutor:** qualquer leitura **diferente de OL** é boa.
+
+<BancadaPratica
+  modo="fusiveis"
+  caption="A conferência dos meter fuses: a test lead vermelha fica plugada no VΩ e a sua ponta encosta em cada entrada de amps, uma de cada vez. A test lead preta não participa."
+/>
+
+**Por que isso funciona.** Na posição diode, o multimeter manda uma current
+pequena pela test lead vermelha e mede a voltage que ela produz. Encostando a
+ponta na entrada A, essa current faz um caminho que passa **por dentro do
+meter fuse** daquela entrada e volta pelo COM. Fuse inteiro: há caminho, e o
+visor mostra um número. Fuse queimado: não há caminho, e o visor mostra **OL**.
+É a mesma ideia de continuity da lição anterior, aplicada ao instrumento em vez
+de a uma peça do carro.
+
+- **Exemplo:** o visor mostra um número qualquer na entrada A e outro na
+  entrada mA. Os dois fuses estão inteiros, e você pode medir current.
+- **Contraexemplo:** o visor mostra **OL** na entrada A. O fuse daquela
+  entrada está queimado. A entrada mA pode continuar boa — por isso o teste é
+  **em cada entrada, uma de cada vez**, e não numa só.
+
+:::note Que número esperar
+O valor que aparece com o fuse bom muda de instrumento para instrumento. O
+número que vale é o do manual do seu multimeter. Para o practical, o critério
+é o que o instrutor deu: **qualquer coisa diferente de OL**.
+:::
+
+### 2. Source voltage
+
+> *Check your battery, with nothing running.*
+
+- **Dial:** volts DC.
+- **Test leads:** preta no COM e vermelha no VΩ; a ponta preta no negative
+  terminal e a vermelha no positive terminal, **encostadas no próprio post**.
+- **Circuit:** switch **desligado**, nenhuma load acesa, nenhuma current
+  passando.
+- **Responde:** quanto a battery da bancada tem para oferecer.
+
+<BancadaPratica
+  modo="fonte"
+  leitura="12\,\text{V}"
+  caption="Source voltage: as pontas direto nos posts da battery, com o switch desligado e nenhuma load acesa. Os 12 V são um número redondo, escolhido para as contas desta lição."
+/>
+
+A expressão que o instrutor usa é **“black on black, red on red”**: a test lead
+preta no post negativo e a vermelha no positivo. A regra é fácil de lembrar
+porque as cores coincidem — e é por isso mesmo que ela é a única das seis em
+que a cor da test lead corresponde à cor do terminal. Nas outras, não
+corresponde a nada.
+
+- **Exemplo:** switch desligado, bulbs apagadas, pontas nos posts: 12 V.
+- **Contraexemplo:** a mesma medição com o switch ligado e as bulbs acesas. A
+  leitura sai um pouco menor, porque a battery tem resistance por dentro e a
+  current passando deixa uma parte da voltage ali dentro. A leitura existe e é
+  útil, mas não é source voltage.
+
+:::note Os números desta lição
+A partir daqui, as contas usam uma battery de **12 V** e duas bulbs iguais.
+São valores escolhidos para a conta fechar redonda, não especificação de
+bancada nenhuma. A bancada de verdade vai mostrar outro número — 12.6 V, por
+exemplo, numa battery carregada —, e todas as leituras mudam na mesma
+proporção.
+:::
+
+### 3. Available voltage
+
+> *Black on a good ground, red at the point of measurement.*
+
+- **Dial:** volts DC — **não mexa no dial**, ele continua onde estava.
+- **Test leads:** a preta num **ground bom** e aí ela fica; a vermelha vai ao
+  ponto que o instrutor nomear.
+- **Circuit:** switch **ligado**, com current passando.
+- **Responde:** quanto da voltage da battery ainda chega até este ponto.
+
+<BancadaPratica
+  modo="disponivel"
+  alvo="bulb1"
+  leitura="12\,\text{V}"
+  caption="Available voltage no top da first bulb: a test lead preta fica parada no ground e a vermelha vai ao ponto nomeado. O switch está ligado."
+/>
+
+Esta é a medição em que os nomes dos pontos fazem mais diferença, porque **a
+test lead preta não se move**. Ela fica no ground o tempo todo. Só a vermelha
+anda, e ela vai exatamente onde o instrutor apontar: “bottom of the switch”,
+“top of the first bulb”, “bottom of the first bulb”.
+
+No circuit da figura, com o switch ligado, as leituras são estas:
+
+| Ponto | Available voltage | Por quê |
+|---|---|---|
+| top do fuse | 12 V | nada antes dele gastou voltage |
+| bottom do fuse | 12 V | o fuse é um wire grosso: não gasta voltage |
+| top do switch | 12 V | o wire entre o fuse e o switch não gasta voltage |
+| bottom do switch | 12 V | o switch fechado também não gasta voltage |
+| top da first bulb | 12 V | ainda nada gastou voltage |
+| bottom da first bulb | 6 V | a first bulb ficou com 6 V dos 12 V |
+| bottom da second bulb | 0 V | a second bulb ficou com os outros 6 V |
+
+**De onde saem os 6 V.** As duas bulbs são iguais, estão em série, e pela regra
+das voltage drops do series circuit as duas quedas somadas dão a source
+voltage. Duas peças iguais dividem igual: $12 \div 2 = 6\,\text{V}$ em cada
+uma. No ponto entre as duas bulbs, já se gastaram 6 V na primeira, e sobram os
+6 V que a segunda ainda vai gastar.
+
+- **Exemplo:** 12 V no bottom do switch. Toda a voltage está chegando até ali,
+  então o fuse e o switch estão bons.
+- **Contraexemplo:** 12 V no bottom do switch com o switch **desligado**.
+  Agora a leitura não prova nada. Sem current, $I$ vale zero, e pela Ohm's law
+  nenhuma resistance do caminho produz voltage drop. Um switch com os contatos
+  meio queimados mostraria os mesmos 12 V. É a mesma leitura com outro
+  significado.
+
+### 4. Voltage drop
+
+> *Put the component in the middle of your two leads, with current flowing.*
+
+- **Dial:** volts DC — continua onde estava.
+- **Test leads:** as duas se movem. A vermelha no **top** da peça, a preta no
+  **bottom** da mesma peça. A peça fica **no meio** das duas.
+- **Circuit:** switch **ligado**. Sem current não existe voltage drop.
+- **Responde:** quanto da voltage ficou nesta peça.
+
+<BancadaPratica
+  modo="queda"
+  alvo="bulb1"
+  leitura="6\,\text{V}"
+  caption="Voltage drop da first bulb: a bulb fica no meio das duas test leads, vermelha no top e preta no bottom, com o switch ligado."
+/>
+
+É aqui que o power flow deixa de ser teoria. **Qual ponta vai em cima é
+decidido pelo caminho da power, não pela aparência da peça.** A vermelha vai no
+terminal por onde a power entra. Se você inverter, o número continua certo,
+mas aparece com um sinal de menos no visor — e numa prova prática isso é uma
+resposta trocada.
+
+<BancadaPratica
+  modo="queda"
+  alvo="switch"
+  leitura="0.0\,\text{V}"
+  caption="Voltage drop do switch: as duas pontas nos dois terminais do switch, e de mais nada. A leitura perto de zero é o resultado esperado de um switch bom."
+/>
+
+**A armadilha que o instrutor avisou.** Quando ele pede a voltage drop **do
+switch**, as duas pontas vão nos dois terminais **do switch**, e de mais nada.
+Se você puser a ponta vermelha antes do fuse, está medindo a voltage drop do
+fuse **e** do switch juntos. A leitura vem maior, e ela responde a uma pergunta
+que ninguém fez. Uma voltage drop é sempre de **uma** peça nomeada: o que está
+entre as duas pontas é o que está sendo medido.
+
+- **Exemplo:** 6 V na first bulb. Ela é uma load, e é trabalho dela gastar
+  voltage. Está normal.
+- **Contraexemplo:** 6 V no switch. É o mesmo número, e agora é um defeito
+  grave. Um switch deveria ficar com quase nada: ele é um pedaço de metal
+  fechado. Seis volts presos num switch querem dizer resistance alta nos
+  contatos, e essa voltage vira calor ali dentro em vez de acender a bulb.
+
+> **Erro comum:** achar que voltage drop alta é sempre ruim e voltage drop
+> baixa é sempre boa. Depende do que a peça é. Numa **load**, a voltage drop
+> tem que ser alta — é assim que ela funciona. Num **wire, fuse, switch ou
+> connector**, ela tem que ser quase zero. Uma bulb com voltage drop de 0.2 V
+> está tão errada quanto um switch com 6 V: quer dizer que a bulb quase não
+> está recebendo voltage, e ela vai acender fraca ou não acender.
+
+### 5. Resistance
+
+> *The component has to be isolated.*
+
+- **Dial:** gire para **ohms**.
+- **Test leads:** **continuam nos mesmos furos** — preta no COM, vermelha no
+  VΩ. Isto muda em relação à current, e por isso vale reparar: para medir
+  resistance, as test leads não mudam de entrada.
+- **Circuit:** **desligado**, e a peça **fora do circuit** — desligada dos
+  wires.
+- **Responde:** a peça tem caminho por dentro, e quanto ele atrapalha.
+
+<BancadaPratica
+  modo="resistencia"
+  alvo="bulb1"
+  leitura="2.4\,\Omega"
+  caption="Resistance da first bulb: a bulb fora do circuit, uma ponta em cada terminal, sem nenhuma power chegando nela."
+/>
+
+**Isolar** quer dizer tirar a peça do circuit: soltar o connector, puxar a
+bulb do socket, desligar os jumper wires que chegam nela. Não é só desligar o
+switch. Enquanto a peça estiver ligada aos wires, as outras peças ficam em
+paralelo com ela, e o multimeter mede o conjunto.
+
+#### A armadilha do switch
+
+Esta é a parte que mais derruba gente no practical, e o instrutor parou a aula
+para avisar.
+
+Quando ele pede a **resistance do switch**, você tem que fazer duas coisas que
+parecem se contradizer:
+
+1. **isolar o switch** — tirá-lo do circuit, soltando os wires;
+2. **ligar o switch** — deixá-lo na posição fechada.
+
+<BancadaPratica
+  modo="resistencia"
+  alvo="switch"
+  leitura="0.3\,\Omega"
+  caption="Resistance do switch: isolado do circuit, mas na posição ligada. Desligado, ele é um caminho interrompido e o visor mostra OL."
+/>
+
+**Por que ligado.** Um switch desligado é um caminho interrompido por dentro —
+é exatamente a mesma coisa que um open circuit. O multimeter manda a sua
+current de teste, ela não tem por onde passar, e o visor mostra **OL**. Essa
+leitura não é a resistance do switch: é a confirmação de que o switch está
+aberto, que você já sabia, porque foi você quem o desligou.
+
+O que a medição quer saber é outra coisa: **quando este switch está fechado,
+quanto ele atrapalha a current?** Um switch bom, fechado, é quase um pedaço de
+wire: a leitura fica perto de zero. Um switch com os contatos queimados dá
+alguns ohms, e são esses ohms que, lá no circuit energizado, viram a voltage
+drop de 6 V do contraexemplo anterior. **São duas leituras do mesmo defeito**,
+uma com o circuit ligado e outra com ele desligado.
+
+> **Erro comum:** medir a resistance do switch com ele desligado, ler OL e
+> escrever “switch queimado”. O switch pode estar perfeito. OL num switch
+> aberto é o resultado esperado — é o que um switch aberto faz. Para julgar o
+> switch, meça com ele **fechado**.
+
+#### A bulb fria não lê o que a bulb acesa tem
+
+Mais um ponto que confunde, e que a lição anterior não tratou.
+
+No circuit energizado, a first bulb fica com 6 V e passam por ela 0.25 A. Pela
+Ohm's law, a resistance dela **naquele momento** é
+$R = 6 \div 0.25 = 24\,\Omega$. Mas se você tirar a mesma bulb e medir com o
+ohmmeter, a leitura vem **muito menor** — alguns ohms, não 24.
+
+Os dois números estão certos. A resistance do filament de tungstênio cresce
+muito com a temperatura, e acesa ela chega a milhares de graus. Frio, o
+filament conduz bem melhor; a resistance medida fria costuma ser **da ordem de
+dez vezes menor** que a que a bulb tem acesa. (As duas leituras aqui são
+ilustrativas, para a conta fechar; os números de uma bulb de verdade vêm do
+catálogo da peça.)
+
+A consequência prática é esta: **no ohmmeter, a resistance de uma bulb não se
+compara com uma conta feita a partir da voltage e da current**. O que o
+ohmmeter responde sobre uma bulb é mais simples, e é o que o practical cobra:
+**há caminho por dentro do filament, ou ele está rompido?** Um número qualquer
+quer dizer que o filament está inteiro. **OL** quer dizer filament rompido —
+bulb queimada.
+
+- **Exemplo:** bulb fora do socket, leitura de alguns ohms. O filament está
+  inteiro.
+- **Contraexemplo:** a mesma bulb no socket, com o switch desligado, medida
+  sem soltar nada. A second bulb e os wires estão em paralelo com ela pelo
+  caminho do ground, e o número não é da first bulb sozinha.
+
+### 6. Current
+
+> *Remove one wire, and put the meter where the wire was.*
+
+:::danger Antes de medir current
+Com a test lead vermelha na entrada **A** e o dial em amps, o multimeter vira
+um caminho de resistance quase zero. Se você encostar as duas pontas **nos dois
+lados de uma peça**, como fez na voltage drop, está ligando esse caminho em
+paralelo com a peça: é um short circuit. Na bancada, queima o meter fuse. Numa
+battery de carro, que entrega centenas de amps, o mesmo erro derrete a ponta
+da test lead, abre um arco elétrico e queima a mão.
+
+Duas regras que evitam isso:
+
+1. o amperímetro entra **no lugar de um wire**, nunca **em volta de uma peça**;
+2. assim que acabar de medir current, **volte a test lead vermelha para o
+   VΩ**. Lead esquecida na entrada A é o jeito mais comum de destruir um
+   multimeter: a próxima medição de voltage vira um short circuit.
+
+Use óculos de proteção.
+:::
+
+- **Dial:** gire para **amps**.
+- **Test leads:** a vermelha **muda de entrada** — sai do VΩ e vai para a
+  entrada **A**. A preta continua no COM.
+- **Circuit:** **retire um wire por completo** — tanto faz qual — e ponha as
+  duas pontas nas duas extremidades que ficaram soltas. O multimeter passa a
+  ser o wire que faltou.
+- **Responde:** quanta current está circulando pelo circuit.
+
+<BancadaPratica
+  modo="corrente"
+  leitura="0.25\,\text{A}"
+  caption="Current: o wire entre o switch e a first bulb foi retirado, e o multimeter ocupa o lugar dele. A test lead vermelha está na entrada A."
+/>
+
+**Por que tanto faz qual wire.** O circuit é em série: há um caminho só, e a
+current é a mesma em todos os pontos dele. Abrindo o laço em qualquer lugar e
+pondo o multimeter ali, a current que passa por ele é a mesma que passaria por
+aquele trecho de wire. É a ideia do series circuit sendo usada para escolher
+onde medir.
+
+Confira a leitura com a Ohm's law antes de aceitá-la. As duas bulbs em série
+somam $24 + 24 = 48\,\Omega$, e
+$I = 12 \div 48 = 0.25\,\text{A}$, que são 250 mA. Se o visor mostrasse 2.5 A,
+alguma coisa estaria errada — na montagem, no instrumento ou na leitura do
+prefixo.
+
+- **Exemplo:** wire retirado entre o switch e a first bulb, pontas nas duas
+  extremidades: 0.25 A. As duas bulbs acendem, porque o circuit voltou a ser um
+  laço fechado, agora passando por dentro do multimeter.
+- **Contraexemplo:** as duas pontas nos dois terminais da first bulb, sem
+  tirar wire nenhum, com a vermelha na entrada A. O multimeter fica em paralelo
+  com a bulb, como um branch de resistance quase zero. É o short circuit do
+  aviso acima.
+
+### As seis num quadro só
+
+| Medição | Dial | Vermelha na entrada | Onde vão as pontas | Circuit |
+|---|---|---|---|---|
+| meter fuses | ohms, function 2× (diode) | VΩ | só a vermelha, do VΩ a cada entrada de amps | o meter fora do circuit |
+| source voltage | volts DC | VΩ | nos dois posts da battery | desligado, sem load |
+| available voltage | volts DC | VΩ | preta parada no ground, vermelha no ponto nomeado | ligado |
+| voltage drop | volts DC | VΩ | uma de cada lado da peça nomeada, vermelha no top | ligado |
+| resistance | ohms | VΩ | uma em cada terminal da peça | desligado e a peça isolada |
+| current | amps | **A** | nas duas pontas do wire retirado | ligado, aberto num ponto |
+
+**O que permanece igual nas seis:** a test lead preta no COM, e a Ohm's law por
+trás de toda leitura. **O que muda:** a posição do dial, a entrada da vermelha,
+os dois pontos tocados e o estado do circuit.
+
+## Como falha e como diagnosticar
+
+### A queixa resolvida
+
+Volte à abertura: um aluno leu 6 V na voltage drop da first bulb e o outro leu
+0 V.
+
+- **O que o circuit deveria fazer:** com o switch ligado, passa current, e a
+  first bulb fica com metade da source voltage. 6 V.
+- **O que foi medido:** 0 V.
+- **O princípio que liga as duas coisas:** $V = I \times R$. Voltage drop é
+  current vezes resistance. Com o switch desligado, $I$ vale zero, e zero vezes
+  qualquer resistance dá zero.
+- **O que isso descarta:** nada sobre a bulb. A leitura de 0 V não diz que a
+  bulb está boa nem que está ruim; ela diz que não havia current passando.
+- **Como confirmar:** ligar o switch e medir de novo. Se aparecerem 6 V, o
+  problema era o estado do circuit, não a bulb.
+
+O segundo aluno acertou as duas primeiras partes da instrução — dial e pontas —
+e errou a terceira. **Numa voltage drop, o estado do circuit faz parte da
+medição.**
+
+### Três leituras que enganam
+
+| Leitura | O que parece | O que também pode ser | O teste que separa |
+|---|---|---|---|
+| current de 0 A | circuit aberto | meter fuse queimado | conferir os meter fuses, como na medição 1 |
+| OL no ohmmeter | peça queimada | switch aberto, ou peça ainda ligada ao circuit | fechar o switch; soltar os wires e medir de novo |
+| 12 V num ponto | caminho bom | caminho ruim medido sem current | ligar a load e medir de novo |
+
+As três têm a mesma forma: **a leitura está certa, e a conclusão é que está
+errada.** O número responde à pergunta que a sua montagem fez, não à que você
+tinha na cabeça. Por isso vale o hábito de dizer em voz alta, antes de olhar o
+visor, o que você espera ler. Quando o número vem diferente do esperado, há
+duas possibilidades — o circuit tem um defeito, ou a medição não é a que você
+pensa que é — e checar a segunda é mais rápido.
+
+## Na oficina: a ordem que não estraga nada
+
+:::warning Antes de encostar no circuit
+- **Óculos de proteção**, sempre que a bancada estiver energizada.
+- **Nunca meça resistance com o circuit ligado.** A voltage do circuit entra na
+  medição e pode danificar o instrumento.
+- **Nada de ferramenta ou test lead encostando nos dois posts da battery ao
+  mesmo tempo.** Numa battery de carro isso é um arco elétrico, metal derretido
+  e queimadura.
+- **Test lead vermelha fora da entrada A**, exceto durante a medição de
+  current. Veja o aviso da medição 6.
+:::
+
+Uma ordem de trabalho que evita a maior parte dos erros:
+
+1. **Confira os meter fuses** antes de tudo. Trinta segundos agora valem meia
+   hora depois.
+2. **Siga o power flow com o dedo** e diga em voz alta o nome de cada ponto,
+   antes de encostar qualquer ponta. É o que decide onde vai a vermelha.
+3. **Faça as medições de voltage primeiro**, enquanto o circuit está montado:
+   source voltage, available voltage, voltage drop. Nenhuma delas exige
+   desmontar nada.
+4. **Depois as que mexem no circuit:** a resistance, que pede a peça isolada, e
+   a current, que pede um wire retirado.
+5. **Monte tudo de volta** e **devolva a test lead vermelha ao VΩ**.
+
+Os valores aceitáveis de voltage drop para cada trecho não são chute nem
+tradição: vêm do manual do veículo ou da orientação do instrutor. Numa bancada
+de laboratório, quem dá o critério é o instrutor.
+
+## Exemplos resolvidos
+
+### Exemplo 1: nomear os pontos
+
+O instrutor diz “available voltage at the bottom of the switch”. Onde vão as
+duas pontas?
+
+**Solução.** A preta vai num ground bom e fica lá. A vermelha vai no terminal
+do switch por onde a power **sai** — o lado que aponta para as bulbs, não o que
+aponta para o fuse. O switch tem que estar ligado. A leitura esperada é 12 V,
+porque nada antes das bulbs gasta voltage.
+
+### Exemplo 2: prever antes de medir
+
+**Pause e tente.** Com o switch ligado, qual é a available voltage no bottom da
+first bulb, e por quê?
+
+<details>
+<summary>Dica</summary>
+
+Available voltage num ponto é a voltage que ainda sobra dali até o ground.
+Pergunte: entre este ponto e o ground, quantas peças ainda gastam voltage?
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+**6 V.** Entre o bottom da first bulb e o ground sobrou uma peça: a second
+bulb. Ela é igual à primeira, e as duas dividem os 12 V em partes iguais, 6 V
+para cada. A voltage que ainda não foi gasta naquele ponto é, portanto, os 6 V
+que a second bulb ainda vai gastar.
+
+Confira pelo outro lado: a first bulb já ficou com 6 V dos 12 V, então no
+ponto depois dela sobram $12 - 6 = 6\,\text{V}$. Os dois caminhos dão o mesmo
+número, como a regra das voltage drops do series circuit manda.
+
+</details>
+
+### Exemplo 3: a leitura que não fecha
+
+**Pause e tente.** Você mede a voltage drop da second bulb e lê 11.4 V. A first
+bulb, medida logo depois, dá 0.6 V. As duas bulbs são iguais. O que está
+acontecendo?
+
+<details>
+<summary>Dica</summary>
+
+Duas peças iguais em série dividem a voltage em partes iguais. Se a divisão
+saiu desigual, as duas peças deixaram de ser iguais. O que pode ter mudado numa
+bulb sem que ela pareça diferente?
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+A soma fecha: $0.6 + 11.4 = 12\,\text{V}$, como a regra das voltage drops
+manda. Então a medição está bem feita; o que está estranho é a **divisão**.
+
+Duas peças iguais em série dividem igual. Para a second bulb ficar com quase
+toda a voltage, a resistance dela teria que ser muito maior que a da primeira.
+A explicação mais provável é que o **filament da second bulb está rompido** —
+resistance altíssima, quase um open circuit. A first bulb, em série com um
+caminho quase aberto, recebe quase nada: por isso só 0.6 V, e por isso as duas
+bulbs estão apagadas.
+
+**O que o teste descarta:** não é o fuse nem o switch. Se um dos dois
+estivesse aberto, não haveria caminho nenhum e a voltage drop da second bulb
+não teria como aparecer.
+
+**O teste que confirma:** tire a second bulb e meça a resistance dela, isolada.
+**OL** confirma o filament rompido. Repare que aqui o ohmmeter responde bem,
+porque a pergunta é “há caminho por dentro?” e não “quantos ohms?”.
+
+</details>
+
+### Exemplo 4: 0 A no visor
+
+Você retira um wire, põe o multimeter no lugar, o dial em amps, a vermelha na
+entrada A. As bulbs continuam apagadas e o visor mostra 0.00 A. Quais são as
+duas explicações, e como separá-las?
+
+**Solução.** As duas explicações são:
+
+1. **o circuit está aberto em outro ponto** — um wire solto, o switch
+   desligado, um filament rompido. Não passa current por lugar nenhum;
+2. **o meter fuse daquela entrada está queimado.** O multimeter virou um
+   caminho interrompido, e foi ele quem abriu o circuit. As bulbs apagadas são
+   consequência do instrumento, não do circuit.
+
+**O teste que separa:** a conferência da medição 1. Tire o multimeter do
+circuit, ponha o dial em ohms com o function button em diode, e encoste a ponta
+vermelha na entrada A. Diferente de OL: o fuse está bom, e o defeito é do
+circuit. **OL**: achou o culpado, e ele estava na sua mão.
+
+### Exemplo 5: a mesma peça, duas medições
+
+**Pause e tente.** Um switch está com os contatos queimados. Descreva as duas
+medições que mostram esse defeito, e diga o que cada uma lê.
+
+<details>
+<summary>Solução</summary>
+
+**Com o circuit ligado — voltage drop do switch.** Uma ponta em cada terminal
+do switch, switch fechado, current passando. Um switch bom lê perto de zero.
+Este lê um valor alto — vários volts. Essa voltage está presa no switch, em
+forma de calor, em vez de chegar nas bulbs.
+
+**Com o circuit desligado — resistance do switch.** Switch isolado dos wires,
+mas **fechado**, dial em ohms, uma ponta em cada terminal. Um switch bom lê
+perto de zero. Este lê alguns ohms.
+
+**O princípio que liga as duas:** $V = I \times R$. A resistance a mais dos
+contatos é a mesma coisa nas duas medições. Com current passando, essa
+resistance aparece como voltage drop; com o circuit desligado, aparece
+diretamente como ohms.
+
+**Qual é melhor?** A voltage drop, quando dá para fazer. Ela testa o switch na
+condição em que ele trabalha, com a current de verdade passando — e uma
+resistance de contato às vezes só aparece com corrente. Além disso, ela não
+exige desmontar nada. A resistance serve quando não dá para energizar o
+circuit, ou para confirmar o achado com a peça na bancada.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o nome “top” não tem relação com a posição da peça na bancada?
+2. Por que a conferência dos meter fuses é a primeira coisa a fazer, e não a
+   última?
+3. Na available voltage, qual das duas test leads não se move, e por quê?
+4. Por que a resistance de um switch tem que ser medida com ele fechado, se a
+   peça precisa estar isolada?
+5. Por que a current pode ser medida em qualquer ponto deste circuit?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque “top” é o terminal por onde a power **entra** na peça, e isso é
+   decidido pelo caminho da current, não pela geometria. A mesma bulb virada de
+   cabeça para baixo continua com o top no mesmo terminal elétrico.
+2. Porque um meter fuse queimado faz a medição de current mostrar **zero**, que
+   é um número plausível: parece circuit aberto. O erro não se denuncia, e você
+   procura no circuit um defeito que está no instrumento.
+3. A **preta**. Ela fica parada num ground bom, e a available voltage é sempre
+   medida em relação ao ground. Se as duas se movessem, a medição viraria uma
+   voltage drop entre dois pontos quaisquer.
+4. São duas exigências diferentes e não se contradizem. **Isolar** é tirar a
+   peça do circuit, para que a medição seja só dela. **Fechar** é pôr o switch
+   na posição em que ele conduz, que é a condição sobre a qual a pergunta é
+   feita. Aberto, ele é um caminho interrompido e lê OL — o que já se sabia.
+5. Porque é um series circuit: há um caminho só, e a current é a mesma em todos
+   os pontos dele. Abrir o laço em qualquer lugar e medir ali dá o mesmo número.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) No circuit da bancada, qual terminal do fuse é o top: o que vem da battery
+ou o que vai para o switch?
+
+b) Em qual input jack fica a test lead vermelha em cada uma das seis medições?
+
+### 2. Explicação
+
+Explique, com as suas palavras, por que a available voltage no bottom da first
+bulb é menor que no top dela, enquanto no fuse os dois lados dão o mesmo
+número.
+
+### 3. Aplicação direta
+
+A bancada está com uma source voltage de 12 V e duas bulbs iguais em série. A
+current medida é 0.25 A.
+
+a) Qual é a resistance total do circuit, com as bulbs acesas?
+
+b) Qual é a resistance de cada bulb, acesa?
+
+c) Quanto vale a current em milliamps?
+
+### 4. Variação
+
+A segunda bulb é trocada por outra, de resistance **três vezes maior** que a da
+primeira. A source voltage continua 12 V.
+
+a) Qual é a voltage drop de cada bulb agora?
+
+b) Qual é a available voltage no ponto entre as duas bulbs?
+
+c) A current aumentou ou diminuiu em relação ao circuit original?
+
+### 5. Caso de diagnóstico
+
+O instrutor monta o circuit e pede as medições. Você anota:
+
+- source voltage: 12 V
+- available voltage no top da first bulb: 12 V
+- available voltage no bottom da first bulb: 12 V
+- available voltage no bottom da second bulb: 12 V
+- as duas bulbs estão apagadas
+
+a) O que está acontecendo?
+
+b) Qual é a próxima medição, e o que você espera ler?
+
+### 6. Justificativa
+
+Por que o amperímetro entra no lugar de um wire retirado, e não em volta da
+peça, como o voltímetro? Responda pela resistance de cada instrumento.
+
+### 7. Formato ASE
+
+**Question 1.** A technician is measuring the voltage drop across a closed
+switch in an operating circuit. The meter reads 4.5 V. Technician A says the
+switch has high resistance at the contacts and should be replaced. Technician B
+says this is a normal reading for a switch. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** A technician isolates a switch from the circuit and measures
+its resistance with the switch in the OFF position. The meter displays OL. This
+reading indicates:
+
+- A. The switch is defective and must be replaced
+- B. The switch contacts are shorted together
+- C. The measurement was taken with the switch open, which is expected
+- D. The meter fuse is blown
+
+**Question 3.** While attempting to measure current, a technician gets a
+reading of 0.00 A, and the lamps in the circuit do not light. Technician A says
+the circuit may be open somewhere else. Technician B says the meter's internal
+fuse may be blown. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) O que **vem da battery**. Top é o terminal por onde a power entra na peça.
+
+b) No **VΩ** em cinco delas: conferência dos meter fuses, source voltage,
+available voltage, voltage drop e resistance. Só na **current** a vermelha
+muda, para a entrada **A**. É por isso que a current é a última medição da
+sequência: ela é a única que exige mexer na entrada.
+
+**2. Explicação**
+
+A first bulb é uma **load**: ela existe para transformar energia elétrica em
+luz e calor, e para isso precisa ficar com uma parte da voltage. Essa parte são
+os 6 V que “desaparecem” entre o top e o bottom dela. O fuse é um pedaço de
+wire grosso, de resistance quase zero. Pela Ohm's law, com a mesma current
+passando, uma resistance quase zero produz uma voltage drop quase zero — por
+isso os dois lados do fuse mostram o mesmo número.
+
+**3. Aplicação direta**
+
+a) $R = V \div I = 12 \div 0.25 = 48\,\Omega$.
+
+b) As bulbs são iguais e estão em série, então as resistances se somam:
+$48 \div 2 = 24\,\Omega$ cada uma. Confere pela voltage drop:
+$6 \div 0.25 = 24\,\Omega$.
+
+c) $0.25\,\text{A} \times 1000 = 250\,\text{mA}$.
+
+*Diagnóstico de erro:* se você encontrou 3 Ω no item (a), multiplicou a
+voltage pela current em vez de dividir. A resistance é $V \div I$.
+
+**4. Variação**
+
+a) A resistance total agora é $24 + 72 = 96\,\Omega$ (valores ilustrativos,
+seguindo o exemplo da lição). A voltage se divide na proporção das
+resistances: a primeira fica com um quarto e a segunda com três quartos.
+Então **3 V na primeira e 9 V na segunda**. Confere: $3 + 9 = 12\,\text{V}$.
+
+b) **9 V.** Entre aquele ponto e o ground sobrou só a segunda bulb, que gasta
+9 V.
+
+c) **Diminuiu.** A resistance total subiu de 48 Ω para 96 Ω, e com a mesma
+source voltage a current cai pela metade: $12 \div 96 = 0.125\,\text{A}$, ou
+125 mA. Na prática, a primeira bulb acende bem mais fraca que antes, porque
+recebe 3 V em vez de 6 V.
+
+**5. Caso de diagnóstico**
+
+a) Os 12 V chegam até o **bottom da second bulb**, que é o último ponto antes
+do ground. Isso quer dizer que **nenhuma peça do caminho positivo está gastando
+voltage** — e, como as bulbs estão apagadas, não é porque elas estão boas: é
+porque **não passa current**. Pela Ohm's law, sem current nenhuma peça tem
+voltage drop, e por isso a voltage inteira aparece em todos os pontos.
+
+Se a voltage chega até o fim do caminho e mesmo assim não há current, a
+interrupção está **depois** desse último ponto: no **caminho de volta pelo
+ground**. Um ground solto, um wire de ground rompido ou um parafuso de ground
+mal apertado.
+
+b) A **voltage drop do ground**: ponta vermelha no bottom da second bulb,
+ponta preta no negative terminal da battery. Num ground bom a leitura fica
+perto de zero. Aqui você espera ler **perto de 12 V**, porque é no trecho
+aberto que a voltage inteira aparece. Encontrar os 12 V ali confirma que a
+interrupção está naquele trecho.
+
+**6. Justificativa**
+
+Pela resistance de cada instrumento, e pelo que ela faz com o circuit.
+
+O **voltímetro** tem resistance altíssima — milhões de ohms. Ligado em
+paralelo com uma peça, ele é um branch por onde quase não passa current, e por
+isso quase não muda o circuit. Pode ficar em volta da peça sem atrapalhar.
+
+O **amperímetro** tem resistance quase zero, de propósito: ele precisa ser
+atravessado pela current sem roubar voltage dela. Em paralelo com uma peça, ele
+seria um branch de resistance quase zero ligado direto entre dois pontos com
+voltage entre eles — um short circuit. Por isso ele entra **em série**, no
+lugar de um wire: ali a current já passa inteira, e a resistance quase zero do
+instrumento não muda o que o circuit faz.
+
+**7. Formato ASE**
+
+**Question 1 — A.** Só o Technician A tem razão.
+
+- **A (certa):** um switch fechado é um caminho de metal; a voltage drop dele
+  tem que ficar perto de zero. 4.5 V presos no switch querem dizer resistance
+  alta nos contatos, e essa voltage vira calor em vez de alimentar a load.
+- **B (errada):** 4.5 V não é normal para switch nenhum. Esse valor seria
+  normal numa **load**, que existe para gastar voltage — e é essa troca que a
+  alternativa tenta.
+- **C e D (erradas):** decorrem das duas acima.
+
+**Question 2 — C.** A medição foi feita com o switch aberto, e OL é o
+resultado esperado.
+
+- **A (errada):** OL com o switch desligado não julga o switch. Um switch
+  aberto é um caminho interrompido, e é isso que o OL está dizendo.
+- **B (errada):** contatos colados dariam o contrário — resistance perto de
+  zero mesmo com o switch desligado.
+- **C (certa):** para julgar o switch, meça com ele **fechado**.
+- **D (errada):** o meter fuse protege as entradas de **amps**. Ele não
+  interfere na medição de resistance, que usa as entradas VΩ e COM.
+
+**Question 3 — C.** Os dois têm razão: as duas explicações produzem a mesma
+leitura de 0.00 A, e a medição sozinha não separa uma da outra.
+
+- **A e B (incompletas):** cada uma cita uma causa possível e exclui a outra.
+- **C (certa):** circuit aberto em outro ponto e meter fuse queimado dão a
+  mesma leitura. O teste que separa é a conferência dos meter fuses.
+- **D (errada):** as duas causas são reais.
+
+*Como a prova ASE monta a pegadinha:* nas questões “Technician A / Technician
+B”, quando as duas falas descrevem causas que **não se excluem**, a resposta
+costuma ser C. Quando uma delas contém um absoluto — “always”, “never”, “is
+normal” —, desconfie dela.
+
+</details>
+
+## Revisão
+
+**A ideia central:** uma medição não está definida pelo nome. Ela está definida
+por três coisas juntas — a posição do dial, onde as duas test leads estão
+plugadas e encostadas, e o estado em que o circuit está. Mude qualquer uma das
+três e a leitura responde a outra pergunta, mesmo que o número pareça razoável.
+
+**Quando usar:** sempre que alguém — o instrutor, o manual ou um colega —
+nomear um ponto do circuit. Siga o power flow para achar o ponto, decida as
+três partes da medição, e diga o que você espera ler antes de olhar o visor.
+
+**Com o que se conecta:** usa o series circuit (a current é a mesma, a voltage
+se divide) e a Ohm's law (sem current não há voltage drop). Sustenta o
+diagnóstico de circuits, a bateria, o starting system e o charging system, onde
+as mesmas seis medições aparecem em circuits maiores.
+
+**Termos em inglês desta lição:** power flow · top · bottom · meter fuse ·
+input jack · amp port · function button · continuity · range · practical exam ·
+source voltage · available voltage · voltage drop · OL · isolate the component.

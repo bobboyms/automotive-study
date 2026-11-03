@@ -72,6 +72,11 @@ const sidebars = {
               id: 'trn-120-eletricidade/medicoes-com-multimetro',
               label: '8. Medições com o multimeter',
             },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/prova-pratica',
+              label: '9. As seis medições na bancada',
+            },
           ],
         },
         {
@@ -81,37 +86,37 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/eletromagnetismo-e-rele',
-              label: '9. Electromagnetism e o relay',
+              label: '10. Electromagnetism e o relay',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/resistencias-variaveis-e-diodo',
-              label: '10. Resistances que mudam e o diode',
+              label: '11. Resistances que mudam e o diode',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/resistor-fixo',
-              label: '11. O resistor fixo',
+              label: '12. O resistor fixo',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/switches',
-              label: '12. Switches',
+              label: '13. Switches',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/protecao-do-circuito',
-              label: '13. Circuit protection',
+              label: '14. Circuit protection',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/cargas-bulbs-e-motores',
-              label: '14. Loads: bulbs e motores',
+              label: '15. Loads: bulbs e motores',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/capacitor-e-transformer',
-              label: '15. Capacitor e transformer',
+              label: '16. Capacitor e transformer',
             },
           ],
         },
@@ -122,7 +127,7 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/simbolos-eletricos',
-              label: '16. Electrical symbols',
+              label: '17. Electrical symbols',
             },
           ],
         },
@@ -133,17 +138,17 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/instrumentos-de-teste',
-              label: '17. Outros instrumentos de teste',
+              label: '18. Outros instrumentos de teste',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/scan-tool-e-osciloscopio',
-              label: '18. Scan tool e oscilloscope',
+              label: '19. Scan tool e oscilloscope',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/reparar-um-wire',
-              label: '19. Reparar um wire',
+              label: '20. Reparar um wire',
             },
           ],
         },

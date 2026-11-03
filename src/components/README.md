@@ -88,6 +88,7 @@ import Circuito from '@site/src/components/Circuito';
 | várias cargas em série ou em paralelo: quedas de tensão, correntes dos ramos, carga aberta, curto num ramo | `Associacao` |
 | triângulo da lei de Ohm, com letras ou unidades, e as três leituras tapando uma grandeza | `TrianguloOhm` |
 | multímetro ligado ao circuito: tensão da fonte, tensão disponível, queda de tensão, corrente, resistência | `Medicao` |
+| o circuit do practical em pé (top e bottom de cada peça) e as seis medições do midterm, com o dial e a entrada certos | `BancadaPratica` |
 | átomo em camadas, elétrons da camada de fora, elétron livre | `Atomo` |
 | motor de um cilindro em corte: peças, posição do pistão, válvulas, gás, PMS/PMI | `Motor` |
 | o ciclo de quatro tempos para girar com a mão (interativo) | `CicloQuatroTempos` |
@@ -432,6 +433,63 @@ cruzar a preta, passa por cima com uma borda da cor do fundo.
 | `semCarga` | tira a lâmpada do soquete; não passa corrente |
 | `corrente` | `false` tira as setas da corrente |
 | `caption` | **texto simples** |
+
+---
+
+## BancadaPratica
+
+O circuit do midterm practical da TRN-120 — battery, fuse, switch e duas bulbs
+em série, voltando pelo ground — e as seis medições que o instrutor pede nele.
+Usado na lição
+[As seis medições na bancada](../../docs/trn-120-eletricidade/09-prova-pratica.mdx).
+
+```mdx
+{/* o caminho da power, com o top e o bottom de cada peça */}
+<BancadaPratica modo="fluxo" caption="..." />
+
+{/* a conferência dos fuses do próprio meter */}
+<BancadaPratica modo="fusiveis" caption="..." />
+
+{/* as cinco medições */}
+<BancadaPratica modo="fonte" leitura="12\,\text{V}" caption="..." />
+<BancadaPratica modo="disponivel" alvo="bulb1" leitura="12\,\text{V}" caption="..." />
+<BancadaPratica modo="queda" alvo="switch" leitura="0.0\,\text{V}" caption="..." />
+<BancadaPratica modo="resistencia" alvo="switch" leitura="0.3\,\Omega" caption="..." />
+<BancadaPratica modo="corrente" leitura="0.25\,\text{A}" caption="..." />
+```
+
+| Prop | O que faz |
+|---|---|
+| `modo` | `'fluxo'` (padrão, sem meter: só o circuit, com top e bottom), `'fusiveis'`, `'fonte'`, `'disponivel'`, `'queda'`, `'resistencia'` ou `'corrente'` |
+| `alvo` | a peça medida em `disponivel`, `queda` e `resistencia`: `'fuse'`, `'switch'`, `'bulb1'` (padrão) ou `'bulb2'` |
+| `leitura` | LaTeX no visor |
+| `caption` | **texto simples** |
+
+**Por que o circuit é desenhado em pé**, e não deitado como no `Medicao`: o
+instrutor chama **top** o terminal por onde a power entra numa peça e
+**bottom** aquele por onde ela sai. Os dois nomes só ficam óbvios se a power
+descer na página; deitado, o aluno teria de decorar que “top” quer dizer “o
+lado da esquerda”.
+
+Decisões de desenho que as figuras dependem — mexer numa delas exige rodar
+`npm run figuras` de novo:
+
+- **Cada modo tem a sua largura** (`W_FLUXO`, `W_CIRCUITO`, `W_SOZINHO`),
+  encostada no que ele desenha. A primeira versão desenhava tudo em 520 e o
+  circuit sozinho ocupava 360 deles: a sobra à direita encolhia a figura no
+  celular sem motivo.
+- **O meter fica todo à direita do circuit**, e por isso nenhuma ponta de prova
+  cruza um fio. Quando a vermelha precisa cruzar a preta, passa por cima com a
+  borda da cor do fundo (`casing`), como no `Medicao`.
+- **Os contatos do switch ficam 14 para dentro dos terminais.** Sem esse recuo,
+  as duas pontas de prova da voltage drop pousam em cima dos dois contatos,
+  tapam os dois, e o switch vira uma linha reta igual à de um wire.
+- **Na conferência dos fuses, a entrada A não é preenchida de vermelho**: a
+  ponta de prova é desenhada como uma cunha encostando nela. Um furo vermelho
+  no A leria como “a lead está plugada aqui também”, que é o contrário do que
+  a conferência manda fazer.
+- **O dial** mostra a função escolhida com um ponteiro e o nome ao lado
+  (`volts DC`, `ohms`, `amps`): é metade da instrução de cada medição.
 
 ---
 

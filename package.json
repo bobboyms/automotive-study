@@ -8,7 +8,8 @@
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "quadro": "node caderno/servidor.js",
-    "figuras": "node scripts/conferir-figuras.mjs"
+    "figuras": "node scripts/conferir-figuras.mjs",
+    "transcrever": "node scripts/transcrever.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",

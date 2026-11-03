@@ -28,3 +28,6 @@ yarn-error.log*
 
 # Capturas da conferência de figuras (npm run figuras)
 .figuras/
+
+# Gravações de aula em trânsito (mesma regra de material/)
+temp/
