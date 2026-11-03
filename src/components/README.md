@@ -116,6 +116,7 @@ import Circuito from '@site/src/components/Circuito';
 | lead-acid battery em corte: uma cell, as seis em série, ou os riscos (gás e short) | `Bateria` |
 | o surface discharge test: a fuga pela sujeira da tampa da battery | `DescargaSuperficial` |
 | onde vai cada clamp do jump pack, e onde ele não vai | `JumpStart` |
+| reconhecer pela aparência: crosta de corrosion, case estufado, plate sulfatada | `Foto` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -956,3 +957,54 @@ Duas decisões de desenho:
   começa a linha à direita do texto, e ela atravessava o rótulo por trás.
 
 Não recebe props além de `caption`.
+
+---
+
+# Fotos
+
+## Foto
+
+```mdx
+import Foto from '@site/src/components/Foto';
+
+<Foto k="terminal-corroido" caption="..." />
+```
+
+| Prop | O que faz |
+|---|---|
+| `k` | chave em `src/data/fotos.json`, que guarda o arquivo, o texto alternativo, as medidas e o crédito |
+| `caption` | a legenda, em texto simples |
+| `largura` | largura máxima em px, se a do `fotos.json` não servir naquela página |
+
+**Quando foto e quando desenho.** Desenho ensina estrutura, caminho e ordem:
+ele escolhe o que mostrar, tem rótulo clicável, três tons e funciona no tema
+escuro. Foto ensina a **reconhecer pela aparência** — a crosta de corrosion, o
+case estufado, a plate sulfatada —, e isso um SVG não entrega, porque cor e
+textura são o conteúdo. Lição boa usa as duas na sequência: o desenho explica,
+a foto mostra o que vai aparecer no pátio.
+
+**Licença.** O repositório é público, então entra só foto do próprio aluno ou
+com licença livre que permita redistribuição. Nada de figura de livro, de
+apostila ou de manual — vale a mesma regra do `CLAUDE.md`, seção “Material de
+aula”. O crédito é montado pelo componente a partir do `fotos.json`: autor com
+link para a página de origem, Wikimedia Commons, a licença com link, e o que
+foi alterado. Nenhuma lição escreve isso à mão, e por isso nenhuma esquece.
+
+**Antes de commitar uma foto nova:**
+
+- confira a licença **na página do arquivo**, não no resultado de busca;
+- redimensione para no máximo 1000 px no lado maior e salve em JPEG de
+  qualidade 82, progressivo (as quatro atuais ficaram entre 70 e 170 KB);
+- **apague o EXIF** — a foto do terminal corroído vinha com coordenadas de GPS
+  do celular de quem tirou. `ImageOps.exif_transpose` seguido de `save` resolve:
+  aplica a rotação e descarta o resto;
+- escreva uma legenda que diga **o que olhar**, e não só o que é. "A crosta é
+  branca, azulada ou esverdeada, e cresce por baixo da garra" ensina; "terminal
+  corroído" não;
+- se a foto não for exatamente do objeto da lição — a do case estufado é de uma
+  battery selada menor que a do carro —, **diga isso na legenda**.
+
+As fotos entram em `static/img/<assunto>/` e são capturadas pelo
+`npm run figuras` como qualquer `<figure>`: confira no claro, no escuro, no
+celular e no Safari, que é onde se vê se a borda está segurando a foto no tema
+escuro.

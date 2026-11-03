@@ -5,6 +5,7 @@ sidebar_label: A battery por dentro
 
 import Bateria from '@site/src/components/Bateria';
 import PartidaCarga from '@site/src/components/PartidaCarga';
+import Foto from '@site/src/components/Foto';
 
 # A battery por dentro: cells, tipos e ratings
 
@@ -146,6 +147,19 @@ short circuit interno — e é um dos defeitos reais de battery.
 
 É por isso que uma battery de carro cheia mede **12.6 V** e não 12.0 V. O
 "12 V" do nome é um apelido; o número de trabalho é 12.6 V.
+
+E é assim que isso aparece numa battery de verdade, com a parede da frente
+cortada fora:
+
+<Foto
+  k="battery-em-corte"
+  caption="A mesma coisa do desenho, numa battery de 12 V aberta. Conte duas vezes: seis compartimentos separados por paredes, e seis furos de vent cap na tampa azul — um por cell. Cada compartimento tem o seu pacote de plates, que aqui não é a plate limpa do desenho, e sim um bloco escuro de material poroso; o que parece sujeira entre os pacotes são os separators encharcados de electrolyte. Repare que as plates de uma cell não chegam perto das da cell vizinha: cada cell é um compartimento estanque, e é por isso que uma cell em curto não contamina as outras cinco."
+/>
+
+Olhe a foto e o desenho juntos. O desenho mostra o que importa e esconde o
+resto; a battery real mostra tudo ao mesmo tempo, e é nela que você vai
+trabalhar. Saber passar de uma para a outra é metade do que esta lição
+ensina.
 
 ## Ponte para a formalização
 
@@ -342,6 +356,14 @@ Duas armadilhas:
 | resistance interna alta | contato ruim entre post e plate strap | voltage boa parada, desaba na partida | load test; comparar com o CCA do rótulo |
 | CCA abaixo do especificado | a battery é fraca para o motor | só falha no frio | ler o rótulo e comparar com o manual |
 | battery congelada | electrolyte fraco virou gelo | nada funciona; battery case estufado | inspeção — **não carregue** |
+
+A **sulfatação** da primeira linha é o defeito mais comum, e vale saber como
+ele é por dentro:
+
+<Foto
+  k="plate-sulfatada"
+  caption="Duas plates da mesma battery, lado a lado. A da esquerda está sã: escura, com a superfície porosa inteira. A da direita sulfatou — o sulfato endureceu numa casca clara sobre o material ativo e pedaços da plate já se soltaram. A área que reagia com o ácido diminuiu, e com ela a current que a battery consegue entregar. A voltage em repouso continua quase normal; quem revela isso é o load test."
+/>
 
 A ordem de teste é sempre a mesma: **primeiro inspeção visual** (battery case,
 terminals, nível), **depois open-circuit voltage** para saber o state of

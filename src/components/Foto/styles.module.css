@@ -1,0 +1,35 @@
+/* Foto de licença livre numa lição. Mesmo espaçamento e mesma legenda dos
+   diagramas (pecas.module.css), mais a linha de crédito. */
+
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  /* a borda existe para a foto não flutuar no tema escuro, em que o fundo
+     da página é quase da cor das sombras de muitas delas */
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.caption {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-align: center;
+}
+
+.credito {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+}

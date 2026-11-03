@@ -4,6 +4,7 @@ sidebar_label: Manutenção da battery
 ---
 
 import DescargaSuperficial from '@site/src/components/DescargaSuperficial';
+import Foto from '@site/src/components/Foto';
 
 # Manutenção da battery: inspecionar, testar a tampa e limpar
 
@@ -248,6 +249,21 @@ cobrindo a junta inteira.
 | post danificado por alavanca | ligação interna rompida | intermitente, sem causa visível | voltage drop no próprio post, na partida |
 | nível de electrolyte baixo | topo das plates seco | perda de capacidade | inspeção na flooded cell |
 | memory saver esquecido | módulos perdem a memória | marcha lenta irregular, rádio pedindo código, vidro sem auto | o cliente reclama depois do serviço |
+
+### A corrosion, de perto
+
+A segunda inimiga desta lição tem aparência própria, e você precisa
+reconhecê-la antes de pôr a mão:
+
+<Foto
+  k="terminal-corroido"
+  caption="Corrosion num polo de battery. A crosta é branca, azulada ou esverdeada, cresce em volta do post e sobe pela cable clamp, e tem textura de pó empedrado. Ela é condutora ruim: a current da partida precisa atravessá-la, e é isso que produz a voltage drop do exemplo 1. Não encoste sem luva — a crosta é ácido que vazou e reagiu com o metal, e queima a pele."
+/>
+
+Duas coisas que a foto mostra e o texto não consegue. A crosta cresce **por
+baixo da garra**, onde ninguém olha: o que aparece por fora é a parte menor do
+problema. E ela empurra a garra para cima, afrouxando o aperto — por isso
+corrosion e contato frouxo quase sempre aparecem juntos.
 
 ### O teste que separa “battery fraca” de “conexão ruim”
 

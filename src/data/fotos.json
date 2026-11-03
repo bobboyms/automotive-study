@@ -1,0 +1,57 @@
+{
+  "_leia": "Fotos de licença livre usadas nas lições. O componente src/components/Foto lê este arquivo pela chave e monta a legenda com o crédito: autor, origem e licença. Toda foto aqui precisa ter licença que permita uso e redistribuição, porque o repositório é público — nada de figura de livro, de apostila ou de manual. `origem` é o acervo de onde ela veio; `alterada` descreve o que foi feito com o original; `maxw` é a largura em que a foto é mostrada. Documentação: src/components/README.md, seção Foto.",
+  "fotos": {
+    "terminal-corroido": {
+      "arquivo": "img/battery/terminal-corroido.jpg",
+      "alt": "Polo de uma battery de veículo coberto por uma crosta grossa branca, azulada e esverdeada, que sobe pela garra do cabo.",
+      "w": 1000,
+      "h": 750,
+      "maxw": 520,
+      "autor": "MarkBuckawicki",
+      "licenca": "CC0",
+      "licencaUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Battery_Terminal_Corrision.jpg",
+      "alterada": "redimensionada",
+      "origem": "Wikimedia Commons"
+    },
+    "battery-em-corte": {
+      "arquivo": "img/battery/battery-em-corte.jpg",
+      "alt": "Battery de 12 V com a parede da frente cortada, mostrando as seis cells lado a lado e o pacote de plates dentro de cada uma.",
+      "w": 720,
+      "h": 960,
+      "maxw": 380,
+      "autor": "Ben Cossalter",
+      "licenca": "CC BY-SA 3.0",
+      "licencaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Car_battery_cross-section.jpeg",
+      "alterada": "recomprimida",
+      "origem": "Wikimedia Commons"
+    },
+    "plate-sulfatada": {
+      "arquivo": "img/battery/plate-sulfatada.jpg",
+      "alt": "Duas plates de chumbo sobre uma bancada: a da esquerda escura e inteira, a da direita esbranquiçada e com pedaços faltando.",
+      "w": 1000,
+      "h": 750,
+      "maxw": 520,
+      "autor": "Sakar.solanki",
+      "licenca": "CC BY-SA 3.0",
+      "licencaUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Sulfated_Anode_plate_at_right_side_from_12V_5aH_battery.jpg",
+      "alterada": "redimensionada",
+      "origem": "Wikimedia Commons"
+    },
+    "case-estufado": {
+      "arquivo": "img/battery/case-estufado.jpg",
+      "alt": "Battery selada de chumbo-ácido com o case estufado: as laterais abauladas para fora e a tampa descolando do corpo.",
+      "w": 750,
+      "h": 1000,
+      "maxw": 360,
+      "autor": "Artechvideo",
+      "licenca": "CC BY-SA 4.0",
+      "licencaUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Swollen_Battery.jpg",
+      "alterada": "redimensionada",
+      "origem": "Wikimedia Commons"
+    }
+  }
+}
