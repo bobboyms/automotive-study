@@ -1,0 +1,727 @@
+---
+title: "Jump start e memory saver com o jump pack"
+sidebar_label: Jump start e memory saver
+---
+
+import JumpStart from '@site/src/components/JumpStart';
+
+# Jump start e memory saver com o jump pack
+
+> **Pergunta central:** o procedimento manda prender o clamp preto no bloco do
+> motor, longe da battery. Mas o bloco do motor **já está ligado** ao negative
+> terminal pelo cabo de massa — eletricamente é o mesmo ponto. Se é o mesmo
+> ponto, por que o lugar importa?
+
+## A queixa: “eu sempre fiz assim e nunca deu nada”
+
+Na oficina, um técnico experiente dá chupeta numa van que ficou com a luz
+acesa a noite toda. Ele pega o jump pack, prende o clamp vermelho no positive
+terminal, prende o preto direto no negative terminal da battery descarregada,
+liga o aparelho e dá partida. O motor pega.
+
+Um aluno pergunta por que o manual manda outra coisa, e ele responde: “eu
+sempre fiz assim e nunca deu nada”.
+
+Ele tem razão sobre o passado e está errado sobre o risco. Ao fim desta lição
+você vai saber exatamente o que muda entre os dois jeitos, por que a diferença
+não aparece em 99 vezes e aparece de forma grave na centésima, e qual é a
+sequência completa — ligar, usar, desligar e recarregar — de um jump pack.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| jump pack | partida auxiliar portátil | caixa com battery interna e dois clamps, para dar partida sem outro carro |
+| jump start | chupeta | dar partida usando uma fonte de energia externa |
+| clamp | garra | a pinça de metal que aperta no post ou no metal do veículo |
+| reverse polarity | polaridade invertida | ligar o + no − e o − no + |
+| override switch | chave de override | botão que força o jump pack a ligar com a battery quase morta |
+| negative ground | massa pelo negativo | o negative terminal é o que vai à carroceria |
+| memory saver | mantenedor de memória | alimenta os módulos enquanto a battery está desligada |
+| data link connector | conector de diagnóstico | a tomada OBD-II embaixo do painel |
+| keep alive memory | memória viva (KAM) | o que o módulo guarda enquanto recebe power o tempo todo |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+No pátio, toda semana. E dentro da oficina, em três usos que o mesmo aparelho
+atende: dar partida, servir de **memory saver** durante a troca de battery, e
+alimentar um aparelho de 12 V onde não há tomada.
+
+Na Wake Tech, é a quarta unidade do **módulo 3** da TRN-120 (*Relays & Battery
+Maintenance*, certificação NC3 da Snap-on), com um lab de *Engine Starting* e
+assinatura do instrutor. Na prova ASE, a área é **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Segurança com a battery](./seguranca-da-battery), onde fica o
+   **hydrogen gas** e o que o acende?
+2. Na mesma lição, qual é o caminho de um short circuit quando a carroceria é
+   o ground?
+3. Na lição [A battery por dentro](./a-battery-por-dentro), por que a
+   resistance interna baixa é o que permite à battery girar o starter motor?
+4. Na lição [Manutenção da battery](./manutencao-da-battery), o que o memory
+   saver protege, e qual é o cuidado que ele cria?
+5. Na lição [Circuito em paralelo](./circuito-em-paralelo), o que acontece
+   quando dois caminhos são ligados entre os mesmos dois pontos?
+
+<details>
+<summary>Respostas</summary>
+
+1. Ele sai pelas **vent caps** e fica em cima da battery, porque é mais leve
+   que o ar. Uma **faísca** o acende — e a faísca aparece no instante em que um
+   contato elétrico se fecha ou se abre com current querendo passar.
+2. Positive terminal → o metal que encostou → carroceria → cabo de massa →
+   negative terminal. A carroceria faz parte do circuit.
+3. Porque o starter motor pede uma current enorme, e só uma fonte com
+   resistance interna muito baixa entrega essa current sem a voltage desabar.
+4. Protege a **keep alive memory** dos módulos, os códigos do rádio e as
+   posições memorizadas. O cuidado é que, com ele ligado, os **battery cables
+   soltos continuam energizados**.
+5. Eles ficam com a mesma voltage entre as pontas, e a current se divide entre
+   eles. Guarde isso: o jump pack e a battery do veículo vão ficar justamente
+   assim, em paralelo.
+
+</details>
+
+## Intuição: por onde a faísca acontece
+
+Na hora de dar chupeta, a última ligação que você faz é a que **fecha o
+circuit**. É nela que aparece a faísca, porque é o único momento em que dois
+metais com voltage diferente se aproximam com current querendo passar.
+
+Você não escolhe se haverá faísca. Você escolhe **onde** ela vai acontecer.
+
+- Clamp preto no negative terminal: a faísca acontece a dois ou três
+  centímetros das vent caps, no meio da nuvem de hydrogen gas.
+- Clamp preto no bloco do motor, longe da battery: a faísca acontece a meio
+  metro dali, em ar comum.
+
+Eletricamente, os dois pontos são o mesmo nó do circuit — o bloco está ligado
+ao negative terminal pelo cabo de massa, e é por isso que o jump funciona dos
+dois jeitos. A escolha não é elétrica: é sobre o lugar da faísca.
+
+É por isso que “sempre fiz assim e nunca deu nada” não é argumento. O jeito
+errado funciona todas as vezes em que não há gás suficiente acumulado. A
+battery descarregada que acabou de receber carga é exatamente a que está
+soltando mais gás.
+
+## Modelo visual: onde vai cada clamp
+
+<JumpStart caption="A ordem de ligar, num veículo de negative ground. (1) clamp vermelho no positive terminal da battery. (2) clamp preto num ponto de metal limpo do engine block ou do chassi, longe da battery. O negative terminal, marcado em verde, não é onde o clamp preto vai. Para desligar, a ordem é ao contrário: primeiro o preto do bloco, depois o vermelho do post." />
+
+Dois detalhes do desenho que valem no serviço real:
+
+- **O clamp preto não vai em qualquer metal.** Nada de carburador, de linha de
+  combustível e de chapa fina de lataria. Procure uma parte grossa do bloco ou
+  do chassi, sem tinta, sem óleo e longe de peça que gira.
+- **Os clamps nunca podem se tocar.** Enquanto estão ligados ao pack, eles são
+  os dois terminals de uma battery. Encostá-los um no outro é exatamente o
+  short circuit da lição [Segurança com a battery](./seguranca-da-battery), com
+  a mesma conta de centenas de amperes.
+
+## Ponte para a formalização
+
+O jump pack é, por dentro, uma battery igual às da lição anterior — quase
+sempre uma AGM selada — mais um pouco de eletrônica que tenta impedir os erros
+mais comuns. Entender o que essa eletrônica faz e **o que ela não faz** é o que
+separa usar o aparelho de confiar nele.
+
+## Formalização
+
+### O que há dentro de um jump pack
+
+| Parte | Para que serve |
+|---|---|
+| battery interna selada (AGM) | a fonte: resistance interna baixa, não vaza, aguenta vibração |
+| clamps de serviço pesado, com cabo grosso | conduzir centenas de amperes sem perder voltage no caminho |
+| botão que liga e desliga os clamps | os clamps só ficam vivos quando você manda |
+| visor digital | mostra a carga do próprio pack e a voltage do que está ligado nele |
+| proteção de reverse polarity | se você trocar os clamps de lado, o aparelho não energiza |
+| **override switch** | força a saída quando a battery do veículo está tão baixa que o aparelho não a reconhece |
+| tomada de 12 V e porta USB | alimentar aparelhos |
+| luz de trabalho | iluminar o serviço |
+| entrada de recarga em 100–240 V | recarregar o pack na tomada |
+
+A proteção de reverse polarity é a parte que mais engana. Ela impede o
+aparelho de **energizar** os clamps ligados ao contrário; ela não impede você
+de encostar os dois clamps um no outro, nem de pôr o clamp preto em cima da
+battery. O aparelho protege o circuito dele, não o seu procedimento.
+
+### O que o visor está dizendo
+
+Os códigos exatos mudam de modelo para modelo, e quem manda é o manual do
+aparelho. O que não muda é o **tipo** de informação:
+
+- **com os clamps desligados**, o visor mostra o estado do próprio pack: a
+  voltage da battery interna ou a porcentagem de carga;
+- **logo que você liga os clamps**, ele mostra por alguns segundos a voltage
+  que mediu **no veículo**;
+- **depois disso**, ele passa a mostrar a voltage **combinada** dos dois,
+  porque agora o pack e a battery do veículo estão em paralelo. O exemplo 2
+  calcula esse número;
+- **uma mensagem de erro** aparece quando os clamps não fizeram bom contato,
+  quando a voltage do veículo está baixa demais para o aparelho reconhecer, ou
+  quando os clamps estão em reverse polarity;
+- **durante a recarga**, uma indicação de carregando, e outra de carga
+  completa.
+
+### Preparar o aparelho, antes de encostar no carro
+
+:::warning Antes do primeiro passo
+
+- Óculos de segurança. Metal fora da mão. Trabalhe em **lugar ventilado**.
+- **Olhe o battery case do veículo.** Estufado, trincado ou vazando: pare.
+  **Nunca dê jump start numa battery congelada ou visivelmente estufada.**
+- **Confira os clamps e os cabos do pack**: marcas de queimado nas garras,
+  mola fraca, cabo com o isolamento aberto. Uma garra com mola fraca não faz
+  pressão, e contato ruim com centenas de amperes vira faísca e calor.
+- **Use o pack da voltage certa.** Pack de 12 V para sistema de 12 V. Em
+  aparelho que faz 12 V e 24 V, selecione a voltage **antes** de energizar.
+- **Nunca deixe os dois clamps se tocarem**, nem encostarem no mesmo pedaço de
+  metal.
+- **Nunca deixe a battery interna do pack congelar**, e não a carregue
+  congelada.
+
+:::
+
+Limpe os terminals do veículo antes de prender os clamps, com o cuidado da
+lição [Manutenção da battery](./manutencao-da-battery): a crosta de corrosion
+impede o contato, e o contato ruim é o que produz faísca. Enquanto estiver
+raspando, mantenha o pó longe dos olhos, do nariz e da boca.
+
+### Ligar na battery: a sequência que decide tudo
+
+1. **Veículo desligado.** Ignição fora, luzes e acessórios desligados.
+2. **Posicione os cabos** de modo que eles fiquem longe de correia, ventoinha,
+   polia e coletor quente. Se precisar fechar o capô, confirme que ele não
+   aperta nem corta o cabo.
+3. **Confira a polaridade dos posts.** O positivo costuma ser o de diâmetro
+   maior, marcado POS, P ou +; o negativo, NEG, N ou −.
+4. **Descubra qual post está ligado à carroceria.** Esse é o ground. Em quase
+   todo veículo moderno é o negativo.
+5. **Veículo de negative ground:** clamp **vermelho** no **positive terminal**
+   (o post que *não* está ligado à carroceria). Depois, clamp **preto** num
+   ponto de metal grosso do bloco ou do chassi, **longe da battery**.
+6. **Veículo de positive ground:** o espelho do passo 5. Clamp **preto** no
+   **negative terminal** (o post que não vai à carroceria) e clamp
+   **vermelho** no metal do chassi, longe da battery.
+7. **Para desligar:** desligue primeiro o botão que energiza os clamps; depois
+   tire o clamp que está no chassi; por último, o que está no post.
+
+A regra geral, que vale nos dois casos e é a que você deve guardar: **o
+primeiro clamp vai no post que não é o ground; o segundo vai no metal do
+veículo, longe da battery. Na saída, inverte.**
+
+### Dar a partida
+
+1. Com tudo ligado como acima, **acione o botão que energiza os clamps**.
+2. Se o aparelho avisar um erro, **não insista**: descubra o motivo. Erro
+   nesse momento costuma ser contato ruim, voltage baixa demais ou reverse
+   polarity.
+3. Em muitos casos vale **esperar alguns minutos** antes de girar o motor. A
+   battery do veículo recebe carga do pack nesse tempo, e a partida sai com
+   menos esforço do aparelho. O exemplo 2 mostra o que acontece nesse
+   intervalo.
+4. **Gire o motor.** Se ele não pegar dentro do tempo que o fabricante do
+   veículo permite, **pare e espere até 30 segundos** antes de tentar de novo.
+   Cranking longo e seguido superaquece o starter motor.
+5. **Pegou:** desligue o botão dos clamps, tire o clamp do chassi e depois o do
+   post, nessa ordem.
+6. **Recarregue o pack logo depois do uso.**
+
+:::danger Não é só a battery que pode estar descarregada
+
+Se o motor não gira nem com o pack, pare de insistir. Pode ser starter motor,
+cabo de massa ruim, trava de segurança de câmbio ou motor travado. Insistir
+aquece o starter motor e o pack sem resolver nada, e o diagnóstico que faltava
+continua faltando.
+
+:::
+
+### Usar como memory saver
+
+É o mesmo aparelho, com outro cabo e outra finalidade: manter os módulos vivos
+enquanto a battery sai do carro.
+
+1. Use o cabo próprio de memory saver do fabricante, que vai do pack ao **data
+   link connector** do veículo.
+2. Ligue o cabo no conector OBD-II e **confirme que o LED do cabo acendeu**.
+   Esse LED é a prova de que existe circuito; sem ele, você está trabalhando
+   achando que a memória está protegida.
+3. Ligue a outra ponta do cabo na tomada auxiliar do pack e acione o botão
+   dessa tomada. Confirme o LED outra vez.
+4. Só então solte a battery do veículo — negativa primeiro.
+
+:::danger Battery cables energizados
+
+Com o memory saver alimentando, os cabos que você soltou da battery
+**continuam vivos**, porque estão ligados ao sistema por trás. Prenda ou isole
+a cable clamp do positivo antes de continuar o serviço.
+
+:::
+
+### Alimentar aparelho de 12 V e carregar pelo USB
+
+A tomada de 12 V do pack serve para alimentar um aparelho de 12 V onde não há
+outra fonte. Três pontos que o manual repete e que a prova cobra:
+
+- **a tomada auxiliar costuma não funcionar com os clamps ligados** — é um ou
+  outro;
+- **confira a current que o aparelho pede** antes de ligar, e compare com o
+  limite da tomada do pack;
+- **desligue o aparelho primeiro, depois desconecte**, e recarregue o pack em
+  seguida.
+
+A porta USB entrega 5 V e serve para telefone e aparelhos pequenos. Ela não
+troca dados; serve para alimentar, e nada mais.
+
+### Carregar, guardar e manter o pack
+
+- **Use só o carregador interno do próprio aparelho.** Outro charger pode
+  danificá-lo.
+- **Recarregue depois de cada uso.** Uma carga completa leva várias horas; o
+  manual do modelo dá o tempo.
+- **Nunca deixe a battery interna descarregar por completo.** Isso encurta a
+  vida dela de forma permanente.
+- **Guardado, recarregue pelo menos a cada três a seis meses**, para ela não
+  passar do ponto de descarga.
+- **Guarde em temperatura amena** e longe de aquecedor, sol direto e umidade.
+  O modelo usado no laboratório pede a faixa de −4 °F a 104 °F
+  (−20 °C a 40 °C); o número que vale é o do manual do seu aparelho.
+- **A única peça que se troca é a battery interna.** Use a peça de reposição
+  exata indicada pelo fabricante. Qualquer outro reparo vai para a assistência
+  autorizada.
+- **Depois de usar, limpe** os clamps, os cabos e a caixa com um pano seco.
+
+:::tip lb-in não é lb-ft
+
+O manual do pack do laboratório pede **18 lb-in** no parafuso do terminal da
+battery interna — cerca de 2 N·m. Isso é **1.5 lb-ft**, porque 1 lb-ft vale 12
+lb-in. Quem lê “18” e aperta 18 lb-ft aplica doze vezes o pedido e arranca a
+rosca do terminal. O valor que vale é sempre o do manual do aparelho.
+
+:::
+
+## Como falha e como diagnosticar
+
+| Sintoma | Causa provável | O que fazer |
+|---|---|---|
+| o pack não energiza os clamps | contato ruim, ou voltage do veículo baixa demais | reapertar os clamps em metal limpo; usar o override switch se o manual permitir |
+| aviso de reverse polarity | clamps trocados de lado | desligar, conferir os posts e refazer |
+| motor nem tenta girar | não é só battery: starter motor, massa, trava de câmbio | parar e diagnosticar, em vez de insistir |
+| motor gira devagar mesmo com o pack | resistance alta nos cabos do veículo | voltage drop na partida, da lição de manutenção |
+| o pack perde carga guardado | ficou meses sem recarga | recarregar; se não segurar, a battery interna chegou ao fim |
+| o pack não segura carga nenhuma | battery interna no fim da vida | trocar pela peça de reposição exata |
+| aviso de superaquecimento | uso seguido sem descanso | deixar esfriar antes de carregar ou usar |
+| faísca ao prender o último clamp | é esperado — e é por isso que ele vai longe da battery | conferir onde a faísca está acontecendo |
+
+### A queixa resolvida
+
+Volte ao técnico que prendeu o clamp preto no negative terminal.
+
+1. **O que o procedimento quer:** que a faísca da última ligação aconteça longe
+   do hydrogen gas.
+2. **O que ele fez:** fechou o circuit a poucos centímetros das vent caps.
+3. **O princípio que liga as duas coisas:** fechar um contato com current
+   querendo passar produz faísca, e o hidrogênio acende com faísca. Os dois
+   fatos vêm da lição [Segurança com a battery](./seguranca-da-battery).
+4. **O que muda entre os dois jeitos:** só o lugar da faísca.
+   **O que não muda:** o circuit elétrico, a current, a voltage e o resultado
+   da partida — o bloco e o negative terminal são o mesmo nó.
+5. **Por que ele nunca teve problema:** porque, na maioria das vezes, não há
+   gás acumulado o bastante. A probabilidade sobe justamente no caso em que o
+   jump é mais usado — battery muito descarregada que acabou de começar a
+   receber carga, e capô fechado, que segura o gás embaixo dele.
+6. **Por que isso é diferente de “nunca dá nada”:** o custo do evento raro não é
+   um susto. É uma explosão de ácido na altura do rosto de quem está debruçado
+   sobre o motor.
+
+**A correção:** clamp preto no bloco, longe da battery, e desligar na ordem
+inversa.
+
+## Na oficina: a sequência inteira, em ordem
+
+1. Óculos, metal fora da mão, lugar ventilado.
+2. Inspecionar o battery case do veículo e os clamps do pack. Battery estufada
+   ou congelada: parar.
+3. Veículo desligado; limpar os terminals se precisar.
+4. Confirmar qual post está ligado à carroceria.
+5. Primeiro clamp no post que **não** é o ground.
+6. Segundo clamp no metal do bloco ou do chassi, longe da battery, longe de
+   peça que gira e de linha de combustível.
+7. Selecionar a voltage, se o aparelho tiver essa opção, e energizar os clamps.
+8. Resolver qualquer aviso do visor antes de prosseguir.
+9. Esperar alguns minutos, se o caso pedir, e dar a partida. Sem cranking
+   longo; até 30 s de descanso entre tentativas.
+10. Pegou: desenergizar os clamps, tirar o do chassi, depois o do post.
+11. Recarregar o pack.
+12. Terminar o serviço descobrindo **por que** a battery estava descarregada.
+    Um jump start não é um reparo: é o que permite mover o carro até o
+    diagnóstico.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o mesmo nó, lugares diferentes
+
+Um aluno argumenta: “se o bloco do motor está ligado ao negative terminal pelo
+cabo de massa, prender o clamp preto num ou no outro dá exatamente a mesma
+coisa”. O que há de certo e o que há de errado nesse raciocínio?
+
+<details>
+<summary>Solução</summary>
+
+**O que está certo:** eletricamente, os dois pontos são praticamente o mesmo
+nó. O cabo de massa liga o bloco ao negative terminal com resistance muito
+baixa — e, se ela não fosse baixa, o carro nem daria partida normalmente. A
+current que vai circular, a voltage do sistema e o resultado do jump são os
+mesmos nos dois casos.
+
+**O que está errado:** o raciocínio considera só o circuit, e o procedimento
+não trata só do circuit. Ele trata de **onde a faísca acontece**.
+
+Fechar o último contato produz faísca em qualquer dos dois pontos. A diferença
+é a atmosfera em volta de cada um:
+
+- em cima da battery há hidrogênio saindo pelas vent caps, e ele é mais leve
+  que o ar, então fica acumulado ali mesmo;
+- meio metro adiante, no bloco, o ar é ar comum.
+
+Em resumo: **o circuit é o mesmo, o risco não é.** É um caso em que a regra de
+segurança não sai da análise elétrica, e por isso ela parece arbitrária para
+quem só olha o esquema.
+
+E há um segundo motivo, menor: uma battery muito descarregada pode estar com
+o battery case fragilizado. Prender um clamp pesado em cima dela acrescenta esforço mecânico
+num lugar que você já não sabe se está íntegro.
+
+</details>
+
+### Exemplo 2: a voltage combinada que o visor mostra
+
+**Pause e tente:** o jump pack está com 12.8 V e resistance interna de 0.008 Ω.
+A battery do veículo está em 11.0 V, com 0.05 Ω (valores ilustrativos). Os
+clamps foram energizados e nada mais está ligado.
+
+a) Que current o pack manda para a battery do veículo?
+
+b) Que voltage o visor vai mostrar?
+
+<details>
+<summary>Dica</summary>
+
+As duas batteries estão em paralelo, ligadas pelos clamps. A diferença entre
+as duas voltages é o que empurra a current, e as duas resistances internas
+estão em série nesse caminho.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+a) A diferença de voltage entre as duas fontes é o que empurra a current, e o
+caminho que ela percorre passa pela resistance interna das duas:
+
+$$
+I = \frac{12.8 - 11.0}{0.008 + 0.05} = \frac{1.8}{0.058} \approx 31\,\text{A}
+$$
+
+b) O visor mede a voltage nos clamps, que é a voltage comum às duas batteries.
+Dá para calcular por qualquer um dos dois lados.
+
+Pelo lado do pack, que está **entregando** current e por isso perde voltage
+internamente:
+
+$$
+V = 12.8 - 31 \times 0.008 = 12.8 - 0.25 = 12.55\,\text{V}
+$$
+
+Pelo lado da battery do veículo, que está **recebendo** current e por isso
+aparece com voltage mais alta nos terminals do que a de dentro dela:
+
+$$
+V = 11.0 + 31 \times 0.05 = 11.0 + 1.55 = 12.55\,\text{V}
+$$
+
+Os dois caminhos dão o mesmo número, o que confere a conta.
+
+**O que isso explica:** o visor não mostra 12.8 nem 11.0, e sim um valor entre
+os dois. É o que o manual chama de voltage combinada, e não é defeito.
+
+**O que isso explica também:** por que esperar alguns minutos ajuda. Enquanto
+esses 31 A entram na battery do veículo, ela sobe de voltage; a diferença
+entre as duas diminui, a current cai, e o conjunto chega à partida mais forte
+do que estava no primeiro segundo.
+
+</details>
+
+### Exemplo 3: os dois clamps se encostando
+
+**Pause e tente:** o jump pack tem uma battery interna de 12.8 V com 0.008 Ω.
+Os clamps estão energizados e, por descuido, encostam um no outro; o contato
+entre eles tem 0.002 Ω. Que current passa, e quanta power fica no ponto de
+contato?
+
+<details>
+<summary>Solução</summary>
+
+É o short circuit da lição [Segurança com a battery](./seguranca-da-battery),
+agora com os números do pack:
+
+$$
+R_T = 0.008 + 0.002 = 0.010\,\Omega
+\qquad
+I = \frac{12.8}{0.010} = 1280\,\text{A}
+$$
+
+$$
+P = I \times I \times R = 1280 \times 1280 \times 0.002 \approx 3277\,\text{W}
+$$
+
+Mais de três mil watts no ponto em que as duas garras se tocam. O metal ali
+derrete, e o jato de metal líquido é o que marca as garras queimadas que o
+procedimento manda procurar na inspeção.
+
+Repare que o pack é mais perigoso nesse ponto do que a battery do exemplo da
+lição 21: a resistance interna dele é menor, porque ele foi feito justamente
+para entregar muita current.
+
+**O que isso significa para o procedimento:** a regra "nunca deixe os clamps
+se tocarem" não é cuidado com o aparelho. É a mesma regra do anel e da chave
+de boca.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o clamp preto vai no bloco do motor, e não no negative terminal, se
+   os dois são o mesmo nó elétrico?
+2. Qual é a ordem de desligar, e por que ela é o inverso da de ligar?
+3. O que a proteção de reverse polarity protege, e o que ela **não** protege?
+4. Por que o visor mostra uma voltage entre a do pack e a do veículo?
+5. Por que esperar alguns minutos antes de girar o motor costuma ajudar?
+6. Por que o LED do cabo de memory saver precisa ser conferido?
+7. Por que recarregar o pack logo depois de usar, e não só quando ele acabar?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o que muda não é o circuit, é o **lugar da faísca**. A última ligação
+   feita produz faísca, e em cima da battery há hydrogen gas acumulado. No
+   bloco, longe da battery, a faísca acontece em ar comum.
+2. Primeiro desenergizar os clamps, depois tirar o clamp do chassi, por último
+   o do post. É o inverso porque a lógica é a mesma: a **última** ligação a ser
+   desfeita com current é a que faísca, e você quer que esse momento aconteça
+   longe da battery. Desligando o botão antes, a faísca fica menor ainda.
+3. Protege o **circuito do aparelho** de ser energizado com os clamps
+   invertidos. Não protege contra encostar os dois clamps um no outro, contra
+   prender o clamp preto em cima da battery, nem contra prendê-lo numa linha de
+   combustível. O procedimento continua sendo seu.
+4. Porque, com os clamps ligados, o pack e a battery do veículo estão em
+   paralelo: os dois compartilham os mesmos dois pontos, então têm a mesma
+   voltage entre eles. Essa voltage comum fica entre as duas, porque uma está
+   entregando current e perdendo voltage internamente, e a outra está
+   recebendo.
+5. Porque, nesse tempo, a battery do veículo recebe carga e sobe de voltage. Na
+   hora da partida, as duas fontes trabalham juntas, e a battery do veículo
+   contribui em vez de atrapalhar.
+6. Porque é a única confirmação de que o circuito de memória está realmente
+   alimentado. Sem o LED aceso, você pode soltar a battery achando que a
+   memória está protegida, e descobrir o contrário só quando o cliente
+   reclamar do rádio e da marcha lenta.
+7. Porque a battery interna é de chumbo-ácido e **não gosta de ficar
+   descarregada**. Guardada baixa, ela sulfata, e isso não se desfaz. Além
+   disso, um pack meio carregado é um pack que pode não dar conta do próximo
+   chamado.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês:
+
+a) a pinça de metal na ponta de cada cabo do pack;
+b) ligar o + no − e o − no +;
+c) o botão que força a saída com a battery do veículo quase morta;
+d) a tomada OBD-II embaixo do painel;
+e) o que o módulo perde quando fica sem power.
+
+### 2. Explicação
+
+Explique por que “o circuit é o mesmo” é uma afirmação verdadeira que **não**
+justifica prender o clamp preto no negative terminal.
+
+### 3. Aplicação direta
+
+a) Um pack de 12.7 V com 0.01 Ω é ligado a uma battery de veículo em 11.5 V
+com 0.04 Ω. Que current passa entre eles?
+
+b) Que voltage o visor mostra?
+
+c) Os clamps desse pack se tocam num ponto de 0.003 Ω. Que current passa?
+
+### 4. Variação
+
+Refaça o item (a) do exercício 3 com a battery do veículo em **9.0 V**, todo o
+resto igual. A current ficou maior ou menor? O que isso diz sobre esperar
+antes de dar a partida numa battery muito descarregada?
+
+### 5. Caso de diagnóstico
+
+Um aluno pega o jump pack para socorrer um carro no pátio. Ele prende o clamp
+vermelho no positive terminal e o preto no bloco do motor, energiza os clamps
+e o visor acusa erro. Ele aperta o botão outra vez; o mesmo erro.
+
+a) Cite três causas possíveis para esse erro, em ordem do mais simples ao mais
+complexo.
+
+b) Que inspeção, sem nenhum instrumento, descarta a mais simples delas?
+
+c) Se o visor mostrar reverse polarity, o que ele está dizendo, e o que o aluno
+deve fazer?
+
+d) Suponha que tudo se resolva e o motor pegue. Por que o serviço ainda não
+acabou?
+
+### 6. Justificativa
+
+Por que o procedimento manda **desligar o botão dos clamps antes** de tirar
+qualquer garra, se a última garra a sair já vai estar longe da battery?
+
+### 7. Formato ASE
+
+**Question 1.** When connecting a jump pack to a negatively grounded vehicle,
+the final connection should be made:
+
+- A. to the negative battery terminal
+- B. to a clean, unpainted metal part of the engine block, away from the
+  battery
+- C. to the positive battery terminal
+- D. to the carburetor or fuel line bracket
+
+**Question 2.** Technician A says that a jump pack's reverse polarity
+protection makes it safe to let the two clamps touch each other. Technician B
+says that the clamps must never be allowed to touch. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A memory saver is connected through the data link connector
+while the battery is removed. The technician should:
+
+- A. leave the battery cables loose in the engine compartment
+- B. secure or insulate the positive cable clamp, because it is still
+  energized
+- C. disconnect the memory saver before removing the battery
+- D. ground the positive cable clamp to the body
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Clamp. b) Reverse polarity. c) Override switch. d) Data link connector
+   (OBD-II). e) Keep alive memory (KAM).
+
+2. Porque a afirmação só olha para o circuit, e o motivo da regra está fora
+   dele. É verdade que o bloco e o negative terminal são o mesmo nó: a current,
+   a voltage e o resultado do jump são iguais nos dois casos. O que muda é o
+   **ambiente** em volta do ponto onde a última ligação é feita. Em cima da
+   battery há hydrogen gas acumulado, e a faísca da ligação final acende esse
+   gás. A regra é de segurança, não de eletricidade — e é por isso que ela não
+   aparece no esquema.
+
+3. a) $I = (12.7 - 11.5) \div (0.01 + 0.04) = 1.2 \div 0.05 = 24\,\text{A}$.
+
+   b) Pelo lado do pack: $12.7 - 24 \times 0.01 = 12.7 - 0.24 = 12.46\,$V.
+   Conferindo pelo veículo: $11.5 + 24 \times 0.04 = 11.5 + 0.96 = 12.46\,$V.
+
+   c) $R_T = 0.01 + 0.003 = 0.013\,\Omega$;
+   $I = 12.7 \div 0.013 \approx 977\,\text{A}$.
+
+4. $I = (12.7 - 9.0) \div 0.05 = 3.7 \div 0.05 = 74\,\text{A}$: bem **maior**
+   que os 24 A do exercício 3.
+
+   Faz sentido, porque a diferença de voltage entre as duas fontes é o que
+   empurra a current, e ela triplicou. E isso é exatamente o argumento para
+   esperar: numa battery muito descarregada, o pack entrega bastante current
+   logo no começo, e alguns minutos nesse regime levantam a voltage da battery
+   do veículo de forma perceptível. Dar partida no primeiro segundo faz o pack
+   sozinho carregar o starter motor **e** a battery vazia ao mesmo tempo.
+
+5. a) **Mais simples:** contato ruim de um dos clamps — garra em cima de tinta,
+   de óleo ou de corrosion, ou mola fraca. **Intermediário:** a battery do
+   veículo está tão baixa que o aparelho não a reconhece como battery; é o caso
+   do override switch, se o manual do aparelho permitir. **Mais complexo:** a
+   battery do veículo está com uma cell em curto ou em circuito aberto
+   internamente, e nenhuma ligação externa resolve.
+
+   b) Soltar e reprender os clamps em metal limpo e descascado, apertando bem,
+   e olhar as garras: marcas de queimado, mola frouxa, cabo com isolamento
+   aberto. Isso descarta ou confirma o contato ruim sem nenhum instrumento.
+
+   c) Que ele está lendo voltage com o sinal trocado: o clamp vermelho está no
+   lado negativo do sistema e o preto no positivo. Ele deve **desligar o
+   aparelho**, soltar os dois clamps, conferir qual post é o positivo e qual
+   está ligado à carroceria, e refazer a ligação. Não se corrige isso
+   insistindo no botão.
+
+   d) Porque o jump start moveu o carro, mas não explicou **por que** a battery
+   estava descarregada. Pode ser a battery no fim da vida, o charging system
+   que não repõe, consumo parasita, ou uma luz esquecida acesa.
+   Entregar o carro sem responder isso é devolver o mesmo problema para a
+   semana que vem.
+
+6. Porque, enquanto os clamps estão energizados, **qualquer** separação de
+   contato com current passando produz faísca — inclusive a da garra que está
+   no chassi, e inclusive a da garra que está no post, que é a última a sair e
+   está em cima da battery. Desligar o botão primeiro interrompe a current
+   antes, e aí as duas garras saem sem nada passando por elas. É o mesmo
+   raciocínio da regra principal, aplicado ao fim do serviço: o procedimento
+   escolhe o lugar da faísca e, quando pode, elimina a faísca.
+
+7. **Question 1: B.** A última ligação faísca, e ela precisa acontecer longe do
+   hydrogen gas que fica em cima da battery. A é o erro clássico. C está errada
+   porque o positivo é a **primeira** ligação, não a última. D é perigoso:
+   carburador e linha de combustível são justamente onde a faísca não pode
+   acontecer.
+
+   **Question 2: B.** A proteção de reverse polarity impede o aparelho de
+   energizar os clamps ligados ao contrário; ela não tem nada a ver com os dois
+   clamps se tocando. Encostá-los é um short circuit direto na battery interna
+   do pack, que tem resistance interna baixíssima — mais de mil amperes, como
+   no exemplo 3.
+
+   **Question 3: B.** Com o memory saver alimentando pelo data link connector,
+   o sistema continua energizado e os cabos soltos também. A garra do positivo
+   precisa ser presa ou isolada. A é exatamente o descuido perigoso. C anula o
+   motivo de usar o memory saver. D é um short circuit deliberado.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** num jump start, o circuit é o mesmo de qualquer jeito
+  que você ligue — o que o procedimento escolhe é **onde a faísca acontece**.
+  Primeiro clamp no post que não é o ground; último clamp no metal do veículo,
+  longe da battery; na saída, inverte, e desenergize antes. A eletrônica do
+  pack protege o aparelho, não o seu procedimento.
+- **Quando usar:** para mover um veículo que não pega, para manter a memória
+  dos módulos durante a troca de battery, e para alimentar um aparelho de 12 V
+  no pátio.
+- **Com o que se conecta:** o hydrogen gas e o short circuit vêm de
+  [Segurança com a battery](./seguranca-da-battery); a resistance interna e a
+  capacidade de entregar current, de
+  [A battery por dentro](./a-battery-por-dentro); o memory saver e o cuidado
+  com os cabos vivos, de [Manutenção da battery](./manutencao-da-battery);
+  as duas fontes em paralelo, de
+  [Parallel circuit](./circuito-em-paralelo); e a ideia de que um jump start
+  não é diagnóstico, da seção de raciocínio de diagnóstico que atravessa todo
+  este material.
+
+**Termos desta lição para revisar:** jump pack, jump start, clamp, reverse
+polarity, override switch, negative ground, memory saver, data link connector,
+keep alive memory.

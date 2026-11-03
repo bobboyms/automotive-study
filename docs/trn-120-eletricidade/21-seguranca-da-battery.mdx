@@ -1,0 +1,701 @@
+---
+title: "Segurança com a battery: gás, ácido e a current enorme"
+sidebar_label: Segurança com a battery
+---
+
+import Bateria from '@site/src/components/Bateria';
+
+# Segurança com a battery: gás, ácido e a current enorme
+
+> **Pergunta central:** a battery é a peça mais tranquila do carro — fica
+> parada num canto do compartimento do motor e ninguém tem medo dela. Por que
+> ela é, ao mesmo tempo, uma das peças que mais manda gente para o pronto
+> socorro?
+
+## A queixa: a battery que explodiu na mão do técnico
+
+Um relato de oficina, do tipo que aparece em treinamento de segurança:
+
+> “Eu só ia trocar a battery. Soltei o cabo vermelho primeiro. A chave de boca
+> escorregou e encostou no suporte do radiador. Saiu uma faísca, e a battery
+> estourou. Tomei ácido no rosto.”
+
+Três coisas aconteceram nessa frase, e nenhuma delas é azar:
+
+1. soltar o cabo do **positive terminal** primeiro deixou um caminho pronto
+   para a current;
+2. a chave encostando no metal da carroceria fechou esse caminho, e a current
+   que passou foi grande o bastante para derreter metal;
+3. a faísca aconteceu bem em cima de uma battery que estava soltando
+   **hydrogen gas**.
+
+Ao fim desta lição você vai saber de onde vem cada um dos três riscos, qual
+conta mostra o tamanho do terceiro, e por que a ordem de soltar os cabos não é
+superstição de mecânico antigo.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| sulfuric acid | ácido sulfúrico | o ácido do electrolyte; queima pele, olhos, roupa e metal |
+| hydrogen gas | gás hidrogênio | gás que a battery solta ao carregar; explode com uma faísca |
+| vent cap | tampa de respiro | a tampa de cada cell, por onde o gás escapa |
+| spark | faísca | a descarga curta que acontece quando dois metais com voltage diferente se tocam ou se separam |
+| personal protective equipment | equipamento de proteção individual | óculos, luvas e roupa de trabalho |
+| safety glasses | óculos de segurança | a proteção mínima para qualquer serviço na battery |
+| baking soda | bicarbonato de sódio | pó que neutraliza o ácido derramado |
+| eyewash station | lava-olhos | o ponto de água corrente para lavar o olho atingido |
+| negative ground | massa pelo negativo | sistema em que o negative terminal é ligado à carroceria |
+| positive ground | massa pelo positivo | sistema antigo, com o positive terminal na carroceria |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Toda vez que alguém encosta numa battery: trocar, testar, carregar, dar
+**jump start**, limpar terminal, ou só desconectar o cabo antes de mexer no
+chicote. Também em veículo acidentado, em battery de equipamento de oficina e
+no jump pack, que tem uma battery dentro.
+
+Na Wake Tech, esta lição abre o **módulo 3** da TRN-120 (*Relays & Battery
+Maintenance*), cuja parte de battery segue a certificação NC3 da Snap-on. A
+primeira unidade desse material é inteira de segurança, antes de qualquer
+procedimento — e é assim que vai ser aqui. O assunto também volta na AUT-114
+(*Safety and Emissions*). Na prova ASE, a área é **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Circuit protection](./protecao-do-circuito), o que é um **short
+   circuit** e por que ele puxa tanta current?
+2. Na lição [Ohm's law](./lei-de-ohm), o que acontece com a current quando a
+   resistance do caminho fica muito pequena?
+3. Na lição [Electrical power](./potencia-eletrica), para onde vai a power que
+   se perde numa resistance?
+4. Na lição [O electrical circuit](./o-circuito-eletrico), por que a carroceria
+   do carro faz parte do circuit?
+
+<details>
+<summary>Respostas</summary>
+
+1. É um caminho que leva a current da fonte de volta ao ground **sem passar
+   por uma load**. Como a load é o que segurava a current, ela some do caminho
+   e sobra quase só a resistance dos wires, que é pequena.
+2. A current sobe. Em $I = V \div R$, dividir por um número menor dá um
+   resultado maior; dividir por um número muito pequeno dá um resultado muito
+   grande.
+3. Vira **calor**, pela conta $P = V \times I$. Quanto mais power se perde num
+   ponto, mais quente esse ponto fica.
+4. Porque o **ground** do carro é a própria carroceria: o negative terminal da
+   battery é parafusado nela, e a corrente de volta de quase toda load passa
+   pelo metal do carro em vez de um wire dedicado. Guarde isso: é a chave da
+   seção sobre a ordem dos cabos.
+
+</details>
+
+## Intuição: três perigos dentro da mesma caixa
+
+A battery parece uma caixa de plástico pesada. Por dentro, ela guarda três
+coisas perigosas ao mesmo tempo, e cada uma pede um cuidado diferente.
+
+1. **Um ácido forte.** O líquido em que as plates ficam mergulhadas é ácido
+   sulfúrico diluído em água. Ele queima a pele e cega.
+2. **Um gás explosivo.** Enquanto a battery carrega, parte da água do
+   electrolyte se separa em hidrogênio e oxigênio. O hidrogênio sai pelas
+   **vent caps** e fica em volta da battery. Ele não tem cheiro nem cor, então
+   ninguém percebe que está ali.
+3. **Uma fonte de current enorme.** A battery tem resistance interna muito
+   baixa, de propósito: é isso que permite a ela girar o starter motor. A mesma
+   característica faz com que um curto nos terminals entregue centenas de
+   amperes em um instante.
+
+O acidente da queixa é o encontro dos três: a current enorme produziu a faísca,
+a faísca acendeu o gás, e a explosão espalhou o ácido.
+
+Uma comparação ajuda, desde que você veja onde ela para de valer: a battery é
+como um botijão de gás com dois parafusos de metal em cima. O botijão você
+respeita porque sabe que tem gás dentro. A diferença é que, no botijão, o gás é
+o conteúdo; na battery, o gás é **produzido durante o uso**, e o detonador
+— a faísca — está nos dois parafusos que você precisa encostar a ferramenta
+para trabalhar.
+
+## Modelo visual: o acidente inteiro numa figura
+
+<Bateria
+  modo="risco"
+  caption="Os dois riscos que andam juntos. Em cima, uma chave de boca caída atravessa os dois terminals e fecha um short circuit: a current passa por ela e faz faísca no ponto de contato. À direita, o hydrogen gas sobe pela vent cap e fica em volta da battery. Embaixo, o electrolyte, que é ácido sulfúrico. O valor de current é ilustrativo, e a conta está no exemplo 1."
+/>
+
+Repare no que a figura mostra e no que o olho não mostra: o gás é invisível e
+não tem cheiro. O desenho precisa pintá-lo para você saber que ele está ali; na
+oficina, ninguém pinta.
+
+## Ponte para a formalização
+
+Os três riscos não são avisos soltos: cada um sai de uma propriedade da
+battery que já foi estudada ou que a lição seguinte vai detalhar. O gás vem da
+reação química; o ácido é o electrolyte dessa reação; a current enorme vem da
+resistance interna baixa. Por isso as regras adiante não são uma lista para
+decorar — cada uma pode ser deduzida do perigo que combate.
+
+## Formalização: os três riscos, um a um
+
+### Risco 1: o hydrogen gas
+
+Quando a battery recebe carga — do alternator, de um battery charger ou de um
+jump pack —, parte da água do electrolyte se quebra em hidrogênio e oxigênio.
+O hidrogênio sai pelas vent caps.
+
+Três fatos que decidem o cuidado:
+
+- o hidrogênio **é mais leve que o ar**, então ele sobe e se acumula na parte
+  de cima de um espaço fechado — embaixo do capô, por exemplo;
+- a mistura de hidrogênio com ar explode a partir de concentrações baixas, da
+  ordem de 4% de hidrogênio no ar;
+- não dá para ver nem cheirar.
+
+> **Regra:** nunca produza faísca, chama ou cigarro perto de uma battery, e
+> carregue sempre em **lugar ventilado**.
+
+- **Exemplo de faísca que conta:** o instante em que você encosta ou tira a
+  cable clamp do post com algum circuit ligado. Essa faísca é pequena e é
+  exatamente a que acende o gás.
+- **Contraexemplo:** encostar a ponta de prova de um voltímetro no post com o
+  carro desligado praticamente não faz faísca, porque o instrumento puxa uma
+  current minúscula — foi o assunto da lição
+  [Outros instrumentos de teste](./instrumentos-de-teste).
+
+### Risco 2: o sulfuric acid
+
+O electrolyte é ácido sulfúrico misturado com água. Ele ataca pele, olhos,
+roupa, ferramenta e lataria.
+
+:::danger Ácido nos olhos
+
+Se cair ácido no olho, **lave com água fria corrente por pelo menos dez
+minutos** e procure atendimento médico. Continue lavando os dez minutos
+inteiros mesmo que a dor passe: o ácido pode ter danificado o nervo, e a
+ausência de dor não quer dizer ausência de ácido. Localize o **eyewash station**
+da sua oficina **antes** de precisar dele.
+
+:::
+
+Na pele ou na roupa, lave na hora com bastante água e sabão. Derramou no chão
+ou em cima da battery: jogue **baking soda** para neutralizar — ele borbulha
+enquanto está fazendo efeito e para quando o ácido acabou — e só depois limpe.
+
+- **Exemplo:** a crosta branca ou azulada em volta do post é ácido que vazou e
+  reagiu com o metal. Ela queima a mão sem luva.
+- **Contraexemplo:** a sujeira preta e seca na tampa da battery costuma ser
+  poeira com óleo, e não ácido. Isso não quer dizer que ela seja inofensiva:
+  a lição [Manutenção da battery](./manutencao-da-battery) mostra que essa
+  sujeira descarrega a battery por fora.
+
+### Risco 3: a current de curto
+
+Este é o risco que o aluno subestima, porque 12 V parece pouco. O problema não
+é a voltage — é a current.
+
+A battery é construída com resistance interna muito baixa. Se os dois terminals
+forem ligados por um pedaço de metal, o circuit que se forma é um short
+circuit: battery → metal → battery, sem nenhuma load no caminho. Pela lei de
+Ohm, a current que passa é a voltage dividida por uma resistance minúscula, e
+o resultado é da ordem de centenas de amperes. O exemplo 1 faz essa conta.
+
+O que essa current faz, em ordem de aparição:
+
+1. **faísca**, no instante do contato — e o gás está ali;
+2. **calor**: a ferramenta esquenta até ficar vermelha em segundos, e cola na
+   pele ou na aliança;
+3. **metal derretido** espirrando;
+4. **a própria battery**, que esquenta por dentro e pode romper.
+
+:::danger Anel, relógio e pulseira
+
+Tire **todo metal da mão e do punho** antes de encostar numa battery. Uma
+aliança que feche o circuit entre o post e a carroceria vira um aro em brasa
+em volta do dedo, e não dá para tirá-la a tempo. Esse é o acidente mais comum
+e um dos mais graves.
+
+:::
+
+### A ordem dos cabos, e por que ela é assim
+
+Quase todo carro moderno é **negative ground**: o negative terminal da battery
+é parafusado na carroceria, então a carroceria inteira está no mesmo potencial
+do negativo. Isso decide a ordem.
+
+> **Para desconectar: o negative cable sai primeiro.**
+> **Para reconectar: o positive cable entra primeiro, e o negative por último.**
+
+O raciocínio, passo a passo:
+
+- Com o **negative** solto, a carroceria não está mais ligada à battery. A
+  chave de boca pode encostar em qualquer lugar da lataria enquanto você mexe
+  no positive: não existe caminho de volta, então não passa current e não há
+  faísca.
+- Com o **positive** solto primeiro, acontece o contrário. A carroceria
+  continua ligada ao negativo, e o positive terminal continua vivo. A chave
+  encostando entre o positive terminal e qualquer metal da carroceria fecha o
+  short circuit — foi o que aconteceu na queixa.
+
+:::warning Em veículo de positive ground, a regra inverte
+
+Alguns veículos antigos, e certos equipamentos, são **positive ground**: é o
+positivo que vai à carroceria. Nesses, o cabo que sai primeiro é o positivo.
+Antes de soltar qualquer cabo num veículo que você não conhece, **olhe qual
+post está parafusado na carroceria.** É uma conferência de cinco segundos.
+
+:::
+
+### Os safety symbols do equipamento
+
+Carregador, jump pack e battery trazem símbolos gravados. Eles são a instrução
+mais curta que existe, e caem na prova. Os que aparecem no material da aula:
+
+| Símbolo | O que quer dizer |
+|---|---|
+| livro com ponto de exclamação | *refer to instruction manual*: leia o manual antes de usar |
+| óculos | *wear eye protection*: use óculos de segurança |
+| luva | *wear protective gloves* |
+| triângulo com raio | *warning: electricity* — risco de choque |
+| triângulo com chama | *warning: flammable material* |
+| triângulo com explosão | *warning: explosive material* |
+| traço contínuo sobre tracejado | *direct current* — corrente contínua (DC) |
+| V | *volts* |
+| quadrado dentro de quadrado | *double insulation* — isolamento duplo |
+| UL | *Underwriters Laboratories*: testado por esse laboratório |
+| CE | conformidade com as regras europeias |
+| RCM | conformidade australiana e neozelandesa |
+| FCC | *Federal Communications Commission*, nos Estados Unidos |
+| BC | atende ao *California Title 20* de eficiência de carregador |
+
+Os quatro últimos não são avisos de risco: são selos de conformidade. Vale
+saber distinguir, porque a prova pergunta.
+
+## Como falha e como diagnosticar
+
+Aqui, "falha" é o acidente — e quase sempre ele tem uma causa elétrica que
+podia ser prevista.
+
+| O que aconteceu | Causa | O que teria evitado |
+|---|---|---|
+| faísca ao soltar o cabo | algum circuit ainda ligado, puxando current | desligar a ignição e as loads antes |
+| chave em brasa | short entre o positive terminal e a carroceria | soltar o negative cable primeiro |
+| aliança queimada | o anel fechou o circuit | tirar todo metal da mão |
+| battery estourou | faísca em cima do hydrogen gas | ventilação, e nenhuma faísca perto |
+| ácido no rosto | explosão ou battery inclinada demais | óculos e proteção facial, battery na vertical |
+| cable clamp quebrada ao bater | alavanca na garra em vez do puller | usar o battery terminal puller |
+
+### Um sinal de battery danificada que você precisa ver antes de encostar
+
+Antes de ligar qualquer coisa numa battery, olhe o **battery case**. Se ele estiver
+**estufado** — as laterais abauladas —, a battery sofreu sobrecarga ou
+congelamento e está com pressão interna. Nesse estado, uma current de carga ou
+de partida pode rompê-la. Não dê jump start, não carregue, não teste: chame o
+instrutor.
+
+:::danger Battery congelada
+
+Uma battery descarregada congela com frio moderado, porque o electrolyte sem
+carga é quase água. **Nunca carregue nem dê jump start numa battery
+congelada**, e não force a carga numa battery visivelmente estufada. O gelo
+não deixa a reação acontecer, a energia vira pressão, e a caixa arrebenta.
+
+:::
+
+### A queixa resolvida
+
+Volte ao técnico que soltou o cabo vermelho primeiro.
+
+1. **O que deveria acontecer:** com o negative cable solto primeiro, a
+   carroceria fica desligada da battery, e encostar a chave em qualquer lugar
+   não fecha circuit nenhum.
+2. **O que ele fez:** soltou o positive primeiro. O caminho
+   positive terminal → chave → carroceria → cabo de massa → negative terminal
+   ficou pronto, faltando só encostar a chave.
+3. **O princípio que liga as duas coisas:** o ground do carro é a carroceria
+   (lição [O electrical circuit](./o-circuito-eletrico)), e um caminho sem load
+   entre o positivo e o ground é um short circuit (lição
+   [Circuit protection](./protecao-do-circuito)).
+4. **O que mudou quando a chave encostou:** a resistance do caminho caiu para
+   alguns centésimos de ohm, e a current saltou para centenas de amperes.
+   **O que não mudou:** a voltage da battery continuou perto de 12.6 V. Não foi
+   a voltage que subiu; foi a resistance que desabou.
+5. **Por que explodiu e não só esquentou:** a faísca do contato aconteceu a
+   poucos centímetros das vent caps, onde havia hydrogen gas acumulado.
+
+**A correção:** negative cable primeiro, óculos no rosto, metal fora da mão,
+e nada de faísca perto da battery.
+
+## Na oficina: antes de encostar na battery
+
+:::warning A lista que vem antes do primeiro passo
+
+- **Óculos de segurança** sempre; proteção facial quando for carregar ou dar
+  jump start. Luvas resistentes a ácido para limpar terminal.
+- **Tire anel, relógio, pulseira e corrente.** Prenda a gravata e a manga
+  solta.
+- **Desligue a ignição e todas as loads** antes de mexer nos cabos. Isso
+  diminui a faísca no momento do contato.
+- **Trabalhe em lugar ventilado**, principalmente ao carregar.
+- **Nada de chama, cigarro ou esmerilhadeira** perto da battery.
+- **Não apoie ferramenta em cima da battery.** Uma chave deitada ali é um
+  short esperando acontecer.
+- **Tenha alguém por perto** quando for trabalhar com lead-acid battery, e
+  saiba onde fica o eyewash station.
+- **Olhe o battery case** antes: estufado, trincado ou vazando, pare e chame o
+  instrutor.
+- **Não incline a battery.** Numa flooded cell, o ácido escorre pelas vent
+  caps.
+- **Siga a instrução de ligação de cada equipamento.** Charger e jump pack têm
+  ordem própria, e ela vem no manual do aparelho.
+
+:::
+
+Com a lista cumprida, a sequência para desconectar é esta:
+
+1. Ignição desligada, luzes e acessórios desligados.
+2. Confirme qual post está parafusado na carroceria: é o do ground.
+3. Solte a porca da cable clamp do **negative** terminal e tire a garra do
+   post. Afaste o cabo para que ele não volte sozinho.
+4. Só então solte o **positive**.
+5. Para montar de volta, inverta: **positive primeiro, negative por último.**
+
+No passo 3, se a garra estiver presa, use o **battery terminal puller**. Fazer
+alavanca com chave de fenda rompe a ligação interna entre o post e a plate, e
+isso estraga a battery por dentro sem deixar marca por fora.
+
+## Exemplos resolvidos
+
+### Exemplo 1: quanta current passa pela chave de boca
+
+Uma battery de 12.6 V tem 0.025 Ω de resistance interna, e a chave que caiu
+sobre os dois terminals acrescenta 0.005 Ω (valores típicos, só para o
+exemplo — a resistance interna real depende da battery e do estado de carga).
+
+Qual é a current do short, e quanta power a chave transforma em calor?
+
+<details>
+<summary>Solução</summary>
+
+As duas resistances estão em série, então se somam:
+
+$$
+R_T = 0.025 + 0.005 = 0.030\,\Omega
+$$
+
+Pela lei de Ohm:
+
+$$
+I = \frac{V}{R} = \frac{12.6}{0.030} = 420\,\text{A}
+$$
+
+A power que fica **na chave** sai de $P = I \times I \times R$, com o R da
+chave:
+
+$$
+P = 420 \times 420 \times 0.005 = 882\,\text{W}
+$$
+
+Oitocentos e oitenta e dois watts dentro de um pedaço de aço do tamanho da
+palma da mão. Para comparar: o headlamp da lição
+[Loads: bulbs e motores](./cargas-bulbs-e-motores) gasta 55 W, e um secador de
+cabelo, uns 1500 W. A chave fica vermelha em segundos.
+
+E a battery não escapa: ela fica com os outros
+$12.6 \times 420 - 882 = 4410\,\text{W}$, dissipados por dentro dela mesma.
+
+</details>
+
+### Exemplo 2: por que a aliança é pior que a chave
+
+**Pause e tente:** uma aliança de ouro tem resistance muito baixa — digamos
+0.001 Ω (valor ilustrativo). Com a mesma battery do exemplo 1, qual é a
+current, e quanta power fica no anel? Compare com a chave.
+
+<details>
+<summary>Dica</summary>
+
+Refaça a mesma conta, trocando só a resistance da peça. Depois pense em onde
+estão esses watts: a chave você solta; o anel, não.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+$$
+R_T = 0.025 + 0.001 = 0.026\,\Omega
+\qquad
+I = \frac{12.6}{0.026} \approx 485\,\text{A}
+$$
+
+$$
+P = 485 \times 485 \times 0.001 \approx 235\,\text{W}
+$$
+
+São 235 W, menos que os 882 W da chave — e mesmo assim o caso é muito pior,
+por duas razões que não aparecem na conta.
+
+1. **O volume é minúsculo.** Os mesmos watts concentrados num aro fino
+   aquecem o metal muito mais depressa que num corpo grande de aço.
+2. **Não dá para soltar.** A chave você joga longe no primeiro instante. O
+   anel está preso no dedo, e vai continuar aquecendo enquanto o contato
+   durar.
+
+É por isso que a regra sobre metal na mão é absoluta, e não "quando der".
+
+</details>
+
+### Exemplo 3: a ordem dos cabos, em forma de circuit
+
+**Pause e tente:** desenhe mentalmente o caminho da current nas duas situações
+abaixo e diga em qual passa current.
+
+a) Negative cable já solto. A chave encosta ao mesmo tempo no positive
+terminal e no suporte do radiador.
+
+b) Positive cable já solto. A chave encosta ao mesmo tempo no negative
+terminal e no suporte do radiador.
+
+<details>
+<summary>Solução</summary>
+
+a) **Não passa current.** O caminho seria positive terminal → chave →
+carroceria → ... → negative terminal. Mas o negative cable está solto, então a
+carroceria não chega mais ao negative terminal. O circuit está aberto, e um
+circuit aberto não conduz — é a lição
+[O electrical circuit](./o-circuito-eletrico).
+
+b) **Também não passa current**, pelo mesmo motivo invertido: o positive está
+solto, então não há nada ligando o positive terminal à carroceria.
+
+O ponto que o exercício esconde é este: o perigo não é soltar um cabo, é o
+**intervalo** entre soltar um e soltar o outro. Durante esse intervalo, um dos
+dois terminals ainda está ligado à carroceria. Se o que sobrou ligado for o
+negativo, a carroceria é "negativo" e encostar a chave no positivo fecha o
+curto. Se o que sobrou ligado for o positivo — caso de quem soltou o negativo
+primeiro —, a carroceria está desligada de tudo, e encostar a chave nela não
+fecha nada.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o hydrogen gas é mais perigoso do que um gás que a gente conseguisse
+   cheirar?
+2. De onde vem o hidrogênio que sai da battery?
+3. Por que 12 V podem derreter uma chave de boca, se 12 V não dão nem choque?
+4. Por que o negative cable sai primeiro num carro de negative ground?
+5. O que você faz antes de soltar qualquer cabo num veículo cujo sistema de
+   ground você não conhece?
+6. Qual é o primeiro cuidado ao derramar electrolyte na bancada?
+7. Por que não se faz alavanca com chave de fenda para tirar a cable clamp?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque ninguém sabe que ele está ali. Um gás com cheiro avisa, e a pessoa
+   se afasta ou ventila o lugar. O hidrogênio não tem cheiro nem cor, sobe e se
+   acumula bem em cima da battery, que é onde a ferramenta trabalha.
+2. Da água do electrolyte. Durante a carga, parte dessa água se separa em
+   hidrogênio e oxigênio, e o hidrogênio sai pelas vent caps.
+3. Porque o estrago vem da **current**, não da voltage. Choque depende de
+   voltage alta o bastante para empurrar current pelo corpo, e 12 V não
+   conseguem. Derreter metal depende de quanta current passa pelo metal, e isso
+   depende da resistance do caminho: com alguns centésimos de ohm, 12.6 V
+   produzem centenas de amperes.
+4. Porque a carroceria é o ground. Soltando o negativo primeiro, a carroceria
+   deixa de estar ligada à battery, e a ferramenta pode encostar nela sem
+   fechar circuit. Soltando o positivo primeiro, a carroceria continua ligada
+   ao negativo e o positive terminal continua vivo: encostar a ferramenta entre
+   os dois é um short circuit.
+5. Olha **qual post está parafusado na carroceria**. Esse é o ground, e é o
+   cabo que sai primeiro. Em quase todo carro moderno é o negativo, mas em
+   veículo antigo e em alguns equipamentos é o positivo.
+6. Neutralizar com baking soda antes de limpar. Enquanto borbulha, ainda há
+   ácido reagindo; quando para de borbulhar, o ácido acabou.
+7. Porque a alavanca empurra o post para o lado, e o post é ligado por dentro
+   da battery à plate strap. Esse esforço rompe ou trinca a ligação interna. A
+   battery passa a ter resistance alta ou a falhar de forma intermitente, e
+   nada aparece por fora. A ferramenta certa é o battery terminal puller, que
+   puxa a garra para cima sem empurrar o post.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o que cada item é ou para que serve:
+
+a) baking soda na bancada da battery;
+b) vent cap;
+c) eyewash station;
+d) o símbolo do triângulo com um raio dentro;
+e) o símbolo do quadrado dentro de outro quadrado.
+
+### 2. Explicação
+
+Explique, com as suas palavras, por que a faísca que acende o hydrogen gas
+costuma acontecer exatamente no momento em que se encosta ou se tira a cable
+clamp do post.
+
+### 3. Aplicação direta
+
+a) Uma battery de 12.6 V com 0.02 Ω internos é curto-circuitada por uma barra
+de metal de 0.004 Ω. Qual é a current?
+
+b) Quanta power fica na barra?
+
+c) Quanta power fica dentro da battery?
+
+### 4. Variação
+
+Refaça o item (a) do exercício 3 com uma battery mais velha, cuja resistance
+interna subiu para 0.06 Ω, e a mesma barra de 0.004 Ω. A current ficou maior
+ou menor? Isso torna a battery velha mais segura?
+
+### 5. Caso de diagnóstico
+
+Um colega vai trocar a battery de um sedan de 2016. Ele desliga a ignição,
+solta a porca do terminal marcado com um sinal de mais e começa a balançar a
+garra com uma chave de 10 mm na mão.
+
+a) Que risco ele criou, e por quê?
+
+b) Qual é o caminho elétrico exato que uma encostada da chave fecharia?
+
+c) O que você diria para ele fazer primeiro?
+
+d) Se ele já tivesse soltado os dois cabos, a chave encostando no positive
+terminal e na carroceria causaria algum problema?
+
+### 6. Justificativa
+
+Por que a regra "tire anel e relógio" é mais rígida que a regra "não apoie
+ferramenta em cima da battery", se as duas tratam do mesmo short circuit?
+
+### 7. Formato ASE
+
+**Question 1.** A technician is removing a battery from a negatively grounded
+vehicle. Which cable should be disconnected first?
+
+- A. the positive cable
+- B. the negative cable
+- C. either one, as long as the ignition is off
+- D. both at the same time
+
+**Question 2.** Technician A says that a spark near a battery can cause an
+explosion because the battery gives off hydrogen gas. Technician B says that
+battery acid spills should be neutralized with baking soda. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** Battery acid has splashed into a technician's eye. The
+technician should:
+
+- A. rub the eye with a clean shop towel
+- B. flush the eye with cold water for at least 10 minutes and seek medical
+  attention
+- C. apply baking soda directly to the eye
+- D. wait to see whether the pain goes away
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Pó para neutralizar ácido derramado antes da limpeza. b) A tampa de cada
+   cell, por onde o hydrogen gas escapa. c) O ponto de água corrente para lavar
+   o olho atingido por ácido; localize-o antes de começar o serviço. d) *Warning:
+   electricity* — risco elétrico. e) *Double insulation*: o aparelho tem
+   isolamento duplo, não é um selo de risco.
+
+2. Porque é nesse instante que dois metais com voltage diferente se aproximam
+   ou se separam com uma current querendo passar. Enquanto a garra está firme no
+   post, o contato é grande e não faísca. No momento de encostar, a current
+   começa a passar por um ponto minúsculo e salta o último milímetro de ar; no
+   momento de tirar, ela insiste em passar enquanto o contato se abre. Os dois
+   instantes acontecem a poucos centímetros das vent caps, que é onde o gás
+   está.
+
+3. a) $R_T = 0.02 + 0.004 = 0.024\,\Omega$;
+   $I = 12.6 \div 0.024 = 525\,\text{A}$.
+
+   b) $P = 525 \times 525 \times 0.004 \approx 1102\,\text{W}$.
+
+   c) $P = 525 \times 525 \times 0.02 \approx 5513\,\text{W}$.
+   Conferindo pelo total: $12.6 \times 525 = 6615\,\text{W}$, e
+   $1102 + 5513 = 6615$. Bate.
+
+4. $R_T = 0.06 + 0.004 = 0.064\,\Omega$;
+   $I = 12.6 \div 0.064 \approx 197\,\text{A}$.
+
+   A current ficou **menor** — menos da metade. E não, isso não torna a battery
+   velha segura: 197 A ainda derretem metal e ainda fazem faísca. Além disso, a
+   resistance interna alta é justamente o defeito que faz a battery não girar
+   mais o starter motor. Uma battery ruim é menos perigosa e menos útil ao
+   mesmo tempo; nenhuma das duas coisas muda o procedimento.
+
+5. a) Ele soltou o **positivo primeiro** num carro de negative ground. Enquanto
+   o negativo estiver ligado, a carroceria inteira está no potencial negativo e
+   o positive terminal está vivo. Qualquer encostada da chave entre os dois é um
+   short circuit.
+
+   b) positive terminal → chave de 10 mm → suporte ou lataria em que ela
+   encostar → carroceria → cabo de massa → negative terminal da battery.
+
+   c) Parar, recolocar a garra do positivo se for o caso, e **soltar o negativo
+   primeiro**. Depois tirar o relógio e o anel e pôr os óculos.
+
+   d) Não. Com os dois cabos soltos, não existe caminho entre o positive
+   terminal e a carroceria: o circuit está aberto. O perigo mora no intervalo
+   entre soltar um cabo e soltar o outro.
+
+6. Porque as duas têm a mesma causa, mas consequências muito diferentes. A
+   ferramenta esquentando você joga longe no primeiro instante, e o contato
+   acaba. O anel está preso no dedo e não sai: os watts continuam entrando
+   enquanto o contato durar, num volume de metal minúsculo, encostado na pele.
+   O exercício resolvido 2 mostra que a current pode ser até maior no anel, por
+   causa da resistance ainda menor.
+
+7. **Question 1: B.** Em sistema de negative ground, soltar o negativo primeiro
+   desliga a carroceria da battery, e a ferramenta deixa de poder fechar um
+   short entre o positivo e a lataria. A alternativa A é exatamente o erro que
+   causa o acidente. C está errada porque a ignição desligada não muda o fato
+   de o positive terminal continuar vivo. D não é possível com uma pessoa só, e
+   não resolveria nada.
+
+   **Question 2: C.** As duas afirmações estão certas. A battery solta
+   hydrogen gas durante a carga, e esse gás explode com faísca; e o ácido
+   derramado se neutraliza com baking soda antes da limpeza.
+
+   **Question 3: B.** Água fria corrente por pelo menos dez minutos e
+   atendimento médico. A é errada e agrava a lesão. C é errada: baking soda
+   neutraliza ácido na bancada, não dentro do olho. D é errada porque a dor
+   pode parar por dano ao nervo, com o ácido ainda presente.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a battery guarda três perigos ao mesmo tempo — ácido
+  sulfúrico, hydrogen gas e uma fonte capaz de centenas de amperes. Os três se
+  encontram num único acidente: um short faz faísca, a faísca acende o gás, e a
+  explosão espalha o ácido. Toda regra desta lição ataca um dos três.
+- **Quando usar:** antes de qualquer serviço que envolva a battery — trocar,
+  testar, carregar, limpar terminal, dar jump start, ou só desconectar o cabo
+  para mexer no chicote.
+- **Com o que se conecta:** o short circuit e a current que ele puxa vêm da
+  lição [Circuit protection](./protecao-do-circuito); a conta da current, de
+  [Ohm's law](./lei-de-ohm); o calor da power perdida, de
+  [Electrical power](./potencia-eletrica); e o ground pela carroceria, de
+  [O electrical circuit](./o-circuito-eletrico). A próxima lição,
+  [A battery por dentro](./a-battery-por-dentro), mostra de onde vêm o ácido, o
+  gás e a resistance interna baixa.
+
+**Termos desta lição para revisar:** sulfuric acid, hydrogen gas, vent cap,
+spark, personal protective equipment, safety glasses, baking soda, eyewash
+station, negative ground, positive ground.

@@ -143,6 +143,28 @@ conhecimento anterior.
     precisa fazer. Wire stripper, crimp, solda rosin core, heat shrink, e a
     voltage drop que verifica o reparo.
 
+### Tópico 7 — Battery
+
+Este tópico acompanha o **módulo 3** da disciplina (*Relays & Battery
+Maintenance*), cuja parte de battery segue a certificação NC3 da Snap-on. O
+relay está na lição 10; aqui vem a battery, da segurança ao jump pack.
+
+21. [Segurança com a battery](./seguranca-da-battery) — os três perigos que
+    moram na mesma caixa: sulfuric acid, hydrogen gas e uma fonte capaz de
+    centenas de amperes. Por que o negative cable sai primeiro, o que o anel
+    na mão faz num short, e os safety symbols do equipamento.
+22. [A battery por dentro](./a-battery-por-dentro) — a cell de 2.1 V, as seis
+    em série que dão 12.6 V, e o que muda entre flooded cell, AGM, gel,
+    spiral cell, lithium-ion e NiMH. Group size diz se cabe; **CCA** diz se
+    gira o motor no frio.
+23. [Manutenção da battery](./manutencao-da-battery) — a sujeira na tampa é um
+    wire que ninguém instalou: o surface discharge test acha a fuga em um
+    minuto. O memory saver, o kit de ferramentas e os oito passos da limpeza.
+24. [Jump start e memory saver](./jump-start-e-memory-saver) — o circuit é o
+    mesmo de qualquer jeito; o procedimento escolhe **onde a faísca
+    acontece**. Onde vai cada clamp, a ordem de ligar e desligar, e o pack
+    usado como memory saver e como fonte de 12 V.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -153,17 +175,17 @@ conhecimento anterior.
 
 ### Próximos tópicos (em preparação)
 
-21. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+25. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-22. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+26. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-23. **Diagnóstico de circuits** — open circuit, short to ground, short to
+27. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-24. **Battery** — construção, state of charge, testes, recarga, jump start e
-    parasitic draw.
-25. **Starting system** — starter motor, solenoid e testes.
-26. **Charging system** — alternator, rectifier, voltage regulator e testes.
+28. **Testar e carregar a battery** — load test, conductance tester, recarga
+    e parasitic draw.
+29. **Starting system** — starter motor, solenoid e testes.
+30. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

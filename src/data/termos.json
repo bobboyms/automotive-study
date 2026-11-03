@@ -116,6 +116,22 @@
     "prova-pratica": {
       "titulo": "As seis medições na bancada",
       "url": "trn-120-eletricidade/prova-pratica"
+    },
+    "seguranca-da-battery": {
+      "titulo": "Segurança com a battery",
+      "url": "trn-120-eletricidade/seguranca-da-battery"
+    },
+    "a-battery-por-dentro": {
+      "titulo": "A battery por dentro",
+      "url": "trn-120-eletricidade/a-battery-por-dentro"
+    },
+    "manutencao-da-battery": {
+      "titulo": "Manutenção da battery",
+      "url": "trn-120-eletricidade/manutencao-da-battery"
+    },
+    "jump-start-e-memory-saver": {
+      "titulo": "Jump start e memory saver",
+      "url": "trn-120-eletricidade/jump-start-e-memory-saver"
     }
   },
   "termos": [
@@ -3638,7 +3654,9 @@
       "pt": "conector de diagnóstico",
       "def": "a tomada embaixo do painel onde o scan tool é ligado",
       "var": [
-        "DLC"
+        "DLC",
+        "OBD-II",
+        "OBD-II port"
       ],
       "licao": "scan-tool-e-osciloscopio"
     },
@@ -3850,6 +3868,365 @@
         "autorange"
       ],
       "licao": "prova-pratica"
+    },
+    {
+      "en": "sulfuric acid",
+      "pt": "ácido sulfúrico",
+      "def": "o ácido do electrolyte: queima pele, olhos e roupa, e come o metal",
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "hydrogen gas",
+      "pt": "gás hidrogênio",
+      "def": "gás que a battery solta ao carregar; explode com uma faísca",
+      "var": [
+        "hydrogen"
+      ],
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "vent cap",
+      "pt": "tampa de respiro",
+      "def": "a tampa de cada cell, por onde o gás escapa para fora",
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "personal protective equipment",
+      "pt": "equipamento de proteção individual",
+      "def": "óculos, luvas e roupa que protegem quem faz o serviço",
+      "var": [
+        "PPE"
+      ],
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "baking soda",
+      "pt": "bicarbonato de sódio",
+      "def": "pó que neutraliza o ácido derramado antes da limpeza",
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "eyewash station",
+      "pt": "lava-olhos",
+      "def": "o ponto de água corrente para lavar o olho atingido por ácido",
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "negative ground",
+      "pt": "massa pelo negativo",
+      "def": "sistema em que o negative terminal é ligado à carroceria",
+      "var": [
+        "negatively grounded"
+      ],
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "positive ground",
+      "pt": "massa pelo positivo",
+      "def": "sistema antigo em que o positive terminal é ligado à carroceria",
+      "var": [
+        "positively grounded"
+      ],
+      "licao": "seguranca-da-battery"
+    },
+    {
+      "en": "lead-acid battery",
+      "pt": "bateria de chumbo-ácido",
+      "def": "a battery comum do carro: plates de chumbo dentro de ácido",
+      "var": [
+        "lead acid battery"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "electrolyte",
+      "pt": "eletrólito",
+      "def": "a mistura de ácido sulfúrico e água em que as plates ficam",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "positive plate",
+      "pt": "placa positiva",
+      "def": "a plate de lead dioxide, o lado + da cell",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "negative plate",
+      "pt": "placa negativa",
+      "def": "a plate de chumbo esponjoso, o lado − da cell",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "lead dioxide",
+      "pt": "dióxido de chumbo",
+      "def": "o material marrom que cobre a positive plate",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "separator",
+      "pt": "separador",
+      "def": "folha porosa que impede uma plate de encostar na outra",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "cell strap",
+      "pt": "barra de ligação das cells",
+      "def": "a peça de chumbo que liga uma cell à seguinte, em série",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "battery case",
+      "pt": "caixa da battery",
+      "def": "o corpo de plástico que segura as cells e o electrolyte",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "SLI battery",
+      "pt": "bateria SLI",
+      "def": "a battery de partida, luz e ignição do carro (starting, lighting, ignition)",
+      "var": [
+        "SLI"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "flooded cell",
+      "pt": "célula inundada",
+      "def": "cell com electrolyte líquido solto, a construção tradicional",
+      "var": [
+        "flooded"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "deep cycle battery",
+      "pt": "bateria de ciclo profundo",
+      "def": "battery feita para descarregar fundo e recarregar muitas vezes",
+      "var": [
+        "deep cycle"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "valve-regulated lead-acid battery",
+      "pt": "bateria de chumbo-ácido regulada por válvula",
+      "def": "battery selada: o gás volta a virar água dentro dela",
+      "var": [
+        "VRLA"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "sealed lead-acid battery",
+      "pt": "bateria de chumbo-ácido selada",
+      "def": "outro nome da VRLA: não se completa o nível de água",
+      "var": [
+        "SLA"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "absorbed glass mat",
+      "pt": "manta de fibra de vidro absorvente",
+      "def": "separator que segura o electrolyte como uma esponja",
+      "var": [
+        "AGM"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "gel cell battery",
+      "pt": "bateria de gel",
+      "def": "battery cujo electrolyte virou gel com pó de sílica",
+      "var": [
+        "gel cell"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "spiral cell battery",
+      "pt": "bateria de célula espiral",
+      "def": "AGM com as plates enroladas em espiral, não planas",
+      "var": [
+        "spiral cell"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "lithium-ion battery",
+      "pt": "bateria de íon de lítio",
+      "def": "battery leve, de alta densidade de energia, sensível ao charger errado",
+      "var": [
+        "lithium-ion",
+        "Li-ion"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "nickel-metal hydride battery",
+      "pt": "bateria de níquel-hidreto metálico",
+      "def": "a química usada em muitos híbridos",
+      "var": [
+        "NiMH"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "group size",
+      "pt": "tamanho de grupo",
+      "def": "o código que diz as medidas e a posição dos terminals da battery",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "Battery Council International",
+      "pt": "Conselho Internacional de Baterias",
+      "def": "a entidade que padroniza os group sizes",
+      "var": [
+        "BCI"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "cold cranking amps",
+      "pt": "amperes de partida a frio",
+      "def": "a current que a battery entrega por 30 s a 0 °F sem cair de 7.2 V",
+      "var": [
+        "CCA"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "cranking amps",
+      "pt": "amperes de partida",
+      "def": "o mesmo teste do CCA, mas a 32 °F: o número sai maior",
+      "var": [
+        "CA"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "marine cranking amps",
+      "pt": "amperes de partida marítimos",
+      "def": "o teste de cranking amps usado em barco",
+      "var": [
+        "MCA"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "open-circuit voltage",
+      "pt": "tensão em circuito aberto",
+      "def": "a voltage da battery parada, sem load e sem charger",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "depth of discharge",
+      "pt": "profundidade de descarga",
+      "def": "quanto da carga foi usado antes de a battery voltar ao charger",
+      "var": [
+        "DOD"
+      ],
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "smart charger",
+      "pt": "carregador inteligente",
+      "def": "charger que limita a voltage de carga, exigido pela AGM",
+      "licao": "a-battery-por-dentro"
+    },
+    {
+      "en": "memory saver",
+      "pt": "mantenedor de memória",
+      "def": "aparelho que alimenta os módulos enquanto a battery está solta",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "keep alive memory",
+      "pt": "memória viva",
+      "def": "o que o módulo guarda enquanto recebe power o tempo todo",
+      "var": [
+        "KAM"
+      ],
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "surface discharge",
+      "pt": "descarga superficial",
+      "def": "a fuga de carga pela sujeira úmida da tampa da battery",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "self-discharge",
+      "pt": "autodescarga",
+      "def": "a perda de carga da battery parada, sem nenhuma load ligada",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "terminal cleaner",
+      "pt": "limpador de terminal",
+      "def": "ferramenta de escova que limpa o post e a cable clamp",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "battery terminal puller",
+      "pt": "saca-terminal",
+      "def": "ferramenta que tira a cable clamp do post sem forçar o post",
+      "var": [
+        "terminal puller"
+      ],
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "cable clamp",
+      "pt": "garra do cabo",
+      "def": "a peça que aperta no post e segura o battery cable",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "cable clamp pliers",
+      "pt": "alicate de garra",
+      "def": "alicate que abre e limpa a cable clamp",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "anti-corrosive paste",
+      "pt": "pasta anticorrosiva",
+      "def": "produto que cobre a conexão pronta e barra o oxigênio",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "wire brush",
+      "pt": "escova de aço",
+      "def": "escova que raspa o óxido do metal",
+      "licao": "manutencao-da-battery"
+    },
+    {
+      "en": "jump pack",
+      "pt": "partida auxiliar portátil",
+      "def": "caixa com battery interna e duas clamps, para dar partida sem outro carro",
+      "var": [
+        "engine starter",
+        "power pack"
+      ],
+      "licao": "jump-start-e-memory-saver"
+    },
+    {
+      "en": "clamp",
+      "pt": "garra",
+      "def": "a pinça de metal que aperta no post ou no metal do veículo",
+      "licao": "jump-start-e-memory-saver"
+    },
+    {
+      "en": "reverse polarity",
+      "pt": "polaridade invertida",
+      "def": "ligar o + no − e o − no +",
+      "licao": "jump-start-e-memory-saver"
+    },
+    {
+      "en": "override switch",
+      "pt": "chave de override",
+      "def": "botão que força o jump pack a ligar com a battery quase morta",
+      "licao": "jump-start-e-memory-saver"
     }
   ]
 }

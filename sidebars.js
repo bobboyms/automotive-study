@@ -153,6 +153,32 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 7 — Battery',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/seguranca-da-battery',
+              label: '21. Segurança com a battery',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/a-battery-por-dentro',
+              label: '22. A battery por dentro',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/manutencao-da-battery',
+              label: '23. Manutenção da battery',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/jump-start-e-memory-saver',
+              label: '24. Jump start e memory saver',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

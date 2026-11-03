@@ -113,6 +113,9 @@ import Circuito from '@site/src/components/Circuito';
 | dimmer com rheostat: mover o wiper e ver current e power mudarem (interativo) | `Reostato` |
 | resistance do NTC e do PTC com a temperatura | `CurvaTermistor` |
 | as quatro bands de um resistor: por onde começar a ler e a band separada da tolerance | `CodigoCores` |
+| lead-acid battery em corte: uma cell, as seis em série, ou os riscos (gás e short) | `Bateria` |
+| o surface discharge test: a fuga pela sujeira da tampa da battery | `DescargaSuperficial` |
+| onde vai cada clamp do jump pack, e onde ele não vai | `JumpStart` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -882,5 +885,74 @@ para aguentar a vibração.
 O feixe é hexagonal, montado pela constante `LINHAS` (`[4, 5, 5, 4]`). O
 número de linhas tem que permitir um corte pela metade exata — `LINHAS` com
 soma ímpar quebra a correspondência com o texto da lição.
+
+Não recebe props além de `caption`.
+
+---
+
+# Battery (TRN-120, tópico 7)
+
+## Bateria
+
+A lead-acid battery em corte, em três figuras. Usada nas lições
+[Segurança com a battery](../../docs/trn-120-eletricidade/21-seguranca-da-battery.mdx)
+e [A battery por dentro](../../docs/trn-120-eletricidade/22-a-battery-por-dentro.mdx).
+
+```mdx
+<Bateria modo="celula" caption="..." />   {/* uma cell por dentro */}
+<Bateria modo="bateria" caption="..." />  {/* as seis cells em série */}
+<Bateria modo="risco" caption="..." />    {/* o gás e o short circuit */}
+```
+
+| `modo` | O que mostra |
+|---|---|
+| `'celula'` (padrão) | uma cell: positive plates, negative plates, separators, electrolyte, os dois straps e os 2.1 V entre eles |
+| `'bateria'` | as seis cells em série dentro do battery case, com os cell straps, os dois terminals e `6 × 2.1 V = 12.6 V` |
+| `'risco'` | uma chave de boca caída sobre os dois terminals, a current do short e a faísca; o hydrogen gas saindo pela vent cap; o electrolyte embaixo |
+
+Tons: 1 (azul) é o líquido e a current; 2 (laranja) é a positive plate e a
+faísca; 3 (verde) é o gás, que aqui é o perigo.
+
+Três decisões de desenho que as figuras dependem:
+
+- **Três preenchimentos diferentes para três materiais**: positive plate
+  laranja, negative plate cinza escuro (`escuro`), separator na cor do papel
+  (`vazio`). A primeira versão usava cinza claro na negative plate e cinza
+  médio no separator, e os dois se confundiam na folha de conferência.
+- **As positive plates atravessam o strap negativo sem tocá-lo.** Um retângulo
+  da cor do papel abre o vão por onde cada uma passa — a regra do cruzamento
+  sem ligação da seção “Conferência obrigatória”.
+- **No modo `risco`, a vent cap fica no canto direito do cover**, e não no
+  meio: no meio, a coluna de bolhas subiria em cima da chave de boca.
+
+## DescargaSuperficial
+
+`<DescargaSuperficial caption="..." />` — o surface discharge test da lição
+[Manutenção da battery](../../docs/trn-120-eletricidade/23-manutencao-da-battery.mdx):
+a ponta vermelha no positive terminal, a ponta preta correndo pela tampa suja,
+e o caminho de fuga tracejado ligando um terminal ao outro por fora. O tom 3
+(verde) é o caminho da fuga, que é o defeito; o tom 2, a ponta vermelha, como
+no `Medicao`.
+
+A leitura de 0.2 V é ligada ao caminho por um traço fino. Solta no canto, ela
+parecia um número sem dono. O valor é o limite usual de referência, e a lição
+diz isso. Não recebe props além de `caption`.
+
+## JumpStart
+
+`<JumpStart caption="..." />` — onde vai cada clamp do jump pack num veículo
+de negative ground, na lição
+[Jump start e memory saver](../../docs/trn-120-eletricidade/24-jump-start-e-memory-saver.mdx):
+(1) o clamp vermelho no positive terminal, (2) o clamp preto no metal do
+engine block, longe da battery. O negative terminal leva um X no tom 3 — o
+lugar onde o clamp preto **não** vai.
+
+Duas decisões de desenho:
+
+- **os clamps ficam encostados no post, não por cima dele.** Tapando o post, a
+  figura deixava de mostrar justamente o que ela ensina;
+- **o rótulo “não aqui” usa `anchor="start"`**, para a linha de chamada sair da
+  esquerda do texto em direção ao post. Com `anchor="end"`, o `RotuloTermo`
+  começa a linha à direita do texto, e ela atravessava o rótulo por trás.
 
 Não recebe props além de `caption`.

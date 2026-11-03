@@ -1,0 +1,761 @@
+---
+title: "A battery por dentro: cells, tipos e ratings"
+sidebar_label: A battery por dentro
+---
+
+import Bateria from '@site/src/components/Bateria';
+import PartidaCarga from '@site/src/components/PartidaCarga';
+
+# A battery por dentro: cells, tipos e ratings
+
+> **Pergunta central:** duas batteries do mesmo tamanho, na mesma prateleira,
+> uma pelo dobro do preço da outra. O que exatamente a mais cara tem a mais —
+> e como você lê isso no rótulo em vez de adivinhar?
+
+## A queixa: “a battery é nova e o carro não pega no frio”
+
+Um cliente chega em dezembro:
+
+> “Troquei a battery em agosto. Comprei a que cabia no lugar e era mais barata.
+> No verão foi ótima. Agora, de manhã, o motor gira devagar e às vezes nem
+> gira. À tarde pega normal.”
+
+A battery está com quatro meses de uso e carrega normalmente. O multimeter
+mostra 12.6 V com o carro parado, que é o valor de uma battery cheia.
+
+Tudo parece certo, e mesmo assim o carro não pega. Ao fim desta lição você vai
+saber qual número do rótulo ele deveria ter olhado, por que esse número é
+medido a 0 °F, e por que 12.6 V em repouso não provam que a battery dá conta
+do starter motor.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| lead-acid battery | bateria de chumbo-ácido | a battery comum do carro: plates de chumbo dentro de ácido |
+| cell | célula | a unidade interna que produz 2.1 V |
+| positive plate | placa positiva | a plate coberta de lead dioxide, o lado + da cell |
+| negative plate | placa negativa | a plate de chumbo esponjoso, o lado − da cell |
+| lead dioxide | dióxido de chumbo | o material marrom da positive plate |
+| separator | separador | folha porosa que impede uma plate de encostar na outra |
+| electrolyte | eletrólito | a mistura de ácido sulfúrico e água em que as plates ficam |
+| cell strap | barra de ligação das cells | a peça de chumbo que liga uma cell à seguinte |
+| battery case | caixa da battery | o corpo de plástico que segura as cells e o electrolyte |
+| SLI battery | bateria SLI | a battery de partida, luz e ignição (*starting, lighting, ignition*) |
+| flooded cell | célula inundada | cell com electrolyte líquido solto |
+| deep cycle battery | bateria de ciclo profundo | feita para descarregar fundo e recarregar muitas vezes |
+| valve-regulated lead-acid battery | bateria regulada por válvula (VRLA) | selada: o gás vira água de novo dentro dela |
+| absorbed glass mat | manta de fibra de vidro (AGM) | separator que segura o electrolyte como esponja |
+| gel cell battery | bateria de gel | o electrolyte virou gel com pó de sílica |
+| spiral cell battery | bateria de célula espiral | AGM com as plates enroladas, não planas |
+| lithium-ion battery | bateria de íon de lítio | leve, densa em energia, exige charger próprio |
+| nickel-metal hydride battery | bateria de NiMH | a química de muitos híbridos |
+| group size | tamanho de grupo | o código que diz medidas e posição dos terminals |
+| cold cranking amps | amperes de partida a frio (CCA) | a current que a battery entrega por 30 s a 0 °F |
+| cranking amps | amperes de partida (CA) | o mesmo teste, a 32 °F |
+| marine cranking amps | amperes de partida marítimos (MCA) | o teste de CA usado em barco |
+| open-circuit voltage | tensão em circuito aberto | a voltage da battery parada, sem load e sem charger |
+| smart charger | carregador inteligente | charger que limita a voltage, exigido pela AGM |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Em toda venda e em todo diagnóstico de partida e de carga. Escolher a battery
+de reposição, ler um rótulo, decidir se a battery é a causa de um motor que
+gira devagar, escolher o charger certo e saber o que pode e o que não pode
+levar carga rápida.
+
+Na Wake Tech, é a unidade de teoria do **módulo 3** da TRN-120 (*Relays &
+Battery Maintenance*, certificação NC3 da Snap-on). O starting system e o
+charging system também aparecem na AUT-116, capítulo 1. Na prova ASE, a área é
+**A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [O que é eletricidade](./o-que-e-eletricidade), o que a battery
+   guarda de verdade?
+2. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   quantos volts produz **uma** cell de chumbo-ácido?
+3. Na lição [Series circuit](./circuito-em-serie), o que acontece com as
+   voltages de várias fontes ligadas uma depois da outra?
+4. Na lição [Ohm's law](./lei-de-ohm), como você calcula a resistance de um
+   caminho a partir da voltage que se perde nele e da current que passa?
+5. Na lição de AUT-116
+   [Ignition, starting e charging](../aut-116-motor/funcionamento-do-motor/ignicao-partida-e-carga),
+   quem alimenta o carro depois que o motor pegou?
+
+<details>
+<summary>Respostas</summary>
+
+1. **Energia química**, não eletricidade. A battery não é um reservatório de
+   elétrons esperando para sair: é uma reação química montada e segura, que só
+   acontece quando existe um caminho externo ligando os dois terminals.
+2. Cerca de **2.1 V**. Esse número não depende do tamanho da cell — depende de
+   quais materiais estão em contato com qual electrolyte. É o ponto de partida
+   desta lição.
+3. As voltages **se somam**. Seis cells de 2.1 V em série dão 12.6 V, e é
+   exatamente assim que a battery de 12 V é montada.
+4. $R = V \div I$. No exemplo 2 desta lição isso vira a conta da resistance
+   interna da battery.
+5. O **charging system**: o alternator, tocado pela drive belt, alimenta as
+   loads e repõe na battery o que a partida gastou.
+
+</details>
+
+## Intuição: uma reação química montada e travada
+
+A battery não guarda eletricidade. Ela guarda dois materiais diferentes
+mergulhados num ácido, numa situação em que eles **querem** reagir um com o
+outro e não conseguem, porque falta um caminho para os elétrons.
+
+Ligue um caminho por fora — um wire, uma bulb, o starter motor — e a reação
+começa. Os elétrons saem do negative terminal, atravessam a load e voltam pelo
+positive terminal. A reação continua enquanto houver material para reagir.
+
+Na recarga, o alternator empurra current no sentido contrário e **desfaz** a
+reação, devolvendo os materiais ao estado original. Isso é o que distingue uma
+battery de carro de uma pilha de controle remoto: a reação é reversível.
+
+Um detalhe que explica muita coisa adiante: tanto a descarga quanto a carga
+gastam parte da água do electrolyte, e é daí que sai o hydrogen gas da lição
+anterior.
+
+## Modelo visual: uma cell, e depois seis
+
+<Bateria
+  modo="celula"
+  caption="Uma cell por dentro. As positive plates (lead dioxide) e as negative plates (chumbo esponjoso) se alternam, cada par separado por um separator poroso, e todas ficam mergulhadas no electrolyte. Todas as positive plates se unem num strap, e todas as negative plates em outro. Entre os dois straps há 2.1 V, não importa o tamanho das plates."
+/>
+
+Duas coisas valem reparar no desenho.
+
+**As plates se alternam, e são muitas.** Não é uma positive e uma negative: é
+um pacote. Quanto maior a área total de plate em contato com o ácido, mais
+**current** a cell consegue entregar. A voltage continua 2.1 V.
+
+**Os dois straps não se tocam.** No desenho, o stub de cada positive plate
+passa por cima do strap negativo com uma borda da cor da página, para deixar
+claro que ali não há ligação. Se eles se tocassem dentro da cell, isso seria um
+short circuit interno — e é um dos defeitos reais de battery.
+
+<Bateria
+  modo="bateria"
+  caption="A battery de 12 V vista por dentro: seis cells separadas por paredes dentro do mesmo battery case, ligadas uma na outra em série pelos cell straps. As voltages se somam: 6 × 2.1 V = 12.6 V. O lado em que cada terminal fica depende do group size; aqui o positivo está à esquerda."
+/>
+
+É por isso que uma battery de carro cheia mede **12.6 V** e não 12.0 V. O
+"12 V" do nome é um apelido; o número de trabalho é 12.6 V.
+
+## Ponte para a formalização
+
+Com a cell e a série no lugar, dá para separar duas coisas que o aluno costuma
+misturar: **o que define a voltage** e **o que define a current**. A voltage
+vem dos materiais e do número de cells em série. A current que a battery
+consegue entregar vem da área de plate e da resistance interna. Os ratings do
+rótulo medem a segunda coisa, e é por isso que eles existem além do "12 V".
+
+## Formalização
+
+### A cell e a battery
+
+> Uma **cell** de chumbo-ácido é formada por **positive plates** cobertas de
+> **lead dioxide**, **negative plates** de chumbo esponjoso, **separators**
+> porosos entre elas e o **electrolyte**, que é ácido sulfúrico diluído em
+> água. Os materiais e o electrolyte fixam a voltage da cell em cerca de
+> 2.1 V.
+
+> Uma **battery** de 12 V é formada por **seis cells em série** dentro do mesmo
+> **battery case**, ligadas pelos **cell straps**. $6 \times 2.1 = 12.6\,$V.
+
+- **Exemplo:** uma cell gigante de caminhão e uma cell pequena de moto têm a
+  mesma voltage, 2.1 V. O que muda é quanta current cada uma entrega.
+- **Contraexemplo:** uma battery de 6 V de trator antigo **não** é uma battery
+  de 12 V menor. Ela tem três cells em vez de seis.
+
+### As quatro coisas que a battery faz
+
+1. **Alimentar o carro com o motor desligado** — alarme, relógio, memória dos
+   módulos, luz de cortesia.
+2. **Girar o starter motor**, que é a maior current que o carro pede em
+   qualquer momento da vida dele.
+3. **Completar o que o charging system não dá conta** nos picos: faróis,
+   desembaçador, ventilador e vidro elétrico ao mesmo tempo, com o motor em
+   marcha lenta.
+4. **Amortecer a voltage do sistema.** A battery absorve os picos e os vales
+   do alternator e protege os módulos eletrônicos. Esse papel é discreto e é
+   o que faz um carro sem battery, rodando só no alternator, queimar
+   eletrônica.
+
+<PartidaCarga
+  modo="partida"
+  caption="O starting system: a battery entrega a current grande ao starter motor, que gira o ring gear do motor. É o maior pedido de current do veículo, e é por ele que os ratings da battery são medidos."
+/>
+
+### Os tipos de lead-acid battery
+
+Todas as versões abaixo são de chumbo e ácido; o que muda é o que seguram o
+electrolyte e o que acontece com o gás.
+
+| Tipo | Como é | Quando aparece |
+|---|---|---|
+| **flooded cell** | electrolyte líquido solto, vent caps abertas | a construção tradicional; a mais barata |
+| **deep cycle** | plates mais grossas | barco, empilhadeira, trailer: descarrega fundo muitas vezes |
+| **VRLA / SLA** | selada, com válvula; o gás recombina em água por dentro | não se completa água; pode ficar em qualquer posição |
+| **AGM** | o separator é uma manta de fibra de vidro que segura o electrolyte como esponja | veículo com start-stop e muita eletrônica |
+| **gel cell** | o electrolyte virou gel com pó de sílica | aplicações em que vazamento é inaceitável |
+| **spiral cell** | AGM com as plates enroladas em espiral | onde há muita vibração |
+
+AGM, gel e spiral cell são todas **VRLA**: seladas e sem reposição de água.
+
+Uma ideia atravessa a tabela inteira: a **depth of discharge**, ou seja, o
+quanto da carga foi usada antes de a battery voltar ao charger. Quanto mais
+fundo a descarga, menos ciclos a battery aguenta. É por isso que existe a
+deep cycle: ela tem plates mais grossas justamente para suportar descargas
+profundas repetidas. Uma SLI battery comum, descarregada até o fim algumas
+vezes, perde vida de forma permanente — e é um dos motivos pelos quais deixar
+a luz acesa a noite toda custa mais caro do que uma recarga.
+
+O que a **AGM** compra, em troca do preço:
+
+- resistance interna mais baixa, então entrega mais current na partida;
+- aceita carga muito mais rápido que uma flooded cell;
+- aguenta melhor vibração e choque;
+- não derrama, porque o electrolyte está preso na manta.
+
+:::warning AGM e gel pedem smart charger
+
+AGM e gel são sensíveis à sobrecarga: uma voltage de carga alta demais estraga
+a battery, e o estrago não se desfaz. Elas exigem um **smart charger**, que é
+o charger com controle eletrônico que limita a voltage e o tempo. Um charger
+antigo, de ajuste fixo, pode arruinar uma AGM num único ciclo. Confira o modo
+do charger **antes** de ligar, e siga o que o fabricante da battery manda.
+
+:::
+
+### As químicas que não são de chumbo
+
+- **lithium-ion battery** — a melhor relação potência/peso, voltage de cell
+  mais alta e estável, aceita carga rápida e descarrega muito mais depressa
+  que a de chumbo. Custa bem mais por quilowatt produzido, e a estabilidade
+  química é uma preocupação de projeto.
+- **nickel-metal hydride battery** (NiMH) — leve, de vida longa, é a química
+  preferida em muitos veículos híbridos.
+
+:::danger Battery de híbrido e elétrico não se carrega com charger de oficina
+
+O charger comum de 12 V **não** foi feito para a battery de tração de um
+híbrido ou de um elétrico, que trabalha com voltage alta. Mexer nesse sistema
+exige o treinamento específico (as disciplinas **EVX**) e o procedimento do
+fabricante. Os cabos laranja marcam o que você não abre sem esse treinamento.
+
+:::
+
+### Group size: medida, não capacidade
+
+> O **group size** é o código do **Battery Council International** que diz o
+> comprimento, a largura e a altura da battery, além da posição e do tipo dos
+> terminals. Grupo 24, 35, 65, 78 e por aí.
+
+O group size existe para a battery caber na bandeja, o hold-down prender e o
+cabo alcançar o post certo. Ele **não** é uma medida de capacidade.
+
+- **Exemplo:** duas batteries grupo 35 cabem no mesmo lugar e têm o + do mesmo
+  lado, mas uma pode ter 500 CCA e a outra 650 CCA.
+- **Contraexemplo:** uma battery de grupo maior não é necessariamente mais
+  forte. Maior fisicamente e mais capaz são coisas diferentes, e o rótulo
+  separa as duas.
+
+> **Erro comum:** escolher a battery "pelo tamanho que cabe". Foi o que o
+> cliente da queixa fez. O tamanho resolve o encaixe; quem decide se o motor
+> gira no frio é o CCA.
+
+### Os ratings: CCA, CA e MCA
+
+Os três medem a mesma coisa — quanta current a battery sustenta na partida —,
+mudando a temperatura do teste.
+
+> **Cold cranking amps (CCA):** a current, em amperes, que a battery entrega
+> durante **30 segundos a 0 °F (−18 °C)** sem que a voltage caia abaixo de
+> **7.2 V**.
+
+> **Cranking amps (CA):** o mesmo teste, a **32 °F (0 °C)**.
+> **Marine cranking amps (MCA):** o teste de CA, usado em barco.
+
+Três consequências práticas:
+
+1. **O CCA é o número que vale nos Estados Unidos**, e é o que o manual do
+   veículo especifica.
+2. **Para a mesma battery, o CA sai maior que o CCA**, porque a battery é mais
+   forte quente do que fria. Um rótulo que destaca o CA em letras grandes está
+   mostrando o número mais bonito. Confira qual sigla está escrita.
+3. **O limite de 7.2 V** é metade de 14.4 V, ou 1.2 V por cell. Ele existe
+   porque abaixo disso o starter motor não gira com força suficiente.
+
+Outros padrões que você pode encontrar no rótulo, e de onde vêm: **JIS**
+(japonês, um código de números e letras), **DIN** e **EN** (alemão e europeu),
+**SAE** e **IEC**. Cada um mede com um critério próprio, então **não se compara
+número de um padrão com número de outro.**
+
+### Open-circuit voltage e state of charge
+
+> A **open-circuit voltage** é a voltage medida com a battery parada: motor
+> desligado, nenhuma load ligada e nenhum charger ligado.
+
+Ela dá uma ideia do **state of charge**, e só uma ideia. Uma tabela típica,
+para flooded cell em temperatura ambiente:
+
+| Open-circuit voltage | State of charge aproximado |
+|---|---|
+| 12.6 V ou mais | 100% |
+| 12.4 V | 75% |
+| 12.2 V | 50% |
+| 12.0 V | 25% |
+| 11.9 V ou menos | descarregada |
+
+Valores típicos, de referência: a tabela que vale é a do fabricante da battery
+e a do equipamento de teste da sua oficina, e ela muda com a temperatura e com
+o tipo de battery.
+
+Duas armadilhas:
+
+- **Surface charge.** Logo depois de rodar ou de carregar, a battery mostra uma
+  voltage mais alta do que a real. Deixe descansar, ou acenda os faróis por
+  alguns instantes para descarregar essa "casquinha", antes de ler.
+- **Voltage não é capacidade.** Uma battery com plates sulfatadas pode mostrar
+  12.6 V paradinha e desabar para 9 V no instante em que o starter motor pede
+  current.
+
+> **Erro comum:** concluir que a battery está boa porque mede 12 V em repouso.
+> Medir sem current não revela resistance interna alta — é o mesmo princípio da
+> lição [Medições com o multimeter](./medicoes-com-multimetro): a voltage
+> medida sem current engana. O teste que decide é o **load test**, com a
+> battery entregando current de verdade.
+
+## Como falha e como diagnosticar
+
+| Defeito | O que acontece por dentro | Sintoma | Teste que separa |
+|---|---|---|---|
+| sulfatação | sulfato endurece nas plates e some a área útil | gira devagar, principalmente no frio | load test: a voltage desaba sob current |
+| cell em curto | plate encostou em plate dentro de uma cell | a battery não passa de ~10.5 V carregada | open-circuit voltage baixa que não sobe com carga |
+| nível de electrolyte baixo | a parte de cima das plates seca | perda de capacidade; depois, dano permanente | inspeção visual na flooded cell |
+| resistance interna alta | contato ruim entre post e plate strap | voltage boa parada, desaba na partida | load test; comparar com o CCA do rótulo |
+| CCA abaixo do especificado | a battery é fraca para o motor | só falha no frio | ler o rótulo e comparar com o manual |
+| battery congelada | electrolyte fraco virou gelo | nada funciona; battery case estufado | inspeção — **não carregue** |
+
+A ordem de teste é sempre a mesma: **primeiro inspeção visual** (battery case,
+terminals, nível), **depois open-circuit voltage** para saber o state of
+charge, **depois carga se precisar**, e **só então o load test**. Testar uma
+battery descarregada não prova nada: ela vai reprovar mesmo estando boa.
+
+### A queixa resolvida
+
+Volte ao cliente de dezembro.
+
+1. **O que o sistema deveria fazer:** entregar ao starter motor a current que
+   ele pede, mesmo a 0 °F, sem a voltage cair abaixo de 7.2 V.
+2. **O que foi observado:** 12.6 V em repouso, carga normal, partida só falha
+   de manhã, no frio.
+3. **O princípio que liga as duas coisas:** 12.6 V em repouso só informam o
+   state of charge. Quem informa a capacidade de entregar current é o CCA, e a
+   capacidade real cai com o frio, porque a reação química fica mais lenta e a
+   resistance interna sobe. Uma battery com CCA abaixo do pedido pelo veículo
+   passa no verão e reprova no inverno.
+4. **O que mudou de agosto para dezembro:** a temperatura, e nada mais.
+   **O que não mudou:** o state of charge, que continua cheio.
+5. **O que isso descarta:** não é o charging system, porque a battery está
+   cheia. Não é consumo parasita, porque o carro pega à tarde depois de parado.
+6. **O teste que confirma:** ler o CCA do rótulo e comparar com o
+   especificado pelo fabricante do veículo, e fazer um load test com a battery
+   carregada.
+
+**A correção:** trocar por uma battery do group size correto e com CCA **igual
+ou acima** do que o manual do veículo pede. O valor que vale é o do manual, não
+um número de memória.
+
+## Na oficina: escolher a battery de reposição
+
+:::warning Antes de tirar a battery
+
+Vale tudo o que está na lição
+[Segurança com a battery](./seguranca-da-battery): óculos, metal fora da mão,
+negative cable primeiro, nada de faísca. Battery estufada ou congelada não se
+testa nem se carrega.
+
+:::
+
+Três números decidem a escolha, nesta ordem:
+
+1. **Group size.** Precisa caber na bandeja, prender no hold-down e ter o
+   positive terminal do lado que o cabo alcança. Em algumas batteries, os
+   terminals ficam na lateral (*side terminals*) em vez de em cima.
+2. **CCA.** Igual ou acima do especificado pelo fabricante do veículo. CCA a
+   mais não faz mal ao sistema: o starter motor puxa a current de que precisa,
+   não a que a battery poderia dar.
+3. **Tipo.** Se o carro veio com AGM — comum em veículos com *start-stop* —,
+   a reposição é AGM. Pôr uma flooded cell no lugar de uma AGM costuma dar
+   vida curta, porque o sistema de carga do veículo foi programado para a AGM.
+
+Onde achar o que o veículo pede: no manual de serviço ou no sistema de
+informação do fabricante. Não existe CCA "padrão por tamanho de motor".
+
+## Exemplos resolvidos
+
+### Exemplo 1: por que 12.6 e não 12.0
+
+Uma battery de carro é anunciada como "12 volts". Por que ela mede 12.6 V
+quando está cheia, e o que você conclui se ela medir 10.5 V depois de uma noite
+no charger?
+
+<details>
+<summary>Solução</summary>
+
+São **seis cells em série**, e a série soma as voltages:
+
+$$
+6 \times 2.1\,\text{V} = 12.6\,\text{V}
+$$
+
+O "12 V" é o nome comercial, arredondado.
+
+Agora os 10.5 V. Faça a conta ao contrário:
+
+$$
+10.5 \div 2.1 = 5
+$$
+
+Cinco cells. Isso é exatamente o que se espera de uma battery com **uma cell
+em curto**: as outras cinco continuam produzindo 2.1 V cada, e a que entrou em
+curto não produz nada. Uma battery nesse estado não se recupera com carga — a
+leitura que não sobe depois de uma noite no charger é a confirmação.
+
+</details>
+
+### Exemplo 2: o que 600 CCA dizem sobre a battery
+
+**Pause e tente:** uma battery tem 600 CCA. Pela definição do rating, ela
+entrega 600 A por 30 s a 0 °F sem cair abaixo de 7.2 V. Se ela está em 12.6 V
+sem load, qual é a resistance interna dela nessa condição?
+
+<details>
+<summary>Dica</summary>
+
+A diferença entre a voltage sem load e a voltage com load é a voltage que se
+perde **dentro** da battery. Você conhece essa voltage e a current. A lei de
+Ohm faz o resto.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+Com 600 A passando, a voltage nos terminals cai de 12.6 V para 7.2 V. Os
+
+$$
+12.6 - 7.2 = 5.4\,\text{V}
+$$
+
+que sumiram não foram embora: eles ficaram na resistance interna da própria
+battery, do mesmo jeito que uma voltage drop fica num conector ruim.
+
+$$
+R = \frac{V}{I} = \frac{5.4}{600} = 0.009\,\Omega
+$$
+
+Nove milésimos de ohm. Esse número explica duas coisas desta disciplina:
+
+- **por que o short circuit da lição anterior é tão violento** — com uma
+  resistance interna dessa ordem, qualquer caminho de metal entre os terminals
+  deixa passar centenas de amperes;
+- **por que o load test funciona** — uma battery sulfatada tem resistance
+  interna muito maior, e a mesma current derruba a voltage muito mais.
+
+</details>
+
+### Exemplo 3: CCA, CA e o rótulo que engana
+
+**Pause e tente:** duas batteries, lado a lado na prateleira, pelo mesmo preço.
+A primeira diz **600 CCA**. A segunda diz, em letras grandes, **700 CA** e, em
+letras pequenas, **560 CCA**. O manual do veículo pede no mínimo 590 CCA. Qual
+você leva?
+
+<details>
+<summary>Solução</summary>
+
+A **primeira**, de 600 CCA.
+
+O erro que o rótulo da segunda convida a cometer é comparar 700 com 600. Mas os
+dois números não medem a mesma coisa: **CA é medido a 32 °F e CCA a 0 °F**, e
+a battery é sempre mais forte na temperatura mais alta. Para a mesma battery, o
+número de CA sai maior que o de CCA — por isso ele aparece em letras grandes.
+
+Comparando o que é comparável: 600 CCA contra 560 CCA. E a exigência do manual
+é 590 CCA, então a segunda battery já está abaixo do especificado antes mesmo
+de sair da loja.
+
+Regra que resolve o caso geral: **compare sempre a mesma sigla**, e compare com
+o que o manual do veículo pede.
+
+</details>
+
+### Exemplo 4: a battery que mede bem e reprova
+
+**Pause e tente:** uma battery marca 12.5 V em repouso. Durante a partida, a
+voltage nos terminals cai para 8.9 V, com o starter motor puxando 180 A
+(valores ilustrativos). Qual é a resistance interna? Compare com a do
+exemplo 2 e diga o que você conclui.
+
+<details>
+<summary>Solução</summary>
+
+A voltage perdida dentro da battery é
+$12.5 - 8.9 = 3.6\,\text{V}$, com 180 A passando:
+
+$$
+R = \frac{3.6}{180} = 0.020\,\Omega
+$$
+
+São 0.020 Ω contra os 0.009 Ω de uma battery sã do exemplo 2: mais que o dobro.
+
+**O que isso significa:** a battery tem **resistance interna alta**, que é a
+assinatura de sulfatação ou de conexão interna ruim. **O que não mudou:** a
+voltage em repouso continua quase cheia, 12.5 V — a battery tem carga.
+**O que mudou:** a capacidade de entregar essa carga depressa.
+
+**O que o teste descarta:** não é falta de carga, porque 12.5 V em repouso é
+quase 100%. Antes de condenar a battery, porém, confirme que a queda não está
+nos cabos: meça a **voltage drop** entre o post e a cable clamp durante a
+partida, como na lição
+[Medições com o multimeter](./medicoes-com-multimetro). Uma garra oxidada
+produz exatamente o mesmo sintoma, e é muito mais barata de resolver.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que uma cell de chumbo-ácido produz 2.1 V, independentemente do
+   tamanho dela?
+2. Então o que o tamanho das plates muda?
+3. O que o group size diz, e o que ele não diz?
+4. Por que o CA de uma battery é sempre maior que o CCA dela?
+5. Por que o limite do teste de CCA é 7.2 V, e não 0 V?
+6. Por que uma AGM precisa de smart charger?
+7. Uma battery carregada mede 10.4 V e não sobe no charger. O que isso sugere,
+   e por quê?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque a voltage da cell vem dos **materiais**: lead dioxide de um lado,
+   chumbo esponjoso do outro, ácido sulfúrico no meio. Essa combinação produz
+   cerca de 2.1 V, e a física disso não depende de quanto material existe.
+2. A **current** que a cell consegue entregar e por quanto tempo. Mais área de
+   plate em contato com o ácido significa mais reação acontecendo ao mesmo
+   tempo, e portanto mais amperes.
+3. Diz comprimento, largura, altura e a posição e o tipo dos terminals, ou
+   seja, se a battery **cabe e liga**. Não diz nada sobre quanta current ela
+   entrega — isso é o CCA.
+4. Porque o CA é medido a 32 °F e o CCA a 0 °F. A reação química é mais rápida
+   e a resistance interna é menor na temperatura mais alta, então a mesma
+   battery entrega mais amperes no teste mais quente.
+5. Porque 7.2 V é o mínimo com que o starter motor ainda gira com força. O
+   teste não pergunta "a battery chega a zero?", e sim "a battery se mantém
+   acima do que o motor precisa, durante o tempo de uma partida?". Os 7.2 V são
+   1.2 V por cell.
+6. Porque ela é sensível à sobrecarga: voltage de carga acima do que o
+   fabricante permite estraga a battery de forma permanente. O smart charger
+   tem controle eletrônico que limita voltage e tempo; um charger de ajuste
+   fixo não limita nada.
+7. Sugere **uma cell em curto**. $10.4 \div 2.1 \approx 5$: sobraram cinco
+   cells produzindo, e uma parou. Uma cell em curto não se recupera com carga,
+   e é por isso que a leitura não sobe.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês de cada um:
+
+a) a folha porosa entre duas plates;
+b) a peça de chumbo que liga uma cell à seguinte;
+c) o código que diz as medidas e a posição dos terminals;
+d) o rating medido a 0 °F;
+e) a battery selada cujo separator é uma manta de fibra de vidro.
+
+### 2. Explicação
+
+Explique por que a battery é descrita como "guardando energia química" e não
+"guardando eletricidade". Diga o que acontece no momento em que alguém liga um
+wire entre os dois terminals.
+
+### 3. Aplicação direta
+
+a) Quantos volts tem uma battery de **oito** cells de chumbo-ácido em série?
+
+b) Uma battery de 12.6 V cai para 7.2 V com 750 A passando. Qual é a resistance
+interna?
+
+c) Uma battery mede 12.2 V em repouso. Pela tabela típica, qual é o state of
+charge aproximado?
+
+### 4. Variação
+
+Refaça o exemplo 2 para uma battery de **900 CCA**, com a mesma queda de 12.6 V
+para 7.2 V. A resistance interna ficou maior ou menor que a da battery de
+600 CCA? Explique por que esse resultado faz sentido.
+
+### 5. Caso de diagnóstico
+
+Um cliente reclama que o carro "está morrendo toda semana". O veículo é de
+2019, com *start-stop*. Na inspeção você encontra uma battery flooded cell
+comum, instalada há três meses, com o group size correto e o CCA correto.
+
+a) O que chama a atenção na combinação "veículo com start-stop" e "battery
+flooded cell"?
+
+b) Que medição você faria primeiro, e com o veículo em que estado?
+
+c) Se a open-circuit voltage estiver em 12.2 V toda manhã, o que isso ainda
+**não** prova?
+
+d) Cite dois testes diferentes que separam "battery fraca" de "charging system
+que não repõe".
+
+### 6. Justificativa
+
+Por que a ordem correta é inspeção visual → open-circuit voltage → carga →
+load test, e não load test direto? O que daria errado se você começasse pelo
+load test?
+
+### 7. Formato ASE
+
+**Question 1.** A 12-volt lead-acid battery is made up of:
+
+- A. three cells of 4 volts each
+- B. six cells of 2.1 volts each
+- C. twelve cells of 1 volt each
+- D. six cells of 1.2 volts each
+
+**Question 2.** Technician A says that a battery with a larger group size
+always has a higher cold cranking amps rating. Technician B says that group
+size describes the physical dimensions and terminal locations of the battery.
+Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** A battery reads 12.6 volts with no load, but drops to 8.5 volts
+during cranking. The most likely cause is:
+
+- A. the battery is discharged
+- B. high internal resistance in the battery, or a high-resistance cable
+  connection
+- C. the alternator is overcharging
+- D. the group size is wrong
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Separator. b) Cell strap. c) Group size. d) Cold cranking amps (CCA).
+   e) AGM, ou *absorbed glass mat* — que é um tipo de VRLA.
+
+2. Porque dentro da battery não há um estoque de elétrons prontos para sair, e
+   sim dois materiais diferentes mergulhados num ácido, em uma situação em que
+   eles reagiriam um com o outro se os elétrons tivessem por onde passar. Ao
+   ligar um wire entre os terminals, esse caminho aparece: a reação começa, os
+   elétrons saem pelo negative terminal, atravessam o wire e voltam pelo
+   positive terminal. Sem load no caminho, isso é um short circuit, e a reação
+   acontece toda de uma vez — que é o perigo da lição anterior.
+
+3. a) $8 \times 2.1 = 16.8\,\text{V}$.
+
+   b) $R = (12.6 - 7.2) \div 750 = 5.4 \div 750 = 0.0072\,\Omega$.
+
+   c) Cerca de **50%**.
+
+4. $R = 5.4 \div 900 = 0.006\,\Omega$, contra 0.009 Ω da battery de 600 CCA:
+   **menor**.
+
+   Faz sentido porque é exatamente a mesma coisa dita de dois jeitos. Entregar
+   mais amperes sem deixar a voltage cair é o mesmo que perder menos voltage
+   por dentro, e perder menos voltage com mais current passando significa
+   resistance interna menor. Na prática, a battery de 900 CCA tem mais área de
+   plate e caminhos internos mais grossos.
+
+5. a) Veículo com *start-stop* dá partida muitas vezes por viagem e descarrega
+   a battery com frequência. Esses sistemas são projetados para **AGM**, que
+   aceita carga rápida e aguenta muitos ciclos. Uma flooded cell comum, no
+   lugar de uma AGM, dura pouco — e o sistema de carga do veículo está
+   programado com o perfil da AGM, que não serve bem à flooded cell.
+
+   b) A **open-circuit voltage**, de manhã, com o veículo parado há horas,
+   ignição desligada e nenhuma load. É a leitura que informa o state of charge
+   sem a surface charge atrapalhar.
+
+   c) Não prova que a battery é a culpada. 12.2 V é cerca de 50% de carga, e
+   isso pode vir de três lugares: battery incapaz de segurar carga, charging
+   system que não repõe, ou consumo parasita com o carro parado.
+
+   d) Um: medir a voltage nos terminals com o motor em marcha lenta e as loads
+   ligadas — o charging system sadio mantém o sistema acima da voltage da
+   battery parada. Outro: carregar a battery até 100% com um charger de
+   bancada e refazer o load test; se ela reprovar carregada, o defeito é dela.
+   Um terceiro teste, para o consumo parasita, é medir a current com tudo
+   desligado e os módulos dormindo.
+
+6. Porque cada etapa só faz sentido se a anterior estiver limpa, e porque o
+   load test numa battery descarregada dá um resultado que não significa nada.
+   Uma battery boa mas descarregada reprova no load test exatamente como uma
+   battery ruim: a voltage desaba nos dois casos. Você condenaria uma peça sadia
+   e deixaria a causa real — consumo parasita ou charging system — no carro,
+   para o cliente voltar. A inspeção visual vem primeiro porque um terminal
+   corroído ou um battery case estufado muda tudo o que vem depois, inclusive se
+   é seguro testar.
+
+7. **Question 1: B.** Seis cells de 2.1 V em série: $6 \times 2.1 = 12.6$ V. A
+   alternativa D descreve a voltage de cell de NiCd/NiMH, não de chumbo-ácido.
+   A e C não correspondem a nenhuma química de battery automotiva.
+
+   **Question 2: B.** O group size trata de medidas e posição dos terminals, e
+   nada mais. A afirmação do técnico A é o erro comum desta lição: duas
+   batteries do mesmo grupo podem ter CCA bem diferentes, e um grupo maior não
+   garante CCA maior.
+
+   **Question 3: B.** Voltage cheia parada e queda grande sob current é a
+   assinatura de resistance alta — dentro da battery ou numa conexão de cabo. A
+   está errada porque 12.6 V indicam battery carregada. C descreve um defeito de
+   charging, que não produz esse sintoma na partida. D não causa queda de
+   voltage: o group size é questão de encaixe.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a voltage da battery vem dos materiais e do número de
+  cells em série — seis cells de 2.1 V dão 12.6 V. A **current** que ela
+  entrega vem da área de plate e da resistance interna, e é isso que o **CCA**
+  mede. Tamanho (group size) e força (CCA) são coisas separadas, e o rótulo
+  informa as duas.
+- **Quando usar:** ao escolher uma battery de reposição, ao ler um rótulo, e
+  em todo diagnóstico de partida difícil — para não condenar a battery por uma
+  leitura feita sem current.
+- **Com o que se conecta:** a energia química, da lição
+  [O que é eletricidade](./o-que-e-eletricidade); os 2.1 V da cell, de
+  [Voltage, current e resistance](./tensao-corrente-e-resistencia); a soma das
+  voltages, de [Series circuit](./circuito-em-serie); a resistance calculada a
+  partir da queda, de [Ohm's law](./lei-de-ohm); e a armadilha da voltage
+  medida sem current, de
+  [Medições com o multimeter](./medicoes-com-multimetro). O starting system e
+  o charging system estão em
+  [Ignition, starting e charging](../aut-116-motor/funcionamento-do-motor/ignicao-partida-e-carga).
+
+**Termos desta lição para revisar:** lead-acid battery, cell, positive plate,
+negative plate, lead dioxide, separator, electrolyte, cell strap, battery case,
+SLI battery, flooded cell, deep cycle battery, VRLA, AGM, gel cell battery,
+spiral cell battery, lithium-ion battery, nickel-metal hydride battery, group
+size, cold cranking amps, cranking amps, marine cranking amps, open-circuit
+voltage, smart charger.

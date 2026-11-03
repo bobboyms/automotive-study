@@ -1,0 +1,682 @@
+---
+title: "Manutenção da battery: inspecionar, testar a tampa e limpar"
+sidebar_label: Manutenção da battery
+---
+
+import DescargaSuperficial from '@site/src/components/DescargaSuperficial';
+
+# Manutenção da battery: inspecionar, testar a tampa e limpar
+
+> **Pergunta central:** a battery passa em todos os testes elétricos, o
+> charging system está bom e não há consumo parasita fora do normal. Mesmo
+> assim, o carro parado três dias não dá partida. Onde mais a carga pode estar
+> indo embora?
+
+## A queixa: o carro que não aguenta um fim de semana
+
+> “De segunda a sexta é perfeito. Se eu deixo o carro parado de sexta à noite
+> até segunda de manhã, ele gira devagar e, às vezes, só faz um clique.”
+
+Na oficina: battery de dois anos, open-circuit voltage de 12.6 V depois de
+carregar, load test aprovado, alternator entregando o que deve, consumo
+parasita dentro do normal. Nada acusa.
+
+Com o capô aberto, o que se vê é uma tampa de battery com uma camada de poeira
+escura e úmida, e uma crosta esbranquiçada em volta de um dos posts.
+
+Ao fim desta lição você vai saber como essa sujeira vira um caminho elétrico
+que a battery não deveria ter, como **medir** esse caminho com o multimeter em
+menos de um minuto, e em que ordem se faz a limpeza para não trocar um defeito
+por outro.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| surface discharge | descarga superficial | a fuga de carga pela sujeira úmida da tampa da battery |
+| self-discharge | autodescarga | a perda de carga da battery parada, sem nenhuma load ligada |
+| memory saver | mantenedor de memória | aparelho que alimenta os módulos enquanto a battery está solta |
+| keep alive memory | memória viva (KAM) | o que o módulo guarda enquanto recebe power o tempo todo |
+| cable clamp | garra do cabo | a peça que aperta no post e segura o battery cable |
+| battery terminal puller | saca-terminal | tira a cable clamp do post sem forçar o post |
+| terminal cleaner | limpador de terminal | ferramenta de escova que limpa o post e a garra |
+| cable clamp pliers | alicate de garra | abre e limpa a cable clamp |
+| wire brush | escova de aço | escova que raspa o óxido do metal |
+| anti-corrosive paste | pasta anticorrosiva | cobre a conexão pronta e barra o oxigênio |
+| corrosion | corrosão | o metal virando óxido, que conduz mal |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Em toda manutenção preventiva e em boa parte dos diagnósticos de partida. É
+também o item de trabalho prático do laboratório: no **módulo 3** da TRN-120
+(*Relays & Battery Maintenance*, certificação NC3 da Snap-on), o lab de
+*Battery Maintenance* é exatamente este procedimento, com assinatura do
+instrutor. Na prova ASE, a área é **A6**; na G1, é item de manutenção básica.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Medições com o multimeter](./medicoes-com-multimetro), o que é
+   **voltage drop** e em que estado o circuit tem que estar para medi-la?
+2. Na lição [Reparar um wire](./reparar-um-wire), por que a **corrosion**
+   atrapalha a condução?
+3. Na lição [Ohm's law](./lei-de-ohm), como se calcula a current que passa por
+   uma resistance conhecida?
+4. Na lição [Segurança com a battery](./seguranca-da-battery), qual cabo sai
+   primeiro, e por quê?
+5. Na lição [A battery por dentro](./a-battery-por-dentro), o que a
+   open-circuit voltage informa, e o que ela não informa?
+
+<details>
+<summary>Respostas</summary>
+
+1. É a voltage que se perde num trecho do caminho. Ela só aparece com o
+   circuit **ligado e com current passando**: sem current, qualquer trecho mede
+   quase zero.
+2. Porque o óxido de cobre e os sais que se formam na conexão **conduzem mal**.
+   Eles acrescentam resistance exatamente no ponto em que não deveria haver
+   nenhuma.
+3. $I = V \div R$.
+4. O **negative cable**, porque a carroceria é o ground: com ele solto, uma
+   ferramenta encostando na lataria não fecha circuit nenhum.
+5. Informa o **state of charge** aproximado. Não informa se a battery
+   consegue entregar current — isso é o load test.
+
+</details>
+
+## Intuição: a sujeira é um wire que ninguém instalou
+
+Água pura conduz mal. Água com ácido, poeira e sal conduz razoavelmente bem.
+
+A tampa da battery junta as três coisas: um pouco de vapor de ácido que sai
+pelas vent caps, poeira do compartimento do motor e umidade do ar. O resultado
+é uma película que liga o positive terminal ao negative terminal **por fora da
+battery**.
+
+Esse caminho tem resistance alta se comparada a um wire — milhares de ohms, não
+milésimos. Por isso ele não acende nada nem queima fuse. Ele só deixa passar
+uma current pequena, o tempo todo, dia e noite, com o carro desligado. Em uma
+semana parado, essa corrente pequena multiplicada por muitas horas vira uma
+fatia grande da carga da battery.
+
+Repare na diferença entre dois nomes parecidos:
+
+- **self-discharge** é a perda de carga que acontece **dentro** da battery, por
+  reações químicas lentas, mesmo com ela limpa e desconectada. É normal, e é
+  lenta.
+- **surface discharge** é a perda **por fora**, pela sujeira da tampa. Não é
+  normal, e você consegue medir e eliminar.
+
+A analogia que serve aqui é a de um telhado: a self-discharge é o
+envelhecimento natural da telha, e a surface discharge é uma goteira. Onde a
+analogia para: a goteira você enxerga. A surface discharge só aparece se você
+puser as test leads nela.
+
+## Modelo visual: medir o caminho pela sujeira
+
+<DescargaSuperficial caption="O surface discharge test. A ponta vermelha do multimeter fica no positive terminal e a ponta preta corre pela tampa da battery, procurando a leitura mais alta. Se a sujeira não conduzisse nada, o multimeter marcaria perto de zero; a leitura que aparece é a voltage que existe entre o post e aquele ponto da tampa. A partir de cerca de 0.2 V, a tampa precisa ser limpa."
+/>
+
+O que esse teste faz, dito de outro jeito: ele pergunta se a tampa da battery é
+um isolante. Numa battery limpa e seca, é. Com a película de sujeira úmida, a
+tampa passa a ter potencial elétrico espalhado por ela — e isso só é possível
+se houver corrente passando pela sujeira.
+
+## Ponte para a formalização
+
+O procedimento de manutenção que vem agora não é uma lista de hábitos. Cada
+passo ataca uma causa física conhecida: a sujeira que descarrega por fora, a
+corrosion que acrescenta resistance na conexão, o ar que alimenta essa
+corrosion, e o short circuit que a ferramenta pode fechar. Decorar a ordem
+ajuda na prova; entender qual causa cada passo ataca é o que faz você perceber
+quando um passo pode ser pulado e quando não pode.
+
+## Formalização
+
+### O memory saver vem antes de tudo
+
+Os módulos do carro guardam coisas enquanto recebem power o tempo todo: a
+**keep alive memory** do PCM, com o aprendizado de marcha lenta e de mistura;
+os códigos do rádio; as posições memorizadas de banco e espelho; a calibração
+de fim de curso dos vidros elétricos.
+
+> Um **memory saver** é uma fonte pequena que alimenta esses módulos enquanto
+> a battery do veículo está desligada ou fora do carro.
+
+Ele entra por uma das duas portas:
+
+- pelo **data link connector** (o conector de diagnóstico, OBD-II, embaixo do
+  painel), que é o caminho mais comum;
+- por uma tomada de 12 V do veículo que continue alimentada.
+
+:::danger Com o memory saver ligado, os cabos da battery ficam vivos
+
+Esta é a parte que surpreende. Depois de tirar a battery, o memory saver
+continua alimentando o sistema — e o sistema inclui os **battery cables** que
+acabaram de sair da battery. A garra do positivo, solta dentro do
+compartimento do motor, está energizada.
+
+Prenda ou isole a cable clamp do positivo antes de continuar. Se ela encostar
+na carroceria, você tem um arco elétrico e um módulo danificado.
+
+:::
+
+### As ferramentas, e o que cada uma faz
+
+Um kit de manutenção de battery tem poucas peças, e cada uma existe para evitar
+um estrago específico:
+
+| Ferramenta | O que faz | O estrago que evita |
+|---|---|---|
+| chave de boca do tamanho certo, ou alicate de battery | solta a porca da cable clamp | arredondar a porca |
+| **battery terminal puller** | puxa a garra para cima, sem forçar o post | romper a ligação interna entre o post e a plate strap |
+| **cable clamp pliers** | abre a garra e limpa a parte interna dela | garra que não aperta direito depois |
+| **terminal cleaner** | escova cônica para o post e escova interna para a garra | limpeza incompleta, que deixa óxido no contato |
+| limpador de terminal lateral | para battery de *side terminals*: corta e escova a rosca e o contato | terminal lateral mal limpo, que não aperta |
+| **wire brush** | raspa óxido em geral | — |
+| alicate de bico curvo | segura e posiciona peça pequena perto da battery | encostar ferramenta nos dois terminals |
+
+:::tip Raspador é melhor que escova de aço no post
+
+No post e na garra de chumbo, prefira a ferramenta de **raspar**. Ela deixa a
+superfície lisa, e superfície lisa encosta em mais pontos quando a garra
+aperta. A escova de aço deixa a superfície riscada: há menos contato e mais
+cantos para a corrosion começar de novo. A diferença não aparece no dia do
+serviço; aparece seis meses depois.
+
+:::
+
+### Os oito passos
+
+:::warning Antes do primeiro passo
+
+Tudo da lição [Segurança com a battery](./seguranca-da-battery) vale aqui:
+óculos de segurança, luvas, anel e relógio fora da mão, ignição e loads
+desligadas, nada de faísca, battery nunca inclinada. Se o battery case estiver
+estufado, trincado ou vazando, pare e chame o instrutor.
+
+:::
+
+1. **Instale o memory saver** e confirme que ele está alimentando — o LED do
+   cabo precisa estar aceso. Sem essa confirmação, você só *acha* que a memória
+   está protegida.
+2. **Inspecione e garanta que o battery case esteja seco e limpo.** Contaminação
+   em cima da battery causa descarga prematura, que é o assunto do passo 3.
+3. **Faça o surface discharge test.** Multimeter em volts DC, ponta vermelha no
+   positive terminal, ponta preta correndo pela tampa até achar a leitura mais
+   alta. **A partir de cerca de 0.2 V, limpe a tampa** com uma mistura de
+   baking soda e água. Esse é o único passo que você perde se pular: depois da
+   limpeza, não dá mais para saber se havia fuga.
+4. **Solte as cable clamps** com a chave do tamanho certo ou com o alicate de
+   battery, e tire cada garra com o **battery terminal puller**. **Negativa
+   primeiro**, pelo motivo da lição anterior. Nunca faça alavanca com chave de
+   fenda.
+5. **Confira o nível do electrolyte, quando der.** Em flooded cell, as plates
+   precisam estar cobertas; há marcas no battery case, e dá para olhar dentro
+   de cada cell. Em battery selada (VRLA, AGM, gel), não existe esse passo —
+   não se abre e não se completa água.
+6. **Limpe o post** com a ferramenta de post e terminal. A ferramenta tem um
+   lado para o post positivo e outro para o negativo, porque os dois têm
+   diâmetros diferentes: o positivo é um pouco mais grosso. Use o lado certo,
+   ou a limpeza fica frouxa num e forçada no outro.
+7. **Limpe a parte interna da cable clamp** com a mesma ferramenta, até o
+   chumbo aparecer brilhante.
+8. **Monte de volta: positivo primeiro, negativo por último.** Aperte cada
+   porca o suficiente para a garra não girar na mão. Depois, **cubra a conexão
+   pronta com anti-corrosive paste ou spray**, que impede o oxigênio de chegar
+   ao metal.
+
+Sobre o aperto do passo 8: não existe um torque universal de cable clamp, e o
+chumbo do post se deforma se você exagerar. O valor que vale é o do manual do
+veículo ou do fabricante da battery.
+
+### Por que a pasta vem depois, e não antes
+
+A anti-corrosive paste **sela** a conexão; ela não conduz melhor que o metal.
+Se você passar pasta antes de apertar, a camada fica entre a garra e o post e
+atrapalha o contato. Passe depois de a garra estar apertada, por fora,
+cobrindo a junta inteira.
+
+## Como falha e como diagnosticar
+
+| Defeito | O que acontece | Sintoma | Teste que separa |
+|---|---|---|---|
+| tampa suja e úmida | fuga pela superfície | battery baixa depois de dias parado | surface discharge test |
+| cable clamp corroída | resistance na conexão | gira devagar; às vezes só um clique | voltage drop entre post e garra, na partida |
+| cable clamp frouxa | contato intermitente | morre ao passar em buraco; tudo apaga | balançar a garra; voltage drop |
+| post danificado por alavanca | ligação interna rompida | intermitente, sem causa visível | voltage drop no próprio post, na partida |
+| nível de electrolyte baixo | topo das plates seco | perda de capacidade | inspeção na flooded cell |
+| memory saver esquecido | módulos perdem a memória | marcha lenta irregular, rádio pedindo código, vidro sem auto | o cliente reclama depois do serviço |
+
+### O teste que separa “battery fraca” de “conexão ruim”
+
+Os dois dão o mesmo sintoma — o motor gira devagar —, e a confusão entre eles
+é o erro mais caro desta lição, porque leva à troca de uma battery boa.
+
+A medição que separa é a **voltage drop na partida**, da lição
+[Medições com o multimeter](./medicoes-com-multimetro):
+
+1. Multimeter em volts DC.
+2. Ponta vermelha no **post** da battery; ponta preta na **cable clamp** que
+   está apertada nesse post. As duas pontas quase se tocando, uma de cada lado
+   da junta.
+3. Peça para alguém dar partida e leia durante o cranking.
+
+Numa conexão boa, a leitura fica perto de zero, porque não há resistance ali
+para segurar voltage. Uma leitura grande significa que a junta está comendo
+parte da voltage que deveria chegar ao starter motor — e o exemplo 1 mostra
+quanto isso custa.
+
+Repita nos dois lados, positivo e negativo, e também no ground strap que liga
+o motor à carroceria. O lado do ground é o mais esquecido e um dos que mais
+dão problema.
+
+### A queixa resolvida
+
+Volte ao carro que não aguenta o fim de semana.
+
+1. **O que o sistema deveria fazer:** com o carro desligado, só os módulos em
+   repouso consomem — uma current pequena e conhecida, dentro do que o
+   fabricante permite. Em três dias, a battery deveria perder pouco.
+2. **O que foi observado:** battery aprovada, charging system bom, consumo
+   parasita medido no cabo dentro do normal, tampa suja e úmida.
+3. **O princípio que liga as duas coisas:** o consumo parasita é medido **em
+   série com o cabo da battery**. Uma fuga que acontece pela tampa, de um post
+   ao outro por fora, **não passa pelo cabo** — então ela não aparece naquela
+   medição. É uma corrente invisível para o teste que foi feito.
+4. **O que muda:** existe um segundo caminho de descarga, em paralelo com o
+   consumo dos módulos. **O que não muda:** a battery em si continua sã, e o
+   charging system também.
+5. **O teste que confirma:** o surface discharge test. Uma leitura acima de
+   0.2 V entre o positive terminal e a tampa confirma que a tampa conduz.
+6. **A conta:** o exemplo 2 estima quanta carga essa fuga leva em duas semanas.
+
+**A correção:** limpar a tampa com baking soda e água, secar, fazer os oito
+passos de manutenção, e proteger as conexões com anti-corrosive paste.
+
+**Verificar o reparo:** refazer o surface discharge test — perto de zero — e
+carregar a battery, deixando o carro parado o mesmo tempo que falhava antes.
+
+## Na oficina: o lab de battery maintenance
+
+A sequência de trabalho, já com a segurança no lugar:
+
+1. Óculos, luvas, metal fora da mão. Ignição e loads desligadas.
+2. Inspeção visual: battery case, nível (se for flooded cell), terminals,
+   hold-down, cabos.
+3. Memory saver instalado e confirmado.
+4. Surface discharge test, **antes** de limpar.
+5. Limpeza da tampa com baking soda e água, se o teste pedir. Não deixe a
+   mistura entrar nas cells de uma flooded cell: o baking soda neutraliza o
+   ácido, e ácido neutralizado dentro da cell é cell perdida.
+6. Soltar as garras — negativa primeiro — com o terminal puller.
+7. Limpar posts e garras com a ferramenta de post e terminal.
+8. Montar — positiva primeiro, negativa por último — e apertar.
+9. Anti-corrosive paste por fora da conexão pronta.
+10. Tirar o memory saver e conferir o que o carro precisa reaprender.
+11. Fechar com uma verificação elétrica: open-circuit voltage e voltage drop na
+    partida.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o que uma garra corroída custa na partida
+
+Um starter motor puxa 200 A durante o cranking. A cable clamp do positivo está
+corroída e acrescenta 0.01 Ω na conexão (valores ilustrativos — a current real
+depende do motor, e a resistance depende do estado da garra).
+
+Quanta voltage fica na garra, e quanta power ela transforma em calor?
+
+<details>
+<summary>Solução</summary>
+
+A garra está em série com o resto do caminho, então a voltage que fica nela sai
+direto da lei de Ohm:
+
+$$
+V = I \times R = 200 \times 0.01 = 2\,\text{V}
+$$
+
+Dois volts. Esses 2 V **não chegam ao starter motor**: ele recebe dois volts a
+menos do que receberia com a garra limpa, e por isso gira mais devagar.
+
+A power perdida ali:
+
+$$
+P = V \times I = 2 \times 200 = 400\,\text{W}
+$$
+
+Quatrocentos watts dentro de uma peça de chumbo do tamanho de uma noz. É por
+isso que uma garra ruim esquenta a ponto de derreter o plástico em volta — e é
+por isso que o defeito piora a si mesmo: o calor acelera a corrosion.
+
+E repare no que a medição de resistance **não** mostraria. Com um ohmmeter,
+0.01 Ω é praticamente indistinguível de zero. Só com 200 A passando é que esse
+número vira 2 V visíveis no visor.
+
+</details>
+
+### Exemplo 2: quanto a sujeira da tampa descarrega
+
+**Pause e tente:** uma tampa muito suja e úmida forma um caminho de 300 Ω entre
+os dois terminals (valor ilustrativo). A battery tem 12.6 V e 60 Ah de
+capacidade.
+
+a) Que current passa por esse caminho?
+
+b) Em duas semanas parado, quanta carga ele leva? Que fração da battery é isso?
+
+<details>
+<summary>Dica</summary>
+
+Para (a), lei de Ohm. Para (b), lembre o que significa "amperes-hora": uma
+battery de 60 Ah entrega, em teoria, 1 A durante 60 horas, ou 2 A durante 30
+horas. Multiplique a current pelo número de horas.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+a) Pela lei de Ohm:
+
+$$
+I = \frac{V}{R} = \frac{12.6}{300} = 0.042\,\text{A} = 42\,\text{mA}
+$$
+
+Quarenta e dois miliamperes. Isso não acende nem a luz do porta-luvas, e nunca
+queimaria um fuse.
+
+b) Duas semanas são $14 \times 24 = 336$ horas:
+
+$$
+0.042 \times 336 \approx 14.1\,\text{Ah}
+$$
+
+$$
+\frac{14.1}{60} \approx 0.235 = 23.5\%
+$$
+
+Quase um quarto da battery, só pela tampa suja — e isso **além** do consumo
+normal dos módulos, que acontece ao mesmo tempo.
+
+Para dar escala: o consumo parasita aceitável de um veículo moderno costuma
+ficar na faixa de algumas dezenas de miliamperes, e o valor que vale é o do
+manual do fabricante. A fuga pela tampa, neste exemplo, é do mesmo tamanho que
+todo o consumo permitido do carro — você dobrou a descarga, sem que nenhum
+circuit do veículo tenha defeito.
+
+</details>
+
+### Exemplo 3: ler duas medições juntas
+
+**Pause e tente:** num carro que gira devagar, você mede, durante o cranking:
+
+- entre o post positivo e a cable clamp positiva: **0.6 V**;
+- entre o post negativo e a cable clamp negativa: **0.1 V**;
+- entre a cable clamp negativa e o bloco do motor: **0.8 V**.
+
+O que cada número diz, e onde você mexe primeiro?
+
+<details>
+<summary>Solução</summary>
+
+Cada medição é a voltage que **fica** naquela junta durante a partida. Numa
+junta boa, o valor fica perto de zero, porque uma junta boa quase não tem
+resistance.
+
+- **0.6 V no positivo:** alto. Há resistance entre o post e a garra — a junta
+  que o passo 7 do procedimento limpa.
+- **0.1 V no negativo:** baixo. Essa junta está aceitável.
+- **0.8 V entre a garra negativa e o bloco:** o maior dos três. Esse trecho é o
+  cabo de massa inteiro, do terminal ao motor. O problema pode estar no cabo,
+  no parafuso de massa no bloco, ou na ponta crimpada do cabo.
+
+Somando o que se perde só nessas três juntas: $0.6 + 0.1 + 0.8 = 1.5\,$V que
+não chegam ao starter motor.
+
+**Onde mexer primeiro:** no trecho de 0.8 V, porque é o maior — a regra de
+diagnóstico é atacar a maior queda primeiro. Mas os 0.6 V do positivo também
+estão altos, e o procedimento de manutenção resolve os dois de uma vez. Refaça
+as três medições depois da limpeza: se a de 0.8 V continuar alta, o problema
+não era a garra, e sim o cabo de massa ou o ponto de aterramento no bloco.
+
+**O que esse conjunto descarta:** não aponta para a battery. A battery pode
+estar perfeita e o motor girar devagar mesmo assim, porque a voltage está se
+perdendo no caminho, não na fonte. Condenar a battery aqui seria trocar uma
+peça boa.
+
+</details>
+
+## Perguntas de verificação
+
+1. Qual é a diferença entre self-discharge e surface discharge?
+2. Por que a fuga pela tampa **não** aparece na medição de consumo parasita
+   feita em série com o cabo da battery?
+3. Por que o surface discharge test tem que ser feito **antes** da limpeza?
+4. Por que o memory saver deixa os battery cables energizados, e o que isso
+   obriga você a fazer?
+5. Por que a anti-corrosive paste é aplicada depois de apertar a garra?
+6. Por que a ferramenta de raspar é preferida à escova de aço no post?
+7. Por que uma garra corroída pode medir "zero ohm" no ohmmeter e ainda assim
+   impedir a partida?
+
+<details>
+<summary>Respostas</summary>
+
+1. A self-discharge acontece **dentro** da battery, por reações químicas
+   lentas; é normal e inevitável. A surface discharge acontece **por fora**,
+   pela sujeira úmida da tampa, que liga um terminal ao outro; não é normal,
+   dá para medir e dá para eliminar.
+2. Porque aquela medição põe o amperímetro **em série com o cabo**, e lê só a
+   current que passa pelo cabo. A fuga pela tampa vai de um post ao outro por
+   cima da battery, sem entrar no cabo, então ela não atravessa o instrumento.
+3. Porque depois da limpeza a tampa não conduz mais, e o teste dá perto de
+   zero. Você perderia a informação de que havia fuga, e com ela a explicação
+   para o sintoma do cliente.
+4. Porque ele alimenta o sistema pelo data link connector ou por uma tomada de
+   12 V, e esse sistema está do outro lado dos mesmos cabos que você acabou de
+   soltar da battery. Isso obriga a prender ou isolar a cable clamp do
+   positivo, para ela não encostar na carroceria e abrir um arco.
+5. Porque a pasta sela, mas não conduz melhor que o metal. Passada antes, ela
+   fica entre a garra e o post e atrapalha o contato — justamente o contrário
+   do que a manutenção quer.
+6. Porque o raspador deixa a superfície lisa, e superfície lisa encosta em mais
+   pontos quando a garra aperta. A escova de aço deixa riscos, que reduzem a
+   área de contato e dão início à corrosion de novo. O efeito aparece meses
+   depois, não no dia.
+7. Porque o ohmmeter mede com o circuit desligado, mandando uma current
+   minúscula, e 0.01 Ω é indistinguível de zero na escala dele. Com os 200 A da
+   partida passando, essa mesma resistance produz 2 V de queda — voltage que
+   deixa de chegar ao starter motor.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês da ferramenta ou do produto:
+
+a) o que tira a garra do post sem empurrar o post para o lado;
+b) a escova cônica que limpa o post e a parte interna da garra;
+c) o alicate que abre e limpa a garra;
+d) o produto passado por fora da conexão pronta;
+e) o aparelho que mantém a memória dos módulos com a battery fora.
+
+### 2. Explicação
+
+Explique, para um colega, por que uma tampa suja descarrega a battery mesmo
+com o carro completamente desligado e sem nenhum defeito elétrico.
+
+### 3. Aplicação direta
+
+a) O caminho pela sujeira tem 800 Ω e a battery está em 12.6 V. Que current
+passa?
+
+b) Quanta carga, em amperes-hora, esse caminho leva em dez dias parado?
+
+c) Uma cable clamp corroída tem 0.006 Ω e o starter motor puxa 250 A. Quanta
+voltage fica na garra?
+
+### 4. Variação
+
+Refaça o exemplo 2 com a tampa parcialmente limpa, agora com 2000 Ω de
+resistance. Em duas semanas, quanta carga sai? Compare com os 14.1 Ah do
+exemplo e diga se limpar "mais ou menos" resolve o problema.
+
+### 5. Caso de diagnóstico
+
+Um cliente trocou a battery na semana passada, em outra oficina. Agora reclama
+que “o rádio pede um código e o carro engasga nos primeiros minutos depois de
+ligar, e depois normaliza”. A battery nova está boa e as conexões estão limpas.
+
+a) O que o rádio pedindo código indica sobre o serviço anterior?
+
+b) Por que o carro engasga só nos primeiros minutos, e depois melhora?
+
+c) Que procedimento teria evitado os dois sintomas?
+
+d) Você trocaria alguma peça? Justifique.
+
+### 6. Justificativa
+
+Por que o procedimento manda soltar a garra **negativa** primeiro, mas
+reconectar a **positiva** primeiro? As duas regras parecem opostas — mostre que
+elas vêm da mesma ideia.
+
+### 7. Formato ASE
+
+**Question 1.** A technician measures 0.3 volts between the positive battery
+post and the top of the battery case. This reading indicates:
+
+- A. a normal condition for a fully charged battery
+- B. a shorted cell
+- C. current leaking across a dirty battery top, which should be cleaned
+- D. an open circuit in the battery cable
+
+**Question 2.** Technician A says that battery terminals should be removed with
+a terminal puller. Technician B says that a screwdriver can be used to pry the
+clamp off the post. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 3.** During cranking, a technician measures 0.7 volts between the
+battery negative post and the engine block. This means:
+
+- A. the battery is discharged
+- B. there is excessive resistance in the ground path
+- C. the starter motor is drawing too little current
+- D. the reading is normal
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Battery terminal puller. b) Terminal cleaner (ferramenta de post e
+   terminal). c) Cable clamp pliers. d) Anti-corrosive paste. e) Memory saver.
+
+2. Porque a camada de poeira com umidade e vapor de ácido em cima da battery
+   conduz eletricidade. Ela liga o positive terminal ao negative terminal por
+   fora da battery, e por esse caminho passa uma current pequena o tempo todo.
+   Ela é pequena demais para acender qualquer coisa ou queimar um fuse, mas
+   funciona dia e noite: multiplicada por centenas de horas, vira uma fatia
+   grande da carga. Não é defeito de nenhum circuit do carro — é um circuit a
+   mais, que a sujeira criou.
+
+3. a) $I = 12.6 \div 800 = 0.01575\,\text{A} \approx 15.8\,\text{mA}$.
+
+   b) Dez dias são $10 \times 24 = 240$ horas.
+   $0.01575 \times 240 = 3.78\,\text{Ah}$.
+
+   c) $V = 250 \times 0.006 = 1.5\,\text{V}$.
+
+4. $I = 12.6 \div 2000 = 0.0063\,\text{A} = 6.3\,\text{mA}$.
+   Em 336 horas: $0.0063 \times 336 \approx 2.1\,\text{Ah}$.
+
+   Contra 14.1 Ah da tampa muito suja: a fuga caiu para cerca de um sétimo.
+   Limpar "mais ou menos" ajuda bastante, porque a current cai na mesma
+   proporção em que a resistance sobe. Mas 2.1 Ah em duas semanas ainda é uma
+   descarga que não deveria existir, e ela se soma ao consumo normal dos
+   módulos. A conferência que decide não é o olho, é refazer o surface
+   discharge test: o alvo é perto de zero, não "menos que antes".
+
+5. a) Indica que a battery foi removida **sem memory saver**: os módulos
+   ficaram sem power e perderam o que guardavam, inclusive o código do rádio.
+
+   b) Porque o PCM perdeu a **keep alive memory** e está reaprendendo marcha
+   lenta e correções de mistura. Enquanto ele reaprende, a marcha lenta fica
+   irregular. Depois de alguns minutos de funcionamento, os valores aprendidos
+   voltam a ficar bons.
+
+   c) Instalar o memory saver pelo data link connector **antes** de soltar a
+   battery, confirmar que o LED do cabo acendeu, e só então começar.
+
+   d) Não. Nenhuma peça está com defeito: o que houve foi perda de memória, e a
+   correção é reaprender ou reprogramar — inserir o código do rádio e deixar o
+   motor completar o ciclo de aprendizado, ou fazer o procedimento de *relearn*
+   com o scan tool, se o fabricante exigir. Trocar peça aqui seria o erro de
+   atirar peças num sintoma já explicado.
+
+6. As duas vêm da mesma ideia: **nunca deixar o positive terminal vivo e a
+   carroceria ligada ao negativo ao mesmo tempo que uma ferramenta está perto
+   dos dois.**
+
+   Na desmontagem, soltar a negativa primeiro desliga a carroceria da battery
+   logo no começo; a partir dali, a ferramenta pode encostar onde quiser
+   enquanto você trabalha no positivo.
+
+   Na montagem, o mesmo princípio lido ao contrário: enquanto a negativa não
+   estiver ligada, a carroceria está desligada, então você pode apertar o
+   positivo com calma. A última ligação a ser feita é a que fecha o circuit —
+   e você quer que ela seja a do negativo, longe do terminal vivo.
+
+   Em resumo: o intervalo em que existe perigo é o intervalo em que **só o
+   negativo está conectado**. As duas regras servem para que esse intervalo
+   não exista.
+
+7. **Question 1: C.** Voltage medida entre o post e a tampa só existe se houver
+   corrente passando pela superfície, e corrente na superfície significa
+   sujeira condutora. O limite usual de referência é cerca de 0.2 V. A está
+   errada: numa battery limpa a leitura fica perto de zero. B produziria uma
+   open-circuit voltage baixa, não uma leitura na tampa. D descreveria falta de
+   continuidade, que não gera esse sintoma.
+
+   **Question 2: A.** O terminal puller levanta a garra sem empurrar o post. A
+   alavanca com chave de fenda (B) empurra o post para o lado e rompe a ligação
+   interna entre o post e a plate strap, criando um defeito intermitente que
+   não aparece por fora.
+
+   **Question 3: B.** 0.7 V entre o post negativo e o bloco, durante a partida,
+   é voltage drop no caminho de ground. Numa conexão boa esse valor fica perto
+   de zero. A está errada porque uma battery descarregada se revela pela
+   voltage nos terminals, não por uma queda num trecho. C é incoerente: menos
+   current daria menos queda, não mais. D está errada porque essa leitura é
+   alta para um caminho de ground.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** a manutenção da battery ataca dois inimigos invisíveis.
+  A **sujeira na tampa**, que liga os terminals por fora e descarrega a battery
+  com o carro parado, e a **corrosion na conexão**, que acrescenta resistance
+  justamente onde passa a maior current do veículo. Um surface discharge test e
+  uma voltage drop na partida mostram os dois em menos de dois minutos.
+- **Quando usar:** em toda manutenção preventiva; em qualquer queixa de partida
+  lenta, de clique ou de battery que descarrega com o carro parado; e sempre
+  antes de condenar uma battery.
+- **Com o que se conecta:** a voltage drop e o perigo da medição sem current
+  vêm de [Medições com o multimeter](./medicoes-com-multimetro); a corrosion,
+  de [Reparar um wire](./reparar-um-wire); a ordem dos cabos e o PPE, de
+  [Segurança com a battery](./seguranca-da-battery); o state of charge, de
+  [A battery por dentro](./a-battery-por-dentro). A próxima lição,
+  [Jump start e memory saver](./jump-start-e-memory-saver), usa o memory saver
+  outra vez e mostra onde cada clamp do jump pack vai.
+
+**Termos desta lição para revisar:** surface discharge, self-discharge, memory
+saver, keep alive memory, cable clamp, battery terminal puller, terminal
+cleaner, cable clamp pliers, wire brush, anti-corrosive paste, corrosion.
