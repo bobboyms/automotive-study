@@ -319,3 +319,12 @@
 .controle input {
   width: 100%;
 }
+
+/* terceiro preenchimento, para quando um desenho precisa de três materiais
+   distintos sem gastar um tom: shield do coaxial cable, chapa da carroceria */
+.escuro {
+  fill: var(--ifm-color-emphasis-500);
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}

@@ -132,6 +132,14 @@
     "jump-start-e-memory-saver": {
       "titulo": "Jump start e memory saver",
       "url": "trn-120-eletricidade/jump-start-e-memory-saver"
+    },
+    "tipos-de-wire-e-bitola": {
+      "titulo": "Tipos de wire e wire gauge",
+      "url": "trn-120-eletricidade/tipos-de-wire-e-bitola"
+    },
+    "chicote-terminals-e-connectors": {
+      "titulo": "O wiring harness: proteção, terminals e connectors",
+      "url": "trn-120-eletricidade/chicote-terminals-e-connectors"
     }
   },
   "termos": [
@@ -3373,7 +3381,10 @@
       "en": "ampacity",
       "pt": "capacidade de corrente",
       "def": "a current que um wire conduz sem esquentar demais",
-      "licao": "protecao-do-circuito"
+      "licao": "protecao-do-circuito",
+      "var": [
+        "current-carrying capacity"
+      ]
     },
     {
       "en": "short finder",
@@ -4227,6 +4238,248 @@
       "pt": "chave de override",
       "def": "botão que força o jump pack a ligar com a battery quase morta",
       "licao": "jump-start-e-memory-saver"
+    },
+    {
+      "en": "solid wire",
+      "pt": "fio maciço",
+      "def": "wire cujo condutor é um único fio de cobre",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "stranded wire",
+      "pt": "fio multifilar",
+      "def": "wire cujo condutor é um feixe de fios finos torcidos",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "parallel wire",
+      "pt": "fio paralelo",
+      "def": "dois ou mais condutores isolados, unidos lado a lado numa capa só",
+      "var": [
+        "parallel wiring"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "primary wire",
+      "pt": "fio primário",
+      "def": "wire de baixa voltage: quase toda a fiação do veículo",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "secondary wire",
+      "pt": "fio secundário",
+      "def": "wire de alta voltage da ignition, que leva a faísca até a spark plug",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "carbon-core wire",
+      "pt": "fio de núcleo de carbono",
+      "def": "secondary wire com núcleo resistivo, que abafa o ruído de rádio",
+      "var": [
+        "resistance wire"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "coaxial cable",
+      "pt": "cabo coaxial",
+      "def": "cabo com um condutor central, isolamento e uma malha de metal em volta",
+      "var": [
+        "coax"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "shield",
+      "pt": "blindagem",
+      "def": "a malha de metal que envolve o sinal e escoa a interferência para o ground",
+      "var": [
+        "shielding",
+        "shielded wire"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "twisted pair wire",
+      "pt": "par trançado",
+      "def": "dois condutores isolados torcidos um no outro, para cancelar a interferência",
+      "var": [
+        "twisted pair",
+        "twisted cable"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "printed circuit",
+      "pt": "circuito impresso",
+      "def": "placa com trilhas de cobre coladas, no lugar de wires soltos",
+      "var": [
+        "printed circuit board"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "American Wire Gage",
+      "pt": "bitola americana",
+      "def": "escala de bitola em que o número cresce quando o wire afina",
+      "var": [
+        "American Wire Gauge"
+      ],
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "metric wire size",
+      "pt": "bitola métrica",
+      "def": "bitola dada pela área da seção do cobre em mm²",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "cross-sectional area",
+      "pt": "área da seção",
+      "def": "a área do corte do condutor: o que de fato decide a resistance",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "hash mark",
+      "pt": "traço",
+      "def": "marca curta repetida no isolamento, usada como código em vez da listra",
+      "licao": "tipos-de-wire-e-bitola"
+    },
+    {
+      "en": "conduit",
+      "pt": "corrugado",
+      "def": "tubo plástico sanfonado que veste o chicote e o protege do atrito",
+      "var": [
+        "split loom"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "grommet",
+      "pt": "passa-fio",
+      "def": "anel de borracha que protege o wire onde ele atravessa um furo de chapa",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "wire tie",
+      "pt": "abraçadeira",
+      "def": "cinta plástica que amarra o chicote e o prende no lugar",
+      "var": [
+        "plastic tie",
+        "zip tie"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "clip",
+      "pt": "presilha",
+      "def": "peça que prende o chicote na carroceria em pontos fixos",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "connector half",
+      "pt": "metade do conector",
+      "def": "cada um dos dois lados que se encaixam: o macho e a fêmea",
+      "var": [
+        "male connector half",
+        "female connector half"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "locking tab",
+      "pt": "trava",
+      "def": "lingueta plástica que segura o conector encaixado ou o terminal dentro dele",
+      "var": [
+        "lock tab",
+        "release tab"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "terminal removal tool",
+      "pt": "extrator de terminal",
+      "def": "ponteira fina que levanta a trava interna e solta o terminal do conector",
+      "var": [
+        "terminal pick"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "self-stripping connector",
+      "pt": "conector autodescascante",
+      "def": "conector que corta o isolamento ao ser apertado, sem descascar antes",
+      "var": [
+        "insulation displacement connector"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "factory connector",
+      "pt": "conector de fábrica",
+      "def": "conector montado na linha de produção, com trava e vedação próprias",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "harness connector",
+      "pt": "conector de chicote",
+      "def": "conector de muitos pinos que liga um chicote inteiro a um módulo",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "dielectric grease",
+      "pt": "graxa dielétrica",
+      "def": "graxa que bloqueia a umidade no conector sem impedir o contato do metal",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "rubber boot",
+      "pt": "capa de borracha",
+      "def": "capa que veda a entrada dos wires no conector",
+      "var": [
+        "weather seal"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "induced voltage",
+      "pt": "tensão induzida",
+      "def": "voltage que aparece num wire por causa do campo de outro wire ao lado",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "hybrid power cable",
+      "pt": "cabo de potência do híbrido",
+      "def": "cabo laranja de alta voltage entre a battery de tração e o motor-generator",
+      "var": [
+        "high-voltage cable"
+      ],
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "terminal drag test",
+      "pt": "teste de atrito do terminal",
+      "def": "teste que mede se o terminal fêmea ainda aperta o pino",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "electrical tape",
+      "pt": "fita isolante",
+      "def": "fita que isola e protege o chicote, mas não veda contra água sozinha",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "wiggle test",
+      "pt": "teste de sacudida",
+      "def": "mexer no chicote com o circuit ligado e o meter conectado, para fazer o defeito intermitente aparecer",
+      "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "motor-generator",
+      "pt": "motor-gerador",
+      "def": "a máquina elétrica do híbrido, que move o carro e também recarrega a battery de tração",
+      "licao": "chicote-terminals-e-connectors"
     }
   ]
 }

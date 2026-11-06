@@ -179,6 +179,22 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 8 — Wiring e wiring repairs',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/tipos-de-wire-e-bitola',
+              label: '25. Tipos de wire e wire gauge',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/chicote-terminals-e-connectors',
+              label: '26. O wiring harness',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

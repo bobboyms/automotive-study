@@ -165,6 +165,24 @@ relay está na lição 10; aqui vem a battery, da segurança ao jump pack.
     acontece**. Onde vai cada clamp, a ordem de ligar e desligar, e o pack
     usado como memory saver e como fonte de 12 V.
 
+### Tópico 8 — Wiring e wiring repairs
+
+Este tópico é o **capítulo 8** do livro (*Wiring and Wiring Repairs*), visto
+no módulo 3 junto com a battery. A lição 20 já tratou do reparo da emenda;
+aqui vêm o wire em si e o chicote que o carrega.
+
+25. [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola) — o wire não é uma
+    linha do esquema: é uma resistance em série com a load. Solid e stranded,
+    primary e secondary, coaxial e twisted pair; a escala AWG, em que o número
+    cresce quando o wire afina; as quatro coisas que mudam a resistance; e a
+    conta que explica o acessório que acende fraco.
+26. [O wiring harness](./chicote-terminals-e-connectors) — o defeito mora no
+    connector, porque é a única parte do circuit feita para abrir. Conduit,
+    grommet, clip e wire tie; a locking tab e a ordem destravar-depois-puxar;
+    o terminal removal tool, a dielectric grease, o terminal drag test e o
+    wiggle test. Por que acessório ganha circuit próprio, e por que não se
+    encosta em cabo laranja.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -175,17 +193,17 @@ relay está na lição 10; aqui vem a battery, da segurança ao jump pack.
 
 ### Próximos tópicos (em preparação)
 
-25. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+27. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-26. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+28. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-27. **Diagnóstico de circuits** — open circuit, short to ground, short to
+29. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-28. **Testar e carregar a battery** — load test, conductance tester, recarga
+30. **Testar e carregar a battery** — load test, conductance tester, recarga
     e parasitic draw.
-29. **Starting system** — starter motor, solenoid e testes.
-30. **Charging system** — alternator, rectifier, voltage regulator e testes.
+31. **Starting system** — starter motor, solenoid e testes.
+32. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

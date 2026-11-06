@@ -116,6 +116,8 @@ import Circuito from '@site/src/components/Circuito';
 | lead-acid battery em corte: uma cell, as seis em série, ou os riscos (gás e short) | `Bateria` |
 | o surface discharge test: a fuga pela sujeira da tampa da battery | `DescargaSuperficial` |
 | onde vai cada clamp do jump pack, e onde ele não vai | `JumpStart` |
+| solid e stranded wire em corte, as bitolas AWG comparadas, coaxial cable e twisted pair wire | `TiposDeWire` |
+| chicote com conduit, grommet e clip; as duas metades de um connector; tirar um terminal do corpo | `Chicote` |
 | reconhecer pela aparência: crosta de corrosion, case estufado, plate sulfatada | `Foto` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
@@ -888,6 +890,80 @@ número de linhas tem que permitir um corte pela metade exata — `LINHAS` com
 soma ímpar quebra a correspondência com o texto da lição.
 
 Não recebe props além de `caption`.
+
+---
+
+# Wiring (TRN-120, tópico 8)
+
+## TiposDeWire
+
+```mdx
+<TiposDeWire modo="condutor" caption="..." />  {/* solid e stranded */}
+<TiposDeWire modo="bitola" caption="..." />    {/* 10, 14 e 18 AWG */}
+<TiposDeWire modo="cabos" caption="..." />     {/* coaxial e twisted pair */}
+```
+
+As três figuras da lição
+[Tipos de wire e wire gauge](../../docs/trn-120-eletricidade/25-tipos-de-wire-e-bitola.mdx).
+Nenhuma usa tom: as três são anatomia, não caminho de current nem defeito. Os
+tons ficam reservados para as figuras que mostram o que a mão faz e onde está
+a falha.
+
+| `modo` | O que mostra |
+|---|---|
+| `'condutor'` (padrão) | o mesmo diâmetro externo com um condutor maciço e com um feixe de 13 strands, e os rótulos `conductor` e `insulation` |
+| `'bitola'` | 10, 14 e 18 AWG em corte, na mesma escala de px por mm, com o diâmetro real do cobre embaixo |
+| `'cabos'` | coaxial cable em corte e twisted pair wire visto de lado |
+
+Quatro decisões de desenho que as figuras dependem:
+
+- **A escala de `bitola` é px por mm, igual para os três.** Os diâmetros vêm
+  da própria escala AWG (2.588, 1.628 e 1.024 mm), e por isso a comparação de
+  área que a lição faz com a conta bate com o que o olho vê.
+- **O 18 AWG leva capa grossa de propósito**, até ficar com o mesmo diâmetro
+  externo do 14 AWG. É assim que a figura ensina que a bitola é só o cobre —
+  o erro comum que a lição trata.
+- **No coaxial, shield e conductor dividem o mesmo preenchimento**, porque os
+  dois são metal; a capa externa e o isolamento de dentro dividem o outro. Com
+  um terceiro preenchimento só para o shield, o condutor central ficava pálido
+  demais e lia como vazio.
+- **No twisted pair, os dois fios são interrompidos alternadamente** nos
+  cruzamentos: no primeiro some o de baixo, no seguinte o de cima. Com os dois
+  inteiros, o desenho parecia uma corrente de elos, não uma trança.
+
+## Chicote
+
+```mdx
+<Chicote modo="protecao" caption="..." />  {/* conduit, tie, grommet, clip */}
+<Chicote modo="conector" caption="..." />  {/* as duas connector halves */}
+<Chicote modo="terminal" caption="..." />  {/* tirar o terminal do corpo */}
+```
+
+As três figuras da lição
+[O wiring harness](../../docs/trn-120-eletricidade/26-chicote-terminals-e-connectors.mdx).
+Um tom só, o **1** (azul), e sempre para a mesma coisa: **o que a mão faz** —
+a seta de apertar a trava, a ferramenta e o puxão no wire. Peça, chapa e
+chicote ficam na cor do texto.
+
+| `modo` | O que mostra |
+|---|---|
+| `'conector'` (padrão) | as duas metades separadas, com o tracejado ligando cada pino à sua cavidade, e a locking tab com a seta de apertar |
+| `'terminal'` | o corpo em corte, a locking tab interna encaixada na janela do terminal, a ferramenta entrando pela frente e o puxão no wire |
+| `'protecao'` | conduit com nervuras, wire tie, a chapa em corte com o grommet forrando o furo, e o clip |
+
+Quatro decisões de desenho, todas vindas da folha de conferência:
+
+- **A chapa de `protecao` vai de borda a borda do viewBox.** Recortada no meio
+  da altura, ela lia como dois postes; tocando as bordas, lê como parede.
+- **O chicote atravessa o furo inteiro**, e o grommet são as duas peças de
+  borracha que forram a borda. Desenhar o chicote interrompido na chapa fazia
+  parecer que ele acabava ali.
+- **O clip é uma cinta opaca com um pé**, e não um quadro em volta dos wires:
+  o quadro cruzava os três wires nas laterais e lia como ligação.
+- **Em `terminal`, a parede da frente é aberta** na altura da cavidade. Com ela
+  fechada, a ferramenta parecia atravessar o plástico. E a tab entra numa
+  **janela** do terminal: encostada no topo do metal, ela não mostrava o que
+  prende o terminal no lugar.
 
 ---
 

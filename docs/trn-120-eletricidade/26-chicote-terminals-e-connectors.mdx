@@ -1,0 +1,701 @@
+---
+title: "O wiring harness: proteção, terminals e connectors"
+sidebar_label: "O wiring harness"
+---
+
+import Chicote from '@site/src/components/Chicote';
+
+# O wiring harness: proteção, terminals e connectors
+
+> **Pergunta central:** o wire em si quase nunca falha no meio. O defeito
+> aparece onde ele **termina** — no terminal, dentro do connector. Por que
+> justamente ali, e o que um técnico faz de diferente para não criar o
+> próximo defeito ao desconectar?
+
+## A queixa: o farol fraco e o connector derretido
+
+Um cliente traz o carro com uma queixa simples:
+
+> “O farol direito está mais fraco que o esquerdo. Já troquei a lâmpada e não
+> adiantou.”
+
+Você tira a bulb e olha o connector que a alimenta. O plástico ao redor de um
+dos contatos está escurecido e deformado, como se tivesse derretido um pouco.
+O terminal de dentro está opaco, com uma camada esverdeada.
+
+Repare no que está acontecendo ao mesmo tempo: a bulb recebe **menos** energia
+que deveria — ela está fraca — e, mesmo assim, alguma coisa ali está
+produzindo calor suficiente para amolecer plástico. As duas coisas parecem se
+contradizer.
+
+Na lição anterior, [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola), um
+wire fino demais transformava 12 W em calor ao longo de trinta pés e ficava
+apenas morno. Aqui, você vai ver uma potência **menor** derreter o conector —
+porque ela está concentrada num ponto do tamanho de um grão de arroz.
+
+Ao fim desta lição você vai saber por que o connector é o ponto frágil do
+circuit, como testá-lo, e como abrir e fechar um connector de fábrica sem
+transformar o seu serviço na próxima queixa.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| wiring harness | chicote | o conjunto de wires amarrados que corre pelo veículo |
+| conduit | corrugado | tubo plástico sanfonado que veste o chicote e o protege do atrito |
+| grommet | passa-fio | anel de borracha que protege o wire onde ele atravessa um furo de chapa |
+| wire tie | abraçadeira | cinta plástica que amarra o chicote e o prende no lugar |
+| clip | presilha | peça que prende o chicote na carroceria em pontos fixos |
+| connector half | metade do conector | cada um dos dois lados que se encaixam: o macho e a fêmea |
+| locking tab | trava | lingueta plástica que segura o conector encaixado ou o terminal dentro dele |
+| terminal removal tool | extrator de terminal | ponteira fina que levanta a trava interna e solta o terminal do conector |
+| self-stripping connector | conector autodescascante | conector que corta o isolamento ao ser apertado, sem descascar antes |
+| factory connector | conector de fábrica | conector montado na linha de produção, com trava e vedação próprias |
+| harness connector | conector de chicote | conector de muitos pinos que liga um chicote inteiro a um módulo |
+| dielectric grease | graxa dielétrica | graxa que bloqueia a umidade no conector sem impedir o contato do metal |
+| rubber boot | capa de borracha | capa que veda a entrada dos wires no conector |
+| terminal drag test | teste de atrito do terminal | teste que mede se o terminal fêmea ainda aperta o pino |
+| induced voltage | tensão induzida | voltage que aparece num wire por causa do campo de outro wire ao lado |
+| hybrid power cable | cabo de potência do híbrido | cabo laranja de alta voltage entre a battery de tração e o motor-generator |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Em todo diagnóstico elétrico. Para medir qualquer coisa num módulo ou num
+sensor, você vai desconectar um connector — e o jeito de desconectar decide se
+o carro volta em dois meses. Em colisão, em entrada de água e em dano de
+roedor, o chicote e seus connectors são o que precisa ser avaliado e
+reparado.
+
+Na Wake Tech, isto é a segunda metade do **capítulo 8** do livro (*Wiring and
+Wiring Repairs*), no módulo 3. Na prova ASE, área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Electrical power](./potencia-eletrica), qual fórmula dá a power
+   transformada em calor quando você conhece a current e a resistance?
+2. Na lição [Reparar um wire](./reparar-um-wire), quais são as quatro coisas
+   que uma emenda precisa fazer?
+3. Na lição [Medições com o multimeter](./medicoes-com-multimetro), por que a
+   voltage drop precisa ser medida com a load ligada?
+4. Na lição [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola), por que um
+   twisted pair wire reduz o ruído num cabo de sinal?
+
+<details>
+<summary>Respostas</summary>
+
+1. $P = I \times I \times R$. Ela é o centro desta lição: a resistance de
+   contato é pequena, mas a current passa por ela inteira.
+2. Conduzir sem acrescentar resistance; aguentar esforço mecânico; ficar
+   vedada contra umidade; ficar isolada. Um connector precisa fazer as mesmas
+   quatro coisas — com a dificuldade extra de **poder ser aberto e fechado**.
+3. Porque resistance de contato só se revela com a current de trabalho
+   passando. Sem current, não há queda, e a medição mostra zero mesmo num
+   contato ruim.
+4. Porque o campo externo atinge os dois condutores quase igualmente, e como
+   eles levam o sinal em sentidos opostos, o efeito se cancela.
+
+</details>
+
+## Intuição: por que o defeito mora no connector
+
+Um wire no meio do chicote vive uma vida tranquila: está vestido, amarrado e
+não se mexe. O connector vive o contrário disso.
+
+- Ele é a **única parte do circuit feita para abrir**. Tudo que abre tem folga,
+  e folga é por onde entra água.
+- Ele é onde o cobre **não é contínuo**. Dois metais se tocam por pressão de
+  mola, e pressão de mola afrouxa com o tempo, o calor e cada desconexão.
+- Ele concentra tudo num ponto minúsculo. Um wire espalha a sua resistance por
+  metros; o contato do terminal concentra a dele em milímetros.
+
+Essa última é a que explica a queixa. Potência espalhada aquece pouco;
+potência concentrada derrete. Sete watts distribuídos em trinta pés de wire
+deixam o wire morno. Os mesmos sete watts dentro de um contato do tamanho de
+um grão de arroz passam de 200 °C e amolecem o plástico em volta.
+
+> **Guarde esta:** a resistance de contato é pequena em ohms e enorme em
+> consequências, porque a current inteira do circuit passa por uma área
+> minúscula.
+
+## Modelo visual: como o chicote é protegido
+
+<Chicote
+  modo="protecao"
+  caption="Um trecho de chicote, com a chapa da carroceria em corte. O conduit veste os wires onde eles correm soltos; o wire tie amarra o feixe; o grommet forra a borda do furo, para que a chapa não serre os wires que passam por ele; o clip prende o chicote num ponto fixo da carroceria."
+/>
+
+Cada uma dessas peças existe para impedir um modo de falha específico, e vale
+saber qual:
+
+| Peça | O que ela impede |
+|---|---|
+| **conduit** | atrito do chicote contra aresta de chapa, que corta a insulation |
+| **grommet** | o furo da chapa serrar os wires que passam por ele |
+| **wire tie** | os wires se soltarem do feixe e encostarem em peças quentes ou móveis |
+| **clip** | o chicote balançar livre e romper por fadiga nas pontas |
+| **electrical tape** | a entrada de sujeira e a abrasão leve no feixe |
+
+Daí vem uma regra de serviço que parece burocrática e não é: **o chicote volta
+preso onde estava**. Um clip que ficou na bancada, um grommet empurrado para
+dentro do furo ou um wire tie cortado e não reposto não causam defeito no dia
+do serviço. Causam em alguns meses, e a queixa que chega depois não se parece
+em nada com o serviço que foi feito.
+
+Um alerta que o capítulo trata como prioridade: num veículo híbrido ou
+elétrico, os cabos de alta voltage são **laranja**, e qualquer peça que você
+tirar perto deles precisa voltar exatamente como estava. Voltamos a eles na
+seção de oficina, com o aviso de segurança completo.
+
+## Formalização: o connector por dentro
+
+<Chicote
+  modo="conector"
+  caption="As duas metades de um connector, desenhadas separadas para que os pinos e as cavidades apareçam; o tracejado mostra a direção em que elas se encaixam. O lado macho tem os pinos; o lado fêmea, as cavidades com os terminals de mola. A locking tab em cima prende as duas metades — e é nela que o dedo aperta para soltar, nunca no wire."
+/>
+
+Um connector tem três partes, e cada uma tem o seu modo de falhar:
+
+1. **O corpo plástico**, que alinha as duas metades e as mantém juntas. Ele
+   quebra quando alguém força a separação sem destravar.
+2. **Os terminals de metal** dentro de cada cavidade. O terminal fêmea é uma
+   mola que aperta o pino macho. Ele falha ao perder a pressão de mola — por
+   excesso de desconexões, por calor ou por alguém enfiar uma ponta de prova
+   grossa dentro dele.
+3. **A vedação**: o **rubber boot** na entrada dos wires e, em alguns tipos, um
+   anel de borracha entre as metades. Ela falha ao ressecar, ao ser cortada ou
+   ao ser deixada de fora na montagem.
+
+### A locking tab
+
+Todo **factory connector** tem uma **locking tab**: uma lingueta plástica que
+precisa ser apertada ou levantada antes de separar as metades. Ela existe
+porque o carro vibra, e sem ela o connector sairia sozinho.
+
+O gesto certo tem duas partes, nesta ordem: **primeiro destravar, depois
+puxar** — e puxar pelo corpo do connector, nunca pelos wires. Puxar pelo wire
+faz uma de duas coisas, as duas ruins: arranca o wire do terminal, ou desloca
+o terminal para dentro do corpo e o deixa meio encaixado, que é o defeito
+intermitente mais difícil de achar.
+
+Em alguns connectors a tab é uma lingueta visível; em outros é um gancho
+interno que exige empurrar o corpo **para dentro** antes de puxar. Quando o
+connector não sai com a pressão de dois dedos, a resposta não é força: é o
+wiring diagram ou o manual do veículo, que mostram onde fica a trava daquele
+modelo.
+
+### Tirar um terminal de dentro do connector
+
+Às vezes o terminal é que precisa sair — para ser substituído, ou porque
+entrou torto na montagem. Cada terminal tem a sua própria trava interna.
+
+<Chicote
+  modo="terminal"
+  caption="O mesmo connector em corte. O terminal está preso por uma locking tab interna: ela desce do corpo e encaixa numa janela aberta no metal do terminal. A ferramenta entra pela frente, por cima do terminal, levanta a tab para fora da janela, e só então o wire é puxado para trás."
+/>
+
+A ordem é sempre esta: a ferramenta levanta a trava, e o **wire** sai puxado
+por trás. Nunca o contrário. Forçar o wire com a trava ainda encaixada rasga a
+janela do terminal, e um terminal com a janela rasgada não trava mais em
+connector nenhum.
+
+A ferramenta é o **terminal removal tool**, uma ponteira fina do tamanho da
+cavidade. Fabricantes diferentes usam formatos diferentes, e o manual diz
+qual. Improvisar com um clipe de papel costuma dobrar a trava em vez de
+levantá-la.
+
+### Proteção contra umidade
+
+Água no connector é o começo da corrosão, e a corrosão é resistance. Duas
+peças fazem essa defesa:
+
+- a **dielectric grease**, que preenche o espaço dentro da cavidade e bloqueia
+  a umidade. O nome assusta — “dielétrica” quer dizer que ela **não** conduz
+  —, e a primeira reação de quem aprende é achar que ela vai isolar o contato.
+  Não vai: o terminal aperta o pino com força de mola e empurra a graxa para
+  os lados, metal com metal. A graxa fica ocupando o espaço vazio ao redor,
+  que é justamente por onde a água entraria;
+- o **rubber boot**, a capa que veda a entrada dos wires. Ele precisa voltar
+  **inteiramente** assentado. Meio encaixado, ele vira um funil: junta a água
+  e segura dentro do connector.
+
+### Outros tipos de connector
+
+| Tipo | Onde aparece | O cuidado |
+|---|---|---|
+| **harness connector** | ligação de um chicote inteiro a um módulo, com dezenas de pinos | só sai com a trava ou o parafuso central liberado; entra alinhado, sem forçar |
+| **factory connector** | em todo o veículo | vedação e trava próprias; peça de reposição específica |
+| **self-stripping connector** | kits de acessório | corta a insulation ao ser apertado |
+
+O **self-stripping connector** merece um aviso. Ele é rápido: aperta-se o
+alicate e ele morde o wire, sem descascar nada antes. Por isso ele aparece em
+quase todo kit de acessório barato. O preço dessa rapidez é que ele corta
+alguns strands ao morder, abre a insulation e deixa a emenda sem vedação. Num carro, isso é a receita da
+corrosão da lição [Reparar um wire](./reparar-um-wire). Para um reparo que
+deve durar, o caminho continua sendo crimp com a ferramenta certa ou solda,
+mais heat shrink.
+
+## Como falha e como diagnosticar
+
+O que o sistema deveria fazer: o connector é apenas um pedaço do caminho. A
+queda sobre ele, com a load ligada, deveria ficar perto de zero — em geral
+**abaixo de 0.1 V** por connector, valor de referência comum, não
+especificação; o limite do circuit vem do manual.
+
+| Sintoma | Causa possível | O teste que separa |
+|---|---|---|
+| load fraca, connector escurecido ou deformado | resistance de contato por terminal frouxo ou corroído | voltage drop sobre o connector, com a load ligada |
+| defeito que aparece e some com solavanco | terminal meio encaixado, ou locking tab quebrada | wiggle test: mexer no connector com o meter conectado e o circuit ligado |
+| DTC intermitente de um sensor, depois de um serviço | terminal espalhado por ponta de prova grossa, ou wire puxado | terminal drag test, comparando com uma cavidade que ninguém mexeu |
+| sinal de sensor com ruído | shield desconectado ou twisted pair desfeito no reparo | inspeção do reparo e comparação com o procedimento do manual |
+| corrosão verde dentro da cavidade | vedação rompida: rubber boot fora do lugar ou capa cortada | inspeção, mais voltage drop para medir o que a corrosão já custa |
+
+Três testes merecem o passo a passo.
+
+**Voltage drop sobre o connector.** Com o circuit ligado e a load funcionando,
+encoste uma test lead de cada lado do connector — no wire que entra e no que
+sai, não nos terminals. A leitura é a voltage que o connector está roubando.
+Perto de zero, ele está bom; décimos de volt, ele é o defeito.
+
+**Wiggle test.** Com o meter mostrando a voltage drop, mexa no connector e no
+chicote em volta com a mão. Se a leitura salta quando a sua mão mexe, você
+achou o ponto. É o mesmo princípio da lição
+[Scan tool e oscilloscope](./scan-tool-e-osciloscopio): reproduzir o defeito
+enquanto o instrumento está olhando.
+
+**Terminal drag test.** Com o connector desligado, encoste um pino de teste da
+mesma bitola do pino original no terminal fêmea e sinta o atrito ao entrar e
+sair. Um terminal bom oferece resistência perceptível; um terminal espalhado
+entra solto. Compare sempre com uma cavidade do mesmo connector que ninguém
+mexeu — essa é a referência que dispensa especificação.
+
+> **Erro comum:** medir um circuit enfiando a ponta do multimeter dentro do
+> terminal fêmea. A ponta de prova é mais grossa que o pino, e ela abre a mola
+> do terminal. O circuit mede certo naquela hora e passa a falhar depois — e o
+> técnico que mediu fica convencido de que o defeito era intermitente desde
+> antes. O jeito certo é o **back probe**: entrar por trás do connector, pela
+> entrada dos wires, sem abrir a cavidade. Quando não dá, usa-se um jogo de
+> pinos de teste da bitola certa.
+
+### A queixa resolvida
+
+A bulb do farol é de 55 W em 12 V. Pela lição
+[Electrical power](./potencia-eletrica), a resistance do filamento é
+
+$$
+R = \frac{12 \times 12}{55} \approx 2.62\,\Omega
+$$
+
+e, com o connector bom, a current é $12 \div 2.62 \approx 4.6\,\text{A}$.
+
+Suponha que a corrosão tenha acrescentado 0.5 Ω no contato — valor
+ilustrativo, para a conta. As duas resistances ficam em série:
+
+$$
+R_T = 2.62 + 0.5 = 3.12\,\Omega
+\qquad
+I = \frac{12}{3.12} \approx 3.85\,\text{A}
+$$
+
+Agora o que cada parte recebe:
+
+| | Resistance | Voltage | Power |
+|---|---|---|---|
+| contato do terminal | 0.5 Ω | 1.92 V | 7.4 W |
+| filamento da bulb | 2.62 Ω | 10.08 V | 38.8 W |
+
+A bulb recebe **38.8 W** em vez de 55 W: é a luz fraca que o cliente viu.
+Trocar a lâmpada não mudou nada, porque a lâmpada nunca foi o problema.
+
+E os **7.4 W** do contato são a outra metade da queixa. Compare com a lição
+anterior: lá, 12.2 W espalhados em trinta pés de wire davam um wire morno.
+Aqui, 7.4 W — quase metade daquilo — ficam dentro de um contato de poucos
+milímetros, e derretem o plástico em volta.
+
+**O que não muda:** a current é a mesma em todo o circuit em série, como
+sempre. **O que muda:** como a voltage se divide, e onde o calor aparece.
+
+O reparo é substituir o terminal — ou o connector, se o corpo estiver
+deformado — e não apenas limpar o verde. Limpar devolve a condução por algumas
+semanas, mas a pressão de mola que o calor já tirou não volta com escova.
+Depois do reparo, a verificação é a mesma medição: voltage drop sobre o
+connector, com o farol aceso, perto de zero.
+
+## Na oficina
+
+:::danger Alta voltage: os cabos laranja
+
+Em veículo híbrido ou elétrico, **cabo laranja é cabo de alta voltage** — o
+**hybrid power cable** que liga a battery de tração ao motor-generator.
+Centenas de volts em corrente contínua, capazes de matar ao primeiro contato,
+e **sem aviso nenhum**: o sistema continua energizado com o carro em silêncio
+e a chave fora.
+
+Não desconecte, não corte, não encoste e não meça nada laranja. Esse trabalho
+exige o procedimento de desenergização do fabricante, luvas de isolamento
+classificadas e em teste válido, e o treinamento específico das disciplinas
+EVX. Ao trabalhar perto deles num chicote comum, confirme com o instrutor e
+com o manual antes de tirar qualquer peça de fixação.
+
+:::
+
+**Antes de mexer no chicote:** desconecte o negative cable da battery de 12 V,
+pela regra da lição [Segurança com a battery](./seguranca-da-battery). E
+lembre que desconectar a battery apaga memórias de módulos — o memory saver da
+lição [Jump start e memory saver](./jump-start-e-memory-saver) resolve isso.
+
+### Separar um factory connector
+
+1. Ache a trava. Olhe o connector antes de puxar: lingueta visível em cima,
+   gancho lateral ou trava deslizante. Na dúvida, o manual do veículo mostra o
+   tipo daquele connector.
+2. Aperte ou levante a trava com o dedo ou com uma ponteira plástica.
+3. Puxe **pelo corpo** das duas metades, em linha, sem torcer. Nunca pelos
+   wires.
+4. Se não sair, pare. Reveja a trava em vez de aumentar a força — corpo
+   quebrado não tem conserto, só troca.
+
+Ao reconectar: alinhe, empurre até **ouvir o clique** da trava e dê um puxão
+leve para confirmar que travou. Connector que ficou só apoiado solta no
+primeiro buraco.
+
+### Instalar um acessório
+
+O capítulo é direto neste ponto, e a razão é a eletrônica do carro: os módulos
+leem voltages pequenas e são sensíveis a qualquer coisa que mude os valores do
+circuit.
+
+> **Nunca emende um acessório na fiação de fábrica.** Todo dispositivo novo
+> ganha o seu próprio circuit, com fuse próprio, alimentado direto no positivo
+> da battery e com um ponto de ground novo.
+
+Emendar num circuit existente faz três estragos ao mesmo tempo. Primeiro,
+soma current num wire que foi dimensionado para outra load. Segundo,
+acrescenta resistance a um circuit que talvez seja de sinal. Terceiro, deixa o
+fuse de fábrica protegendo mais load do que ele foi escolhido para proteger.
+Com a bitola escolhida como na lição
+[Tipos de wire e wire gauge](./tipos-de-wire-e-bitola) e o fuse escolhido para
+a bitola, o acessório não interfere em nada.
+
+### Reparar um cabo de sinal
+
+Em cabo com **shield** ou **twisted pair wire**, o reparo segue a construção
+original: o shield volta a ser ligado ao ground como estava, e o par volta a
+ser torcido com o mesmo passo. O comprimento também importa — sobra de cabo
+enrolada ao lado de um chicote de potência capta **induced voltage**, e o
+módulo passa a ler ruído junto com o sinal.
+
+Alguns fabricantes proíbem emenda em certos cabos de sinal e exigem a troca do
+trecho inteiro. Isso está no manual do veículo, não há como adivinhar, e é um
+dos casos em que o procedimento vence o bom senso.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o que um décimo de ohm custa
+
+Um connector no circuit do blower motor acrescentou 0.1 Ω. O blower puxa 15 A.
+Qual é a queda no connector e quanta power ele transforma em calor?
+
+$$
+V = I \times R = 15 \times 0.1 = 1.5\,\text{V}
+$$
+
+$$
+P = V \times I = 1.5 \times 15 = 22.5\,\text{W}
+$$
+
+Um décimo de ohm — um valor que o ohmmeter mal distingue de zero — tira 1.5 V
+do blower e produz 22.5 W de calor num contato. É mais do que uma lâmpada de
+geladeira, dentro de uma peça de plástico.
+
+> **O que isso ensina:** quanto maior a current do circuit, menos resistance de
+> contato é necessária para estragar tudo. Por isso connector de blower, de
+> farol e de starter são os que mais derretem.
+
+### Exemplo 2: comparando dois circuits
+
+**Pause e tente:** a mesma resistance de contato de 0.1 Ω aparece num circuit
+de sensor que puxa 0.02 A. Qual é a queda agora, e qual é a power?
+
+<details>
+<summary>Solução</summary>
+
+$$
+V = 0.02 \times 0.1 = 0.002\,\text{V}
+\qquad
+P = 0.002 \times 0.02 = 0.00004\,\text{W}
+$$
+
+Praticamente nada: dois milivolts e quarenta microwatts. O mesmo defeito que
+derrete o connector do blower passa despercebido num circuit de sensor —
+**pela current**.
+
+Mas cuidado com a conclusão: num circuit de sensor, o que estraga não é o
+calor, é o **sinal**. Se o módulo compara uma voltage de sensor com uma
+referência, até milivolts a mais podem mudar o valor que ele lê. O defeito
+muda de forma, não desaparece.
+
+</details>
+
+### Exemplo 3: ler uma voltage drop repartida
+
+**Pause e tente:** com o farol aceso, você mede a voltage drop em três
+trechos: 0.08 V do fuse box até o connector, 0.9 V sobre o connector e 0.05 V
+do connector até a bulb. Onde está o defeito, e quanto da source voltage
+sobrou para a bulb?
+
+<details>
+<summary>Dica</summary>
+
+Some as três quedas e lembre que, em série, o que sobra da source voltage é o
+que chega à load.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+A soma das quedas no caminho é $0.08 + 0.9 + 0.05 = 1.03\,\text{V}$, e a bulb
+fica com $12 - 1.03 = 10.97\,\text{V}$ — supondo 12 V na fonte.
+
+O defeito está no **connector**: ele sozinho responde por 0.9 V dos 1.03 V
+perdidos. Os dois trechos de wire, com 0.08 V e 0.05 V, estão dentro do que se
+espera.
+
+É essa repartição que a medição em trechos entrega e a medição total não: uma
+queda de 1.03 V medida de ponta a ponta diria que há um problema, mas não
+diria **onde**.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o connector é o ponto mais provável de falha de um circuit, e não
+   o meio do wire?
+2. Sete watts deixam um wire longo apenas morno e derretem um connector. Por
+   quê?
+3. Por que se puxa um connector pelo corpo e nunca pelos wires?
+4. A dielectric grease não conduz. Como ela pode ficar dentro de um connector
+   sem impedir o contato?
+5. Por que enfiar a ponta do multimeter dentro do terminal fêmea cria um
+   defeito futuro?
+6. Por que um acessório novo recebe circuit e fuse próprios em vez de ser
+   emendado num circuit existente?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque é a única parte feita para abrir: tem folga por onde entra umidade,
+   o cobre não é contínuo — dois metais se tocam por pressão de mola —, e a
+   pressão de mola afrouxa com o tempo, o calor e cada desconexão.
+2. Porque o que derrete não é a quantidade de watts, é a **concentração**. Os
+   mesmos watts espalhados por metros de cobre se dissipam no ar; dentro de um
+   contato de poucos milímetros, eles elevam a temperatura daquele ponto muito
+   acima do que o plástico aguenta.
+3. Porque o wire está preso ao terminal, e o terminal, à trava interna. Puxar
+   pelo wire arranca o wire do terminal ou desloca o terminal para dentro do
+   corpo, deixando-o meio encaixado — a origem clássica do defeito
+   intermitente.
+4. Porque o terminal fêmea aperta o pino com força de mola e empurra a graxa
+   para os lados. O contato fica metal com metal; a graxa ocupa só o espaço
+   vazio em volta, que é por onde a água entraria.
+5. Porque a ponta de prova é mais grossa que o pino original e abre a mola do
+   terminal. Depois disso ele não aperta mais o pino, e o circuit passa a
+   falhar com vibração — num dia em que ninguém vai associar a falha à medição.
+6. Porque emendar soma current num wire dimensionado para outra load,
+   acrescenta resistance a um circuit que pode ser de sinal, e deixa o fuse de
+   fábrica protegendo mais load do que foi escolhido para proteger.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês da peça descrita:
+
+a) anel de borracha onde o chicote atravessa a chapa;
+b) tubo sanfonado que veste o chicote;
+c) lingueta que prende as duas metades do connector;
+d) ponteira que levanta a trava interna de um terminal;
+e) graxa que bloqueia a umidade dentro da cavidade.
+
+### 2. Explicação
+
+Explique por que limpar a corrosão de um terminal resolve a queixa por algumas
+semanas e depois ela volta.
+
+### 3. Aplicação direta
+
+Um connector do circuit do starter acrescentou 0.05 Ω. Na partida, o starter
+puxa 150 A — valor típico, só para a conta.
+
+a) Qual é a queda sobre o connector?
+
+b) Quanta power ele transforma em calor?
+
+c) Com 12.6 V na battery, quanta voltage sobra para o resto do circuit?
+
+### 4. Variação
+
+Refaça o exercício 3 com 0.02 Ω, menos da metade da resistance. A queda e a
+power caem na mesma proporção? Explique por que a power cai de um jeito
+diferente da queda.
+
+### 5. Caso de diagnóstico
+
+Depois de uma troca de sensor, um veículo passa a acender a luz de falha de
+vez em quando, com um DTC do circuit de outro sensor — um que ninguém tocou.
+Os dois sensores ficam no mesmo harness connector do módulo.
+
+a) O que, no histórico, já é suspeito?
+
+b) Que teste você faz no connector antes de medir qualquer voltage?
+
+c) Como você obtém uma referência para esse teste sem ter especificação?
+
+d) Por que a leitura de voltage no sensor, com o carro parado na oficina,
+pode sair perfeitamente normal?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Pense no que acontece com uma cavidade quando alguém mede enfiando a ponta de
+prova por ela. E lembre que o connector tem muitas cavidades iguais, feitas na
+mesma fábrica, no mesmo dia.
+
+</details>
+
+### 6. Justificativa
+
+Por que o wiggle test precisa ser feito com o circuit ligado e o instrumento
+conectado, em vez de desconectado e com o ohmmeter?
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says that a connector should be disconnected by
+pulling on the wires. Technician B says that the locking tab must be released
+before the halves are separated. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** A headlight is dim and its connector is melted around one
+terminal. The most likely cause is:
+
+- A. a bulb with the wrong wattage
+- B. high resistance at the terminal contact
+- C. a blown fuse
+- D. a short to ground in the feed wire
+
+**Question 3.** When installing an aftermarket accessory, the accessory should
+be:
+
+- A. spliced into the nearest factory circuit
+- B. wired to its own fused circuit with its own ground
+- C. connected to the sensor signal wire
+- D. grounded through the connector shell
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Grommet. b) Conduit. c) Locking tab. d) Terminal removal tool.
+   e) Dielectric grease.
+
+2. Porque a limpeza remove o óxido, mas não devolve a **pressão de mola** do
+   terminal. O calor que a resistance produziu já recozeu o metal, e um
+   terminal sem mola volta a ter folga, a entrar ar e umidade e a oxidar de
+   novo. O reparo que dura é a troca do terminal — e do corpo do connector, se
+   ele deformou.
+
+3. a) $V = 150 \times 0.05 = 7.5\,\text{V}$.
+
+   b) $P = V \times I = 7.5 \times 150 = 1125\,\text{W}$.
+
+   c) $12.6 - 7.5 = 5.1\,\text{V}$ — longe do que o starter precisa, e por
+   isso ele mal gira. Repare na ordem de grandeza da power: mais de mil watts
+   num contato, pelos poucos segundos da partida. É assim que um connector de
+   starter vira uma peça derretida.
+
+4. Com 0.02 Ω: $V = 150 \times 0.02 = 3\,\text{V}$ e
+   $P = 3 \times 150 = 450\,\text{W}$.
+
+   A queda caiu de 7.5 V para 3 V, na mesma proporção da resistance: 0.02 é
+   0.4 de 0.05, e 3 é 0.4 de 7.5. A power caiu de 1125 W para 450 W — também
+   0.4. Neste caso as duas caem igual, porque a current foi tratada como fixa
+   em 150 A.
+
+   O que muda a proporção é quando a current **também** muda com a
+   resistance, como no caso do farol da lição: lá, mexer na resistance de
+   contato mexia na current, e nada caía proporcionalmente. A diferença entre
+   os dois casos é se a current do circuit é dada ou calculada.
+
+5. a) Que o DTC é de um circuit que ninguém tocou, mas que compartilha o
+   **connector** com o sensor que foi trocado. O histórico aponta para o que
+   foi mexido, e o que foi mexido é o connector inteiro, não só uma cavidade.
+
+   b) O **terminal drag test**: verificar se os terminals fêmea daquele
+   connector ainda apertam o pino. Uma ponta de prova grossa enfiada numa
+   cavidade durante o serviço anterior espalha o terminal.
+
+   c) Comparando com as **outras cavidades do mesmo connector** — mesmo
+   fabricante, mesma idade, mesmo lote. Se uma entra visivelmente mais solta
+   que as vizinhas, ela é a suspeita, e não foi preciso nenhum número de
+   manual.
+
+   d) Porque um terminal espalhado ainda encosta no pino quando nada se mexe.
+   Parado na oficina, o contato conduz e a voltage sai normal. O defeito
+   precisa de vibração para abrir — daí o wiggle test e, se necessário, a
+   gravação do oscilloscope enquanto o carro roda.
+
+6. Porque o ohmmeter trabalha com o circuit desligado e manda uma current
+   minúscula, que um contato frouxo conduz sem dificuldade: a leitura sai
+   normal mesmo com o defeito presente. Com o circuit ligado é outra coisa.
+   A current de trabalho passa, o meter mostra a voltage drop, e qualquer
+   variação de contato aparece na hora como um salto na leitura. O movimento
+   da mão faz o papel da vibração da estrada.
+
+7. **Question 1: B.** Só o Technician B está certo: a locking tab é liberada
+   antes, e então as metades saem puxadas pelo corpo. Puxar pelos wires (A)
+   arranca o wire do terminal ou desloca o terminal dentro do corpo.
+
+   **Question 2: B.** Luz fraca com o connector derretido em volta de um
+   terminal é o retrato da resistance de contato alta: ela rouba voltage da
+   bulb e transforma essa voltage em calor concentrado. Uma bulb de wattage
+   errada (A) poderia dar luz fraca, mas não derreteria o connector. Fuse
+   queimado (C) apagaria o farol. Um short to ground (D) abriria o fuse.
+
+   **Question 3: B.** O acessório recebe circuit próprio, com fuse próprio e
+   ground próprio. Emendar no circuit de fábrica mais próximo (A) soma current
+   num wire dimensionado para outra load. Ligar no wire de sinal de um sensor
+   (C) corrompe a leitura do módulo. Fazer ground pela carcaça do connector
+   (D) não é um ponto de ground.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o connector é a parte do circuit feita para abrir, e por
+  isso é a mais frágil. Ali o cobre não é contínuo, a vedação pode falhar e a
+  resistance de contato se concentra num ponto minúsculo — onde poucos watts
+  derretem plástico. Primeiro destravar, depois puxar pelo corpo; e todo o
+  resto do chicote volta preso onde estava.
+- **Quando usar:** em todo diagnóstico elétrico, porque todo diagnóstico passa
+  por desconectar alguma coisa; e em todo reparo de chicote por colisão, água
+  ou roedor.
+- **Com o que se conecta:** a bitola e a escolha do wire vêm da lição
+  [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola); a emenda que dura,
+  de [Reparar um wire](./reparar-um-wire); a medição que mede o connector, de
+  [Medições com o multimeter](./medicoes-com-multimetro); o calor da
+  resistance, de [Electrical power](./potencia-eletrica); a reprodução do
+  defeito intermitente, de
+  [Scan tool e oscilloscope](./scan-tool-e-osciloscopio); e os cuidados com
+  alta voltage, de [Segurança com a battery](./seguranca-da-battery).
+
+**Termos desta lição para revisar:** wiring harness, conduit, grommet, wire
+tie, clip, connector half, locking tab, terminal removal tool, self-stripping
+connector, factory connector, harness connector, dielectric grease, rubber
+boot, terminal drag test, induced voltage, hybrid power cable.

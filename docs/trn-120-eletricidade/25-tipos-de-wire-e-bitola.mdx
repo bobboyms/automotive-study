@@ -1,0 +1,774 @@
+---
+title: "Tipos de wire e wire gauge"
+---
+
+import TiposDeWire from '@site/src/components/TiposDeWire';
+
+# Tipos de wire e wire gauge
+
+> **Pergunta central:** todo wire do carro é um pedaço de cobre com capa
+> plástica. Por que, então, o manual manda um wire específico para cada
+> circuit — e o que acontece de verdade quando alguém usa um mais fino
+> porque era o que tinha na gaveta?
+
+## A queixa: os faróis auxiliares que acendem fracos
+
+Um cliente instalou dois faróis auxiliares no para-choque, de 55 W cada, com
+um kit comprado pela internet. Ele conta:
+
+> “Funcionou, mas a luz é bem mais fraca que a dos faróis normais. E o fio
+> que passa por baixo do capô fica morno depois de uns minutos.”
+
+Você confere a instalação. O kit veio com relay e fuse, e a ligação está
+certa: positivo na battery, ground num parafuso da carroceria, relay
+comandado pelo farol alto. O que chama atenção é o wire: é fino, do tipo que
+se usa em lanterna de placa, e o percurso é longo — sai do compartimento do
+motor, desce até o para-choque e volta.
+
+Nada está quebrado. O circuit está completo, o fuse não queima, as bulbs são
+novas. Mesmo assim o cliente está recebendo bem menos luz do que pagou, e o
+wire está esquentando.
+
+Ao fim desta lição você vai saber calcular **quanta voltage aquele wire está
+roubando**, escolher a bitola que resolve e explicar ao cliente, com números,
+por que trocar o wire muda a luz.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| solid wire | fio maciço | wire cujo condutor é um único fio de cobre |
+| stranded wire | fio multifilar | wire cujo condutor é um feixe de fios finos torcidos |
+| parallel wire | fio paralelo | dois ou mais condutores isolados, unidos lado a lado numa capa só |
+| primary wire | fio primário | wire de baixa voltage: quase toda a fiação do veículo |
+| secondary wire | fio secundário | wire de alta voltage da ignition, que leva a faísca até a spark plug |
+| carbon-core wire | fio de núcleo de carbono | secondary wire com núcleo resistivo, que abafa o ruído de rádio |
+| coaxial cable | cabo coaxial | cabo com um condutor central, isolamento e uma malha de metal em volta |
+| shield | blindagem | a malha de metal que envolve o sinal e escoa a interferência para o ground |
+| twisted pair wire | par trançado | dois condutores isolados torcidos um no outro, para cancelar a interferência |
+| printed circuit | circuito impresso | placa com trilhas de cobre coladas, no lugar de wires soltos |
+| American Wire Gage | bitola americana | escala de bitola em que o número cresce quando o wire afina |
+| metric wire size | bitola métrica | bitola dada pela área da seção do cobre em mm² |
+| cross-sectional area | área da seção | a área do corte do condutor: o que de fato decide a resistance |
+| current-carrying capacity | capacidade de corrente | quanta current um wire aguenta sem esquentar demais — a ampacity da lição 14, vista agora pela bitola |
+| hash mark | traço | marca curta repetida no isolamento, usada como código em vez da stripe |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Escolher wire acontece toda vez que alguém instala um acessório, refaz um
+trecho de chicote danificado por colisão ou por roedor, ou troca um battery
+cable. Reconhecer o tipo de wire acontece antes disso, e com mais frequência:
+você precisa saber, olhando, se aquele cabo é um primary wire comum, um par
+de sinal de sensor ou um cabo de alta voltage em que não se encosta.
+
+Na Wake Tech, isto é o **capítulo 8** do livro (*Wiring and Wiring Repairs*),
+estudado no módulo 3 junto com a battery. Na prova ASE, está na área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. Na lição [Voltage, current e resistance](./tensao-corrente-e-resistencia),
+   o que acontece com a resistance de um wire quando ele fica mais fino? E
+   quando ele fica mais comprido?
+2. Na lição [Series circuit](./circuito-em-serie), como a source voltage se
+   divide entre duas resistances ligadas em série?
+3. Na lição [Electrical power](./potencia-eletrica), qual fórmula dá a power
+   que uma resistance transforma em calor quando você conhece a current?
+4. Na lição [Reparar um wire](./reparar-um-wire), por que um wire que perdeu
+   metade dos strands fica com o dobro da resistance naquele trecho?
+
+<details>
+<summary>Respostas</summary>
+
+1. Mais fino, **mais** resistance. Mais comprido, **mais** resistance também.
+   São os dois fatos que esta lição transforma em número.
+2. Cada resistance fica com uma parte da source voltage, e as partes somam a
+   source voltage. A maior resistance fica com a maior parte. Nesta lição, as
+   duas resistances em série são **o wire** e **a load** — e é por isso que o
+   wire fino rouba luz do farol.
+3. $P = I \times I \times R$. Ela aparece aqui para dizer quantos watts o
+   wire está transformando em calor dentro da capa.
+4. Porque sobrou metade do cobre para a current passar. Metade da área,
+   dobro da resistance. Esta lição parte exatamente dessa relação: a
+   resistance depende da **área da seção** do cobre.
+
+</details>
+
+## Intuição: o wire não é um fio ideal
+
+Nos esquemas das lições anteriores, o wire era uma linha. Linha não tem
+resistance: a voltage que sai da battery chega inteira na load.
+
+No carro real, o wire é cobre, e cobre tem resistance. Pouca — mas ela existe,
+e está **em série** com a load. Então o wire e a load dividem a source
+voltage entre si, exatamente como duas resistances em série da lição 6.
+
+A mangueira de jardim da lição 3 ajuda a ver por quê: a voltage é a pressão
+da torneira, a current é a vazão, e a resistance é o aperto no caminho. Uma
+mangueira estreita e comprida enche o balde mais devagar, mesmo com a torneira
+aberta igual.
+
+**Onde a analogia para de valer:** na mangueira, a água que não passa fica
+para trás, na torneira. No circuit, a energia que não chega à load não fica
+guardada em lugar nenhum — ela vira **calor no próprio wire**. É por isso que
+o fio do cliente está morno. O morno é a luz que falta nos faróis,
+transformada em calor no caminho.
+
+## Modelo visual: o wire por dentro
+
+<TiposDeWire
+  modo="condutor"
+  caption="O mesmo wire em corte, de dois jeitos. À esquerda, um condutor maciço. À direita, o mesmo diâmetro preenchido por um feixe de fios finos. A insulation é a capa plástica; o conductor é o cobre de dentro."
+/>
+
+Os dois conduzem bem. A diferença aparece quando o wire **dobra e vibra**,
+que é o que acontece a vida inteira num carro.
+
+- O **solid wire** é um fio de cobre só. Conduz bem e é barato, mas dobra mal:
+  cada flexão trabalha o mesmo ponto do metal, e depois de muitas flexões ele
+  rompe. É o wire das instalações paradas, como a fiação de uma casa.
+- O **stranded wire** é um feixe de fios finos torcidos. Ao dobrar, cada
+  strand escorrega um pouco em relação ao vizinho, e a flexão se divide entre
+  todos. Por isso **quase toda a fiação do veículo é stranded wire**.
+
+> **Guarde esta:** o carro usa stranded wire porque o carro treme. Não é uma
+> questão de conduzir melhor — é de não romper.
+
+Isso também explica, por outro lado, o estrago do descasque mal feito da
+lição [Reparar um wire](./reparar-um-wire): cortar metade dos strands tira
+metade do cobre **e** metade do que aguentava a vibração.
+
+### Os outros tipos de wire que você vai encontrar
+
+| Tipo | Onde fica | O que tem de diferente |
+|---|---|---|
+| **primary wire** | quase todo o carro | wire comum de baixa voltage, stranded, com capa fina |
+| **secondary wire** | da ignition coil até cada spark plug | capa muito mais grossa, para segurar dezenas de milhares de volts |
+| **carbon-core wire** | o tipo mais comum de secondary wire | o núcleo não é cobre: é carbono, com resistance alta de propósito |
+| **battery cable** | battery, starter motor e ground do motor | bitola muito maior, porque a current da partida é de centenas de amperes |
+| **parallel wire** | ligações curtas, como a de uma lanterna | dois ou três condutores isolados, unidos numa capa só |
+| **printed circuit** | atrás do painel de instrumentos | trilhas de cobre coladas numa placa, no lugar de wires soltos |
+
+Dois desses merecem um parágrafo a mais, porque são a fonte de dois erros
+comuns.
+
+**O carbon-core wire tem resistance alta de propósito.** Isso contraria tudo
+o que vimos até aqui — resistance num caminho é defeito. Aqui não é: a faísca
+é uma descarga muito rápida, e uma descarga rápida num fio de cobre nu
+transmite ruído de rádio para todo lado. O núcleo de carbono abafa esse ruído.
+Por isso, ao medir um secondary wire, você encontra milhares de ohms e isso é
+**normal** — o valor de referência vem do manual do veículo. Num primary
+wire, o mesmo valor seria um defeito grave.
+
+**O battery cable é grosso porque a current é enorme.** O starter motor puxa
+algo como 150 A — valor típico, só para a ideia; o valor que vale é o do
+manual. Com essa current, até alguns centésimos de ohm no cabo viram mais de
+um volt perdido, que é a conta da lição
+[Ohm's law](./lei-de-ohm).
+
+### Os cabos de sinal
+
+<TiposDeWire
+  modo="cabos"
+  caption="À esquerda, um coaxial cable em corte: o condutor no centro, o isolamento em volta e a malha de metal — o shield — envolvendo tudo, sob a capa externa. À direita, um twisted pair wire visto de lado: dois condutores isolados torcidos um no outro."
+/>
+
+Sensores trabalham com voltages pequenas, às vezes de alguns milivolts. Um
+wire comum ao lado de um cabo de ignition capta um pouco da voltage dele — um
+efeito que a lição [Capacitor e transformer](./capacitor-e-transformer)
+mostrou no transformer: campo de um lado, voltage do outro, sem contato. Num
+cabo de potência isso não importa; num cabo de sinal de poucos milivolts, é
+ruído em cima da informação.
+
+Duas construções resolvem isso, e você vai achar as duas no carro:
+
+- o **coaxial cable** envolve o condutor com uma malha de metal, o **shield**,
+  ligada ao ground. A interferência bate na malha e escoa para o ground em vez
+  de chegar ao condutor;
+- o **twisted pair wire** torce os dois condutores um no outro. O campo
+  externo atinge os dois quase igualmente, e como eles levam o sinal em
+  sentidos opostos, o efeito se cancela.
+
+Guarde o detalhe de serviço: um twisted pair que você precise reparar tem que
+ser **retorcido com o mesmo passo**, e um cabo com shield tem que ter o shield
+reconectado. Deixar o par esticado ou o shield solto devolve o carro com um
+sinal sujo — e com um DTC que não aponta para o reparo que você fez. O
+procedimento está no manual do veículo.
+
+## Ponte para a formalização
+
+Até aqui temos uma relação em palavras: wire mais fino, mais resistance. Para
+responder à queixa do cliente, isso não basta. Precisamos de um **número**:
+quantos ohms tem aquele wire.
+
+Felizmente, a bitola do wire é padronizada, e a resistance de cada bitola está
+em tabela. É o que vem agora.
+
+## Formalização: a escala AWG
+
+Nos Estados Unidos, a bitola do wire é dada pela escala **American Wire Gage**
+(AWG). Ela tem uma característica que confunde quase todo mundo no começo:
+
+> **O número cresce quando o wire afina.** Um 10 AWG é grosso; um 18 AWG é
+> fino.
+
+<TiposDeWire
+  modo="bitola"
+  caption="Três bitolas em corte, na mesma escala, com o diâmetro real do cobre embaixo. Repare no 18 AWG: ele recebeu uma capa mais grossa e ficou com o mesmo diâmetro externo do 14 AWG. Por fora são iguais; por dentro, o cobre do 14 tem duas vezes e meia a área do cobre do 18."
+/>
+
+Duas consequências práticas saltam dessa figura.
+
+**A bitola é só o cobre.** A capa não entra na conta. Dois wires podem ter
+exatamente o mesmo diâmetro externo e bitolas diferentes, porque um deles tem
+isolamento mais grosso. Medir o wire por fora com um paquímetro não diz a
+bitola — quem diz é o entalhe do wire stripper em que ele encaixa, ou a
+marcação impressa na capa.
+
+**O que decide a resistance é a área, não o diâmetro.** Quando o diâmetro
+dobra, a área fica **quatro** vezes maior, porque a área cresce com o
+quadrado. Confira com os números da figura: o cobre do 14 AWG tem 1.628 mm de
+diâmetro e o do 18 AWG tem 1.024 mm. A razão entre as áreas é
+
+$$
+\left(\frac{1.628}{1.024}\right)^2 \approx 2.53
+$$
+
+e, na tabela de resistance que vem a seguir, o 18 AWG tem exatamente 2.53
+vezes a resistance do 14 AWG. Não é coincidência: **a resistance é
+inversamente proporcional à área da seção.**
+
+### A bitola métrica
+
+Fora dos Estados Unidos, e em muitos manuais de veículos importados, a bitola
+vem pelo sistema métrico: o número é a **área da seção em mm²**, e aí ele
+cresce quando o wire engrossa — o contrário da escala AWG. Um wire de
+0.8 mm² é fino; um de 5 mm² é grosso.
+
+As duas escalas não se correspondem exatamente. Quando o manual do veículo
+pedir uma bitola métrica, use a tabela de equivalência do próprio manual ou do
+fabricante do wire, e não uma conversão de cabeça.
+
+### As quatro coisas que mudam a resistance de um wire
+
+Todas já apareceram em alguma lição; aqui elas ficam juntas, que é como você
+vai usá-las:
+
+1. **O material.** Cobre conduz melhor que alumínio, que conduz melhor que
+   aço. Quase todo wire automotivo é cobre.
+2. **A área da seção.** Mais área, menos resistance. É a regra da escala AWG.
+3. **O comprimento.** Dobrou o comprimento, dobrou a resistance. E o
+   comprimento que conta é o do **caminho inteiro**, ida e volta: o wire que
+   leva a current até a load mais o que a traz de volta ao ground.
+4. **A temperatura.** No cobre, a resistance **sobe** quando a temperatura
+   sobe. Um wire que sai de 20 °C (68 °F) e chega a 85 °C (185 °F) encostado
+   no motor fica com cerca de 25% mais resistance do que tinha frio.
+
+O item 4 explica um tipo de queixa que confunde: o circuit funciona de manhã e
+falha depois de meia hora rodando. Se já havia resistance a mais no caminho, o
+calor a aumenta, e a load deixa de receber o que precisa.
+
+### A tabela de resistance
+
+A resistance de um wire é tabelada em **ohms por 1000 pés** (Ω/1000 ft), para
+cobre a 20 °C:
+
+| Bitola | Diâmetro do cobre | Resistance |
+|---|---|---|
+| 10 AWG | 2.588 mm | 0.999 Ω/1000 ft |
+| 12 AWG | 2.053 mm | 1.588 Ω/1000 ft |
+| 14 AWG | 1.628 mm | 2.525 Ω/1000 ft |
+| 16 AWG | 1.291 mm | 4.016 Ω/1000 ft |
+| 18 AWG | 1.024 mm | 6.385 Ω/1000 ft |
+
+Esses valores são da própria escala AWG para cobre, e servem para calcular. A
+bitola que um circuit do veículo deve ter, porém, **vem do manual do
+veículo** — ela depende da current, do comprimento e da temperatura daquele
+percurso.
+
+Para achar a resistance de um trecho:
+
+$$
+R = \frac{\text{ohms por 1000 ft}}{1000} \times \text{comprimento em ft}
+$$
+
+### Definição com exemplo e contraexemplo
+
+> **Current-carrying capacity** é a maior current que um wire pode conduzir
+> sem esquentar além do que a capa aguenta.
+
+**Exemplo:** um 12 AWG alimentando dois faróis auxiliares que puxam 9 A, num
+percurso de 30 ft. Ele conduz com folga, perde menos de meio volt e fica frio.
+
+**Contraexemplo:** o **fuse** não é current-carrying capacity. O fuse protege
+o wire, como a lição [Circuit protection](./protecao-do-circuito) mostrou.
+Mas um fuse de 15 A instalado num wire 18 AWG não transforma esse wire num
+wire de 15 A. Ele faz uma coisa só: deixa o wire esquentar até perto do
+limite sem nunca abrir. A ordem é esta — a bitola é escolhida primeiro, e o
+fuse é escolhido depois, **para proteger aquela bitola**.
+
+### Dois erros comuns
+
+> **Erro comum:** achar que o número AWG maior é o wire mais grosso. É
+> tentador, porque em quase toda escala técnica o número maior significa
+> “mais”. Aqui é o contrário. O jeito de não esquecer é ligar o número à
+> quantidade de vezes que o fio foi puxado pela fieira para afinar: quanto
+> mais passagens, mais fino, maior o número. Se você trocar um 10 AWG por um
+> 14 AWG num battery cable achando que melhorou, acabou de reduzir a área do
+> cobre a menos da metade — e o motor vai girar devagar no frio.
+
+> **Erro comum:** escolher a bitola só pela current, esquecendo o
+> comprimento. Dez pés de 16 AWG e cinquenta pés de 16 AWG conduzem a mesma
+> current, mas a resistance do segundo é cinco vezes maior, e a queda também.
+> Um acessório instalado no para-choque com a bitola que serviria embaixo do
+> painel acende fraco por esse motivo — é exatamente a queixa desta lição.
+
+## Como falha e como diagnosticar
+
+Wire fino demais ou longo demais **não quebra**. Ele funciona mal, e isso é
+mais difícil de achar do que um defeito franco: não há fuse queimado, não há
+código de falha, e o circuit liga.
+
+O que o sistema deveria fazer: entregar à load quase toda a source voltage. A
+regra usual da oficina é que a queda total no caminho de um circuit de 12 V
+fique **abaixo de 0.5 V** — valor de referência comum, não especificação; o
+limite do circuit específico vem do manual.
+
+| Sintoma | O que pode ser | O teste que separa |
+|---|---|---|
+| load fraca, sem outro sinal de defeito | wire fino ou longo demais; ou resistance a mais numa conexão | voltage drop ao longo do wire, com a load ligada |
+| queda cresce depois de alguns minutos | resistance que sobe com a temperatura, por bitola insuficiente ou conexão ruim | repetir a voltage drop com o circuit quente |
+| capa amolecida ou cheirando a queimado | current acima da current-carrying capacity do wire | comparar a current medida com a bitola instalada |
+| resistance alta num secondary wire | normal: é carbon-core | comparar com o valor do manual, não com zero |
+
+A medição é a mesma de sempre, a da lição
+[Medições com o multimeter](./medicoes-com-multimetro): **voltage drop com a
+load ligada**. Uma test lead em cada ponta do trecho de wire, com a current
+passando. Sem current, qualquer wire mede zero — inclusive o fino demais.
+
+O que a voltage drop **não** separa sozinha: um wire fino de ponta a ponta e
+uma conexão ruim no meio dele dão a mesma leitura total. Para separar os dois,
+divida o trecho: meça a queda em pedaços menores. Um wire fino distribui a
+queda ao longo de todo o comprimento; uma conexão ruim concentra quase toda a
+queda em poucos centímetros.
+
+### A queixa resolvida
+
+O kit do cliente veio com **18 AWG**, e o percurso de ida e volta até o
+para-choque dá cerca de **30 ft**. Os dois faróis somam 110 W.
+
+Primeiro, a resistance das bulbs. Pela lição
+[Electrical power](./potencia-eletrica), uma load de 110 W em 12 V tem
+
+$$
+R = \frac{V \times V}{P} = \frac{12 \times 12}{110} \approx 1.31\,\Omega
+$$
+
+Agora o wire:
+
+$$
+R_{wire} = \frac{6.385}{1000} \times 30 \approx 0.19\,\Omega
+$$
+
+Os dois estão em série, então somam:
+
+$$
+R_T = 1.31 + 0.19 = 1.50\,\Omega
+\qquad
+I = \frac{12}{1.50} \approx 8.0\,\text{A}
+$$
+
+E a source voltage se divide entre eles:
+
+| | Resistance | Voltage | Power |
+|---|---|---|---|
+| wire 18 AWG | 0.19 Ω | 1.52 V | 12.2 W |
+| faróis | 1.31 Ω | 10.48 V | 83.8 W |
+
+Os faróis recebem **83.8 W** dos 110 W que deveriam receber — um quarto a
+menos. E o wire está transformando **12.2 W** em calor espalhado ao longo dos
+30 pés. É o morno que o cliente sentiu.
+
+Refazendo a conta com **12 AWG** no mesmo percurso, a resistance do wire cai
+para 0.048 Ω. A queda vai para 0.42 V, abaixo do limite de referência de
+0.5 V. E os faróis passam a receber 102.4 W. O cliente ganha a luz que
+faltava, e o wire para de esquentar.
+
+Repare no que **não** mudou: as bulbs são as mesmas, o relay é o mesmo, o fuse
+é o mesmo. Mudou só a área do cobre no caminho.
+
+## Na oficina: escolher a bitola e ler a cor
+
+**Antes de qualquer coisa:** desconecte o negative cable da battery antes de
+passar wire novo ou mexer em chicote. Uma ferramenta que escorrega e toca o
+positivo com a carroceria vira um short de centenas de amperes — é o risco da
+lição [Segurança com a battery](./seguranca-da-battery). Se o veículo for
+híbrido ou elétrico, **não encoste em nada laranja**: esses cabos são de alta
+voltage e exigem o treinamento e o procedimento do fabricante.
+
+Para escolher a bitola de um acessório, você precisa de três coisas:
+
+1. **A current que a load puxa.** Se o fabricante dá a power em watts, divida
+   pela voltage do sistema: $I = P \div V$.
+2. **O comprimento do caminho inteiro**, ida e volta — do ponto de
+   alimentação até a load e de volta ao ponto de ground.
+3. **A tabela de bitola do fabricante do wire**, que cruza current com
+   comprimento. Não há regra de cabeça para isso, e a tabela existe
+   exatamente por quê: a bitola certa depende das duas coisas ao mesmo tempo.
+
+Com a bitola escolhida, confira pelo cálculo: a queda calculada precisa ficar
+dentro do limite. Depois do serviço, **confirme medindo** a voltage drop com
+a load ligada.
+
+### A cor do wire
+
+O wiring diagram identifica cada wire pela cor, como a lição
+[Electrical symbols](./simbolos-eletricos) mostrou. A capa pode vir de três
+jeitos:
+
+- **solid color** — uma cor só: BRN é marrom, LT GRN é verde-claro;
+- **color with stripe** — a cor de fundo e uma **stripe** de outra cor, escrita
+  com barra: DK GRN/WHT é verde-escuro com listra branca;
+- **bands ou hash marks** — marcas curtas repetidas ao longo da capa, usadas
+  por alguns fabricantes no lugar da listra.
+
+A ordem importa: BLU/WHT e WHT/BLU são **wires diferentes**. O primeiro é azul
+com listra branca; o segundo, branco com listra azul. Num conector de vinte
+pinos, trocar os dois liga o circuit errado.
+
+Um aviso que poupa tempo: a cor é do **fabricante**, não da função. Preto é
+ground na maior parte dos carros, mas não em todos, e vermelho nem sempre é
+positivo permanente. Quem decide é o wiring diagram do veículo.
+
+## Exemplos resolvidos
+
+### Exemplo 1: a queda num trecho
+
+Um circuit de lanterna puxa 2 A por um wire 18 AWG de 16 ft no total. Qual é a
+queda no wire?
+
+$$
+R = \frac{6.385}{1000} \times 16 \approx 0.102\,\Omega
+$$
+
+$$
+V = I \times R = 2 \times 0.102 \approx 0.20\,\text{V}
+$$
+
+Vinte centésimos de volt, abaixo do limite de referência de 0.5 V. Para 2 A, o
+18 AWG serve bem — a mesma bitola que fracassou nos faróis de 9 A.
+
+> **O que isso ensina:** não existe “wire fino demais” sozinho. Existe wire
+> fino demais **para aquela current e aquele comprimento**.
+
+### Exemplo 2: a mesma load, o dobro do caminho
+
+**Pause e tente:** o mesmo circuit do exemplo 1, mas o wire agora tem 32 ft.
+Qual é a queda?
+
+<details>
+<summary>Solução</summary>
+
+O comprimento dobrou, então a resistance dobra:
+
+$$
+R = \frac{6.385}{1000} \times 32 \approx 0.204\,\Omega
+$$
+
+$$
+V = 2 \times 0.204 \approx 0.41\,\text{V}
+$$
+
+A queda dobra junto: 0.41 V. Ainda está abaixo de 0.5 V, mas a folga quase
+acabou — e qualquer conexão ruim que apareça depois passa do limite.
+
+</details>
+
+### Exemplo 3: escolher entre duas bitolas
+
+**Pause e tente:** um compressor de ar auxiliar puxa 10 A. O percurso de ida e
+volta é de 24 ft. Você tem wire 16 AWG e wire 12 AWG na prateleira. Calcule a
+queda com cada um e diga qual você usa.
+
+<details>
+<summary>Dica</summary>
+
+Faça a conta de resistance para cada bitola com a tabela, multiplique por 10 A
+e compare cada resultado com 0.5 V.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+Com 16 AWG:
+
+$$
+R = \frac{4.016}{1000} \times 24 \approx 0.096\,\Omega
+\qquad
+V = 10 \times 0.096 \approx 0.96\,\text{V}
+$$
+
+Com 12 AWG:
+
+$$
+R = \frac{1.588}{1000} \times 24 \approx 0.038\,\Omega
+\qquad
+V = 10 \times 0.038 \approx 0.38\,\text{V}
+$$
+
+Use o **12 AWG**: 0.38 V fica dentro do limite de referência, e o 16 AWG, com
+0.96 V, fica quase no dobro dele. Repare também na power que o 16 AWG
+desperdiçaria: $P = I \times I \times R = 10 \times 10 \times 0.096 \approx
+9.6\,\text{W}$ de calor dentro da capa.
+
+</details>
+
+### Exemplo 4: por que o circuit piora quando esquenta
+
+**Pause e tente:** um wire tem 0.12 Ω frio, a 20 °C. Rodando, ele encosta no
+coletor de escape e chega perto de 85 °C. Com 8 A passando, quanto a queda
+aumenta?
+
+<details>
+<summary>Solução</summary>
+
+No cobre, a resistance sobe cerca de 25% entre 20 °C e 85 °C:
+
+$$
+R_{quente} = 0.12 \times 1.25 = 0.15\,\Omega
+$$
+
+Queda a frio: $8 \times 0.12 = 0.96\,\text{V}$.
+Queda a quente: $8 \times 0.15 = 1.20\,\text{V}$.
+
+São 0.24 V a mais, só por causa da temperatura. Num circuit que já estava no
+limite, essa diferença é suficiente para a load deixar de funcionar. E, quando o
+carro esfria, ela volta a funcionar sozinha. Esta é a origem da queixa “só
+acontece depois de meia hora de estrada”.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que quase toda a fiação do veículo é stranded wire, e não solid wire?
+2. Dois wires têm o mesmo diâmetro externo. Isso garante que têm a mesma
+   bitola? Por quê?
+3. Por que a resistance de um secondary wire é alta de propósito?
+4. O que acontece com a área da seção quando o diâmetro do cobre dobra?
+5. Por que o comprimento que entra na conta é o de ida **e** volta?
+6. Um wire 18 AWG serviu num circuit e falhou em outro. Como as duas coisas
+   podem ser verdade ao mesmo tempo?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o carro vibra e os wires dobram a vida inteira. No stranded wire a
+   flexão se divide entre muitos fios finos; no solid wire ela se concentra
+   num ponto só do metal, que acaba rompendo.
+2. Não. A bitola é só o cobre de dentro; a capa não entra na conta. Um wire
+   fino com isolamento grosso pode ter o mesmo diâmetro externo de um wire
+   mais grosso com isolamento fino.
+3. Porque a faísca é uma descarga muito rápida, e uma descarga rápida num
+   condutor de cobre nu espalha ruído de rádio. O núcleo de carbono, com
+   resistance alta, abafa esse ruído.
+4. Fica **quatro vezes maior**, porque a área cresce com o quadrado do
+   diâmetro. Por isso a resistance cai para um quarto.
+5. Porque a current percorre os dois caminhos: o que leva até a load e o que
+   volta ao ground. A resistance dos dois está em série com a load, e as duas
+   roubam voltage.
+6. Porque a bitola suficiente depende da current **e** do comprimento. Dois
+   amperes em dezesseis pés dão 0.20 V de queda; nove amperes em trinta pés,
+   pelo mesmo wire, dão 1.52 V.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga que tipo de wire ou cable está sendo descrito:
+
+a) feixe de fios finos torcidos, usado em quase todo o carro;
+b) condutor central, isolamento e uma malha de metal em volta;
+c) dois condutores isolados torcidos um no outro;
+d) wire de alta voltage com núcleo de carbono;
+e) trilhas de cobre coladas numa placa, atrás do painel.
+
+### 2. Explicação
+
+Explique, com as suas palavras, por que um wire fino demais deixa a load fraca
+**e** esquenta — e por que as duas coisas são o mesmo fenômeno visto de dois
+lados.
+
+### 3. Aplicação direta
+
+a) Qual é a resistance de 40 ft de wire 14 AWG?
+
+b) Com 6 A passando por esse wire, qual é a queda?
+
+c) Quanta power ele transforma em calor?
+
+### 4. Variação
+
+Refaça o item (b) do exercício 3 trocando o 14 AWG por 10 AWG, no mesmo
+comprimento e com a mesma current. Diga quantas vezes a queda diminuiu e
+compare esse número com a razão entre as áreas das duas bitolas.
+
+### 5. Caso de diagnóstico
+
+Um cliente reclama que o vidro elétrico do passageiro “sobe bem devagar, e
+piora quando o carro está há um tempo rodando”. O vidro do motorista funciona
+normalmente. O veículo nunca sofreu colisão e não tem acessório instalado.
+
+a) O que o detalhe “piora quando está rodando” sugere sobre o defeito?
+
+b) Que medição você faria primeiro, e com o circuit em que estado?
+
+c) Se a queda total medida for 1.4 V, como você descobre se o problema está
+espalhado pelo wire ou concentrado numa conexão?
+
+d) Por que a leitura do ohmmeter, com a porta desmontada e o circuit
+desligado, provavelmente não vai mostrar nada?
+
+<details>
+<summary>Dica para o exercício 5</summary>
+
+Duas coisas fazem a resistance subir com o calor: a temperatura do cobre e a
+temperatura de uma conexão que já estava ruim. Pense em qual medição distingue
+“um pouco de resistance em muitos centímetros” de “muita resistance em dois
+centímetros”.
+
+</details>
+
+### 6. Justificativa
+
+Por que a bitola de um wire é escolhida **antes** do fuse, e não o contrário?
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says that a 10 AWG wire is thicker than a 14 AWG
+wire. Technician B says that the AWG number includes the thickness of the
+insulation. Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
+**Question 2.** An accessory light is dim and its feed wire is warm. The fuse
+is intact and the bulbs are new. The most likely cause is:
+
+- A. the ground connection is open
+- B. the wire gauge is too small for the current and length
+- C. the bulbs are rated for 24 volts
+- D. the fuse rating is too low
+
+**Question 3.** Stranded wire is used for most automotive wiring because it:
+
+- A. has less resistance than solid wire of the same gauge
+- B. withstands vibration and flexing without breaking
+- C. does not require insulation
+- D. carries high voltage more safely
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) Stranded wire. b) Coaxial cable. c) Twisted pair wire. d) Secondary
+   wire do tipo carbon-core. e) Printed circuit.
+
+2. A load fica fraca porque o wire e a load estão em série e dividem a source
+   voltage: a parte da voltage que fica no wire não chega à load. E essa parte
+   não desaparece — toda voltage que cai sobre uma resistance com current
+   passando vira calor, pela fórmula $P = V \times I$. Então a luz que falta
+   no farol é exatamente o calor que aparece no wire. São o mesmo watt,
+   contado nos dois lugares.
+
+3. a) $R = \dfrac{2.525}{1000} \times 40 = 0.101\,\Omega$.
+
+   b) $V = 6 \times 0.101 \approx 0.61\,\text{V}$ — acima do limite de
+   referência de 0.5 V.
+
+   c) $P = V \times I = 0.61 \times 6 \approx 3.6\,\text{W}$.
+
+4. $R = \dfrac{0.999}{1000} \times 40 \approx 0.040\,\Omega$, e
+   $V = 6 \times 0.040 \approx 0.24\,\text{V}$.
+
+   A queda caiu de 0.61 V para 0.24 V, ou seja, para cerca de **um quarto**
+   — mais exatamente, dividiu-se por 2.53. A razão entre as áreas é
+   $(2.588 \div 1.628)^2 \approx 2.53$. Os dois números são o mesmo, porque a
+   resistance é inversamente proporcional à área da seção.
+
+5. a) Que há resistance a mais no caminho. A resistance do cobre sobe com a
+   temperatura, e a de uma conexão ruim sobe ainda mais quando ela própria
+   esquenta com a current. Um motor de vidro com defeito interno não teria
+   motivo para piorar com o carro rodando.
+
+   b) **Voltage drop** no circuit do vidro do passageiro, com o vidro
+   funcionando e a current passando — primeiro a queda total, do positivo da
+   battery até o ground do motor do vidro. Comparar com o lado do motorista,
+   que está bom, dá a referência sem precisar de especificação.
+
+   c) Dividindo o caminho: meça a queda em trechos menores — da battery até o
+   conector da porta, dentro do conector, do conector até o motor, e o lado do
+   ground. Um wire fino espalha a queda proporcionalmente ao comprimento de
+   cada trecho; uma conexão ruim concentra quase todos os 1.4 V em um único
+   ponto.
+
+   d) Porque o ohmmeter mede com o circuit desligado, mandando uma current
+   minúscula. Resistance de contato só aparece com a current de trabalho
+   passando, e o aquecimento que piora o defeito também depende dessa current.
+   Frio e sem current, o circuit mede normal.
+
+6. Porque o fuse existe para proteger o **wire**, não a load — foi o que a
+   lição [Circuit protection](./protecao-do-circuito) estabeleceu. Para
+   escolher o fuse é preciso saber quanta current o wire aguenta sem
+   esquentar, e isso é a bitola. Na ordem inversa, você escolheria um fuse que
+   só abre depois que o wire já derreteu a capa. A bitola vem da current da
+   load e do comprimento; o fuse vem da bitola.
+
+7. **Question 1: A.** O Technician A está certo: na escala AWG o número cresce
+   quando o wire afina, então o 10 AWG é mais grosso que o 14 AWG. O
+   Technician B está errado: a bitola mede apenas o condutor de cobre, e a
+   espessura da insulation não entra. Por isso dois wires de mesmo diâmetro
+   externo podem ter bitolas diferentes.
+
+   **Question 2: B.** Luz fraca com o wire morno, sem fuse queimado e com
+   bulbs novas, é o retrato da bitola insuficiente para a current e o
+   comprimento: o wire fica com parte da voltage e a transforma em calor. Um
+   ground aberto (A) apagaria a luz por completo, não a deixaria fraca. Bulbs
+   de 24 V (C) acenderiam fracas, mas sem aquecer o wire — elas puxariam
+   **menos** current. Um fuse de rating baixo (D) abriria em vez de deixar a
+   luz fraca.
+
+   **Question 3: B.** O stranded wire é usado porque aguenta vibração e
+   flexão. A alternativa A está errada: na mesma bitola, a resistance é
+   praticamente igual, porque a área de cobre é a mesma. C está errada — ele
+   precisa de insulation como qualquer wire. D está errada: alta voltage é
+   assunto da espessura da insulation, não do número de strands.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o wire não é uma linha do esquema; é uma resistance em
+  série com a load. Quanta resistance depende do material, da **área da
+  seção**, do comprimento de ida e volta e da temperatura. Na escala AWG, o
+  número cresce quando o wire afina, e a bitola mede só o cobre.
+- **Quando usar:** ao instalar qualquer acessório, ao refazer um trecho de
+  chicote, ao trocar um battery cable e ao explicar uma load fraca que não tem
+  nenhum defeito franco.
+- **Com o que se conecta:** a divisão da voltage entre wire e load vem do
+  [Series circuit](./circuito-em-serie); o calor da resistance, da
+  [Electrical power](./potencia-eletrica); a medição que confirma tudo, de
+  [Medições com o multimeter](./medicoes-com-multimetro); a proteção do wire,
+  de [Circuit protection](./protecao-do-circuito); o conserto do wire
+  danificado, de [Reparar um wire](./reparar-um-wire); e o chicote que
+  carrega todos eles, da próxima lição,
+  [O wiring harness](./chicote-terminals-e-connectors).
+
+**Termos desta lição para revisar:** solid wire, stranded wire, parallel wire,
+primary wire, secondary wire, carbon-core wire, coaxial cable, shield, twisted
+pair wire, printed circuit, American Wire Gage (AWG), metric wire size,
+cross-sectional area, current-carrying capacity, hash mark.
