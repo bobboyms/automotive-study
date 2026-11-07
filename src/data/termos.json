@@ -4830,7 +4830,7 @@
     {
       "en": "charging rate",
       "pt": "taxa de carga",
-      "def": "a current escolhida para carregar a battery, quase sempre uma fração da capacidade em Ah",
+      "def": "a current escolhida no charger; no EEBC500A/B, MAINTAIN (4 A), FAST (15 A) ou BOOST (60 A)",
       "licao": "carregar-a-battery"
     },
     {
@@ -4848,25 +4848,25 @@
     {
       "en": "float charge",
       "pt": "carga de manutenção",
-      "def": "a fase final: voltage baixa e constante, só o bastante para repor a self-discharge",
+      "def": "a fase final: voltage de manutenção, 13.2 a 13.4 V numa battery de 12 V, que mantém a battery cheia",
       "licao": "carregar-a-battery"
     },
     {
       "en": "trickle charge",
       "pt": "carga lenta contínua",
-      "def": "current pequena e contínua, usada para manter a battery guardada por muito tempo",
+      "def": "outro nome para a current pequena da fase float, que mantém a battery cheia",
       "licao": "carregar-a-battery"
     },
     {
       "en": "fast charge",
       "pt": "carga rápida",
-      "def": "current alta e tempo curto; esquenta mais a battery e produz mais hydrogen gas",
+      "def": "current maior e tempo menor, como o FAST de 15 A; esquenta mais e produz mais hydrogen gas",
       "licao": "carregar-a-battery"
     },
     {
       "en": "slow charge",
       "pt": "carga lenta",
-      "def": "current baixa, perto de 10% da capacidade em Ah; a mais indicada para uma recarga completa",
+      "def": "current baixa e tempo maior, como o MAINTAIN de 4 A; esquenta pouco a battery",
       "licao": "carregar-a-battery"
     },
     {
@@ -4885,6 +4885,54 @@
       "en": "surface charge",
       "pt": "carga superficial",
       "def": "a carga que fica perto da superfície da plate logo depois do charger; infla a voltage por um tempo e não é o state of charge real",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "reserve capacity",
+      "pt": "capacidade de reserva",
+      "def": "quantos minutos a battery cheia entrega 25 A antes de cair a 10.5 V",
+      "licao": "carregar-a-battery",
+      "var": [
+        "RC"
+      ]
+    },
+    {
+      "en": "hydrometer",
+      "pt": "densímetro",
+      "def": "instrumento que puxa electrolyte de uma cell e mede a specific gravity",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "specific gravity",
+      "pt": "densidade relativa",
+      "def": "quanto o electrolyte é mais pesado que a água; 1.265 numa cell cheia",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "flash reprogramming",
+      "pt": "reprogramação de módulo",
+      "def": "gravar um software novo num módulo do veículo; pede voltage estável",
+      "licao": "carregar-a-battery",
+      "var": [
+        "flash reprogram"
+      ]
+    },
+    {
+      "en": "thermal runaway",
+      "pt": "disparo térmico",
+      "def": "a battery esquenta, aceita mais current, esquenta mais; o ciclo só para cortando a current",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "fender cover",
+      "pt": "capa de paralama",
+      "def": "capa que protege a pintura do paralama durante o serviço",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "extension cord",
+      "pt": "extensão elétrica",
+      "def": "cabo de extensão da tomada; quanto mais comprido, mais grossa a bitola precisa ser",
       "licao": "carregar-a-battery"
     }
   ]

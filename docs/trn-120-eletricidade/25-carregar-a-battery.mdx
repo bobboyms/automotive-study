@@ -7,57 +7,69 @@ import CurvaCarga from '@site/src/components/CurvaCarga';
 
 # Carregar a battery: bulk, absorption e float
 
-> **Pergunta central:** você liga a battery no charger a noite inteira. De
-> manhã, desliga o charger, solta os clamps e mede: **13.2 V**. Isso é mais
-> alto que os 12.6 V de uma battery cheia e parada, da lição
-> [A battery por dentro](./a-battery-por-dentro). A battery carregou acima de
-> 100%, ou essa leitura está escondendo alguma coisa?
+> **Pergunta central:** a battery passou a noite no charger. De manhã, o
+> painel diz que ela está cheia e em manutenção, e o multimeter nos posts
+> marca **13.2 V**. Você desliga o charger, solta os clamps e mede de novo:
+> 13.1 V, caindo devagar até parar em **12.6 V** meia hora depois. Qual dos
+> três números é o state of charge da battery — e por que os outros dois são
+> diferentes?
 
-## A queixa: a battery que "carregou demais"
+## A queixa: três leituras para a mesma battery
 
 Depois do jump start da lição anterior, você quer devolver o carro com a
-battery de verdade recarregada — não só com o motor pegando. Você prende os
-clamps do charger, liga na tomada e deixa a noite inteira.
+battery de verdade recarregada, não só com o motor pegando. Você liga o
+charger da oficina e deixa a noite inteira.
 
-De manhã, antes de soltar os clamps, você mede a battery no multimeter:
-**13.2 V**. Você abre a tabela da lição 22 para conferir o state of charge e
-não acha a linha: a tabela só vai até "12.6 V ou mais = 100%". Vinte minutos
-depois, com o carro já solto do charger e parado, você mede de novo: **12.6
-V**. O número caiu sozinho, sem ninguém tocar em nada.
+De manhã, a luz de carga completa do charger está pulsando. Você encosta o
+multimeter nos posts, com os clamps ainda presos: **13.2 V**. Um colega olha e
+diz: "acima de 12.6 V? Então ela carregou mais de 100%".
 
-A battery está boa, está ruim, ou o multimeter é que está errado?
+Você desliga o charger da tomada, solta os clamps e mede de novo: 13.1 V. Meia
+hora depois, sem nada ligado, a leitura está em **12.6 V** e não cai mais.
 
-Ao fim desta lição você vai saber por que essa queda acontece, como o charger
-decide quanta current mandar em cada instante, e como ler o resultado de um
-charge sem se enganar com um número que ainda não assentou.
+A battery perdeu carga nessa meia hora? O colega tem razão? Ao fim desta lição
+você vai saber o que cada uma das três leituras está medindo, como o charger
+decide quanta current mandar em cada fase, quanto tempo uma recarga leva pelo
+método da certificação, e como usar o charger da oficina sem se enganar e sem
+se machucar.
 
 ## Mapa das ideias
 
 | Inglês | Português | O que é |
 |---|---|---|
 | ampere-hour (Ah) | ampère-hora | a unidade que mede quanta current a battery entrega e por quanto tempo |
-| charging rate | taxa de carga | a current escolhida para carregar, quase sempre uma fração da capacidade em Ah |
-| bulk charge | fase bulk | a primeira fase: current quase no máximo, quase constante, enquanto a voltage sobe |
-| absorption charge | fase absorption | a segunda fase: voltage presa perto de um teto, current caindo aos poucos |
-| float charge | carga de manutenção | a fase final: voltage baixa e constante, só para repor a self-discharge |
-| trickle charge | carga lenta contínua | current pequena e contínua, para manter a battery guardada por muito tempo |
-| fast charge | carga rápida | current alta, tempo curto, mais calor e mais hydrogen gas |
-| slow charge | carga lenta | current baixa, perto de 10% da capacidade em Ah |
-| constant current charging | carga a current constante | o charger mantém a current fixa e deixa a voltage subir sozinha |
-| constant voltage charging | carga a voltage constante | o charger mantém a voltage fixa e deixa a current cair sozinha |
-| surface charge | carga superficial | carga perto da superfície da plate, logo após o charger; infla a voltage por um tempo |
+| reserve capacity (RC) | capacidade de reserva | quantos minutos a battery cheia entrega 25 A antes de cair a 10.5 V |
+| charging rate | taxa de carga | a current escolhida no charger |
+| bulk charge | fase bulk | a primeira fase: current quase no máximo, enquanto a voltage sobe |
+| absorption charge | fase absorption | a segunda fase: voltage presa num teto, current caindo aos poucos |
+| float charge | carga de manutenção | a fase final: voltage mais baixa e constante, battery mantida cheia |
+| trickle charge | carga lenta contínua | outro nome para a current pequena da fase float |
+| fast charge | carga rápida | current maior e tempo menor, com mais calor e mais gás |
+| slow charge | carga lenta | current baixa e tempo maior, com menos calor |
+| constant current charging | carga a current constante | o charger segura a current e deixa a voltage subir |
+| constant voltage charging | carga a voltage constante | o charger segura a voltage e deixa a current cair |
+| surface charge | carga superficial | carga na superfície da plate logo depois do charger; infla a voltage por um tempo |
+| hydrometer | densímetro | instrumento que mede a specific gravity do electrolyte |
+| specific gravity | densidade relativa | quanto o electrolyte é mais pesado que a água; sobe com a carga |
+| flash reprogramming | reprogramação de módulo | gravar um software novo num módulo do veículo |
+| thermal runaway | disparo térmico | a battery esquenta, aceita mais current, esquenta mais, e assim por diante |
+| fender cover | capa de paralama | a capa que protege a pintura do paralama durante o serviço |
 
 Lembre: toque em qualquer termo sublinhado para ver o português.
 
 ## Onde isso aparece
 
 Em toda devolução de carro depois de um reparo elétrico, em todo veículo que
-fica parado por semanas no pátio ou no estoque, e em todo diagnóstico que
-precisa descartar "battery descarregada" antes de ir mais fundo. Na Wake Tech,
-é a quinta unidade do **módulo 3** da TRN-120 (*Relays & Battery
-Maintenance*), com a certificação NC3 da Snap-on de **Battery Charging** — a
-que vem depois da certificação de *Battery Maintenance & Engine Starting*. Na
-prova ASE, a área é **A6**.
+fica parado por semanas no pátio, e em todo diagnóstico que precisa descartar
+"battery descarregada" antes de ir mais fundo.
+
+Na Wake Tech, é a quinta unidade do **módulo 3** da TRN-120 (*Relays & Battery
+Maintenance*), com a certificação NC3 de **Battery Charging** — a que vem
+depois da de *Battery Maintenance & Engine Starting*. A certificação é
+construída em cima de um aparelho específico, o **Snap-on EEBC500A/B Battery
+Charger Plus**, e por isso esta lição usa os botões e os modos dele. O
+material da certificação é o flipbook do NC3Certs; as páginas citadas aqui são
+as dele. Na prova ASE, a área é **A6**.
 
 ## Ideias anteriores que voltam aqui
 
@@ -91,29 +103,39 @@ prova ASE, a área é **A6**.
 
 ## Intuição: o charger empurra a current ao contrário
 
-Durante a partida, a battery **entrega** current: os elétrons saem do
-negative terminal, passam pelo starter motor e voltam pelo positive terminal,
-por dentro da battery. Essa é a direção da descarga.
+Neste material, a current é sempre descrita no sentido convencional, do + para
+o −, como nos esquemas do fabricante (lição
+[O electrical circuit](./o-circuito-eletrico)).
 
-Um **battery charger** faz o caminho contrário. Ele é uma fonte de voltage
-**maior** que a voltage da battery, ligada com o + no + e o − no −. Com essa
-diferença de voltage, a current é empurrada **para dentro** da battery, no
-sentido contrário ao da descarga — e é essa current invertida que refaz a
-reação química que a descarga tinha desfeito.
+Durante a partida, a battery **entrega** current. A current sai do **positive
+terminal (+)**, passa pelo starter motor e volta ao **negative terminal (−)**.
+Por dentro da battery, ela fecha o laço indo do − para o +. Essa é a direção
+da descarga.
+
+Um **battery charger** faz a current atravessar a battery no sentido
+contrário. Ele é uma fonte de voltage **maior** que a voltage da battery,
+ligada com o + no + e o − no −. Como a voltage do charger é maior, é ele que
+decide o sentido: a current sai do + do charger e **entra** na battery pelo
+positive terminal. Por dentro da battery, ela vai do + para o −, e volta ao
+charger pelo negative terminal. Esse é o sentido contrário ao da descarga — e
+é essa current invertida que refaz a reação química que a descarga tinha
+desfeito.
 
 Repare que isso é a mesma ideia da lição [Jump start e memory saver](./jump-start-e-memory-saver):
 duas fontes de voltage diferente, ligadas uma na outra, e a diferença empurra
-a current. A novidade aqui é que o charger não se limita a dar um empurrão
-rápido — ele fica ligado por horas, e **muda de comportamento** à medida que a
-battery se enche.
+a current. A novidade aqui é que o charger fica ligado por horas e **muda de
+comportamento** à medida que a battery se enche.
 
-É aí que mora a pergunta central. Enquanto a current ainda está entrando, uma
-parte dela fica temporariamente acumulada bem perto da superfície da plate,
-sem ainda ter penetrado para dentro do material. Essa carga superficial some
-sozinha em minutos, puxada para dentro da plate ou consumida por uma pequena
-load — mas enquanto está ali, ela empurra a leitura do multimeter para cima.
-Uma battery de 12.6 V de verdade pode, por isso, mostrar 13.2 V por um tempo
-curto.
+Isso já responde a primeira leitura da pergunta central. Enquanto os clamps
+estão presos, o multimeter nos posts mede a voltage que o **charger** está
+segurando, e não a da battery sozinha — as duas estão ligadas nos mesmos dois
+pontos.
+
+A segunda leitura vem de outro efeito. A current que entrou por último deixou
+uma parte da carga acumulada bem perto da superfície da plate, sem ainda ter
+se espalhado pelo material de dentro. Essa **surface charge** some sozinha em
+minutos, ou mais depressa se uma load pequena for ligada. Enquanto ela está
+ali, empurra a leitura para cima.
 
 ## Modelo visual: as três fases de um charge completo
 
@@ -121,20 +143,32 @@ curto.
 
 O que muda em cada fase, e o que não muda:
 
-- **Bulk:** o charger **regula a current**, mantendo-a perto do máximo que ele
-  pode entregar, mesmo com a voltage da battery ainda baixa. **O que muda:** a
-  voltage, subindo. **O que não muda:** a current, quase constante — por isso
-  esta fase também é chamada **constant current charging**.
-- **Absorption:** assim que a voltage da battery chega perto do teto que o
-  charger permite, ele muda de estratégia e passa a **regular a voltage**,
-  segurando-a quase parada nesse teto. **O que muda:** a current, caindo.
-  **O que não muda:** a voltage — por isso esta fase também é chamada
-  **constant voltage charging**. A ponte para a formalização explica por que a
-  current cai sozinha quando a voltage é segurada.
-- **Float:** o charger baixa o teto de voltage para um valor de manutenção,
-  bem mais baixo que o da absorption. Com a battery já cheia e a voltage do
-  charger só um pouco acima da dela, a current que passa é pequena — só o
-  bastante para repor a self-discharge da lição 23.
+- **Bulk:** o charger **regula a current**, mantendo-a perto do máximo da
+  taxa escolhida, mesmo com a voltage da battery ainda baixa. **O que muda:**
+  a voltage, subindo. **O que não muda:** a current, quase constante — por isso
+  esta fase também é chamada **constant current charging**. É a fase que
+  recupera uma battery muito descarregada, e não há risco de sobrecarga nela,
+  porque a battery ainda está longe de cheia.
+- **Absorption:** segundo o material da certificação, o charger entra nesta
+  fase quando a battery chega perto de **80%** de state of charge. Ele passa a
+  **regular a voltage**, segurando-a quase parada num teto. **O que muda:** a
+  current, caindo. **O que não muda:** a voltage — por isso esta fase também é
+  chamada **constant voltage charging**. Os últimos 20% demoram bem mais que os
+  primeiros 20%, e a seção seguinte explica por quê.
+- **Float:** alguns chargers entram nela por volta de 85% de state of charge,
+  outros perto de 95%. O charger baixa o teto de voltage para um nível de
+  manutenção — **13.2 a 13.4 V** numa battery de 12 V, pelo material da
+  certificação — e a current fica pequena, só o bastante para levar a battery a
+  100% e mantê-la ali. É daí que vem o nome **trickle charge**: a current
+  "pinga" na battery. Um charger de três fases pode ficar ligado em float por
+  muito tempo sem sobrecarregar a battery.
+
+Os tetos de voltage da fase bulk dependem da química da battery. O material da
+certificação cita **14.6 a 14.8 V** para uma AGM de 12 V, um pouco mais para a
+flooded cell, e **no máximo 14.2 a 14.3 V** para a gel. É por isso que o charger
+pergunta o tipo de battery antes de começar: o mesmo teto que carrega bem uma
+flooded cell estraga uma gel. O valor que vale para cada battery é o do
+fabricante dela.
 
 ## Ponte para a formalização
 
@@ -142,88 +176,154 @@ A fase absorption parece ter uma regra nova, mas não tem: ela é a lei de Ohm
 de sempre, aplicada a duas fontes em paralelo, do jeito que a lição 24 já
 ensinou. A diferença de voltage entre o charger e a battery é o que empurra a
 current através da resistance do caminho — cabos, clamps e a própria battery.
-Enquanto a battery está descarregada, essa diferença é grande, e por isso a
-current de bulk seria enorme se o charger deixasse: é por isso que ele a
-**limita de propósito**. Conforme a battery recebe carga, a voltage dela sobe
-sozinha, a diferença para o teto do charger diminui, e a current que a mesma
-lei de Ohm permite passar **diminui junto** — sem o charger precisar fazer
-nada além de segurar a voltage parada. O exemplo 2 faz essa conta com números.
+
+Enquanto a battery está descarregada, essa diferença é grande, e a current
+seria enorme se o charger deixasse. Por isso, na bulk, ele **limita a current
+de propósito**. Conforme a battery recebe carga, a voltage dela sobe sozinha.
+A diferença para o teto do charger diminui, e a current que a mesma lei de Ohm
+deixa passar **diminui junto**. O charger não precisa fazer nada além de
+segurar a voltage parada. O exemplo 2 faz essa conta com números, e ela também
+explica por que os últimos 20% demoram: quanto mais cheia a battery, menor a
+diferença, e menor a current que entra por hora.
 
 ## Formalização
 
-### O que há dentro de um battery charger
+### O charger da certificação: EEBC500A/B Battery Charger Plus
 
-| Parte | Para que serve |
+É um **smart charger** de três fases, num carrinho com rodas e cabos longos.
+Um microprocessador controla a voltage e a current o tempo todo, e escolhe o
+algoritmo de carga pelo tipo de battery. Ele carrega batteries de 6 V (3
+cells) e de 12 V (6 cells). Numa battery de 24 V (12 cells), ele **só faz
+boost**: não carrega por completo.
+
+O painel, botão por botão (páginas 11 e 12 do flipbook):
+
+| Controle | O que faz |
 |---|---|
-| entrada de AC e um transformador ou circuito eletrônico | transforma a voltage da tomada numa voltage DC maior que a da battery |
-| retificador | transforma a corrente alternada da tomada em corrente contínua, do jeito que a battery usa |
-| ammeter e voltmeter (ou um visor digital) | mostram a current que está entrando e a voltage da battery |
-| seletor de voltage do sistema (6 V / 12 V) | escolhe a voltage de trabalho pelo número de cells em série da battery |
-| seletor de **charging rate** ou de química (flooded / AGM / gel) | muda o teto de voltage da absorption — AGM e gel pedem um teto mais baixo, como a lição 22 já avisou |
-| fuse ou circuit breaker | corta a current se um curto acontecer no cabo ou nos clamps |
-| clamps, vermelho e preto | a mesma lógica de cor do jump pack: vermelho no positivo, preto no negativo ou no ground |
-| controle eletrônico (no **smart charger**) | decide sozinho quando trocar de bulk para absorption e de absorption para float |
+| main power switch | o interruptor que liga o aparelho na rede |
+| `BATTERY VOLTAGE` | escolhe 6 V, 12 V ou 24 V |
+| `BATTERY TYPE` | escolhe STD (standard, flooded cell), AGM ou GEL; o EEBC500B tem STD/Ca, AGM e `LiFePO4` (lítio-ferro-fosfato) |
+| `OUTPUT RATE` | escolhe `MAINTAIN` (4 A), `FAST` (15 A), `BOOST` (60 A em 6 V e 12 V; 30 A em 24 V) ou `ENGINE START` |
+| `START/STOP` | começa e termina charge, boost, engine start e flash reprogramming |
+| `DISPLAY MODE` | troca o visor entre `VOLTS`, `BATTERY %` (state of charge) e `ALT %` (desempenho do alternator) |
+| `FLASH` e as setas | entram no modo de flash reprogramming e ajustam a voltage dele |
+| digital display | mostra voltage, porcentagem de carga ou tempo |
 
-Um charger antigo, de ajuste fixo, não tem esse controle: ele entrega a mesma
-voltage o tempo todo, e cabe a quem está carregando desligar na hora certa. Um
-**smart charger** faz as três trocas de fase sozinho, e por isso é o exigido
-para AGM e gel — a mesma recomendação da lição 22.
+Os três LEDs de estado:
 
-### A taxa de carga: quanta current pedir
+- **reversed clamps** — os clamps estão invertidos;
+- **boost/charging** — aceso: o charger reconheceu a battery e está carregando
+  ou em boost. **Piscando:** a operação foi abortada;
+- **charged/maintaining** — pulsando: a battery está cheia e o charger está em
+  manutenção.
 
-A **charging rate** é a current que você escolhe no charger, e ela é quase
-sempre falada como uma fração da capacidade da battery em **ampere-hour**
-(Ah) — a unidade que diz quanta current a battery entrega e por quanto tempo.
-Uma battery de 60 Ah, por exemplo, entrega 1 A durante 60 horas, ou 2 A durante
-30 horas, de forma aproximada.
+Duas coisas que a prova cobra:
 
-> Uma regra de referência comum: **slow charge** perto de **10% da capacidade
-> em Ah**. Uma battery de 60 Ah carrega devagar em torno de 6 A.
+- **Não existe modo manual.** Uma lei da Califórnia proíbe charger ajustado
+  para carregar sem parar, e o fabricante tirou o modo manual de todas as
+  unidades. O charger sempre termina sozinho e passa para a manutenção.
+- **Os três tipos de battery que ele carrega** são standard, AGM e gel.
 
-Essa é uma referência de ponto de partida, não uma especificação: a taxa certa
-para cada battery está no manual dela ou no manual do charger, e muda com a
-química (AGM aceita mais rápido que flooded, como a lição 22 mostrou).
+A legenda das taxas do painel tem os nomes que esta lição usa: `MAINTAIN` é a
+**slow charge** de 4 A; `FAST` é a **fast charge** de 15 A.
 
-### Fast charge e slow charge: a troca que você está fazendo
+### Quanto tempo leva: os dois métodos da certificação
 
-| | Slow charge (perto de 10%) | Fast charge (taxa bem maior) |
+O tempo de carga depende de **quanta carga falta** e de **quanta current** o
+charger manda. A certificação ensina dois jeitos de estimar isso.
+
+**1. O chart method (página 20 do flipbook).** Uma tabela dá o tempo de carga
+pelo rating da battery, nas colunas `MAINTAIN` (4 A) e `FAST` (15 A):
+
+- batteries pequenas (moto, cortador de grama) aparecem pelo rating em **Ah**;
+- batteries de carro e caminhonete, pelo **reserve capacity** (RC) ou pelo
+  **CCA**;
+- batteries marine e deep cycle, pelo **RC**.
+
+Os tempos da tabela valem para uma battery que está com **50% de carga**.
+Battery muito descarregada leva mais. Onde a tabela diz **NR** (*not
+recommended*), aquela taxa não é recomendada para aquela battery. Consulte a
+tabela no flipbook; ela é a referência da prova.
+
+**2. O método do hydrometer ou do tester eletrônico (página 21).** Primeiro
+você descobre quanto falta para encher.
+
+A battery flooded cell tem uma relação direta entre a carga e o peso do
+electrolyte: o ácido carregado é mais pesado. O **hydrometer** puxa um pouco
+de electrolyte de uma cell e mede a **specific gravity**, que é quanto ele é
+mais pesado que a água pura. A tabela da certificação:
+
+| Specific gravity | State of charge | Falta carregar |
+|---|---|---|
+| 1.265 | 100% | 0% |
+| 1.225 | 75% | 25% |
+| 1.155 | 25% | 75% |
+| 1.120 | 0% | 100% |
+
+Numa battery selada, onde não se tira electrolyte, o mesmo número sai de um
+tester eletrônico de porcentagem de carga.
+
+Depois você precisa da capacidade em Ah. Quando a battery só informa o RC, a
+conversão da certificação é:
+
+$$
+\text{Ah} = \text{RC} \div 2 + 16
+$$
+
+E, com os dois números, o tempo:
+
+$$
+\text{horas} = \frac{\text{Ah} \times \text{fração que falta}}{\text{taxa do charger em A}} \times 1.25
+$$
+
+Mais **uma hora** se a battery for deep cycle.
+
+O fator 1.25 existe porque o charge não é 100% eficiente: parte da energia
+vira calor e hydrogen gas em vez de carga guardada, e a fase absorption manda
+cada vez menos current no fim. Sem ele, a conta daria um tempo curto demais.
+
+### MAINTAIN ou FAST: a troca que você está fazendo
+
+| | `MAINTAIN` (4 A), slow charge | `FAST` (15 A), fast charge |
 |---|---|---|
 | Tempo | mais longo | mais curto |
-| Calor na battery | pouco | bastante |
-| Hydrogen gas produzido | pouco | bastante |
-| Desgaste da plate | pouco | mais, repetido com frequência |
-| Quando usar | recarga completa, de rotina | reforço rápido antes de um load test, ou quando o carro precisa sair logo |
+| Calor na battery | pouco | mais |
+| Hydrogen gas produzido | pouco | mais |
+| Quando usar | battery pequena; manter cheia uma battery parada | recarregar uma battery de carro no mesmo dia |
 
-Repare que isso **não** é uma escolha livre de consequência: a current maior
-da fast charge é exatamente o que produz mais calor e mais gás, pelos mesmos
-motivos da power elétrica ($P = V \times I$) e da química da battery que as
-lições 21 e 22 já ensinaram.
+A current maior da fast charge é exatamente o que produz mais calor e mais
+gás, pelos motivos da power elétrica ($P = V \times I$) e da química da
+battery das lições 21 e 22. Por isso a tabela marca `FAST` como NR para as
+batteries pequenas: 15 A seria current demais para elas.
 
 ### Verificar o charge: tirar a surface charge antes de julgar
 
 :::tip Surface charge não é surface discharge
 
-Os dois nomes são parecidos e os dois moram na mesma battery, mas são coisas
-opostas. **Surface discharge** (lição 23) é uma **fuga de carga por fora** da
-battery, pela sujeira da tampa — ela faz a battery perder carga sozinha.
-**Surface charge** (esta lição) é uma **carga que ainda está por cima** da
-plate, logo depois do charger — ela faz a battery **parecer** mais carregada
-do que está, por um tempo curto, e depois some sozinha.
+Os dois nomes são parecidos e moram na mesma battery, mas são coisas opostas.
+**Surface discharge** (lição 23) é uma **fuga de carga por fora** da battery,
+pela sujeira da tampa — ela faz a battery perder carga sozinha. **Surface
+charge** (esta lição) é uma **carga que ainda está por cima** da plate, logo
+depois do charger — ela faz a battery **parecer** mais carregada do que está,
+por um tempo curto, e depois some sozinha.
 
 :::
 
-Uma voltage lida **direto do charger**, ou nos primeiros minutos depois de
-desligá-lo, não é confiável. Para ler o state of charge de verdade:
+Uma voltage lida com os clamps presos mede o charger. Uma voltage lida nos
+primeiros minutos depois de soltar ainda carrega a surface charge. Para ler o
+state of charge de verdade:
 
-1. **Tire a surface charge.** Ligue uma load conhecida por um ou dois minutos
-   — os headlamps servem — ou espere a battery descansar por cerca de meia
-   hora sem nada ligado.
-2. **Desligue a load** e espere a voltage assentar por um instante.
-3. **Meça a open-circuit voltage**, do jeito da lição 22: battery parada, sem
+1. **Desligue o charger e solte os clamps**, pelo procedimento da seção
+   seguinte.
+2. **Tire a surface charge.** Ligue uma load conhecida por um ou dois minutos
+   — os headlamps servem — ou deixe a battery descansar por cerca de meia hora
+   sem nada ligado.
+3. **Desligue a load** e espere a voltage assentar.
+4. **Meça a open-circuit voltage**, do jeito da lição 22: battery parada, sem
    load, sem charger.
-4. **Compare com a tabela da lição 22.** Um valor que não bate com nenhuma
-   linha da tabela, como os 13.2 V da pergunta central, é sinal de que a
-   surface charge ainda não saiu — não é um state of charge novo que a tabela
+5. **Compare com a tabela da lição 22.** Um valor que não bate com nenhuma
+   linha da tabela, como os 13.1 V da pergunta central, é sinal de que a
+   surface charge ainda não saiu — não é um state of charge que a tabela
    esqueceu.
 
 ## Na oficina: ligar e desligar o charger
@@ -231,112 +331,243 @@ desligá-lo, não é confiável. Para ler o state of charge de verdade:
 :::warning Antes do primeiro passo
 
 Tudo da lição [Segurança com a battery](./seguranca-da-battery) continua
-valendo: óculos de segurança, metal fora da mão, nada de faísca perto da
-battery. O charge produz **hydrogen gas** por horas, não só no instante da
-ligação — por isso o local precisa ser **ventilado o tempo todo**, nunca um
-porta-malas fechado ou um armário sem corrente de ar.
+valendo. **Uma faísca perto da battery pode causar uma explosão**, e o charge
+produz **hydrogen gas** por horas, não só no instante da ligação.
 
-Nunca carregue uma battery com o **battery case** congelado, trincado ou
-visivelmente estufado: pare e chame o instrutor.
+- **Óculos de segurança e luvas** para quem liga e para quem está perto.
+- **Local ventilado o tempo todo.** Nada de chama, cigarro ou ferramenta
+  faiscando perto da battery.
+- **Não fique na frente da battery** enquanto liga e solta os clamps. Trabalhe
+  do lado, o mais longe que o cabo permitir.
+- **Nunca carregue uma battery congelada, trincada ou estufada:** pare e chame
+  o instrutor.
+- **Confira com os olhos a voltage da battery** antes de escolher 6, 12 ou
+  24 V no painel. A voltage errada danifica a battery e a parte elétrica do
+  veículo.
 
 :::
 
-1. **Confira o nível do electrolyte**, numa flooded cell, antes de ligar — a
-   mesma inspeção da lição 23. Carregar com o nível baixo expõe a plate ao ar
-   e concentra o ácido que sobra.
-2. **Escolha o charger certo**: voltage do sistema (6 V ou 12 V), e o modo ou
-   a taxa pela química da battery. Confira se é **smart charger** antes de
-   ligar numa AGM ou numa gel.
-3. **Com o charger desligado da tomada**, prenda os clamps: **vermelho no
-   positive terminal**; **preto num ponto de metal limpo do chassi ou do
-   engine block, longe da battery** — a mesma lógica da lição 24, porque a
-   última ligação é onde a faísca acontece, e é por isso que ela fica longe
-   das vent caps.
-4. **Ligue o charger na tomada e selecione a taxa.** Só agora a current
-   começa a passar pelos clamps.
-5. **Acompanhe o ammeter de vez em quando.** Numa carga saudável, a current
-   começa alta e **cai sozinha** com o passar do tempo — é a fase absorption
-   acontecendo. Current que não cai depois de muitas horas é sinal de
-   problema, e a seção seguinte explica o quê.
-6. **No fim, desligue o charger da tomada antes de soltar qualquer clamp.**
-   Solta-se primeiro o clamp que está longe da battery, depois o que está no
-   post — o inverso de como foram presos, pela mesma razão da lição 24.
-7. **Tire a surface charge e confira a voltage de verdade**, pelo
-   procedimento da seção anterior, antes de devolver o veículo ou de fazer
-   qualquer outro teste na battery.
+**Battery no veículo** (página 15 do flipbook):
+
+1. Instale a **fender cover** no paralama e confira o nível do electrolyte,
+   numa flooded cell, como na lição 23.
+2. Passe o cabo de força e os cabos dos clamps longe do capô, da porta e de
+   qualquer peça que gira — ventoinha, correia, polia.
+3. Confira a polaridade pelas marcas da battery: POS, P ou + e NEG, N ou −. Na
+   battery de post em cima, o positivo costuma ser o post mais grosso.
+4. Descubra qual post vai ao chassi. Quase sempre é o negativo.
+5. **Com o charger desligado e fora da tomada:** clamp **vermelho** no post
+   positivo, que não vai ao chassi. Depois, clamp **preto** num ponto de metal
+   grosso e sem tinta do chassi ou do engine block, **longe da battery**. Nunca
+   em carburador, linha de combustível ou chapa fina. É a mesma lógica da lição
+   24: a última ligação é a que faísca, e ela tem de acontecer longe das vent
+   caps.
+6. **Balance cada clamp** para frente e para trás até ele morder o metal. Um
+   clamp frouxo escorrega e faísca.
+7. Ligue o cabo de força numa tomada **aterrada** de 120 V AC e ligue o main
+   power switch.
+8. Escolha `BATTERY VOLTAGE`, `BATTERY TYPE` e `OUTPUT RATE`, e aperte
+   `START/STOP`. A carga termina sozinha: o LED charged/maintaining pulsa, e o
+   charger fica mantendo a battery.
+9. **No fim:** aperte `START/STOP`, desligue o main power switch e **tire o
+   cabo da tomada**. Só então solte os clamps.
+10. De longe da battery, solte **primeiro o clamp do chassi**, depois o do
+    post — o inverso da ligação, pela mesma razão.
+11. Limpe o charger e guarde em lugar seco.
+
+**Battery fora do veículo** (páginas 17 e 18). A diferença está no clamp
+preto, porque agora não existe chassi para levar a faísca para longe:
+
+1. Desligue as loads do carro e tire a battery, soltando primeiro o terminal
+   que vai à massa.
+2. Confira a polaridade e prenda o clamp **vermelho** no post positivo,
+   balançando o clamp.
+3. Prenda no post **negativo** um battery cable isolado avulso, de **pelo
+   menos 24 in (61 cm)**, de bitola 6 AWG.
+4. **De pé, o mais longe possível da battery**, prenda o clamp **preto** na
+   ponta solta desse cabo. Assim, a faísca da última ligação acontece a meio
+   metro da battery.
+5. Tomada, ajustes e `START/STOP`, como antes. Para desligar, a ordem inversa:
+   a primeira ligação a ser desfeita é a da ponta do cabo, longe da battery.
+
+Três situações especiais que a certificação cobra:
+
+- **Extension cord:** não é recomendado. Se for inevitável, os pinos têm de ser
+  iguais aos do plug do charger, o cabo tem de estar em bom estado, e a bitola
+  tem de crescer com o comprimento — a tabela da página 14 dá a bitola por
+  comprimento. É a lição [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola)
+  de novo: wire mais comprido tem mais resistance, e precisa ser mais grosso
+  para não perder voltage.
+- **Battery marine:** sai do barco e é carregada em terra. Carregar a bordo
+  exige equipamento próprio para uso náutico.
+- **Sistema com duas batteries de 12 V:** as batteries são desligadas uma da
+  outra e carregadas separadamente.
+
+## Os outros modos: boost, engine start, flash e ALT %
+
+O EEBC500A/B faz mais que carregar, e a prova pergunta sobre cada modo.
+
+**Boost** (`OUTPUT RATE` em `BOOST`, página 23): entrega até 60 A e segura a
+voltage num valor fixo — 6.8 V em 6 V, 13.6 V em 12 V, 27.2 V em 24 V —
+enquanto você não apertar `START/STOP`. Não use em battery pequena, como a de
+moto ou de cortador de grama. Em 24 V, o boost nem liga se a battery estiver
+abaixo de 15.5 V.
+
+**Engine start** (página 25): o charger ajuda o starter motor, com até 300 A
+em 12 V.
+
+:::danger Antes de usar o engine start
+
+- **Confira os terminals:** apertados e sem corrosion.
+- **Headlamps e acessórios desligados.**
+- **Confira se a battery não está ruim ou sulfatada.** Ligue o charger na
+  battery em `FAST`, aperte `START/STOP` e ponha o visor em `VOLTS`. Se a
+  voltage subir rápido para **mais de 15 V em poucos segundos**, a battery está
+  ruim ou muito sulfatada: **não use o engine start nela**.
+- **Nunca dê partida num veículo sem a battery instalada.** Sem a battery, a
+  voltage pode subir o bastante para danificar a parte elétrica do veículo.
+
+O motivo dos dois últimos itens é o mesmo. Uma battery sulfatada tem
+resistance interna alta (lição 22), e não aceita a current que o charger
+manda. Pela lei de Ohm, a mesma current numa resistance maior dá uma voltage
+maior, e essa voltage chega aos módulos do carro. A battery boa é o que segura
+a voltage do sistema num valor seguro. Sem battery, ou com uma battery que não
+aceita carga, nada segura.
+
+:::
+
+O procedimento, sem os números do manual do veículo:
+
+1. Ligue o charger como na seção anterior e escolha a voltage.
+2. Ponha `OUTPUT RATE` em `ENGINE START` e aperte `START/STOP`. O charger
+   carrega um pouco a battery antes da partida, e você tem **3 minutos** para
+   dar partida.
+3. **Não gire o motor por mais de 20 segundos.** No frio intenso, ou com a
+   battery abaixo de 1 V, carregue 5 minutos antes de tentar.
+4. **Não pegou: espere 3 minutos.** O visor conta o tempo, o LED do engine
+   start pisca, e o charger manda até 10 A na battery enquanto isso. Quando o
+   visor mostra `rdy`, você pode tentar de novo, sem apertar nada.
+5. Ainda não pegou: deixe carregar mais 5 minutos antes de tentar outra vez.
+6. Pegou: **tire o charger da tomada antes de soltar os clamps**.
+
+Se o motor gira normalmente mas não pega, o problema não é a partida: está em
+outro lugar do veículo. Pare de girar o motor e vá para o diagnóstico.
+
+:::tip 30 segundos ou 3 minutos?
+
+Na lição 24, o jump pack pedia até 30 segundos de descanso entre tentativas.
+No engine start do EEBC500A/B, a espera é de **3 minutos (180 s)**, e o próprio
+charger obriga, contando o tempo no visor. Cada aparelho tem o seu manual; na
+prova da Battery Charging, a resposta é 3 minutos.
+
+:::
+
+**Flash reprogramming** (página 26): quando um módulo do veículo recebe
+software novo pelo scan tool, a ignição fica ligada por muito tempo, e
+ventoinhas e bombas podem ligar sozinhas e descarregar a battery. Se a voltage
+cair no meio da gravação, a operação pode falhar, e um módulo pode ficar
+inutilizado. O modo `FLASH` segura uma voltage constante para evitar isso.
+
+- A battery precisa estar **boa e completamente carregada antes**: o modo flash
+  não serve para carregar uma battery fraca.
+- O charger entrega **até 100 A** nesse modo. Se o fabricante do veículo pede
+  mais que isso, o EEBC500A/B não serve para aquela reprogramação.
+- A voltage é ajustada pelas setas, de 13.0 a 14.8 V (o padrão é 14.2 V). O
+  valor certo é o que o fabricante do veículo especifica.
+- `START/STOP` liga a saída e, no fim, sai do modo.
+
+**ALT %** (página 27): com o visor em `ALT %` e o motor funcionando, o charger
+mostra a voltage do alternator como porcentagem do normal. **100% é normal.**
+Um valor baixo ou alto indica problema, e o próximo passo é um teste de
+alternator com o instrumento próprio.
 
 ## Como falha e como diagnosticar
 
-| Sintoma | Causa provável | Teste que separa |
+| Sintoma ou código | O que significa | O que fazer |
 |---|---|---|
-| ammeter em zero, charger ligado | clamp sem contato, fuse do charger queimado, ou polaridade trocada | reapertar os clamps em metal limpo; conferir o fuse; conferir polaridade |
-| current não cai depois de muitas horas | cell ruim, sulfatação forte: a battery não aceita carga de verdade | comparar com o comportamento esperado da fase absorption; load test depois |
-| battery case quente, cheiro forte, gás em excesso | overcharge: taxa ou tempo altos demais para aquela battery | reduzir a taxa; conferir se o charger é smart charger e está na química certa |
-| AGM ou gel estufada depois do charge | charger de ajuste fixo usado numa química que exige smart charger | o dano já está feito; trocar a battery e usar o charger certo da próxima vez |
-| voltage alta logo após o charger, caindo em minutos | surface charge, não é defeito | tirar a surface charge (load por 1–2 min) e medir de novo |
-| battery enche rápido mas perde a carga em poucas horas | sulfatação ou curto interno numa cell | medir a open-circuit voltage de novo depois de um tempo parado; load test |
+| visor em 0.0 V ou apagado | clamp sem contato, cabo de força solto, tomada sem energia, ou clamps invertidos | reapertar os clamps em metal limpo; conferir o cabo, a tomada e a polaridade |
+| LED boost/charging piscando | o charger abortou o boost ou o charge | a battery pode estar ruim: desligar da tomada, soltar e mandar testar |
+| **F01** | depois de 2 horas, a battery de 12 V ainda está abaixo de 10 V (ou a de 6 V abaixo de 5 V) | a battery pode estar ruim: testar ou trocar |
+| **F02** | o charger não consegue desfazer a sulfatação | testar ou trocar a battery |
+| **F03** | a battery não chegou à voltage de carga completa | battery grande demais, ou banco de batteries, para a taxa escolhida: tentar uma taxa maior, ou testar a battery |
+| **F04** | clamps invertidos | tirar o charger da tomada e inverter os clamps |
+| **F05** | o charger não consegue manter a battery cheia na manutenção | alguma load está puxando current, ou a battery não segura carga: desligar as loads e, se continuar, testar a battery |
+| **F06** | a battery está esquentando demais (**thermal runaway**) | o charger corta a current sozinho: testar ou trocar a battery |
+| visor mostra `SUL` | battery sulfatada | o charger continua com current baixa por até 10 horas tentando recuperá-la; se não aceitar carga, testar |
+| zumbido alto do charger | as chapas do transformador vibram | normal, não é defeito |
+| current não cai depois de muitas horas | cell ruim ou sulfatação forte | comparar com o comportamento esperado da fase absorption; load test depois |
+| AGM ou gel estufada depois do charge | tipo de battery errado no painel, ou charger sem controle de voltage | o dano já está feito: trocar a battery e escolher o `BATTERY TYPE` certo |
+
+O **thermal runaway** do código F06 é um ciclo que se alimenta sozinho. A
+battery quente tem resistance interna menor e aceita mais current. Mais
+current esquenta mais a battery, e ela aceita mais current ainda. Sem alguém
+cortar a current, o ciclo só para quando a battery estufa ou ferve. Por isso o
+charger corta sozinho.
 
 ### A queixa resolvida
 
-Volte à battery que pareceu "carregar demais".
+Volte às três leituras da pergunta central.
 
-1. **O que o sistema deveria fazer:** depois de uma noite de slow charge, a
-   battery deveria terminar perto de 100% — 12.6 V ou mais, pela tabela da
-   lição 22.
-2. **O que foi observado:** 13.2 V assim que tirada do charger; 12.6 V vinte
-   minutos depois, sem nada ligado.
-3. **O princípio que liga as duas coisas:** a current que entrou por último,
-   na fase absorption, deixou uma camada de surface charge perto da plate.
-   Essa carga eleva a leitura do multimeter, porque ela também é voltage, só
-   que ainda não distribuída por dentro da battery.
+1. **O que o sistema deveria fazer:** depois de uma noite de charge, o charger
+   entra em float e segura a battery cheia. Solta e descansada, uma battery
+   cheia mede 12.6 V ou mais, pela tabela da lição 22.
+2. **O que foi observado:** 13.2 V com os clamps presos; 13.1 V logo depois de
+   soltar; 12.6 V meia hora depois, estável, sem nada ligado.
+3. **O princípio que liga as leituras:**
+   - **13.2 V** é a voltage de float que o **charger** segura — 13.2 a 13.4 V
+     pelo material da certificação. Com os clamps presos, battery e charger
+     ocupam os mesmos dois pontos, e o multimeter mede os dois juntos.
+   - **13.1 V** é a battery sozinha, ainda com a surface charge da current que
+     entrou por último.
+   - **12.6 V** é a open-circuit voltage de verdade, porque a condição da lição
+     22 foi cumprida: battery parada, sem load e sem charger.
 4. **O que muda:** a leitura do multimeter, enquanto a surface charge se
-   redistribui ou é consumida. **O que não muda:** a carga real guardada na
-   battery, que já estava lá desde que o charger desligou.
-5. **O teste que confirma:** esperar ou aplicar uma load por um minuto, e
-   medir de novo. A queda de 13.2 V para 12.6 V, sem nenhuma load ligada
-   durante a espera, é exatamente o comportamento da surface charge
-   desaparecendo — uma fuga de verdade (surface discharge) precisaria de um
-   caminho condutor, e aqui não há nenhum.
+   redistribui. **O que não muda:** a carga guardada na battery. Nenhuma load
+   estava ligada, e uma fuga (surface discharge) precisaria de um caminho
+   condutor que não existe aqui.
+5. **O teste que confirma:** a leitura parou em 12.6 V e ficou estável.
 
-**A conclusão:** a battery carregou corretamente. O erro não estava no charge,
-estava em julgar o resultado pela primeira leitura.
+**A conclusão:** a battery carregou corretamente e está em 100%. O colega leu a
+voltage do charger como se fosse a da battery. A tabela da lição 22 só vale
+para a última leitura.
 
 ## Exemplos resolvidos
 
-### Exemplo 1: quanto tempo leva um slow charge
+### Exemplo 1: quanto tempo leva a recarga
 
-Uma battery de **60 Ah** está com **50% de depth of discharge** — ela perdeu
-metade da carga que tinha. O charger está ajustado para slow charge, em 10% da
-capacidade. Quanto tempo leva para repor a carga?
+Uma battery de carro informa **120 RC** no rótulo. O hydrometer mede **1.155**
+de specific gravity. Você vai carregar no `FAST` (15 A). Quanto tempo, pelo
+método da certificação? E no `MAINTAIN` (4 A)?
 
 <details>
 <summary>Solução</summary>
 
-Primeiro, quanta carga falta repor. Metade de 60 Ah:
+Primeiro, a capacidade em Ah, pela conversão do RC:
 
 $$
-60 \times 0.5 = 30\,\text{Ah}
+\text{Ah} = 120 \div 2 + 16 = 60 + 16 = 76\,\text{Ah}
 $$
 
-A taxa escolhida, 10% de 60 Ah:
+Depois, quanto falta. Pela tabela do hydrometer, 1.155 é 25% de carga, então
+falta **75%** (0.75).
+
+O tempo no `FAST`:
 
 $$
-60 \times 0.10 = 6\,\text{A}
+\frac{76 \times 0.75}{15} \times 1.25 = \frac{57}{15} \times 1.25 = 3.8 \times 1.25 = 4.75\,\text{horas}
 $$
 
-Se o charger entregasse 6 A o tempo todo, o tempo seria $30 \div 6 = 5$ horas.
-Mas ele não entrega 6 A o tempo todo: a fase absorption reduz a current aos
-poucos, como a curva mostra, e parte da current vira calor e hydrogen gas em
-vez de carga guardada. Por isso o tempo real é maior que a conta simples — um
-fator entre 1.1 e 1.2 é uma referência ilustrativa comum para essa perda; o
-valor exato depende da battery e da temperatura. Com 1.15:
+Quatro horas e quarenta e cinco minutos.
+
+No `MAINTAIN`, com a mesma conta e 4 A:
 
 $$
-\frac{30 \times 1.15}{6} = \frac{34.5}{6} = 5.75\,\text{horas}
+\frac{57}{4} \times 1.25 = 14.25 \times 1.25 \approx 17.8\,\text{horas}
 $$
 
-Quase 6 horas — por isso a recomendação de deixar a noite inteira, mesmo numa
-conta que "deveria" fechar em 5 horas.
+Quase 18 horas. A mesma carga, com menos current, leva muito mais tempo. É
+por isso que o `MAINTAIN` serve para manter uma battery cheia, e não para
+recuperar uma battery de carro descarregada no mesmo dia.
 
 </details>
 
@@ -385,10 +616,10 @@ consequência, pela lei de Ohm.
 
 ### Exemplo 3: a leitura que não bate com a tabela
 
-Uma battery sai do charger marcando **13.4 V**. Um colega confere a tabela da
-lição 22 e não acha nenhuma linha correspondente, porque ela para em "12.6 V
-ou mais = 100%". Ele conclui que a battery está danificada, porque "está acima
-do que a tabela permite".
+Você solta os clamps de uma battery que acabou de sair do charger e mede
+**13.4 V**. Um colega confere a tabela da lição 22 e não acha nenhuma linha
+correspondente, porque ela para em "12.6 V ou mais = 100%". Ele conclui que a
+battery está danificada, porque "está acima do que a tabela permite".
 
 O que você diria a ele, e que teste resolveria a dúvida sem abrir a battery?
 
@@ -396,19 +627,17 @@ O que você diria a ele, e que teste resolveria a dúvida sem abrir a battery?
 <summary>Solução</summary>
 
 A conclusão está errada, mas o estranhamento é justo: 13.4 V de fato não
-aparece na tabela, porque a tabela foi feita para a open-circuit voltage de
-uma battery **parada**, sem load e sem charger — exatamente a condição que a
-lição 22 exige antes de usá-la.
+aparece na tabela. A tabela foi feita para a open-circuit voltage de uma
+battery **parada**, sem load e sem charger — a condição que a lição 22 exige
+antes de usá-la.
 
-Uma leitura tirada direto do charger não está nessa condição: ainda carrega a
-surface charge, que soma uma voltage extra temporária por cima do state of
-charge real. A tabela não está errada nem incompleta — ela não se
-aplica a essa leitura ainda.
+Uma leitura tirada logo depois do charger não está nessa condição: ainda
+carrega a surface charge, que soma uma voltage extra temporária. A tabela não
+está errada nem incompleta. Ela ainda não se aplica a essa leitura.
 
-**O teste que resolve:** ligar uma load conhecida (os headlamps) por um ou
-dois minutos, desligar, esperar a voltage assentar e medir de novo. Se a
-leitura cair para algo como 12.6 V e ficar estável ali, a battery está cheia e
-saudável — a tabela volta a valer, porque agora a condição dela foi cumprida.
+**O teste que resolve:** ligar os headlamps por um ou dois minutos, desligar,
+esperar a voltage assentar e medir de novo. Se a leitura cair para algo como
+12.6 V e ficar estável ali, a battery está cheia e saudável.
 
 </details>
 
@@ -419,42 +648,42 @@ saudável — a tabela volta a valer, porque agora a condição dela foi cumprid
 2. O que muda e o que não muda entre a fase bulk e a fase absorption?
 3. Por que a current cai sozinha durante a absorption, sem o charger "decidir"
    reduzi-la a cada instante?
-4. Qual é a diferença entre surface charge e surface discharge?
-5. Por que uma leitura tirada direto do charger pode não bater com a tabela de
-   state of charge da lição 22?
-6. Por que AGM e gel exigem um smart charger, e o que acontece se um charger
-   de ajuste fixo for usado nelas?
-7. Por que o clamp preto vai longe da battery ao ligar o charger, do mesmo
-   jeito que no jump start?
+4. Por que o multimeter mostra 13.2 V nos posts com os clamps ainda presos?
+5. Qual é a diferença entre surface charge e surface discharge?
+6. Por que o fator 1.25 entra na conta do tempo de carga?
+7. Por que uma battery sulfatada não pode receber o engine start?
+8. Por que, fora do veículo, o clamp preto vai na ponta de um cabo de 24 in, e
+   não direto no post negativo?
 
 <details>
 <summary>Respostas</summary>
 
 1. Porque é a diferença de voltage que empurra a current. Com a mesma voltage
-   dos dois lados, ou com a do charger menor, não haveria current entrando na
-   battery — ou ela sairia, que é a descarga.
+   dos dois lados não haveria current; com a do charger menor, a current
+   sairia da battery, que é a descarga.
 2. Na bulk, a current fica quase constante e a voltage sobe: o que muda é a
    voltage. Na absorption, a voltage fica quase constante e a current cai: o
-   que muda é a current. A troca entre as duas acontece quando a voltage da
-   battery chega perto do teto que o charger permite.
-3. Porque, com a voltage do charger presa num teto, a diferença de voltage
-   entre o charger e a battery só diminui conforme a battery sobe de voltage.
-   Pela lei de Ohm, menos diferença de voltage com a mesma resistance dá menos
-   current — é consequência, não decisão.
-4. Surface discharge é uma fuga de carga **por fora** da battery, pela
-   sujeira da tampa — ela tira carga. Surface charge é uma carga que ainda
-   está **por cima** da plate, logo depois do charger — ela some sozinha e não
-   tira nem acrescenta carga real.
-5. Porque a tabela vale para a open-circuit voltage com a battery parada, sem
-   load e sem charger. Uma leitura tirada direto do charger ainda carrega a
-   surface charge, que soma uma voltage extra temporária.
-6. Porque AGM e gel são sensíveis a uma voltage de carga alta demais, e o dano
-   que isso causa não se desfaz. Um charger de ajuste fixo entrega a mesma
-   voltage o tempo todo, sem saber reduzir na hora certa, e pode estufar ou
-   arruinar a battery num único ciclo.
-7. Porque a última ligação feita é a que faísca, e a battery tem hydrogen gas
-   acumulado perto das vent caps. Prender o clamp preto longe da battery
-   coloca essa faísca em ar comum, em vez de no meio do gás.
+   que muda é a current. A troca acontece perto de 80% de state of charge.
+3. Porque, com a voltage do charger presa num teto, a diferença entre o
+   charger e a battery diminui conforme a battery sobe de voltage. Pela lei de
+   Ohm, menos diferença com a mesma resistance dá menos current.
+4. Porque, com os clamps presos, o charger e a battery estão ligados nos mesmos
+   dois pontos, e o multimeter mede a voltage que o charger está segurando — a
+   de float, 13.2 a 13.4 V. Não é a voltage da battery sozinha.
+5. Surface discharge é uma fuga de carga **por fora** da battery, pela sujeira
+   da tampa: ela tira carga. Surface charge é uma carga que ainda está **por
+   cima** da plate, logo depois do charger: ela some sozinha e não tira nem
+   acrescenta carga real.
+6. Porque o charge não é 100% eficiente. Parte da energia vira calor e hydrogen
+   gas, e a fase absorption manda cada vez menos current no fim. Sem o fator,
+   o tempo calculado sairia curto demais.
+7. Porque a battery sulfatada tem resistance interna alta e não aceita a
+   current do charger. Com a mesma current numa resistance maior, a voltage
+   sobe — o teste mostra isso subindo acima de 15 V em segundos —, e essa
+   voltage alta pode danificar a parte elétrica do veículo.
+8. Porque a última ligação é a que faísca, e a faísca precisa acontecer longe
+   do hydrogen gas da battery. No veículo, o chassi leva essa ligação para
+   longe; fora dele, o cabo de 24 in faz o mesmo papel.
 
 </details>
 
@@ -462,51 +691,53 @@ saudável — a tabela volta a valer, porque agora a condição dela foi cumprid
 
 ### 1. Reconhecimento
 
-Diga o nome em inglês:
+Diga o nome em inglês, ou o botão do EEBC500A/B:
 
 a) a fase em que a current fica quase constante e a voltage sobe;
 b) a fase em que a voltage fica quase constante e a current cai;
-c) a fase final, de manutenção, com voltage baixa;
-d) a carga temporária que infla a leitura de voltage logo após o charger;
-e) a unidade que mede quanta current a battery entrega por quanto tempo.
+c) a carga temporária que infla a leitura de voltage logo após o charger;
+d) o instrumento que mede a specific gravity do electrolyte;
+e) o botão que troca o visor entre voltage, porcentagem de carga e alternator;
+f) a taxa de 15 A do painel.
 
 ### 2. Explicação
 
 Explique, para um colega que nunca estudou isso, por que uma battery pode
-mostrar 13.2 V assim que sai do charger e 12.6 V vinte minutos depois, sem que
-ninguém tenha feito nada nesse meio-tempo.
+mostrar 13.1 V logo depois de sair do charger e 12.6 V meia hora depois, sem
+que ninguém tenha feito nada nesse meio-tempo.
 
 ### 3. Aplicação direta
 
-a) Uma battery de 70 Ah está com 25% de depth of discharge. O charger está em
-slow charge, 10% da capacidade. Use o fator ilustrativo de 1.15. Quanto tempo
-leva a recarga?
+a) Uma battery informa **90 RC**, e o hydrometer marca **1.225**. Pelo método
+da certificação, quanto tempo leva no `FAST` (15 A)?
 
 b) Na fase absorption, o charger segura 14.4 V. Num instante, a battery está
 em 13.9 V, e a resistance total do caminho é 0.025 Ω. Que current passa?
 
 ### 4. Variação
 
-Refaça o exemplo 1 para a mesma battery de 60 Ah, agora com 80% de depth of
-discharge (quase descarregada). Compare o tempo com o do exemplo e diga por
-que a recomendação de "deixar a noite inteira" faz sentido nos dois casos.
+Refaça o exemplo 1 para uma battery **deep cycle** com o mesmo RC e a mesma
+specific gravity, no `FAST` e no `MAINTAIN`. O que muda na conta, e por quê?
 
 ### 5. Caso de diagnóstico
 
-Uma battery está no charger há seis horas, em slow charge. O ammeter mostra a
-mesma current do início, sem cair nada. A voltage no visor também não subiu.
+Um carro não pega. Você liga o EEBC500A/B para usar o engine start. Antes, faz
+o teste da certificação: `FAST`, `START/STOP` e visor em `VOLTS`. Em quatro
+segundos, o visor passa de 15 V.
 
-a) Isso é um comportamento normal de alguma fase do charge? Justifique.
+a) O que essa leitura diz sobre a battery?
 
-b) Dê duas causas prováveis para esse comportamento.
+b) Por que você **não** deve seguir com o engine start?
 
-c) Que teste, feito depois de desligar o charger, ajuda a decidir entre elas?
+c) Que leitura você esperaria, nesse mesmo teste, numa battery apenas
+descarregada, mas sã?
+
+d) Qual é o próximo passo?
 
 ### 6. Justificativa
 
-Por que o procedimento manda desligar o charger **da tomada** antes de soltar
-qualquer clamp, em vez de só desligar o botão de energizar (quando o charger
-tiver um)?
+Por que o procedimento manda apertar `START/STOP`, desligar o main power
+switch **e** tirar o cabo da tomada antes de soltar qualquer clamp?
 
 ### 7. Formato ASE
 
@@ -538,69 +769,98 @@ read the polarity on the meter while connecting the clamps. Who is right?
 - C. Both A and B
 - D. Neither A nor B
 
+**Question 4.** A battery is rated at 100 RC and is at 50 percent state of
+charge. Using the formula method, approximately how long will it take to
+charge on the 15-amp setting?
+
+- A. 2.2 hours
+- B. 2.75 hours
+- C. 3.75 hours
+- D. 4.2 hours
+
+**Question 5.** While using the Engine Start mode, the vehicle fails to start.
+Technician A says the engine should not be cranked for more than 20 seconds.
+Technician B says the technician should wait 30 seconds before cranking again.
+Who is right?
+
+- A. Technician A only
+- B. Technician B only
+- C. Both A and B
+- D. Neither A nor B
+
 <details>
 <summary>Respostas para conferência</summary>
 
-1. a) Bulk charge. b) Absorption charge. c) Float charge. d) Surface charge.
-   e) Ampere-hour (Ah).
+1. a) Bulk charge. b) Absorption charge. c) Surface charge. d) Hydrometer.
+   e) `DISPLAY MODE`. f) `FAST`.
 
-2. Direto do charger, a battery ainda carrega uma camada de surface charge
-   perto da superfície da plate — carga que ainda não se distribuiu por dentro
-   do material. Essa camada soma uma voltage extra na leitura do multimeter.
-   Em poucos minutos, sem nenhuma load ligada, essa carga se redistribui
-   sozinha, e a leitura cai para o valor que reflete o state of charge real.
-   Não é uma fuga (ninguém tirou carga da battery) nem um defeito: é a
-   leitura que precisa de um tempo para assentar.
+2. Logo depois do charger, a battery ainda tem uma camada de surface charge
+   perto da superfície da plate — carga que ainda não se espalhou pelo
+   material de dentro. Essa camada soma uma voltage extra na leitura. Em
+   minutos, mesmo sem load nenhuma, ela se redistribui, e a leitura cai para o
+   valor do state of charge real. Não é uma fuga, porque ninguém tirou carga
+   da battery, nem um defeito: é a leitura que precisa de um tempo para
+   assentar.
 
-3. a) Carga a repor: $70 \times 0.25 = 17.5\,$Ah. Taxa: $70 \times 0.10 =
-   7\,$A. Tempo: $\dfrac{17.5 \times 1.15}{7} = \dfrac{20.125}{7} \approx
-   2.875\,$horas, cerca de 2 h 53 min.
+3. a) Ah: $90 \div 2 + 16 = 45 + 16 = 61\,$Ah. Pela tabela, 1.225 é 75% de
+   carga, então falta 25% (0.25). Tempo:
+   $\dfrac{61 \times 0.25}{15} \times 1.25 = \dfrac{15.25}{15} \times 1.25
+   \approx 1.27\,$horas, cerca de 1 h 16 min.
+
+   Se você encontrou cerca de 3.8 horas, provavelmente usou 75% como a fração
+   que **falta**. A tabela dá duas colunas: 1.225 é 75% de carga, e o que
+   falta é 25%.
 
    b) $I = \dfrac{14.4 - 13.9}{0.025} = \dfrac{0.5}{0.025} = 20\,$A.
 
-4. Carga a repor: $60 \times 0.8 = 48\,$Ah. Tempo: $\dfrac{48 \times
-   1.15}{6} = \dfrac{55.2}{6} = 9.2\,$horas.
+4. A conta é a mesma, mais uma hora no fim, porque a regra da certificação
+   manda somar uma hora para deep cycle. `FAST`: $4.75 + 1 = 5.75\,$horas.
+   `MAINTAIN`: $17.8 + 1 \approx 18.8\,$horas. A conta não muda; só ganha a
+   hora no fim. Faz sentido com o que a lição
+   [A battery por dentro](./a-battery-por-dentro) mostrou: a deep cycle
+   battery tem plates mais grossas, e o material de dentro de uma plate grossa
+   leva mais tempo para receber a carga por inteiro.
 
-   Contra as 5.75 horas do exemplo (50% de depth of discharge), uma battery
-   quase descarregada leva bem mais tempo — faz sentido, porque há muito mais
-   carga para repor com a mesma current. Nos dois casos o tempo passa de
-   algumas horas, e é por isso que "a noite inteira" é a referência prática:
-   ela cobre a pior situação comum sem exigir que alguém calcule a cada vez.
+5. a) A battery está ruim ou muito sulfatada: ela não aceita a current do
+   charger, e por isso a voltage nos posts dispara.
 
-5. a) Não. Numa carga saudável, a current cai aos poucos durante a absorption,
-   e a voltage sobe durante a bulk. Current parada e voltage parada ao mesmo
-   tempo, por seis horas, não é nenhuma das três fases funcionando bem.
+   b) Porque, com uma battery que não aceita carga, o charger no engine start
+   pode levar a voltage do sistema a um valor alto o bastante para danificar
+   os módulos do veículo. A battery é o que segura a voltage do sistema; essa
+   não segura.
 
-   b) Contato ruim num dos clamps (a current que o ammeter mostra pode nem
-   estar chegando à battery direito); ou uma cell ruim por sulfatação forte,
-   que não aceita carga de verdade e por isso nem a voltage nem a current se
-   movem como esperado.
+   c) Uma voltage subindo devagar, sem disparar acima de 15 V em segundos — a
+   battery sã descarregada aceita a current do `FAST`, e é a fase bulk
+   acontecendo.
 
-   c) Depois de desligar o charger e tirar a surface charge (load por um ou
-   dois minutos), medir a open-circuit voltage e comparar com a tabela da
-   lição 22. Uma voltage muito abaixo do esperado para seis horas de charge
-   aponta para a cell ruim; reapertar os clamps e repetir o charge descarta o
-   contato ruim.
+   d) Testar a battery com um load test e, se confirmado, trocá-la. Depois, investigar por que ela chegou a esse estado.
 
-6. Porque o botão de energizar só interrompe a current que o charger está
-   mandando — ele não desliga o próprio charger da rede elétrica. Deixado na
-   tomada, o charger continua ligado e pode voltar a energizar os clamps
-   sozinho, ou manter os dois clamps vivos se o botão falhar.
-   Tirar da tomada é a única garantia de que não vai passar current nenhuma
-   enquanto você solta os clamps.
+6. Porque `START/STOP` só para a operação: o charger continua ligado na rede.
+   O main power switch desliga o aparelho, e tirar da tomada é a única
+   garantia de que nenhuma current vai passar pelos clamps enquanto você os
+   solta. É a ordem da página 15 do flipbook e da lição 24: a última separação
+   com current é a que faísca, e o procedimento elimina a current antes.
 
 7. **Question 1: B.** Na absorption, o charger segura a voltage e deixa a
-   current cair sozinha. A descreve a bulk, não a absorption. C e D não
-   descrevem nenhuma fase real do charge.
+   current cair sozinha. A descreve a bulk. C e D não descrevem nenhuma fase
+   real do charge.
 
    **Question 2: B.** A leitura alta é o comportamento típico da surface
-   charge, que some com uma load curta. A está errada porque 100% já
-   corresponde a 12.6 V ou mais — não existe "acima de 100%" nessa leitura.
+   charge, que some com uma load curta. A está errada: 100% já corresponde a
+   12.6 V ou mais, e não existe "acima de 100%" nessa leitura.
 
    **Question 3: A.** Conectar com o charger desligado evita que os clamps
-   estejam vivos durante a ligação, o que tira a faísca do momento em que as
-   mãos estão perto dos terminals. Ligar o charger antes (B) energiza os
-   clamps exatamente no momento em que eles ainda estão sendo posicionados.
+   estejam vivos durante a ligação. Ligar antes (B) energiza os clamps
+   exatamente quando eles ainda estão sendo posicionados perto da battery.
+
+   **Question 4: B.** Ah: $100 \div 2 + 16 = 66$. Tempo:
+   $\dfrac{66 \times 0.5}{15} \times 1.25 = 2.75\,$h. A esquece o fator 1.25
+   ($2.2\,$h). C soma a hora da deep cycle, que esta battery não é. D usa o RC
+   direto como se fosse Ah ($\approx 4.2\,$h).
+
+   **Question 5: A.** No engine start do EEBC500A/B, a partida não passa de
+   20 segundos, e a espera entre tentativas é de **3 minutos**, contados pelo
+   próprio charger. Os 30 segundos de B são do jump pack da lição 24.
 
 </details>
 
@@ -609,22 +869,25 @@ read the polarity on the meter while connecting the clamps. Who is right?
 - **A ideia central:** o battery charger empurra a current ao contrário da
   descarga, e muda de estratégia em três fases: **bulk** (current quase
   constante, voltage subindo), **absorption** (voltage quase constante,
-  current caindo pela mesma lei de Ohm da lição 24) e **float** (voltage baixa
-  de manutenção). Uma leitura tirada direto do charger carrega **surface
-  charge** e não reflete o state of charge real até assentar.
+  current caindo pela lei de Ohm, a partir de uns 80%) e **float** (13.2 a
+  13.4 V de manutenção). Com os clamps presos, o multimeter mede o charger;
+  logo depois de soltar, mede a surface charge; só depois de assentar, mede o
+  state of charge.
 - **Quando usar:** toda vez que uma battery precisa ser recarregada por
-  completo, não só ter o carro movido — a diferença que fecha a lição
-  anterior. E sempre antes de julgar o resultado de um charge pela primeira
-  leitura.
+  completo, não só ter o carro movido. O tempo sai do chart method ou da conta
+  $\text{Ah} \times \text{fração que falta} \div \text{taxa} \times 1.25$, mais
+  uma hora para deep cycle.
 - **Com o que se conecta:** a open-circuit voltage e a tabela de state of
-  charge vêm de [A battery por dentro](./a-battery-por-dentro); o surface
-  discharge e o cuidado de não confundir os dois nomes, de
+  charge vêm de [A battery por dentro](./a-battery-por-dentro), junto com a
+  sulfatação e a resistance interna; o surface discharge, de
   [Manutenção da battery](./manutencao-da-battery); a diferença de voltage
-  empurrando current entre duas fontes, de
-  [Jump start e memory saver](./jump-start-e-memory-saver); e a ordem dos
-  clamps para manter a faísca longe do hydrogen gas, da lição
-  [Segurança com a battery](./seguranca-da-battery).
+  empurrando current e a ordem dos clamps, de
+  [Jump start e memory saver](./jump-start-e-memory-saver); o hydrogen gas e a
+  faísca, de [Segurança com a battery](./seguranca-da-battery); e a bitola do
+  extension cord, de [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola).
 
-**Termos desta lição para revisar:** ampere-hour, charging rate, bulk charge,
-absorption charge, float charge, trickle charge, fast charge, slow charge,
-constant current charging, constant voltage charging, surface charge.
+**Termos desta lição para revisar:** ampere-hour, reserve capacity, charging
+rate, bulk charge, absorption charge, float charge, trickle charge, fast
+charge, slow charge, constant current charging, constant voltage charging,
+surface charge, hydrometer, specific gravity, flash reprogramming, thermal
+runaway, fender cover.
