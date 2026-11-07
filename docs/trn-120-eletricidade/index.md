@@ -183,6 +183,26 @@ aqui vêm o wire em si e o chicote que o carrega.
     wiggle test. Por que acessório ganha circuit próprio, e por que não se
     encosta em cabo laranja.
 
+### Tópico 9 — Restraint systems (SRS)
+
+Este tópico é o **capítulo 25** do livro (*Restraint System Electronics*),
+visto no módulo 3 junto com os capítulos 8 e 9. É o primeiro sistema do
+material em que o erro de procedimento machuca na hora, e por isso a segurança
+vem antes de tudo nas duas páginas.
+
+27. [O restraint system](./restraint-system-e-air-bag) — a força sobre o corpo
+    é a massa vezes a desaceleração, e a desaceleração depende da distância em
+    que o corpo é freado. Crush zone, passenger compartment, seat belt,
+    pretensioner, knee bolster e o air bag module por dentro: trim cover,
+    inflator, gas generant, squib e vent holes. A conta que explica por que o
+    air bag não abre numa batida leve.
+28. [Sensors do SRS e serviço](./sensores-srs-e-servico-seguro) — como o
+    módulo decide disparar. Magnet-and-ball sensor, coil spring sensor e
+    accelerometer; os sensors de guinada, de capotamento e de posição do
+    ocupante; o clock spring e a shorting bar; o event data recorder. E o
+    procedimento de desenergizar o sistema, com o tempo de espera que existe
+    por causa do capacitor de reserva.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -193,17 +213,17 @@ aqui vêm o wire em si e o chicote que o carrega.
 
 ### Próximos tópicos (em preparação)
 
-27. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+29. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-28. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+30. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-29. **Diagnóstico de circuits** — open circuit, short to ground, short to
+31. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-30. **Testar e carregar a battery** — load test, conductance tester, recarga
+32. **Testar e carregar a battery** — load test, conductance tester, recarga
     e parasitic draw.
-31. **Starting system** — starter motor, solenoid e testes.
-32. **Charging system** — alternator, rectifier, voltage regulator e testes.
+33. **Starting system** — starter motor, solenoid e testes.
+34. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

@@ -140,6 +140,14 @@
     "chicote-terminals-e-connectors": {
       "titulo": "O wiring harness: proteção, terminals e connectors",
       "url": "trn-120-eletricidade/chicote-terminals-e-connectors"
+    },
+    "restraint-system-e-air-bag": {
+      "titulo": "O restraint system: o que segura o corpo na colisão",
+      "url": "trn-120-eletricidade/restraint-system-e-air-bag"
+    },
+    "sensores-srs-e-servico-seguro": {
+      "titulo": "Os sensors do SRS, o controller e o serviço seguro",
+      "url": "trn-120-eletricidade/sensores-srs-e-servico-seguro"
     }
   },
   "termos": [
@@ -3123,12 +3131,6 @@
       "licao": "simbolos-eletricos"
     },
     {
-      "en": "SRS",
-      "pt": "sistema de airbags",
-      "def": "Supplemental Restraint System: airbags, sensores de impacto e o módulo que os dispara",
-      "licao": "simbolos-eletricos"
-    },
-    {
       "en": "A/C",
       "pt": "ar-condicionado",
       "def": "o sistema que resfria e seca o ar da cabine",
@@ -4480,6 +4482,336 @@
       "pt": "motor-gerador",
       "def": "a máquina elétrica do híbrido, que move o carro e também recarrega a battery de tração",
       "licao": "chicote-terminals-e-connectors"
+    },
+    {
+      "en": "restraint system",
+      "pt": "sistema de retenção",
+      "def": "o conjunto de peças que segura o corpo dos ocupantes durante uma colisão",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "occupant restraint system"
+      ]
+    },
+    {
+      "en": "supplemental restraint system",
+      "pt": "sistema de retenção suplementar",
+      "def": "o nome completo do sistema de air bag — bolsas, sensors e módulo: ele é suplemento do seat belt, não substituto",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "SRS"
+      ]
+    },
+    {
+      "en": "active restraint system",
+      "pt": "retenção ativa",
+      "def": "retenção que só protege se o ocupante fizer alguma coisa, como afivelar o cinto",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "passive restraint system",
+      "pt": "retenção passiva",
+      "def": "retenção que funciona sozinha, sem nenhuma ação do ocupante",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "crush zone",
+      "pt": "zona de deformação",
+      "def": "parte da carroceria feita para amassar e alongar o tempo da parada",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "crumple zone"
+      ]
+    },
+    {
+      "en": "passenger compartment",
+      "pt": "habitáculo",
+      "def": "a caixa rígida onde os ocupantes viajam, feita para não se deformar",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "passenger cell"
+      ]
+    },
+    {
+      "en": "side-impact beam",
+      "pt": "barra de impacto lateral",
+      "def": "barra de aço dentro da porta que impede a porta de invadir o habitáculo",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "body pillar",
+      "pt": "coluna da carroceria",
+      "def": "cada uma das colunas que ligam o teto ao assoalho e sustentam o habitáculo",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "seat belt",
+      "pt": "cinto de segurança",
+      "def": "a faixa que prende o ocupante ao banco e o freia junto com o veículo",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "safety belt"
+      ]
+    },
+    {
+      "en": "lap belt",
+      "pt": "cinto subabdominal",
+      "def": "o trecho do cinto que passa sobre a bacia",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "shoulder belt",
+      "pt": "cinto diagonal",
+      "def": "o trecho do cinto que cruza o tórax, do ombro ao quadril",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "seat belt buckle",
+      "pt": "fivela do cinto",
+      "def": "a trava em que a lingueta do cinto encaixa",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "buckle"
+      ]
+    },
+    {
+      "en": "seat belt anchor",
+      "pt": "ancoragem do cinto",
+      "def": "o ponto em que o cinto é parafusado na estrutura do veículo",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "belt retractor",
+      "pt": "retrator do cinto",
+      "def": "o carretel que enrola a sobra do cinto e o trava quando puxado de repente",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "seat belt retractor",
+        "retractor"
+      ]
+    },
+    {
+      "en": "seat belt pretensioner",
+      "pt": "pré-tensionador do cinto",
+      "def": "dispositivo que puxa o cinto para dentro no começo da colisão, tirando a folga",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "pretensioner"
+      ]
+    },
+    {
+      "en": "seat belt reminder system",
+      "pt": "aviso de cinto",
+      "def": "a luz e o som que avisam que um cinto está desafivelado",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "knee bolster",
+      "pt": "protetor de joelhos",
+      "def": "a parte acolchoada embaixo do painel que impede o ocupante de escorregar para baixo",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "air bag",
+      "pt": "bolsa inflável",
+      "def": "a bolsa de náilon que infla na colisão e espalha a força sobre o corpo",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "air bag module",
+      "pt": "módulo do air bag",
+      "def": "o conjunto fechado que traz a bolsa dobrada, o inflator e a tampa",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "trim cover",
+      "pt": "tampa do módulo",
+      "def": "a tampa plástica que rasga por uma costura quando a bolsa infla",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "inflator",
+      "pt": "gerador de gás",
+      "def": "a peça que produz o gás que enche a bolsa",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "squib",
+      "pt": "iniciador elétrico",
+      "def": "resistência minúscula que esquenta com a current e acende o propelente",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "gas generant",
+      "pt": "propelente",
+      "def": "o material sólido que queima e vira gás para encher a bolsa",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "sodium azide",
+      "pt": "azida de sódio",
+      "def": "propelente usado em módulos mais antigos; queima e libera nitrogênio",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "vent hole",
+      "pt": "furo de alívio",
+      "def": "furo no tecido da bolsa por onde o gás sai, para a bolsa murchar logo depois",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "driver-side air bag",
+      "pt": "air bag do motorista",
+      "def": "a bolsa guardada no centro do volante",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "passenger-side air bag",
+      "pt": "air bag do passageiro",
+      "def": "a bolsa guardada no painel, do lado do passageiro",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "side-impact air bag",
+      "pt": "air bag lateral",
+      "def": "bolsa que sai do banco ou da porta e protege o tronco num impacto lateral",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "side curtain air bag",
+      "pt": "air bag de cortina",
+      "def": "bolsa comprida que desce do teto e cobre as janelas laterais",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "curtain air bag"
+      ]
+    },
+    {
+      "en": "knee air bag",
+      "pt": "air bag de joelhos",
+      "def": "bolsa pequena que sai da parte baixa do painel",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "collision preconditioning system",
+      "pt": "preparação para a colisão",
+      "def": "sistema que fecha vidros, ajusta bancos e tensiona cintos antes do impacto",
+      "licao": "restraint-system-e-air-bag"
+    },
+    {
+      "en": "deploy",
+      "pt": "disparar",
+      "def": "acionar o air bag ou o pretensioner: a carga queima e a bolsa infla",
+      "licao": "restraint-system-e-air-bag",
+      "var": [
+        "deployment",
+        "deployed"
+      ]
+    },
+    {
+      "en": "impact sensor",
+      "pt": "sensor de impacto",
+      "def": "sensor que avisa o módulo de que a desaceleração passou do normal",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "magnet-and-ball sensor",
+      "pt": "sensor de ímã e esfera",
+      "def": "sensor antigo em que uma esfera presa por um ímã rola e fecha dois contatos",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "ball",
+      "pt": "esfera",
+      "def": "a bola de metal que o ímã segura dentro do sensor",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "coil spring sensor",
+      "pt": "sensor de mola",
+      "def": "sensor em que um peso preso a uma mola avança e toca os contatos",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "accelerometer",
+      "pt": "acelerômetro",
+      "def": "sensor que mede quanto a velocidade está mudando, e manda isso como sinal elétrico",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "yaw rate sensor",
+      "pt": "sensor de guinada",
+      "def": "sensor que mede o quanto o veículo está girando em torno do eixo vertical",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "lateral acceleration sensor",
+      "pt": "sensor de aceleração lateral",
+      "def": "sensor que mede o empurrão de lado sobre o veículo",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "roll sensor",
+      "pt": "sensor de capotamento",
+      "def": "sensor que avalia se o veículo está começando a capotar",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "occupant position sensor",
+      "pt": "sensor de posição do ocupante",
+      "def": "sensor que informa se há alguém no banco e como ele está posicionado",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "seat weight sensor",
+      "pt": "sensor de peso do banco",
+      "def": "sensor sob o banco que estima o peso de quem está sentado",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "seat belt sensor",
+      "pt": "sensor de cinto",
+      "def": "sensor que informa ao módulo se aquele cinto está afivelado",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "air bag control module",
+      "pt": "módulo de controle do air bag",
+      "def": "o computador que lê os sensors e decide disparar",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "air bag warning lamp",
+      "pt": "luz do air bag",
+      "def": "luz do painel que acende quando o sistema encontra um defeito",
+      "licao": "sensores-srs-e-servico-seguro",
+      "var": [
+        "SRS warning lamp",
+        "air bag light"
+      ]
+    },
+    {
+      "en": "clock spring",
+      "pt": "fita espiral do volante",
+      "def": "fita condutora enrolada que leva a current ao volante enquanto ele gira",
+      "licao": "sensores-srs-e-servico-seguro",
+      "var": [
+        "clockspring"
+      ]
+    },
+    {
+      "en": "shorting bar",
+      "pt": "barra de curto",
+      "def": "lâmina dentro do conector do SRS que une os dois pinos do squib quando ele é desligado",
+      "licao": "sensores-srs-e-servico-seguro"
+    },
+    {
+      "en": "event data recorder",
+      "pt": "registrador de dados do evento",
+      "def": "memória que guarda as condições do veículo nos instantes da colisão",
+      "licao": "sensores-srs-e-servico-seguro",
+      "var": [
+        "EDR"
+      ]
     }
   ]
 }

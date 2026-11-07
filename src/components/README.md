@@ -118,6 +118,8 @@ import Circuito from '@site/src/components/Circuito';
 | onde vai cada clamp do jump pack, e onde ele não vai | `JumpStart` |
 | solid e stranded wire em corte, as bitolas AWG comparadas, coaxial cable e twisted pair wire | `TiposDeWire` |
 | chicote com conduit, grommet e clip; as duas metades de um connector; tirar um terminal do corpo | `Chicote` |
+| crush zone e passenger compartment de lado; a mesma parada em duas distâncias | `Colisao` |
+| air bag module em corte; o magnet-and-ball sensor; quem fala com quem no SRS | `AirBag` |
 | reconhecer pela aparência: crosta de corrosion, case estufado, plate sulfatada | `Foto` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
@@ -964,6 +966,71 @@ Quatro decisões de desenho, todas vindas da folha de conferência:
   fechada, a ferramenta parecia atravessar o plástico. E a tab entra numa
   **janela** do terminal: encostada no topo do metal, ela não mostrava o que
   prende o terminal no lugar.
+
+---
+
+# Restraint systems (TRN-120, tópico 9)
+
+## Colisao
+
+A colisão vista de dois jeitos, nas lições
+[O restraint system](../../docs/trn-120-eletricidade/27-restraint-system-e-air-bag.mdx)
+e seguinte.
+
+```jsx
+<Colisao modo="zonas" caption="..." />   {/* crush zones e habitáculo */}
+<Colisao modo="parada" caption="..." />  {/* a mesma parada em 0.50 m e em 0.05 m */}
+```
+
+Um tom só, o 1, e com o mesmo sentido nos dois modos: **o que cede**. Em
+`zonas` é a lata que amassa de propósito; em `parada` é o caminho que o corpo
+ainda percorre depois que o veículo já parou.
+
+Quatro decisões de desenho que vale a pena não desfazer:
+
+- **As duas setas de `parada` estão na mesma escala**: 234 px valem 0.50 m e
+  23 px valem 0.05 m. É a razão de dez entre os comprimentos que ensina a
+  razão de dez entre as forças. Encurtar a de cima para "caber melhor" destrói
+  o argumento da figura.
+- **Os dois corpos partem do mesmo ponto**, e não chegam ao mesmo ponto. A
+  primeira versão alinhava as chegadas e a de baixo ficava com o boneco em
+  cima do rótulo da distância.
+- **Em `zonas`, o habitáculo é um traço contínuo só** — assoalho, colunas e
+  teto —, porque é assim que ele trabalha: uma caixa. A primeira versão tinha
+  a carroceria baixa demais e o desenho lia como uma caixa sobre uma prancha;
+  a linha de cintura em `y = 112` resolveu.
+- **Os rótulos `crush zone` apontam para o meio da área sombreada**, não para
+  a borda de baixo: na borda, o ponto da chamada se confundia com a linha do
+  assoalho e com a roda.
+
+## AirBag
+
+O restraint system por dentro, em três figuras, nas lições 27 e 28.
+
+```jsx
+<AirBag modo="modulo" caption="..." />    {/* o módulo em corte */}
+<AirBag modo="sensor" caption="..." />    {/* o magnet-and-ball sensor */}
+<AirBag modo="circuito" caption="..." />  {/* sensors, módulo, squib e lamp */}
+```
+
+Um tom só, o 1: em `sensor` é o movimento da ball, em `circuito` é o sinal
+que atravessa os blocos. Peça e carcaça ficam na cor do texto.
+
+Quatro decisões de desenho:
+
+- **A trim cover é uma faixa com espessura, não uma linha.** Desenhada como um
+  fio curvo, ela parecia uma tampa flutuando acima do módulo. A costura é um
+  entalhe em V **dentro** da faixa — na primeira versão ele ficava acima da
+  curva, solto no ar.
+- **Em `sensor`, os dois contatos são lâminas horizontais, uma em cima e outra
+  embaixo**, e a ball fecha o circuit encostando nas duas. Lado a lado, como
+  na primeira versão, os wires de saída precisavam cruzar um contato para
+  sair, e os contatos ficavam desalinhados da altura da ball.
+- **A ball encosta no magnet.** Com a folga de quatro pixels da primeira
+  versão, a figura dizia o contrário do texto: que nada segurava a ball.
+- **`gas generant` é rótulo de duas linhas.** Em uma linha ele passava da
+  borda direita do viewBox e saía cortado — o desenho tem 480 de largura e o
+  rótulo começa em 400.
 
 ---
 

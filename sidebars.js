@@ -195,6 +195,22 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 9 — Restraint systems (SRS)',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/restraint-system-e-air-bag',
+              label: '27. O restraint system',
+            },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/sensores-srs-e-servico-seguro',
+              label: '28. Sensors do SRS e serviço',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

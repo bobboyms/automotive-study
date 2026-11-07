@@ -1,0 +1,19 @@
+/* Desenhos da colisão (TRN-120, tópico 9). Só o que o Simbolos não tem. */
+
+/* A parte da carroceria que amassa de propósito. Tom 1, e no desenho ele
+   significa sempre a mesma coisa: "projetado para se deformar". */
+.zona {
+  fill: var(--mv-tone-1);
+  fill-opacity: var(--mv-fill-opacity);
+  stroke: var(--mv-tone-1);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+/* O habitáculo: traço grosso, porque o que ele faz é justamente não ceder. */
+.celula {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 3.6;
+  stroke-linejoin: round;
+}

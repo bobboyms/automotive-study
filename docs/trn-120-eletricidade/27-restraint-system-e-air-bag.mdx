@@ -1,0 +1,907 @@
+---
+title: "O restraint system: o que segura o corpo na colisão"
+sidebar_label: "O restraint system"
+---
+
+import Colisao from '@site/src/components/Colisao';
+import AirBag from '@site/src/components/AirBag';
+
+# O restraint system: o que segura o corpo na colisão
+
+> **Pergunta central:** numa colisão, o que machuca o corpo não é a
+> velocidade — é a parada. O seat belt e o air bag não impedem a parada: eles
+> mudam **em que distância** ela acontece. Por que essa distância decide tudo?
+
+:::danger Este sistema dispara com força suficiente para ferir
+
+Dentro de cada air bag module existe uma carga que queima em poucos
+milésimos de segundo. O mesmo vale para o seat belt pretensioner de quase
+todo veículo moderno. Um módulo pode disparar fora do veículo, solto na
+bancada, se alguém energizar o circuit dele por engano — e nessa hora ele
+está sem nada por cima e sem ninguém esperando.
+
+Enquanto você estiver estudando esta lição, e até ler a próxima:
+
+- **não encoste ponta de prova, test light nem ohmímetro** em nenhum
+  connector amarelo do veículo. Amarelo é a cor que os fabricantes reservam
+  para o chicote do SRS;
+- **não desencaixe nenhum connector amarelo**;
+- **não desmonte** volante, coluna de direção, painel, banco nem revestimento
+  de coluna;
+- **não fique na frente do volante nem do painel** com a battery ligada
+  enquanto houver serviço em andamento no sistema.
+
+O procedimento para desenergizar o SRS com segurança está na próxima lição,
+[Os sensors do SRS, o controller e o serviço seguro](./sensores-srs-e-servico-seguro).
+Leia-o **antes** de encostar no sistema.
+
+:::
+
+## A queixa: bateu e o air bag não abriu
+
+Um cliente traz o carro no guincho e conta o que aconteceu:
+
+> “Eu estava numa fila de trânsito e bati na traseira de uma caminhonete.
+> Devia estar a uns dez por hora. O para-choque amassou e a tampa do capô
+> ficou torta, mas **o air bag não abriu**. Quero saber se o sistema está com
+> defeito, porque se eu bater de verdade um dia eu quero que ele funcione.”
+
+A pergunta é justa, e a resposta errada é cara dos dois lados. Se você disser
+“está tudo bem” sem verificar, pode estar mandando embora um veículo com o
+sistema desligado por uma falha. Se você disser “está com defeito” só porque o
+air bag não abriu, vai trocar um módulo caro sem necessidade.
+
+Ao fim desta lição você vai conseguir calcular por que o air bag **não devia**
+abrir numa batida de dez por hora, e vai saber qual é o primeiro sinal que
+separa “funcionou como foi projetado” de “está com defeito”.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| restraint system | sistema de retenção | o conjunto de peças que segura o corpo dos ocupantes na colisão |
+| supplemental restraint system | sistema de retenção suplementar | o nome completo do sistema de air bag; a sigla SRS vem daí |
+| active restraint system | retenção ativa | só protege se o ocupante fizer alguma coisa — afivelar o cinto |
+| passive restraint system | retenção passiva | funciona sozinha, sem nenhuma ação do ocupante |
+| crush zone | zona de deformação | a parte da carroceria feita para amassar |
+| passenger compartment | habitáculo | a caixa rígida onde as pessoas viajam, feita para não ceder |
+| side-impact beam | barra de impacto lateral | barra de aço dentro da porta |
+| body pillar | coluna da carroceria | cada coluna que liga o teto ao assoalho |
+| seat belt | cinto de segurança | a faixa que freia o ocupante junto com o veículo |
+| belt retractor | retrator | o carretel que enrola a sobra do cinto e trava quando puxado de repente |
+| seat belt pretensioner | pré-tensionador | dispositivo que puxa o cinto para dentro no começo da colisão |
+| knee bolster | protetor de joelhos | a parte acolchoada embaixo do painel |
+| air bag | bolsa inflável | a bolsa de náilon que infla e espalha a força sobre o corpo |
+| air bag module | módulo do air bag | o conjunto fechado com a bolsa dobrada, o inflator e a tampa |
+| inflator | gerador de gás | a peça que produz o gás que enche a bolsa |
+| squib | iniciador elétrico | resistência minúscula que esquenta com a current e acende o propelente |
+| gas generant | propelente | o sólido que queima e vira gás |
+| trim cover | tampa do módulo | a tampa plástica que rasga por uma costura quando a bolsa infla |
+| vent hole | furo de alívio | furo no tecido por onde o gás sai, para a bolsa murchar |
+| deploy | disparar | acionar o air bag ou o pretensioner |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Em todo veículo de passeio fabricado nas últimas décadas, e em caminhonete,
+van e caminhão leve. O restraint system encosta no trabalho do técnico em
+situações que não parecem ter nada a ver com ele: trocar um banco, puxar o
+carpete molhado, tirar o volante para corrigir o alinhamento do aro, passar um
+chicote novo pela coluna, instalar um som.
+
+Na Wake Tech, isto é o **capítulo 25** do livro (*Restraint System
+Electronics*), que a sua turma vê dentro do módulo 3 junto com o capítulo 8.
+Na prova ASE, área **A6**. O lado de segurança também aparece na **AUT-114**.
+
+## Ideias anteriores que voltam aqui
+
+Três perguntas de resgate. Responda de cabeça antes de ler a resposta — se
+alguma travar, vale reler a página antes de seguir.
+
+1. **Na lição [Electrical power](./potencia-eletrica):** o que acontece quando
+   uma current grande atravessa uma resistance pequena num pedaço de metal
+   fino?
+
+   > Ele esquenta. A power transformada em calor é
+   > $P = V \times I$, e num condutor muito fino essa potência fica concentrada
+   > numa quantidade mínima de metal. Por isso o filamento de uma bulb chega ao
+   > branco. Guarde isto: o squib do air bag é exatamente um filamento desses.
+
+2. **Na lição [Capacitor e transformer](./capacitor-e-transformer):** o que um
+   capacitor carregado faz quando a alimentação dele é cortada?
+
+   > Ele continua entregando a carga que guardou, por algum tempo, até
+   > descarregar. O air bag control module tem um capacitor justamente para
+   > isso: se a battery for arrancada no primeiro décimo de segundo da colisão,
+   > o módulo ainda precisa ter energia para disparar. Essa é a razão de o
+   > procedimento de desenergização ter um **tempo de espera**.
+
+3. **Na lição [O wiring harness](./chicote-terminals-e-connectors):** por que
+   não se enfia a ponta de prova na boca de um terminal fêmea?
+
+   > Porque a ponta abre o terminal e ele nunca mais aperta o pino com a mesma
+   > força. No SRS isso é pior que um mau contato: um terminal frouxo no
+   > circuit do squib é uma falha que o módulo vai registrar, e um sistema com
+   > falha registrada pode se desligar.
+
+## A ideia nova: inércia
+
+Este é o primeiro ponto do material em que você vai precisar de **força** e
+**massa**. Nada disso foi usado nas lições anteriores, então vamos construir do
+zero.
+
+Imagine uma sacola de compras no banco do passageiro. Você vem a sessenta e
+freia forte. A sacola sai do banco e vai para o chão, na frente do banco.
+
+Repare no que **não** aconteceu: nada empurrou a sacola para a frente. Não
+havia ninguém atrás dela. O que aconteceu é que a sacola já estava indo a
+sessenta junto com o carro, e quando o carro diminuiu a velocidade, **a sacola
+continuou** com a velocidade que tinha. Essa tendência de continuar do jeito
+que está se chama **inércia**.
+
+O corpo de quem está no banco faz a mesma coisa. Na colisão, a carroceria para
+em frações de segundo. O corpo dentro dela não recebeu nenhuma ordem de parar:
+ele continua indo para a frente até que alguma coisa o freie.
+
+**Onde a comparação com a sacola para de valer:** a sacola escorrega e vai
+perdendo velocidade aos poucos no atrito com o banco e com o carpete, numa
+distância grande. O corpo humano, sem cinto, não escorrega — ele encontra uma
+peça dura e para quase de uma vez. E é aí que mora o problema, como você vai
+ver no número a seguir.
+
+## O modelo visual: a mesma velocidade, duas paradas
+
+<Colisao
+  modo="parada"
+  caption="Os dois corpos têm a mesma massa e vinham à mesma velocidade. A seta é o caminho que o corpo ainda percorre depois que o veículo já parou. As duas setas estão na mesma escala: a de baixo é um décimo da de cima — e a força é dez vezes maior. Valores ilustrativos, calculados mais adiante na lição."
+/>
+
+A figura mostra o resultado antes da conta, de propósito: o que muda entre os
+dois casos não é a velocidade, não é a massa e não é o carro. O que muda é
+**a distância em que o corpo é freado**. Agora vamos ver de onde sai o fator dez.
+
+## Formalização: a conta que explica tudo nesta lição
+
+### Primeiro passo: quanto tempo dura a parada
+
+Suponha que o corpo venha a uma velocidade $v$ e seja freado de forma parelha
+até parar, percorrendo uma distância $d$ enquanto isso.
+
+Durante essa frenagem a velocidade cai de $v$ até zero. A velocidade **média**
+no percurso é, portanto, $v / 2$. E distância é velocidade média vezes tempo:
+
+$$
+d = \frac{v}{2} \times t
+\qquad\Longrightarrow\qquad
+t = \frac{2d}{v}
+$$
+
+### Segundo passo: quanto vale a desaceleração
+
+**Desaceleração** é o quanto a velocidade muda a cada segundo. Se a velocidade
+cai de $v$ a zero em um tempo $t$, a desaceleração é $a = v / t$. Trocando o
+$t$ que acabamos de achar:
+
+$$
+a = \frac{v}{t} = \frac{v}{\;2d / v\;} = \frac{v^2}{2d}
+$$
+
+Leia o que essa fórmula diz, em palavras: **a desaceleração cresce com o
+quadrado da velocidade e diminui quando a distância da parada aumenta.**
+Dobrar a velocidade quadruplica a desaceleração. Dividir a distância por dez
+multiplica a desaceleração por dez.
+
+### Terceiro passo: da desaceleração para a força
+
+A força necessária para frear um corpo é a massa dele vezes a desaceleração:
+
+$$
+F = m \times a
+$$
+
+A unidade de força é o **newton** (N). Um newton é a força que dá a um quilo
+uma desaceleração de um metro por segundo, a cada segundo. Para ter uma
+referência do tamanho: segurar um pacote de um quilo contra a gravidade exige
+cerca de 9.8 N. Então 12 000 N é a ordem de grandeza do peso de um carro
+pequeno.
+
+### A conta completa, a 30 mph
+
+Vamos usar a queixa do capítulo numa versão mais séria: um ocupante de 70 kg
+num veículo a 30 mph. Os dois números são **ilustrativos**, escolhidos para a
+conta ser legível; nada aqui é especificação de veículo.
+
+Primeiro a velocidade em unidades do SI, porque a fórmula pede metros e
+segundos:
+
+$$
+v = 30\,\text{mph} \times \frac{1609.344\,\text{m}}{3600\,\text{s}} = 13.41\,\text{m/s}
+$$
+
+**Caso A — com seat belt e air bag.** O cinto estica um pouco, o air bag
+murcha enquanto o corpo entra nele, e o tórax ainda anda cerca de 0.50 m antes
+de parar:
+
+$$
+a = \frac{13.41^2}{2 \times 0.50} = 180\,\text{m/s}^2
+\qquad
+F = 70 \times 180 = 12\,600\,\text{N}
+$$
+
+São cerca de 2830 lbf — o peso de um carro pequeno, aplicado sobre o tórax por
+75 milésimos de segundo. Já é muito. Mas o corpo humano aguenta isso quando a
+força está espalhada, e é por isso que gente sai andando de colisão a 30 mph.
+
+**Caso B — sem nada, contra o painel.** O mesmo corpo, a mesma velocidade. Só
+que agora ele não é freado por nada elástico: ele encontra o painel e para em
+cerca de 0.05 m, o que o painel cede.
+
+$$
+a = \frac{13.41^2}{2 \times 0.05} = 1800\,\text{m/s}^2
+\qquad
+F = 70 \times 1800 = 126\,000\,\text{N}
+$$
+
+**O que muda:** a distância da parada, de 0.50 m para 0.05 m — dez vezes
+menor. **O que permanece igual:** a massa, a velocidade, o veículo e a energia
+que precisa ser absorvida. A força sobe dez vezes, para cerca de 28 300 lbf,
+porque ela é o preço de parar o corpo num espaço menor.
+
+:::tip Este é o ponto que mais confunde nesta lição
+
+Parece que o cinto e o air bag “absorvem o impacto”. Eles não absorvem nada
+no sentido de fazer a energia desaparecer. Eles **alongam a distância e o
+tempo** em que o corpo é freado. Se esta passagem não fechar na primeira
+leitura, isso é esperado — releia depois do exemplo 2.
+
+:::
+
+### Por que espalhar também importa
+
+Força não é tudo. O corpo se machuca quando a força fica concentrada numa área
+pequena. A grandeza que mede isso é a **pressão**: força dividida por área.
+
+$$
+p = \frac{F}{A}
+$$
+
+Pegue a mesma força do caso A, 12 600 N, e espalhe-a de dois jeitos — as áreas
+abaixo são ilustrativas, só para a comparação:
+
+- sobre a área que um air bag encosta no tórax, algo como 0.10 m²:
+  $p = 12\,600 / 0.10 = 126\,000$ Pa, ou **126 kPa** (18 psi);
+- sobre a borda do aro do volante, algo como 0.005 m²:
+  $p = 12\,600 / 0.005 = 2\,518\,000$ Pa, ou **2518 kPa** (365 psi).
+
+Vinte vezes mais pressão, com a mesma força. É por isso que o air bag é largo
+e macio em vez de pequeno e firme: o trabalho dele é tanto alongar a parada
+quanto espalhar a força.
+
+## A carroceria já começou o trabalho
+
+<Colisao
+  modo="zonas"
+  caption="O veículo visto de lado. As duas pontas são crush zones: elas amassam de propósito, e enquanto amassam o habitáculo ainda está desacelerando. O habitáculo, no traço grosso, é a caixa que não pode ceder — se ela se deformar, o espaço onde as pessoas estão deixa de existir."
+/>
+
+A **crush zone** é a parte da carroceria projetada para se deformar num
+impacto forte. Ela não é um defeito de projeto: ela é a primeira etapa do
+alongamento da parada. Enquanto a lata da frente amassa, o habitáculo ainda
+está se movendo e desacelerando — e cada centímetro amassado é um centímetro a
+mais de distância de parada para quem está dentro.
+
+> **Exemplo:** a longarina dianteira, sob o capô, é feita com dobras que
+> começam a colapsar acima de certa força.
+>
+> **Contraexemplo:** a **body pillar** central, entre a porta da frente e a de
+> trás, **não** é crush zone. Ela é reforçada justamente para não ceder, porque
+> sustenta o teto e segura a lateral do habitáculo. Dentro da porta, a
+> **side-impact beam** faz o mesmo trabalho: impedir que a porta entre no
+> espaço das pessoas.
+
+O **passenger compartment** é a caixa rígida formada por assoalho, colunas,
+teto e travessas. Crush zone e habitáculo têm objetivos opostos e isso é
+proposital: um cede para alongar a parada, o outro resiste para preservar o
+espaço.
+
+:::note Erro comum: “carro antigo era mais forte porque não amassava”
+
+A observação está certa e a conclusão está errada. O carro antigo, de
+estrutura rígida de ponta a ponta, amassava pouco — e justamente por isso
+parava numa distância curta. Toda a desaceleração que a lata não absorveu foi
+parar no corpo de quem estava dentro, e você já viu o que a distância curta
+faz com a força. O carro moderno amassa muito **na frente** e quase nada **no
+meio**. Chegar na oficina com a dianteira destruída e o habitáculo inteiro é o
+sistema funcionando como foi projetado.
+
+:::
+
+## Retenção ativa e retenção passiva
+
+Agora os termos que a prova cobra.
+
+Um **active restraint system** só protege se o ocupante fizer alguma coisa.
+Um **passive restraint system** funciona sozinho.
+
+> **Exemplo de ativo:** o seat belt comum. Ele está ali, mas se ninguém
+> afivelar, ele não segura ninguém.
+>
+> **Contraexemplo:** o air bag é passivo. Ele não depende de nenhuma ação do
+> ocupante — nem de o ocupante saber que ele existe. Um cinto que se fecha
+> sozinho ao ligar a ignição também conta como passivo, pela mesma razão.
+
+A sigla **SRS** vem de **supplemental restraint system**, e essa palavra é
+importante: *supplemental* quer dizer que o air bag é **suplemento** do seat
+belt, não substituto. O air bag foi projetado contando que o corpo venha
+segurado pelo cinto, na posição certa, na hora certa. Sem cinto, o corpo chega
+ao air bag cedo demais e de qualquer jeito, e a bolsa que estava ali para
+proteger vira uma peça dura no caminho.
+
+## O seat belt system, peça por peça
+
+| Peça | O que ela faz |
+|---|---|
+| lap belt | passa sobre a bacia, que é osso forte, e segura a parte pesada do corpo |
+| shoulder belt | cruza o tórax do ombro ao quadril e impede o tronco de ir à frente |
+| seat belt buckle | fivela em que a lingueta encaixa; é ela que o ocupante aperta para soltar |
+| seat belt anchor | o ponto parafusado na estrutura; é por ele que a força vai parar na carroceria |
+| belt retractor | carretel com mola que enrola a sobra e deixa o cinto justo |
+| seat belt pretensioner | puxa o cinto para dentro no começo da colisão, tirando toda a folga |
+
+Duas peças merecem explicação, porque o aluno costuma entender errado as duas.
+
+**O belt retractor trava de propósito.** Dentro dele há um mecanismo que
+responde a puxão rápido: se você puxar o cinto devagar, ele desenrola; se
+puxar de repente, ele trava. Esse mecanismo é um sensor mecânico de
+desaceleração — a mesma ideia que você vai ver na próxima lição na forma
+elétrica, no sensor de ímã e esfera. Cliente que reclama “o cinto está
+travando” quase sempre está descrevendo o cinto funcionando.
+
+**O seat belt pretensioner é pirotécnico.** Ele não é uma mola forte: na maior
+parte dos veículos ele tem uma carga que queima e puxa o cinto alguns
+centímetros para dentro, nos primeiros milésimos da colisão. Isso tira a folga
+entre o corpo e o cinto antes de o corpo começar a andar — e folga é distância
+desperdiçada. Para o técnico, a consequência prática é direta: **o retrator de
+um veículo moderno é um componente do SRS e recebe o mesmo tratamento do air
+bag module.**
+
+Um terceiro item fecha o conjunto: o **seat belt reminder system**, a luz do
+painel e o som que avisam que alguém não afivelou. Ele existe porque o resto
+do sistema foi dimensionado contando com o cinto.
+
+## O knee bolster
+
+Embaixo do painel, do lado do motorista e do passageiro, há um painel plástico
+grosso sobre a estrutura metálica: o **knee bolster**. Ele faz duas coisas.
+Primeira, impede que o joelho encontre a estrutura de metal do painel.
+Segunda, e menos óbvia, ele segura a parte de baixo do corpo no lugar, para
+que o ocupante não escorregue para baixo do cinto e para baixo do air bag
+durante a colisão.
+
+## O air bag module por dentro
+
+<AirBag
+  modo="modulo"
+  caption="O air bag module em corte. A bolsa vai dobrada em sanfona dentro da carcaça de metal. No centro fica o inflator, com o propelente em pastilhas em volta do squib. A tampa plástica tem uma costura enfraquecida no meio, por onde ela rasga quando a bolsa empurra."
+/>
+
+A sequência, do sinal elétrico até a bolsa murcha, é esta:
+
+1. os sensors medem a desaceleração e mandam os valores ao air bag control
+   module (o assunto da próxima lição);
+2. o módulo decide disparar e fecha o circuit do **squib**;
+3. a current atravessa o squib — um fio metálico fininho, de resistance
+   baixa — e ele esquenta até acender;
+4. o calor acende o **gas generant**, as pastilhas de propelente dentro do
+   **inflator**. O propelente queima e produz um grande volume de gás, que em
+   boa parte é nitrogênio;
+5. o gás enche a bolsa. A bolsa cresce e empurra a **trim cover** de dentro
+   para fora. A tampa rasga pela costura enfraquecida, que é um sulco feito de
+   propósito no plástico;
+6. a bolsa termina de abrir e o corpo do ocupante chega nela;
+7. o gás sai pelos **vent holes**, furos no tecido, e a bolsa murcha enquanto o
+   corpo entra.
+
+O passo 7 é o que mais surpreende: **quando o corpo encontra o air bag, a
+bolsa já está esvaziando.** Se ela continuasse cheia e dura, o corpo pararia
+contra uma peça rígida — exatamente o que o sistema existe para evitar. A
+bolsa cheia dá a forma; o trabalho de alongar a parada é do gás saindo aos
+poucos.
+
+Sobre o propelente: nos módulos mais antigos ele é **sodium azide**, azida de
+sódio, que queima liberando nitrogênio. Módulos mais recentes usam outros
+compostos. Para o técnico, o que muda pouco é o que mais importa: em qualquer
+geração, é uma carga sólida que queima, e um módulo disparado deixa resíduo.
+
+### Uma conta para ver o squib
+
+O squib é um resistor minúsculo. Vamos supor, **só para o exemplo**, que ele
+tenha 2 Ω — o valor real varia por fabricante e sai do manual do veículo.
+Ligado aos 12 V do sistema, pela lei de Ohm da
+[lição 4](./lei-de-ohm):
+
+$$
+I = \frac{V}{R} = \frac{12}{2} = 6\,\text{A}
+\qquad
+P = V \times I = 12 \times 6 = 72\,\text{W}
+$$
+
+Setenta e dois watts num filamento do tamanho de um fio de cabelo. É mais
+potência do que uma bulb de farol dissipa, concentrada num pedaço de metal
+milhares de vezes menor. Por isso ele acende praticamente no instante em que o
+módulo fecha o circuit — e por isso qualquer ferramenta que injete current nesse
+circuit é perigosa.
+
+## Os tipos de air bag
+
+| Tipo | Onde fica | Contra o quê protege |
+|---|---|---|
+| driver-side air bag | no centro do volante | impacto frontal, tórax e cabeça do motorista |
+| passenger-side air bag | no painel, do lado direito | impacto frontal, do lado do passageiro |
+| side-impact air bag | na lateral do banco ou na porta | impacto lateral, tronco |
+| side curtain air bag | no forro do teto, ao longo das janelas | impacto lateral e capotamento, cabeça |
+| knee air bag | na parte baixa do painel | impede o corpo de escorregar para baixo |
+
+Alguns veículos trazem ainda um **collision preconditioning system**: quando os
+sensores de distância concluem que a colisão vai acontecer, o veículo fecha os
+vidros e o teto solar, recoloca os bancos numa posição melhor e tensiona os
+cintos — tudo antes do impacto. É o mesmo raciocínio das crush zones, levado
+para antes do contato: ganhar centímetros e milésimos de segundo.
+
+## Como isso falha, e o primeiro teste
+
+| Sintoma | O que o sistema deveria estar fazendo | O que o sintoma indica |
+|---|---|---|
+| a luz do air bag acende ao ligar a ignição e apaga sozinha em alguns segundos | o módulo testa a si mesmo e acende a luz durante o teste | o sistema está se reportando saudável |
+| a luz acende e **fica** acesa | o módulo encontrou algo fora do esperado e registrou um código | há falha; o sistema pode estar desligado, e pode não disparar numa colisão |
+| a luz **não acende nunca**, nem ao ligar a ignição | deveria acender no teste inicial | a luz está queimada, o circuit dela está aberto, ou alguém a retirou — e o motorista perdeu o único aviso que tinha |
+| o cinto não desenrola, ou trava com facilidade | o retractor trava sob puxão rápido | quase sempre é o sistema funcionando; confirme puxando devagar |
+| houve colisão forte com air bag disparado | — | módulo disparado é sucata; sensors e pretensioners também precisam ser avaliados segundo o manual |
+
+Repare na terceira linha. A **ausência** do teste inicial da luz é tão grave
+quanto a luz acesa, e é das que mais passam despercebidas: o painel fica limpo
+e parece tudo bem. Esse é o primeiro teste de qualquer veículo que chega com queixa de
+air bag, e ele não custa nada: ligue a ignição e olhe o painel.
+
+:::note Erro comum: concluir pela peça, não pelo teste
+
+“O air bag não abriu, então o módulo está ruim” é o mesmo raciocínio de
+“bateria mostra 12 V, então está boa”: tira a conclusão de uma observação que
+não separa as hipóteses. O air bag pode não ter aberto porque a colisão não
+alcançou o limite de disparo — que é o projeto funcionando — ou porque o
+sistema está com falha. Quem separa as duas coisas é a luz do painel e, depois
+dela, a leitura dos códigos com o scan tool.
+
+:::
+
+## Resolvendo a queixa
+
+Volte ao cliente da abertura: colisão traseira a cerca de 10 mph, para-choque
+amassado, air bag fechado.
+
+Faça a mesma conta do caso A, trocando só a velocidade. A 10 mph,
+$v = 4.47$ m/s, e com o corpo segurado pelo cinto percorrendo os mesmos 0.50 m:
+
+$$
+a = \frac{4.47^2}{2 \times 0.50} = 20\,\text{m/s}^2
+\qquad
+F = 70 \times 20 = 1400\,\text{N}
+$$
+
+Cerca de 314 lbf sobre o tórax, espalhados pela faixa do cinto, durante mais
+de dois décimos de segundo. É um empurrão forte — o cliente provavelmente
+ficou dolorido —, mas está muito longe dos 12 600 N da colisão a 30 mph. O
+cinto sozinho dá conta.
+
+Agora pense no outro lado da decisão. Um air bag inflando leva o corpo a
+receber o impacto da própria bolsa abrindo. Disparar a bolsa numa situação que
+o cinto resolve acrescenta risco e não acrescenta proteção — além de
+transformar um para-choque amassado num serviço de módulo, volante, painel e
+chicote. **O air bag não abrir numa batida leve é o comportamento projetado.**
+
+Isso responde “por que não abriu”, mas não responde “o sistema está bom?”. Para
+isso:
+
+1. ligue a ignição e observe a luz do air bag: ela deve acender e apagar
+   sozinha;
+2. se ela apagar, leia os códigos do módulo do SRS com um scan tool que tenha
+   acesso a esse módulo — luz apagada e nenhum código é o resultado que
+   encerra a queixa;
+3. se ela ficar acesa, há falha, e o caminho está na
+   [próxima lição](./sensores-srs-e-servico-seguro).
+
+Note que a colisão foi **traseira**. Os sensors de impacto frontal estão na
+dianteira; uma batida na traseira em baixa velocidade não é a situação para a
+qual eles foram postos ali. Vale checar a traseira do veículo e o banco de
+trás por dano, e checar se os cintos travam.
+
+## Na oficina
+
+:::warning Antes de encostar no veículo
+
+Nada nesta seção é procedimento de reparo do SRS — o procedimento está na
+próxima lição, depois do passo de desenergização. O que vem aqui são as
+regras que valem mesmo quando o seu serviço **não é** no air bag.
+
+:::
+
+- **Amarelo é SRS.** Connectors e conduítes amarelos do chicote pertencem ao
+  restraint system. Passe longe deles em qualquer serviço, inclusive quando
+  estiver só procurando um ponto de massa.
+- **Não instale nada entre o ocupante e uma bolsa.** Capa de banco em veículo
+  com side-impact air bag impede a bolsa de sair pela costura do banco, a menos
+  que a capa seja específica para isso. O mesmo vale para enfeite no volante e
+  para suporte de celular colado no painel do lado do passageiro.
+- **Nunca instale um módulo usado.** Módulo de ferro-velho não tem como ter o
+  histórico conhecido, e um módulo disparado nunca é recarregado.
+- **Módulo disparado é resíduo.** Depois do disparo sobra pó e a carcaça fica
+  quente. Use luva e óculos, não respire o pó, lave as mãos depois, e siga o
+  manual e a regra local para descarte.
+- **Desconectou a battery? O relógio não é o único que esquece.** Alguns
+  módulos de SRS registram a perda de alimentação. Veja a lição
+  [Jump start e memory saver](./jump-start-e-memory-saver) para o lado da
+  battery, e o manual do veículo para o que o SRS exige depois.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — a mesma colisão, com e sem cinto
+
+Um ocupante de 80 kg num veículo a 25 mph. Com o cinto, o corpo é freado em
+0.45 m. Sem cinto, ele encontra a coluna de direção e para em 0.06 m. Compare
+as forças.
+
+**Solução.** Primeiro a velocidade:
+$v = 25 \times 1609.344 / 3600 = 11.18$ m/s.
+
+Com cinto:
+
+$$
+a = \frac{11.18^2}{2 \times 0.45} = 138.9\,\text{m/s}^2
+\qquad
+F = 80 \times 138.9 = 11\,112\,\text{N}
+$$
+
+Sem cinto:
+
+$$
+a = \frac{11.18^2}{2 \times 0.06} = 1041.6\,\text{m/s}^2
+\qquad
+F = 80 \times 1041.6 = 83\,328\,\text{N}
+$$
+
+A razão entre as duas forças é $83\,328 / 11\,112 = 7.5$, que é exatamente
+$0.45 / 0.06$. Isso não é coincidência: na fórmula, a força é inversamente
+proporcional à distância da parada. Massa e velocidade aparecem nos dois casos
+e se cancelam na comparação.
+
+### Exemplo 2 — por que o air bag precisa murchar
+
+:::tip Pause e tente
+
+Um air bag infla e **permanece** cheio e duro, porque os vent holes foram
+tampados por engano numa montagem. O corpo chega a ele com a mesma velocidade
+de antes. A bolsa cheia cede, digamos, 0.08 m antes de o corpo encontrar
+resistência firme. Qual é a força sobre um tórax de 70 kg a 30 mph, e como ela
+se compara aos 12 600 N do caso A?
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+$$
+a = \frac{13.41^2}{2 \times 0.08} = 1124\,\text{m/s}^2
+\qquad
+F = 70 \times 1124 = 78\,680\,\text{N}
+$$
+
+São cerca de 6.2 vezes os 12 600 N do caso A, que é a razão das distâncias:
+$0.50 / 0.08 = 6.25$.
+
+A conclusão é a que importa: **o air bag não protege por estar cheio; ele
+protege por esvaziar enquanto o corpo entra.** Uma bolsa que não murcha é uma
+peça rígida a vinte centímetros do rosto. Os vent holes não são um detalhe de
+fabricação, são parte do funcionamento.
+
+</details>
+
+### Exemplo 3 — a conta do squib com outro valor
+
+:::tip Pause e tente
+
+Um manual informa que o circuit do squib de certo módulo tem 3 Ω. Com 12 V
+disponíveis, qual seria a current e a power nesse squib?
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+$$
+I = \frac{12}{3} = 4\,\text{A}
+\qquad
+P = 12 \times 4 = 48\,\text{W}
+$$
+
+Quatro amperes é pouco para um farol e muito para um fio da espessura de um
+cabelo. É por isso que a regra “nenhuma ferramenta que injete current entra
+num circuit de SRS” não admite exceção por bom senso: você não tem como julgar
+de fora quanto aquele squib aguenta.
+
+E note de onde veio o 3 Ω: do **manual do veículo**. Esse número varia entre
+fabricantes e entre módulos. Não se mede esse circuit com um ohmímetro comum e
+não se adivinha o valor esperado.
+
+</details>
+
+### Exemplo 4 — a área muda o estrago
+
+:::tip Pause e tente
+
+A mesma força de 11 112 N do exemplo 1 chega ao corpo de duas maneiras:
+espalhada pela faixa do shoulder belt, com área de cerca de 0.012 m², ou
+concentrada na borda de uma peça, com área de cerca de 0.002 m². Calcule as
+duas pressões, em kPa.
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+$$
+p_1 = \frac{11\,112}{0.012} = 926\,000\ \text{Pa} = 926\,\text{kPa}
+$$
+
+$$
+p_2 = \frac{11\,112}{0.002} = 5\,556\,000\ \text{Pa} = 5556\,\text{kPa}
+$$
+
+Seis vezes mais pressão, com a mesma força — a razão $0.012 / 0.002 = 6$.
+
+Isso explica por que o shoulder belt é uma **faixa larga** e não uma corda, e
+por que o lap belt passa sobre a bacia e não sobre a barriga: osso largo
+espalha a força; tecido mole não espalha nada. As áreas aqui são ilustrativas.
+
+</details>
+
+## Perguntas de verificação
+
+<details>
+<summary>1. Que ideia anterior deste material sustenta o funcionamento do squib?</summary>
+
+A relação entre power, current e resistance, da lição
+[Electrical power](./potencia-eletrica). O squib é um condutor de resistance
+pequena e seção minúscula: a potência que ele transforma em calor fica
+concentrada num volume mínimo de metal, e ele acende quase instantaneamente.
+É o mesmo princípio do filamento da bulb.
+
+</details>
+
+<details>
+<summary>2. Por que um veículo moderno é projetado para amassar na dianteira?</summary>
+
+Porque a força sobre os ocupantes é inversamente proporcional à distância em
+que eles são freados, e cada centímetro que a lata amassa é mais distância de
+frenagem para o habitáculo. A crush zone transforma a parada brusca da
+carroceria numa parada mais longa para quem está dentro.
+
+</details>
+
+<details>
+<summary>3. O que exatamente a palavra *supplemental* avisa, no nome SRS?</summary>
+
+Que o air bag é suplemento do seat belt. O sistema foi dimensionado supondo
+que o corpo chega à bolsa já segurado pelo cinto, na posição e no instante
+previstos. Sem cinto, o corpo chega cedo demais e fora de posição, e a bolsa
+que abriria para protegê-lo pode machucá-lo.
+
+</details>
+
+<details>
+<summary>4. Por que a luz do air bag que nunca acende é um problema?</summary>
+
+Porque o módulo faz um autoteste ao ligar a ignição e acende a luz durante
+esse teste. Se ela não acende nem nesse momento, o motorista perdeu o único
+aviso disponível: a partir daí, o sistema pode estar com falha sem que
+ninguém saiba.
+
+</details>
+
+<details>
+<summary>5. Por que o pretensioner recebe o mesmo cuidado que o air bag module?</summary>
+
+Porque na maioria dos veículos ele também é pirotécnico: tem uma carga que
+queima para puxar o cinto. Do ponto de vista de risco para quem trabalha no
+veículo, ele é um air bag menor.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês de cada peça:
+
+a) a parte acolchoada embaixo do painel, que impede o joelho de bater na
+estrutura;
+b) o carretel que enrola a sobra do cinto;
+c) o sólido que queima dentro do inflator;
+d) os furos no tecido da bolsa;
+e) a tampa plástica que rasga quando a bolsa abre.
+
+### 2. Explicação
+
+Explique com as suas palavras, em três ou quatro frases, por que o air bag
+começa a esvaziar no mesmo instante em que termina de encher.
+
+### 3. Aplicação direta
+
+Um ocupante de 60 kg vem a 20 mph e é freado em 0.40 m. Calcule a velocidade
+em m/s, a desaceleração e a força.
+
+### 4. Variação
+
+Repita o exercício 3 com a mesma velocidade e a mesma massa, mas com a parada
+em 0.10 m. Sem refazer a conta inteira, diga primeiro quantas vezes a força vai
+mudar, e depois confirme calculando.
+
+### 5. Caso de diagnóstico
+
+Um cliente chega dizendo que a luz do air bag ficou acesa depois que ele
+instalou um banco de outro carro, comprado em desmanche. O veículo tem
+side-impact air bag no banco.
+
+a) O que você verifica primeiro, antes de pensar em peça?
+b) Cite duas causas possíveis ligadas diretamente ao serviço que ele fez.
+c) Por que você não vai enfiar a ponta do multímetro no connector amarelo
+embaixo do banco para “ver se tem continuidade”?
+
+### 6. Justificativa
+
+O procedimento de desenergização do SRS pede que se espere um tempo depois de
+desligar a battery, em vez de começar o serviço logo em seguida. Explique por
+quê, usando a ideia da lição
+[Capacitor e transformer](./capacitor-e-transformer).
+
+### 7. Formato ASE
+
+**Question 1.** Technician A says that a crush zone is a weak spot in the body
+that should be reinforced during collision repair. Technician B says that the
+crush zone is designed to collapse so that the passenger compartment
+decelerates over a longer distance. Who is right?
+
+(A) Technician A only
+(B) Technician B only
+(C) Both A and B
+(D) Neither A nor B
+
+**Question 2.** A vehicle is towed in after a low-speed rear collision. The air
+bags did not deploy. The air bag warning lamp comes on with the ignition and
+then goes out. Technician A says the system must be defective because the air
+bags did not deploy. Technician B says the lamp behavior indicates the module
+found no fault, and that a low-speed impact is not expected to deploy the
+front air bags. Who is right?
+
+(A) Technician A only
+(B) Technician B only
+(C) Both A and B
+(D) Neither A nor B
+
+**Question 3.** Which statement about an air bag module is correct?
+
+(A) The nylon bag stays fully inflated until the vehicle is repaired.
+(B) The squib ignites the gas generant, which produces the gas that fills the
+bag.
+(C) A deployed module can be refilled and reinstalled.
+(D) The trim cover is removed by the technician before deployment.
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1.** a) knee bolster; b) belt retractor (ou seat belt retractor); c) gas
+generant; d) vent holes; e) trim cover.
+
+**2.** A bolsa cheia é a forma que o gás dá ao tecido, e nada além disso. Quem alonga a parada
+do corpo é o gás saindo pelos vent holes enquanto o corpo entra na bolsa. Se a
+bolsa ficasse cheia e dura, o corpo pararia contra uma peça rígida — e a
+distância curta de parada traria de volta a força grande que o sistema existe
+para evitar.
+
+**3.** $v = 20 \times 1609.344 / 3600 = 8.94$ m/s.
+
+$$
+a = \frac{8.94^2}{2 \times 0.40} = 99.9\,\text{m/s}^2
+\qquad
+F = 60 \times 99.9 = 5994\,\text{N}
+$$
+
+Cerca de 6000 N, ou 1348 lbf.
+
+**4.** A distância caiu de 0.40 m para 0.10 m, quatro vezes menor, então a
+força fica quatro vezes maior. Confirmando:
+
+$$
+a = \frac{8.94^2}{2 \times 0.10} = 399.6\,\text{m/s}^2
+\qquad
+F = 60 \times 399.6 = 23\,976\,\text{N}
+$$
+
+E $23\,976 / 5994 = 4$. Se você encontrou dezesseis vezes, provavelmente
+aplicou ao $d$ o quadrado que pertence só ao $v$: na fórmula
+$a = v^2 / (2d)$, a velocidade entra ao quadrado e a distância, não.
+
+**5.** a) Ligue a ignição e observe o comportamento da luz, e depois leia os
+códigos do módulo do SRS com o scan tool. O código diz qual circuit o módulo
+não está reconhecendo, e isso vale mais que qualquer suposição sobre o banco.
+
+b) Duas causas ligadas ao serviço: o connector do air bag lateral ou do sensor
+de peso do banco pode ter ficado desencaixado ou mal encaixado; e o banco de
+desmanche pode ser de outra versão, com módulo de resistance diferente ou sem
+o sensor que o veículo espera encontrar.
+
+c) Porque a ponta de prova injeta current num circuit cuja carga dispara com
+pouca current, e porque ela abre o terminal fêmea e cria um mau contato
+permanente. O circuit do squib só se verifica com o equipamento e o
+procedimento do fabricante, e com o sistema desenergizado.
+
+**6.** Porque o air bag control module guarda energia num capacitor, como a
+lição do capacitor mostrou: o capacitor continua entregando a carga que
+guardou depois de a alimentação sumir. Esse capacitor existe para que o módulo
+ainda consiga disparar se a battery for arrancada no começo da colisão. A
+consequência para quem trabalha no carro é que desligar a battery **não**
+desenergiza o sistema na mesma hora: é preciso esperar o capacitor
+descarregar, pelo tempo que o manual daquele veículo determina.
+
+**7. Question 1 — (B).**
+*A* está errado: a crush zone não é um ponto fraco acidental, e reforçá-la num
+reparo de colisão estraga o projeto — numa próxima batida a estrutura não
+cederia e a desaceleração iria inteira para os ocupantes. *B* está certo: a
+zona colapsa de propósito, e enquanto ela colapsa o habitáculo desacelera por
+uma distância maior.
+
+**Question 2 — (B).**
+*A* está errado porque tira conclusão de peça a partir de uma observação que
+não separa as hipóteses: o air bag também não dispara quando a colisão fica
+abaixo do limite de disparo. *B* está certo nas duas partes: a luz que acende
+e apaga é o autoteste terminando sem falha, e uma batida traseira em baixa
+velocidade não é a condição de disparo dos air bags frontais.
+
+**Question 3 — (B).**
+*A* está errada: a bolsa murcha pelos vent holes em frações de segundo, e
+precisa murchar para proteger. *C* está errada: módulo disparado é sucata e
+nunca é recarregado nem reinstalado. *D* está errada: a trim cover rasga
+sozinha pela costura enfraquecida, empurrada pela bolsa — ninguém a remove
+antes. *B* descreve a sequência correta: squib, gas generant, gás, bolsa.
+
+</details>
+
+## Revisão
+
+**A ideia central:** a força sobre o corpo numa colisão é a massa vezes a
+desaceleração, e a desaceleração é $v^2 / (2d)$. Como a velocidade e a massa
+não estão sob controle do projetista no momento do acidente, **tudo o que o
+restraint system faz é aumentar o $d$** — a distância em que o corpo é
+freado — e espalhar a força numa área maior. Crush zone, seat belt,
+pretensioner, air bag e knee bolster são cinco formas da mesma ideia.
+
+**Quando usar:** sempre que precisar explicar a um cliente por que o air bag
+abriu ou não abriu, e sempre que for avaliar um veículo acidentado.
+
+**Com o que se conecta:** com [Electrical power](./potencia-eletrica), que
+explica o squib; com [Capacitor e transformer](./capacitor-e-transformer), que
+explica a energia de reserva do módulo; com
+[O wiring harness](./chicote-terminals-e-connectors), de onde vem a regra de
+não maltratar terminal; e com a próxima lição,
+[Os sensors do SRS, o controller e o serviço seguro](./sensores-srs-e-servico-seguro),
+que mostra como o módulo decide disparar e como se trabalha no sistema sem
+correr risco.
+
+**Termos desta lição para revisar em inglês:** restraint system, supplemental
+restraint system, active restraint system, passive restraint system, crush
+zone, passenger compartment, side-impact beam, body pillar, seat belt, lap
+belt, shoulder belt, seat belt buckle, seat belt anchor, belt retractor, seat
+belt pretensioner, seat belt reminder system, knee bolster, air bag, air bag
+module, trim cover, inflator, squib, gas generant, sodium azide, vent hole,
+driver-side air bag, passenger-side air bag, side-impact air bag, side curtain
+air bag, knee air bag, collision preconditioning system, deploy.

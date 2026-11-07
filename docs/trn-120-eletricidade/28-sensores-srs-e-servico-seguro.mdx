@@ -1,0 +1,838 @@
+---
+title: "Os sensors do SRS, o controller e o serviço seguro"
+sidebar_label: "Sensors do SRS e serviço"
+---
+
+import AirBag from '@site/src/components/AirBag';
+
+# Os sensors do SRS, o controller e o serviço seguro
+
+> **Pergunta central:** o air bag control module tem poucos milésimos de
+> segundo para decidir, e não pode errar nos dois sentidos — nem deixar de
+> disparar numa colisão, nem disparar num buraco da rua. Como ele decide, e
+> por que essa decisão obriga o técnico a trabalhar de um jeito diferente de
+> todo o resto do veículo?
+
+:::danger Leia esta lista antes de qualquer procedimento desta lição
+
+O restraint system guarda cargas que queimam em milésimos de segundo, e ele
+continua energizado por um tempo depois de a battery sair. Nenhum item abaixo
+é opcional:
+
+1. **Nunca ligue test light, ohmímetro, fonte, bateria de pilha ou qualquer
+   coisa que injete current em um circuit do SRS.** Não existe medição “leve”
+   nesse circuit.
+2. **Nunca faça jumper** — ligar dois pontos com um fio para “testar” — em
+   nenhum ponto do SRS.
+3. **Nunca back probe** um connector amarelo. Veja por quê em
+   [O wiring harness](./chicote-terminals-e-connectors).
+4. **Desenergize o sistema antes de desmontar qualquer coisa**, pelo
+   procedimento da seção “Na oficina”, mais abaixo nesta página, e com o tempo
+   de espera que o manual **daquele** veículo determina.
+5. **Nunca use memory saver** quando o serviço for no SRS: ele mantém o
+   sistema alimentado, que é exatamente o que você acabou de desfazer.
+6. **Carregue um módulo não disparado com a trim cover virada para longe do
+   corpo**, e apoie-o com a tampa para cima, longe da borda da bancada e longe
+   de fonte de calor.
+7. Na dúvida sobre qualquer passo, **pare e confirme com o instrutor e com o
+   manual de serviço.** Chute, aqui, é acidente.
+
+:::
+
+## A queixa: molhou o carpete e a luz acendeu
+
+Um cliente traz uma minivan com uma queixa que parece não ter nenhuma relação
+com air bag:
+
+> “Entupiu o dreno do ar-condicionado e encharcou o carpete do lado do
+> passageiro. Eu sequei tudo com aspirador de água e ventilador. Uma semana
+> depois a luz do air bag acendeu e não apaga mais.”
+
+Duas coisas chamam a atenção. A primeira é o intervalo: a luz não acendeu
+quando o carpete estava molhado, e sim uma semana depois. A segunda é o lado:
+o carpete molhado é o do passageiro, e é ali embaixo que ficam connectors do
+restraint system.
+
+Ao fim desta lição você vai saber por que o atraso de uma semana é informação
+de diagnóstico, qual é o primeiro teste e por que a tentação de “medir a
+continuidade daquele connector” é justamente o que não se faz.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| impact sensor | sensor de impacto | avisa o módulo de que a desaceleração passou do normal |
+| magnet-and-ball sensor | sensor de ímã e esfera | esfera presa por um ímã; na colisão ela rola e fecha dois contatos |
+| coil spring sensor | sensor de mola | peso preso a uma mola que avança e toca os contatos |
+| accelerometer | acelerômetro | mede o quanto a velocidade está mudando e manda isso como sinal |
+| yaw rate sensor | sensor de guinada | mede o quanto o veículo gira em torno do eixo vertical |
+| lateral acceleration sensor | sensor de aceleração lateral | mede o empurrão de lado sobre o veículo |
+| roll sensor | sensor de capotamento | avalia se o veículo está começando a capotar |
+| occupant position sensor | sensor de posição do ocupante | informa se há alguém no banco e como ele está |
+| seat weight sensor | sensor de peso do banco | estima o peso de quem está sentado |
+| seat belt sensor | sensor de cinto | informa se aquele cinto está afivelado |
+| air bag control module | módulo de controle do air bag | o computador que lê tudo isso e decide disparar |
+| air bag warning lamp | luz do air bag | a luz do painel que acende quando há falha registrada |
+| clock spring | fita espiral do volante | fita condutora enrolada que leva a current ao volante que gira |
+| shorting bar | barra de curto | lâmina que une os dois pinos do squib quando o connector é desligado |
+| event data recorder | registrador de dados do evento | memória que guarda as condições do veículo nos instantes da colisão |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+Em todo diagnóstico de luz de air bag acesa, e em qualquer serviço que mexa em
+banco, carpete, coluna de direção, painel, porta ou volante. Também aparece de
+lado em outras áreas: o yaw rate sensor e o lateral acceleration sensor são os
+mesmos sensores que o controle de estabilidade usa, então um defeito ali pode
+acender duas luzes ao mesmo tempo.
+
+Na Wake Tech, isto é a segunda metade do **capítulo 25** do livro (*Restraint
+System Electronics*), no módulo 3. Na prova ASE, área **A6**.
+
+## Ideias anteriores que voltam aqui
+
+1. **Na lição [Electromagnetism e o relay](./eletromagnetismo-e-rele):** o que
+   precisa acontecer para que um par de contacts feche um circuit?
+
+   > Alguma coisa precisa aproximar fisicamente as duas peças de metal. No
+   > relay quem faz isso é o campo magnético da bobina. No sensor que você vai
+   > ver agora, quem faz isso é uma esfera de metal empurrada pela própria
+   > inércia.
+
+2. **Na lição [Capacitor e transformer](./capacitor-e-transformer):** quanto
+   tempo um capacitor leva para descarregar depois que a alimentação sai?
+
+   > Depende da capacitância e do caminho de descarga: não é instantâneo. Esse
+   > “não é instantâneo” é a razão do tempo de espera no procedimento de
+   > desenergização do SRS.
+
+3. **Na lição [Scan tool e oscilloscope](./scan-tool-e-osciloscopio):** um
+   código de falha aponta a peça com defeito?
+
+   > Não. Ele aponta o **circuit** em que o módulo viu algo fora do esperado.
+   > A peça pode estar boa e o problema estar no wire, no terminal ou na massa.
+   > Essa distinção vale em todo o veículo, e no SRS ela vale ainda mais,
+   > porque aqui você não pode sair medindo para descobrir.
+
+## A decisão que o módulo precisa tomar
+
+Pense no problema do ponto de vista do módulo. Ele recebe, o tempo todo, um
+número que descreve o quanto a velocidade do veículo está mudando. Esse número
+sobe quando o motorista freia forte. Sobe também quando a roda cai num buraco,
+quando o carro passa num quebra-molas rápido demais e quando alguém bate a
+porta.
+
+O módulo precisa separar essas situações de uma colisão de verdade, e precisa
+fazer isso em poucos milésimos de segundo, porque depois disso já é tarde.
+
+Duas coisas separam a colisão do resto:
+
+- **o tamanho** da desaceleração: um quebra-molas desacelera o veículo bem
+  menos que um poste;
+- **a duração**: um solavanco é um pico curtíssimo, que volta ao normal logo
+  em seguida. Uma colisão é uma desaceleração grande que **se mantém** enquanto
+  a crush zone amassa.
+
+É por isso que um simples interruptor de “bateu / não bateu” deixou de ser
+suficiente, como você vai ver comparando as três gerações de sensor.
+
+## O sensor mais simples de todos
+
+<AirBag
+  modo="sensor"
+  caption="O magnet-and-ball sensor em corte. Enquanto o veículo anda normalmente, o magnet segura a ball. Numa desaceleração forte o suficiente, a inércia da ball vence a atração do magnet: ela rola para a frente do veículo e encosta nos dois contatos ao mesmo tempo, fechando o circuit que avisa o módulo."
+/>
+
+O **magnet-and-ball sensor** é o sensor cuja ideia aparece inteira no desenho:
+dá para ver com os olhos o que ele faz, passo a passo.
+
+1. um **permanent magnet** segura uma esfera de metal — a **ball** — encostada
+   nele;
+2. enquanto o veículo anda e freia normalmente, a atração do magnet é mais
+   forte que a inércia da ball, e ela fica onde está;
+3. numa desaceleração grande, a ball tende a continuar para a frente, como a
+   sacola de compras da lição anterior. Nesse momento a inércia vence o magnet;
+4. a ball rola e encosta nos dois **contacts** ao mesmo tempo, fechando o
+   circuit entre eles;
+5. o circuit fechado é o aviso que chega ao air bag control module.
+
+Repare no detalhe mais inteligente da peça: **o magnet é o ajuste do sensor.**
+Um magnet mais forte exige uma desaceleração maior para soltar a ball. O limiar
+de disparo está na força do ímã, não em nenhuma eletrônica.
+
+O **coil spring sensor** faz a mesma coisa com outra peça: em vez de um ímã
+segurando uma esfera, um peso de metal preso a uma mola. A mola segura o peso
+no lugar; numa desaceleração grande, o peso vence a tensão da mola, avança e
+toca os contatos. O limiar está na dureza da mola.
+
+## O accelerometer, e por que ele substituiu os outros dois
+
+Os dois sensores acima têm a mesma limitação, e ela é grave: **eles só sabem
+dizer sim ou não.** O circuit está aberto ou fechado. Não há nada no sinal que
+informe se a desaceleração foi um pouco acima do limiar ou dez vezes acima.
+
+O **accelerometer** resolve isso. Ele mede o quanto a velocidade está mudando e
+entrega essa medida como um sinal elétrico que **varia junto com a grandeza
+medida** — o mesmo tipo de sinal que você viu nos sensores de resistance
+variável da [lição 11](./resistencias-variaveis-e-diodo). O módulo não recebe
+mais um aviso; ele recebe um número, muitas vezes por milésimo de segundo.
+
+Com um número em vez de um aviso, o módulo consegue fazer três coisas que
+antes eram impossíveis:
+
+- **olhar a duração**, e não só o pico: um solavanco sobe e desce; uma colisão
+  sobe e fica;
+- **escolher a intensidade do disparo**, quando o módulo tem mais de um
+  estágio de inflagem;
+- **guardar o que aconteceu**, que é o que alimenta o event data recorder, no
+  fim desta lição.
+
+| Sensor | O que ele entrega | O que ele não consegue |
+|---|---|---|
+| magnet-and-ball sensor | contato fechado ou aberto | dizer o tamanho da desaceleração |
+| coil spring sensor | contato fechado ou aberto | dizer o tamanho da desaceleração |
+| accelerometer | um valor que acompanha a desaceleração | nada disso; é o que os sistemas atuais usam |
+
+:::note Erro comum: procurar o sensor no para-choque
+
+É tentador imaginar que o sensor de impacto fica preso no para-choque, onde a
+batida acontece. Em muitos veículos ele está mais para dentro — na travessa do
+radiador, na longarina ou em pontos da estrutura —, e o módulo ainda tem
+accelerometers no próprio corpo, no túnel central. **Onde ficam os sensors
+daquele veículo é informação do manual de serviço**, não de palpite, e isso
+importa na hora de avaliar um veículo acidentado: um sensor pode ter sido
+danificado por um amassado que parece pequeno.
+
+:::
+
+## Dois sensores em série: por que falso disparo é tão raro
+
+Muitos sistemas não disparam com um sensor só. Eles põem **dois sensores em
+série** no caminho que aciona o squib: os dois precisam concordar para que a
+current chegue até ele. Você já conhece essa ligação da
+[lição 6](./circuito-em-serie) — em série, um dos dois aberto já interrompe a
+current do caminho inteiro.
+
+Vale a pena ver o tamanho do efeito com uma conta, mesmo que os números sejam
+inventados só para ilustrar. Suponha que um sensor sozinho tenha uma chance em
+dez mil de fechar por engano numa situação qualquer. Com dois sensores
+independentes em série, para o disparo acontecer por engano os dois teriam que
+errar ao mesmo tempo:
+
+$$
+\frac{1}{10\,000} \times \frac{1}{10\,000} = \frac{1}{100\,000\,000}
+$$
+
+Uma chance em cem milhões, em vez de uma em dez mil. **O que muda** é a
+probabilidade do falso disparo, que despenca. **O que permanece igual** é a
+capacidade de disparar quando precisa: numa colisão de verdade, os dois
+sensores veem a mesma desaceleração e fecham juntos.
+
+## Os outros sensores do sistema
+
+Colisão frontal não é o único evento. Para os outros, o módulo precisa de
+outras medidas:
+
+| Sensor | O que ele mede | Para que serve |
+|---|---|---|
+| yaw rate sensor | o quanto o veículo gira em torno do eixo vertical | perceber um rodopio |
+| lateral acceleration sensor | o empurrão de lado | reconhecer um impacto ou uma derrapagem lateral |
+| roll sensor | a inclinação e o movimento de rolagem | decidir sobre o side curtain air bag num capotamento |
+| seat belt sensor | se aquele cinto está afivelado | ajustar a decisão ao que está segurando o ocupante |
+
+Esses mesmos sinais, em muitos veículos, são compartilhados com o controle de
+estabilidade. Isso tem uma consequência prática de diagnóstico: um sensor de
+guinada com problema pode acender a luz do controle de estabilidade **e** a luz
+do air bag, e um técnico apressado pode achar que são dois defeitos.
+
+## Quem está sentado ali, afinal
+
+O **occupant position sensor** é o nome geral de um grupo de sensores que
+respondem a uma pergunta diferente: não “bateu?”, mas “quem está no banco e
+como?”. O air bag do passageiro abrindo contra uma criança numa cadeirinha
+voltada para trás, ou contra um adulto pequeno sentado muito à frente, é pior
+que o air bag não abrir — e por isso o módulo precisa saber o que tem ali.
+
+- **seat weight sensor**: estima o peso de quem está sentado. É o mais comum, e
+  é o que permite desligar o air bag do passageiro quando o banco está vazio ou
+  com pouco peso;
+- **seat belt sensor**: informa se o cinto daquele lugar está afivelado;
+- sensores de pressão espalhados no banco, no tapete ou no revestimento da
+  porta, que detectam presença;
+- sensores que “olham” o ocupante sem tocar nele: infravermelho, ultrassom,
+  capacitivos e câmeras. O capacitivo é o mesmo princípio da
+  [lição 16](./capacitor-e-transformer): a presença de um corpo muda a
+  capacitância entre duas placas, e o módulo lê essa mudança.
+
+:::note Erro comum: achar que a luz “PASSENGER AIR BAG OFF” é defeito
+
+Em muitos veículos existe um indicador que avisa quando o air bag do
+passageiro foi desligado pelo módulo. Quando o banco está vazio, ou com pouco
+peso, esse indicador acender é o sistema trabalhando. O que **não** é normal é
+o indicador dizer que o air bag está desligado com um adulto sentado ali — aí
+há algo errado no sensor do banco ou no circuit dele.
+
+:::
+
+## O air bag control module
+
+<AirBag
+  modo="circuito"
+  caption="O desenho de quem fala com quem. Os sensors entram; o módulo decide; na saída vão a current que dispara o squib e o comando da warning lamp. O capacitor desenhado dentro do módulo é a energia de reserva: é por causa dele que desligar a battery não desenergiza o sistema na mesma hora."
+/>
+
+O módulo faz quatro coisas:
+
+1. **lê os sensors**, muitas vezes por milésimo de segundo;
+2. **decide** se dispara, quais bolsas e com que intensidade;
+3. **dispara**, mandando current pelo circuit do squib — o que acende o
+   propelente, como você viu na
+   [lição anterior](./restraint-system-e-air-bag);
+4. **vigia a si mesmo**: testa os próprios circuits, registra códigos e acende
+   a **air bag warning lamp** quando encontra algo fora do esperado.
+
+Três detalhes desse funcionamento mudam o trabalho do técnico.
+
+**O capacitor de reserva.** O módulo guarda energia num capacitor para
+continuar podendo disparar mesmo se a battery for arrancada no primeiro
+instante da colisão. É uma boa ideia de projeto e um risco para quem trabalha
+no carro: durante alguns instantes depois de a battery sair, o sistema ainda
+tem energia suficiente para disparar. Daí o tempo de espera do procedimento.
+
+**O autoteste ao ligar a ignição.** É isso que você vê quando a luz do air bag
+acende por alguns segundos e apaga sozinha. Nesse intervalo o módulo confere
+os circuits dos squibs, os sensors e a própria memória. Luz que acende e apaga
+é relatório de sistema saudável; luz que fica acesa é falha registrada; luz que
+não acende nunca quer dizer que o aviso em si está perdido.
+
+**A vigilância contínua do circuit do squib.** O próprio módulo mede esses
+circuits o tempo todo, com uma current minúscula, calculada pelo fabricante
+para não acender nada. Nenhum instrumento de bancada tem essa garantia — e é
+essa a diferença entre o módulo medir e você medir com um ohmímetro.
+
+## O clock spring
+
+O air bag do motorista fica no volante, e o volante gira. O wire não pode
+atravessar a coluna em linha reta, porque ele se torceria e arrebentaria. A
+solução é o **clock spring**: uma fita plana com condutores impressos,
+enrolada numa caixa atrás do volante, com folga suficiente para acompanhar o
+giro de batente a batente.
+
+Pelo clock spring passam o circuit do air bag do motorista e, em geral, os
+comandos do volante: buzina, controles de som, piloto automático.
+
+**O sintoma clássico** é essa combinação: código de circuit aberto no air bag
+do motorista **e** buzina muda **e** comandos do volante sem resposta. Três
+coisas que parecem independentes, com um ponto em comum — e é o ponto em comum
+que aponta a peça.
+
+:::warning A regra que quebra clock spring
+
+Com o volante removido, **não gire a coluna de direção.** O clock spring fica
+livre e pode passar do fim do curso, e a fita arrebenta por dentro sem que
+ninguém veja. Trave o volante ou mantenha as rodas direitas, e siga o
+procedimento de centragem do manual ao montar — cada fabricante tem o seu.
+
+:::
+
+## O shorting bar
+
+Quando você desliga um connector do SRS, algo acontece lá dentro: uma lâmina
+chamada **shorting bar** encosta nos dois pinos do lado do squib e os une.
+
+A razão é a eletricidade estática e a voltage perdida. Com os dois pinos
+unidos, qualquer tensão que apareça num deles aparece igual no outro, e sem
+diferença de potencial entre os dois não passa current pelo squib. O curto
+proposital é a proteção.
+
+A consequência prática pega muita gente: **medir resistance entre os pinos de
+um connector do SRS desligado lê perto de zero por causa da shorting bar, e
+esse valor não significa nada sobre o estado do squib.** Além de não dizer
+nada, a medição é proibida pelo item 1 da lista de segurança desta página.
+
+## O event data recorder
+
+Muitos módulos de air bag têm também um **event data recorder**: uma memória
+que vai guardando as condições do veículo e que, quando acontece um evento,
+congela os instantes em torno dele — velocidade, posição do acelerador,
+frenagem, se os cintos estavam afivelados, se as bolsas dispararam.
+
+Para o diagnóstico, isso é útil: dá para saber o que o módulo viu. Para o
+mundo fora da oficina, é um assunto em discussão, porque esses dados podem ser
+usados para atribuir responsabilidade num acidente, e quem é o dono deles não
+é uma pergunta fechada. O lado do técnico é simples e você deve respeitá-lo:
+**esses dados pertencem ao veículo e ao cliente**, a leitura exige equipamento
+específico, e as regras sobre acesso variam por estado.
+
+## Como isso falha, e como diagnosticar
+
+### O primeiro teste é de graça
+
+Ligue a ignição e olhe a air bag warning lamp.
+
+| O que a luz faz | O que isso diz | Próximo passo |
+|---|---|---|
+| acende e apaga sozinha em alguns segundos | o autoteste rodou e não encontrou falha | se a queixa era “não disparou”, a resposta provável é que a colisão ficou abaixo do limiar |
+| acende e fica acesa | há pelo menos um código registrado | leia os códigos com um scan tool que alcance o módulo do SRS |
+| não acende em momento nenhum | o aviso está perdido: luz queimada, circuit aberto, ou removida de propósito | conserte isso antes de qualquer outra coisa |
+| pisca num padrão repetido | alguns veículos informam o código pelo próprio piscar | consulte o manual daquele veículo para ler o padrão |
+
+### Depois do código
+
+O código diz o circuit, não a peça. A partir dele, a ordem é a de sempre: o
+mais simples e barato primeiro.
+
+1. **O que foi mexido recentemente?** Banco removido, carpete levantado,
+   volante trocado, som instalado, veículo acidentado. A maior parte dos
+   códigos de SRS em veículo que não bateu vem de serviço feito perto do
+   chicote.
+2. **O connector daquele circuit** — desenergizando o sistema primeiro. Olhe
+   com os olhos: trava quebrada, terminal verde de corrosão, vedação de
+   borracha fora do lugar, chicote esticado. A
+   [lição do wiring harness](./chicote-terminals-e-connectors) é o que você usa
+   aqui.
+3. **A rota do chicote.** Sob o banco, o chicote acompanha o trilho. Banco
+   puxado para a frente e para trás muitas vezes, ou arrastado durante uma
+   montagem, estica e rompe condutores por dentro do isolamento.
+4. **A alimentação e a massa do módulo**, se o código apontar para isso.
+5. **Só então a peça.**
+
+### Códigos presentes e códigos de histórico
+
+O scan tool costuma separar os códigos em duas listas: os que estão
+acontecendo **agora** e os que foram registrados em algum momento e já não
+estão presentes. A diferença muda o caminho:
+
+- **código presente** é o caso direto: o defeito está lá enquanto você olha;
+- **código de histórico** quer dizer intermitente. A causa clássica é contato
+  que abre e fecha com vibração, temperatura ou umidade.
+
+E é aqui que a queixa da abertura começa a se explicar.
+
+:::warning O wiggle test tem uma versão de SRS, e é diferente
+
+Procurar contato intermitente sacudindo o chicote com o circuit vivo, como na
+lição do wiring harness, **não se faz no SRS.** Aqui a inspeção do chicote é
+visual e com o sistema desenergizado. Qualquer teste elétrico nesse circuit é
+feito com o equipamento e o procedimento do fabricante, e há casos em que ele
+exige uma ferramenta que simula o módulo justamente para que nada real seja
+energizado.
+
+:::
+
+## Resolvendo a queixa
+
+Volte à minivan: carpete do passageiro encharcado, secado, e a luz do air bag
+acesa uma semana depois.
+
+**O que o sistema deveria estar fazendo.** O módulo confere os circuits dos
+squibs e dos sensors continuamente. Enquanto tudo está dentro do esperado, a
+luz fica apagada depois do autoteste.
+
+**O que o sintoma mostra.** A luz ficou acesa, então o módulo registrou pelo
+menos um código. O passo um é lê-lo, e a aposta razoável, antes mesmo de ler,
+é um circuit do lado do passageiro: o air bag lateral do banco, o sensor de
+peso do banco ou o sensor de cinto.
+
+**Qual princípio liga as duas coisas.** Água não cria o defeito na hora. Ela
+entra no connector, fica ali, e começa a corroer o metal do terminal. A
+corrosão cresce devagar e com o tempo acrescenta resistance ao contato — é a
+mesma história do connector derretido da
+[lição 26](./chicote-terminals-e-connectors), só que aqui não há current
+grande para derreter nada. A resistance sair da faixa que o módulo espera já é
+suficiente para que ele registre o código. **Por isso o atraso de uma semana não é
+estranho: ele é a assinatura da corrosão.**
+
+**Por que isso descarta outras hipóteses.** Se fosse dano mecânico do chicote,
+a luz teria acendido durante ou logo depois do serviço de secagem, e não sete
+dias depois. Se fosse o módulo, o código apontaria defeito interno, e não um
+circuit de um componente do lado do passageiro.
+
+**O que fazer, na ordem certa:**
+
+1. ler os códigos com o scan tool e anotar todos, presentes e de histórico;
+2. desenergizar o sistema pelo procedimento da próxima seção;
+3. levantar o carpete e inspecionar com os olhos os connectors daquele lado:
+   corrosão esverdeada, água presa dentro do corpo do connector, vedação
+   deslocada;
+4. reparar segundo o manual — connector de SRS corroído em geral é trocado,
+   não limpo, e o reparo com emenda comum não é aceito nesse chicote;
+5. religar, apagar os códigos, ligar a ignição e confirmar que a luz acende e
+   apaga sozinha;
+6. e resolver a causa primeira, que não é elétrica: o dreno entupido do
+   ar-condicionado.
+
+A ponta de prova no connector, que seria o reflexo natural de quem vem das
+lições anteriores, é exatamente o que não se faz — e agora você sabe os dois
+motivos: ela injeta current num circuit que dispara com pouca current, e a
+leitura entre os pinos seria o zero da shorting bar, que não informa nada.
+
+## Na oficina: desenergizar o SRS
+
+:::danger Este procedimento é genérico e não substitui o manual
+
+Os passos abaixo são a ordem comum a quase todos os veículos. **O tempo de
+espera, o ponto exato de desconexão e a sequência de religamento variam por
+fabricante e estão no manual de serviço daquele veículo.** Não substitua o
+tempo de espera por “contei até sessenta”. Não comece sem conferir o manual.
+
+:::
+
+**Antes de começar:** óculos de proteção. Nada de ferramenta solta no colo.
+Ninguém dentro do veículo além de você.
+
+1. Estacione, puxe o freio de estacionamento, desligue a ignição e tire a
+   chave. Em veículo de botão, siga o que o manual manda para garantir que o
+   sistema desligou mesmo.
+2. **Desconecte o cabo negativo da battery primeiro**, pela razão que você viu
+   em [Segurança com a battery](./seguranca-da-battery): com o negativo fora,
+   uma chave que encoste na carroceria não fecha circuit nenhum. Isole a ponta
+   do cabo para ela não voltar a encostar no polo.
+3. **Espere o tempo que o manual determina.** Esse tempo existe para o
+   capacitor de reserva do módulo descarregar. É o único passo deste
+   procedimento que não dá para ver acontecendo, e é o mais importante.
+4. Só então desmonte. Ao desligar um connector amarelo, solte a locking tab e
+   puxe pelo corpo do connector, nunca pelos wires.
+5. **Com um módulo não disparado na mão:** carregue-o com a trim cover virada
+   para longe do corpo. Apoie-o numa superfície plana e limpa, com a tampa para
+   cima, longe da borda da bancada e longe de calor. Nada em cima dele. Não o
+   carregue pelos wires.
+6. **Para religar:** monte tudo, feche as portas ou pelo menos fique **fora**
+   do veículo, e só então reconecte o cabo negativo da battery. Depois ligue a
+   ignição de fora do veículo, se o manual permitir, e observe a luz do air
+   bag fazer o autoteste.
+7. Apague os códigos e confirme que eles não voltam.
+
+**Se o módulo já disparou:** use luva e óculos, não respire o pó que fica,
+lave as mãos depois, e descarte segundo o manual e a regra local. Módulo
+disparado não é recarregado nem reinstalado, e módulo usado de ferro-velho não
+entra em veículo nenhum.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — três painéis, três conclusões
+
+Três veículos chegam com queixa de air bag. Em cada um você liga a ignição e
+observa o painel:
+
+- **Veículo A:** a luz acende por cerca de seis segundos e apaga.
+- **Veículo B:** a luz acende e fica acesa.
+- **Veículo C:** a luz não acende em momento nenhum.
+
+**Solução.** O veículo A acabou de informar que o autoteste rodou e não achou
+falha; se a queixa era “não disparou numa batida leve”, essa é a resposta, e o
+passo seguinte é confirmar com o scan tool que não há código. O veículo B tem
+pelo menos um código registrado e o sistema pode estar desligado: leia os
+códigos. O veículo C é o mais traiçoeiro, porque o painel parece limpo: ali o
+aviso em si está perdido, e a primeira coisa a consertar é o circuit da luz —
+sem ele, ninguém fica sabendo de nada.
+
+### Exemplo 2 — o ohmímetro no connector desligado
+
+:::tip Pause e tente
+
+Um colega conta que “testou” o circuit do air bag do motorista: desligou o
+connector amarelo embaixo do volante e mediu com o ohmímetro entre os dois
+pinos do lado do módulo do air bag. Leu 0.2 Ω e concluiu que o squib está em
+curto. Aponte os dois erros dele.
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+**Primeiro erro: ele não podia medir.** O ohmímetro injeta current no circuit
+para medir resistance. Num circuit cuja carga é um squib, nenhuma current é
+segura, e a regra não abre exceção por o valor parecer pequeno.
+
+**Segundo erro: a leitura não significa nada.** Ao desligar o connector, a
+shorting bar uniu os dois pinos do lado do squib. O que ele mediu foi a
+lâmina, não o squib. Mesmo que a medição fosse permitida, o número lido seria
+sempre perto de zero, com o squib bom ou ruim.
+
+O caminho certo é ler os códigos com o scan tool e seguir o procedimento do
+fabricante, que quando exige medição exige junto a ferramenta que a torna
+segura.
+
+</details>
+
+### Exemplo 3 — três sintomas, um ponto em comum
+
+:::tip Pause e tente
+
+Um veículo chega com a luz do air bag acesa. O scan tool mostra um código de
+circuit aberto no air bag do motorista. Conversando com o cliente, você
+descobre mais duas coisas: a buzina não funciona e os botões de som no volante
+pararam. O que isso sugere, e por quê?
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+Sugere o clock spring.
+
+O raciocínio é o do ponto em comum. Air bag do motorista, buzina e botões do
+volante são três circuits independentes, com funções que não têm relação entre
+si. A única coisa que eles compartilham é o caminho: todos passam pela fita
+enrolada que leva a current para dentro do volante que gira. Três circuits
+falhando juntos apontam o que eles têm em comum, não três defeitos separados.
+
+O que confirma a hipótese é a história recente do veículo: volante removido,
+coluna trocada, ou coluna girada com o volante fora. Esse último é o jeito
+mais comum de arrebentar um clock spring.
+
+</details>
+
+### Exemplo 4 — por que dois sensores em série
+
+:::tip Pause e tente
+
+Um sistema usa dois sensores em série e um deles fica com os contatos colados,
+permanentemente fechados. O veículo bate. O que acontece? E se o defeito fosse
+num sistema de um sensor só?
+
+:::
+
+<details>
+<summary>Solução</summary>
+
+**Com dois em série e um colado:** na colisão, o sensor bom fecha, o colado já
+estava fechado, e o circuit se completa. **O air bag dispara normalmente.** O
+sistema perdeu a proteção contra falso disparo, mas não perdeu a função. É
+provável, além disso, que o módulo já tenha registrado código do sensor colado
+e acendido a luz antes disso acontecer.
+
+**Num sistema de um sensor só com o contato colado:** o circuit estaria
+fechado o tempo todo, e o air bag dispararia na primeira vez que o módulo
+energizasse aquele caminho — sem colisão nenhuma.
+
+É exatamente esse o ganho da ligação em série que você estudou na
+[lição 6](./circuito-em-serie): com dois em série, nenhum dos dois sozinho
+consegue fechar o caminho.
+
+</details>
+
+## Perguntas de verificação
+
+<details>
+<summary>1. Por que o magnet-and-ball sensor não serve para um sistema de dois estágios de disparo?</summary>
+
+Porque ele só informa “passou do limiar” ou “não passou”. Um sistema que
+escolhe entre disparo mais forte e mais fraco precisa saber **quanto** a
+desaceleração passou do limiar, e essa informação não existe num par de
+contatos que fecha ou não fecha. É isso que o accelerometer entrega.
+
+</details>
+
+<details>
+<summary>2. O que o tempo de espera do procedimento de desenergização está esperando?</summary>
+
+O capacitor de reserva do módulo descarregar. Enquanto ele tiver carga, o
+módulo ainda pode disparar, mesmo sem battery. O tempo vem do manual do
+veículo, porque depende do capacitor e do circuit de descarga daquele módulo.
+
+</details>
+
+<details>
+<summary>3. Por que medir resistance entre os pinos de um connector de SRS desligado não informa nada?</summary>
+
+Porque a shorting bar do connector une os dois pinos do lado do squib assim
+que ele é desligado. A leitura é a da lâmina, perto de zero, com o squib bom
+ou ruim. E antes disso: a medição em si é proibida, porque o ohmímetro injeta
+current no circuit.
+
+</details>
+
+<details>
+<summary>4. Por que a luz do air bag que acende e apaga sozinha vale como resultado de teste?</summary>
+
+Porque ela é a parte visível do autoteste: ao ligar a ignição, o módulo
+confere os seus circuits e a própria memória, e mantém a luz acesa enquanto
+faz isso. A luz apagando é o módulo informando que terminou sem encontrar
+falha.
+
+</details>
+
+<details>
+<summary>5. Qual é a diferença de caminho entre um código presente e um código de histórico?</summary>
+
+O código presente indica um defeito que está acontecendo agora, e pode ser
+procurado diretamente. O código de histórico indica um defeito intermitente,
+que já não está presente: a investigação passa a ser por inspeção da rota do
+chicote, dos connectors e das condições que fazem o defeito aparecer —
+vibração, temperatura, umidade.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Diga o nome em inglês:
+
+a) a esfera presa por um ímã dentro do sensor de impacto;
+b) a fita enrolada que leva a current ao volante;
+c) a lâmina que une os pinos do connector desligado;
+d) o sensor que estima quem está sentado no banco do passageiro;
+e) a memória que guarda as condições do veículo em torno do evento.
+
+### 2. Explicação
+
+Explique, em três ou quatro frases, por que um accelerometer permite ao módulo
+distinguir um buraco na rua de uma colisão, e um magnet-and-ball sensor não
+permite.
+
+### 3. Aplicação direta
+
+Um sistema usa dois sensores em série. O sensor dianteiro fecha e o sensor do
+túnel central não fecha. Passa current pelo squib? Justifique com a regra do
+circuit em série.
+
+### 4. Variação
+
+O mesmo sistema do exercício 3, agora com os dois sensores em **paralelo**.
+Responda à mesma pergunta e diga qual das duas ligações é mais segura contra
+falso disparo, e por quê.
+
+### 5. Caso de diagnóstico
+
+Um cliente tirou os bancos para lavar o carpete e recolocou tudo. No dia
+seguinte a luz do air bag está acesa. O scan tool mostra um código de circuit
+aberto no air bag lateral do banco do motorista.
+
+a) Qual é a causa mais provável, dada a história do veículo?
+b) Qual é o primeiro passo **físico**, antes de encostar no chicote?
+c) Depois do reparo, como você confirma que resolveu?
+
+### 6. Justificativa
+
+Explique por que o item “nunca use memory saver quando o serviço for no SRS”
+está na lista de segurança desta lição, usando o que você aprendeu em
+[Jump start e memory saver](./jump-start-e-memory-saver).
+
+### 7. Formato ASE
+
+**Question 1.** An air bag warning lamp stays on after the bulb check.
+Technician A says the first step is to connect a scan tool and read the SRS
+codes. Technician B says the first step is to unplug the yellow connector at
+the driver air bag and measure the circuit resistance with an ohmmeter. Who is
+right?
+
+(A) Technician A only
+(B) Technician B only
+(C) Both A and B
+(D) Neither A nor B
+
+**Question 2.** A vehicle has an open-circuit code for the driver air bag, an
+inoperative horn, and inoperative steering wheel audio controls. The most
+likely cause is:
+
+(A) a blown fuse in the air bag circuit
+(B) a damaged clock spring
+(C) a failed occupant position sensor
+(D) a discharged battery
+
+**Question 3.** Technician A says the waiting period after disconnecting the
+battery allows the control module's backup capacitor to discharge. Technician
+B says a memory saver may be used during SRS service so that radio presets are
+not lost. Who is right?
+
+(A) Technician A only
+(B) Technician B only
+(C) Both A and B
+(D) Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1.** a) ball; b) clock spring; c) shorting bar; d) occupant position sensor
+(ou, especificamente, seat weight sensor); e) event data recorder.
+
+**2.** O magnet-and-ball sensor só fecha ou não fecha um par de contatos:
+todas as desacelerações que passam do limiar produzem exatamente o mesmo
+sinal. O accelerometer entrega um valor que acompanha a desaceleração, muitas
+vezes por milésimo de segundo. Com isso o módulo enxerga também a **duração**:
+o buraco é um pico que sobe e desce logo, enquanto a colisão é uma
+desaceleração grande que se mantém enquanto a crush zone amassa.
+
+**3.** Não passa. Em série há um caminho só, e todos os componentes estão
+nesse caminho: um componente aberto interrompe o circuit inteiro, e a current
+em série é a mesma em todos os pontos — zero, neste caso.
+
+**4.** Em paralelo, cada sensor forma um caminho próprio, então o sensor
+dianteiro fechado já completa um caminho e **passa** current pelo squib. A
+ligação **em série é a mais segura contra falso disparo**, porque exige que os
+dois sensores concordem: um sensor que feche por engano sozinho não consegue
+disparar nada. Em paralelo, qualquer um dos dois dispara sozinho — inclusive
+quando erra.
+
+**5.** a) Um connector do banco desencaixado ou mal encaixado na remontagem, ou
+o chicote do banco esticado ou prensado pelo trilho ao recolocar o banco. A
+história do veículo é a informação mais forte que você tem.
+
+b) Desenergizar o SRS: ignição desligada, cabo negativo da battery
+desconectado e isolado, e o tempo de espera do manual. Nada de levantar o
+carpete antes disso.
+
+c) Religando tudo, apagando os códigos e ligando a ignição: a luz do air bag
+deve acender no autoteste e apagar sozinha, e os códigos não devem voltar.
+
+**6.** O memory saver existe para manter o veículo alimentado enquanto a
+battery está fora, de modo que rádio, relógio e memórias dos módulos não se
+percam. O problema é que “manter alimentado” inclui o SRS. Todo o sentido do
+procedimento é cortar a alimentação e esperar o capacitor de reserva
+descarregar; com um memory saver ligado, o sistema continua energizado e o
+tempo de espera não serve para nada. No SRS, perder as memórias do rádio é o
+preço, e é barato.
+
+**7. Question 1 — (A).**
+*A* está certo: o scan tool é o único caminho que entra nesse sistema sem
+injetar current nele, e o código diz em qual circuit olhar. *B* está errado
+por dois motivos independentes: o ohmímetro injeta current num circuit cuja
+carga é um squib, e a leitura entre os pinos seria a da shorting bar, perto de
+zero com o squib bom ou ruim.
+
+**Question 2 — (B).**
+O ponto em comum dos três sintomas é o caminho elétrico para dentro do volante
+que gira, e esse caminho é o clock spring. *A* não explica a buzina e os
+controles de som, que são circuits separados com proteção própria. *C* não
+tem relação com nenhum dos três sintomas. *D* deixaria o veículo sem dar
+partida, e não causaria essa combinação específica.
+
+**Question 3 — (A).**
+*A* está certo: o tempo de espera existe para o capacitor de reserva do módulo
+descarregar, já que enquanto ele tiver carga o sistema ainda pode disparar.
+*B* está errado: o memory saver mantém o sistema alimentado e anula a
+desenergização que o procedimento acabou de fazer.
+
+</details>
+
+## Revisão
+
+**A ideia central:** o air bag control module decide pela **medida** da
+desaceleração, não por um aviso de sim ou não, e por isso ele precisa de
+accelerometers em vez dos antigos sensores de contato. Essa mesma eletrônica
+que mede também vigia a si mesma: ela testa os próprios circuits, registra
+códigos e acende a air bag warning lamp. Para o técnico, a consequência é
+única e não tem exceção — **no SRS, quem mede é o módulo, pelo scan tool;
+nenhuma ferramenta que injete current entra nesse circuit.**
+
+**Quando usar:** em toda luz de air bag acesa, e antes de qualquer serviço que
+chegue perto de banco, carpete, coluna, painel, porta ou volante.
+
+**Com o que se conecta:** com
+[O restraint system](./restraint-system-e-air-bag), que mostra o que o disparo
+faz; com [Electromagnetism e o relay](./eletromagnetismo-e-rele), de onde vem a
+ideia de um par de contatos que fecha; com
+[Capacitor e transformer](./capacitor-e-transformer), que explica o tempo de
+espera; com [Circuito em série](./circuito-em-serie), que explica os dois
+sensores; e com [O wiring harness](./chicote-terminals-e-connectors), que é o
+que você usa na inspeção dos connectors.
+
+**Termos desta lição para revisar em inglês:** impact sensor,
+magnet-and-ball sensor, ball, coil spring sensor, accelerometer, yaw rate
+sensor, lateral acceleration sensor, roll sensor, occupant position sensor,
+seat weight sensor, seat belt sensor, air bag control module, air bag warning
+lamp, clock spring, shorting bar, event data recorder.
