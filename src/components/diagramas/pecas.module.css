@@ -140,3 +140,26 @@
   stroke-width: 1;
   stroke-dasharray: 2 3;
 }
+
+/* eixos de gráfico (curva de carga, oscilograma) */
+.eixo {
+  fill: none;
+  stroke: var(--ifm-font-color-base);
+  stroke-width: 1.6;
+}
+
+.curva1 {
+  fill: none;
+  stroke: var(--mv-tone-1);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.curva2 {
+  fill: none;
+  stroke: var(--mv-tone-2);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

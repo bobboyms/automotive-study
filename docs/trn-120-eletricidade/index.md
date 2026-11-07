@@ -164,6 +164,11 @@ relay está na lição 10; aqui vem a battery, da segurança ao jump pack.
     mesmo de qualquer jeito; o procedimento escolhe **onde a faísca
     acontece**. Onde vai cada clamp, a ordem de ligar e desligar, e o pack
     usado como memory saver e como fonte de 12 V.
+25. [Carregar a battery](./carregar-a-battery) — o jump start move o carro,
+    mas não recarrega a battery: quem faz isso é o battery charger, nas fases
+    bulk, absorption e float. A taxa de carga em função da capacidade em Ah,
+    o tempo de carga, e o surface charge que infla a leitura de voltage logo
+    depois do charger.
 
 ### Tópico 8 — Wiring e wiring repairs
 
@@ -171,12 +176,12 @@ Este tópico é o **capítulo 8** do livro (*Wiring and Wiring Repairs*), visto
 no módulo 3 junto com a battery. A lição 20 já tratou do reparo da emenda;
 aqui vêm o wire em si e o chicote que o carrega.
 
-25. [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola) — o wire não é uma
+26. [Tipos de wire e wire gauge](./tipos-de-wire-e-bitola) — o wire não é uma
     linha do esquema: é uma resistance em série com a load. Solid e stranded,
     primary e secondary, coaxial e twisted pair; a escala AWG, em que o número
     cresce quando o wire afina; as quatro coisas que mudam a resistance; e a
     conta que explica o acessório que acende fraco.
-26. [O wiring harness](./chicote-terminals-e-connectors) — o defeito mora no
+27. [O wiring harness](./chicote-terminals-e-connectors) — o defeito mora no
     connector, porque é a única parte do circuit feita para abrir. Conduit,
     grommet, clip e wire tie; a locking tab e a ordem destravar-depois-puxar;
     o terminal removal tool, a dielectric grease, o terminal drag test e o
@@ -190,13 +195,13 @@ visto no módulo 3 junto com os capítulos 8 e 9. É o primeiro sistema do
 material em que o erro de procedimento machuca na hora, e por isso a segurança
 vem antes de tudo nas duas páginas.
 
-27. [O restraint system](./restraint-system-e-air-bag) — a força sobre o corpo
+28. [O restraint system](./restraint-system-e-air-bag) — a força sobre o corpo
     é a massa vezes a desaceleração, e a desaceleração depende da distância em
     que o corpo é freado. Crush zone, passenger compartment, seat belt,
     pretensioner, knee bolster e o air bag module por dentro: trim cover,
     inflator, gas generant, squib e vent holes. A conta que explica por que o
     air bag não abre numa batida leve.
-28. [Sensors do SRS e serviço](./sensores-srs-e-servico-seguro) — como o
+29. [Sensors do SRS e serviço](./sensores-srs-e-servico-seguro) — como o
     módulo decide disparar. Magnet-and-ball sensor, coil spring sensor e
     accelerometer; os sensors de guinada, de capotamento e de posição do
     ocupante; o clock spring e a shorting bar; o event data recorder. E o
@@ -213,17 +218,17 @@ vem antes de tudo nas duas páginas.
 
 ### Próximos tópicos (em preparação)
 
-29. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+30. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-30. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+31. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
     páginas.
-31. **Diagnóstico de circuits** — open circuit, short to ground, short to
+32. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-32. **Testar e carregar a battery** — load test, conductance tester, recarga
-    e parasitic draw.
-33. **Starting system** — starter motor, solenoid e testes.
-34. **Charging system** — alternator, rectifier, voltage regulator e testes.
+33. **Testar a battery** — load test, conductance tester e parasitic draw.
+    A lição 25 já cobriu a recarga.
+34. **Starting system** — starter motor, solenoid e testes.
+35. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

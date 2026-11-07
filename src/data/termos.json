@@ -133,6 +133,10 @@
       "titulo": "Jump start e memory saver",
       "url": "trn-120-eletricidade/jump-start-e-memory-saver"
     },
+    "carregar-a-battery": {
+      "titulo": "Carregar a battery: bulk, absorption e float",
+      "url": "trn-120-eletricidade/carregar-a-battery"
+    },
     "tipos-de-wire-e-bitola": {
       "titulo": "Tipos de wire e wire gauge",
       "url": "trn-120-eletricidade/tipos-de-wire-e-bitola"
@@ -4812,6 +4816,76 @@
       "var": [
         "EDR"
       ]
+    },
+    {
+      "en": "ampere-hour",
+      "pt": "ampère-hora (Ah)",
+      "def": "a unidade que mede quanta current a battery entrega e por quanto tempo",
+      "licao": "carregar-a-battery",
+      "var": [
+        "amp-hour",
+        "Ah"
+      ]
+    },
+    {
+      "en": "charging rate",
+      "pt": "taxa de carga",
+      "def": "a current escolhida para carregar a battery, quase sempre uma fração da capacidade em Ah",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "bulk charge",
+      "pt": "fase bulk",
+      "def": "a primeira fase da carga: current quase no máximo, quase constante, enquanto a voltage sobe",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "absorption charge",
+      "pt": "fase absorption",
+      "def": "a segunda fase: voltage presa perto do teto, e a current caindo aos poucos (taper)",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "float charge",
+      "pt": "carga de manutenção",
+      "def": "a fase final: voltage baixa e constante, só o bastante para repor a self-discharge",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "trickle charge",
+      "pt": "carga lenta contínua",
+      "def": "current pequena e contínua, usada para manter a battery guardada por muito tempo",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "fast charge",
+      "pt": "carga rápida",
+      "def": "current alta e tempo curto; esquenta mais a battery e produz mais hydrogen gas",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "slow charge",
+      "pt": "carga lenta",
+      "def": "current baixa, perto de 10% da capacidade em Ah; a mais indicada para uma recarga completa",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "constant current charging",
+      "pt": "carga a current constante",
+      "def": "o charger mantém a current fixa e deixa a voltage subir sozinha",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "constant voltage charging",
+      "pt": "carga a voltage constante",
+      "def": "o charger mantém a voltage fixa e deixa a current cair sozinha",
+      "licao": "carregar-a-battery"
+    },
+    {
+      "en": "surface charge",
+      "pt": "carga superficial",
+      "def": "a carga que fica perto da superfície da plate logo depois do charger; infla a voltage por um tempo e não é o state of charge real",
+      "licao": "carregar-a-battery"
     }
   ]
 }

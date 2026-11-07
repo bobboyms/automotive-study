@@ -116,6 +116,7 @@ import Circuito from '@site/src/components/Circuito';
 | lead-acid battery em corte: uma cell, as seis em série, ou os riscos (gás e short) | `Bateria` |
 | o surface discharge test: a fuga pela sujeira da tampa da battery | `DescargaSuperficial` |
 | onde vai cada clamp do jump pack, e onde ele não vai | `JumpStart` |
+| as três fases de um charge ao longo do tempo: bulk, absorption e float | `CurvaCarga` |
 | solid e stranded wire em corte, as bitolas AWG comparadas, coaxial cable e twisted pair wire | `TiposDeWire` |
 | chicote com conduit, grommet e clip; as duas metades de um connector; tirar um terminal do corpo | `Chicote` |
 | crush zone e passenger compartment de lado; a mesma parada em duas distâncias | `Colisao` |
@@ -1098,6 +1099,38 @@ Duas decisões de desenho:
 - **o rótulo “não aqui” usa `anchor="start"`**, para a linha de chamada sair da
   esquerda do texto em direção ao post. Com `anchor="end"`, o `RotuloTermo`
   começa a linha à direita do texto, e ela atravessava o rótulo por trás.
+
+Não recebe props além de `caption`.
+
+## CurvaCarga
+
+`<CurvaCarga caption="..." />` — as três fases de um smart charger ao longo do
+tempo, na lição
+[Carregar a battery](../../docs/trn-120-eletricidade/25-carregar-a-battery.mdx):
+a voltage (tom 1) sobe na bulk, fica presa no teto durante a absorption e cai
+para o nível de manutenção na float; a current (tom 2) fica alta na bulk, cai
+aos poucos na absorption — o taper — e termina perto de zero.
+
+As duas curvas saem de `V_PONTOS` e `I_PONTOS`, pares `[t, fração da altura]`
+interpolados linearmente, como no `Oscilograma`. As divisas tracejadas em
+`DIVISAS` ficam **no meio da transição de cada curva**: postas no começo ou no
+fim da rampa, a figura passava a dizer que a fase muda depois que a curva já
+mudou.
+
+Quatro decisões de desenho:
+
+- **largura 470, como a do `Oscilograma`.** A primeira versão tinha 620, e aí
+  o rótulo de 13 px caía para 7.5 px efetivos na coluna do celular (`fs × 358
+  ÷ W`), bem abaixo do mínimo legível. Gráfico largo é a armadilha: ele cabe
+  no computador e some no celular;
+- **a cauda da current para em 0.11 da altura, não em 0.06.** O rótulo
+  `current` fica na ponta da curva, e perto demais do eixo ele era lido como
+  rótulo da seta do tempo;
+- **o eixo vertical é “alto” e “baixo”, sem número.** voltage e current não
+  têm a mesma unidade, e pôr escala em uma delas faria a outra mentir — a
+  legenda da lição diz isso em palavras;
+- **o nome de cada fase é `RotuloTermo` com `chaveDoTermo`**, embaixo do eixo:
+  os três são termos do dicionário, e o aluno toca neles ali mesmo.
 
 Não recebe props além de `caption`.
 

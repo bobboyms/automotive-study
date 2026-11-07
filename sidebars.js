@@ -176,6 +176,11 @@ const sidebars = {
               id: 'trn-120-eletricidade/jump-start-e-memory-saver',
               label: '24. Jump start e memory saver',
             },
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/carregar-a-battery',
+              label: '25. Carregar a battery',
+            },
           ],
         },
         {
@@ -185,12 +190,12 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/tipos-de-wire-e-bitola',
-              label: '25. Tipos de wire e wire gauge',
+              label: '26. Tipos de wire e wire gauge',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/chicote-terminals-e-connectors',
-              label: '26. O wiring harness',
+              label: '27. O wiring harness',
             },
           ],
         },
@@ -201,12 +206,12 @@ const sidebars = {
             {
               type: 'doc',
               id: 'trn-120-eletricidade/restraint-system-e-air-bag',
-              label: '27. O restraint system',
+              label: '28. O restraint system',
             },
             {
               type: 'doc',
               id: 'trn-120-eletricidade/sensores-srs-e-servico-seguro',
-              label: '28. Sensors do SRS e serviço',
+              label: '29. Sensors do SRS e serviço',
             },
           ],
         },
