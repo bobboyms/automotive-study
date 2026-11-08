@@ -232,6 +232,21 @@ const sidebars = {
       items: [
         {
           type: 'category',
+          label: 'Fasteners & Torque (aula)',
+          link: {
+            type: 'doc',
+            id: 'aut-116-motor/fixadores-e-torque/index',
+          },
+          items: [
+            {
+              type: 'doc',
+              id: 'aut-116-motor/fixadores-e-torque/fixadores-e-torque',
+              label: 'Fasteners e torque',
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'Cap. 1 — Review of Engine Operation',
           link: {
             type: 'doc',

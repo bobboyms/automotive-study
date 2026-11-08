@@ -65,6 +65,11 @@ continua sem elas.
 
 ## Roteiro
 
+### Fasteners & Torque
+
+O bolt, a rosca, o torque e a torque wrench, como no PowerPoint da aula.
+[Ver o roteiro do tópico](./fixadores-e-torque/).
+
 ### Capítulo 1 — Review of Engine Operation
 
 O funcionamento do motor, peça por peça, e os sistemas que trabalham em volta

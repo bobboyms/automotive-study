@@ -152,6 +152,10 @@
     "sensores-srs-e-servico-seguro": {
       "titulo": "Os sensors do SRS, o controller e o serviço seguro",
       "url": "trn-120-eletricidade/sensores-srs-e-servico-seguro"
+    },
+    "fixadores-e-torque": {
+      "titulo": "Fasteners e torque: identificar o bolt e apertar certo",
+      "url": "aut-116-motor/fixadores-e-torque/fixadores-e-torque"
     }
   },
   "termos": [
@@ -4934,6 +4938,354 @@
       "pt": "extensão elétrica",
       "def": "cabo de extensão da tomada; quanto mais comprido, mais grossa a bitola precisa ser",
       "licao": "carregar-a-battery"
+    },
+    {
+      "en": "fastener",
+      "pt": "fixador",
+      "def": "peça que une duas ou mais peças de um jeito que dá para desmontar depois sem estragá-las",
+      "var": [
+        "fasteners"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt",
+      "pt": "parafuso (com porca ou rosqueado no furo)",
+      "def": "fixador com corpo roscado e cabeça, que se aperta com chave",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "nut",
+      "pt": "porca",
+      "def": "peça com rosca por dentro que se aperta no bolt",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "screw",
+      "pt": "parafuso (que faz a própria rosca)",
+      "def": "fixador roscado que se aperta direto na peça, sem porca",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "stud",
+      "pt": "prisioneiro",
+      "def": "haste roscada nas duas pontas, presa por uma ponta na peça; a porca aperta na outra",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "threaded rod",
+      "pt": "vara roscada",
+      "def": "haste comprida roscada em todo o comprimento, que se corta no tamanho preciso",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "thread",
+      "pt": "rosca",
+      "def": "o relevo em espiral do bolt e do furo, que faz o aperto",
+      "var": [
+        "threads"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt head",
+      "pt": "cabeça do parafuso",
+      "def": "a ponta alargada do bolt, onde a chave encaixa",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "shank",
+      "pt": "haste",
+      "def": "o corpo liso do bolt, entre a cabeça e as roscas",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "thread pitch",
+      "pt": "passo da rosca",
+      "def": "a distância entre dois filetes vizinhos, em mm; nas roscas em polegada, usa-se threads per inch",
+      "var": [
+        "pitch"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "threads per inch",
+      "pt": "filetes por polegada",
+      "def": "quantos filetes cabem em 1 in de comprimento; número maior quer dizer rosca mais fina",
+      "var": [
+        "TPI"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "coarse thread",
+      "pt": "rosca grossa",
+      "def": "rosca com poucos filetes por polegada ou passo grande",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "fine thread",
+      "pt": "rosca fina",
+      "def": "rosca com muitos filetes por polegada ou passo pequeno",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "metric thread",
+      "pt": "rosca métrica",
+      "def": "rosca medida em milímetros, escrita como M12 × 1.75",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt diameter",
+      "pt": "diâmetro do parafuso",
+      "def": "a largura do bolt medida sobre as roscas",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt length",
+      "pt": "comprimento do parafuso",
+      "def": "medido da face de baixo da cabeça até a ponta, num bolt de cabeça hexagonal",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "wrench size",
+      "pt": "medida da chave",
+      "def": "a distância entre duas faces opostas da cabeça; é a medida da chave, e não a do bolt",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt grade",
+      "pt": "classificação de resistência do parafuso",
+      "def": "número que diz o quanto o bolt aguenta; vem marcado na cabeça",
+      "var": [
+        "property class"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "clamp load",
+      "pt": "força de aperto",
+      "def": "a força com que o bolt aperta as peças uma contra a outra",
+      "var": [
+        "clamping force"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "preload",
+      "pt": "pré-carga",
+      "def": "a força que fica no bolt logo depois do aperto, antes de o engine trabalhar",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "yield strength",
+      "pt": "limite de escoamento",
+      "def": "a partir dessa força, o bolt estica e não volta mais ao tamanho original",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "tensile strength",
+      "pt": "resistência à tração",
+      "def": "a força máxima que o bolt aguenta antes de romper",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "proof load",
+      "pt": "carga de prova",
+      "def": "a maior força com que o bolt ainda volta inteiro ao tamanho original",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "torque specification",
+      "pt": "especificação de torque",
+      "def": "o valor de aperto que o service manual pede para aquele bolt",
+      "var": [
+        "torque spec"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "torque wrench",
+      "pt": "chave de torque",
+      "def": "chave que mede o torque que se aplica ao bolt",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "beam torque wrench",
+      "pt": "chave de torque de agulha",
+      "def": "chave com uma haste que flexiona e mostra o torque numa escala",
+      "var": [
+        "beam-type torque wrench"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "split beam torque wrench",
+      "pt": "chave de torque de agulha dupla",
+      "def": "chave de agulha com uma segunda haste, que se regula e fica ajustada",
+      "var": [
+        "split beam-type torque wrench"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "click torque wrench",
+      "pt": "chave de torque estalo",
+      "def": "chave que estala ao chegar ao torque regulado",
+      "var": [
+        "click-type torque wrench"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "digital torque wrench",
+      "pt": "chave de torque digital",
+      "def": "chave com visor, que avisa o torque com luz, som ou vibração",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "ratchet",
+      "pt": "catraca",
+      "def": "cabo com mecanismo que gira o soquete só num sentido, para apertar sem tirar a chave",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "wrench",
+      "pt": "chave",
+      "def": "ferramenta que gira o bolt ou a porca pela cabeça",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "impact wrench",
+      "pt": "chave de impacto",
+      "def": "chave a ar ou elétrica que bate no bolt; não controla o torque",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "pitch gauge",
+      "pt": "calibrador de passo",
+      "def": "lâminas com dentes de passos conhecidos; a que encaixa nas roscas sem folga dá o passo",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt gauge",
+      "pt": "calibrador de parafuso",
+      "def": "régua com furos e entalhes que mede o diâmetro e o comprimento do bolt",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "torque-to-yield bolt",
+      "pt": "parafuso de torque até o escoamento",
+      "def": "bolt apertado até esticar além do limite elástico; usa-se uma vez e se descarta",
+      "var": [
+        "TTY bolt",
+        "torque-to-yield",
+        "TTY"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "head bolt",
+      "pt": "parafuso do cabeçote",
+      "def": "parafuso longo que prende o cylinder head no cylinder block",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "washer",
+      "pt": "arruela",
+      "def": "disco com furo no meio, que distribui o aperto da cabeça ou da porca",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "anti-seize",
+      "pt": "antigripante",
+      "def": "pasta que evita que a rosca grude; muda o atrito e, por isso, o torque",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "cross-threading",
+      "pt": "rosca cruzada",
+      "def": "bolt que entra torto e corta uma rosca nova por cima da certa",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "stripped thread",
+      "pt": "rosca espanada",
+      "def": "rosca cujos filetes foram arrancados; o bolt gira sem apertar",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "bolt extractor socket",
+      "pt": "soquete extrator",
+      "def": "soquete com ranhuras em espiral que morde a cabeça arredondada do bolt",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "screw extractor",
+      "pt": "extrator de parafuso",
+      "def": "haste com rosca invertida que se crava num furo feito no bolt quebrado, para girá-lo para fora",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "drill and extractor set",
+      "pt": "jogo de broca e extrator",
+      "def": "a broca que abre o furo no bolt quebrado e o extrator que o gira para fora",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "thread chaser",
+      "pt": "limpa-rosca",
+      "def": "ferramenta que limpa e alinha a rosca amassada sem cortar material novo",
+      "var": [
+        "re-threader",
+        "rethreader"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "tap",
+      "pt": "macho de rosca",
+      "def": "ferramenta que corta rosca dentro de um furo",
+      "so": [
+        "/fixadores-e-torque/"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "die",
+      "pt": "cossinete",
+      "def": "ferramenta que corta ou refaz a rosca por fora de um bolt ou de uma haste",
+      "so": [
+        "/fixadores-e-torque/"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "helicoil",
+      "pt": "helicoil",
+      "def": "mola de fio em espiral que se rosqueia no furo para refazer a rosca original",
+      "var": [
+        "thread repair coil"
+      ],
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "thread insert",
+      "pt": "bucha roscada",
+      "def": "luva sólida com rosca por dentro e por fora, que repara um furo sem material para o helicoil",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "penetrating oil",
+      "pt": "óleo penetrante",
+      "def": "óleo fino que entra nas roscas e solta o bolt enferrujado",
+      "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "torque sequence",
+      "pt": "sequência de aperto",
+      "def": "a ordem numerada em que os bolts de uma peça se apertam, dada pelo manual",
+      "licao": "fixadores-e-torque"
     }
   ]
 }

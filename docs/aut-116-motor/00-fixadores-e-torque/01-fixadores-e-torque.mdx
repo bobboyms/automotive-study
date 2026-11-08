@@ -1,0 +1,727 @@
+---
+title: "Fasteners e torque: identificar o bolt e apertar certo"
+sidebar_label: Fasteners e torque
+---
+
+import Parafuso from '@site/src/components/Parafuso';
+
+# Fasteners e torque: identificar o bolt e apertar certo
+
+> **Pergunta central:** um bolt é uma peça de aço que parece não fazer nada
+> além de ficar parada. Então por que existe um número de torque para cada um,
+> e o que acontece com o engine quando esse número é ignorado?
+
+## A queixa: a head gasket queimou de novo
+
+Um cliente volta à oficina três semanas depois de uma troca de head gasket
+feita em outro lugar. Ele diz:
+
+> “O carro está perdendo coolant de novo, e o ponteiro de temperatura sobe no
+> trânsito. A outra oficina disse que apertou tudo bem forte.”
+
+O técnico abre o engine e encontra três pistas. Os head bolts foram apertados
+com uma impact wrench, sem seguir uma ordem. Os bolts eram os mesmos da
+montagem anterior, reaproveitados. E a head gasket queimada está amassada de
+um lado do cylinder head e solta do outro.
+
+“Bem forte” e “certo” são coisas diferentes, e esta lição mostra por quê. No
+fim, você vai saber três coisas. Primeiro, ler o nome de um bolt (M12 × 1.75,
+9/16-12, grau 10.9) e reconhecer o que cada número mede. Segundo, explicar o que
+o torque faz dentro do bolt. Terceiro, dizer o que deu errado na montagem
+dessa head gasket e o que a próxima montagem precisa fazer diferente.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| fastener | fixador | peça que une outras peças e permite desmontar depois |
+| bolt | parafuso | fixador com cabeça e corpo roscado |
+| nut | porca | peça com rosca por dentro, que aperta no bolt |
+| stud | prisioneiro | haste roscada nas duas pontas |
+| thread | rosca | o relevo em espiral do bolt e do furo |
+| thread pitch | passo da rosca | a distância entre dois filetes vizinhos |
+| bolt grade | classificação de resistência | o número marcado na cabeça: quanto maior, mais forte |
+| clamp load | força de aperto | a força com que o bolt aperta as peças |
+| torque specification | especificação de torque | o valor de aperto que o service manual pede |
+| torque wrench | chave de torque | a chave que mede o torque aplicado |
+| torque-to-yield bolt | bolt de aperto até o escoamento | bolt que estica além do limite elástico e se usa uma vez |
+
+## Onde isso aparece
+
+Todo engine é montado com bolts, e quase todo reparo desmonta e remonta
+alguns. Por isso esta lição vale para a disciplina inteira:
+
+- **AUT-116** (*Engine Repair*): as *lab task sheets* do módulo do cylinder head
+  pedem para remover e instalar o cylinder head “de acordo com as
+  especificações e procedimentos do fabricante”. Essa frase é esta lição.
+- **AUT-141, AUT-151 e AUT-231:** rodas, suspensão, freios e transmissão também
+  são presos por bolts com torque especificado.
+- **Prova ASE:** na área **A1** (*Engine Repair*), perguntas sobre o aperto correto
+  do cylinder head e sobre bolts podem aparecer.
+
+Esta lição acompanha o PowerPoint *Fasteners & Torque* do Blackboard. Segue a
+mesma ordem (o que é um fastener, como o bolt trabalha, como medir, como
+apertar, como soltar um bolt quebrado) e acrescenta a explicação do porquê.
+
+## Ideias anteriores que voltam aqui
+
+Quatro coisas já estudadas sustentam esta lição:
+
+- o **rod bolt** e a **rod cap**, da lição
+  [Block, piston, connecting rod e crankshaft](../funcionamento-do-motor/bloco-pistao-biela-e-virabrequim);
+- a **head gasket**, da lição
+  [Cylinder head e valves](../funcionamento-do-motor/cabecote-e-valvulas);
+- o **torque**, da lição [Drive train](../funcionamento-do-motor/trem-de-forca),
+  onde ele foi apresentado como força vezes distância;
+- o **atrito**, da lição sobre o bloco e o crankshaft.
+
+Responda antes de seguir:
+
+1. Para que serve a head gasket, e o que acontece com o engine se ela deixar de
+   vedar num ponto?
+2. Se você empurra a ponta de uma chave com 50 lb de força, e a chave tem 2 ft
+   de comprimento, quanto torque você aplica?
+3. O que o atrito faz quando uma superfície escorrega sobre outra?
+
+<details>
+<summary>Respostas</summary>
+
+1. A head gasket veda a junção entre o cylinder block e o cylinder head. Ela
+   segura a pressão da combustão dentro do cylinder e mantém separados o
+   coolant e o óleo. Se vaza num ponto, o gás da combustão pode entrar no
+   coolant, ou o coolant pode entrar no cylinder.
+2. Torque é força vezes distância: $50\,\text{lb} \times 2\,\text{ft} = 100\,\text{lb-ft}$.
+3. O atrito resiste ao deslizamento e transforma parte do esforço em calor. É a
+   resistência que aparece entre as roscas de um bolt enquanto ele gira.
+
+</details>
+
+Se a resposta 2 não veio, releia a seção “O que é força de giro” da lição do
+drive train: o torque aparece o tempo todo daqui em diante.
+
+## Intuição: um bolt apertado é uma mola esticada
+
+### O que um fastener faz
+
+Um **fastener** (fixador) é uma peça que une duas ou mais peças de um jeito que
+dá para desmontar depois sem estragá-las. Isso o separa de uma solda ou de um
+rebite, que só saem destruídos. As famílias mais comuns são o **bolt**, o
+**screw** e a **nut**. Também aparecem o **stud** (um prisioneiro, roscado nas
+duas pontas), a **threaded rod** (uma vara roscada em todo o comprimento) e a
+**thread insert**, que repara um furo gasto.
+
+Nesta lição, “bolt” é o fastener de cabeça e corpo roscado que prende as peças
+de um engine. É o que o cylinder head e a connecting rod usam.
+
+### O que acontece dentro do bolt quando ele é apertado
+
+Imagine um elástico de escritório. Se você o estica um pouco e prende as duas
+pontas em dois objetos, ele puxa os objetos um contra o outro. Quanto mais
+esticado, maior a força.
+
+O bolt funciona do mesmo jeito. Quando você gira o bolt, a cabeça empurra a
+peça de cima para baixo, e a rosca no cylinder block puxa o bolt para baixo.
+Entre a cabeça e a rosca, o corpo do bolt fica esticado, como o elástico. O
+bolt estica por um motivo físico: o aço é elástico, e a rosca avança um pouco a
+cada volta enquanto a cabeça já está parada contra a peça. Como o corpo é
+comprido, esse avanço vira alongamento.
+
+Esse alongamento é minúsculo. O olho não o vê. Mas esse alongamento pequeno já
+cria uma força grande, porque o aço é muito rígido: esticar um pouquinho exige
+muita força. Essa força que o bolt faz puxando é o que aperta as peças. Em inglês, é a
+**clamp load**. O valor que fica no bolt logo depois do aperto se chama
+**preload**.
+
+<Parafuso modo="aperto" caption="Um head bolt prendendo o cylinder head no cylinder block, com a head gasket no meio. O bolt está esticado (laranja) e, por isso, aperta as peças uma contra a outra (azul). Na peça real, o alongamento é pequeno demais para ver; o desenho só indica o sentido das forças." />
+
+**Onde a analogia do elástico para de valer.** O elástico estica muito e volta.
+O bolt estica quase nada, e só volta ao tamanho se não for esticado demais. Veja
+o que acontece quando o esforço cresce:
+
+| Zona | O que acontece com o bolt | Se você soltar o bolt |
+|---|---|---|
+| elástica, até a **proof load** | estica e se comporta como mola | volta ao tamanho original |
+| depois do **yield strength** | estica e deforma para sempre | fica mais comprido |
+| na **tensile strength** | o aço chega ao limite | rompe |
+
+O **yield strength** é o ponto em que o aço deixa de ser mola e passa a escorrer
+como massa de modelar. A **proof load** é a maior força com que ele ainda volta
+inteiro. A **tensile strength** é a força que o rompe. O bolt só funciona como
+mola, e só mantém o aperto, na primeira zona.
+
+### Por que a mola importa
+
+Uma peça presa por bolt está sujeita a vibração e a ciclos de calor. A mola
+mantém a força de aperto constante apesar disso. Dois erros quebram essa
+lógica:
+
+- **Aperto de menos.** O bolt está pouco esticado, a força de aperto é pequena
+  e as peças se mexem. O bolt passa a receber esforço que sobe e desce a cada
+  movimento, e esse esforço repetido pode trincar o aço ao longo do tempo.
+- **Aperto de mais.** O bolt passa do yield strength. Ele deforma para sempre,
+  perde a força de mola e, às vezes, quebra.
+
+## Ponte para a formalização
+
+Até aqui, o aperto foi descrito pelo efeito dentro do bolt: o quanto ele
+estica. Só que ninguém consegue medir o alongamento de um bolt numa oficina.
+O que a oficina mede é outra coisa: o torque que a chave aplica na cabeça. A
+ligação entre as duas é o ponto delicado desta lição. Se ela falhar, o torque
+certo na chave deixa de dar o aperto certo no bolt.
+
+Para chegar lá, vamos primeiro aprender a identificar o bolt (o manual fala dele
+pelo tamanho, passo e classe) e depois ver como o torque vira alongamento.
+
+## Formalização
+
+### Como identificar um bolt: três medidas
+
+Para pedir ou conferir um bolt, você precisa de três medidas. O desenho mostra
+onde cada uma é tirada.
+
+<Parafuso modo="anatomia" caption="Um bolt de cabeça hexagonal. À esquerda, a vista de frente da cabeça, com o wrench size. No bolt, as três medidas que o identificam: diameter, thread pitch e length." />
+
+1. **Diameter (diâmetro):** a largura do bolt medida sobre as roscas, de uma
+   crista à outra do lado oposto.
+2. **Thread pitch (passo da rosca):** o espaçamento entre as roscas.
+3. **Length (comprimento):** medido da face de baixo da cabeça até a ponta, num
+   bolt de cabeça hexagonal. A cabeça não entra na conta.
+
+**O wrench size não é o diâmetro do bolt.** O wrench size é a distância entre
+duas faces opostas da cabeça, e é o número que escolhe a chave ou o soquete.
+Um bolt de 12 mm de diâmetro não usa uma chave de 12 mm.
+
+### Passo: métrico e em polegada
+
+O passo se escreve de dois jeitos, conforme o sistema:
+
+| Sistema | Como se lê o passo | Exemplo | O que diz |
+|---|---|---|---|
+| **metric thread** | distância em mm entre dois filetes | M12 × 1.75 | 12 mm de diâmetro, 1.75 mm entre filetes |
+| rosca em polegada | quantos filetes cabem em 1 in (**threads per inch**) | 9/16-12 | 9/16 in de diâmetro, 12 filetes por polegada |
+
+As duas leituras vão em direções contrárias. No sistema métrico, número maior
+é passo maior, isto é, rosca mais grossa. Em threads per inch, número maior
+quer dizer mais filetes na mesma distância, isto é, rosca mais fina.
+
+Dentro de cada sistema, existem duas famílias para o mesmo diâmetro: a
+**coarse thread** (rosca grossa, poucos filetes) e a **fine thread** (rosca
+fina, muitos filetes). O manual diz qual usar. Nenhuma das duas é “melhor”: são
+projetos diferentes, e trocar uma pela outra é um erro.
+
+Um bolt métrico completo se escreve **M12 × 1.75 × 70**: 12 mm de diâmetro,
+1.75 mm de passo e 70 mm de comprimento.
+
+**Erro comum: achar que um bolt “quase igual” serve.** O M12 × 1.75 tem 12 mm de
+diâmetro. O bolt de ½ in com 13 filetes por polegada (½-13) tem 12.7 mm. São 0.7 mm
+de diferença, o suficiente para entrar uma ou duas voltas no furo errado e
+parecer que vai. O passo também difere: 1.75 mm de um lado e
+$25.4 \div 13 = 1.95\,\text{mm}$ do outro. As roscas não casam, o bolt trava e
+corta a rosca do furo. O nome desse defeito é **cross-threading**, e ele será
+tratado adiante.
+
+### Ferramentas que medem
+
+- **Pitch gauge:** um leque de lâminas com dentes de passos conhecidos. Você
+  encosta as lâminas, uma por vez, nas roscas do bolt. A lâmina que encaixa sem
+  nenhuma folga e sem forçar tem o mesmo passo, e o número gravado nela é o
+  passo.
+- **Bolt gauge:** uma régua com furos e entalhes. Você enfia o bolt nos furos
+  e vê qual deixa passar sem folga: esse é o diâmetro. As escalas da lateral
+  dão o comprimento.
+
+### Classe de resistência: o que está marcado na cabeça
+
+A cabeça do bolt traz uma marca que diz o quanto ele aguenta. É a **bolt
+grade**, e a regra é: quanto maior o número, mais forte o bolt. Há dois
+sistemas, e eles se reconhecem pelo tipo de marca:
+
+| Sistema | Como aparece na cabeça | Como ler |
+|---|---|---|
+| métrico | números gravados, como 8.8, 10.9 ou 12.9 | número maior, bolt mais forte |
+| em polegada (SAE) | traços em relevo, ou nenhuma marca | número de traços mais dois dá a classe: 3 traços, classe 5; 6 traços, classe 8; sem marca, as classes mais baixas |
+
+Na classe métrica, o número depois do ponto tem um significado extra. Em
+8.8, o segundo 8 quer dizer que o bolt começa a deformar para sempre a 0.8
+(80%) da sua resistência máxima. Em 10.9, o 9 quer dizer 90%. Você pode
+conferir a conta: $8 \div 10 = 0.8$ e $9 \div 10 = 0.9$. Um bolt 10.9 não só
+aguenta mais: ele também usa uma fatia maior dessa resistência antes de passar
+do yield strength.
+
+A tabela do slide da aula traz três colunas para cada classe: **proof load**,
+**yield strength** e **tensile strength**. Essas são as três zonas da seção
+anterior, com os números de cada classe. Não copie esses números para um
+reparo: o que vale é o service manual do veículo.
+
+**Regra prática:** nunca troque um bolt por outro de classe menor. Ele foi
+escolhido porque o esforço naquele ponto exige essa resistência. Trocar por um
+mais fraco pode quebrar. Trocar por um mais forte também não é automático, pois
+o torque especificado foi calculado para o bolt original.
+
+### Torque: a conta que a oficina consegue medir
+
+Torque é força vezes distância (lição do drive train):
+
+$$
+\text{torque} = \text{força} \times \text{distância}
+$$
+
+A unidade do manual é a **lb-ft** (libra-pé), a **lb-in** (libra-polegada) ou o
+**N·m** (newton-metro). Tome cuidado com a primeira troca, que é a mais comum:
+1 lb-ft vale 12 lb-in. Quem lê 89 lb-in como 89 lb-ft aperta 12 vezes mais
+forte do que o manual pede. A conversão para o sistema métrico é
+$1\,\text{lb-ft} = 1.356\,\text{N·m}$.
+
+### Para onde vai o torque
+
+O torque que você aplica na chave **não vira todo alongamento do bolt**. A maior
+parte vence o atrito: o atrito sob a cabeça do bolt, que escorrega sobre a
+peça, e o atrito entre as roscas. Só o que sobra estica o bolt.
+
+Isso tem uma consequência prática importante, que explica por que o manual
+fala tanto de condição da rosca. Se o atrito muda, a mesma leitura de torque
+deixa de dar o mesmo alongamento.
+
+Para ver o efeito com números, suponha (**valores inventados só para a conta,
+não de nenhum bolt real**):
+
+- rosca seca e limpa: o atrito consome 90% do torque, e 10% estica o bolt;
+- rosca com óleo ou **anti-seize**: o atrito consome 85% do torque, e 15% estica
+  o bolt.
+
+Com a mesma leitura na chave, o alongamento passa de 10 para 15 partes:
+$15 \div 10 = 1.5$. O bolt lubrificado fica **50% mais esticado** que o seco, no
+mesmo clique. Se o valor do manual foi calculado para rosca seca e você apertou
+com óleo, o bolt pode passar do yield strength. No sentido contrário, uma rosca
+suja, enferrujada ou com sujeira no furo aumenta o atrito. A chave estala no
+valor certo, mas o bolt ficou pouco esticado: a clamp load ficou baixa.
+
+Por isso o manual diz **em que condição** o torque vale (rosca seca ou
+lubrificada com óleo de motor, por exemplo). Siga a condição, e não só o
+número.
+
+### Controlar o aperto
+
+Os métodos de aperto se dividem em dois grupos:
+
+- **Aperto não controlado:** usa ferramenta ou método que não se mede, como uma
+  impact wrench, ou uma chave com a força do braço. Ninguém sabe quanto o bolt
+  recebeu.
+- **Aperto controlado:** usa ferramenta calibrada e um procedimento escrito. Na
+  oficina de engine, isso quer dizer a **torque wrench**.
+
+O aperto controlado traz força conhecida, igual em todos os bolts, e resultado
+que se repete. Esse é o ponto da queixa da abertura: com a impact wrench, a
+força variou de bolt para bolt, e a head gasket foi amassada de um lado.
+
+### Os quatro tipos de torque wrench
+
+| Tipo | Como funciona | Como você sabe que chegou |
+|---|---|---|
+| **beam** | a haste de apoio flexiona contra uma agulha numa escala | você olha a agulha enquanto puxa |
+| **split beam** | tem duas hastes: a do cabo aplica a força e a outra, presa na cabeça, serve de indicador; pode ficar regulada num valor | pelo indicador, ou ao chegar ao valor regulado |
+| **click** | mecanismo interno solta ao chegar ao torque regulado | um estalo audível |
+| **digital** | sensor eletrônico e visor; aceita várias unidades e até ângulo | luz, som ou vibração |
+
+A click torque wrench é a mais usada. Ela exige um cuidado: depois do uso, gire
+o cabo de volta para o menor valor da escala (a aula fala em “zero”; o manual da
+ferramenta diz o ajuste exato). A mola interna fica comprimida enquanto a
+ferramenta está regulada. Guardada assim, ela se deforma com o tempo e a chave
+perde a calibração.
+
+### Estágios e sequência
+
+O cylinder head tem muitos bolts, e a head gasket é uma peça única embaixo de todos.
+Se você aperta um bolt até o valor final antes dos outros, o cylinder head
+inclina para esse lado e amassa a gasket onde ele está, deixando-a folgada do
+lado oposto. É o caso da queixa. A solução é apertar **todos os bolts em
+estágios**, cada estágio um pouco mais forte que o anterior, numa **sequência**
+numerada. O service manual traz o desenho da ordem e os valores de cada
+estágio. Em geral, a ordem começa pelo meio da peça e vai para as pontas, para
+a peça ir assentando de dentro para fora. Siga o desenho do manual, e não a
+memória.
+
+### Torque-to-yield: o bolt que se usa uma vez
+
+Alguns engines usam **torque-to-yield bolts** (também chamados de TTY bolts).
+Eles são apertados de propósito até o começo do yield strength. A vantagem é
+que a clamp load fica muito uniforme de bolt para bolt. O custo é que o bolt
+**já esticou para sempre**. Reapertá-lo vai esticar de novo, e o bolt pode
+quebrar. A regra é descartar e instalar um novo.
+
+O manual avisa quando o bolt é TTY, e costuma dar o aperto em duas partes:
+primeiro um torque baixo, depois uma volta de ângulo (por exemplo, mais
+90°, **valor só ilustrativo**). O ângulo é aplicado com um medidor de ângulo ou com uma
+digital torque wrench que mede graus.
+
+O bolt TTY reutilizado é a segunda pista da queixa: os bolts da outra oficina
+eram os mesmos da montagem anterior.
+
+## Como falha e como diagnosticar
+
+**O que o sistema deveria fazer.** Cada bolt do cylinder head deveria ficar
+esticado com a mesma força, e a head gasket deveria ser comprimida de modo
+uniforme em toda a volta, em cada cylinder, no canal de coolant e no de óleo.
+
+**O que foi observado.** Na queixa da abertura, a gasket estava amassada de um
+lado e folgada do outro. Pelo que a lição mostrou, as três pistas explicam isso:
+
+| Pista | O princípio que ela quebra | Efeito na gasket |
+|---|---|---|
+| impact wrench | aperto não controlado: a força muda de bolt para bolt | alguns bolts passam do valor e outros ficam abaixo |
+| sem sequência nem estágios | a peça deve assentar de modo parelho | o cylinder head inclina e amassa a gasket de um lado |
+| bolts TTY reutilizados | o bolt já esticou além do yield strength | a clamp load é menor e não se repete |
+
+**Por que a conclusão não é palpite.** A gasket queimada, amassada num lado e
+solta no outro, é exatamente o que se espera de força de aperto desigual: o lado
+amassado foi mais apertado, o lado solto, menos. As três causas atacam a mesma
+coisa, a uniformidade da clamp load.
+
+**Como confirmar.** Antes de remontar, limpe e confira. A superfície do
+cylinder head e do cylinder block deve estar limpa e plana, e os furos roscados
+do block devem estar limpos e secos (líquido preso num furo cego pode dar torque
+falso e, em casos extremos, trincar o block). Depois, remonte com bolts novos,
+gasket nova, estágios e sequência do manual, e uma torque wrench calibrada. Na
+conferência final, o sintoma de perda de coolant e de temperatura alta não
+volta.
+
+### Defeitos do próprio fastener
+
+| Sintoma | Causa provável | Como se confirma |
+|---|---|---|
+| o bolt gira sem apertar e a chave nunca estala | **stripped thread**: a rosca do bolt ou do furo foi arrancada | o bolt gira livre até o fim sem resistência; comparar com um bolt bom |
+| o bolt trava logo nas primeiras voltas | **cross-threading**: entrou torto, ou o passo é errado | a primeira volta, feita com a mão, já exige força; pare e retire |
+| a cabeça do bolt gira e a chave escorrega | cabeça arredondada, por chave de medida errada ou por esforço demais | olhar os cantos da cabeça: ficaram redondos |
+| a cabeça do bolt quebra e fica o toco no furo | aperto demais, bolt enferrujado ou fadiga | olhar o toco: o bolt está quebrado |
+| o aperto estala, mas a peça solta depois | rosca suja ou bolt esticado demais antes | desmontar e inspecionar rosca e bolt |
+
+### Como soltar o que travou
+
+**Cabeça arredondada.** Use um **non-slip socket**, um soquete que agarra pelos
+cantos arredondados, ou um **bolt extractor socket**, com ranhuras em espiral que
+mordem a cabeça no sentido de soltar.
+
+**Bolt quebrado com toco no furo.** O **screw extractor** gira o toco para fora:
+você abre um furo no centro do toco com uma broca (o **drill and extractor
+set** traz as duas ferramentas), crava o extrator, que tem rosca invertida, e o gira no sentido de soltar.
+Quanto mais ele morde, mais ele aperta o toco, e o toco gira para fora.
+**Cuidado:** o extrator é de aço muito duro e quebradiço. Se você o força e ele
+parte dentro do furo, o problema fica pior. Se o toco não gira com esforço
+moderado, pare e peça ajuda ao instrutor.
+
+**Rosca danificada na extração.** Depende de quanto sobrou:
+
+| Ferramenta | O que faz | Quando |
+|---|---|---|
+| **thread chaser** (re-threader) | limpa e alinha a rosca amassada, sem tirar material | rosca com pequeno dano |
+| **tap** | corta rosca nova dentro do furo; a **die** faz o mesmo por fora de um bolt | rosca que ainda existe, mas precisa ser refeita |
+| **Helicoil** | uma mola de fio em espiral que se rosqueia no furo e devolve a rosca original | rosca quase toda perdida, com material ao redor |
+| **thread insert** | uma luva sólida com rosca por dentro e por fora, em furo maior que o original | quando falta material para o Helicoil |
+
+Existem três tipos de tap: o **taper tap**, com a ponta bem afilada, que ajuda a
+entrar no furo; o **plug tap**, menos afilado; e o **bottoming tap**, sem
+afilamento, que corta a rosca até o fundo de um furo cego. Começa-se
+pelo mais afilado.
+
+## Na oficina: apertar e soltar com segurança
+
+:::danger Segurança antes de pegar a chave
+
+- **Use óculos de proteção** sempre que furar um bolt, usar um extrator, bater
+  numa ferramenta ou soltar um bolt enferrujado. Lascas de aço e pedaços de
+  extrator saltam.
+- **Puxe a chave, não empurre.** Se um bolt cede de repente e você estava
+  empurrando, a mão bate na peça. Puxando, a mão se afasta.
+- **Nunca use a torque wrench para soltar** um bolt travado. Ela mede o aperto e
+  não foi feita para esforço de soltura; o impacto pode tirar a calibração.
+- **Não alongue o cabo** de uma chave com um tubo, a menos que a ferramenta
+  seja própria para isso.
+- **Ao furar, prenda a peça** e retire joias e roupas soltas do alcance da
+  broca.
+- **Óleo penetrante** é inflamável. Não use perto de chama, de faísca ou de peça
+  muito quente.
+- **Calor aplicado com maçarico** para soltar um bolt é assunto do instrutor,
+  nunca de improviso: engine tem combustível e plástico em volta.
+:::
+
+### O procedimento geral para apertar um bolt
+
+1. **Procure no service manual** a **torque specification**, a condição da
+   rosca (seca ou com óleo), o número de estágios, a sequência e se o bolt é
+   TTY. O valor sempre vem do manual do veículo, e não de uma tabela de
+   memória.
+2. **Confira o bolt:** diâmetro, passo, comprimento e classe iguais aos do
+   original. Se é TTY, use um novo.
+3. **Limpe as roscas** do bolt e do furo. Se o furo é cego, seque o fundo.
+4. **Comece o bolt com a mão.** Ele deve girar livre nas primeiras voltas. Se
+   trava, pare: é cross-threading. Tire e comece de novo.
+5. **Aperte em estágios,** na sequência do manual, com a torque wrench regulada
+   no valor de cada estágio.
+6. **Puxe com movimento firme e contínuo,** com a mão no centro do cabo, até o
+   estalo ou a leitura. Pare no estalo: apertar mais depois dele passa do
+   valor.
+7. **Guarde a click torque wrench** no menor valor da escala.
+
+**Onde achar a especificação:** no service manual do veículo, ou no sistema de
+informação do fabricante (por exemplo, o ShopKey Pro que a aula usa). O valor de
+cada bolt varia conforme veículo, engine e ano.
+
+## Exemplos resolvidos
+
+### Exemplo 1: ler o nome de dois bolts
+
+Um bolt vem anotado **M12 × 1.75 × 70**. Outro vem anotado **9/16-12**.
+
+- No M12 × 1.75 × 70: 12 mm de diâmetro, 1.75 mm de passo e 70 mm de
+  comprimento. Para comparar com o sistema em polegada, converta o passo:
+  $25.4 \div 1.75 = 14.5$ filetes por polegada.
+- No 9/16-12: 9/16 in de diâmetro, que são $9 \div 16 \times 25.4 = 14.3\,\text{mm}$.
+  São 12 filetes por polegada, e cada passo mede $1 \div 12 = 0.083\,\text{in}$, que
+  são $25.4 \div 12 = 2.12\,\text{mm}$.
+
+O que não muda é o que cada número mede. O que muda é a unidade: o primeiro
+número é sempre o diâmetro, e o segundo sempre descreve o espaçamento.
+
+### Exemplo 2: o manual pede 89 lb-in e a chave está em lb-ft
+
+**Pause e tente** antes de ler a solução: quanto é 89 lb-in em lb-ft e em N·m?
+
+Solução. 1 lb-ft vale 12 lb-in. Então $89 \div 12 = 7.42\,\text{lb-ft}$. Em
+N·m, $7.42 \times 1.356 = 10.1\,\text{N·m}$. Os dois valores são de exemplo: o número que vale é o do manual do veículo.
+
+Um alerta: 7.42 lb-ft é um valor baixo. Uma click torque wrench de escala
+grande pode ser imprecisa na faixa baixa. Use uma chave cuja escala em lb-in
+cubra o valor do manual.
+
+### Exemplo 3: a mesma chave, rosca diferente
+
+**Pause e tente:** o manual pede um torque calculado para rosca seca. Um
+técnico passa óleo nas roscas e aperta no mesmo valor. O que acontece com a
+clamp load, e por quê?
+
+Solução. Com os números inventados da seção “Para onde vai o torque”, o
+atrito de rosca seca consumia 90% do torque, e sobravam 10% para esticar. Com
+óleo, o atrito cai para 85%, e sobram 15%. O bolt estica $15 \div 10 = 1.5$ vez
+mais. A clamp load sobe 50% e pode passar do yield strength. **O que não muda:**
+a leitura da chave. **O que muda:** a parte do torque que chega ao alongamento.
+
+### Exemplo 4: de volta à queixa
+
+**Pause e tente:** por que a head gasket da abertura estava amassada de um lado
+e solta do outro?
+
+Solução. Uma impact wrench não limita o torque, e a sequência foi
+ignorada. Alguns bolts receberam bem mais clamp load que outros, e o cylinder
+head assentou inclinado. O lado muito apertado amassou a gasket, e o lado pouco
+apertado ficou com folga e vazou coolant. Os bolts TTY reutilizados pioraram:
+eles já tinham esticado além do yield strength e não davam clamp load previsível.
+A causa é a mesma nas três pistas: aperto desigual. O reparo certo: gasket nova,
+bolts novos, estágios e sequência do manual, torque wrench calibrada.
+
+## Perguntas de verificação
+
+1. Por que um bolt apertado é como uma mola?
+2. Por que o wrench size de um bolt de 12 mm de diâmetro não é 12 mm?
+3. Por que apertar com óleo no valor do torque “seco” pode quebrar o bolt?
+4. Por que os bolts do cylinder head se apertam em estágios e em sequência?
+5. Por que um bolt TTY se descarta em vez de reutilizar?
+
+<details>
+<summary>Respostas</summary>
+
+1. Quando se aperta, o bolt estica um pouco e, como o aço é elástico, tenta
+   voltar ao tamanho original. Essa tentativa puxa a cabeça contra a peça: é a
+   clamp load. Se esticar demais, ele passa do yield strength e deixa de ser
+   mola.
+2. O diâmetro mede o corpo do bolt. O wrench size mede a distância entre faces
+   opostas da cabeça. São duas medidas de lugares diferentes, e a cabeça é
+   maior que o corpo.
+3. O óleo reduz o atrito. Com menos atrito, uma parte maior do torque vira
+   alongamento. O bolt estica mais que o previsto e pode passar do yield
+   strength.
+4. A head gasket é uma peça só embaixo de todos os bolts. Se um bolt fosse
+   apertado até o final antes dos outros, o cylinder head inclinaria e a gasket
+   amassaria de um lado. Estágios e sequência fazem a peça assentar de modo
+   parelho.
+5. O bolt TTY é apertado de propósito até o yield strength. Ele já esticou para
+   sempre. Reapertar estica de novo, a clamp load não é previsível e o bolt
+   pode quebrar.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Nomeie as três medidas que identificam um bolt de cabeça hexagonal.
+
+b) Um bolt é gravado **M10 × 1.5**. O que o 10 e o 1.5 medem?
+
+c) Na cabeça de um bolt, há 6 traços em relevo. Que sistema é esse e qual é a
+classe? E um bolt com “10.9” gravado?
+
+d) Que ferramenta mede o passo de um bolt?
+
+### 2. Explicação
+
+Com as suas palavras, explique por que apertar um bolt “bem forte” não é o
+mesmo que apertar certo.
+
+### 3. Aplicação direta
+
+a) Você empurra com 24 lb a ponta de uma chave de torque de 1.5 ft. Qual é o
+torque em lb-ft?
+
+b) Converta o torque do item (a) para N·m.
+
+c) O manual pede 120 lb-in. Quanto é em lb-ft?
+
+### 4. Variação
+
+a) Um técnico tem um bolt M12 × 1.75 e um bolt ½-13. Os dois entram no mesmo
+furo por uma volta. Por que não são intercambiáveis?
+
+b) O técnico precisa de um torque de 90 lb-ft e tem uma chave de 2 ft. Que
+força precisa fazer na ponta?
+
+### 5. Caso de diagnóstico
+
+Depois de trocar a valve cover gasket, o técnico apertou todos os bolts da valve
+cover com uma ratchet “até parar”. O óleo vaza por um canto. Que causa você
+suspeita? Que verificação confirma? O que o procedimento correto traria?
+
+### 6. Justificativa
+
+Por que um torque wrench é um método de aperto controlado, e uma impact wrench
+não?
+
+### 7. Formato ASE
+
+**1.** Technician A says a bolt stretches slightly when it is tightened.
+Technician B says a bolt that has been stretched past its yield strength returns
+to its original length when the load is removed. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+**2.** Which tool is used to determine the thread pitch of a bolt?
+
+- A. Bolt gauge
+- B. Pitch gauge
+- C. Feeler gauge
+- D. Torque wrench
+
+**3.** Technician A says torque-to-yield head bolts may be reused if they look
+undamaged. Technician B says a torque wrench may be used to loosen a stuck bolt.
+Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Dica (item 5)</summary>
+
+Pergunte quem apertou: a mão, uma ratchet ou uma chave que mede? O que falta
+para saber quanto cada bolt recebeu?
+
+</details>
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) Diameter, thread pitch e length (da face de baixo da cabeça até a ponta).
+
+b) O 10 é o diâmetro em mm. O 1.5 é o passo, a distância em mm entre dois
+filetes vizinhos.
+
+c) Seis traços, no sistema em polegada (SAE): a regra “traços mais dois” dá
+$6 + 2 = 8$, classe 8. O “10.9” é do sistema métrico.
+
+d) O pitch gauge.
+
+**2. Explicação**
+
+O bolt só funciona como mola dentro de uma faixa: esticado o suficiente para
+criar clamp load, e não além do yield strength. “Bem forte” não mede nada e
+pode passar do yield strength. Além disso, a maior parte da força vence o
+atrito, então forte na mão não é o mesmo que esticado no ponto certo.
+
+**3. Aplicação direta**
+
+a) $24 \times 1.5 = 36\,\text{lb-ft}$.
+
+b) $36 \times 1.356 = 48.8\,\text{N·m}$.
+
+c) $120 \div 12 = 10\,\text{lb-ft}$. Quem aperta 120 lb-ft pelo valor lido em
+lb-in aperta 12 vezes mais do que o manual pede. Se você achou 1440, multiplicou
+em vez de dividir.
+
+**4. Variação**
+
+a) O diâmetro é 12 mm contra 12.7 mm, e o passo é 1.75 mm contra
+$25.4 \div 13 = 1.95\,\text{mm}$. A diferença é pequena na primeira volta, mas
+as roscas não casam: o bolt trava e corta uma rosca nova no furo
+(cross-threading).
+
+b) $90 \div 2 = 45\,\text{lb}$.
+
+**5. Caso de diagnóstico**
+
+Aperto não controlado: com a ratchet, ninguém sabe quanto cada bolt recebeu.
+Provavelmente algum bolt ficou pouco apertado e a gasket deixou vazar no canto
+(ou algum foi apertado demais e deformou a cover). Para confirmar, solte e
+inspecione: a cover deformada ou a gasket amassada mostra qual foi o caso. O
+procedimento correto traz o valor do manual (para a valve cover, costuma ser um
+torque baixo, **dado só pelo manual**), a sequência e uma torque wrench de escala
+baixa.
+
+**6. Justificativa**
+
+A torque wrench mede o torque, para no valor regulado e repete o resultado. A
+impact wrench bate no bolt e não tem como mostrar ou limitar o torque. Sem
+medida, não há como controlar.
+
+**7. Formato ASE**
+
+1. **A only (alternativa A).** Technician A está certo: o bolt estica um pouco ao
+   ser apertado. Technician B está errado: depois do yield strength o bolt
+   deforma para sempre e não volta ao tamanho.
+2. **Pitch gauge (B).** O bolt gauge mede o diâmetro e o comprimento. O feeler
+   gauge mede folgas entre duas peças. A torque wrench mede aperto, e não passo.
+3. **Neither A nor B (D).** Technician A está errado: um bolt TTY já esticou além
+   do yield strength, e a aparência não mostra isso; o manual manda descartar.
+   Technician B está errado: a torque wrench é para apertar. Usá-la para soltar
+   pode tirar a calibração.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o bolt funciona como uma mola esticada. Esse alongamento
+  cria a clamp load, que aperta as peças. O torque que a oficina mede só vira
+  alongamento depois de vencer o atrito.
+- **Quando usar:** para ler o nome de um bolt (diâmetro, passo, comprimento,
+  classe), para apertar com a torque specification do manual e para entender
+  por que um aperto desigual queima uma head gasket.
+- **Com o que se conecta:** com o rod bolt e a head gasket da AUT-116, com o
+  torque do drive train e com o atrito. Continua nas lab task sheets do
+  cylinder head e em todas as disciplinas que montam peças.
+- **O que sempre vem do manual:** o valor do torque, a condição da rosca, os
+  estágios, a sequência e se o bolt é TTY.
+
+**Termos em inglês desta lição:** fastener · bolt · nut · screw · stud ·
+threaded rod · thread · bolt head · shank · thread pitch · threads per inch ·
+coarse thread · fine thread · metric thread · bolt diameter · bolt length ·
+wrench size · bolt grade · clamp load · preload · yield strength · tensile
+strength · proof load · torque specification · torque wrench · beam torque wrench ·
+split beam torque wrench · click torque wrench · digital torque wrench · ratchet ·
+wrench · impact wrench · pitch gauge · bolt gauge · torque-to-yield bolt ·
+head bolt · anti-seize · cross-threading · stripped thread · bolt extractor
+socket · screw extractor · drill and extractor set · thread chaser · tap · die ·
+helicoil · thread insert · penetrating oil · torque sequence.
