@@ -1,0 +1,28 @@
+.figure {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.caption {
+  max-width: 560px;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.credito {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+}

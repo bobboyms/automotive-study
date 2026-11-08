@@ -122,6 +122,10 @@ import Circuito from '@site/src/components/Circuito';
 | crush zone e passenger compartment de lado; a mesma parada em duas distâncias | `Colisao` |
 | air bag module em corte; o magnet-and-ball sensor; quem fala com quem no SRS | `AirBag` |
 | reconhecer pela aparência: crosta de corrosion, case estufado, plate sulfatada | `Foto` |
+| cylinder em corte no leakage test: o ar do tester e os quatro caminhos de vazamento (intake valve, exhaust valve, piston rings, head gasket) | `VazamentoCilindro` |
+| cylinder em corte no compression test: o gauge no furo da plug e o piston subindo | `CompressaoNoCilindro` |
+| as leituras de um compression test em barras, com a linha dos 75 % | `LeiturasCompressao` |
+| o V6 visto de cima, com os cylinders numerados e os vizinhos que se tocam | `IdentificacaoCilindros` |
 | correspondência: sintoma → causa → teste, leitura → significado | tabela markdown |
 | passos alinhados de uma conta | `\begin{array}` em KaTeX |
 
@@ -630,6 +634,49 @@ virabrequim e do comando, o sentido do pistão e o estado de cada válvula.
 | `'oleo'` | o anel de óleo descendo e raspando a película de óleo, que volta para baixo |
 
 Tom 2 é a pressão da combustão; tom 1 é o óleo.
+
+## VazamentoCilindro
+
+Cylinder em corte no cylinder leakage test: piston no TDC, as duas valves
+fechadas, o furo da spark plug aberto e os quatro caminhos do ar que vaza
+(intake valve → throttle body, exhaust valve → tailpipe, piston rings →
+crankcase, head gasket → cylinder vizinho). Tom 1 é o ar do tester; tom 2 é o ar
+que vaza.
+
+```mdx
+<VazamentoCilindro caption="..." />
+```
+
+## CompressaoNoCilindro
+
+Cylinder em corte no compression test: o compression gauge e o adapter no furo da
+spark plug, as duas valves fechadas e o piston subindo no compression stroke. Tom
+1 é o ar que o piston aperta e leva ao gauge; tom 2 é o ar que escapa pelos
+rings.
+
+```mdx
+<CompressaoNoCilindro caption="..." />
+```
+
+## LeiturasCompressao
+
+Gráfico de barras das leituras de um compression test, uma barra por cylinder,
+com uma linha tracejada em 75 % da maior leitura. Tom 1 é o cylinder dentro do
+limite; tom 2 é o cylinder abaixo. A escala é fixa (0 a 200 psi).
+
+```mdx
+<LeiturasCompressao leituras={[188, 190, 186, 189, 118, 121]} caption="..." />
+```
+
+## IdentificacaoCilindros
+
+O engine V6 3.5L visto de cima, com um bank de cylinders 1-2-3 e o outro 4-5-6,
+redesenhado a partir da figura “Engine Cylinder Identification” do manual
+(303-01C). `destaque` pinta de tom 2 os cylinders da queixa.
+
+```mdx
+<IdentificacaoCilindros destaque={[5, 6]} caption="..." />
+```
 
 ## ComandoValvula
 

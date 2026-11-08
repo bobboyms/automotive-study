@@ -1,0 +1,846 @@
+---
+title: "Compression test: medir se cada cylinder segura a pressão"
+sidebar_label: Compression test
+---
+
+import CompressaoNoCilindro from '@site/src/components/CompressaoNoCilindro';
+import LeiturasCompressao from '@site/src/components/LeiturasCompressao';
+import IdentificacaoCilindros from '@site/src/components/IdentificacaoCilindros';
+import FiguraManual from '@site/src/components/FiguraManual';
+
+# Compression test: medir se cada cylinder segura a pressão
+
+> **Pergunta central:** o scan tool mostra misfire em dois cylinders e a coil
+> está descartada. Como medir se esses cylinders apertam o ar no compression
+> stroke, e como ler os números sem decorar um valor de memória?
+
+Esta lição usa o **Ford Edge com o engine 3.5L Duratec V6**. Todo passo e todo
+número vêm do *service manual* desse engine, e a lição indica **a seção e a
+figura do manual** de cada passo. As figuras do manual estão copiadas aqui, para estudo, cada
+uma no passo em que o manual a usa. O número dela (E200473, E201465 e assim por
+diante) é o que aparece no canto da figura no manual, e serve para você achar a
+mesma figura lá. A lição explica o que cada figura mostra, e a figura mostra
+onde a mão vai.
+
+O compression test já foi apresentado na lição
+[O four-stroke cycle](../funcionamento-do-motor/ciclo-de-quatro-tempos), em
+versão resumida. Aqui ele é feito inteiro, no Edge, e a lição seguinte,
+[Cylinder leakage test](./teste-de-vazamento-do-cilindro), usa o resultado.
+
+## A queixa: o Edge treme e a coil está descartada
+
+Um cliente traz um Ford Edge 3.5L e diz:
+
+> “O carro treme quando está parado no semáforo, e a luz do engine acendeu.”
+
+O técnico liga o scan tool e encontra dois códigos de *misfire* (falha de
+combustão): **P0305**, no cylinder 5, e **P0306**, no cylinder 6. Ele troca a
+coil do cylinder 5 com a de um cylinder bom, e a falha continua no cylinder 5.
+Então a coil não é a causa.
+
+Sobram duas famílias de causa: faltam faísca e combustível (que o teste da coil
+não cobre por inteiro), ou o cylinder **não segura a pressão** do compression
+stroke. O compression test responde a segunda pergunta. No fim da lição, a
+seção “A queixa, resolvida” volta a este carro e mostra as leituras.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| compression test | teste de compressão | medir a pressão máxima que cada cylinder faz quando o engine é girado |
+| compression gauge | manômetro de compressão | o relógio rosqueado no furo da spark plug; ele guarda a maior pressão que recebeu |
+| cranking | giro do engine pelo starter | o starter motor gira o engine sem que ele pegue |
+| auxiliary starter switch | interruptor auxiliar de partida | um botão ligado ao circuito de partida, que deixa uma pessoa girar o engine de fora do carro |
+| wet test | teste molhado | o mesmo teste repetido com um pouco de óleo no cylinder, para separar os piston rings das valves |
+| 75 % rule | regra dos 75 % | a regra do manual: a menor leitura tem que ser pelo menos 75 % da maior |
+| check valve | válvula de retenção | uma válvula que deixa o ar passar em um sentido e não deixa voltar |
+| relative compression test | teste de compressão relativa | um teste feito pelo scan tool, que compara os cylinders sem tirar as spark plugs |
+| firing order | ordem de ignição | a sequência em que os cylinders queimam: no 3.5L, 1-4-2-5-3-6 |
+
+## Onde isso aparece
+
+- **AUT-116** (*Engine Repair*): o compression test é o primeiro teste mecânico
+  do engine. Ele vem antes do cylinder leakage test, que é a *lab task sheet*
+  C395.
+- **AUT-181 e AUT-183** (*Engine Performance*): quando um misfire não tem causa
+  elétrica, o compression test é o passo seguinte. O manual do Edge, na tabela
+  de sintomas, manda usar o scan tool para fazer o power balance test e o
+  relative compression test (seção 303-00), e depois a compressão com o
+  gauge.
+- **Prova ASE:** área **A1** (*Engine Repair*), nas perguntas sobre diagnóstico
+  mecânico do engine.
+
+## Ideias anteriores que voltam aqui
+
+- O **compression stroke**, da lição
+  [O four-stroke cycle](../funcionamento-do-motor/ciclo-de-quatro-tempos): o
+  piston sobe com as duas valves fechadas.
+- As três peças que fecham o cylinder, da lição
+  [Cylinder head e valves](../funcionamento-do-motor/cabecote-e-valvulas): as
+  valves, os piston rings e a head gasket.
+- O **starter motor** e o estado de carga da battery, da lição
+  [Ignition, starting e charging](../funcionamento-do-motor/ignicao-partida-e-carga):
+  quem gira o engine no teste é o starter motor, e ele só gira rápido se a
+  battery estiver carregada.
+- O **torque** e a unidade lb-in, da lição
+  [Fasteners e torque](../fixadores-e-torque/fixadores-e-torque): você vai
+  apertar coils, spark plugs e o intake manifold.
+
+Responda antes de seguir:
+
+1. No compression stroke, em que posição estão a intake valve e a exhaust valve?
+2. Se a battery está fraca, o que acontece com a velocidade com que o starter
+   motor gira o engine?
+3. Torque de 133 lb-in e torque de 133 lb-ft são o mesmo valor?
+
+<details>
+<summary>Respostas</summary>
+
+1. As duas estão fechadas. Com uma delas aberta, o cylinder ficaria ligado ao
+   intake ou ao exhaust e não seguraria pressão.
+2. O starter motor gira o engine mais devagar, porque a battery entrega menos
+   tensão e menos corrente. Isso muda a leitura do teste, e a seção “Intuição”
+   explica por quê.
+3. Não. Um lb-ft é 12 vezes um lb-in. Quem lê 133 lb-in como lb-ft aperta 12
+   vezes mais forte do que o manual pede.
+
+</details>
+
+## Intuição: a bomba de bicicleta com o dedo no bico
+
+Pegue uma bomba de encher pneu e tape o bico com o dedo. Quando você empurra o
+êmbolo, o ar fica preso e a pressão sobe. A pressão que você sente é maior
+quando o ar não tem por onde escapar.
+
+Agora imagine que o couro que veda a borda do êmbolo está gasto. O ar escapa
+pela borda, e o êmbolo desce quase sem resistência. O dedo no bico vedou o
+bico, mas a borda deixou o ar sair.
+
+O cylinder é essa bomba. O piston é o êmbolo, e os **piston rings** são o couro
+da borda. O dedo no bico são as duas **valves** fechadas, mais a **head
+gasket** que veda a parte de cima. O compression test mede **a pressão mais
+alta** que essa bomba consegue fazer.
+
+**Onde a analogia para de valer.** Na bomba, uma pessoa empurra o êmbolo com a
+velocidade que quiser. No engine, quem empurra é o starter motor, e ele gira a
+uma velocidade que depende da battery. Cada compression stroke dura uma fração
+de segundo. Se o engine gira devagar, o ar tem mais tempo para escapar pelos
+piston rings, e a leitura sai menor. Por isso o manual fixa as condições do
+teste, como a seção “Formalização” mostra.
+
+<CompressaoNoCilindro caption="O compression gauge rosqueado no furo da spark plug, com o adapter. O piston sobe e aperta o ar (seta azul) até o gauge. As duas valves estão fechadas. O ar que escapa pelos piston rings (laranja) é o que baixa a leitura." />
+
+### Por que a leitura sobe a cada compression stroke
+
+O compression gauge tem uma **check valve** (válvula de retenção): o ar entra no
+gauge e não volta. Então, a cada compression stroke, uma porção nova de ar entra
+no gauge e o ponteiro sobe. Ele não desce quando o piston desce, e fica parado
+no valor mais alto até você abrir a válvula de alívio do relógio.
+
+Um cylinder que vaza ganha menos pressão a cada stroke, e precisa de mais
+strokes para chegar perto do seu máximo. É por isso que o manual pede **no
+mínimo 5 compression strokes** e manda anotar o **número aproximado** de strokes
+até o ponteiro parar de subir. A tabela abaixo mostra o padrão. **Os valores
+são ilustrativos, só para o exemplo; as leituras de verdade vêm do carro.**
+
+| Compression stroke | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| cylinder bom (psi) | 100 | 150 | 172 | 184 | 188 |
+| cylinder que vaza (psi) | 45 | 75 | 95 | 110 | 118 |
+
+Dois pontos desta tabela importam:
+
+- O cylinder bom chega perto do máximo em poucos strokes. O que vaza sobe
+  devagar e chega a um valor mais baixo.
+- Se você medisse um cylinder com 3 strokes e outro com 5, o segundo leria mais
+  alto só por ter mais strokes. Por isso o manual manda girar **aproximadamente
+  o mesmo número de strokes** em todos os cylinders.
+
+### Por que se compara um cylinder com os outros
+
+Os seis cylinders são do mesmo engine, medidos com a mesma battery e a mesma
+velocidade de giro. A maior leitura mostra o que **este engine**, nestas
+condições, consegue fazer. Um cylinder muito abaixo dos outros vaza mais do que
+os outros. Esse é o raciocínio por trás da regra dos 75 %.
+
+## Modelo visual: seis leituras e um limite
+
+<LeiturasCompressao leituras={[188, 190, 186, 189, 118, 121]} caption="As leituras do Edge (valores ilustrativos): cylinders 1 a 4 em azul, perto de 190 psi; cylinders 5 e 6 em laranja, abaixo da linha tracejada. A linha é 75 % da maior leitura: 0.75 × 190 = 142.5 psi." />
+
+Olhe a figura antes de ler a regra. Quatro barras têm quase a mesma altura. Duas
+estão bem mais baixas, e a linha tracejada separa as que passam das que não
+passam. Duas barras baixas e **vizinhas** (os cylinders 5 e 6 ficam lado a lado)
+são um padrão que a regra do manual interpreta, como a seção “Formalização”
+mostra.
+
+<IdentificacaoCilindros destaque={[5, 6]} caption="Os cylinders do 3.5L vistos de cima, redesenhados a partir da figura “Engine Cylinder Identification” do manual (303-01C, figura E151266). Um bank tem 1, 2 e 3; o outro tem 4, 5 e 6. Cylinders vizinhos de um mesmo bank compartilham a parede entre os bores, e a head gasket veda essa região. Em laranja, os cylinders 5 e 6 do caso do Edge." />
+
+A figura E151266 do manual tem uma seta que orienta a vista (de que lado fica a
+frente do carro). O manual, nessa figura, **não escreve** qual bank é o direito
+e qual é o esquerdo. Para saber, confira no carro: as coils de um lado ficam
+visíveis depois de tirar a engine appearance cover, e as do outro só depois de
+tirar o upper intake manifold (veja o passo B5, mais abaixo).
+
+## Ponte para a formalização
+
+Olhar as barras já mostra que dois cylinders estão baixos. Para decidir se um
+cylinder está **fora do limite**, o técnico precisa de uma regra com número,
+igual para todo mundo. O manual dá a regra em termos relativos (a menor leitura
+contra a maior), e isso funciona porque as condições do teste são iguais para
+todos os cylinders.
+
+## Formalização
+
+### A regra dos 75 %
+
+O manual diz, na seção 303-00 (*Compression Test - Test Results*): as pressões
+estão dentro da especificação **se o cylinder de menor leitura tem pelo menos
+75 % da maior leitura.** Em símbolos:
+
+$$
+P_{\min,\text{aceito}} = 0.75 \times P_{\max}
+$$
+
+**Exemplo.** A maior leitura do Edge é 190 psi. Então o limite é
+$0.75 \times 190 = 142.5\,\text{psi}$ (983 kPa). O cylinder 5, com 118 psi, tem
+$118 \div 190 = 62.1\,\%$ da maior leitura. Ele está abaixo do limite.
+
+**Contraexemplo.** Um engine em que **todos** os cylinders leem perto de 118 psi
+passa na regra, porque a menor leitura é quase igual à maior. Mas todas as
+leituras estão baixas. A regra é relativa: ela compara cylinders entre si, e não
+vê um problema que atinge todos igualmente. A seção “Como falha” mostra o que
+fazer nesse caso.
+
+O manual traz também a *Compression Pressure Limit Chart* (figura E151691), uma
+tabela que dá, para cada leitura máxima, o limite mínimo. Ela é só a regra dos
+75 % já calculada. A tabela em psi e kPa tem quatro blocos de duas colunas:
+“Maximum Recorded Cylinder Pressure” e “Minimum Recorded Cylinder Pressure”.
+Para 190 psi (1310 kPa), a tabela mostra 142 psi (979 kPa). Ela arredonda **para
+baixo**: o valor exato é 142.5 psi. Duas linhas da cópia do manual que temos não
+seguem o padrão: 237 psi → 166 psi (75 % de 237 é 177.75) e 248 psi → 174 psi
+(75 % de 248 é 186). **Confira a tabela com a conta**, e use a conta quando as
+duas discordarem.
+
+O manual **não dá um valor mínimo absoluto de psi para o 3.5L** nesta seção.
+Ele só dá a regra relativa.
+
+### As condições do teste, uma a uma
+
+O manual (303-00, *Compression Test*, passos 1 a 5) fixa estas condições. Cada
+uma existe por um motivo físico:
+
+| O que o manual manda | Por que (a explicação é desta lição, o manual não a dá) |
+|---|---|
+| Óleo do crankcase com a viscosity e o nível certos | o óleo forma a película que ajuda os piston rings a vedar; óleo errado ou baixo muda a vedação |
+| Battery corretamente carregada | a velocidade do giro depende dela; giro lento deixa o ar escapar e baixa todas as leituras |
+| Engine na temperatura normal de trabalho | com o engine quente, as folgas e o óleo estão como em uso |
+| Ignition em OFF, depois remover **todas** as spark plugs | sem as plugs, o engine gira livre e rápido; com todas fora, nenhum cylinder atrapalha o outro |
+| Throttle plates totalmente abertos | o ar entra livre; com o throttle fechado, entra menos ar e a leitura sai menor |
+| Gauge no cylinder 1, e um auxiliary starter switch no circuito de partida | uma pessoa gira o engine de fora, enquanto outra lê o gauge, com a ignition OFF |
+| No mínimo 5 compression strokes; anotar a maior leitura e o número aproximado de strokes | o ponteiro sobe a cada stroke e para num valor máximo (veja “Intuição”) |
+| Repetir em cada cylinder, com **aproximadamente o mesmo número de strokes** | para a comparação entre cylinders ser justa |
+
+### O wet test: o que o óleo separa
+
+O manual (303-00, *Test Results*) diz: se um ou mais cylinders leem baixo,
+**ponha cerca de uma colher de sopa de óleo de motor** (do tipo que a Ford
+especifica) em cima dos pistons dos cylinders baixos e **repita a medição**
+nesses cylinders. Uma colher de sopa (*tablespoon*) é cerca de 15 mL (14.8 mL).
+
+O óleo veda a folga dos piston rings por um tempo curto. Então o resultado diz
+onde o vazamento está. O manual interpreta assim (*Interpreting Compression
+Readings*):
+
+| O que acontece com a leitura | O que significa |
+|---|---|
+| **Sobe bastante** | os piston rings estão gastos ou danificados |
+| **Não melhora** | as valves estão emperradas ou não assentam direito |
+| **Dois cylinders vizinhos estão baixos e o óleo não ajuda** | a head gasket pode estar vazando entre os dois cylinders; óleo ou coolant nos cylinders pode vir dessa falha |
+
+Exemplo do wet test: o cylinder lê 112 psi a seco e 165 psi com óleo. A
+pressão subiu muito, então o óleo vedou o que estava vazando: os rings.
+Contraexemplo: o cylinder lê 118 psi a seco e 121 psi com óleo. O óleo não
+mudou nada, então o vazamento está onde o óleo não chega: valve ou head gasket.
+
+### O teste relativo pelo scan tool
+
+O manual cita, na tabela de sintomas (303-00), o relative compression test e
+o power balance test, ambos feitos com o scan tool, **sem tirar as spark
+plugs**. O manual diz “consulte a seção apropriada no Grupo 303” para o
+procedimento, e essa seção não está entre as que temos. Pergunte ao instrutor
+como a escola faz esses testes. Eles são rápidos e indicam **qual cylinder**
+olhar primeiro, e o compression test com o gauge dá o número.
+
+## Como falha e como diagnosticar
+
+O que o engine deveria fazer: cada cylinder aperta o ar com as valves fechadas
+e chega a uma pressão parecida com a dos outros.
+
+| O que você vê | O que significa | Próximo teste |
+|---|---|---|
+| Todos parecidos e acima de 75 % da maior | a vedação está boa; o misfire vem de faísca ou combustível | testes de ignição e de fuel injector |
+| Um cylinder baixo; **sobe** com óleo | piston rings | o cylinder leakage test confirma: o ar sai pelo oil filler cap e pelo PCV |
+| Um cylinder baixo; **não sobe** com óleo | valve (assentamento ou emperrada) | o cylinder leakage test separa a intake valve da exhaust valve |
+| Dois cylinders **vizinhos** baixos; não sobem com óleo | head gasket entre os dois, ou valves dos dois | o cylinder leakage test: o ar de um sai no furo da spark plug do outro |
+| **Todos** baixos e parecidos | passa na regra, mas algo comum a todos baixou a leitura | confira battery e velocidade de giro, throttle, gauge e adapter; depois repita |
+| Zero ou perto de zero | vazamento grande (valve que não fecha, piston furado) | cylinder leakage test e inspeção |
+
+O que este teste **descarta**: com todos os cylinders dentro do limite, o
+vazamento no compression stroke não é a causa do misfire. O que ele **não
+separa**: a valve da head gasket, e qual das duas valves. Para isso existe o
+cylinder leakage test.
+
+**Pista do manual para consumo de óleo.** O manual (303-00, *Excessive Engine
+Oil Consumption*) diz: se o consumo é excessivo, faça o compression test com a
+battery totalmente carregada e todas as spark plugs fora. Se a compressão está
+dentro da especificação, o consumo pode vir de desgaste nas **valve guides**,
+nas valves ou nos valve seals. E se uma spark plug sai encharcada de óleo, o
+óleo está entrando no cylinder.
+
+### Erros comuns
+
+- **Usar um número de memória.** Cada engine tem os seus valores, e o manual do
+  Edge dá a regra de 75 %, não um mínimo fixo. Use a regra.
+- **Contar um número diferente de strokes em cada cylinder.** A comparação
+  perde o sentido, porque o ponteiro ainda estava subindo.
+- **Testar com a battery fraca.** O starter motor gira devagar, e todas as
+  leituras saem baixas. O teste parece mostrar um engine ruim e mostra uma
+  battery ruim.
+- **Esquecer o throttle fechado.** O ar entra pouco e todas as leituras saem
+  baixas.
+- **Concluir “piston rings gastos” só porque a leitura é baixa.** Uma exhaust
+  valve queimada dá a mesma leitura. Só o wet test e o leakage test separam as
+  duas.
+- **Concluir “head gasket” com um cylinder só baixo.** A regra do manual é de
+  **dois cylinders vizinhos**, e o leakage test confirma.
+
+## Na oficina: o compression test no Ford Edge 3.5L, passo a passo
+
+:::danger Antes de começar: os riscos deste teste
+
+- **O engine vai girar com as spark plugs fora.** O starter motor gira o engine, e
+  a drive belt e as polias giram junto. Mantenha mãos, cabelo, roupas e
+  ferramentas longe delas. Quem aperta o auxiliary starter switch avisa em voz
+  alta antes de girar o engine.
+- **Combustível e faísca.** Com as plugs fora e a injeção ativa, o combustível pode
+  sair pelos furos, e uma faísca pode acendê-lo. O manual faz o teste com a
+  **ignition em OFF** e o **auxiliary starter switch** no circuito de partida.
+  Esta seção do manual **não diz** como ligar esse switch no Edge, nem outra
+  forma de desligar a injeção. **Pergunte ao instrutor** antes de girar o engine.
+- **Use óculos de proteção o tempo todo.** Ao girar o engine sem as plugs, sai ar,
+  óleo e sujeira pelos furos. Sopre a sujeira em volta das coils e dos poços das
+  plugs **antes** de soltar qualquer peça (o manual manda isso, e a sujeira cai
+  no cylinder).
+- **Engine quente queima.** O manual do teste pede o engine na temperatura normal
+  de trabalho. O manual de remoção das spark plugs (303-07C) avisa o oposto: **não
+  tire as plugs com o engine quente nem totalmente frio**, porque a rosca da
+  plug ou o cylinder head, que é de alumínio, pode ser danificado. Ele pede o
+  engine **morno ao toque** (*warm, hand touch after cooling down*). Aqueça, desligue e
+  espere esfriar até a mão suportar. O radiator cap **nunca** se abre com o engine
+  quente.
+- **Se uma spark plug cair no chão, descarte.** O manual avisa: o dano interno
+  pode causar misfire e danificar o engine.
+- **Parking brake aplicado, transmissão em Park, rodas calçadas.**
+
+:::
+
+### Como ler as figuras do manual
+
+As figuras do service manual Ford seguem um código de cores. O manual o explica
+na seção 100-00 (*About this Manual*, “Illustration Color-coding”):
+
+| Cor na figura | O que significa |
+|---|---|
+| Azul | a peça principal do passo: a que sai ou entra |
+| Verde | peça que precisa sair **antes** (e voltar **depois**) da principal |
+| Amarelo | peça que se **afasta** para dar acesso, sem remover; também destaca uma área para inspecionar |
+| Magenta | conectores e fixadores (nuts, bolts, clamps, clips) a soltar ou a apertar |
+| Azul-claro | ferramenta especial ou ferramenta comum usada de um jeito incomum |
+
+Uma seta preta aponta para uma peça, geralmente um fixador. Um “x3” junto à
+seta quer dizer **três** peças iguais. Os números dentro de círculos mostram a
+**sequência** da remoção, que se inverte na instalação. Use a tabela como
+legenda em cada passo abaixo.
+
+### Ferramentas e materiais
+
+- *service manual* do Edge 3.5L (seções 303-00, 303-07C, 303-01C e 303-12C);
+- compression gauge com o **adapter de rosca certo** para a spark plug do 3.5L
+  (confirme o adapter com o instrutor) e um auxiliary starter switch;
+- o **Hose Clamp Remover/Installer**, ferramenta que o manual lista para o upper
+  intake manifold (303-01C);
+- ratchet, extension e **spark plug socket**, torque wrench de escala baixa, e
+  ar comprimido (*shop air*) para soprar a sujeira;
+- óleo de motor do tipo que a Ford especifica, em um recipiente pequeno, para o
+  wet test, e um carregador ou testador de battery;
+- óculos de proteção, luvas, pano limpo, papel e lápis para anotar.
+
+### Parte A: preparar o carro e o teste
+
+O manual (303-00, *Compression Test*, passo 1) pede estas verificações antes de
+tirar qualquer coisa.
+
+1. **Confira o óleo.** Puxe a dipstick e veja o nível. Confira que o óleo é da
+   viscosity certa.
+2. **Confira a battery.** Ela precisa estar corretamente carregada. Meça o state
+   of charge e, se necessário, carregue (veja a lição
+   [Carregar a battery](../../trn-120-eletricidade/carregar-a-battery)).
+3. **Aqueça o engine** até a temperatura normal de trabalho e depois **desligue**
+   a ignition.
+4. **Espere esfriar até ficar morno ao toque**, pelo aviso do manual da spark
+   plug (303-07C). Calce luvas e não encoste no exhaust manifold.
+
+### Parte B: chegar nas coils (303-07C, *Ignition Coil-On-Plug*)
+
+O manual separa o **lado esquerdo** (*Left side*) do **lado direito** (*Right
+side*). Para o compression test, o manual manda tirar **todas** as spark
+plugs, então os dois lados serão abertos.
+
+**B1. Tire a engine appearance cover.** Passo 1 do lado esquerdo, figura
+**E200473**. A figura mostra a cover em azul (a peça principal), dois fixadores
+em magenta nos cantos de cima e a oil fill cap em verde, embaixo à esquerda. O
+verde diz que a tampa sai **antes** e volta **depois**: tire a oil fill cap,
+solte os dois fixadores, tire a cover e **recoloque a oil fill cap** (assim cai
+menos sujeira no engine).
+
+<FiguraManual id="E200473" alt="Engine appearance cover em azul, dois fixadores em magenta e a oil fill cap em verde" caption="A engine appearance cover (azul), os dois fixadores dela (magenta, setas pretas) e a oil fill cap (verde, embaixo à esquerda). Seção 303-07C, Ignition Coil-On-Plug, lado esquerdo, passo 1." />
+
+**B2. Desconecte o PCV hose pelo quick release coupling.** Passo 2, figura
+**E201465**. A figura mostra a ponta do acoplamento em magenta e a mangueira em
+amarelo, em cima das coils. O amarelo diz: a mangueira **se afasta, não sai**. O
+procedimento de abrir o quick release coupling está no manual (310-00C, *Quick
+Release Coupling*).
+
+<FiguraManual id="E201465" alt="PCV hose em amarelo com o quick release coupling em magenta, em cima das coils" caption="O quick release coupling do PCV hose (magenta). A mangueira está em amarelo: ela se afasta e não sai. Seção 303-07C, passo 2." />
+
+**B3. Solte o harness retainer e os connectors das coils.** Passo 3, figura
+**E201466**. A figura mostra o chicote em amarelo (afastado), o fixador do chicote
+em magenta, com uma seta à esquerda, e os três connectors elétricos em
+magenta, com o “x3” (um por coil). Primeiro solte o fixador do chicote da valve
+cover, depois desconecte os três connectors.
+
+<FiguraManual id="E201466" alt="Chicote em amarelo, fixador do chicote e três connectors das coils em magenta" caption="O chicote (amarelo), o harness retainer (magenta, seta à esquerda) e os três connectors das coils (magenta, x3). Seção 303-07C, passo 3." />
+
+**B4. Sopre a sujeira e tire as coils.** Passo 4, figura **E201467**. A figura
+mostra as três coils em azul, cada uma com um bolt em magenta (“x3”). O manual
+dá **duas notas**: use ar comprimido para tirar a sujeira das coils e do
+entorno **antes** de soltá-las; e, ao tirar cada coil, um **leve movimento de
+torção** rompe a vedação e ajuda a sair. Solte os três bolts e puxe as coils.
+
+<FiguraManual id="E201467" alt="Três ignition coil-on-plugs em azul, cada uma com um bolt em magenta" caption="As três coils (azul) e os três bolts delas (magenta, x3). Seção 303-07C, passo 4." />
+
+**B5. Lado direito: tire o upper intake manifold.** O manual avisa, em nota,
+que **o upper intake manifold precisa sair para chegar às coils do lado direito**
+(*RH ignition coil-on-plugs*). Este é o trabalho mais longo do teste, e está em
+outra seção, 303-01C (*Upper Intake Manifold*). Os passos do manual, com as
+figuras:
+
+**B5.1 Engine appearance cover**, já tirada em B1.
+
+<FiguraManual id="E198003" alt="Engine appearance cover em azul, fixadores em magenta e oil fill cap em verde" caption="A engine appearance cover de novo, no passo 1 do upper intake manifold (303-01C): azul, com os dois fixadores em magenta e a oil fill cap em verde." />
+
+**B5.2 Air cleaner outlet pipe.** O procedimento está na seção 303-12C.
+
+**B5.3 Connector e wire retainer.** Passo 3 do manual.
+
+<FiguraManual id="E197117" alt="Connector elétrico e wire retainer em magenta" caption="O connector elétrico e o wire retainer (magenta, setas pretas). O fio amarelo é afastado, não removido." />
+
+**B5.4 Dois connectors e o wire retainer.** Passo 4.
+
+<FiguraManual id="E197972" alt="Dois connectors e um wire retainer em magenta" caption="Dois connectors (magenta, x2) e o wire retainer (magenta, seta à esquerda)." />
+
+**B5.5 EVAP tube.** Passo 5. O quick release coupling é o mesmo tipo do PCV hose.
+
+<FiguraManual id="E197973" alt="Acoplamento do EVAP tube em magenta" caption="O quick release coupling do EVAP tube (magenta). O tubo, em amarelo, se afasta." />
+
+**B5.6 Vacuum hoses.** Passo 6. Aqui entra o Hose Clamp Remover/Installer.
+
+<FiguraManual id="E197974" alt="Dois clamps em magenta nas vacuum hoses amarelas" caption="Os dois hose clamps (magenta, x2) e as vacuum hoses (amarelo)." />
+
+**B5.7 Coolant hose.** Passo 7. O manual manda **posicionar a mangueira de lado**, não tirar.
+
+<FiguraManual id="E197975" alt="Dois retainers em magenta e a coolant hose em amarelo" caption="Os dois retainers (magenta, x2) e a coolant hose (amarelo), que só é posta de lado." />
+
+**B5.8 Upper intake manifold support bolt.** Passo 8.
+
+<FiguraManual id="E196818" alt="Bolt de apoio do upper intake manifold em magenta" caption="O support bolt do upper intake manifold (magenta). Na instalação, 89 lb-in." largura={400} />
+
+**B5.9 Bolts e upper intake manifold.** Passo 9: tire os sete bolts e o manifold.
+
+<FiguraManual id="E197171" alt="Upper intake manifold em azul com sete bolts em magenta" caption="O upper intake manifold (azul) e os sete bolts dele (magenta, x7)." />
+
+**B5.10 Gaskets do upper intake manifold:** o manual manda **remover e descartar**. Na instalação, ele manda gaskets **novas**. Esse é um custo do teste no lado direito.
+
+**B5.11 Limpe e inspecione** as superfícies de vedação do upper e do lower intake manifold. O manual avisa que, se o engine foi reparado por falha “de cima” (valve ou piston), o intake manifold deve ser examinado atrás de limalha de metal.
+
+**B6. Lado direito: connectors e coils.** Passo 6 do lado direito, figura
+**E201468**: os três connectors das coils em magenta (“x3”), com o chicote em
+amarelo. Passo 7, figura **E201469**: as três coils em azul e os três bolts em
+magenta (“x3”). Faça o mesmo que em B3 e B4: sopre a sujeira, solte os bolts e
+puxe as coils com uma leve torção.
+
+<FiguraManual id="E201468" alt="Três connectors das coils do lado direito em magenta, chicote em amarelo" caption="Lado direito, passo 6: os três connectors das coils (magenta, x3) e o chicote (amarelo), já com o upper intake manifold fora." />
+
+<FiguraManual id="E201469" alt="Três coils do lado direito em azul com um bolt em magenta cada" caption="Lado direito, passo 7: as três coils (azul) e os três bolts (magenta, x3)." />
+
+### Parte C: tirar as spark plugs (303-07C, *Spark Plugs*)
+
+**C1. Sopre os poços e tire cada spark plug.** Passo 2 da seção *Spark Plugs*,
+figura **E201364**. A figura mostra uma plug em azul, no fundo do poço, com o
+“x6” (seis plugs) e, no canto, um **ícone de chave de impacto riscada**: o
+manual proíbe ferramenta de impacto nesse passo, e o *About this Manual* diz que
+ferramenta elétrica não se usa na instalação. O manual traz o torque de
+instalação: **133 lb-in (15 N·m)**. Os dois avisos que você já leu na caixa de
+riscos valem aqui: engine morno ao toque, e plug que cai é descartada.
+
+<FiguraManual id="E201364" alt="Spark plug em azul no fundo do poço, com x6 e o ícone de chave de impacto riscada" caption="A spark plug (azul) no poço, “x6” (seis plugs) e, no canto, o ícone da chave de impacto riscada: não use ferramenta de impacto. Seção 303-07C, Spark Plugs, passo 2." />
+
+Guarde as spark plugs **em ordem, por cylinder**, num suporte ou numa bandeja
+numerada. A cor e o desgaste da ponta de cada plug dão pistas sobre o cylinder,
+e um misfire num cylinder pode estar escrito na plug dele.
+
+### Parte D: o teste (303-00, *Compression Test*, passos 2 a 5)
+
+**D1. Abra o throttle plates por completo** (passo 2). O manual manda deixar os
+throttle plates na posição de máxima abertura, para o ar entrar livre. Esta
+seção do manual **não diz como fazer isso no Edge** (o throttle é comandado
+eletronicamente). **Pergunte ao instrutor** antes de girar o engine.
+
+**D2. Instale o compression gauge no cylinder 1** (passo 3). Use a figura
+abaixo para achar o cylinder 1. Rosqueie o adapter
+e o gauge **com a mão**, até assentar, e confira que não há vazamento na rosca,
+porque um adapter mal rosqueado baixa a leitura.
+
+<FiguraManual id="E151266" alt="Vista de cima do engine com os cylinders 4, 5 e 6 de um lado e 1, 2 e 3 do outro" caption="Engine Cylinder Identification: um bank tem os cylinders 1, 2 e 3; o outro, 4, 5 e 6. A seta orienta a vista. Seção 303-01C." />
+
+**D3. Gire o engine pelo auxiliary starter switch** (passo 4). Com a ignition em
+OFF, gire o engine por **no mínimo 5 compression strokes**. **Observe o ponteiro
+subir** a cada stroke e **anote a maior leitura** e o **número aproximado de
+strokes** até o ponteiro parar de subir.
+
+**D4. Repita em cada cylinder** (passo 5), girando **aproximadamente o mesmo
+número de strokes**. Antes de passar ao próximo cylinder, libere a pressão do
+gauge pela válvula de alívio, solte o gauge e anote a leitura **ao lado do
+número do cylinder**, na ordem física (1, 2, 3, 4, 5, 6), e não na ordem de
+ignição. Confira, ao fim, se as seis leituras estão anotadas.
+
+### Parte E: ler o resultado e fazer o wet test
+
+**E1. Calcule o limite.** Ache a maior leitura e multiplique por 0.75. Compare
+cada cylinder com esse número. Use a figura **E151691** (a tabela do manual) como
+conferência, **mas confie na conta**.
+
+<FiguraManual id="E151691" alt="Tabela com a pressão máxima registrada e a pressão mínima registrada, em kPa e psi" caption="A Compression Pressure Limit Chart: para cada maior leitura (coluna da esquerda de cada par), a leitura mínima aceita (coluna da direita). Seção 303-00, Compression Test. Duas linhas não seguem os 75 %: 237 → 166 psi e 248 → 174 psi." />
+
+**E2. Se algum cylinder está abaixo, faça o wet test nele** (303-00, *Test
+Results*): ponha cerca de uma colher de sopa de óleo no cylinder baixo pelo
+furo da spark plug, e repita a medição com o mesmo número de strokes.
+
+**E3. Interprete** pela tabela da seção “Formalização” e anote as duas leituras
+(a seco e com óleo) de cada cylinder baixo.
+
+### Parte F: remontar, na ordem inversa
+
+O manual diz para as spark plugs: “*To install, reverse the removal
+procedure*”. Os valores abaixo são do manual do Edge 3.5L. **Confirme-os no
+service manual** antes de apertar.
+
+| Peça | Valor do manual | Em N·m |
+|---|---|---|
+| Spark plug | 133 lb-in | 15 N·m (11.1 lb-ft) |
+| Bolt de cada ignition coil-on-plug | estágio 1: 62 lb-in; estágio 2: mais 48° | estágio 1: 7 N·m |
+| Upper intake manifold, bolts 1 e 3 a 7 | 10 N·m (89 lb-in), mais 45° | 10 N·m |
+| Upper intake manifold, bolt 2 | 10 N·m (89 lb-in), mais 90° | 10 N·m |
+| Upper intake manifold support bolt | 89 lb-in | 10 N·m |
+
+- **Antes de instalar as coils**, inspecione cada uma (figura **E182855**, com um
+  ícone de olho). A figura destaca em amarelo o seal de cima e a boot de borracha
+  da ponta. O manual manda **trocar** qualquer coil com seal ou boot com trinca,
+  rasgo ou corte.
+<FiguraManual id="E182855" alt="Ignition coil-on-plug com o seal de cima e a boot de borracha da ponta em amarelo, e um ícone de olho" caption="Inspecione a coil: o seal de cima e a boot de borracha da ponta (amarelo), com o ícone de olho que quer dizer “inspecionar”. Troque a coil com trinca, rasgo ou corte." largura={380} />
+
+- O manual manda apertar os bolts da coil em **dois estágios**: primeiro 62 lb-in,
+  depois um giro adicional de 48°.
+- Para o upper intake manifold, o manual manda gaskets **novas** e uma
+  **sequência numerada** de aperto (figura com os números dos bolts, em 303-01C).
+- **Confira** que nenhum parafuso, ferramenta ou pano ficou no engine.
+
+Os torques estão em **lb-in**. Veja de novo a lição
+[Fasteners e torque](../fixadores-e-torque/fixadores-e-torque) sobre o erro de
+ler lb-in como lb-ft. Confira as conversões: $133\,\text{lb-in} \div 8.85 =
+15.0\,\text{N·m}$ e $89\,\text{lb-in} \div 8.85 = 10.1\,\text{N·m}$.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — o Edge: aplicar a regra dos 75 %
+
+As leituras do Edge (valores ilustrativos): 188, 190, 186, 189, 118 e 121 psi,
+nos cylinders de 1 a 6. Quais passam na regra?
+
+**Solução.** A maior leitura é 190 psi (cylinder 2). O limite é
+
+$$
+0.75 \times 190 = 142.5\,\text{psi}
+$$
+
+Os cylinders 1, 2, 3 e 4 (188, 190, 186 e 189) estão acima. O cylinder 5, com
+118 psi, tem $118 \div 190 = 62.1\,\%$. O cylinder 6, com 121 psi, tem
+$121 \div 190 = 63.7\,\%$. Os dois ficam abaixo de 75 %. A tabela do manual
+(figura E151691) arredonda para baixo e dá 142 psi para 190 psi; a conta dá
+142.5 psi.
+
+### Exemplo 2 — passa na regra, mas o cylinder é o mais fraco (pause e tente)
+
+Um engine de 6 cylinders lê 172, 170, 175, 168, 140 e 171 psi (ilustrativos). O
+cylinder 5 tem misfire. Ele passa na regra? O que isso diz sobre a causa?
+
+Pause e tente antes de abrir.
+
+<details>
+<summary>Solução</summary>
+
+A maior leitura é 175 psi. O limite é $0.75 \times 175 = 131.25\,\text{psi}$ (905
+kPa). O cylinder 5, com 140 psi, está acima: $140 \div 175 = 80\,\%$. **Passa.**
+
+Mas ele é o mais baixo e se distancia dos outros. O compression test
+**não condena** a vedação desse cylinder. Então a causa do misfire provavelmente
+não é um vazamento grande, e o técnico vai olhar a ignição e o combustível do
+cylinder 5. O cylinder leakage test ainda pode medir esse cylinder se o técnico
+quiser mais certeza.
+
+</details>
+
+### Exemplo 3 — o wet test separa os piston rings (pause e tente)
+
+Um engine de 6 cylinders lê 176, 178, 112, 177, 175 e 174 psi (ilustrativos). O
+cylinder 3 é o único baixo. Com óleo, ele lê 165 psi. Qual é o limite, e o que o
+óleo mostra?
+
+<details>
+<summary>Solução</summary>
+
+A maior leitura é 178 psi. O limite é $0.75 \times 178 = 133.5\,\text{psi}$ (920
+kPa). O cylinder 3, com 112 psi, tem $112 \div 178 = 62.9\,\%$: está abaixo.
+
+Com óleo, ele passa a 165 psi, que é $165 \div 178 = 92.7\,\%$ e passa na regra. A
+pressão subiu muito, então o óleo vedou o que vazava. Pelo manual, **os piston
+rings** estão gastos ou danificados nesse cylinder. O leakage test confirma: o
+ar deve sair no oil filler cap e no PCV.
+
+</details>
+
+### Exemplo 4 — todos baixos: o teste mede a battery (pause e tente)
+
+O técnico mede um engine com a battery fraca e lê 118, 120, 119, 121, 117 e 120
+psi (ilustrativos). Todos passam na regra? O que ele deve fazer?
+
+<details>
+<summary>Solução</summary>
+
+A maior leitura é 121 psi, e o limite é $0.75 \times 121 = 90.75\,\text{psi}$. A
+menor, 117 psi, é $117 \div 121 = 96.7\,\%$ da maior. **Todos passam**, porque as
+seis leituras são parecidas.
+
+Mas as seis leituras são baixas **juntas**, e a regra relativa não vê isso. A
+pista é a velocidade de giro lenta (a battery fraca). Causas comuns a todos os
+cylinders: battery fraca, throttle fechado, gauge ou adapter mal rosqueado. O
+técnico carrega a battery, confere o throttle e o adapter, e **repete** o teste.
+Se, depois da carga, as leituras forem 183, 185, 184, 186, 182 e 185 psi
+(ilustrativas), o limite passa a $0.75 \times 186 = 139.5\,\text{psi}$ e todos
+passam com folga. O engine estava bom, e o primeiro teste media a battery.
+
+</details>
+
+## A queixa, resolvida
+
+Volte ao Edge com P0305 e P0306. O técnico seguiu o manual (battery
+carregada, throttle aberto, mesmo número de strokes em cada cylinder) e leu, a
+seco, 188, 190, 186, 189, 118 e 121 psi nos cylinders de 1 a 6 (ilustrativos,
+como na figura).
+
+**Passo 1: o limite.** A maior leitura é 190 psi, então o limite é
+$0.75 \times 190 = 142.5\,\text{psi}$. Os cylinders 5 (118 psi, 62.1 %) e 6
+(121 psi, 63.7 %) estão abaixo. O vazamento no compression stroke é real, e é
+exatamente nos cylinders que têm os códigos P0305 e P0306.
+
+**Passo 2: o wet test.** Com óleo, o cylinder 5 passa de 118 para 121 psi, e o
+cylinder 6 de 121 para 124 psi (ilustrativos). Com 124 psi, o cylinder 6 tem
+$124 \div 190 = 65.3\,\%$, ainda abaixo de 75 %. O óleo quase não mudou nada,
+então os piston rings **não** são a causa principal.
+
+**Passo 3: a leitura do manual.** Dois cylinders **vizinhos** estão baixos, e o
+óleo não ajudou. O manual diz: a head gasket pode estar vazando **entre os dois
+cylinders**. Mas valves também podem causar leituras baixas que o óleo não
+corrige. O compression test não separa essas duas hipóteses.
+
+**O que muda e o que permanece.** Mudou: agora se sabe que o problema é mecânico
+e está em dois cylinders vizinhos. Permanece: ainda não se sabe **por onde** o ar
+escapa. O próximo teste é o
+[Cylinder leakage test](./teste-de-vazamento-do-cilindro). Ele mantém o piston
+parado, injeta ar e deixa o técnico **escutar** o caminho.
+
+## Perguntas de verificação
+
+1. Por que o manual pede aproximadamente o mesmo número de strokes em todos os
+   cylinders?
+2. Por que um engine com todos os cylinders baixos e parecidos passa na regra
+   dos 75 %?
+3. Por que o throttle fica totalmente aberto durante o teste?
+4. O que o resultado do wet test separa, e o que ele não separa?
+5. Por que, no Edge, o compression test completo exige tirar o upper intake
+   manifold?
+
+<details>
+<summary>Respostas</summary>
+
+1. O ponteiro sobe a cada stroke e só para num valor máximo. Um cylinder medido
+   com menos strokes lê menos, mesmo sem vazar mais. Com o mesmo número de
+   strokes, a diferença entre os cylinders vem da vedação.
+2. A regra compara a menor leitura com a maior, e em um engine assim as duas são
+   quase iguais. A regra é relativa e não vê um problema que baixa todos
+   juntos, como a battery fraca ou o throttle fechado.
+3. Com o throttle fechado, entra pouco ar no cylinder, e a pressão no fim do
+   compression stroke sai menor em todos os cylinders. Isso falsifica o
+   resultado.
+4. O wet test separa os **piston rings** (o óleo sobe a leitura) das **valves ou
+   da head gasket** (o óleo não ajuda). Ele **não** separa a valve da head gasket,
+   nem a intake valve da exhaust valve.
+5. O manual manda tirar **todas** as spark plugs. As coils do lado direito só
+   ficam acessíveis depois de tirar o upper intake manifold (303-07C). Então,
+   para tirar as plugs desse lado, o manifold precisa sair.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Na figura do manual, que cor mostra a peça principal do passo? E a que
+   mostra conectores e fixadores?
+b) Qual é a seção do manual que traz o procedimento do compression test?
+c) Qual é o torque da spark plug do Edge 3.5L, e em que unidade?
+
+### 2. Explicação
+
+Explique com suas palavras por que a leitura do compression gauge sobe a cada
+compression stroke e para de subir num valor.
+
+### 3. Aplicação direta
+
+Um engine lê 150, 148, 152, 149, 147 e 151 psi (ilustrativos). Calcule o
+limite pela regra dos 75 % e diga se algum cylinder está fora.
+
+### 4. Variação
+
+O mesmo engine do item 3, mas o cylinder 4 lê 105 psi. Qual é o limite, e o
+cylinder 4 passa? Com óleo, ele passa para 141 psi. O que isso indica?
+
+### 5. Caso de diagnóstico
+
+O cliente diz que o carro gasta óleo e fumaceia ao acelerar. O técnico mede e
+encontra 175, 177, 176, 174, 178 e 175 psi (ilustrativos). Todos passam. A
+compressão exclui o consumo de óleo? Qual é a pista do manual?
+
+### 6. Justificativa
+
+Por que o manual manda **ignition em OFF** e um **auxiliary starter switch**
+para girar o engine, em vez de dar a partida pela chave? E por que o manual do
+Edge manda tirar **todas** as spark plugs, mesmo testando um cylinder de cada
+vez?
+
+### 7. Formato ASE
+
+**1.** Technician A says that a compression test is within specification when the
+lowest reading cylinder is at least 75% of the highest reading. Technician B
+says that the engine should be cranked for a minimum of 5 compression strokes per
+cylinder, and the highest reading recorded. Who is right?
+
+a) A only  
+b) B only  
+c) Both A and B  
+d) Neither A nor B
+
+**2.** Two adjacent cylinders read low on a compression test, and adding engine
+oil does not raise either reading. Which is the MOST likely cause?
+
+a) Worn piston rings  
+b) A leaking head gasket between the two cylinders  
+c) A weak ignition coil  
+d) A clogged fuel injector
+
+**3.** Technician A says that a weak battery can cause low compression readings on
+all cylinders. Technician B says that the throttle plates should be closed during
+a compression test. Who is right?
+
+a) A only  
+b) B only  
+c) Both A and B  
+d) Neither A nor B
+
+<details>
+<summary>Dica (itens 3 e 4)</summary>
+
+No item 3, o limite é $0.75$ vezes a maior leitura. No item 4, compare a leitura
+do cylinder 4 com esse limite, antes e depois do óleo.
+
+</details>
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) **Azul** é a peça principal; **magenta** são conectores e fixadores. b) A
+   seção **303-00** (*Engine System - General Information*), em *Diagnosis and
+   Testing*, *Compression Test*. c) **133 lb-in** (15 N·m), em lb-in, e não em
+   lb-ft.
+2. O gauge tem uma check valve: o ar entra e não volta. A cada compression stroke
+   entra mais ar, e a pressão no gauge sobe. Ela para de subir quando o gauge
+   já alcançou o pico que o cylinder consegue fazer, e os strokes seguintes não
+   passam disso. Por isso o manual manda anotar o número de strokes.
+3. A maior é 152 psi, e o limite é $0.75 \times 152 = 114\,\text{psi}$ (786 kPa).
+   A menor, 147 psi, está bem acima. **Nenhum cylinder está fora.** Se você
+   achou outro limite, confira se multiplicou pela **maior** leitura e não pela
+   menor.
+4. O limite continua 114 psi, porque a maior leitura é a mesma (152 psi). O
+   cylinder 4, com 105 psi, tem $105 \div 152 = 69.1\,\%$: **está abaixo**. Com
+   óleo, 141 psi é $141 \div 152 = 92.8\,\%$: **passa**. A pressão subiu muito, então os
+   **piston rings** do cylinder 4 são o vazamento.
+5. Todos passam na regra: o limite é $0.75 \times 178 = 133.5\,\text{psi}$, e a menor
+   leitura (174) é bem maior. **A compressão não exclui** o consumo de óleo.
+   Pelo manual (303-00, *Excessive Engine Oil Consumption*), com a compressão
+   dentro da especificação, o consumo pode vir de **valve guides, valves ou valve
+   seals**. A spark plug encharcada de óleo reforça a suspeita.
+6. Com a ignition em OFF, o engine não recebe faísca nem injeção de combustível, e
+   ainda gira. Um auxiliary starter switch permite que uma pessoa gire o engine
+   de fora, enquanto outra lê o gauge. O manual não dá o motivo de
+   tirar **todas** as plugs. A explicação mais direta é esta: um cylinder com a
+   plug montada continua apertando ar enquanto o engine gira, o que exige mais do
+   starter motor e muda a velocidade de giro de uma medida para a outra. Com
+   todas fora, a velocidade fica mais parecida em todas as medidas.
+7. **Item 1: c.** A e B estão certos, os dois descrevem o procedimento do manual
+   (a regra dos 75 % e no mínimo 5 compression strokes). **Item 2: b.** O
+   manual diz que, com dois cylinders vizinhos baixos e sem melhora com óleo, a
+   head gasket pode estar vazando entre eles. **a** está errada porque o óleo
+   sobe a leitura quando os rings são a causa. **c** e **d** estão erradas porque
+   coil e fuel injector não mudam a pressão de compressão. **Item 3: a.** A
+   battery fraca gira o engine devagar e baixa todas as leituras (A está certo).
+   O manual manda os throttle plates **totalmente abertos**, e não fechados (B está
+   errado).
+
+</details>
+
+## Revisão
+
+**A ideia central.** O compression test mede a pressão máxima de cada cylinder
+com o engine girado pelo starter motor. O manual fixa as condições, e a regra
+dos 75 % compara cada cylinder com o melhor do mesmo engine.
+
+**Quando usar.** Quando há misfire sem causa elétrica, ou consumo de óleo. O wet
+test separa os piston rings das valves e da head gasket.
+
+**Com o que se conecta.** O compression test avisa que há um cylinder fraco. O
+[cylinder leakage test](./teste-de-vazamento-do-cilindro) diz **por onde** ele
+vaza.
+
+**Termos para revisar:** compression test, compression gauge, cranking, auxiliary
+starter switch, wet test, check valve, firing order, compression stroke, piston
+ring, valve seat, head gasket, throttle plate, relative compression test.

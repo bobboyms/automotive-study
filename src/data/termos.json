@@ -156,6 +156,14 @@
     "fixadores-e-torque": {
       "titulo": "Fasteners e torque: identificar o bolt e apertar certo",
       "url": "aut-116-motor/fixadores-e-torque/fixadores-e-torque"
+    },
+    "teste-de-compressao": {
+      "titulo": "Compression test",
+      "url": "aut-116-motor/vazamento-do-cilindro/teste-de-compressao"
+    },
+    "teste-de-vazamento-do-cilindro": {
+      "titulo": "Cylinder leakage test",
+      "url": "aut-116-motor/vazamento-do-cilindro/teste-de-vazamento-do-cilindro"
     }
   },
   "termos": [
@@ -5286,6 +5294,207 @@
       "pt": "sequência de aperto",
       "def": "a ordem numerada em que os bolts de uma peça se apertam, dada pelo manual",
       "licao": "fixadores-e-torque"
+    },
+    {
+      "en": "cylinder leakage tester",
+      "pt": "aparelho do teste de vazamento",
+      "def": "regulador, dois manômetros e mangueira que se rosqueia no furo da spark plug e injeta ar no cylinder",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "leakage percentage",
+      "pt": "porcentagem de vazamento",
+      "def": "a leitura do tester: quanto do ar injetado escapa do cylinder; acima do limite do manual é excessivo",
+      "var": [
+        "percent leakage"
+      ],
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "regulator",
+      "pt": "regulador de pressão",
+      "def": "peça que fixa a pressão de entrada do ar no tester, ajustada antes do teste",
+      "var": [
+        "pressure regulator"
+      ],
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "shop air",
+      "pt": "ar da oficina",
+      "def": "o ar comprimido da rede da oficina, que alimenta o tester",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "adapter",
+      "pt": "adaptador",
+      "def": "peça que se rosqueia no furo da spark plug e liga a mangueira do tester ao cylinder",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "firing order",
+      "pt": "ordem de ignição",
+      "def": "a sequência em que os cylinders recebem a faísca; no Edge 3.5L, 1-4-2-5-3-6",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "bank",
+      "pt": "bank (fileira de cylinders)",
+      "def": "cada fileira de cylinders de um engine em V; no 3.5L, 1-2-3 num lado e 4-5-6 no outro",
+      "var": [
+        "banks"
+      ],
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "tailpipe",
+      "pt": "saída do escapamento",
+      "def": "o tubo final do escapamento; o ar que passa pela exhaust valve aparece ali",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "oil filler cap",
+      "pt": "tampa de abastecimento de óleo",
+      "def": "a tampa no valve cover por onde se põe óleo; o ar que passa pelos piston rings sai por ali com a tampa aberta",
+      "var": [
+        "oil fill cap"
+      ],
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "breaker bar",
+      "pt": "chave de braço longo",
+      "def": "chave sem catraca e de cabo longo, usada para girar o crankshaft ou soltar um bolt duro",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "spark plug socket",
+      "pt": "soquete de vela",
+      "def": "soquete longo, com borracha por dentro, que segura a spark plug",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "coil-on-plug",
+      "pt": "bobina sobre a vela",
+      "def": "ignition coil montada direto em cima da spark plug, sem cabo de vela",
+      "var": [
+        "ignition coil-on-plug"
+      ],
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "parking brake",
+      "pt": "freio de estacionamento",
+      "def": "freio que prende o carro parado; neste teste ajuda a impedir que o engine gire o carro",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "engine appearance cover",
+      "pt": "tampa decorativa do engine",
+      "def": "a cobertura de plástico em cima do engine, que sai para dar acesso às coils",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "quick release coupling",
+      "pt": "conector de engate rápido",
+      "def": "conexão de mangueira que se solta apertando as travas, sem ferramenta",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "upper intake manifold",
+      "pt": "upper intake manifold (parte de cima)",
+      "def": "a metade de cima do intake manifold; no 3.5L, tem de sair para alcançar as coils de um dos lados",
+      "licao": "teste-de-vazamento-do-cilindro"
+    },
+    {
+      "en": "cranking",
+      "pt": "giro do engine pelo starter",
+      "def": "o starter motor gira o engine sem que ele pegue; é como se faz o compression test",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "auxiliary starter switch",
+      "pt": "interruptor auxiliar de partida",
+      "def": "botão ligado ao circuito de partida, que deixa uma pessoa girar o engine de fora do carro",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "check valve",
+      "pt": "válvula de retenção",
+      "def": "válvula que deixa o ar passar em um sentido e não deixa voltar; é ela que faz o compression gauge guardar a maior pressão",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "relative compression test",
+      "pt": "teste de compressão relativa",
+      "def": "teste feito pelo scan tool que compara a compressão dos cylinders sem tirar as spark plugs",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "power balance test",
+      "pt": "teste de balanço de cilindros",
+      "def": "teste feito pelo scan tool que compara a contribuição de cada cylinder ao giro do engine",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "harness retainer",
+      "pt": "presilha do chicote",
+      "def": "a presilha que prende o chicote elétrico na valve cover",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "electrical connector",
+      "pt": "conector elétrico",
+      "def": "o plugue que liga o chicote a uma peça, como a coil",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "air cleaner outlet pipe",
+      "pt": "tubo de saída do filtro de ar",
+      "def": "o tubo que leva o ar do air cleaner ao throttle body; sai para tirar o upper intake manifold",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "EVAP tube",
+      "pt": "tubo do sistema evaporativo",
+      "def": "a mangueira do sistema que recolhe os vapores de combustível",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "vacuum hose",
+      "pt": "mangueira de vácuo",
+      "def": "mangueira fina que leva o vácuo do manifold a uma peça",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "coolant hose",
+      "pt": "mangueira de arrefecimento",
+      "def": "a mangueira por onde passa o coolant",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "hose clamp",
+      "pt": "abraçadeira de mangueira",
+      "def": "anel que aperta a mangueira no tubo",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "gasket",
+      "pt": "junta",
+      "def": "peça fina que veda a união de duas superfícies",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "viscosity",
+      "pt": "viscosidade",
+      "def": "o quanto o óleo é grosso ou fino; o manual do engine indica a correta",
+      "licao": "teste-de-compressao"
+    },
+    {
+      "en": "PCV hose",
+      "pt": "mangueira do PCV",
+      "def": "a mangueira do sistema PCV, que liga o crankcase à admissão",
+      "licao": "teste-de-compressao"
     }
   ]
 }

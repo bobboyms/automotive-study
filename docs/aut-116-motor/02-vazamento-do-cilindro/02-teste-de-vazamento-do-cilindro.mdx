@@ -1,0 +1,728 @@
+---
+title: "Cylinder leakage test: achar por onde o cilindro vaza"
+sidebar_label: Cylinder leakage test
+---
+
+import VazamentoCilindro from '@site/src/components/VazamentoCilindro';
+import FiguraManual from '@site/src/components/FiguraManual';
+
+# Cylinder leakage test: achar por onde o cilindro vaza
+
+> **Pergunta central:** o compression test disse que um cylinder não segura a
+> pressão. Mas ele não diz por onde a pressão escapa. Como pôr o piston parado
+> no topo, injetar ar e usar o ouvido para descobrir se o culpado é a valve, o
+> piston ring ou a head gasket?
+
+Esta lição acompanha a *Lab Task Sheet* **Perform cylinder leakage test;
+determine necessary action** (CDX Tasksheet Number C395), da AUT-116. Ela usa
+como veículo o **Ford Edge com o engine 3.5L Duratec V6**, e os valores e passos
+específicos vêm do *service manual* desse engine (seção 303-01C e seção 303-07C,
+do Edge). Todo número tirado do manual está marcado com a origem.
+
+## A queixa: o Edge treme e o compression test não explica
+
+Um cliente traz um Ford Edge 3.5L e diz:
+
+> “O carro treme quando está parado no semáforo, e a luz do engine acendeu.”
+
+O técnico liga o scan tool e encontra dois códigos de *misfire* (falha de
+combustão): P0305, no cylinder 5, e P0306, no cylinder 6. A causa pode ser
+elétrica (ignition coil, spark plug, fuel injector) ou mecânica (o cylinder não
+fecha). O técnico troca de lugar a coil do cylinder 5 com a de um cylinder bom, e
+a falha continua no cylinder 5. Isso tira a coil da lista. Então ele faz o
+[compression test](./teste-de-compressao), da lição anterior, e anota estas leituras. **Os números são ilustrativos, só para
+o exemplo; as leituras de verdade vêm do carro.**
+
+| Cylinder | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| Pressão (psi) | 188 | 190 | 186 | 189 | 118 | 121 |
+
+Os cylinders 5 e 6 estão muito abaixo dos outros. O técnico faz o *wet test*
+(põe um pouco de óleo no cylinder e mede de novo), e as duas leituras quase não
+sobem. A lição de [ciclo de quatro tempos](../funcionamento-do-motor/ciclo-de-quatro-tempos)
+ensinou que isso afasta os piston rings como causa principal. Sobram a valve e a
+head gasket, e o compression test não separa as duas. É aqui que entra o
+**cylinder leakage test**. No fim desta lição, o Exemplo 3 volta a este carro e
+resolve a queixa.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| cylinder leakage test | teste de vazamento do cilindro | injetar ar comprimido num cylinder com o piston parado no topo e medir quanto escapa |
+| cylinder leakage tester | aparelho do teste | o conjunto de regulador, dois manômetros e mangueira que se rosqueia no furo da spark plug |
+| leakage percentage | porcentagem de vazamento | a leitura do tester: quanto do ar injetado escapa do cylinder |
+| top dead center (TDC) | ponto morto superior | a posição em que o piston chega ao ponto mais alto do cylinder |
+| compression stroke | tempo de compressão | o tempo em que o piston sobe com as duas valves fechadas |
+| firing order | ordem de ignição | a sequência em que os cylinders recebem a faísca: no 3.5L, 1-4-2-5-3-6 |
+| intake valve | válvula de admissão | a valve que deixa o ar entrar no cylinder |
+| exhaust valve | válvula de escape | a valve que deixa o gás queimado sair |
+| piston ring | anel do pistão | o anel que veda a folga entre o piston e a parede do cylinder |
+| head gasket | junta do cabeçote | a junta entre o cylinder block e o cylinder head |
+| crankcase | cárter (parte de baixo do bloco) | a cavidade embaixo dos cylinders, onde gira o crankshaft |
+| PCV system | ventilação do crankcase | o circuito que leva o gás que passa pelos piston rings de volta à admissão |
+
+## Onde isso aparece
+
+- **AUT-116** (*Engine Repair*): é a *lab task sheet* C395. A folha pede dois
+  cylinders medidos, a localização de cada vazamento e a ação necessária.
+- **AUT-181 e AUT-183** (*Engine Performance*): quando um *misfire* não tem causa
+  elétrica, o leakage test é o passo seguinte do diagnóstico mecânico.
+- **Prova ASE:** área **A1** (*Engine Repair*), nas perguntas sobre diagnóstico
+  de compression test e de cylinder leakage.
+
+## Ideias anteriores que voltam aqui
+
+Quatro ideias já estudadas sustentam esta lição. A primeira delas é o resultado da
+lição anterior, o [Compression test](./teste-de-compressao): a regra dos 75 % e o
+wet test.
+
+- o **compression stroke**, da lição [O four-stroke cycle](../funcionamento-do-motor/ciclo-de-quatro-tempos):
+  o piston sobe com as duas valves fechadas e aperta a mistura;
+- o **piston ring**, da lição [Block, piston, connecting rod e crankshaft](../funcionamento-do-motor/bloco-pistao-biela-e-virabrequim):
+  ele veda a folga entre o piston e a parede do cylinder;
+- a **head gasket** e as **valves**, da lição [Cylinder head e valves](../funcionamento-do-motor/cabecote-e-valvulas);
+- o **torque** dos fasteners, da lição [Fasteners e torque](../fixadores-e-torque/fixadores-e-torque):
+  você vai tirar e recolocar coils e spark plugs.
+
+Responda antes de seguir:
+
+1. No compression stroke, em que posição estão a intake valve e a exhaust valve?
+2. Quais são as três peças que fecham o cylinder para que ele segure pressão?
+3. Se o piston estiver na metade da descida, a pressão do ar dentro do cylinder
+   empurra o piston para baixo. O que isso pode fazer com o crankshaft?
+
+<details>
+<summary>Respostas</summary>
+
+1. As duas estão fechadas. Se alguma estivesse aberta, o cylinder estaria ligado
+   ao intake manifold ou ao exhaust manifold e não seguraria pressão.
+2. As valves fechadas (a intake valve e a exhaust valve contra os seats),
+   os piston rings contra a parede do cylinder, e a head gasket entre o
+   cylinder head e o block.
+3. A pressão empurra o piston, e o piston empurra a connecting rod, que gira o
+   crankshaft. Com o engine desligado, o crankshaft pode girar sozinho. Isso é
+   um risco de segurança neste teste, e a seção “Na oficina” trata dele.
+
+</details>
+
+## Intuição: testar um pneu de bicicleta, mas dentro do engine
+
+Para achar um furo na câmara de ar de uma bicicleta, a gente enche a câmara e
+escuta o chiado, ou a mergulha na água e procura bolhas. O ar que escapa mostra o
+caminho do furo.
+
+O cylinder leakage test faz o mesmo com o cylinder. Quando o cylinder está
+fechado, ele é uma câmara selada: o piston é o fundo, as valves e a head gasket
+são a tampa, e os piston rings fecham a folga em volta. O técnico injeta ar
+comprimido de fora e escuta por onde ele escapa.
+
+**Onde a analogia para de valer.** Na câmara de ar, qualquer escape é defeito. No
+cylinder, um escape pequeno é normal: os piston rings nunca vedam 100 %. Por isso
+o tester não responde “vaza ou não vaza”. Ele mede **quanto** vaza, e é essa
+medida que se compara com o limite do manual.
+
+### Por que o compression test sozinho não localiza o vazamento
+
+O compression test mede a pressão **com o engine girando** pelo starter motor.
+Cada compression stroke dura uma fração de segundo. Um vazamento pequeno não tem
+tempo de deixar a pressão cair, e o ar que escapa não dá para ouvir nem localizar.
+
+No leakage test, o engine está **parado** e o ar entra de fora com pressão
+constante. O vazamento acontece o tempo que o técnico quiser, e o ouvido tem
+tempo de procurar o chiado. É por isso que o compression test avisa que há um
+cylinder fraco, e o leakage test diz **onde** ele vaza.
+
+### O que o tester faz por dentro
+
+O tester liga o ar da oficina (*shop air*) a um **regulator** (regulador), que
+fixa a pressão de entrada num valor. Depois do regulator, o ar passa por uma
+restrição pequena (um furo calibrado) antes de chegar à mangueira do cylinder.
+Há dois manômetros: um antes da restrição, que mostra a pressão de entrada, e
+outro depois, que mostra o que chega ao cylinder.
+
+Agora compare dois casos.
+
+- **Cylinder bem fechado:** o ar enche o cylinder e a pressão sobe até quase a
+  de entrada. Quase nada passa pela restrição. O manômetro depois da restrição
+  fica alto.
+- **Cylinder com vazamento:** o ar que entra sai por algum lugar. Passa muito
+  ar pela restrição, e uma restrição sob fluxo grande **gasta** pressão. O
+  manômetro depois dela mostra um valor mais baixo.
+
+A escala do segundo manômetro é desenhada para ler **porcentagem de vazamento**:
+quanto mais a pressão cai depois da restrição, maior a porcentagem. Você lê o
+número direto, sem fazer conta.
+
+**O que muda e o que permanece igual:** a pressão de entrada, regulada antes do
+teste, **permanece igual** em todos os cylinders. O que **muda** é o
+tamanho do vazamento do cylinder, e é isso que a leitura mede. Por isso o
+regulator precisa ser ajustado do jeito que o manual do tester manda **antes** de
+ligar a mangueira ao engine. Se esse ajuste estiver errado, todas as leituras
+saem erradas na mesma direção.
+
+## Modelo visual: quatro caminhos de vazamento
+
+<VazamentoCilindro caption="O cylinder com o piston no TDC do compression stroke. O ar do tester entra pelo furo da spark plug (azul). O ar que escapa (laranja) pode sair por quatro caminhos: pela intake valve (e vai ao throttle body), pela exhaust valve (e vai ao tailpipe), pelos piston rings (e vai ao crankcase, ao oil filler cap e ao PCV) ou pela head gasket (e vai ao cylinder vizinho)." />
+
+Os quatro caminhos são as quatro peças que fecham o cylinder. Cada uma
+leva o ar para um lugar **diferente** do engine. Esse é o raciocínio inteiro
+do teste:
+
+> Quem fecha o cylinder? A intake valve, a exhaust valve, os piston rings e a
+> head gasket. Para onde vai o ar que cada uma deixa passar? Para um lugar
+> próprio. Então o lugar de onde o chiado sai aponta a peça.
+
+## Ponte para a formalização
+
+O que o ouvido encontra é um lugar. O que o técnico escreve na task sheet é uma
+causa e uma ação. A passagem entre as duas é uma tabela de correspondência: para
+cada lugar onde o ar sai, qual peça vaza. A tabela vem direto do desenho acima.
+Só falta o número, que vem do tester.
+
+## Formalização
+
+### O que o manual diz sobre o teste
+
+O manual do Ford Edge 3.5L descreve o teste na seção de diagnóstico do engine
+(303-00, *Diagnosis and Testing*, “Cylinder Leakage Detection”). Em resumo:
+
+1. O tester entra no furo da spark plug.
+2. O piston sobe até o TDC no compression stroke.
+3. O ar comprimido entra, e o tester mostra a porcentagem de vazamento.
+4. **Vazamento acima de 20 % é excessivo** (valor do manual do Edge).
+5. Com a pressão retida no cylinder, escute o chiado do ar que escapa.
+
+O manual dá o limite de 20 %, mas **não** dá a pressão de entrada nem o ajuste
+do regulator. Esses vêm do manual do tester que você estiver usando.
+
+### Onde escutar, e o que cada lugar significa
+
+| O ar sai por | Peça que vaza | Por que esse lugar |
+|---|---|---|
+| o throttle body (a entrada de ar do engine) | **intake valve** | a intake valve abre para o intake port, que leva ao intake manifold e ao throttle body |
+| o tailpipe (o escapamento) | **exhaust valve** | a exhaust valve abre para o exhaust port, que leva ao escapamento |
+| o oil filler cap aberto, o dipstick tube ou a conexão do PCV | **piston rings** | o ar passa entre o piston e a parede do cylinder e cai no crankcase, que se liga a esses pontos |
+| o furo da spark plug do cylinder vizinho | **head gasket**, entre dois cylinders | a gasket separa cada cylinder do vizinho; se ela falha, o ar passa de um para o outro |
+| bolhas no coolant do radiator | **head gasket** com falha para o cooling system, ou trinca no block ou no head | o ar passa para as galerias de coolant e sobe como bolhas |
+
+**Por que se tiram as spark plugs vizinhas.** A task sheet manda tirar a spark
+plug do cylinder testado **e as dos cylinders ao lado**. É para o caso da
+head gasket: o ar passa para o vizinho, e só um furo de plug aberto deixa esse ar
+sair onde você consegue ouvir.
+
+### A ordem de ignição e o giro do crankshaft
+
+O 3.5L é um V6 e tem seis cylinders. O manual numera os cylinders 1, 2 e 3 num
+*bank* (a fileira de três cylinders de um lado do V) e 4, 5 e 6 no outro, e dá a **firing order** 1-4-2-5-3-6. Para
+testar um cylinder, o piston dele precisa estar no TDC do compression stroke. O
+ciclo de cada cylinder dura duas voltas do crankshaft, 720°. Com seis cylinders,
+um passa pelo TDC do compression stroke a cada $720 \div 6 = 120$ graus.
+
+Isso dá um atalho: **depois de testar um cylinder, gire o crankshaft 120° e o
+próximo cylinder da firing order está no TDC do compression stroke.** A partir do
+cylinder 1, a sequência é 1, 4, 2, 5, 3, 6.
+
+| Do TDC do cylinder 1 | Graus do crankshaft | Cylinder no TDC do compression stroke |
+|---|---|---|
+| 0° | 0° | 1 |
+| +120° | 120° | 4 |
+| +240° | 240° | 2 |
+| +360° | 360° | 5 |
+| +480° | 480° | 3 |
+| +600° | 600° | 6 |
+
+O manual do 3.5L manda girar o crankshaft **só no sentido horário** (*clockwise*).
+O manual repete essa regra em todos os procedimentos que giram o crankshaft e não
+explica o motivo no trecho que consultamos. Siga a regra. Se você passar do
+ponto, não volte: continue no sentido horário até o cylinder certo chegar de novo.
+
+## Como falha e como diagnosticar
+
+O raciocínio de diagnóstico tem a mesma forma de sempre: o que o cylinder
+**deveria** fazer, o que o teste **mostrou**, que princípio liga as duas coisas, e
+por que esse resultado descarta as outras hipóteses.
+
+**O que o cylinder deveria fazer:** com o piston no TDC e as valves fechadas,
+segurar o ar com pouco vazamento, abaixo do limite de 20 % do manual.
+
+| O teste mostrou | Princípio | Hipótese confirmada | O que descarta |
+|---|---|---|---|
+| Porcentagem alta e chiado no throttle body | o ar só chega ao throttle body passando pela intake valve | intake valve que não assenta | exhaust valve, rings, gasket |
+| Porcentagem alta e chiado no tailpipe | o ar só chega ao tailpipe pela exhaust valve | exhaust valve que não assenta | intake valve, rings, gasket |
+| Porcentagem alta e chiado no oil filler cap ou no PCV | o ar só chega ao crankcase passando pelos rings | piston rings ou cylinder wall gastos | as duas valves, gasket |
+| Porcentagem alta e chiado no furo da plug do vizinho | o ar só passa de um cylinder ao outro pela gasket | head gasket entre os dois | valves e rings |
+| Bolhas no radiator | o ar só chega ao coolant por uma falha entre câmara e galeria | head gasket para o coolant, ou trinca | valves e rings |
+| Porcentagem baixa em todos os cylinders | todos vedam bem | o problema não é de vedação do cylinder | todas as causas mecânicas deste teste |
+
+Para o 3.5L, o manual (tabela de sintomas, seção 303-00) relaciona cada achado a
+uma ação: *damaged head gasket* pede uma head gasket nova; *damaged, worn or
+sticking piston ring(s)* pedem piston rings novos; *compression leakage at valve
+seat*, *damaged valve guide* ou *seized valve stem* pedem um cylinder head novo.
+O manual também lista *cracked or distorted cylinder head* (cylinder head novo).
+
+### Erros comuns
+
+> **Erro comum 1: medir com o piston fora do TDC do compression stroke.** É
+> tentador, porque o piston “quase” no topo parece servir. Mas um piston no TDC do
+> **exhaust** stroke tem uma valve aberta (ou as duas, no instante da
+> sobreposição). O ar sai direto pelo tailpipe ou pelo throttle body, e o tester
+> mostra uma porcentagem muito alta. O técnico conclui “valve ruim” e abre
+> o head sem necessidade. A causa física é a valve aberta *de propósito* naquele
+> tempo. Confirme o compression stroke (veja a seção “Na oficina”) antes de
+> ler o número.
+
+> **Erro comum 2: concluir “piston rings gastos” só pela porcentagem alta.**
+> Porcentagem alta só diz que o cylinder vaza. A peça que vaza é a que o ouvido
+> localiza. Sem escutar os quatro lugares, qualquer das quatro peças pode ser a
+> culpada.
+
+> **Erro comum 3: achar que 5 % ou 10 % já é defeito.** Os piston rings nunca vedam
+> 100 %. Um valor pequeno e parecido entre os cylinders é normal. O que chama
+> atenção é um cylinder muito acima dos outros, ou acima do limite do manual.
+
+> **Erro comum 4: confundir a leitura do tester com a do compression gauge.** No
+> compression test, pressão **alta** é bom. No leakage test, porcentagem **alta** é
+> ruim. São escalas em sentidos opostos. Um cylinder com 118 psi no compression
+> test e outro com 35 % no leakage test estão **os dois** mal.
+
+## Na oficina: o cylinder leakage test no Ford Edge 3.5L
+
+:::danger Antes de começar: os riscos deste teste
+
+- **O engine pode girar sozinho.** Com ar comprimido no cylinder e o piston um
+  pouco depois do TDC, a pressão empurra o piston para baixo e gira o
+  crankshaft. As polias e a drive belt giram junto. Mantenha as mãos, o cabelo e as
+  roupas longe da drive belt e das polias. Use a transmissão em **Park**, o
+  parking brake aplicado e as rodas calçadas. Siga a orientação do instrutor
+  sobre como segurar o crankshaft.
+- **O ar comprimido solta sujeira.** Use óculos de proteção o tempo todo,
+  principalmente ao soprar sujeira dos poços das spark plugs.
+- **Mangueira solta chicoteia.** Confira a conexão da mangueira ao tester e ao
+  adapter antes de abrir o ar. Nunca aponte o ar para o corpo.
+- **Engine quente queima.** O manifold e o exhaust queimam a mão. O radiator
+  cap **nunca** se abre com o engine quente: o cooling system está pressurizado e
+  o coolant sai fervendo.
+- **O engine não pode ser ligado com as spark plugs fora e as coils soltas.**
+  O teste é com o engine **desligado**. Se o carro tiver de ser ligado depois, as
+  coils e as plugs voltam antes.
+
+:::
+
+### Ferramentas e materiais
+
+- *service manual* do Edge 3.5L (seções 303-00, 303-01C e 303-07C);
+- cylinder leakage tester com o manual dele, e o **adapter** do tamanho do furo
+  da spark plug;
+- ar comprimido da oficina (*shop air*), com mangueira;
+- socket e ratchet para os parafusos das coils, extension, **breaker bar** (uma
+  chave longa de braço, para girar o crankshaft) e um socket que caiba no bolt do
+  crankshaft, indicado pelo instrutor;
+- chave para a spark plug (*spark plug socket*) e **torque wrench** de escala baixa;
+- óculos de proteção, luvas e um pano limpo;
+- uma lanterna.
+
+### Procedimento geral
+
+**Passo 1. Leia o manual do tester e o service manual.** O manual do tester diz a
+pressão de entrada e como calibrar o regulator. O service manual dá a
+firing order e os torques.
+
+**Passo 2. Prepare o carro.** Park, parking brake, rodas calçadas, ignition **OFF**. O
+engine deve estar **morno ao toque**, e não quente nem frio. O manual do Edge
+avisa: tirar spark plug com o engine quente ou com o engine frio de muito
+tempo pode danificar a rosca da spark plug ou o cylinder head, que é de
+alumínio.
+
+**Passo 3. Descubra onde ficam as coils e qual cylinder é qual.** O manual (seção
+303-07C) diz que as coils do lado esquerdo saem depois de tirar a engine
+appearance cover. **As coils do lado direito só aparecem depois de tirar o upper
+intake manifold.** Por isso, escolha para o teste cylinders do lado **acessível**,
+a menos que o instrutor mande outra coisa. A figura abaixo mostra os cylinders
+vistos de cima. Ela **não** escreve qual bank é o direito e qual é o esquerdo:
+confira no carro.
+
+<FiguraManual id="E151266" alt="Vista de cima do engine com os cylinders 4, 5 e 6 de um lado e 1, 2 e 3 do outro" caption="Engine Cylinder Identification (303-01C): um bank tem os cylinders 1, 2 e 3; o outro, 4, 5 e 6. Cylinders vizinhos do mesmo bank são os que a head gasket separa, e por isso a task sheet manda tirar também as plugs dos vizinhos." />
+
+**Passo 4. Tire as coils (ignition coil-on-plug) dos cylinders que vai testar e dos
+vizinhos.** São os mesmos passos da lição
+[Compression test](./teste-de-compressao), seção B. Aqui, o lado esquerdo:
+
+*4a. Engine appearance cover.* Tire a oil fill cap, solte os dois fixadores e tire
+a cover. Recoloque a oil fill cap.
+
+<FiguraManual id="E200473" alt="Engine appearance cover em azul, dois fixadores em magenta e a oil fill cap em verde" caption="A engine appearance cover (azul), os dois fixadores dela (magenta) e a oil fill cap (verde), que sai antes e volta depois. Seção 303-07C, lado esquerdo, passo 1." />
+
+*4b. PCV hose.* Desconecte o quick release coupling. A mangueira (amarela) se
+afasta, não sai.
+
+<FiguraManual id="E201465" alt="PCV hose em amarelo com o quick release coupling em magenta" caption="O quick release coupling do PCV hose (magenta). Seção 303-07C, passo 2." />
+
+*4c. Harness retainer e connectors.* Solte o fixador do chicote da valve cover e
+desconecte os connectors das coils.
+
+<FiguraManual id="E201466" alt="Chicote em amarelo, fixador do chicote e três connectors das coils em magenta" caption="O chicote (amarelo), o harness retainer (magenta) e os três connectors das coils (magenta, x3). Seção 303-07C, passo 3." />
+
+*4d. Sopre a sujeira e tire as coils.* O manual manda soprar a sujeira em volta das
+coils com ar comprimido **antes** de soltá-las. Solte o bolt de cada coil e puxe a
+coil com um leve movimento de torção, que rompe a vedação e ajuda a sair.
+
+<FiguraManual id="E201467" alt="Três ignition coil-on-plugs em azul, cada uma com um bolt em magenta" caption="As três coils (azul) e os três bolts (magenta, x3). Seção 303-07C, passo 4." />
+
+*Lado direito.* Se o cylinder do teste está no lado direito, o upper intake manifold
+precisa sair primeiro. Os 11 passos dele, com as figuras, estão na lição
+[Compression test](./teste-de-compressao), passo B5. Depois, o manual manda
+desconectar os connectors e soltar os bolts das coils:
+
+<FiguraManual id="E201468" alt="Três connectors das coils do lado direito em magenta, chicote em amarelo" caption="Lado direito: os três connectors das coils (magenta, x3). Seção 303-07C, passo 6." />
+
+<FiguraManual id="E201469" alt="Três coils do lado direito em azul com um bolt em magenta cada" caption="Lado direito: as três coils (azul) e os três bolts (magenta, x3). Seção 303-07C, passo 7." />
+
+**Passo 5. Tire as spark plugs.** O manual avisa: se uma spark plug cair no chão,
+**jogue fora**, porque o dano interno pode causar misfire e danificar o engine.
+Antes de soltar, sopre a sujeira do poço. A figura traz o ícone da chave de
+impacto riscada: **não use ferramenta de impacto**.
+
+<FiguraManual id="E201364" alt="Spark plug em azul no fundo do poço, com x6 e o ícone de chave de impacto riscada" caption="A spark plug (azul) no poço, com “x6” e o ícone de chave de impacto riscada. Seção 303-07C, Spark Plugs, passo 2. Torque de instalação: 133 lb-in (15 N·m)." />
+
+**Passo 6. Calibre o tester** como o manual dele manda, com a mangueira do cylinder
+**ainda desligada** do engine.
+
+**Passo 7. Ponha o cylinder no TDC do compression stroke.** Veja o quadro abaixo.
+
+**Passo 8. Rosqueie o adapter no furo da spark plug** e conecte a mangueira do tester.
+Segure o crankshaft (item de segurança acima).
+
+**Passo 9. Abra o ar e leia a porcentagem.** Anote o cylinder e o valor.
+
+**Passo 10. Escute os quatro lugares:** o throttle body, o tailpipe, o oil filler cap
+aberto (ou o PCV) e os furos das spark plugs vizinhas. Peça a um colega para
+ficar em cada ponto, ou vá de um a um. Anote **de onde** vem o chiado.
+
+**Passo 11. Chame o instrutor antes de soltar o tester.** A task sheet pede que ele
+confira a leitura do segundo cylinder.
+
+**Passo 12. Alivie o ar antes de desrosquear o adapter.** Feche o ar do shop air e deixe a
+pressão sair pelo tester.
+
+**Passo 13. Gire o crankshaft 120° no sentido horário** e repita para o próximo cylinder
+da firing order.
+
+**Passo 14. Remonte.** Coloque as spark plugs e as coils, os conectores, o harness
+retainer, o PCV hose coupling e a engine appearance cover, e confira que
+nenhum parafuso ou ferramenta ficou no engine. Os valores de torque abaixo vêm
+do manual do Edge 3.5L; **confirme-os no service manual** antes de apertar.
+
+| Peça | Valor do manual (Edge 3.5L) | Em N·m e lb-ft |
+|---|---|---|
+| Spark plug | 133 lb-in | 15 N·m (11.1 lb-ft) |
+| Parafuso da ignition coil-on-plug | estágio 1: 62 lb-in; estágio 2: 48° | estágio 1: 7 N·m (5.2 lb-ft) |
+| Gap da spark plug | 0.049–0.053 in | 1.25–1.35 mm |
+
+Os torques estão em **lb-in**. Quem lê 133 como lb-ft aperta a spark plug 12
+vezes mais forte do que o manual pede, e a rosca do cylinder head de alumínio
+não aguenta. Veja o erro comum na lição de
+[Fasteners e torque](../fixadores-e-torque/fixadores-e-torque).
+
+### Como achar o TDC do compression stroke (passo 7)
+
+O que você precisa é de um piston no ponto mais alto **com as duas valves
+fechadas**. Dois sinais confirmam isso, e é preciso ter os dois.
+
+1. **O compression stroke.** Com a spark plug do cylinder fora, gire o
+   crankshaft devagar, no sentido horário. Ponha o dedo (com luva) sobre o furo da
+   plug. Enquanto o piston sobe com as valves fechadas, o ar sai do furo e empurra
+   o dedo. Esse sopro é o compression stroke. Se não há sopro e o ar é aspirado,
+   é outro tempo: continue girando.
+2. **O topo do curso.** Continue girando devagar e **pare quando o sopro
+   terminar de subir e o piston parar no ponto mais alto.** Um jeito de conferir
+   é encostar uma haste plástica ou de madeira (nunca de metal, que risca o
+   piston e a parede) no piston pelo furo da plug e girar o crankshaft um pouco
+   para os dois lados: a haste sobe e desce, e o ponto mais alto da haste é o
+   TDC.
+
+O service manual do 3.5L que temos dá a posição de TDC só para trabalho com a
+front cover aberta (crankshaft dowel pin às 11 horas). Não encontramos nele uma
+marca externa para este teste. **Pergunte ao instrutor** como ele quer
+confirmar o TDC neste engine, ou se há uma marca na polia do crankshaft.
+
+## Exemplos resolvidos
+
+### Exemplo 1 — a firing order na prática
+
+Você testou o cylinder 1 e agora quer testar o cylinder 5. Quantos graus gira o
+crankshaft?
+
+A sequência é 1-4-2-5-3-6. Do 1 ao 5, passam-se três passos: 1→4, 4→2, 2→5.
+Cada passo é de 120°. Então: $3 \times 120 = 360°$. Uma volta inteira do crankshaft,
+no sentido horário.
+
+### Exemplo 2 — o que o ouvido encontrou (pause e tente)
+
+No cylinder 3 você mede 32 % de vazamento. O chiado é forte no oil filler cap
+aberto e não se ouve nada no throttle body, no tailpipe nem nos furos vizinhos.
+Qual peça vaza, e por quê?
+
+Antes de ler a resposta, use a tabela dos “quatro caminhos”.
+
+<details>
+<summary>Resposta</summary>
+
+O ar só chega ao oil filler cap passando pelo crankcase, e só chega ao crankcase
+passando entre o piston e a parede. As duas valves e a gasket não levam ar para
+lá. Então os **piston rings** (ou a parede do cylinder) são o suspeito. Os 32 %
+estão acima do limite de 20 % do manual. A ação do manual para piston ring
+gasto ou preso é instalar piston rings novos.
+
+</details>
+
+### Exemplo 3 — a queixa do Edge resolvida (pause e tente)
+
+Voltemos aos cylinders 5 e 6 da abertura (118 psi e 121 psi, contra 190 psi do
+melhor). Antes de qualquer outro teste, o manual dá uma regra: a leitura mais
+baixa deve ser pelo menos **75 %** da mais alta.
+
+a) Os cylinders 5 e 6 passam nessa regra?
+b) Você faz o leakage test e mede 41 % no cylinder 5 e 38 % no 6. Com o 5 sob
+   pressão, o chiado forte sai pelo furo da spark plug do cylinder 6. Qual é a
+   causa?
+
+<details>
+<summary>Resposta</summary>
+
+a) Não. 75 % de 190 psi é $0.75 \times 190 = 142.5\,\text{psi}$ (983 kPa). As duas
+leituras ficam abaixo disso: $118 \div 190 = 62\,\%$ e $121 \div 190 = 64\,\%$.
+
+b) O ar do cylinder 5 sai no cylinder 6, o **vizinho**. O único caminho entre dois
+cylinders vizinhos é a **head gasket**. Os dois cylinders ficam lado a lado, no mesmo
+bank, e as duas porcentagens passam do limite de 20 %. Isso confirma o que o
+wet test sugeriu: não são os piston rings. A correção é instalar uma head gasket
+nova, depois de conferir se o cylinder head está empenado. O manual tem o
+procedimento *Cylinder Head Distortion*. Para confirmar o reparo, repita o
+compression test e o leakage test: os dois cylinders devem voltar a ficar
+parecidos com os outros.
+
+</details>
+
+### Exemplo 4 — o tester lê alto, mas o motivo é o tempo errado
+
+Você põe o cylinder 2 “no topo” e mede 92 %, com ar saindo pelo tailpipe. Qual é o
+erro mais provável?
+
+<details>
+<summary>Resposta</summary>
+
+O piston estava no TDC do **exhaust stroke**, e não do compression stroke. Nesse
+momento a exhaust valve está aberta, e o ar sai direto pelo tailpipe. É o erro
+comum 1. Gire o crankshaft mais 360° (uma volta) no sentido horário até o
+piston voltar ao TDC com as valves fechadas, e meça de novo.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o cylinder leakage test localiza o vazamento e o compression test não?
+2. Por que o piston precisa estar no TDC do compression stroke?
+3. Por que se removem também as spark plugs dos cylinders vizinhos?
+4. Se o ar sai pelo tailpipe, qual peça vaza, e por quê?
+5. O que muda e o que permanece igual entre um cylinder bom e um com vazamento,
+   do ponto de vista do tester?
+
+<details>
+<summary>Respostas</summary>
+
+1. O compression test é feito com o engine girando, e cada compression stroke dura
+   uma fração de segundo. O ar que escapa não dá para ouvir nem seguir. No
+   leakage test, o engine está parado e a pressão é constante: o vazamento dura o
+   tempo que o técnico quiser, e o ouvido tem tempo de achar o chiado.
+2. Nesse ponto as duas valves estão fechadas e o piston está no topo. Se uma valve
+   estivesse aberta, o ar sairia por ela mesmo sem defeito. E com as duas fechadas,
+   qualquer ar que escape passa por um defeito de vedação.
+3. Porque o ar que passa pela head gasket vai para o cylinder vizinho. Só com o
+   furo da plug do vizinho aberto o ar sai num lugar onde se ouve.
+4. A exhaust valve. O tailpipe só se liga ao cylinder pelo exhaust port, e a
+   exhaust valve é a peça que fecha esse caminho.
+5. A pressão de entrada, regulada antes, **permanece igual**. O que **muda** é a
+   quantidade de ar que escapa e, por consequência, a pressão depois da
+   restrição do tester. Mais vazamento dá porcentagem maior na leitura.
+
+</details>
+
+## Como preencher a task sheet C395
+
+A task sheet tem seis itens. Esta tabela diz **onde estudar** cada um. As leituras e
+as conclusões de cada item vêm do **seu** teste no laboratório.
+
+| Item | O que pede | Onde está nesta lição |
+|---|---|---|
+| 1 | listar os lugares por onde o ar pode sair | “Modelo visual” e a tabela “Onde escutar” |
+| 2 | tirar as plugs do cylinder testado e dos vizinhos | “Na oficina”, passos 4 e 5, e “Por que se tiram as spark plugs vizinhas” |
+| 3 | TDC no compression stroke, instalar o tester e anotar cylinder, porcentagem e origem | “Como achar o TDC” e passos 7 a 10 |
+| 4 | repetir em outro cylinder e **chamar o instrutor antes de soltar o tester** | passos 11 e 13 |
+| 5 | determinar a ação necessária | “Como falha e como diagnosticar” |
+| 6 | o instrutor confere a conclusão | esta etapa é do instrutor |
+
+O instrutor pediu que o item 5 explique também **o que cada leitura significa**.
+Para cada cylinder medido, escreva três coisas: a porcentagem, de onde saiu o
+ar, e a ação que o manual relaciona àquela peça. Se a porcentagem estiver abaixo
+de 20 % e nada vazar de forma notável, a conclusão é que o cylinder está dentro do
+limite do manual e nenhuma ação é necessária nele.
+
+## Exercícios
+
+### 1. Reconhecimento
+
+a) Nomeie as quatro peças que fecham um cylinder e que o leakage test examina.
+b) Qual é a firing order do Edge 3.5L?
+c) Em inglês, como se chama o aparelho do teste?
+
+### 2. Explicação
+
+Explique com suas palavras por que o ar que vaza pelos piston rings aparece no
+oil filler cap.
+
+### 3. Aplicação direta
+
+a) Quantos graus o crankshaft gira entre o TDC do cylinder 1 e o do cylinder 3
+no compression stroke?
+b) Converta 133 lb-in em lb-ft e em N·m.
+c) A leitura mais alta de um compression test foi 185 psi. Qual é a menor leitura
+aceita pela regra dos 75 %?
+
+### 4. Variação
+
+Num segundo carro, o chiado de um cylinder sai pelo throttle body. Qual peça
+vaza? E se o mesmo carro tivesse o chiado no oil filler cap?
+
+### 5. Caso de diagnóstico
+
+Um motor tem 8 % de vazamento nos cylinders 1, 3 e 4, e 29 % no cylinder 2, com
+chiado no throttle body. Qual é a causa provável? Qual é a ação do manual? Que
+teste de confirmação você faria depois do reparo?
+
+<details>
+<summary>Dica</summary>
+
+Volte à tabela “Onde escutar”: o que só chega ao throttle body pela
+intake valve? E o que mostra que o reparo funcionou: a leitura de qual cylinder?
+
+</details>
+
+### 6. Justificativa
+
+Por que o regulator do tester precisa ser calibrado **antes** de ligar a mangueira
+ao cylinder, e não depois?
+
+### 7. Formato ASE
+
+**1.** A cylinder leakage test shows 45 percent leakage on one cylinder, and air
+can be heard escaping at the tailpipe. Technician A says the piston rings are
+worn. Technician B says the exhaust valve is not sealing. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+**2.** During a cylinder leakage test, air is heard escaping from the adjacent
+cylinder’s spark plug hole. The most likely cause is:
+
+- A. a burned intake valve
+- B. a damaged head gasket
+- C. worn piston rings
+- D. a cracked exhaust manifold
+
+**3.** Technician A says the piston must be at top dead center on the compression
+stroke when the leakage tester is connected. Technician B says the engine should
+be rotated counterclockwise to reach the next cylinder. Who is correct?
+
+- A. A only
+- B. B only
+- C. Both A and B
+- D. Neither A nor B
+
+<details>
+<summary>Respostas para conferência</summary>
+
+**1. Reconhecimento**
+
+a) A intake valve, a exhaust valve, os piston rings e a head gasket.
+
+b) 1-4-2-5-3-6 (manual do Edge 3.5L).
+
+c) *Cylinder leakage tester*.
+
+**2. Explicação**
+
+O ar passa pela folga entre o piston e a parede do cylinder, mesmo com os
+rings, quando eles estão gastos. Esse ar cai no crankcase. O crankcase é ligado
+ao oil filler cap e ao PCV, então o ar sai por lá. O crankcase é o único lugar
+que os piston rings, e só eles, ligam ao cylinder.
+
+**3. Aplicação direta**
+
+a) 1-4-2-5-3: o 3 é o quinto da lista, quatro passos depois do 1.
+$4 \times 120 = 480°$.
+
+b) $133 \div 12 = 11.1\,\text{lb-ft}$ e $133 \times 0.113 = 15.0\,\text{N·m}$.
+Se você achou 1596, multiplicou por 12 em vez de dividir.
+
+c) $0.75 \times 185 = 138.75\,\text{psi}$, ou cerca de 139 psi.
+
+**4. Variação**
+
+O chiado no throttle body aponta a **intake valve**. O chiado no oil filler cap
+aponta os **piston rings**. O local do chiado decide a peça, não a
+porcentagem.
+
+**5. Caso de diagnóstico**
+
+O cylinder 2 está muito acima dos outros (29 % contra 8 %) e acima do limite de
+20 %. O chiado no throttle body mostra que o ar sai pela intake valve. A
+intake valve do cylinder 2 não assenta. O manual relaciona *compression leakage at
+valve seat* a um cylinder head novo. Para confirmar o reparo, repita o leakage
+test no cylinder 2: a leitura deve voltar a ficar perto das dos outros três.
+
+**6. Justificativa**
+
+A leitura é o que sobra da pressão de entrada depois da restrição e do
+vazamento. Se o regulator estiver mal ajustado, a pressão de entrada deixa de ser
+a que a escala do tester espera, e todas as leituras saem erradas na mesma
+direção. O ajuste feito com a mangueira desligada fixa o ponto de partida (0 %),
+que depois serve de referência para os cylinders.
+
+**7. Formato ASE**
+
+1. **B only.** O ar no tailpipe só passa pela exhaust valve. Technician A está
+   errado: o ar dos piston rings sai no crankcase, não no escapamento.
+2. **B (damaged head gasket).** O ar só passa de um cylinder ao vizinho pela
+   head gasket. A (intake valve) levaria o ar ao throttle body. C (rings) levaria o
+   ar ao crankcase. D (exhaust manifold) não é uma peça que ligue dois cylinders
+   pelo furo da spark plug.
+3. **A only.** Technician A está certo: é a posição em que as duas valves estão
+   fechadas. Technician B está errado: o manual do 3.5L manda girar o crankshaft
+   **só no sentido horário**.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** o cylinder é uma câmara fechada por quatro peças: a
+  intake valve, a exhaust valve, os piston rings e a head gasket. O leakage test
+  injeta ar com o piston parado no TDC do compression stroke e **escuta para
+  onde o ar escapa**. O lugar do chiado diz a peça; a porcentagem diz o tamanho.
+- **Quando usar:** quando o compression test acusa um cylinder baixo e é preciso
+  saber a causa antes de abrir o engine, ou quando um misfire não tem causa
+  elétrica.
+- **Com o que se conecta:** com o compression test e o wet test, com o
+  compression stroke e as valves do ciclo de quatro tempos, com a head gasket e
+  com a ordem de ignição. Continua nas lab task sheets do cylinder head.
+- **O que sempre vem do manual:** o limite de vazamento (20 % no Edge 3.5L), a
+  firing order, os torques das spark plugs e das coils e o ajuste do tester.
+
+**Termos em inglês desta lição:** cylinder leakage test · cylinder leakage tester ·
+leakage percentage · regulator · shop air · adapter · top dead center · compression
+stroke · firing order · bank · intake valve · exhaust valve · intake port ·
+exhaust port · throttle body · tailpipe · piston ring · head gasket · crankcase ·
+oil filler cap · dipstick · PCV system · ignition coil · spark plug · breaker bar ·
+torque wrench · wet compression test · compression test.

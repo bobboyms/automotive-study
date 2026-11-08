@@ -75,6 +75,13 @@ O bolt, a rosca, o torque e a torque wrench, como no PowerPoint da aula.
 O funcionamento do motor, peça por peça, e os sistemas que trabalham em volta
 dele. [Ver o roteiro do capítulo](./funcionamento-do-motor/).
 
+### Lab: Compression e leakage tests
+
+Como medir se um cylinder segura a pressão (compression test) e como achar por
+onde ele vaza (leakage test, task sheet C395), com o Ford Edge 3.5L e o service
+manual dele.
+[Ver o roteiro do tópico](./vazamento-do-cilindro/).
+
 ### Próximos capítulos (em preparação)
 
 2. Shop Safety — segurança na oficina.

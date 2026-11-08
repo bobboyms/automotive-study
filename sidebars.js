@@ -295,6 +295,26 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: 'Compression e leakage tests (lab)',
+          link: {
+            type: 'doc',
+            id: 'aut-116-motor/vazamento-do-cilindro/index',
+          },
+          items: [
+            {
+              type: 'doc',
+              id: 'aut-116-motor/vazamento-do-cilindro/teste-de-compressao',
+              label: 'Compression test',
+            },
+            {
+              type: 'doc',
+              id: 'aut-116-motor/vazamento-do-cilindro/teste-de-vazamento-do-cilindro',
+              label: 'Cylinder leakage test',
+            },
+          ],
+        },
       ],
     },
     {
