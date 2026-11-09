@@ -208,6 +208,18 @@ vem antes de tudo nas duas páginas.
     procedimento de desenergizar o sistema, com o tempo de espera que existe
     por causa do capacitor de reserva.
 
+### Tópico 10 — Relay testing
+
+Este tópico é a *job sheet* **Relay Testing** do módulo 3, feita num carro de
+verdade: o Ford Edge 2016 3.5L, com o service manual dele.
+
+30. [Testar um relay com o service manual](./testar-relay-com-service-manual)
+    — o horn relay do Edge, do wiring diagram à bancada. As quatro páginas do
+    manual que respondem qual relay, onde fica, o que faz cada pino e que
+    leitura esperar; a numeração 2, 1, 3 e 5 da Ford ao lado da 86, 85, 30 e
+    87; o resistor em paralelo com a coil, que faz a coil aberta não mostrar
+    OL; e o pinpoint test, que pula uma parte do circuit por vez.
+
 ### Laboratório
 
 - [Laboratório de circuits](./laboratorio-de-circuitos) — uma bancada para
@@ -218,17 +230,17 @@ vem antes de tudo nas duas páginas.
 
 ### Próximos tópicos (em preparação)
 
-30. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
+31. **Series-parallel circuit** — série e paralelo no mesmo circuit, como o
     fuse em série com um conjunto de bulbs em paralelo.
-31. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
+32. **Ler wiring diagrams do fabricante** — as páginas que distribuem a power
     e os grounds, o component locator e como seguir um circuit por várias
-    páginas.
-32. **Diagnóstico de circuits** — open circuit, short to ground, short to
+    páginas. A lição 30 já leu um circuit inteiro do Edge.
+33. **Diagnóstico de circuits** — open circuit, short to ground, short to
     power, high resistance e voltage drop.
-33. **Testar a battery** — load test, conductance tester e parasitic draw.
+34. **Testar a battery** — load test, conductance tester e parasitic draw.
     A lição 25 já cobriu a recarga.
-34. **Starting system** — starter motor, solenoid e testes.
-35. **Charging system** — alternator, rectifier, voltage regulator e testes.
+35. **Starting system** — starter motor, solenoid e testes.
+36. **Charging system** — alternator, rectifier, voltage regulator e testes.
 
 ## Como estudar cada lição
 

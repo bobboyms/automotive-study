@@ -375,7 +375,21 @@ export {Massa};
 // contato 87a, fechado em repouso. `diodo` põe o diode em paralelo com a coil.
 // `dx` é a distância do meio até cada coluna; num circuit, ela alinha a coil
 // e o contato com os fios que chegam a eles.
-export function Rele({x = 0, y = 0, dx = 20, acionado = false, cinco = false, diodo = false, pinos = true, fontSize = 13}) {
+// `resistor` põe um resistor em paralelo com a coil, como no símbolo de relay
+// da Ford. `nomes` troca os números dos pinos, na ordem [coil em cima, coil
+// embaixo, contato em cima, contato embaixo, 87a]: a Ford usa 2, 1, 3 e 5.
+export function Rele({
+  x = 0,
+  y = 0,
+  dx = 20,
+  acionado = false,
+  cinco = false,
+  diodo = false,
+  resistor = false,
+  nomes = ['86', '85', '30', '87', '87\\text{a}'],
+  pinos = true,
+  fontSize = 13,
+}) {
   const cx = -dx; // coluna da coil
   const sx = cinco ? dx + 2 : dx; // coluna do contato
   const top = -44;
@@ -391,7 +405,7 @@ export function Rele({x = 0, y = 0, dx = 20, acionado = false, cinco = false, di
       ? [c87a[0] + 1.5, c87a[1] - 3]
       : [sx + 11, 10];
   const meio = [(pivo[0] + ponta[0]) / 2, (pivo[1] + ponta[1]) / 2];
-  const esq = cx - (diodo ? 40 : 14);
+  const esq = cx - (diodo || resistor ? 40 : 14);
   const caixa = [esq, -30, (cinco ? c87[0] + 14 : sx + 18) - esq, 60];
   return (
     <g transform={`translate(${x} ${y})`}>
@@ -443,14 +457,31 @@ export function Rele({x = 0, y = 0, dx = 20, acionado = false, cinco = false, di
           <circle className={styles.ponto} cx={cx} cy={24} r={3} />
         </g>
       )}
+      {resistor && (
+        <g>
+          {/* em paralelo com a coil: as duas pontas ligadas aos mesmos pinos */}
+          <g className={styles.fio}>
+            <line x1={cx} y1={-24} x2={cx - 24} y2={-24} />
+            <line x1={cx} y1={24} x2={cx - 24} y2={24} />
+            <line x1={cx - 24} y1={-24} x2={cx - 24} y2={-13} />
+            <line x1={cx - 24} y1={13} x2={cx - 24} y2={24} />
+          </g>
+          <path
+            className={styles.fino}
+            d={`M ${cx - 24} -13 L ${cx - 30} -9 L ${cx - 18} -3 L ${cx - 30} 3 L ${cx - 18} 9 L ${cx - 24} 13`}
+          />
+          <circle className={styles.ponto} cx={cx} cy={-24} r={3} />
+          <circle className={styles.ponto} cx={cx} cy={24} r={3} />
+        </g>
+      )}
       {pinos && (
         <g>
-          <SvgMath x={cx - 5} y={top + 4} math="86" anchor="end" fontSize={fontSize} />
-          <SvgMath x={cx - 5} y={bot - 4} math="85" anchor="end" fontSize={fontSize} />
-          <SvgMath x={sx + 5} y={top + 4} math="30" anchor="start" fontSize={fontSize} />
-          <SvgMath x={c87[0] + 5} y={bot - 4} math="87" anchor="start" fontSize={fontSize} />
+          <SvgMath x={cx - 5} y={top + 4} math={nomes[0]} anchor="end" fontSize={fontSize} />
+          <SvgMath x={cx - 5} y={bot - 4} math={nomes[1]} anchor="end" fontSize={fontSize} />
+          <SvgMath x={sx + 5} y={top + 4} math={nomes[2]} anchor="start" fontSize={fontSize} />
+          <SvgMath x={c87[0] + 5} y={bot - 4} math={nomes[3]} anchor="start" fontSize={fontSize} />
           {cinco && (
-            <SvgMath x={c87a[0] - 5} y={bot - 4} math="87\text{a}" anchor="end" fontSize={fontSize} />
+            <SvgMath x={c87a[0] - 5} y={bot - 4} math={nomes[4]} anchor="end" fontSize={fontSize} />
           )}
         </g>
       )}

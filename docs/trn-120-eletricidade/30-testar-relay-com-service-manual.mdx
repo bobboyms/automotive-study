@@ -1,0 +1,1040 @@
+---
+title: "Testar um relay com o service manual: o horn relay do Ford Edge"
+sidebar_label: Testar um relay com o manual
+---
+
+import FiguraManual from '@site/src/components/FiguraManual';
+import ReleBancada from '@site/src/components/ReleBancada';
+
+# Testar um relay com o service manual: o horn relay do Ford Edge
+
+> **Pergunta central:** com o relay na mão e o service manual aberto, como
+> você descobre o que cada pino faz, que leitura esperar em cada teste e o
+> que cada resultado descarta?
+
+Esta lição faz, num carro de verdade, a *job sheet* **Relay Testing** do
+módulo 3 da TRN-120. O carro é o **Ford Edge 2016 com o engine 3.5L**. Todo
+pino, toda cor de wire e todo passo de teste vêm do *service manual* desse
+carro: o wiring diagram da horn (célula 44), a página da caixa de fusíveis
+(célula 11) e o roteiro de diagnóstico da horn (seção 413-06). As figuras do
+manual estão copiadas aqui, para estudo, no ponto em que a lição as usa.
+**Toque numa figura para abri-la em tamanho cheio** e dar zoom.
+
+A lição [Electromagnetism e o relay](./eletromagnetismo-e-rele) explicou como
+um relay funciona por dentro. Esta lição usa aquela ideia para outra coisa:
+achar o relay no desenho do fabricante, ler cada pino e testar o relay sem
+chutar.
+
+## A queixa: a horn do Edge parou
+
+Uma cliente traz o Ford Edge e diz:
+
+> “A buzina parou de vez. Eu aperto o volante e não sai nada.”
+
+O técnico aperta o centro do volante e confirma: a horn não toca. Ele encosta
+o ouvido perto da caixa de fusíveis do compartimento do motor e pede para
+alguém apertar de novo. **Nenhum clique.**
+
+Na lição 10, a falta do clique mandava procurar o defeito no control circuit:
+o botão, a relay coil, os wires e o ground da coil. Só que, neste carro, o
+botão do volante **não está ligado à relay coil**. Ele está ligado a um
+módulo, e é o módulo que liga a coil. Para saber onde medir, o técnico precisa
+ler o wiring diagram do Edge. No fim da lição, a seção “A queixa, resolvida”
+volta a este carro e acha a peça com defeito.
+
+## Mapa das ideias
+
+| Inglês | Português | O que é |
+|---|---|---|
+| battery junction box (BJB) | caixa de fusíveis e relés do motor | a caixa de fusíveis do compartimento do motor, no nome que a Ford usa |
+| body control module (BCM) | módulo da carroceria | o módulo que comanda horn, luzes, travas e outros sistemas da carroceria |
+| steering column control module (SCCM) | módulo da coluna de direção | o módulo na coluna de direção por onde passa o sinal do horn switch |
+| horn relay | relé da buzina | o relay que liga a horn; no Edge, o R40 da BJB |
+| circuit number | código do circuito | o código que o fabricante dá a cada wire do diagram, como CRH02 |
+| busbar | barramento | barra de metal dentro da caixa de fusíveis que leva a power a vários fuses e relays, sem wire |
+| hot at all times | com power o tempo todo | circuit que tem voltage mesmo com a chave desligada |
+| FET | transistor de efeito de campo | switch eletrônico, sem peça que se mexe, que o módulo usa para ligar uma saída |
+| ignition | ignição | a posição da chave: OFF é desligada, ON é ligada |
+| pinpoint test | teste dirigido | o roteiro do manual Ford: um teste por passo, e a resposta sim ou não escolhe o passo seguinte |
+| known good relay | relé sabidamente bom | relay do mesmo part number que você sabe que funciona |
+| active command | comando ativo | função do scan tool que manda o módulo ligar ou desligar uma saída |
+| flex probe | ponta flexível | ponta de teste fina, feita para entrar no terminal sem alargá-lo |
+| job sheet | folha de tarefa | a folha da aula com as perguntas que você responde no carro |
+
+Lembre: toque em qualquer termo sublinhado para ver o português.
+
+## Onde isso aparece
+
+- **TRN-120, módulo 3** (*Relays & Battery Maintenance*): a job sheet Relay
+  Testing pede exatamente o que esta lição faz. Você escolhe um relay, diz o
+  que ele controla, descreve cada pino pelo wiring diagram, mede a coil e o
+  contato, e monta o relay na bancada com uma bulb.
+- **Todo sistema com relay.** A mesma BJB do Edge tem o relay da fuel pump, do
+  blower motor, das cooling fans e do starter. O método é o mesmo para todos:
+  ler o diagram, separar o control circuit do load circuit, medir.
+- **Disciplinas seguintes:** AUT-181 e AUT-183 diagnosticam fuel pump e
+  cooling fan comandadas por módulo; TRN-140 diagnostica o relay do A/C.
+- **Prova ASE:** área **A6** (*Electrical/Electronic Systems*), nas questões
+  sobre testar relay e ler wiring diagram.
+
+## Ideias anteriores que voltam aqui
+
+- O **control circuit** e o **load circuit**, o contato **normally open** e o
+  clique que divide o diagnóstico em duas metades, da lição
+  [Electromagnetism e o relay](./eletromagnetismo-e-rele).
+- Os símbolos, as cores de wire, os connectors, os splices e os grounds de um
+  wiring diagram, da lição [Electrical symbols](./simbolos-eletricos).
+- A **total resistance** de dois caminhos em paralelo, da lição
+  [Parallel circuit](./circuito-em-paralelo).
+- A resistance medida com a peça fora do circuit, e o **OL**, da lição
+  [Medições com o multimeter](./medicoes-com-multimetro).
+- O **fused jumper wire**, da lição
+  [Outros instrumentos de teste](./instrumentos-de-teste).
+- O **clock spring**, da lição
+  [Sensors do SRS e serviço](./sensores-srs-e-servico-seguro).
+
+Responda antes de seguir:
+
+1. O relay da horn clica, mas a horn não toca. Em qual das duas metades do
+   circuit está o defeito?
+2. Dois caminhos ligados entre os mesmos dois pontos: um de 80 Ω e outro de
+   680 Ω. A total resistance fica acima de 680 Ω, entre os dois valores, ou
+   abaixo de 80 Ω?
+3. Por que se usa um fused jumper wire, e não um wire comum, para ligar dois
+   pontos de um circuit durante um teste?
+
+<details>
+<summary>Respostas</summary>
+
+1. No load circuit. O clique prova que a armature se moveu, e a armature só
+   se move quando a coil recebe current. Então o control circuit funcionou.
+2. Abaixo de 80 Ω. Num parallel circuit, cada branch acrescenta um caminho a
+   mais para a current, e por isso a total resistance fica menor que a do
+   menor branch. A conta exata aparece no exemplo 2 desta lição.
+3. Porque, se o jumper encostar no lugar errado e ligar o positivo direto ao
+   ground, o fuse do jumper queima e corta a current. Sem o fuse, o jumper
+   vira um short circuit: o wire esquenta e pode queimar o chicote ou a mão.
+
+</details>
+
+## Intuição: quatro perguntas, quatro páginas do manual
+
+Testar um relay exige quatro respostas antes da primeira medição:
+
+1. **Qual relay?** O nome dele e o que ele liga.
+2. **Onde ele fica?** Em que caixa, em que posição, e de que lado entra cada
+   pino.
+3. **O que cada pino faz?** Qual pino é a coil, qual é o contato, de onde vem
+   a power e para onde vai o ground.
+4. **Que leitura esperar?** O que um relay bom mostra em cada teste.
+
+Nenhuma página do manual responde as quatro. O wiring diagram mostra **como
+as peças se ligam**, mas não onde elas ficam no carro. O próprio manual da
+Ford avisa isso na introdução dos diagrams: um wire de quatro pés de
+comprimento é desenhado igual a um wire de poucas polegadas, e as peças não
+aparecem na posição em que estão no carro. Por isso o técnico abre páginas
+diferentes para perguntas diferentes:
+
+| Pergunta | Onde está a resposta no manual do Edge |
+|---|---|
+| qual relay, e o que ele liga | o wiring diagram do sistema: célula 44, *Horn/Cigar Lighter* |
+| onde fica | célula 11, *Fuse and Relay Information*: a vista de cima da BJB |
+| o que cada pino faz | célula 44, de novo, seguindo cada wire até a outra ponta |
+| que leitura esperar | seção 413-06, *Horn*, *Diagnosis and Testing*: o pinpoint test |
+
+Pense no wiring diagram como o desenho do encanamento de um prédio. O desenho
+mostra qual cano sai de qual registro e chega em qual torneira. Ele não mostra
+em que parede o cano passa. Para achar a parede, você precisa da planta do
+andar, que é outro desenho. A comparação para aqui: um cano furado vaza água,
+mas um wire aberto não vaza nada. A current para.
+
+## Modelo visual: o horn circuit do Edge, parte por parte
+
+### O caminho em blocos
+
+O manual começa a seção da horn com um desenho em blocos. Ele mostra o
+caminho do sinal, sem wires e sem pinos.
+
+<FiguraManual
+  id="E199257"
+  alt="Blocos em fila: horn switch, clockspring, SCCM, BCM e horn"
+  caption="O caminho do sinal da horn no Edge sem adaptive steering: horn switch → clock spring → SCCM → BCM → horn. Seção 413-06, Horn, System Operation."
+/>
+
+Leia o desenho da esquerda para a direita. O **horn switch** fica no centro do
+volante. O sinal dele passa pelo **clock spring**, a fita enrolada que liga o
+volante, que gira, à coluna de direção, que não gira. Depois o sinal passa pelo
+**SCCM** e chega ao **BCM**. É o BCM que decide ligar a horn. O relay não
+aparece neste desenho porque ele fica no caminho entre o BCM e a horn.
+
+O manual descreve a operação assim: o horn switch tem dois conjuntos de
+contatos separados por molas. Quando o motorista aperta o centro do volante,
+os contatos se encostam e mandam um sinal de **ground** pelo clock spring e
+pelo SCCM até o BCM. O BCM então aterra a relay coil, o relay fecha, e a
+voltage chega à horn.
+
+:::note Duas versões do mesmo carro
+
+O manual tem um diagram para o Edge **sem adaptive steering** (a direção com
+relação variável entre o volante e as rodas) e outro **com adaptive steering**. Os pinos do relay e as
+cores dos wires desta lição são os da versão **sem** adaptive steering, que é
+o caso da maioria dos carros. No carro da oficina, confira qual versão ele é
+antes de usar o diagram.
+
+:::
+
+### Como a Ford desenha um wiring diagram
+
+A introdução dos wiring diagrams da Ford (célula 3) explica as regras do
+desenho. As que você vai usar nesta lição:
+
+| No desenho | O que quer dizer |
+|---|---|
+| a power em cima, o ground embaixo | a current corre de cima para baixo na página |
+| switch e relay **em repouso** | tudo aparece com a chave desligada e nada acionado |
+| caixa de linha cheia | a peça está desenhada inteira |
+| caixa tracejada | só a parte da peça que importa para este circuit está desenhada |
+| número azul à direita de uma peça, como 11-1 | a célula e a página onde a peça aparece completa: 11-1 é célula 11, página 1 |
+| código ao lado do wire, como CRH02 | o **circuit number** daquele wire |
+| letras ao lado do wire, como BU-WH | a cor: a primeira é a cor do isolamento, a segunda é a da listra |
+| C mais um número, como C1035A | um connector; o número pequeno ao lado é o pino dentro dele |
+| S mais um número, como S189 | um splice |
+| G mais um número, como G111 | um ponto de ground |
+
+As cores seguem uma norma internacional, e o manual lista as abreviações na
+célula 4. As desta lição são: **BU** azul, **WH** branco, **VT** violeta,
+**GN** verde, **BK** preto e **GY** cinza. Então **BU-WH** é um wire azul com
+uma listra branca.
+
+### O relay dentro da BJB
+
+Comece pelo relay. Este recorte é o canto de cima, à esquerda, da página 2 da
+célula 44.
+
+<FiguraManual
+  id="wd-044-002-rele"
+  titulo="Wiring diagram, célula 44, página 2 (recorte)."
+  alt="Horn relay dentro da battery junction box, com os pinos 3, 5, 2 e 1, o fuse F50 de 20 A e os connectors C1035B e C1035A"
+  caption="O horn relay dentro da BJB. À direita, a coil entre os pinos 2 e 1, com um resistor desenhado ao lado dela. À esquerda, o contato: o braço móvel no pino 3 e o contato fixo no pino 5, aberto. O pino 5 passa pelo fuse F50 de 20 A e sai da BJB pelo pino 50 do connector C1035B. O pino 1 sai pelo pino 32 do C1035A."
+/>
+
+Leia o recorte de cima para baixo, como a current corre.
+
+- **As duas linhas de cima dizem “Hot at all times”.** Uma entra no pino 3; a
+  outra, no pino 2. Elas não têm cor nem circuit number porque não são wires:
+  são a **busbar**, a barra de metal dentro da BJB que distribui a power da
+  battery. Hot at all times quer dizer que esses dois pinos têm voltage
+  mesmo com a chave desligada.
+- **A caixa tracejada grande é a BJB.** Ela é tracejada porque só uma parte da
+  caixa está desenhada. O **11-1** azul ao lado do nome diz onde a BJB
+  aparece inteira: célula 11, página 1. É a vista de cima que aparece mais
+  adiante nesta lição.
+- **A caixa de linha dupla é o horn relay**, desenhado inteiro.
+- **À direita, a relay coil**, entre o pino 2 (em cima) e o pino 1 (embaixo).
+  Ao lado dela há um pequeno retângulo com um zigue-zague: é um **resistor**,
+  ligado nas mesmas duas pontas da coil, ou seja, em paralelo com ela. A
+  seção “Formalização” explica por que o resistor muda a medição.
+- **O pontilhado** que vai da coil até o contato é a ligação magnética: ele
+  lembra que é a coil que move o contato.
+- **À esquerda, o contato.** O braço móvel está preso no pino 3 e aparece
+  **aberto**, longe do pino 5. Como o diagram mostra tudo em repouso, o
+  contato aberto no desenho quer dizer que ele é **normally open**.
+- **Do pino 5 para baixo**, a current passa pelo **F50, de 20 A**. O
+  **13-14** azul diz que o F50 aparece completo na célula 13 (*Power
+  Distribution*), página 14.
+- **Embaixo**, dois wires saem da BJB: o do pino 5, pelo pino 50 do connector
+  **C1035B**, e o do pino 1, pelo pino 32 do connector **C1035A**.
+
+O próprio manual mostra, na legenda dos símbolos, o desenho do relay que ele
+usa.
+
+<FiguraManual
+  id="wd-004-004-rele"
+  titulo="Wiring diagram, célula 4, Symbols (recorte)."
+  alt="Símbolo de relay da Ford: coil com resistor ao lado, pontilhado e contato aberto"
+  caption="O símbolo de relay da legenda da Ford: “Normally open contact. When coil is energized switch is activated.” Ou seja, o contato é normally open, e, quando a coil recebe current, o switch fecha. O resistor aparece ao lado da coil no próprio símbolo."
+/>
+
+### O lado da coil: quem liga o relay
+
+Agora siga o wire do pino 1 até o fim. No recorte anterior, ele sai da BJB pelo
+pino 32 do connector C1035A. Este recorte continua o mesmo wire para a direita.
+
+<FiguraManual
+  id="wd-044-002-comando"
+  titulo="Wiring diagram, célula 44, página 2 (recorte)."
+  alt="O canto da BJB à esquerda e o wire CRH02 azul com listra branca indo até o pino 20 do C2280C, no BCM, onde fica o horn relay FET ligado ao ground"
+  caption="O control circuit. À esquerda, a borda da BJB. O wire CRH02 BU-WH, que vem do pino 1 do relay, chega ao BCM pelo connector C2280C, pino 20. Dentro do BCM, esse pino vai ao “Horn Relay (FET)”, ligado ao ground. À direita, a entrada “Horn Relay Input”, que recebe o sinal do horn switch pelo C2280G, pino 18."
+/>
+
+O wire **CRH02 BU-WH** liga o pino 1 do relay ao pino 20 do connector
+**C2280C**, que é um dos connectors do **BCM**. Dentro do BCM, esse pino vai a
+uma peça chamada **Horn Relay (FET)**, desenhada ligada ao ground.
+
+Um **FET** é um switch eletrônico. Ele não tem contato nem peça que se mexe:
+o próprio BCM liga e desliga o caminho dentro de um componente de silício.
+Para ler o diagram, a função é o que importa: **quando o BCM quer a horn, o
+FET liga o pino 1 do relay ao ground.** O pino 2 já tem power o tempo todo.
+Então a coil recebe current, o relay fecha, e a horn toca.
+
+Repare onde o comando acontece: no lado do **ground** da coil. O positivo fica
+sempre ligado, e o BCM decide quando o caminho até o ground fecha. A lição 10
+avisou que muitos carros fazem assim, e o Edge é um deles.
+
+### O horn switch: só um sinal para o BCM
+
+Agora o outro lado do BCM, a entrada que recebe o sinal do botão.
+
+<FiguraManual
+  id="wd-044-002-botao"
+  titulo="Wiring diagram, célula 44, página 2 (recorte)."
+  alt="Do pino 18 do C2280G, o wire RRH02 verde com listra branca desce até o SCCM, passa pelo clockspring e chega ao horn switch, que fecha para o ground G201"
+  caption="O caminho do sinal. Do BCM (C2280G, pino 18), o wire RRH02 GN-WH desce até o SCCM, atravessa o clock spring e chega ao horn switch, que é normally open. Do outro lado do switch, o caminho volta pelo clock spring e vai ao ground G201 pelo wire GD215 BK-GY."
+  largura={460}
+/>
+
+O wire **RRH02 GN-WH** sai do pino 18 do C2280G, no BCM, e desce até o horn
+switch, passando pelo SCCM e pelo clock spring. O outro lado do horn switch
+vai ao ground **G201**. A legenda do switch diz “1) Normally open, 2) Horn
+activated”: solto, ele fica aberto; apertado, ele fecha.
+
+Então, quando você aperta o volante, o horn switch **liga o wire RRH02 ao
+ground**. O BCM percebe esse ground na entrada Horn Relay Input. Esse é o sinal. O
+horn switch não carrega a current da coil nem a da horn: ele só avisa o BCM.
+
+### O lado do contato: o caminho até a horn
+
+Por último, o load circuit, do pino 5 até o ground da horn.
+
+<FiguraManual
+  id="wd-044-002-carga"
+  titulo="Wiring diagram, célula 44, página 2 (recorte)."
+  alt="Do pino 5 do relay, pelo F50, o wire CRH04 violeta com listra verde vai até a horn no connector C131; da horn, o wire GD120 preto com listra verde vai ao splice S189 e ao ground G111"
+  caption="O load circuit. Do pino 5, pelo F50 e pelo C1035B, pino 50, o wire CRH04 VT-GN passa pelo connector C139 (pino 6) e chega à horn no C131, pino 2. A horn tem duas unidades em paralelo no mesmo connector. Do C131, pino 1, o wire GD120 BK-GN passa pelo splice S189, pelo C139 (pino 8) e termina no ground G111."
+  largura={380}
+/>
+
+O wire **CRH04 VT-GN** leva a power do F50 até a **horn**, que fica atrás do
+para-lama dianteiro esquerdo, segundo o manual. A horn tem duas unidades
+desenhadas dentro da mesma caixa, ligadas em paralelo: são duas buzinas no mesmo
+connector, e as duas tocam juntas. Da horn, o wire **GD120 BK-GN** volta
+ao ground **G111**.
+
+<FiguraManual
+  id="E198319"
+  alt="O Edge transparente, com as duas buzinas destacadas atrás do para-lama dianteiro esquerdo"
+  caption="Onde fica a horn: o item 1, atrás da proteção plástica do para-lama dianteiro esquerdo. Seção 413-06, Horn, Component Location."
+  largura={480}
+/>
+
+### Juntando: a ficha do relay
+
+Com os quatro recortes lidos, a pergunta 2 da job sheet se responde pino por
+pino:
+
+| Pino | Wire e circuit number | Função |
+|---|---|---|
+| 2 | sem wire: busbar da BJB | power da coil, hot at all times |
+| 1 | CRH02 BU-WH, pelo C1035A pino 32 até o BCM C2280C pino 20 | ground da coil, comandado pelo FET do BCM |
+| 3 | sem wire: busbar da BJB | power do contato (o terminal comum), hot at all times |
+| 5 | pelo F50 (20 A), C1035B pino 50, CRH04 VT-GN até a horn C131 pino 2 | saída para a horn quando o relay fecha |
+
+O exemplo da job sheet (“Pin 86, GRN/YEL, circuit 352”) usa outra numeração
+de pinos e outro estilo de circuit number. A diferença não é erro da job sheet: é
+outro fabricante. A seção seguinte mostra como as duas numerações se
+correspondem.
+
+### Onde fica o relay no carro
+
+O **11-1** ao lado da BJB leva à vista de cima da caixa, na célula 11.
+
+<FiguraManual
+  id="wd-011-001-r40"
+  titulo="Wiring diagram, célula 11, página 1 (recorte)."
+  alt="Vista de cima da BJB com o R40, marcado horn relay, e os pinos 3, 2, 1 e 5; ao lado, o R41 e os fuses F49 e F50"
+  caption="Parte da vista de cima da BJB. O horn relay é o R40, com os pinos 3 e 2 em cima e 1 e 5 embaixo. O F50 fica à direita, ao lado do F49."
+  largura={420}
+/>
+
+Na vista de cima, o horn relay é o **R40**. O desenho mostra a posição de
+cada pino no socket: 3 e 2 em cima, 1 e 5 embaixo. A tabela de fuses da mesma
+célula confirma que o **F50, de 20 A,** protege o circuit *Horn*. Segundo a
+página do connector C1035B, a BJB fica no compartimento do motor, do lado
+esquerdo.
+
+O pinpoint test da horn usa um desenho só do socket do R40, para você não
+errar o furo:
+
+<FiguraManual
+  id="E198668"
+  alt="O socket R40 visto de cima, com os furos 3, 2, 1 e 5"
+  caption="O socket do R40 com o relay fora, visto de cima: 3 e 2 em cima, 1 e 5 embaixo. O pinpoint test chama cada furo de “pin socket”. Seção 413-06, Horn, Pinpoint Test A."
+  largura={400}
+/>
+
+## Ponte para a formalização: a mesma peça em duas numerações
+
+A lição 10 ensinou a numeração **86, 85, 30 e 87**, que vem de uma norma
+alemã. O relay do Edge usa **2, 1, 3 e 5**. Os dois aparecem até no mesmo
+manual. Na introdução dos wiring diagrams, a Ford desenha dois relays lado a
+lado, um em cada numeração:
+
+<FiguraManual
+  id="wd-003-003-pinos"
+  titulo="Wiring diagram, célula 3, Introduction (recorte)."
+  alt="Dois relays numa caixa de fusíveis: o hi beam relay com pinos 85, 86, 30 e 87, e o fog lamp relay com pinos 2, 1, 3 e 5"
+  caption="Dois relays do exemplo da introdução da Ford. Em cima, o hi beam relay, numerado 85, 86, 30 e 87. Embaixo, o fog lamp relay, numerado 2, 1, 3 e 5. Os dois têm a coil em cima e o contato normally open embaixo."
+  largura={420}
+/>
+
+Os números são diferentes, mas as peças são as mesmas: uma coil com duas
+pontas e um contato com duas pontas. Então a correspondência se faz **pela
+função**, e não pelo número. Para saber a função de cada pino, você lê o
+desenho do relay no diagram: as duas pontas da coil e as duas pontas do
+contato.
+
+## Formalização
+
+### Ler um pino é seguir o wire até a outra ponta
+
+> Para descrever um pino, siga o wire dele no wiring diagram até a outra
+> ponta e responda: **de onde vem a power, ou para onde vai o ground, e quem
+> decide quando ela passa.**
+
+- **Exemplo:** o pino 1 do horn relay. O wire CRH02 BU-WH vai ao BCM, e o BCM
+  liga esse wire ao ground pelo FET. Função: ground da coil, comandado pelo
+  BCM.
+- **Contraexemplo:** o número **32**, ao lado do C1035A, no mesmo wire. Ele
+  não é um circuit number: é o número do pino dentro do connector C1035A. O
+  circuit number desse wire é CRH02, escrito ao lado do wire.
+
+### A correspondência das duas numerações, neste relay
+
+| Ford (Edge) | Função neste relay | DIN, lição 10 |
+|---|---|---|
+| 2 | ponta da coil que recebe a power | 86 |
+| 1 | ponta da coil que vai ao ground | 85 |
+| 3 | terminal comum do contato, que recebe a power | 30 |
+| 5 | contato normally open, que vai à load | 87 |
+
+Esta tabela vale **para este relay**, porque foi tirada do diagram dele. Em
+outro relay da Ford, confira no diagram daquele circuit qual pino é qual. O
+que vale é o desenho do fabricante e a marcação do próprio relay.
+
+### Busbar e hot at all times
+
+> **Busbar** é uma barra de metal dentro da caixa de fusíveis que leva a power
+> a vários fuses e relays ao mesmo tempo. No diagram, a ligação até a busbar
+> não tem cor nem circuit number, porque não é um wire.
+
+- **Exemplo:** os pinos 2 e 3 do R40. Os dois recebem power da busbar da BJB,
+  hot at all times.
+- **Contraexemplo:** o pino 5. A saída dele vira um wire, o CRH04 VT-GN, com
+  cor e circuit number.
+
+A busbar tem uma consequência prática, que o pinpoint test usa no passo A13: se
+falta voltage no pino 3, não há wire para consertar. A barra está dentro da
+BJB. Por isso o manual manda trocar a BJB.
+
+### O comando pelo lado do ground
+
+> No horn relay do Edge, a power chega à coil o tempo todo, pelo pino 2. Quem
+> liga o relay é o BCM, que **fecha o caminho do pino 1 até o ground** com o
+> FET.
+
+- **Exemplo:** o Edge. Com a horn em repouso, o pino 2 tem voltage e o pino 1
+  também tem voltage, porque a coil liga um ao outro e nenhuma current passa.
+  Quando o FET liga o pino 1 ao ground, a voltage nesse pino cai perto de zero
+  e a coil recebe current.
+- **Contraexemplo:** o desenho da horn na lição 10, em que o horn switch fica
+  no lado positivo da coil. Ali, quem decide é o botão, e ele carrega a
+  current da coil. No Edge, o botão não carrega a current da coil: ele só
+  manda um sinal ao BCM.
+
+### O resistor em paralelo com a coil muda a leitura do ohmmeter
+
+Este é o ponto que mais confunde nesta lição. Vale a pena ler devagar.
+
+O símbolo da Ford mostra um resistor ligado nas mesmas duas pontas da coil.
+Esse resistor tem a mesma função do clamping diode da lição
+[Resistances que mudam e o diode](./resistencias-variaveis-e-diodo): quando o
+FET desliga, a coil tenta continuar empurrando current e produz um voltage
+spike, e o resistor dá um caminho para essa energia. Sem ele, o spike chega à
+saída do BCM.
+
+O resistor muda o teste com o ohmmeter. Entre os pinos 2 e 1 há **dois
+caminhos em paralelo**: a coil e o resistor. O ohmmeter não mede a coil
+sozinha. Ele mede a total resistance dos dois caminhos, e na lição 7 você viu
+que ela fica abaixo da menor das duas.
+
+$$
+R_{\text{total}} = \frac{R_{\text{coil}} \times R_{\text{resistor}}}{R_{\text{coil}} + R_{\text{resistor}}}
+$$
+
+Com valores **ilustrativos, só para a conta** (o manual da Ford não publica
+nenhum dos dois), uma coil de 80 Ω e um resistor de 680 Ω dão:
+
+$$
+R_{\text{total}} = \frac{80 \times 680}{80 + 680} = \frac{54\,400}{760} \approx 71.6\,\Omega
+$$
+
+Agora imagine que o wire da coil se rompeu por dentro. A coil virou um
+caminho aberto, mas o resistor continua lá. O ohmmeter passa a medir só o
+resistor: **680 Ω, e não OL**.
+
+| Estado do relay | O que o ohmmeter mostra entre 2 e 1 (valores ilustrativos) |
+|---|---|
+| coil boa | cerca de 71.6 Ω: a coil e o resistor juntos |
+| coil aberta | 680 Ω: só o resistor |
+| coil e resistor abertos, ou ponta sem contato | OL |
+| coil em curto | perto de 0 Ω |
+
+**O que muda** com o resistor: a leitura de uma coil aberta deixa de ser OL.
+**O que permanece igual:** a coil em curto continua lendo perto de zero, e a
+current que passa pela coil, com 12 V, continua sendo
+$12 \div 80 = 0.15\,\text{A}$. O resistor só acrescenta uma current pequena
+ao lado, de $12 \div 680 \approx 0.018\,\text{A}$.
+
+Por isso o número sozinho diz pouco. Sem uma especificação, 680 Ω pode
+parecer “uma coil com resistance alta” e não “uma coil aberta”. Duas
+conclusões saem daqui:
+
+1. **Compare com um known good relay** do mesmo part number. A diferença
+   entre os dois relays é a informação.
+2. **O teste que decide é ligar a coil.** Com 12 V entre os pinos 2 e 1, um
+   relay bom clica, e o contato entre 3 e 5 fecha. Esse é o teste da pergunta
+   5 da job sheet, e ele funciona tenha o relay resistor, diode ou nada.
+
+> **Erro comum:** ler 680 Ω na coil e concluir “a coil está boa, porque não
+> deu OL”. O OL só aparece se os dois caminhos estiverem abertos. Num relay
+> com resistor em paralelo, a coil aberta mostra a resistance do resistor.
+> Confirme ligando a coil na bancada.
+
+## Como falha e como diagnosticar: o pinpoint test da Ford
+
+O que o sistema **deveria** fazer: o horn switch aterra o wire RRH02; o BCM
+percebe e aterra o pino 1 do relay pelo FET; a coil recebe current e fecha o
+contato de 3 para 5; a power do F50 chega à horn, e a horn toca.
+
+A Ford organiza o diagnóstico num **pinpoint test**. Cada passo faz um teste
+só e termina com uma pergunta de sim ou não. A resposta diz qual é o passo
+seguinte. O pinpoint test A, *The Horn Is Inoperative*, é o da horn que não
+toca.
+
+### Como ler os passos do manual
+
+Cada medição aparece numa tabela de três colunas: *Positive Lead* (onde vai a
+ponta vermelha), *Measurement / Action* (o que fazer, num ícone) e *Negative
+Lead* (onde vai a ponta preta). Os ícones do meio são três:
+
+| Ícone no manual | O que quer dizer |
+|---|---|
+| um S entre dois pontos, como um fuse | ligue um **fused jumper wire** entre os dois pontos |
+| um V com um traço cheio e um tracejado em cima | meça **voltage** contínua com o voltmeter |
+| a letra Ω | meça **resistance** com o ohmmeter |
+
+“Horn relay, pin socket 3” quer dizer **o furo 3 do socket do R40, com o
+relay fora**. Use a figura E198668 para achar o furo certo.
+
+### Os passos que testam o relay e os dois circuits
+
+| Passo | O que se faz | Se sim | Se não |
+|---|---|---|---|
+| A1 | ignition ON; com o scan tool, active command do PID HORN_RELAY: ligar e desligar | a horn toca: o BCM, o relay e o load circuit funcionam; o defeito está do lado do horn switch (A2) | confira o F50; se ele estiver bom, vá para A8 |
+| A8 | ignition OFF; troque o horn relay por um known good relay e teste a horn | a horn toca: instale um horn relay novo | A9 |
+| A9 | relay fora; fused jumper entre os furos 3 e 5 | a horn toca: o load circuit está bom, de ponta a ponta (A10) | o defeito está no load circuit (A13) |
+| A10 | relay no lugar; desligue o C2280C do BCM e ligue um fused jumper do pino 20 dele ao ground | a horn toca: o relay e o wire CRH02 estão bons; a suspeita passa ao BCM, e o A17 começa inspecionando os connectors dele | A11 |
+| A11 | relay fora; voltage entre o furo 2 e o ground | acima de 11 V: a power da coil chega (A12) | conserte a alimentação da coil |
+| A12 | resistance entre o furo 1 e o pino 20 do C2280C | abaixo de 3 Ω: o wire CRH02 está inteiro | conserte o circuit CRH02 (BU/WH), que está aberto |
+| A13 | voltage entre o furo 3 e o ground | acima de 11 V: a power do contato chega (A14) | troque a BJB: a power vem da busbar, que fica dentro dela |
+| A14 | relay no lugar; connector da horn desligado; horn switch apertado; voltage no pino 2 do C131 | acima de 11 V: a power chega à horn; o manual segue para o ground e a própria horn | o wire entre a BJB e a horn está aberto (A15) |
+
+Repare no que cada passo faz. O A1 usa o scan tool para **pular o horn
+switch**: se a horn toca com o comando do scan tool, todo o caminho do BCM até
+a horn está bom. O A9 **pula o relay** com um jumper: se a horn toca, o load
+circuit está bom, e sobram o relay e o lado da coil. O A10 **pula o BCM**: o
+jumper faz o papel do FET. Cada passo deixa de fora uma parte do circuit, e a
+resposta diz se o defeito está na parte que ficou de fora ou na que continuou
+no teste.
+
+Os números “acima de 11 V” e “abaixo de 3 Ω” são do manual, e a lógica deles
+é a da lição 8. Uma voltage acima de 11 V num ponto que deveria ter a voltage
+da battery mostra que a power chega. Uma resistance abaixo de 3 Ω num wire
+mostra que o wire está inteiro.
+
+### A queixa, resolvida
+
+Volte ao Edge que não buzina e não clica.
+
+1. **Confirmar a queixa.** O técnico aperta o volante: sem horn e sem clique.
+2. **Passo A1.** Com a ignition ON, ele usa o active command do scan tool para
+   ligar a horn. A horn continua muda. Então o horn switch, o clock spring e o
+   SCCM ficam de fora: mesmo pulando o lado do botão, a horn não toca. O
+   defeito está entre o BCM e a horn.
+3. **O F50.** Ele confere o fuse, e o fuse está bom.
+4. **Passo A8.** Com a ignition OFF, ele tira o R40 e põe no lugar um known
+   good relay, do mesmo part number. A horn toca. O relay é a peça com
+   defeito, e o manual manda instalar um horn relay novo.
+5. **Confirmar na bancada.** O técnico mede os dois relays entre os pinos 2 e
+   1. O relay bom mostra cerca de 72 Ω; o do carro mostra cerca de 680 Ω
+   (valores ilustrativos). Se ele não conhecesse o resistor em paralelo,
+   poderia achar que 680 Ω é uma coil “mais forte”. Mas a comparação mostra
+   uma leitura quase dez vezes maior que a do relay bom. Para tirar a dúvida,
+   ele liga 12 V na coil do relay do carro: **nenhum clique**, e o contato
+   entre 3 e 5 continua em OL. A coil está aberta.
+6. **Verificar o reparo.** Com o relay novo, a horn toca pelo volante e pelo
+   scan tool, e o clique voltou.
+
+O que descartou o quê: o A1 tirou o horn switch e os módulos do volante da
+lista; o A8 mostrou que, com outro relay, todo o resto funciona; a bancada
+confirmou a coil aberta. Nenhuma peça foi trocada antes de um teste apontar
+para ela.
+
+## Na oficina: a job sheet Relay Testing passo a passo
+
+:::danger Antes de começar: os riscos deste trabalho
+
+- **Ignition OFF antes de tirar ou pôr um relay.** Puxar um relay com o
+  circuit ligado pode fazer faísca no terminal e queimar o contato do socket.
+- **Use fused jumper wire em todo jumper**, como o manual manda (seção
+  100-00, *Diagnostic Methods*). O manual recomenda um fuse de **5 A ou
+  menos** no jumper, e um maior só quando a load precisar. Para pular o
+  contato do relay da horn (passo A9), a current é a da horn: pergunte ao
+  instrutor que fused jumper usar. O jumper nunca deve ter um fuse maior que o
+  do próprio circuit, o F50 de 20 A, porque o wire do carro foi dimensionado
+  para esse fuse.
+- **Confira o furo no desenho E198668 antes de ligar o jumper.** Um jumper no
+  furo errado pode pôr 12 V numa saída do BCM e danificar o módulo.
+- **A horn é muito alta.** No passo A9 e na verificação final, use protetor de
+  ouvido e avise quem estiver perto.
+- **Não alargue os terminais.** O manual manda usar *flex probes* nos furos
+  do socket. Uma ponta grossa enfiada no furo abre o terminal fêmea, e o
+  relay passa a ter mau contato.
+- **Na bancada, a battery entrega centenas de amps num short circuit.** Tire
+  anéis e relógio, use óculos de proteção e faça a última ligação só depois de
+  conferir a montagem inteira.
+- **Não faça o passo A2 sem o instrutor.** Ele manda tirar o air bag do
+  motorista. Tirar o air bag só se faz com o procedimento do SRS da lição
+  [Sensors do SRS e serviço](./sensores-srs-e-servico-seguro), porque o air bag
+  pode disparar e ferir quem está na frente do volante.
+
+:::
+
+### Ferramentas e materiais
+
+- o service manual do carro: no Edge, as células 11 e 44 dos wiring diagrams
+  e a seção 413-06;
+- digital multimeter e flex probes;
+- dois fused jumper wires e dois jumper wires comuns com jacaré;
+- uma battery de 12 V carregada e uma bulb de 12 V com soquete;
+- um known good relay do mesmo part number, se houver;
+- óculos de proteção, protetor de ouvido, papel e lápis para a job sheet.
+
+### Parte A: identificar o carro e o relay (cabeçalho e pergunta 1)
+
+1. Anote o ano, a marca e o modelo do carro. No exemplo: 2016, Ford, Edge
+   3.5L.
+2. Abra a célula 11 do manual e escolha o relay. Anote o nome dele (*horn
+   relay*), a posição (R40) e o que ele liga (a horn).
+
+### Parte B: tirar o relay
+
+1. Desligue a ignition.
+2. Abra a tampa da BJB, no compartimento do motor, do lado esquerdo.
+3. Ache o R40 comparando a caixa com a vista de cima da célula 11 e com a
+   marcação da tampa.
+4. Antes de puxar, repare na posição do relay: os pinos só entram de um
+   jeito, e o desenho E198668 mostra qual pino vai em qual furo.
+5. Puxe o relay reto para cima, sem balançar de um lado para o outro. Balançar
+   alarga os terminais do socket.
+
+### Parte C: ler os pinos no wiring diagram (pergunta 2)
+
+Abra a célula 44 e siga cada pino até a outra ponta, como na seção “Modelo
+visual”. Para cada pino, anote: o número, a cor do wire, o circuit number e a
+função. Quando a ligação for pela busbar, escreva isso: o pino não tem wire
+nem circuit number.
+
+### Parte D: medir a coil (pergunta 3)
+
+1. Coloque o multimeter na escala de resistance (Ω).
+2. Com o relay **fora do socket**, encoste a ponta vermelha no pino 2 e a
+   preta no pino 1. A resistance não tem lado: trocar as pontas dá a mesma
+   leitura.
+3. Anote a leitura. Depois meça um known good relay do mesmo part number e
+   compare.
+
+<ReleBancada
+  modo="bobina"
+  leitura="71.6\,\Omega"
+  caption="O ohmmeter na coil do horn relay, fora do carro: ponta vermelha no pino 2, preta no pino 1. A leitura é a da coil e do resistor juntos, em paralelo. O 71.6 Ω é ilustrativo (coil de 80 Ω e resistor de 680 Ω): o manual da Ford não publica esse valor."
+/>
+
+Na pergunta “compare com a service literature”, a resposta honesta para o
+Edge é esta: **o manual não publica a resistance da coil do horn relay.** A
+Ford testa o relay por substituição, no passo A8. Escreva isso na job sheet,
+junto com a comparação com o known good relay. Uma leitura em OL ou perto de
+0 Ω condena o relay. Uma leitura muito diferente da do relay bom levanta a
+suspeita, que a parte F confirma.
+
+### Parte E: medir o contato (pergunta 4)
+
+1. Ainda com o relay fora, encoste as pontas nos pinos 3 e 5.
+2. Sem nada ligado na coil, a leitura de um relay normally open é **OL**: o
+   contato está aberto. O diagram mostra o contato aberto, então OL é o
+   resultado certo.
+
+<ReleBancada
+  modo="contato"
+  leitura="\text{OL}"
+  caption="O ohmmeter no contato, pinos 3 e 5, com a coil sem current. O contato normally open está aberto, e o meter mostra OL."
+/>
+
+3. Para conferir se o contato fecha, ligue 12 V na coil: o positivo, por um
+   fused jumper, no pino 2, e o negativo no pino 1. O relay clica, e a leitura
+   entre 3 e 5 cai perto de 0 Ω.
+
+<ReleBancada
+  modo="contato"
+  acionado
+  leitura="0.1\,\Omega"
+  caption="O mesmo teste com 12 V na coil: o + da battery, por um fused jumper, no pino 2, e o − no pino 1. A coil puxa o contato, e a leitura entre 3 e 5 cai perto de zero. O 0.1 Ω é ilustrativo."
+/>
+
+### Parte F: montar o relay na bancada com uma bulb (pergunta 5)
+
+A pergunta pede para ligar o relay **como ele está no wiring diagram do
+carro**. Na bancada, cada peça do carro ganha uma substituta:
+
+| No carro | Na bancada |
+|---|---|
+| a busbar, hot at all times, nos pinos 2 e 3 | o + da battery, por um fused jumper em cada pino |
+| o FET do BCM, que aterra o pino 1 | um jumper do pino 1 ao − da battery |
+| a horn, no pino 5 | a bulb, entre o pino 5 e o − da battery |
+
+<ReleBancada
+  modo="bancada"
+  caption="O relay na bancada, montado como no diagram do Edge, com o jumper do pino 1 ainda solto. Os pinos 2 e 3 recebem o + da battery, cada um por um fused jumper. O pino 5 vai à bulb, e a bulb vai ao −. Com o pino 1 solto, a coil não recebe current, o contato fica aberto e a bulb fica apagada."
+/>
+
+1. Ligue o fused jumper do + da battery ao pino 3.
+2. Ligue o outro fused jumper do + da battery ao pino 2.
+3. Ligue a bulb entre o pino 5 e o − da battery.
+4. Confira a montagem inteira contra o diagram antes do último passo.
+5. Por último, ligue o jumper do pino 1 ao − da battery. Esse jumper faz o
+   papel do FET do BCM.
+
+<ReleBancada
+  modo="bancada"
+  acionado
+  caption="O jumper do pino 1 ligado ao −. A coil recebe current (2 → 1), o relay clica e fecha o contato (3 → 5), e a bulb acende. Soltar o jumper do pino 1 apaga a bulb: é o BCM soltando o ground da coil."
+/>
+
+O resultado esperado: a bulb acende quando você liga o pino 1 ao − e apaga
+quando você solta. Chame o instrutor para aprovar com o circuit montado.
+
+### Parte G: devolver o relay e verificar
+
+1. Desligue tudo na bancada, começando pelo jumper do pino 1.
+2. Com a ignition OFF, encaixe o relay no R40, na posição certa.
+3. Teste a horn pelo volante. Ela tem que tocar e parar quando você solta o
+   botão.
+
+## Exemplos resolvidos
+
+### Exemplo 1: o que faz o pino 1
+
+O wire do pino 1 é o CRH02 BU-WH. Ele sai da BJB pelo pino 32 do C1035A e
+chega ao pino 20 do C2280C, no BCM. Dentro do BCM, esse pino vai ao Horn
+Relay (FET), ligado ao ground. Então o pino 1 é o **ground da coil**, e quem
+decide quando ele fecha é o BCM. Na job sheet: “Pin 1, BU-WH, circuit CRH02,
+relay coil ground, switched by the BCM”.
+
+### Exemplo 2: a leitura da coil com o resistor (pause e tente)
+
+Um relay tem uma coil de 90 Ω e um resistor de 600 Ω em paralelo com ela.
+Valores ilustrativos. Que leitura o ohmmeter mostra entre os pinos 2 e 1?
+Tente antes de abrir.
+
+<details>
+<summary>Solução</summary>
+
+Os dois caminhos ficam em paralelo, entre os mesmos dois pinos:
+
+$$
+R_{\text{total}} = \frac{90 \times 600}{90 + 600} = \frac{54\,000}{690} \approx 78.3\,\Omega
+$$
+
+A leitura fica abaixo de 90 Ω, a resistance do caminho menor. Se você
+encontrou 690 Ω, somou as duas resistances, que é a regra do series circuit.
+Aqui as duas peças estão ligadas nas mesmas duas pontas, então a regra é a do
+parallel circuit.
+
+</details>
+
+### Exemplo 3: a coil aberta (pause e tente)
+
+No relay do exemplo 2, o wire da coil se rompe por dentro. Que leitura o
+ohmmeter mostra agora entre 2 e 1? Com 12 V na coil, quanta current passa, e
+o relay clica?
+
+<details>
+<summary>Solução</summary>
+
+A coil virou um caminho aberto, e sobra só o resistor: a leitura é **600 Ω**,
+e não OL. Com 12 V, a current é
+$I = V \div R = 12 \div 600 = 0.02\,\text{A}$. Essa current passa pelo
+resistor, e o resistor não é um eletroímã: ele não puxa a armature. Então o
+relay **não clica**, e o contato entre 3 e 5 continua em OL.
+
+</details>
+
+### Exemplo 4: seguir o pinpoint test (pause e tente)
+
+Outro Edge, mesma queixa: a horn não toca. O técnico chega ao passo A9 e
+encontra estes resultados:
+
+- **A9:** com o fused jumper entre os furos 3 e 5, a horn toca;
+- **A10:** com o relay no lugar e o jumper do pino 20 do C2280C ao ground, a
+  horn não toca;
+- **A11:** a voltage entre o furo 2 e o ground é 12.4 V;
+- **A12:** a resistance entre o furo 1 e o pino 20 do C2280C é OL.
+
+Onde está o defeito? Tente antes de abrir.
+
+<details>
+<summary>Dica</summary>
+
+Para cada passo, pergunte que parte do circuit ele deixou de fora e que parte
+continuou dentro do teste.
+
+</details>
+
+<details>
+<summary>Solução</summary>
+
+- O **A9** pulou o relay e a horn tocou. Então o F50, o wire CRH04, a horn e o
+  ground G111 estão bons.
+- O **A10** pulou o BCM e a horn não tocou. Então o defeito está no que
+  continuou dentro do teste: o relay, a power do pino 2 ou o wire CRH02.
+- O **A11** mostrou 12.4 V no furo 2, acima dos 11 V do manual. A power da
+  coil chega.
+- O **A12** mostrou OL entre o furo 1 e o BCM, onde um wire bom mostra menos
+  de 3 Ω. O wire **CRH02 BU-WH está aberto.**
+
+O conserto é reparar o CRH02. Trocar o relay ou o BCM não resolveria: o
+ground do FET nunca chegaria à coil.
+
+</details>
+
+### Exemplo 5: a coil em curto e o BCM (pause e tente)
+
+Um horn relay tem a coil em curto, e o ohmmeter mostra 2 Ω entre os pinos
+2 e 1. Quanta current o FET do BCM teria que conduzir com 12 V? Por que essa
+current é um problema?
+
+<details>
+<summary>Solução</summary>
+
+$I = V \div R = 12 \div 2 = 6\,\text{A}$. Uma coil boa, como a de 80 Ω da
+formalização, puxa $12 \div 80 = 0.15\,\text{A}$. Com o curto, a current fica
+40 vezes maior. A saída do BCM foi feita para a current de uma coil, e não
+para a de uma load. Por isso uma relay coil em curto pode danificar o módulo.
+É por esse motivo também que o BCM grava um DTC quando percebe defeito no
+circuit da coil: o manual lista o B1C55:12 (*short to battery*) e o B1C55:14
+(*short to ground or open*). Esses DTCs apontam um **circuit**, não uma peça.
+O passo seguinte continua sendo medir.
+
+</details>
+
+## Perguntas de verificação
+
+1. Por que o wiring diagram sozinho não diz onde o relay está no carro?
+2. Os pinos 2 e 3 do R40 não têm cor de wire no diagram. Por quê?
+3. No Edge, o horn switch carrega a current da relay coil? Como você sabe
+   pelo diagram?
+4. O diagram mostra o contato entre 3 e 5 aberto. O contato aberto quer dizer
+   que ele está quebrado?
+5. Por que uma coil aberta não mostra OL neste relay?
+6. O que o passo A9 descarta quando a horn toca?
+7. Por que, no passo A13, o manual manda trocar a BJB, e não consertar um
+   wire?
+
+<details>
+<summary>Respostas</summary>
+
+1. Porque o wiring diagram mostra como as peças se ligam, e não onde elas
+   ficam. O manual da Ford avisa que os wires e as peças não aparecem como
+   estão no carro. A posição está na vista da BJB, na célula 11.
+2. Porque eles não recebem a power por um wire, e sim pela busbar, uma barra
+   de metal dentro da BJB. Só wire tem cor e circuit number.
+3. Não. O horn switch está ligado à entrada do BCM, pelo RRH02, e não à
+   coil. A coil vai do pino 2 (busbar) ao pino 1, e o pino 1 vai ao FET do
+   BCM. O botão só manda o sinal de ground ao BCM.
+4. Não. O diagram desenha todo relay em repouso, sem current na coil. Aberto
+   em repouso é o normally open, que é o normal deste relay.
+5. Porque o resistor em paralelo com a coil continua ligando os pinos 2 e 1.
+   O ohmmeter mede a resistance do resistor, e não OL.
+6. Descarta o load circuit inteiro: o F50, o wire até a horn, a horn e o
+   ground dela. Com o jumper no lugar do contato, a horn tocou, então esse
+   caminho está bom. Sobram o relay e o lado da coil.
+7. Porque a power do pino 3 vem da busbar, dentro da BJB. Não existe wire
+   entre a busbar e o pino 3 para consertar.
+
+</details>
+
+## Exercícios
+
+### 1. Reconhecimento
+
+Na legenda da Ford, diga o que é cada item:
+
+a) o código **CRH04** ao lado de um wire;
+b) as letras **VT-GN**;
+c) o número azul **10-6** ao lado de um ground;
+d) uma caixa tracejada em volta de uma peça;
+e) o código **S189**.
+
+### 2. Explicação
+
+Explique, com as suas palavras, o caminho completo do sinal e da current,
+desde o momento em que o motorista aperta o volante até a horn tocar no
+Edge. Cite o horn switch, o BCM, o FET, a coil, o contato e o F50.
+
+### 3. Aplicação direta
+
+Um relay tem uma coil de 75 Ω e um resistor de 560 Ω em paralelo (valores
+ilustrativos). a) Que leitura o ohmmeter mostra entre os pinos da coil? b)
+Quanta current a coil sozinha puxa com 12 V?
+
+### 4. Variação
+
+O mesmo relay do exercício 3 é medido de novo, e o ohmmeter mostra 560 Ω.
+O que aconteceu com o relay, e que teste confirma?
+
+### 5. Caso de diagnóstico
+
+Um Edge chega com a horn tocando sem parar, mesmo com o carro desligado. O
+técnico tira o R40, e a horn para. Ele põe um known good relay, e a horn
+volta a tocar sem parar.
+
+a) O que o primeiro teste mostrou?
+b) O que o segundo teste descarta?
+c) Qual circuit você mediria em seguida, e por quê?
+
+<details>
+<summary>Dica</summary>
+
+Com um relay bom no lugar, a horn só toca se a coil recebe current. E a coil
+só recebe current quando o pino 1 encontra um ground.
+
+</details>
+
+### 6. Justificativa
+
+Por que o pinpoint test A usa o scan tool, no passo A1, antes de qualquer
+medição com o multimeter?
+
+### 7. Formato ASE
+
+**7.1** A horn relay coil is measured with an ohmmeter and reads 680 Ω. A
+known good relay with the same part number reads 72 Ω. Technician A says the
+relay coil is good, because the meter did not read OL. Technician B says the
+relay should be energized on the bench to check that it clicks and that the
+contacts close. Who is right?
+
+a) Technician A only
+b) Technician B only
+c) Both A and B
+d) Neither A nor B
+
+**7.2** In a wiring diagram, the horn relay coil is fed by a circuit marked
+"Hot at all times", and the other end of the coil goes to the body control
+module. Which statement is correct?
+
+a) The horn switch carries the full horn current.
+b) The module turns the relay on by providing a ground path for the coil.
+c) The relay coil has voltage only when the ignition is ON.
+d) The relay contacts are normally closed.
+
+**7.3** With the horn relay removed, a fused jumper is connected between the
+relay socket terminals for the contacts, and the horn sounds. This test
+shows that:
+
+a) the horn relay is defective
+b) the horn switch is good
+c) the fuse, the wiring to the horn, the horn and its ground are good
+d) the body control module is defective
+
+<details>
+<summary>Respostas para conferência</summary>
+
+1. a) O circuit number do wire. b) A cor: violeta com listra verde. c) A
+   célula e a página onde esse ground aparece completo: célula 10
+   (*Grounds*), página 6. d) Só uma parte da peça está desenhada. e) Um
+   splice, o ponto onde wires se emendam.
+2. O horn switch fecha e liga o wire RRH02 ao ground, passando pelo clock
+   spring e pelo SCCM. O BCM percebe esse sinal na entrada Horn Relay Input.
+   Então o FET do BCM liga o pino 1 do relay ao ground. A coil, que já tinha
+   power no pino 2, recebe current e puxa o contato. O contato fecha de 3 para
+   5, e a power da busbar passa pelo F50 e chega à horn, que toca.
+3. a) $R = (75 \times 560) \div (75 + 560) = 42\,000 \div 635 \approx 66.1\,\Omega$.
+   b) $I = 12 \div 75 = 0.16\,\text{A}$. Se você encontrou 635 Ω, somou as
+   resistances: as duas peças estão em paralelo, não em série.
+4. A coil abriu. O ohmmeter mede só o resistor, que continua inteiro. Para
+   confirmar, ligue 12 V na coil na bancada: sem clique, e o contato entre 3
+   e 5 continua em OL.
+5. a) Que a current da horn passa pelo relay: tirado o relay, a horn para.
+   Então o defeito não é um wire do load circuit encostado na power. b)
+   Descarta o relay como causa: um relay bom também deixa a horn tocando. O
+   relay está obedecendo a um comando que não deveria existir. c) O control
+   circuit da coil, o wire CRH02 entre o pino 1 e o BCM. Se ele estiver
+   encostado num ground (*short to ground*), a coil recebe current o tempo
+   todo. Se o wire estiver bom, a suspeita passa ao BCM, ou ao lado do botão,
+   que pode estar mandando o sinal sem parar.
+6. Porque o active command liga a horn pelo BCM, pulando o horn switch, o
+   clock spring e o SCCM. Em um teste, sem desmontar nada, ele divide o
+   sistema em duas metades: do botão ao BCM, e do BCM à horn. Começar pelo
+   teste que mais descarta economiza tempo.
+**7.1 — b.** A está errado: num relay com resistor em paralelo, a coil aberta
+mostra a resistance do resistor, e não OL. A leitura quase dez vezes maior
+que a do relay bom já é suspeita. B está certo: ligar a coil na bancada
+mostra se o relay clica e se o contato fecha, e esse é o teste que decide.
+Por isso c e d estão errados.
+
+**7.2 — b.** A coil recebe power o tempo todo, e o módulo fecha o caminho até
+o ground. a) está errado: no circuit com relay, a current da horn passa pelo
+contato, não pelo switch. c) está errado: “Hot at all times” quer dizer power
+mesmo com a ignition OFF. d) está errado: nada no enunciado indica contato fechado, e o
+horn relay é normally open.
+
+**7.3 — c.** O jumper substitui o contato, e a horn tocou: todo o caminho dali
+até o ground da horn está bom. a) está errado, porque o teste deixou o relay
+de fora: ele não diz se o relay é bom ou ruim. b) e d) estão errados pelo
+mesmo motivo: o horn switch e o módulo também ficaram fora do teste.
+
+</details>
+
+## Revisão
+
+- **A ideia central:** para testar um relay, primeiro leia o wiring diagram
+  do carro e separe os dois circuits. A coil vai de onde vem a power até
+  quem fecha o ground. O contato vai da power até a load.
+- **No Edge,** o horn relay é o R40 da BJB. A coil (2 e 1) recebe power da
+  busbar e é aterrada pelo FET do BCM. O contato (3 e 5) leva a power da
+  busbar, pelo F50, até a horn. O horn switch só manda um sinal ao BCM.
+- **Numeração:** 2, 1, 3 e 5 da Ford fazem o papel de 86, 85, 30 e 87 neste
+  relay. A correspondência é pela função, lida no diagram.
+- **Medição:** o resistor em paralelo com a coil faz a coil aberta mostrar a
+  resistance do resistor, e não OL. Compare com um known good relay e
+  confirme ligando a coil na bancada.
+- **Diagnóstico:** o pinpoint test pula uma parte do circuit por vez: o scan
+  tool pula o botão, o jumper entre 3 e 5 pula o relay, o jumper no BCM pula
+  o FET.
+- **Conecta com:** a lição 10 (o relay por dentro), a lição 7 (resistance em
+  paralelo), a lição 17 (os símbolos) e a lição 18 (o fused jumper wire).
+
+Termos em inglês para revisar: battery junction box (BJB), body control
+module (BCM), steering column control module (SCCM), horn relay, circuit
+number, busbar, hot at all times, FET, ignition, pinpoint test, known good
+relay, active command, flex probe, job sheet.

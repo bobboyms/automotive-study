@@ -164,6 +164,10 @@
     "teste-de-vazamento-do-cilindro": {
       "titulo": "Cylinder leakage test",
       "url": "aut-116-motor/vazamento-do-cilindro/teste-de-vazamento-do-cilindro"
+    },
+    "testar-relay-com-service-manual": {
+      "titulo": "Testar um relay com o service manual",
+      "url": "trn-120-eletricidade/testar-relay-com-service-manual"
     }
   },
   "termos": [
@@ -1990,7 +1994,7 @@
     {
       "en": "socket",
       "pt": "soquete",
-      "def": "o encaixe em que a lâmpada entra, com os terminais dela",
+      "def": "o encaixe em que a lâmpada ou o relay entra, com os terminais",
       "var": [
         "bulb socket"
       ],
@@ -5495,6 +5499,108 @@
       "pt": "mangueira do PCV",
       "def": "a mangueira do sistema PCV, que liga o crankcase à admissão",
       "licao": "teste-de-compressao"
+    },
+    {
+      "en": "battery junction box",
+      "pt": "caixa de fusíveis e relés do motor",
+      "def": "a caixa de fusíveis do compartimento do motor, no nome que a Ford usa",
+      "var": [
+        "BJB"
+      ],
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "body control module",
+      "pt": "módulo da carroceria",
+      "def": "o módulo que comanda horn, luzes, travas e outros sistemas da carroceria",
+      "var": [
+        "BCM"
+      ],
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "steering column control module",
+      "pt": "módulo da coluna de direção",
+      "def": "o módulo na coluna de direção por onde passa o sinal do horn switch",
+      "var": [
+        "SCCM"
+      ],
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "horn relay",
+      "pt": "relé da buzina",
+      "def": "o relay que liga a horn",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "circuit number",
+      "pt": "código do circuito",
+      "def": "o código que o fabricante dá a cada wire do diagram, como CRH02",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "busbar",
+      "pt": "barramento",
+      "def": "barra de metal dentro da caixa de fusíveis que leva a power a vários fuses e relays, sem wire",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "hot at all times",
+      "pt": "com power o tempo todo",
+      "def": "circuit que tem voltage mesmo com a chave desligada",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "FET",
+      "pt": "transistor de efeito de campo",
+      "def": "switch eletrônico, sem peça que se mexe, que o módulo usa para ligar uma saída",
+      "var": [
+        "field-effect transistor"
+      ],
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "ignition",
+      "pt": "ignição",
+      "def": "a posição da chave do carro: OFF é desligada, ON é ligada",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "pinpoint test",
+      "pt": "teste dirigido",
+      "def": "o roteiro do manual Ford: um teste por passo, e a resposta sim ou não escolhe o passo seguinte",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "known good relay",
+      "pt": "relé sabidamente bom",
+      "def": "relay do mesmo part number que você sabe que funciona, usado para comparar ou substituir",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "active command",
+      "pt": "comando ativo",
+      "def": "função do scan tool que manda o módulo ligar ou desligar uma saída",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "flex probe",
+      "pt": "ponta flexível de teste",
+      "def": "ponta fina, feita para entrar no terminal sem alargá-lo",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "job sheet",
+      "pt": "folha de tarefa",
+      "def": "a folha da aula com as perguntas que você responde no carro",
+      "licao": "testar-relay-com-service-manual"
+    },
+    {
+      "en": "adaptive steering",
+      "pt": "direção adaptativa",
+      "def": "direção em que a relação entre o volante e as rodas muda com a velocidade; no Edge, muda o wiring diagram da horn",
+      "licao": "testar-relay-com-service-manual"
     }
   ]
 }

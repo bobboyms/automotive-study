@@ -216,6 +216,17 @@ const sidebars = {
           ],
         },
         {
+          type: 'category',
+          label: 'Tópico 10 — Relay testing',
+          items: [
+            {
+              type: 'doc',
+              id: 'trn-120-eletricidade/testar-relay-com-service-manual',
+              label: '30. Testar um relay com o manual',
+            },
+          ],
+        },
+        {
           type: 'doc',
           id: 'trn-120-eletricidade/laboratorio-de-circuitos',
           label: 'Laboratório de circuits',

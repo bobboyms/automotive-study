@@ -110,6 +110,8 @@ import Circuito from '@site/src/components/Circuito';
 | wiring diagram completo no jeito dos manuais (fog lamps) | `DiagramaNeblina` |
 | campo magnético de um wire, de uma coil e de um eletroímã | `Eletroima` |
 | relay em corte (repouso e acionado) e o circuit da horn com relay | `Rele` |
+| o relay da Ford (pinos 2, 1, 3, 5, resistor na coil) na bancada: ohmmeter na coil, no contato, e ligado a uma bulb | `ReleBancada` |
+| figura ou página do wiring diagram do service manual do Ford Edge, copiada para estudo | `FiguraManual` |
 | dimmer com rheostat: mover o wiper e ver current e power mudarem (interativo) | `Reostato` |
 | resistance do NTC e do PTC com a temperatura | `CurvaTermistor` |
 | as quatro bands de um resistor: por onde começar a ler e a band separada da tolerance | `CodigoCores` |
@@ -770,8 +772,11 @@ convenções comuns dos manuais, sem copiar figura de livro ou apostila.
   `fusivelNumero`, `interruptorPosicoes`, `potenciometro`, `transformador`.
 - `Rele` (o símbolo, exportado de `desenhos.jsx`) aceita `dx` (distância do
   meio até a coil e até o contact, para alinhar com os wires de um circuit),
-  `acionado`, `cinco` (contact 87a) e `diodo`. A caixa é contínua: tracejada,
-  no diagram, quer dizer componente incompleto.
+  `acionado`, `cinco` (contact 87a), `diodo`, `resistor` (o resistor em
+  paralelo com a coil do símbolo da Ford) e `nomes` (os números dos pinos, na
+  ordem coil em cima, coil embaixo, contato em cima, contato embaixo, 87a; a
+  Ford usa `['2', '1', '3', '5']`). A caixa é contínua: tracejada, no diagram,
+  quer dizer componente incompleto.
 
 Tons: azul (`1`) é a current, laranja (`2`) é a load — os papéis do
 `Circuito`. Verde (`3`) é o campo magnético, só no `Eletroima` e no `Rele`.
@@ -879,6 +884,43 @@ armature, contacts, relay coil) à direita, com linha de chamada. No circuit da
 horn, um fuse alimenta, por um splice, o control circuit (horn switch e coil)
 e o load circuit (contact e horn). O nome “horn switch” fica à direita do
 switch: à esquerda, encostava no + da battery.
+
+## ReleBancada
+
+O horn relay do Ford Edge fora do carro, com a numeração da Ford (coil 2 e 1,
+contato 3 e 5) e o resistor em paralelo com a coil. Usado na lição
+[Testar um relay com o service manual](../../docs/trn-120-eletricidade/30-testar-relay-com-service-manual.mdx).
+
+```mdx
+<ReleBancada modo="bobina" leitura="71.6\,\Omega" caption="..." />      {/* ohmmeter na coil, 2 e 1 */}
+<ReleBancada modo="contato" leitura="\text{OL}" caption="..." />        {/* ohmmeter no contato, 3 e 5 */}
+<ReleBancada modo="contato" acionado leitura="0.1\,\Omega" />           {/* o mesmo, com 12 V na coil */}
+<ReleBancada modo="bancada" caption="..." />                            {/* battery, relay e bulb; jumper do pino 1 solto */}
+<ReleBancada modo="bancada" acionado caption="..." />                   {/* jumper ligado: a bulb acende */}
+```
+
+O meter fica em cima, à direita. A ponta vermelha chega ao pino de cima por
+cima do relay e a preta ao pino de baixo por baixo, para nenhuma das duas
+cruzar um wire. Na bancada, o jumper do pino 1 ao ground faz o papel do FET
+do BCM: solto, ele aparece como duas pontas abertas.
+
+## FiguraManual
+
+Figura do service manual do Ford Edge, copiada para estudo, em
+`static/img/manual-edge/<id>.jpg`. O crédito sai sozinho embaixo da legenda, e
+tocar na figura abre o arquivo em tamanho cheio (no celular, é assim que se dá
+zoom num wiring diagram).
+
+```mdx
+<FiguraManual id="E198668" alt="..." caption="..." largura={400} />
+<FiguraManual id="wd-044-002-rele" titulo="Wiring diagram, célula 44, página 2 (recorte)." alt="..." caption="..." />
+```
+
+As figuras com número (E198668) são copiadas do manual como estão. As páginas
+do wiring diagram vêm em SVG no manual e não têm número: elas são renderizadas
+no Chrome e recortadas (arquivo `wd-<célula>-<página>-<parte>.jpg`), e
+`titulo` diz de onde vieram. Recorte uma parte por figura, do tamanho que o
+texto explica: a página inteira fica ilegível no celular.
 
 ## DiagramaNeblina
 
